@@ -28,7 +28,8 @@ export class Github {
   }
   async text(repository, file, commit) {
     const endpoint = `/repos/${repository}/contents/${file.split('/').map(encodeURIComponent).join('/')}?ref=${encodeURIComponent(commit)}`
-    const { data } = await this.request(endpoint)
+    let { data } = await this.request(endpoint)
+    if(data?.encoding==='none'&&/^[a-f0-9]{40}$/i.test(data.sha??''))data=(await this.request(`/repos/${repository}/git/blobs/${data.sha}`)).data
     if (data?.encoding !== 'base64' || typeof data.content !== 'string') throw new Error(`Expected file: ${file}`)
     return Buffer.from(data.content, 'base64').toString('utf8')
   }

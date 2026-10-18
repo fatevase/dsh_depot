@@ -2,10 +2,12 @@ import semver from 'semver'
 import { buildKey, jsonDigest } from './model.mjs'
 export function createPlan({ recipes, sources, state = {}, host, retryKeys = [] }) {
   const decisions = [], tasks = [], publications = [], publicationTasks = [], createdAt = new Date().toISOString()
+  for(const recipe of recipes.filter(r=>!r.enabled&&r.blockedReason))for(const target of recipe.targets)decisions.push({recipeId:recipe.id,target,version:recipe.seed?.version,action:'needs_recipe',reason:recipe.blockedReason})
   for (const source of sources) if (!recipes.some(r => r.id === source.recipeId && r.enabled)) decisions.push({ recipeId: source.recipeId, action: 'needs_recipe', reason: 'Source has no enabled recipe' })
   for (const recipe of recipes.filter(r => r.enabled)) {
     let selected
     const available = sources.filter(s => s.recipeId === recipe.id).sort((a, b) => semver.valid(a.version) && semver.valid(b.version) ? semver.rcompare(a.version, b.version) : 0)
+    if(!available.length)for(const target of recipe.targets)decisions.push({recipeId:recipe.id,target,action:'blocked',reason:'No usable source observation; inspect discovery errors'})
     for (const source of available) {
       const note = { recipeId: recipe.id, version: source.version }
       if (source.error || source.stale) { decisions.push({ ...note, action: 'blocked', reason: source.error?.code ?? 'source_fetch_failed' }); continue }

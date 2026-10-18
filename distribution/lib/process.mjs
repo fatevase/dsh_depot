@@ -49,10 +49,11 @@ export async function prepareTools(toolchain, root) {
       if (result.exitCode) throw new Error(`Cannot prepare ${name}@${version}: ${result.output.slice(-1000)}`)
     }
     const cli = path.join(prefix, 'node_modules', name, 'bin', name === 'npm' ? 'npm-cli.js' : 'pnpm.cjs')
-    tools[name] = [process.execPath, cli]
+    const fixedArgs=name==='pnpm'?['--pm-on-fail=ignore']:[]
+    tools[name] = [process.execPath, cli,...fixedArgs]
     const quote = s => `'${s.replaceAll("'", "'\"'\"'")}'`
-    if (process.platform === 'win32') await writeFile(path.join(bin, `${name}.cmd`), `@"${process.execPath}" "${cli}" %*\r\n`)
-    else { await writeFile(path.join(bin, name), `#!/bin/sh\nexec ${quote(process.execPath)} ${quote(cli)} "$@"\n`); await chmod(path.join(bin, name), 0o755) }
+    if (process.platform === 'win32') await writeFile(path.join(bin, `${name}.cmd`), `@"${process.execPath}" "${cli}" ${fixedArgs.join(' ')} %*\r\n`)
+    else { await writeFile(path.join(bin, name), `#!/bin/sh\nexec ${quote(process.execPath)} ${quote(cli)} ${fixedArgs.map(quote).join(' ')} "$@"\n`); await chmod(path.join(bin, name), 0o755) }
   }
   tools.bin = bin; tools.cache = path.join(root, 'npm-cache'); tools.versions = { ...toolchain }; return tools
 }

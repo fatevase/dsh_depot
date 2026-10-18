@@ -33,7 +33,7 @@ export async function main(argv = process.argv.slice(2)) {
   const workDir = path.resolve(args.work ?? path.join(root, '../.runtime/distribution'))
   const output = path.resolve(args.output ?? path.join(workDir, ({discover:'discovered.json',plan:'plan.json',build:'build-receipt.json',verify:'verification.json',publish:'publication-plan.json',site:'site'}[args.command]??`${args.command}.json`)))
   if (args.command === 'discover' || args.command === 'plan') {
-    const recipes = await readRecipes(path.resolve(args.recipes ?? path.join(root, 'recipes')))
+    const recipes = await readRecipes(path.resolve(args.recipes ?? path.join(root, 'recipes')), {cohort:args.recipes?undefined:config.cohort?.plugins})
     const state = await readJson(args.state ?? path.join(workDir, 'state.json'), initialState())
     const github = new Github({ token: process.env.GITHUB_TOKEN, cache: state.apiCache??{} })
     state.availableArtifacts={}
@@ -46,7 +46,7 @@ export async function main(argv = process.argv.slice(2)) {
     if (result.complete === false) process.exitCode = 1
     return result
   }
-  const recipes = await readRecipes(path.resolve(args.recipes ?? path.join(root,'recipes')))
+  const recipes = await readRecipes(path.resolve(args.recipes ?? path.join(root,'recipes')), {cohort:args.recipes?undefined:config.cohort?.plugins})
   const github = new Github({token:process.env.GITHUB_TOKEN})
   if(args.command==='build'||args.command==='verify'){
     const plan=await readJson(args.plan??path.join(workDir,'plan.json')),task=plan.tasks.find(t=>t.buildKey===args.key)
@@ -72,8 +72,10 @@ export async function main(argv = process.argv.slice(2)) {
       for(const task of plan.tasks)if(!receipts.some(r=>r.buildKey===task.buildKey))receipts.push({...task,stage:'build',status:'missing',attempt:new Date().toISOString(),error:{message:'Matrix job did not return a receipt'}})
       const discovery=await readJson(args.discovered??path.join(workDir,'discovered.json'),null)
       const state=mergeState(current,{discovery})
+      state.lastPlan={createdAt:plan.createdAt,cohort:config.cohort,decisions:plan.decisions??[]}
       result=await publishBatch({batchId:args.batch??process.env.GITHUB_RUN_ID??'local',repository,state,receipts,tasks:[...plan.tasks,...(plan.publicationTasks??[])],github,dryRun:!real,recipes})
-      if(real){const merged=await updateStateBranch({store:githubStateStore({repository,branch:config.stateBranch,github}),merge:latest=>mergeState(mergeState(latest,{discovery}),{receipts,publications:result.publications})});result.state=merged.state;result.catalog=catalogOf(merged.state,recipes)}
+      if(real){const merged=await updateStateBranch({store:githubStateStore({repository,branch:config.stateBranch,github}),merge:latest=>{const next=mergeState(mergeState(latest,{discovery}),{receipts,publications:result.publications});if((next.lastPlan?.createdAt??'')<=(plan.createdAt??''))next.lastPlan=state.lastPlan;return next}});result.state=merged.state;result.catalog=catalogOf(merged.state,recipes)}
+      result.cohort=config.cohort;result.decisions=plan.decisions??[]
     }else{
       const mutate=s=>args.command==='withdraw'?withdraw(s,args.key,args.reason):rollback(s,{key:args.key,recipeId:args.plugin,target:args.target,host:config.host})
       const state=real?(await updateStateBranch({store:githubStateStore({repository,branch:config.stateBranch,github}),merge:mutate})).state:mutate(current)

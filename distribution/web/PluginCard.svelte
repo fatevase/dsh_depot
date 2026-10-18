@@ -11,5 +11,5 @@
   <h3><a class="dv-name-link" {href}>{plugin.name}</a></h3>
   <div class="dv-plugin-author">{plugin.repository.split('/')[0]}{#if version}<span class="dv-mono" style="margin-left:6px">v{version}</span>{/if}</div>
   <p>{plugin.description||plugin.npmName}</p>
-  <div class="dv-plugin-bottom"><span>{smallest?`${platforms[smallest.target]?.replace(' · ',' ')} · ${bytes(smallest.compressedBytes)}`:target==='all'?'尚未发布':`${platforms[target]} · 待验证`}</span><a class="dv-text-link" {href}>查看详情 ↗</a></div>
+  <div class="dv-plugin-bottom"><span>{smallest?`${platforms[smallest.target]?.replace(' · ',' ')} · ${bytes(smallest.compressedBytes)}`:plugin.status==='needs_recipe'?'待适配':target==='all'?'尚未发布':`${platforms[target]} · 待验证`}</span><a class="dv-text-link" {href}>查看详情 ↗</a></div>
 </article>

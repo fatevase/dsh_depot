@@ -1,0 +1,60 @@
+{
+  "schemaVersion": 1,
+  "packagePath": ".",
+  "channel": {
+    "type": "fixed",
+    "ref": "6c27d5bfafaf821290f580e713b9fcb159bf2e93"
+  },
+  "allowedVersions": "0.26.0",
+  "hostRange": "^0.2.0-rc.2",
+  "targets": [
+    "darwin-arm64",
+    "linux-x64",
+    "win32-x64"
+  ],
+  "toolchain": {
+    "node": "26.9.0",
+    "npm": "11.19.1",
+    "pnpm": "11.25.0"
+  },
+  "packageManager": "npm",
+  "buildCommands": [],
+  "packageRules": {
+    "localPackages": []
+  },
+  "install": false,
+  "id": "treg",
+  "repository": "superdesigndev/treg",
+  "npmName": "treg-dsh",
+  "seed": {
+    "ref": "6c27d5bfafaf821290f580e713b9fcb159bf2e93",
+    "version": "0.26.0",
+    "commit": "6c27d5bfafaf821290f580e713b9fcb159bf2e93"
+  },
+  "locks": {
+    "runtime": {
+      "origin": "adapter",
+      "file": "locks/treg-runtime.json"
+    }
+  },
+  "probes": {
+    "registrations": [
+      {
+        "id": "treg-skill",
+        "name": "treg-dsh"
+      }
+    ],
+    "native": [],
+    "skillFiles": [
+      "dsh/skills/treg/SKILL.md"
+    ]
+  },
+  "display": {
+    "name": "treg",
+    "category": "tools"
+  },
+  "enabled": true,
+  "distributionScope": "The official treg-dsh DSH skill bundle. The Python CLI and server are not installed by this package. The separately declared hosted MCP connector requires TREG_TOKEN and network access; it is disabled without that token.",
+  "license": "LicenseRef-tools-registry",
+  "licenseSource": "https://github.com/superdesigndev/treg/blob/6c27d5bfafaf821290f580e713b9fcb159bf2e93/LICENSE"
+}

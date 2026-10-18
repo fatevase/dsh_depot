@@ -1,0 +1,34 @@
+{
+  "name": "@liustack/modlens",
+  "version": "3.27.1",
+  "lockfileVersion": 3,
+  "requires": true,
+  "packages": {
+    "": {
+      "name": "@liustack/modlens",
+      "version": "3.27.1",
+      "dependencies": {
+        "commander": "13.1.0",
+        "undici": "8.10.0"
+      }
+    },
+    "node_modules/commander": {
+      "version": "13.1.0",
+      "resolved": "https://registry.npmjs.org/commander/-/commander-13.1.0.tgz",
+      "integrity": "sha512-/rFeCpNJQbhSZjGVwO9RFV3xPqbnERS8MmIQzCtD/zl6gpJuV/bMLuN92oG3F7d8oDEHHRrujSXNUr8fpjntKw==",
+      "license": "MIT",
+      "engines": {
+        "node": ">=18"
+      }
+    },
+    "node_modules/undici": {
+      "version": "8.10.0",
+      "resolved": "https://registry.npmjs.org/undici/-/undici-8.10.0.tgz",
+      "integrity": "sha512-HvltHd7avK13QIw/oLe4qoOLyoVSoafqJ2jYOrtMRBkbYT31eiBQ8O0ehRKZiEZCMEyLFQNIADpgCWC5fALvYQ==",
+      "license": "MIT",
+      "engines": {
+        "node": ">=22.19.0"
+      }
+    }
+  }
+}

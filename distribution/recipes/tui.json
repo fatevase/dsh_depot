@@ -1,0 +1,46 @@
+{
+  "schemaVersion": 1,
+  "id": "tui",
+  "repository": "ccch1mneyyy/dsh-TUI",
+  "packagePath": ".",
+  "npmName": "@deepseek-harness-tui/dsh-tui",
+  "channel": {
+    "type": "fixed",
+    "ref": "4ddbcafea5d6df235c126f2f1405ca10a951273a"
+  },
+  "seed": {
+    "ref": "4ddbcafea5d6df235c126f2f1405ca10a951273a",
+    "version": "0.16.1",
+    "commit": "4ddbcafea5d6df235c126f2f1405ca10a951273a"
+  },
+  "allowedVersions": "0.16.1",
+  "hostRange": "^0.2.0-rc.2",
+  "targets": [
+    "darwin-arm64",
+    "linux-x64",
+    "win32-x64"
+  ],
+  "toolchain": {
+    "node": "26.9.0",
+    "npm": "11.19.1",
+    "pnpm": "11.25.0"
+  },
+  "packageManager": "npm",
+  "locks": {},
+  "buildCommands": [],
+  "packageRules": {
+    "localPackages": []
+  },
+  "probes": {
+    "native": [
+      "sharp"
+    ]
+  },
+  "display": {
+    "name": "DSH TUI",
+    "category": "interface"
+  },
+  "enabled": false,
+  "install": false,
+  "blockedReason": "Pinned source requires vendor/dsh-std git submodule 614dfa1ac168db79fcf4577cf0ebb34e2e3b944b and eight workspace:* production packages; GitHub source archives omit the submodule and generated lib/types. Current packager only accepts semver local packages with no production dependencies, so it cannot preserve and bundle this workspace graph. Terminal interface also requires a TUI startup/interaction probe rather than the web client verifier; sharp 0.35.4 needs per-platform native-load checks. No verified artifact is available."
+}

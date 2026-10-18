@@ -3,8 +3,8 @@ import { mkdir, readFile, writeFile, rename, readdir } from 'node:fs/promises'
 import path from 'node:path'
 
 export const SCHEMA = 1
-export const PACKAGER_VERSION = '1'
-export const VERIFIER_VERSION = '1'
+export const PACKAGER_VERSION = '2'
+export const VERIFIER_VERSION = '2'
 export const digest = value => createHash('sha256').update(value).digest('hex')
 export const fileDigest = async file => digest(await readFile(file))
 export function canonical(value) {
@@ -38,7 +38,7 @@ export function assertRecipe(r) {
   for (const local of r.packageRules?.localPackages ?? []) safeRelative(local.path)
   return r
 }
-export async function readRecipes(dir) {
+export async function readRecipes(dir, { cohort } = {}) {
   const recipes = []
   for (const file of (await readdir(dir)).filter(f => f.endsWith('.json')).sort()) {
     const r = assertRecipe(await readJson(path.join(dir, file)))
@@ -48,7 +48,14 @@ export async function readRecipes(dir) {
     }
     recipes.push(r)
   }
-  return recipes
+  if (!cohort) return recipes
+  if (!Array.isArray(cohort) || !cohort.length || new Set(cohort.map(p=>p.recipeId)).size!==cohort.length) throw Error('Invalid or duplicate cohort entries')
+  return cohort.map(entry=>{
+    const recipe=recipes.find(r=>r.id===entry.recipeId)
+    if(!recipe)throw Error(`Missing cohort recipe: ${entry.recipeId}`)
+    if(recipe.repository.toLowerCase()!==entry.repository.toLowerCase())throw Error(`Cohort repository mismatch: ${entry.recipeId}`)
+    return recipe
+  })
 }
 export function buildKey({ recipe, source, target, host, packagerVersion = PACKAGER_VERSION, verifierVersion = VERIFIER_VERSION }) {
   const { repository, commit, version, manifestDigest, lockDigests, peerDependencies, archiveSha256 } = source

@@ -16,10 +16,10 @@ try {
   let response = await fetch(url, { redirect: 'manual', signal: AbortSignal.timeout(5000) })
   if (response.status === 303) { const cookie = response.headers.get('set-cookie')?.split(';')[0]; if (!cookie) throw new Error('Missing authentication cookie'); const destination = new URL(response.headers.get('location') ?? '/', url); if (destination.origin !== new URL(url).origin) throw new Error('Unexpected auth redirect'); response = await fetch(destination, { headers: { Cookie: cookie }, redirect: 'manual', signal: AbortSignal.timeout(5000) }) }
   const html = await response.text(); result.httpStatus = response.status
-  result.host = response.status === 200 && html.includes('<html') && !/failed to import|unhandled rejection/i.test(logs)
-  result.clientModule = html.includes(input.probes.clientModule)
+  result.host = response.status === 200 && html.includes('<html') && !/failed to (?:import|apply|initialize)|unhandled rejection|TypeError:|ReferenceError:|ERR_MODULE_NOT_FOUND|Cannot find (?:module|package)/i.test(logs)
+  result.clientModule = input.probes.clientModule ? html.includes(input.probes.clientModule) : null
   result.native = true
 } catch (error) { result.error = error.message }
 finally { try { if (process.platform === 'win32') execFileSync('taskkill',['/PID',String(child.pid),'/T','/F'],{stdio:'ignore'}); else process.kill(-child.pid,'SIGTERM') } catch {}; for (let i = 0; i < 30 && !ended; i++) await delay(100); if (!ended) { try { process.kill(-child.pid,'SIGKILL') } catch {} }; await writeFile(input.logFile, redact(logs)) }
 console.log(JSON.stringify(result))
-if (!result.host || !result.clientModule || !result.native) process.exitCode = 1
+if (!result.host || (input.probes.clientModule && !result.clientModule) || !result.native) process.exitCode = 1

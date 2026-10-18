@@ -5,8 +5,8 @@
   "packagePath": ".",
   "npmName": "dshmarket",
   "channel": {
-    "type": "tags",
-    "allowPrerelease": false
+    "type": "fixed",
+    "ref": "07e0def00366016c0a4d5b637fb5a80673134657"
   },
   "seed": {
     "ref": "v1.66.38",
@@ -14,7 +14,7 @@
     "commit": "07e0def00366016c0a4d5b637fb5a80673134657",
     "archiveSha256": "230654e6d6351fec95ab05e530b186ac0c628ef6b08c8aea52064a1290ea2685"
   },
-  "allowedVersions": ">=1.66.38 <2.0.0",
+  "allowedVersions": "1.66.38",
   "hostRange": "^0.2.0-rc.2",
   "targets": [
     "darwin-arm64",
@@ -55,5 +55,6 @@
     "name": "DSH Market",
     "category": "tools"
   },
-  "enabled": true
+  "enabled": true,
+  "distributionScope": "First cohort uses the compatible source version already exercised against frozen stock DSH0.2.0-rc.2; it does not claim to be the latest upstream release."
 }

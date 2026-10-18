@@ -1,37 +1,95 @@
 {
   "taskfold": {
-    "order": 1,
+    "order": 101,
     "description": "折叠长任务与工具输出，让对话更容易浏览。",
     "label": "任务整理",
     "mark": "T",
     "license": "MIT"
   },
   "multi-root": {
-    "order": 2,
+    "order": 102,
     "description": "在同一处组织多个项目目录，轻松切换工作上下文。",
     "label": "工作空间",
     "mark": "M",
     "license": "MIT"
   },
   "mobile": {
-    "order": 3,
+    "order": 103,
     "description": "让 DSH 的操作与布局，更适合手机上的使用方式。",
     "label": "移动体验",
     "mark": "m",
     "license": "MIT"
   },
   "sidebar": {
-    "order": 4,
+    "order": 5,
     "description": "整理侧栏与导航，为日常工作提供更完整的界面。",
     "label": "界面增强",
     "mark": "B",
     "license": "MIT"
   },
   "market": {
-    "order": 5,
+    "order": 6,
     "description": "在 DSH 中浏览与管理社区插件，补齐常用能力。",
     "label": "插件管理",
     "mark": "D",
     "license": "MIT"
+  },
+  "free-model": {
+    "description": "多渠道模型接入、账号管理与本地 OpenAI 网关。",
+    "label": "模型接入",
+    "mark": "F",
+    "license": "MIT",
+    "order": 1
+  },
+  "dsh-web": {
+    "description": "模块化 DSH Web 插件集合；聚合依赖的离线适配仍在准备中。",
+    "label": "聚合工作台",
+    "mark": "D",
+    "license": "Apache-2.0",
+    "order": 2,
+    "availabilityNote": "聚合包的依赖打包尚未适配，当前不提供下载。"
+  },
+  "purge": {
+    "description": "提示词与规则库管理，提供授权红队演练面板。",
+    "label": "规则管理",
+    "mark": "P",
+    "license": "MIT",
+    "order": 3
+  },
+  "routing-suite": {
+    "description": "为模型路由提供上下文注入；本包范围为上游 Injector。",
+    "label": "模型路由",
+    "mark": "R",
+    "license": "LicenseRef-Upstream-Conflict",
+    "order": 4
+  },
+  "modlens": {
+    "description": "模型视觉与网页处理工具，附带 DSH 插件及命令行入口。",
+    "label": "视觉工具",
+    "mark": "M",
+    "license": "MIT",
+    "order": 7
+  },
+  "whale-widget": {
+    "description": "常驻鲸鱼挂件，显示账户余额、今日用量和对话消耗。",
+    "label": "余额挂件",
+    "mark": "W",
+    "license": "MIT",
+    "order": 8
+  },
+  "treg": {
+    "description": "在 DSH 中发现并加载工具技能；外部服务另需凭据和网络。",
+    "label": "工具技能",
+    "mark": "t",
+    "license": "LicenseRef-tools-registry",
+    "order": 9
+  },
+  "tui": {
+    "description": "在终端中管理智能体、会话和工具，支持键鼠交互。",
+    "label": "终端界面",
+    "mark": ">",
+    "license": "MIT",
+    "order": 10,
+    "availabilityNote": "该插件需要终端安装与交互验证，目前不提供此安装方式的离线包。"
   }
 }

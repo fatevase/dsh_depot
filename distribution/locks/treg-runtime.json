@@ -1,0 +1,12 @@
+{
+  "name": "treg-dsh",
+  "version": "0.26.0",
+  "lockfileVersion": 3,
+  "packages": {
+    "": {
+      "name": "treg-dsh",
+      "version": "0.26.0",
+      "dependencies": {}
+    }
+  }
+}

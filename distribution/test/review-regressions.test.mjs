@@ -37,6 +37,11 @@ test('native probes reject dependencies satisfied outside the installed closure'
  const input=path.join(dir,'input.json');await writeFile(input,JSON.stringify({npmName:'dsh-fixture',probes:{native:['leaked-native']}}));const env=await isolatedEnv(dir);env.DSH_HOME=home
  const r=await runCommand({argv:[process.execPath,fileURLToPath(new URL('../lib/native-probe.mjs',import.meta.url)),input],cwd:dir,env,logFile:path.join(dir,'native.log')});assert.notEqual(r.exitCode,0);assert.match(r.output,/outside.*closure/i)
 })
+test('a skill bundle cannot pass its installed-file probe when the declared skill is absent',async t=>{
+ const dir=await temporary(t),home=path.join(dir,'home'),pkg=path.join(home,'profiles/web/node_modules/dsh-fixture');await mkdir(pkg,{recursive:true});await writeFile(path.join(pkg,'package.json'),'{}')
+ const input=path.join(dir,'input.json');await writeFile(input,JSON.stringify({npmName:'dsh-fixture',probes:{native:[],skillFiles:['skills/html/SKILL.md']}}));const env=await isolatedEnv(dir);env.DSH_HOME=home
+ const r=await runCommand({argv:[process.execPath,fileURLToPath(new URL('../lib/native-probe.mjs',import.meta.url)),input],cwd:dir,env,logFile:path.join(dir,'skill.log')});assert.notEqual(r.exitCode,0)
+})
 test('install instruction exactly names the immutable downloaded file and rejects unsafe names',async()=>{
  const {installCommand}=await import('../web/catalog.mjs')
  assert.equal(installCommand({fileName:'taskfold-1.0.0-key.tgz'}),'dsh plugin --profile web add "./taskfold-1.0.0-key.tgz" --offline --ignore-scripts')

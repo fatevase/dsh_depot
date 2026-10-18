@@ -1,0 +1,51 @@
+{
+  "schemaVersion": 1,
+  "id": "purge",
+  "repository": "YuJunZhiXue/dsh-purge",
+  "packagePath": ".",
+  "npmName": "dsh-purge",
+  "channel": {
+    "type": "fixed",
+    "ref": "6c1d638d1bdcc45ede50fc30249c753d58122a51",
+    "allowPrerelease": false
+  },
+  "seed": {
+    "ref": "6c1d638d1bdcc45ede50fc30249c753d58122a51",
+    "version": "1.1.71",
+    "commit": "6c1d638d1bdcc45ede50fc30249c753d58122a51",
+    "archiveSha256": "5936afb42a147f22e924f612d523ff6f15606eaeaf0b6044dcb6442a9141c5cd"
+  },
+  "allowedVersions": "1.1.71",
+  "hostRange": "0.2.0-rc.2",
+  "targets": [
+    "darwin-arm64",
+    "linux-x64",
+    "win32-x64"
+  ],
+  "toolchain": {
+    "node": "26.9.0",
+    "npm": "11.19.1",
+    "pnpm": "11.25.0"
+  },
+  "packageManager": "npm",
+  "locks": {
+    "runtime": {
+      "origin": "adapter",
+      "file": "locks/purge-runtime.json"
+    }
+  },
+  "buildCommands": [],
+  "packageRules": {
+    "localPackages": []
+  },
+  "probes": {
+    "clientModule": "dsh-purge",
+    "native": []
+  },
+  "display": {
+    "name": "DSH Purge",
+    "category": "workspace"
+  },
+  "enabled": true,
+  "install": false
+}

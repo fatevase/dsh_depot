@@ -1,0 +1,50 @@
+{
+  "schemaVersion": 1,
+  "id": "free-model",
+  "repository": "Ebony-Vinyl/dsh-our-free-model",
+  "packagePath": ".",
+  "npmName": "dsh-our-free-model",
+  "channel": {
+    "type": "fixed",
+    "ref": "f0b979fdf48d3915504f5f20e0a105596712f3c8",
+    "allowPrerelease": false
+  },
+  "seed": {
+    "ref": "f0b979fdf48d3915504f5f20e0a105596712f3c8",
+    "version": "2.5.3",
+    "commit": "f0b979fdf48d3915504f5f20e0a105596712f3c8"
+  },
+  "allowedVersions": "2.5.3",
+  "hostRange": "0.2.0-rc.2",
+  "targets": [
+    "darwin-arm64",
+    "linux-x64",
+    "win32-x64"
+  ],
+  "toolchain": {
+    "node": "26.9.0",
+    "npm": "11.19.1",
+    "pnpm": "11.25.0"
+  },
+  "packageManager": "npm",
+  "locks": {
+    "runtime": {
+      "origin": "adapter",
+      "file": "locks/free-model-runtime.json"
+    }
+  },
+  "buildCommands": [],
+  "packageRules": {
+    "localPackages": []
+  },
+  "probes": {
+    "clientModule": "dsh-our-free-model",
+    "native": []
+  },
+  "display": {
+    "name": "Our Free Model",
+    "category": "tools"
+  },
+  "enabled": true,
+  "install": false
+}

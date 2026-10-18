@@ -7,20 +7,37 @@ import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { setTimeout as delay } from 'node:timers/promises'
 import { randomUUID } from 'node:crypto'
+import { parseDocument } from 'yaml'
 import { atomicJson, readJson, fileDigest } from './model.mjs'
 import { hostEnvironmentDigest } from './host-environment.mjs'
 import { isolatedEnv, runCommand, prepareTools } from './process.mjs'
 import { connect } from './network-probe.mjs'
 import { sandboxProfile } from '../isolation/macos.mjs'
 const directory = path.dirname(fileURLToPath(import.meta.url))
-export function assertVerification(v, task, sha256) {
+export function assertVerification(v, task, sha256, recipe) {
   assert.equal(v.schemaVersion, 1); assert.equal(v.status, 'passed'); assert.equal(v.buildKey, task.buildKey); assert.equal(v.target, task.target); assert.deepEqual(v.host, task.host); assert.equal(v.sha256, sha256)
   const c = v.isolationControls
   assert.equal(c?.beforeReachable, true); assert.equal(c?.beforeReachableIPv6, true)
   for (const mode of ['offline', 'loopback']) { assert.equal(c?.[mode]?.externalBlocked, true); assert.equal(c?.[mode]?.childBlocked, true); assert.equal(c?.[mode]?.externalBlockedIPv6, true); assert.equal(c?.[mode]?.childBlockedIPv6, true); assert.equal(c?.[mode]?.otherProgramBlocked, true) }
   assert.equal(c.offline.loopbackBlocked, true); assert.equal(c.loopback.loopbackAllowed, true)
-  for (const check of ['install', 'compose', 'host', 'clientModule', 'native']) assert.equal(v.checks?.[check], true)
+  for (const check of ['install', 'compose', 'host', 'native']) assert.equal(v.checks?.[check], true)
+  const probes=recipe?.probes??{clientModule:'legacy'}
+  assert.ok(probes.clientModule || probes.registrations?.length,'Recipe has no plugin registration probe')
+  if(probes.clientModule)assert.equal(v.checks?.clientModule,true)
+  if(probes.registrations?.length){assert.equal(v.checks?.registration,true);assert.deepEqual(v.registrationEvidence,probes.registrations)}
   return true
+}
+export function registrationEvidenceOf(text,expected=[]){
+  if(!expected.length)return []
+  const document=parseDocument(text,{logLevel:'silent'})
+  if(document.errors.length)throw Error('Cannot parse stock DSH composition for registration evidence')
+  const rows=document.toJS()
+  if(!Array.isArray(rows))throw Error('Expected stock DSH configuration rows')
+  return expected.map(wanted=>{
+    const found=rows.find(row=>row?.id===wanted.id&&row.name===wanted.name&&(row.disabled===undefined||row.disabled===false))
+    if(!found)throw Error(`Declared plugin registration missing or disabled: ${wanted.id}`)
+    return {id:found.id,name:found.name}
+  })
 }
 export async function startControlServer() {
   const entry = Object.values(os.networkInterfaces()).flat().find(i => i?.family === 'IPv4' && !i.internal)
@@ -82,7 +99,7 @@ export async function prepareHost({ hostVersion = '0.2.0-rc.2', workDir, tools, 
 }
 export async function verifyArtifact({ task, recipe, artifact, host, workDir, isolation = isolationAdapter() }) {
   workDir = path.join(path.resolve(workDir), randomUUID()); await mkdir(workDir, { recursive: true })
-  const verification = { schemaVersion: 1, buildKey: task.buildKey, target: task.target, host: task.host, sha256: artifact.sha256, status: 'unverified', timings: {}, checks: {}, scope: ['cold-install', 'config-compose', 'host-page-smoke', ...(recipe.probes.native?.length ? ['native-load'] : [])], workDir }
+  const verification = { schemaVersion: 1, buildKey: task.buildKey, target: task.target, host: task.host, sha256: artifact.sha256, status: 'unverified', timings: {}, checks: {}, scope: ['cold-install', 'config-compose', 'host-page-smoke', ...(recipe.probes.registrations?.length?['config-registration']:[]),...(recipe.probes.skillFiles?.length?['bundled-skill-files']:[]), ...(recipe.probes.native?.length ? ['native-load'] : [])], workDir }
   let control, profileHome
   try {
     if (task.target !== `${process.platform}-${process.arch}` || task.host.node !== process.versions.node || host.version !== task.host.version || host.environmentDigest !== task.host.environmentDigest || task.host.environmentDigest !== hostEnvironmentDigest()) throw new Error('Verifier environment differs from plan')
@@ -104,6 +121,7 @@ export async function verifyArtifact({ task, recipe, artifact, host, workDir, is
     verification.timings.compose = compose.seconds
     verification.checks.compose = compose.exitCode === 0 && !/failed to import/i.test(compose.output)
     if (!verification.checks.compose) throw new Error('Configuration composition failed')
+    if(recipe.probes.registrations?.length){verification.registrationEvidence=registrationEvidenceOf(compose.output,recipe.probes.registrations);verification.checks.registration=true}
     const hostPrefix = isolation.platform === 'darwin' ? await isolation.command({ mode: 'loopback', argv: [], cwd: workDir, env }) : []
     const probeInput = path.join(workDir, 'host-input.json'); await atomicJson(probeInput, { hostPrefix, dshBin: host.dshBin, npmName: recipe.npmName, probes: recipe.probes, logFile: path.join(workDir, 'host.log') })
     const boot = await (hostPrefix.length ? runCommand : options => isolation.run({ mode: 'loopback', ...options }))({ argv: [process.execPath, path.join(directory, 'host-probe.mjs'), probeInput], cwd: workDir, env, timeoutMs: 90000, logFile: path.join(workDir, 'host-result.log') })
@@ -111,7 +129,7 @@ export async function verifyArtifact({ task, recipe, artifact, host, workDir, is
     let result; try { result = JSON.parse(boot.output.trim()) } catch { throw new Error(`Invalid host result: ${boot.output.slice(-1000)}`) }
     const native = await isolation.run({ mode: 'offline', argv: [process.execPath, path.join(directory, 'native-probe.mjs'), probeInput], cwd: workDir, env, logFile: path.join(workDir, 'native.log') })
     Object.assign(verification.checks, { host: boot.exitCode === 0 && result.host, clientModule: result.clientModule, native: native.exitCode === 0 })
-    verification.status = 'passed'; assertVerification(verification, task, artifact.sha256)
+    verification.status = 'passed'; assertVerification(verification, task, artifact.sha256,recipe)
   } catch (error) { if (verification.status === 'passed') verification.status = 'failed'; verification.error = { message: error.message } }
   finally { await control?.close(); if(profileHome)await rm(profileHome,{recursive:true,force:true}); await atomicJson(path.join(workDir, 'verification.json'), verification) }
   return verification

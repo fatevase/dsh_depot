@@ -13,7 +13,7 @@ import { prepareHost, verifyArtifact } from './lib/verify.mjs'
 import { writeReceipt } from './lib/receipts.mjs'
 import { main } from './cli.mjs'
 import { distributionRepository } from './lib/repository.mjs'
-const root=path.resolve('.runtime/distribution'),batch=path.join(root,'batch'),config=await readJson('distribution/config.json'),recipes=await readRecipes('distribution/recipes'),command=process.argv[2]
+const root=path.resolve('.runtime/distribution'),batch=path.join(root,'batch'),config=await readJson('distribution/config.json'),recipes=await readRecipes('distribution/recipes',{cohort:config.cohort?.plugins}),command=process.argv[2]
 config.host=configuredHost(config.host)
 const repository=distributionRepository(config,{required:true,runningRepository:process.env.GITHUB_REPOSITORY})
 const runners={'darwin-arm64':'macos-15','linux-x64':'ubuntu-24.04','win32-x64':'windows-2025'}

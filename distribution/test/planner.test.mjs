@@ -29,3 +29,11 @@ test('publication resumes only when staged bytes match the verified hash',()=>{
  assert.equal(plan({state:{receipts:{[key]:r},availableArtifacts:{[key]:{sha256:'a'.repeat(64)}}}}).decisions[0].action,'publish')
  assert.equal(plan({state:{receipts:{[key]:{status:'missing'}}}}).decisions[0].action,'needs_attention')
 })
+test('unsupported cohort members receive an explicit needs-recipe outcome for every target',()=>{
+ const p=plan({recipes:[recipe({enabled:false,blockedReason:'TUI needs submodule and terminal verification'})],sources:[]})
+ assert.equal(p.tasks.length,0);assert.equal(p.decisions.length,3)
+ assert.ok(p.decisions.every(d=>d.action==='needs_recipe'&&d.reason.includes('submodule')))
+})
+test('a cohort member with no usable source is reported instead of disappearing from the plan',()=>{
+ const p=plan({sources:[]});assert.equal(p.tasks.length,0);assert.equal(p.decisions.length,3);assert.ok(p.decisions.every(d=>d.action==='blocked'))
+})

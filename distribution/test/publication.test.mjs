@@ -3,8 +3,23 @@ import assert from 'node:assert/strict'
 import path from 'node:path'
 import { writeFile } from 'node:fs/promises'
 import { initialState,fileDigest,buildKey,jsonDigest } from '../lib/model.mjs'
-import { publishBatch } from '../lib/publish.mjs'
+import { publishBatch, catalogOf } from '../lib/publish.mjs'
 import { temporary,recipe,source,host as baselineHost } from './helpers.mjs'
+test('catalog excludes historical publications, pointers and issues outside selected recipes without mutating state',()=>{
+ const state=initialState()
+ for(const id of ['fixture','mobile']){
+  state.published[id]={recipeId:id,buildKey:id,status:'published'}
+  state.latest[`${id}|host`]=id
+  state.receipts[id]={recipeId:id,target:'linux-x64',status:'failed'}
+ }
+ state.lastPlan={decisions:[{recipeId:'fixture'},{recipeId:'mobile'}]}
+ const before=structuredClone(state),catalog=catalogOf(state,[recipe()])
+ assert.deepEqual(catalog.packages.map(p=>p.recipeId),['fixture'])
+ assert.deepEqual(catalog.latest,{'fixture|host':'fixture'})
+ assert.deepEqual(catalog.issues.map(p=>p.recipeId),['fixture'])
+ assert.deepEqual(catalog.decisions,[{recipeId:'fixture'}])
+ assert.deepEqual(state,before)
+})
 async function fixture(t){const dir=await temporary(t),file=path.join(dir,'fixture.tgz');await writeFile(file,'immutable package');const sha256=await fileDigest(file),host=baselineHost,rec=recipe(),src=source(),key=buildKey({recipe:rec,source:src,host,target:'darwin-arm64'});const receipt={schemaVersion:1,buildKey:key,recipeId:'fixture',recipeDigest:jsonDigest(rec),plannedAt:'2026-10-18T01:00:00Z',source:src,host,target:'darwin-arm64',status:'verified',attempt:'1',artifacts:{package:file,sha256,compressedBytes:17,unpackedBytes:20},verification:{schemaVersion:1,buildKey:key,host,target:'darwin-arm64',sha256,status:'passed',isolationControls:{beforeReachable:true,beforeReachableIPv6:true,offline:{externalBlocked:true,externalBlockedIPv6:true,childBlockedIPv6:true,otherProgramBlocked:true,childBlocked:true,loopbackBlocked:true},loopback:{externalBlocked:true,externalBlockedIPv6:true,childBlockedIPv6:true,otherProgramBlocked:true,childBlocked:true,loopbackAllowed:true}},checks:{install:true,compose:true,host:true,clientModule:true,native:true}}};receipt._recipe=rec;receipt._tasks=[{buildKey:key,recipeId:receipt.recipeId,recipeDigest:receipt.recipeDigest,plannedAt:receipt.plannedAt,source:structuredClone(src),host:structuredClone(host),target:receipt.target}];return receipt}
 test('dry run is default; invalid bytes, missing reports and withdrawn keys never upload',async t=>{
  const receipt=await fixture(t),state=initialState(),remote={ensureDraft:async()=>{throw Error('must not mutate')}}

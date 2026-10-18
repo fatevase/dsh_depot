@@ -8,6 +8,16 @@
 
 网站采用 Svelte 5 + Vite，源码位于 `distribution/web/`。保留已确认的融合设计：分类按钮列表、目标平台下拉框、筛选标签、详情双标签页和平台状态。构建输出为三个静态入口，使用相对资源路径，支持 Pages 仓库子路径。`site` 命令会编译前端再写入目录数据；不需要单独的常驻前端服务。开发预览运行 `npm --prefix distribution run web:dev`。
 
+## 首轮 Top 10 测试
+
+`config.json` 的 `cohort` 固定本轮清单，来源是 DSH Hub 的公开实时 API `scope=all&sort=trending&limit=10`，原始排名摘要位于 `cohorts/trending-top10-2026-10-18.json`。网页搜索缓存与实时榜单可能不同；本轮包含 DSH Market，不包含已经移出前十的 Answer me with HTML。
+
+本轮有 8 个可构建项目，对 macOS arm64、Linux x64、Windows x64 各建一个任务；DSH Web 聚合包和 DSH TUI 明确记录为 `needs_recipe`，不会伪造安装包。前者需要递归工作区依赖打包，后者还需要源码子模块、终端安装和交互验证。未获取有效源码、宿主不兼容、构建失败、验证失败均在计划/状态/报告中保留。
+
+源码固定到人工核对的 commit，避免首轮测试中途漂移。Sidebar 与 Market 先采用已经与冻结宿主验证过的兼容版本 0.26.0 / 1.66.38，不冒充最新上游。正常追踪新版本时，维护者再把审核过的渠道切回 tags/releases 或显式 branch。
+
+`treg` 分发范围是上游 DSH 技能包，Python CLI/服务并未包含；外部 MCP 仍需要凭据及网络。保留其完整自定义许可证，以 `LicenseRef-tools-registry` 标识。Routing Suite 的根包只打包 Injector，且上游 manifest/许可证文件标注不同，目录使用 `LicenseRef-Upstream-Conflict` 并保留原文件。
+
 ## 本地运行
 
 从仓库根目录运行。Node **26.9.0**、Python ≥3.9；构建器会在专用目录准备 recipe 固定的 npm/pnpm。准备宿主与构建需要联网，验证阶段自动断网。
@@ -42,7 +52,7 @@ python3 -m http.server 4188 --bind 127.0.0.1 --directory .runtime/distribution/s
 
 ## 验证边界
 
-验证使用独立冻结 pnpm 宿主、全新 HOME / DSH_HOME / npm cache / pnpm store。DSH profile 建在仓库之外的临时目录中，阻止从 Workbench 的上层 node_modules 借用依赖；原生探针另检查解析来源必须位于安装闭包。使用原版 `dsh plugin add --offline --ignore-scripts`，检查配置合成、鉴权后 HTTP 200、插件 client 模块登记；Multi-root 另在断网子进程中实际加载 Koffi 和 flock。没有覆盖完整浏览器业务功能或外部 API 功能。
+验证使用独立冻结 pnpm 宿主、全新 HOME / DSH_HOME / npm cache / pnpm store。DSH profile 建在仓库之外的临时目录中，阻止从 Workbench 的上层 node_modules 借用依赖；原生探针另检查解析来源必须位于安装闭包。使用原版 `dsh plugin add --offline --ignore-scripts`，检查配置合成、鉴权后 HTTP 200、插件 client 模块登记；Multi-root 另在断网子进程中实际加载 Koffi 和 flock。技能型包使用显式的配置注册行、随包技能文件和宿主启动门禁，报告不伪称存在 Web 客户端。没有覆盖完整浏览器业务功能、技能调用或外部 API 功能。
 
 每次验证先证明非回环 TCP 地址在隔离前可达，隔离后 Node、Node 子进程与 Python 均不可达；另用 IPv6-mapped IPv4 socket 检查另一地址族。该对照不等同于对原生公网 IPv6 路由的实测。策略本身封锁全部网络，再按平台开放启动所需入口。控制失败一律 `unverified`，不会发布。
 
@@ -80,11 +90,11 @@ node distribution/cli.mjs rollback --state .runtime/distribution/state.json --pl
 4. 按 `discover → plan → matrix(build+verify) → publish → pages` 检查报告。matrix 单平台失败不取消其他平台；发布器始终汇总并拒绝未验证包。
 5. Pages job 独立重试时读取最新状态重新生成站点，与发布 job 共用串行边界，避免旧 artifact 恢复已撤回链接。暂存 artifacts 留两天，最终字节存 Releases。官方 Actions 以 2026-10-18 解析的 commit 固定；workflow 文件使用 JSON 形式的合法 YAML，便于直接进行结构化权限测试。
 
-本地实现与 UI 复核已完成；真实 CI、Linux/Windows 证据、Releases 与公开站点，必须以目标仓库中的实际运行结果为准。仓库授权已能读取且返回 push 权限，工作流文件写入和 Pages 设置是否可用仍需首次部署验证。
+本地实现与 UI 复核已完成；真实 CI、Linux/Windows 证据、Releases 与公开站点，必须以目标仓库中的实际运行结果为准。仓库授权已能读取且返回 push 权限，工作流文件写入与代码测试已验证；用户已将 Pages Source 设为 GitHub Actions。完整构建和部署仍需以本轮实际运行记录为准。
 
 ## 规模扩展
 
-一个仓库维护几百个插件的 recipe，不保存上游源码副本。发现阶段只为有变化或显式重试的输入生成任务，各平台在独立 runner 构建。当前实现针对首批 5 个插件，尚未实现大规模队列与批次调度；扩到几百个之前需要增加分批、并发预算和失败重试配额，不能直接把几百个插件一次塞进现有 matrix。
+一个仓库维护几百个插件的 recipe，不保存上游源码副本。发现阶段只为有变化或显式重试的输入生成任务，各平台在独立 runner 构建。当前试验冻结趋势榜 Top 10，尚未实现大规模队列与批次调度；扩到几百个之前需要增加分批、并发预算和失败重试配额，不能直接把几百个插件一次塞进现有 matrix。
 
 ## 暂缓的小项
 

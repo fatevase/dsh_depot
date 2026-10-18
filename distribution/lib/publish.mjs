@@ -6,8 +6,11 @@ import { fileDigest, digest, jsonDigest, buildKey } from './model.mjs'
 import { assertVerification } from './verify.mjs'
 import { mergeState } from './state.mjs'
 export function catalogOf(state, recipes = []) {
-  const packages = Object.values(state.published).filter(p => p.status === 'published' && !state.withdrawn[p.buildKey])
-  return { schemaVersion: 1, host:config.host, distributionRepository:config.distributionRepository, lastSuccessfulDiscoveryAt: state.lastSuccessfulDiscoveryAt, latest: state.latest, packages, plugins: recipes.filter(r=>r.enabled).sort((a,b)=>(metadata[a.id]?.order??99)-(metadata[b.id]?.order??99)).map(r=>({id:r.id,name:r.display?.name ?? r.id,npmName:r.npmName,repository:r.repository,category:r.display?.category ?? 'tools',description:metadata[r.id]?.description ?? '',label:metadata[r.id]?.label,mark:metadata[r.id]?.mark,license:metadata[r.id]?.license,seed:r.seed,targets:r.targets})), issues: Object.values(state.receipts).filter(r=>['failed','unverified','missing'].includes(r.status)).map(r=>({recipeId:r.recipeId,target:r.target,status:r.status,error:r.error})) }
+  const selected = new Set(recipes.filter(r=>r.enabled||r.blockedReason).map(r=>r.id))
+  const packages = Object.values(state.published).filter(p => selected.has(p.recipeId) && p.status === 'published' && !state.withdrawn[p.buildKey])
+  const keys = new Set(packages.map(p=>p.buildKey))
+  const latest = Object.fromEntries(Object.entries(state.latest).filter(([,key])=>keys.has(key)))
+  return { schemaVersion: 1, host:config.host, cohort:config.cohort, decisions:(state.lastPlan?.decisions??[]).filter(d=>selected.has(d.recipeId)), distributionRepository:config.distributionRepository, lastSuccessfulDiscoveryAt: state.lastSuccessfulDiscoveryAt, latest, packages, plugins: recipes.filter(r=>r.enabled||r.blockedReason).sort((a,b)=>(metadata[a.id]?.order??99)-(metadata[b.id]?.order??99)).map(r=>({id:r.id,name:r.display?.name ?? r.id,npmName:r.npmName,repository:r.repository,category:r.display?.category ?? 'tools',description:metadata[r.id]?.description ?? '',label:metadata[r.id]?.label,mark:metadata[r.id]?.mark,license:metadata[r.id]?.license??r.license,seed:r.seed,targets:r.targets,status:r.enabled?'curated':'needs_recipe',blockedReason:r.blockedReason,availabilityNote:metadata[r.id]?.availabilityNote,distributionScope:r.distributionScope})), issues: Object.values(state.receipts).filter(r=>selected.has(r.recipeId)&&['failed','unverified','missing'].includes(r.status)).map(r=>({recipeId:r.recipeId,target:r.target,status:r.status,error:r.error})) }
 }
 export async function publishBatch({ batchId, repository, state, receipts, remote, github, dryRun = true, recipes = [], tasks = [] }) {
   if (!/^[\w.-]+$/.test(String(batchId))) throw new Error('Invalid batch ID')
@@ -21,7 +24,7 @@ export async function publishBatch({ batchId, repository, state, receipts, remot
       for(const field of ['recipeId','recipeDigest','source','host','target','plannedAt'])if(jsonDigest(r[field])!==jsonDigest(task[field]))throw new Error(`Receipt ${field} differs from approved plan`)
       if(task.recipeDigest!==jsonDigest(recipe)||buildKey({recipe,source:task.source,target:task.target,host:task.host})!==task.buildKey)throw new Error('Approved build inputs changed')
       if (r.status !== 'verified' || state.withdrawn[r.buildKey]) throw new Error('Not verified or explicitly withdrawn')
-      assertVerification(r.verification, r, r.artifacts.sha256)
+      assertVerification(r.verification, r, r.artifacts.sha256,recipe)
       if (await fileDigest(r.artifacts.package) !== r.artifacts.sha256) throw new Error('Package checksum changed after verification')
       const old = state.published[r.buildKey]
       if (old) { if (old.sha256 !== r.artifacts.sha256) throw new Error('Immutable key checksum conflict'); actions.push({buildKey:r.buildKey,action:'skip',reason:'Already published'});continue }
