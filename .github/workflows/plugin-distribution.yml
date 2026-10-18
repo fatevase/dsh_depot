@@ -157,6 +157,10 @@
           }
         },
         {
+          "if": "matrix.target == 'win32-x64'",
+          "run": "./distribution/isolation/prepare-windows.ps1"
+        },
+        {
           "run": "node distribution/ci.mjs build",
           "env": {
             "BUILD_KEY": "${{ matrix.key }}"
@@ -313,7 +317,7 @@
       ]
     },
     "windows-isolation-probe": {
-      "if": "github.event_name == 'pull_request' || github.ref != format('refs/heads/{0}', github.event.repository.default_branch)",
+      "if": "github.event_name == 'pull_request'",
       "runs-on": "windows-2025",
       "permissions": {
         "contents": "read"

@@ -4,13 +4,13 @@ import { mkdir,writeFile,readFile } from 'node:fs/promises'
 import { lookup } from 'node:dns/promises'
 import { spawn } from 'node:child_process'
 import { setTimeout as delay } from 'node:timers/promises'
-import { startControlServer,checkIsolation } from '../lib/verify.mjs'
-import { isolatedEnv,runCommand } from '../lib/process.mjs'
+import { startControlServer,checkIsolation,isolationAdapter } from '../lib/verify.mjs'
+import { isolatedEnv } from '../lib/process.mjs'
 import { connect } from '../lib/network-probe.mjs'
 const workDir=path.resolve('.runtime/distribution/windows-probe');await mkdir(workDir,{recursive:true})
 const guard=path.resolve('.runtime/distribution/isolation/dsh-network-guard.exe')
 const control=await startControlServer(),env={...await isolatedEnv(path.join(workDir,'environment')),GITHUB_ACTIONS:'true',RUNNER_ENVIRONMENT:'github-hosted'}
-const adapter={platform:'win32',available:true,run:options=>runCommand({...options,argv:[guard,options.mode,String(options.timeoutMs??45000),...options.argv],timeoutMs:(options.timeoutMs??45000)+10000})}
+const adapter=isolationAdapter()
 try{
  const report=await checkIsolation({adapter,control,env,workDir})
  const remote={address:(await lookup('api.github.com',{family:4})).address,port:443}
