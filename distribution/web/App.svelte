@@ -6,9 +6,10 @@
   import { categories, platforms, packagesFor, selectPlugins, searchUrl, bytes, downloadUrl, installCommand, platformState, isUnverifiedPackage, verificationMessage } from './catalog.mjs'
   let {initialPage='index.html',initialSearch='',initialCatalog=null}=$props()
   const params=new URLSearchParams(initialSearch)
+  const unsupportedPlatform=params.has('platform')&&!Object.hasOwn(platforms,params.get('platform'))
   let catalog=$state(initialCatalog),error=$state('')
   let options=$state({q:params.get('q')??'',category:categories[params.get('category')]?params.get('category'):'all',platform:platforms[params.get('platform')]?params.get('platform'):'all',verified:params.get('verified')==='1',sort:params.get('sort')??'curated'})
-  let query=$state(options.q),target=$state(platforms[params.get('platform')]&&params.get('platform')!=='all'?params.get('platform'):'darwin-arm64'),tab=$state(params.get('tab')==='proof'?'proof':'install')
+  let query=$state(options.q),target=$state(platforms[params.get('platform')]&&params.get('platform')!=='all'?params.get('platform'):'macos-arm64'),tab=$state(params.get('tab')==='proof'?'proof':'install')
   const page=initialPage==='guide.html'?'guide':initialPage==='plugins.html'?'search':initialPage==='plugin.html'?'detail':'home'
   const returnValue=params.get('return')??'plugins.html'
   const back=/^(?:plugins|index)\.html(?:\?|$)/.test(returnValue)?returnValue:'plugins.html'
@@ -42,7 +43,7 @@
   function detailUrl(id){const state=new URLSearchParams();for(const key of ['q','category','platform','sort'])if(options[key]&&!['all','curated'].includes(options[key]))state.set(key,options[key]);if(options.verified)state.set('verified','1');return `plugin.html?${new URLSearchParams({id,return:page==='search'?searchUrl(state):'index.html',...(options.platform!=='all'?{platform:options.platform}:{})})}`}
   function setDetail(key,value){if(key==='platform'){target=value;installCopied=''}else tab=value;const next=new URLSearchParams(location.search);next.set(key,value);history.replaceState(null,'',`plugin.html?${next}`)}
   function tabKey(e){if(!['ArrowLeft','ArrowRight','Home','End'].includes(e.key))return;e.preventDefault();const next=e.key==='Home'?'install':e.key==='End'?'proof':tab==='install'?'proof':'install';setDetail('tab',next);document.getElementById(`depot-${next}-tab`)?.focus()}
-  onMount(()=>{if(page!=='guide'&&!catalog){fetch('catalog.json',{cache:'no-cache'}).then(r=>{if(!r.ok)throw Error('目录读取失败');return r.json()}).then(value=>{if(value.schemaVersion!==1)throw Error('目录版本不支持');catalog=value}).catch(e=>error=e.message)}})
+  onMount(()=>{if(page!=='guide'&&!unsupportedPlatform&&!catalog){fetch('catalog.json',{cache:'no-cache'}).then(r=>{if(!r.ok)throw Error('目录读取失败');return r.json()}).then(value=>{if(value.schemaVersion!==1)throw Error('目录版本不支持');catalog=value}).catch(e=>error=e.message)}})
 </script>
 
 <div id="depot-v2" aria-label="DSH Depot 插件仓">
@@ -54,6 +55,8 @@
   <main>
     {#if page==='guide'}
       <Guide/>
+    {:else if unsupportedPlatform}
+      <section class="dv-wrap dv-empty"><h1>目标平台不受支持。</h1><p>请从插件目录重新选择平台。</p><a class="dv-text-link" href="plugins.html">浏览插件目录 →</a></section>
     {:else if error}
       <section class="dv-wrap dv-empty" role="alert"><h1>暂时无法读取插件目录。</h1><p>{error}</p><button class="dv-secondary" type="button" onclick={()=>location.reload()}>重新加载</button></section>
     {:else if !catalog}

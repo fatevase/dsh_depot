@@ -1,6 +1,7 @@
 import { createHash, randomUUID } from 'node:crypto'
 import { mkdir, readFile, writeFile, rename, readdir } from 'node:fs/promises'
 import path from 'node:path'
+import { supportedTarget } from './platform.mjs'
 
 export const SCHEMA = 1
 export const PACKAGER_VERSION = '3'
@@ -33,7 +34,7 @@ export function assertRecipe(r) {
   safeRelative(r.packagePath)
   if(r.sourceArchiveExcludes){if(!Array.isArray(r.sourceArchiveExcludes))throw Error('Invalid source exclusions');for(const entry of r.sourceArchiveExcludes)safeRelative(entry)}
   if (!['tags', 'releases', 'branch', 'fixed'].includes(r.channel?.type)) throw new Error('Invalid update channel')
-  if (!Array.isArray(r.targets) || !r.targets.length || r.targets.some(t => !['darwin-arm64', 'linux-x64', 'win32-x64'].includes(t))) throw new Error('Invalid target')
+  if (!Array.isArray(r.targets) || !r.targets.length || r.targets.some(t => !supportedTarget(t))) throw new Error('Invalid target')
   if (!Array.isArray(r.buildCommands) || r.buildCommands.some(a => !Array.isArray(a) || !a.length || a.some(v => typeof v !== 'string' || v.includes('\0')))) throw new Error('Commands must be argv arrays')
   if (!r.toolchain?.node || !r.hostRange || !r.allowedVersions || !r.probes) throw new Error('Missing recipe policy')
   for (const lock of Object.values(r.locks ?? {})) if (lock?.file) safeRelative(lock.file)

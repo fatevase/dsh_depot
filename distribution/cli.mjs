@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 import path from 'node:path'
+import { supportedTarget } from './lib/platform.mjs'
 import { fileURLToPath } from 'node:url'
 import { readRecipes, readJson, atomicJson, initialState, fileDigest } from './lib/model.mjs'
 import { Github } from './lib/github.mjs'
@@ -29,6 +30,7 @@ export function argumentsOf(argv) {
 }
 export async function main(argv = process.argv.slice(2)) {
   const args = argumentsOf(argv), root = path.dirname(fileURLToPath(import.meta.url))
+  if(args.target&&!supportedTarget(args.target))throw Error('Unsupported target')
   const config = await readJson(args.config ?? path.join(root, 'config.json')); config.host=configuredHost(config.host)
   const remote = args.command === 'state-read' || args.publish === true
   const repository = distributionRepository(config, {requested: args.repository, runningRepository: remote ? process.env.GITHUB_REPOSITORY : undefined, required: remote})

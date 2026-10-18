@@ -70,7 +70,7 @@ Top10 实测已有 8 个 macOS arm64 和 8 个 Linux x64 当前版本包通过 C
 node distribution/cli.mjs publish --receipts .runtime/distribution/jobs --plan .runtime/distribution/plan.json --state .runtime/distribution/state.json --batch 12345 --publish --output .runtime/distribution/publication-plan.json
 ```
 
-每个 Release 仅列出 `插件-版本-平台.tgz`、一份 `SHA256SUMS` 和一份 `reports.json`。例如 `market-1.66.38-darwin-arm64.tgz`。完整构建 key、来源提交、依赖和验证证据放在合并报告中，文件名不包含 key。
+每个 Release 仅列出 `插件-版本-平台.tgz`、一份 `SHA256SUMS` 和一份 `reports.json`。例如 `market-1.66.38-macos-arm64.tgz`。完整构建 key、来源提交、依赖和验证证据放在合并报告中，文件名不包含 key。
 
 批次一般使用 GitHub run ID。每个 receipt 必须与批准计划的 recipe、源码、宿主、平台和重新计算的 key 完全一致，额外或重复 key 拒绝。先建立 draft Release，所有资产上传后核对 SHA-256，再公开。下载 URL 使用批次的正式 tag 构造，禁止把 GitHub 草稿的 `untagged-*` 临时 URL 写入目录；公开后逐一检查下载、校验清单与报告地址，失败时不提交新发布状态。已有同名资产只核对，永不覆盖。上传后状态写入失败时，重跑同批次及保留下来的 receipt，可恢复已有资产。公开批次如果缺资产，使用新批次，不向公开 Release 追加未核对的资产。
 
@@ -81,7 +81,7 @@ node distribution/cli.mjs publish --receipts .runtime/distribution/jobs --plan .
 ```sh
 node distribution/cli.mjs state-read --output .runtime/distribution/state.json
 node distribution/cli.mjs withdraw --state .runtime/distribution/state.json --key KEY --reason '原因' --output .runtime/distribution/withdrawal.json
-node distribution/cli.mjs rollback --state .runtime/distribution/state.json --plugin taskfold --target darwin-arm64 --key OLD_KEY --output .runtime/distribution/rollback.json
+node distribution/cli.mjs rollback --state .runtime/distribution/state.json --plugin taskfold --target macos-arm64 --key OLD_KEY --output .runtime/distribution/rollback.json
 ```
 
 以上两种状态变更默认本地预演；加 `--publish` 才写远端。回滚只接受相同宿主与平台、已发布已验证且未撤回的既有包。撤回后重新生成并部署站点；旧 Release 字节保留，目录不再提供该 key。

@@ -1,3 +1,4 @@
+import { runtimeTarget } from './platform.mjs'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { mkdir, copyFile, writeFile, readFile } from 'node:fs/promises'
@@ -27,7 +28,7 @@ export async function buildTask(task, { recipe, workDir, tools, sourceArchive } 
   const receipt = { schemaVersion: 1, buildKey: task.buildKey, recipeId: task.recipeId, recipeDigest: task.recipeDigest, plannedAt: task.plannedAt, source: task.source, target: task.target, host: task.host, stage: 'build', status: 'failed', artifacts: {}, timings: {}, attempt: new Date().toISOString() }
   await mkdir(workDir, { recursive: true })
   try {
-    if (task.target !== `${process.platform}-${process.arch}`) throw new Error('Target does not match runner')
+    if (task.target !== runtimeTarget(process.platform,process.arch)) throw new Error('Target does not match runner')
     if (task.recipeDigest !== jsonDigest(recipe) || task.buildKey !== buildKey({ recipe, source: task.source, target: task.target, host: task.host })) throw new Error('Build plan inputs changed')
     if(task.host.environmentDigest !== hostEnvironmentDigest())throw new Error('Host dependency graph differs from plan')
     if(sourceArchive && !task.source.archiveSha256)throw new Error('Local source archive requires a pinned checksum in the plan')

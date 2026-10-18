@@ -7,10 +7,10 @@ import path from 'node:path'
 test('Windows environment handoff revision invalidates only Windows verification keys',()=>{
  const input={recipe:recipe(),source:source(),host}
  assert.notEqual(buildKey({...input,target:'win32-x64'}),buildKey({...input,target:'win32-x64',verifierVersion:VERIFIER_VERSION}))
- for(const target of ['darwin-arm64','linux-x64'])assert.equal(buildKey({...input,target}),buildKey({...input,target,verifierVersion:VERIFIER_VERSION}))
+ for(const target of ['macos-arm64','linux-x64'])assert.equal(buildKey({...input,target}),buildKey({...input,target,verifierVersion:VERIFIER_VERSION}))
 })
 test('keys ignore observation time but change on any build input',()=>{
- const r=recipe(),s=source(),input={recipe:r,source:s,target:'darwin-arm64',host}
+ const r=recipe(),s=source(),input={recipe:r,source:s,target:'macos-arm64',host}
  const key=buildKey(input);assert.match(key,/^[a-f0-9]{64}$/)
  assert.equal(buildKey({...input,source:{...s,observedAt:'tomorrow'}}),key)
  for(const changed of [{...input,target:'linux-x64'},{...input,source:{...s,commit:'b'.repeat(40)}},{...input,recipe:{...r,locks:{...r.locks,runtime:{digest:'d'.repeat(64)}}}},{...input,recipe:{...r,buildCommands:[['npm','run','other']] }},{...input,host:{...host,node:'24.19.0'}},{...input,verifierVersion:'next'}])assert.notEqual(buildKey(changed),key)

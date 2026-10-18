@@ -1,3 +1,4 @@
+import { supportedTarget } from './lib/platform.mjs'
 // CI adapter: all untrusted/event inputs stay data, never interpolated into shell.
 import path from 'node:path'
 import { appendFile, mkdir } from 'node:fs/promises'
@@ -16,7 +17,8 @@ import { distributionRepository } from './lib/repository.mjs'
 const root=path.resolve('.runtime/distribution'),batch=path.join(root,'batch'),config=await readJson('distribution/config.json'),recipes=await readRecipes('distribution/recipes',{cohort:config.cohort?.plugins}),command=process.argv[2]
 config.host=configuredHost(config.host)
 const repository=distributionRepository(config,{required:true,runningRepository:process.env.GITHUB_REPOSITORY})
-const runners={'darwin-arm64':'macos-15','linux-x64':'ubuntu-24.04','win32-x64':'windows-2025'}
+const runners={'macos-arm64':'macos-15','linux-x64':'ubuntu-24.04','win32-x64':'windows-2025'}
+if(process.env.ONLY_TARGET&&!supportedTarget(process.env.ONLY_TARGET))throw Error('Unsupported target')
 if(command==='discover'){
  const github=new Github({token:process.env.GITHUB_TOKEN})
  const current=await githubStateStore({repository,branch:config.stateBranch,github}).read()

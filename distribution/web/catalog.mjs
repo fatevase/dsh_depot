@@ -1,7 +1,7 @@
 import { isDownloadablePackage, isUnverifiedPackage, verificationMessage } from '../lib/package-status.mjs'
 export { isUnverifiedPackage, verificationMessage }
 export const categories = {all:'全部插件',interface:'界面体验',workspace:'工作空间',tools:'实用工具'}
-export const platforms = {all:'全部平台','darwin-arm64':'macOS · arm64','linux-x64':'Linux · x64','win32-x64':'Windows · x64'}
+export const platforms = {all:'全部平台','macos-arm64':'macOS · arm64','linux-x64':'Linux · x64','win32-x64':'Windows · x64'}
 export const packagesFor = (catalog,id) => catalog.packages.filter(p=>p.recipeId===id&&isDownloadablePackage(p)&&(!catalog.latest||Object.values(catalog.latest).includes(p.buildKey)))
 export function platformState(catalog,plugin,target){
  const published=packagesFor(catalog,plugin.id).find(p=>p.target===target)

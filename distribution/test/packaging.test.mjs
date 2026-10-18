@@ -1,3 +1,4 @@
+import { runtimeTarget } from '../lib/platform.mjs'
 import test from 'node:test'
 import assert from 'node:assert/strict'
 import { mkdir, writeFile, readFile } from 'node:fs/promises'
@@ -16,7 +17,7 @@ test('a real packed plugin bundles its same-source client and preserves peers, l
  execFileSync('python3',['-c',"import tarfile,io,sys,json\nt=tarfile.open(sys.argv[1],'w:gz')\nfor n,v in json.loads(sys.argv[2]).items():\n b=v.encode();i=tarfile.TarInfo(n);i.size=len(b);t.addfile(i,io.BytesIO(b))\nt.close()",archive,JSON.stringify(files)])
  const lock=path.join(dir,'runtime.json');await writeFile(lock,JSON.stringify({name:'dsh-fixture',version:'1.0.0',lockfileVersion:3,packages:{'':{name:'dsh-fixture',version:'1.0.0',dependencies:{}}}}))
  const r=recipe({_root:dir,locks:{runtime:{origin:'adapter',file:'runtime.json',digest:await fileDigest(lock)}},packageRules:{localPackages:[{path:'client',name:'fixture-client'}]}})
- const task={recipeId:r.id,buildKey:'a'.repeat(64),source:source(),target:`${process.platform}-${process.arch}`,host}
+ const task={recipeId:r.id,buildKey:'a'.repeat(64),source:source(),target:runtimeTarget(process.platform,process.arch),host}
  const result=await packageRuntime({task,recipe:r,builtPackage:archive,sourceDir:dir,workDir:path.join(dir,'work'),tools:await resolveTools()})
  assert.equal(result.status,'built');await extractArchive(result.artifacts.package,path.join(dir,'inspect'))
  const output=JSON.parse(await readFile(path.join(dir,'inspect/package.json')))

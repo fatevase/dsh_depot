@@ -1,3 +1,4 @@
+import { runtimeTarget } from './platform.mjs'
 import assert from 'node:assert/strict'
 import net from 'node:net'
 import os from 'node:os'
@@ -102,7 +103,7 @@ export async function verifyArtifact({ task, recipe, artifact, host, workDir, is
   const verification = { schemaVersion: 1, buildKey: task.buildKey, target: task.target, host: task.host, sha256: artifact.sha256, status: 'unverified', timings: {}, checks: {}, scope: ['cold-install', 'config-compose', 'host-page-smoke', ...(recipe.probes.registrations?.length?['config-registration']:[]),...(recipe.probes.skillFiles?.length?['bundled-skill-files']:[]), ...(recipe.probes.native?.length ? ['native-load'] : [])], workDir }
   let control, profileHome
   try {
-    if (task.target !== `${process.platform}-${process.arch}` || task.host.node !== process.versions.node || host.version !== task.host.version || host.environmentDigest !== task.host.environmentDigest || task.host.environmentDigest !== hostEnvironmentDigest()) throw new Error('Verifier environment differs from plan')
+    if (task.target !== runtimeTarget(process.platform,process.arch) || task.host.node !== process.versions.node || host.version !== task.host.version || host.environmentDigest !== task.host.environmentDigest || task.host.environmentDigest !== hostEnvironmentDigest()) throw new Error('Verifier environment differs from plan')
     if (await fileDigest(artifact.package) !== artifact.sha256) throw new Error('Artifact checksum mismatch')
     const tools = await prepareTools({ node: task.host.node, npm: '11.19.1', pnpm: '11.25.0' }, path.resolve(workDir, '../../../verification-tools'))
     const env = await isolatedEnv(path.join(workDir, 'environment'), { bin: tools.bin })

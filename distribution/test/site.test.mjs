@@ -14,9 +14,9 @@ test('site emits a real empty catalog and escapes upstream text through data, wi
  assert.equal(selectPlugins(saved,{verified:true}).length,0)
 })
 test('filters use published platform packages only and detail return preserves the query',()=>{
- const catalog={plugins:[{id:'one',name:'Alpha',category:'tools',repository:'Jane/one',description:'任务'},{id:'two',name:'Beta',category:'workspace',repository:'a/two'}],packages:[{recipeId:'one',target:'darwin-arm64',status:'published',compressedBytes:10,verification:{status:'passed'}}]}
- assert.equal(selectPlugins(catalog,{q:'jane',platform:'darwin-arm64',verified:true})[0].id,'one');assert.equal(selectPlugins(catalog,{platform:'linux-x64',verified:true}).length,0)
- const p=new URLSearchParams({q:'任务 & "',category:'tools',platform:'darwin-arm64',verified:'1',sort:'small'});assert.equal(new URL(searchUrl(p),'https://example.test/').searchParams.get('q'),'任务 & "')
+ const catalog={plugins:[{id:'one',name:'Alpha',category:'tools',repository:'Jane/one',description:'任务'},{id:'two',name:'Beta',category:'workspace',repository:'a/two'}],packages:[{recipeId:'one',target:'macos-arm64',status:'published',compressedBytes:10,verification:{status:'passed'}}]}
+ assert.equal(selectPlugins(catalog,{q:'jane',platform:'macos-arm64',verified:true})[0].id,'one');assert.equal(selectPlugins(catalog,{platform:'linux-x64',verified:true}).length,0)
+ const p=new URLSearchParams({q:'任务 & "',category:'tools',platform:'macos-arm64',verified:'1',sort:'small'});assert.equal(new URL(searchUrl(p),'https://example.test/').searchParams.get('q'),'任务 & "')
 })
 test('platform selection keeps curated plugin information visible until verified-only is selected',()=>{
  const catalog={plugins:[{id:'one',name:'Alpha',category:'tools',repository:'Jane/one'}],packages:[]}
