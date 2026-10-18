@@ -3,10 +3,11 @@ import { mkdir } from 'node:fs/promises'
 import { fileDigest } from './model.mjs'
 import { downloadArchive } from './build.mjs'
 import { packageFileName } from './publish.mjs'
+import { supportedTarget } from './platform.mjs'
 
 // Reuse only current verified bytes. The normal publisher rechecks their plan and proof.
 export async function recoverPublishedReceipts({state,repository,github,workDir,recipeIds,excludeKeys=new Set(),download=downloadArchive}){
- const pending=[...new Set(Object.values(state.latest))].map(key=>state.published[key]).filter(p=>p?.status==='published'&&p.presentationVersion!==2&&!state.withdrawn[p.buildKey]&&recipeIds.has(p.recipeId)&&!excludeKeys.has(p.buildKey))
+ const pending=[...new Set(Object.values(state.latest))].map(key=>state.published[key]).filter(p=>p?.status==='published'&&supportedTarget(p.target)&&p.presentationVersion!==2&&!state.withdrawn[p.buildKey]&&recipeIds.has(p.recipeId)&&!excludeKeys.has(p.buildKey))
  if(!pending.length)return {receipts:[],tasks:[]}
  const releases=(await github.list(`/repos/${repository}/releases`)).filter(r=>!r.draft),receipts=[],tasks=[]
  for(const p of pending){
