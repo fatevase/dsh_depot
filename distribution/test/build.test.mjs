@@ -1,3 +1,4 @@
+import { runtimeTarget } from '../lib/platform.mjs'
 import test from 'node:test'
 import assert from 'node:assert/strict'
 import { writeFile, readFile, mkdir } from 'node:fs/promises'
@@ -34,7 +35,7 @@ test('builder resolves relative work directories before passing paths to npm',as
  const dir=await temporary(t),manifest={name:'dsh-fixture',version:'1.0.0',main:'index.js'}
  const lock=path.join(dir,'runtime.json');await writeFile(lock,JSON.stringify({lockfileVersion:3,packages:{'':{name:'dsh-fixture',version:'1.0.0',dependencies:{}}}}))
  const r=recipe({_root:dir,install:false,buildCommands:[],locks:{runtime:{origin:'adapter',file:'runtime.json',digest:await fileDigest(lock)}}}),s=source({manifestDigest:jsonDigest(manifest),lockDigests:{}})
- const target=`${process.platform}-${process.arch}`,task={recipeId:r.id,source:s,host,target,recipeDigest:jsonDigest(r),buildKey:buildKey({recipe:r,source:s,target,host})}
+ const target=runtimeTarget(process.platform,process.arch),task={recipeId:r.id,source:s,host,target,recipeDigest:jsonDigest(r),buildKey:buildKey({recipe:r,source:s,target,host})}
  const archive=path.join(dir,'source.tgz');execFileSync('python3',['-c',"import tarfile,io,sys,json\nt=tarfile.open(sys.argv[1],'w:gz')\nfor n,v in json.loads(sys.argv[2]).items():\n b=v.encode();i=tarfile.TarInfo(n);i.size=len(b);t.addfile(i,io.BytesIO(b))\nt.close()",archive,JSON.stringify({'source/package.json':JSON.stringify(manifest),'source/index.js':'module.exports=1'})])
  s.archiveSha256=await fileDigest(archive);task.buildKey=buildKey({recipe:r,source:s,target,host})
  const result=await buildTask(task,{recipe:r,sourceArchive:archive,workDir:path.relative(process.cwd(),path.join(dir,'build')),tools:await resolveTools()});assert.equal(result.status,'built',result.error?.message)

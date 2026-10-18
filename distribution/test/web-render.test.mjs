@@ -23,7 +23,7 @@ async function app(t){
  }
  return (await import(pathToFileURL(path.join(dir,'App.mjs')))).default
 }
-const catalog={schemaVersion:1,host:{version:'0.2.0-rc.2',node:'26.9.0'},plugins:[{id:'one',name:'<img src=x onerror=alert(1)>',repository:'curated/one',category:'workspace',seed:{version:'1.0.0',commit:'a'.repeat(40)},license:'MIT'}],packages:[{recipeId:'one',buildKey:'verified-key',target:'darwin-arm64',version:'1.0.0',status:'published',compressedBytes:250000,fileName:'one-1.0.0-darwin-arm64.tgz',sha256:'b'.repeat(64),packageUrl:'https://github.com/fatevase/dsh_depot/releases/download/batch/one.tgz',reportUrl:'https://github.com/fatevase/dsh_depot/releases/download/batch/report.json',host:{version:'0.2.0-rc.2',node:'26.9.0'},verification:{status:'passed',checks:{install:true,compose:true,host:true,clientModule:true},scope:['cold-install']}}]}
+const catalog={schemaVersion:1,host:{version:'0.2.0-rc.2',node:'26.9.0'},plugins:[{id:'one',name:'<img src=x onerror=alert(1)>',repository:'curated/one',category:'workspace',seed:{version:'1.0.0',commit:'a'.repeat(40)},license:'MIT'}],packages:[{recipeId:'one',buildKey:'verified-key',target:'macos-arm64',version:'1.0.0',status:'published',compressedBytes:250000,fileName:'one-1.0.0-macos-arm64.tgz',sha256:'b'.repeat(64),packageUrl:'https://github.com/fatevase/dsh_depot/releases/download/batch/one.tgz',reportUrl:'https://github.com/fatevase/dsh_depot/releases/download/batch/report.json',host:{version:'0.2.0-rc.2',node:'26.9.0'},verification:{status:'passed',checks:{install:true,compose:true,host:true,clientModule:true},scope:['cold-install']}}]}
 test('actual Svelte cards escape upstream markup and link back to retained search filters',async t=>{
  const component=await app(t)
  const {body}=render(component,{props:{initialCatalog:catalog,initialPage:'plugins.html',initialSearch:'?category=workspace&platform=linux-x64'}})
@@ -35,9 +35,9 @@ test('actual Svelte cards escape upstream markup and link back to retained searc
 test('detail commands, download, and passed proof belong only to the selected published platform',async t=>{
  const component=await app(t)
  const html=platform=>render(component,{props:{initialCatalog:catalog,initialPage:'plugin.html',initialSearch:`?id=one&platform=${platform}&tab=proof`}}).body
- const mac=html('darwin-arm64'),linux=html('linux-x64')
- assert.match(mac,/one-1.0.0-darwin-arm64.tgz/);assert.match(mac,/--offline --ignore-scripts/);assert.match(mac,/releases\/download\/batch\/one.tgz/);assert.match(mac,/全新缓存 · 断网安装<\/span><small[^>]*>通过/)
- assert.ok(!linux.includes('one-1.0.0-darwin-arm64.tgz'));assert.ok(!linux.includes('releases/download/batch/one.tgz'));assert.match(linux,/暂无报告/)
+ const mac=html('macos-arm64'),linux=html('linux-x64')
+ assert.match(mac,/one-1.0.0-macos-arm64.tgz/);assert.match(mac,/--offline --ignore-scripts/);assert.match(mac,/releases\/download\/batch\/one.tgz/);assert.match(mac,/全新缓存 · 断网安装<\/span><small[^>]*>通过/)
+ assert.ok(!linux.includes('one-1.0.0-macos-arm64.tgz'));assert.ok(!linux.includes('releases/download/batch/one.tgz'));assert.match(linux,/暂无报告/)
 })
 test('home counts current downloads and links to the separate guide',async t=>{
  const component=await app(t),c=structuredClone(catalog)
@@ -65,7 +65,7 @@ test('all-platform cards show both available systems and the current Windows ver
  assert.match(html,/macOS · arm64 · 已验证 · 可下载/);assert.match(html,/Linux · x64 · 已验证 · 可下载/);assert.match(html,/Windows · x64 · 验证未通过/)
  const win=render(component,{props:{initialCatalog:c,initialPage:'plugin.html',initialSearch:'?id=one&platform=win32-x64'}}).body
  assert.match(win,/网络隔离检查未通过/);assert.ok(!win.includes('Build plan inputs changed'));assert.ok(!win.includes('href="https://github.com/fatevase/dsh_depot/releases/download/batch/one.tgz"'))
- const mac=render(component,{props:{initialCatalog:c,initialPage:'plugins.html',initialSearch:'?platform=darwin-arm64'}}).body
+ const mac=render(component,{props:{initialCatalog:c,initialPage:'plugins.html',initialSearch:'?platform=macos-arm64'}}).body
  assert.match(mac,/macOS · arm64 · 已验证 · 可下载/);assert.ok(!mac.includes('Windows · x64 · 验证未通过'))
 })
 

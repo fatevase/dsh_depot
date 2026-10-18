@@ -8,7 +8,7 @@
   const params=new URLSearchParams(initialSearch)
   let catalog=$state(initialCatalog),error=$state('')
   let options=$state({q:params.get('q')??'',category:categories[params.get('category')]?params.get('category'):'all',platform:platforms[params.get('platform')]?params.get('platform'):'all',verified:params.get('verified')==='1',sort:params.get('sort')??'curated'})
-  let query=$state(options.q),target=$state(platforms[params.get('platform')]&&params.get('platform')!=='all'?params.get('platform'):'darwin-arm64'),tab=$state(params.get('tab')==='proof'?'proof':'install')
+  let query=$state(options.q),target=$state(platforms[params.get('platform')]&&params.get('platform')!=='all'?params.get('platform'):'macos-arm64'),tab=$state(params.get('tab')==='proof'?'proof':'install')
   const page=initialPage==='guide.html'?'guide':initialPage==='plugins.html'?'search':initialPage==='plugin.html'?'detail':'home'
   const returnValue=params.get('return')??'plugins.html'
   const back=/^(?:plugins|index)\.html(?:\?|$)/.test(returnValue)?returnValue:'plugins.html'

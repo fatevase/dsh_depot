@@ -3,7 +3,7 @@ import assert from 'node:assert/strict'
 import { createPlan } from '../lib/plan.mjs'
 import { recipe, source, host } from './helpers.mjs'
 const plan=(opts={})=>createPlan({recipes:[recipe()],sources:[source()],state:{},host,...opts})
-test('new compatible source fans out to three independent target tasks',()=>{const p=plan();assert.equal(p.tasks.length,3);assert.deepEqual(p.tasks.map(t=>t.target),['darwin-arm64','linux-x64','win32-x64'])})
+test('new compatible source fans out to three independent target tasks',()=>{const p=plan();assert.equal(p.tasks.length,3);assert.deepEqual(p.tasks.map(t=>t.target),['macos-arm64','linux-x64','win32-x64'])})
 test('published inputs skip; failed inputs require explicit retry',()=>{
  const first=plan(),key=first.tasks[0].buildKey
  assert.equal(plan({state:{published:{[key]:{status:'published'}}}}).tasks.length,2)

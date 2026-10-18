@@ -17,7 +17,7 @@
 
 | 系统 | 包中的平台标识 | 说明 |
 | --- | --- | --- |
-| macOS Apple Silicon | `darwin-arm64` | 适用于 M 系列芯片，不能用于 Intel Mac |
+| macOS Apple Silicon | `macos-arm64` | 适用于 M 系列芯片，不能用于 Intel Mac |
 | Linux x64 | `linux-x64` | 适用于 64 位 x86 Linux |
 | Windows x64 | `win32-x64` | 独立构建与验证，下载前查看详情中的当前状态 |
 

@@ -16,7 +16,7 @@
   "allowedVersions": "0.4.2",
   "hostRange": "^0.2.0-rc.2",
   "targets": [
-    "darwin-arm64",
+    "macos-arm64",
     "linux-x64",
     "win32-x64"
   ],

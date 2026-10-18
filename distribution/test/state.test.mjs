@@ -2,14 +2,14 @@ import test from 'node:test'
 import assert from 'node:assert/strict'
 import { initialState } from '../lib/model.mjs'
 import { mergeState, pointerKey, withdraw, rollback, updateStateBranch } from '../lib/state.mjs'
-const publication=(key,version='1.0.0',target='darwin-arm64')=>({buildKey:key,recipeId:'fixture',version,target,host:{version:'0.2.0-rc.2',node:'26.9.0'},status:'published',sha256:'b'.repeat(64),packageUrl:'https://github.com/x/y/releases/download/a/b.tgz',verification:{status:'passed'}})
+const publication=(key,version='1.0.0',target='macos-arm64')=>({buildKey:key,recipeId:'fixture',version,target,host:{version:'0.2.0-rc.2',node:'26.9.0'},status:'published',sha256:'b'.repeat(64),packageUrl:'https://github.com/x/y/releases/download/a/b.tgz',verification:{status:'passed'}})
 test('persistent receipts, monotonic pointers, withdrawal and explicit rollback',()=>{
  let state=mergeState(initialState(),{discovery:{complete:true,checkedAt:'now',sources:[{recipeId:'fixture'}],candidates:[{repository:'a/b'}]},receipts:[{buildKey:'bad',attempt:'1',status:'failed'}],publications:[publication('new','2.0.0')]})
  state=mergeState(state,{publications:[publication('old')]})
  const pointer=pointerKey(publication('new'));assert.equal(state.latest[pointer],'new');assert.equal(state.receipts.bad.status,'failed');assert.equal(state.lastSuccessfulDiscoveryAt,'now');assert.equal(state.candidates.length,1)
- state=rollback(state,{key:'old',recipeId:'fixture',target:'darwin-arm64',host:publication('old').host});assert.equal(state.latest[pointer],'old')
+ state=rollback(state,{key:'old',recipeId:'fixture',target:'macos-arm64',host:publication('old').host});assert.equal(state.latest[pointer],'old')
  assert.throws(()=>rollback(state,{key:'new',recipeId:'fixture',target:'linux-x64',host:publication('old').host}))
- state=withdraw(state,'old','bad version');assert.equal(state.latest[pointer],'new');assert.throws(()=>rollback(state,{key:'old',recipeId:'fixture',target:'darwin-arm64',host:publication('old').host}))
+ state=withdraw(state,'old','bad version');assert.equal(state.latest[pointer],'new');assert.throws(()=>rollback(state,{key:'old',recipeId:'fixture',target:'macos-arm64',host:publication('old').host}))
  const repeated=mergeState(state,{receipts:[{buildKey:'bad',attempt:'1',status:'failed'}]});assert.deepEqual(repeated,state)
 })
 test('state CAS conflict reads current state and recalculates without losing concurrent receipts',async()=>{

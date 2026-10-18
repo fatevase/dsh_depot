@@ -8,7 +8,7 @@ import { temporary,recipe,source,host as baselineHost } from './helpers.mjs'
 test('catalog excludes historical publications, pointers and issues outside selected recipes without mutating state',()=>{
  const state=initialState()
  for(const id of ['fixture','mobile']){
-  state.published[id]={recipeId:id,buildKey:id,status:'published'}
+  state.published[id]={recipeId:id,buildKey:id,target:'macos-arm64',status:'published'}
   state.latest[`${id}|host`]=id
   state.receipts[id]={buildKey:id,recipeId:id,target:'linux-x64',status:'failed'}
  }
@@ -20,7 +20,7 @@ test('catalog excludes historical publications, pointers and issues outside sele
  assert.deepEqual(catalog.decisions,[{recipeId:'fixture'}])
  assert.deepEqual(state,before)
 })
-async function fixture(t){const dir=await temporary(t),file=path.join(dir,'fixture.tgz');await writeFile(file,'immutable package');const sha256=await fileDigest(file),host=baselineHost,rec=recipe(),src=source(),key=buildKey({recipe:rec,source:src,host,target:'darwin-arm64'});const receipt={schemaVersion:1,buildKey:key,recipeId:'fixture',recipeDigest:jsonDigest(rec),plannedAt:'2026-10-18T01:00:00Z',source:src,host,target:'darwin-arm64',status:'verified',attempt:'1',artifacts:{package:file,sha256,compressedBytes:17,unpackedBytes:20},verification:{schemaVersion:1,buildKey:key,host,target:'darwin-arm64',sha256,status:'passed',isolationControls:{beforeReachable:true,beforeReachableIPv6:true,offline:{externalBlocked:true,externalBlockedIPv6:true,childBlockedIPv6:true,otherProgramBlocked:true,childBlocked:true,loopbackBlocked:true},loopback:{externalBlocked:true,externalBlockedIPv6:true,childBlockedIPv6:true,otherProgramBlocked:true,childBlocked:true,loopbackAllowed:true}},checks:{install:true,compose:true,host:true,clientModule:true,native:true}}};receipt._recipe=rec;receipt._tasks=[{buildKey:key,recipeId:receipt.recipeId,recipeDigest:receipt.recipeDigest,plannedAt:receipt.plannedAt,source:structuredClone(src),host:structuredClone(host),target:receipt.target}];return receipt}
+async function fixture(t){const dir=await temporary(t),file=path.join(dir,'fixture.tgz');await writeFile(file,'immutable package');const sha256=await fileDigest(file),host=baselineHost,rec=recipe(),src=source(),key=buildKey({recipe:rec,source:src,host,target:'macos-arm64'});const receipt={schemaVersion:1,buildKey:key,recipeId:'fixture',recipeDigest:jsonDigest(rec),plannedAt:'2026-10-18T01:00:00Z',source:src,host,target:'macos-arm64',status:'verified',attempt:'1',artifacts:{package:file,sha256,compressedBytes:17,unpackedBytes:20},verification:{schemaVersion:1,buildKey:key,host,target:'macos-arm64',sha256,status:'passed',isolationControls:{beforeReachable:true,beforeReachableIPv6:true,offline:{externalBlocked:true,externalBlockedIPv6:true,childBlockedIPv6:true,otherProgramBlocked:true,childBlocked:true,loopbackBlocked:true},loopback:{externalBlocked:true,externalBlockedIPv6:true,childBlockedIPv6:true,otherProgramBlocked:true,childBlocked:true,loopbackAllowed:true}},checks:{install:true,compose:true,host:true,clientModule:true,native:true}}};receipt._recipe=rec;receipt._tasks=[{buildKey:key,recipeId:receipt.recipeId,recipeDigest:receipt.recipeDigest,plannedAt:receipt.plannedAt,source:structuredClone(src),host:structuredClone(host),target:receipt.target}];return receipt}
 test('dry run is default; invalid bytes, missing reports and withdrawn keys never upload',async t=>{
  const receipt=await fixture(t),state=initialState(),remote={ensureDraft:async()=>{throw Error('must not mutate')}}
  const dry=await publishBatch({tasks:receipt._tasks,recipes:[receipt._recipe],batchId:'1',repository:'x/y',state,receipts:[receipt],remote});assert.equal(dry.actions[0].action,'would_publish');assert.deepEqual(dry.state.published,{})
@@ -47,9 +47,9 @@ test('public downloads use the final tag and short filenames; audit data is cons
  const r=await fixture(t),assets=new Map(),files=new Map()
  const remote={ensureDraft:async()=>({id:1,draft:true,tag_name:'depot-clean'}),asset:async(_,name)=>assets.get(name),upload:async(_,name,file,sha)=>{files.set(name,Buffer.isBuffer(file)?file:await readFile(file));const a={sha256:sha,url:`https://github.com/x/y/releases/download/untagged-temporary/${name}`};assets.set(name,a);return a},publish:async()=>{}}
  const result=await publishBatch({batchId:'clean',repository:'x/y',state:initialState(),receipts:[r],tasks:r._tasks,recipes:[r._recipe],remote,dryRun:false})
- assert.deepEqual([...files.keys()],['fixture-1.0.0-darwin-arm64.tgz','SHA256SUMS','reports.json'])
- const p=result.publications[0];assert.equal(p.fileName,'fixture-1.0.0-darwin-arm64.tgz');assert.equal(p.packageUrl,'https://github.com/x/y/releases/download/depot-clean/fixture-1.0.0-darwin-arm64.tgz');assert.ok(!p.reportUrl.includes('untagged-'))
- assert.match(files.get('SHA256SUMS').toString(),/  fixture-1.0.0-darwin-arm64.tgz\n$/)
+ assert.deepEqual([...files.keys()],['fixture-1.0.0-macos-arm64.tgz','SHA256SUMS','reports.json'])
+ const p=result.publications[0];assert.equal(p.fileName,'fixture-1.0.0-macos-arm64.tgz');assert.equal(p.packageUrl,'https://github.com/x/y/releases/download/depot-clean/fixture-1.0.0-macos-arm64.tgz');assert.ok(!p.reportUrl.includes('untagged-'))
+ assert.match(files.get('SHA256SUMS').toString(),/  fixture-1.0.0-macos-arm64.tgz\n$/)
  const report=JSON.parse(files.get('reports.json'));assert.equal(report.packages[0].buildKey,r.buildKey);assert.equal(report.packages[0].verification.status,'passed')
 })
 test('a failed public-link check never records publication and resumes identical public assets',async t=>{

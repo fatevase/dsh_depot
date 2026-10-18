@@ -14,10 +14,10 @@ test('host graph changes enter deterministic build identity',async t=>{
  const {hostEnvironmentDigest}=await import('../lib/host-environment.mjs')
  const dir=await temporary(t);for(const name of ['package.json','pnpm-workspace.yaml','pnpm-lock.yaml'])await writeFile(path.join(dir,name),'one')
  const first=hostEnvironmentDigest(dir);await writeFile(path.join(dir,'pnpm-lock.yaml'),'two');const second=hostEnvironmentDigest(dir);assert.notEqual(first,second)
- assert.notEqual(buildKey({recipe:recipe(),source:source(),target:'darwin-arm64',host:{...host,environmentDigest:first}}),buildKey({recipe:recipe(),source:source(),target:'darwin-arm64',host:{...host,environmentDigest:second}}))
+ assert.notEqual(buildKey({recipe:recipe(),source:source(),target:'macos-arm64',host:{...host,environmentDigest:first}}),buildKey({recipe:recipe(),source:source(),target:'macos-arm64',host:{...host,environmentDigest:second}}))
 })
 test('late and retried equal-version old-source jobs never replace the newer source',()=>{
- const p=(key,observedAt,plannedAt)=>({buildKey:key,recipeId:'fixture',version:'1.0.0',source:{commit:key,observedAt},host,target:'darwin-arm64',status:'published',sha256:key,publishedAt:plannedAt,plannedAt})
+ const p=(key,observedAt,plannedAt)=>({buildKey:key,recipeId:'fixture',version:'1.0.0',source:{commit:key,observedAt},host,target:'macos-arm64',status:'published',sha256:key,publishedAt:plannedAt,plannedAt})
  const newer=p('new','2026-10-18T02:00Z','2026-10-18T02:01Z'),older=p('old','2026-10-18T01:00Z','2026-10-18T03:00Z')
  const state=mergeState(mergeState(initialState(),{publications:[newer]}),{publications:[older]});assert.equal(state.latest[pointerKey(newer)],'new')
 })
@@ -56,7 +56,7 @@ test('default branch publication and latest-state Pages deployment share a seria
 })
 test('an old deployment retry regenerates from current state and cannot resurrect a withdrawal',async t=>{
  const {refreshDeployment}=await import('../lib/deploy.mjs'),dir=await temporary(t),state=initialState()
- state.published.old={buildKey:'old',recipeId:'fixture',status:'published',version:'1.0.0',host,target:'darwin-arm64',packageUrl:'https://github.com/a/b/releases/download/1/old.tgz',verification:{status:'passed'}};state.latest[pointerKey(state.published.old)]='old'
+ state.published.old={buildKey:'old',recipeId:'fixture',status:'published',version:'1.0.0',host,target:'macos-arm64',packageUrl:'https://github.com/a/b/releases/download/1/old.tgz',verification:{status:'passed'}};state.latest[pointerKey(state.published.old)]='old'
  let current={commit:'old',state};const store={read:async()=>structuredClone(current)}
  await refreshDeployment({store,recipes:[recipe()],outDir:dir})
  current.state.withdrawn.old={reason:'withdrawn'};current.commit='new'
