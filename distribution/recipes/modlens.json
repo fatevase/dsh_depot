@@ -1,0 +1,67 @@
+{
+  "schemaVersion": 1,
+  "id": "modlens",
+  "repository": "liustack/modlens",
+  "packagePath": ".",
+  "npmName": "@liustack/modlens",
+  "channel": {
+    "type": "fixed",
+    "ref": "aa108d1796e3c4b5a6790516e2fcde87a35b189f"
+  },
+  "seed": {
+    "ref": "aa108d1796e3c4b5a6790516e2fcde87a35b189f",
+    "version": "3.27.1",
+    "commit": "aa108d1796e3c4b5a6790516e2fcde87a35b189f",
+    "archiveSha256": "78e936ed3dda503cbe6f07429de40a3d55a5947da40c2242c5fbd00a139d9673"
+  },
+  "allowedVersions": "3.27.1",
+  "hostRange": "^0.2.0-rc.2",
+  "targets": [
+    "darwin-arm64",
+    "linux-x64",
+    "win32-x64"
+  ],
+  "toolchain": {
+    "node": "26.9.0",
+    "npm": "11.19.1",
+    "pnpm": "11.25.0"
+  },
+  "packageManager": "pnpm",
+  "locks": {
+    "build": {
+      "origin": "source",
+      "file": "pnpm-lock.yaml"
+    },
+    "runtime": {
+      "origin": "adapter",
+      "file": "locks/modlens-runtime.json"
+    }
+  },
+  "buildCommands": [
+    [
+      "npm",
+      "run",
+      "build"
+    ]
+  ],
+  "packageRules": {
+    "localPackages": []
+  },
+  "probes": {
+    "clientModule": "@liustack/modlens",
+    "registrations": [
+      {
+        "id": "modlens",
+        "name": "@liustack/modlens"
+      }
+    ],
+    "native": []
+  },
+  "display": {
+    "name": "Modlens",
+    "category": "tools"
+  },
+  "enabled": true,
+  "license": "MIT",
+  "distributionScope": "The complete official Modlens CLI and DSH plugin, including its browser client and frozen production dependencies. Vision-provider requests need a configured provider or an authenticated external CLI; packaging and plugin startup do not provide credentials."
+}

@@ -1,0 +1,62 @@
+{
+  "schemaVersion": 1,
+  "id": "routing-suite",
+  "repository": "yjh051108/dsh-routing-suite",
+  "packagePath": ".",
+  "npmName": "@dsh-external/dsh-super-injector",
+  "channel": {
+    "type": "fixed",
+    "ref": "195273352f23bff7f9023ebe2ec0cdbdf9c98f10",
+    "allowPrerelease": false
+  },
+  "seed": {
+    "ref": "195273352f23bff7f9023ebe2ec0cdbdf9c98f10",
+    "version": "0.3.3",
+    "commit": "195273352f23bff7f9023ebe2ec0cdbdf9c98f10",
+    "archiveSha256": "35ac8bff3a0e5c5023fc55df8c838caf0812a203e8d6bf6bb9cedfcf00d57c87"
+  },
+  "allowedVersions": "0.3.3",
+  "hostRange": "0.2.0-rc.2",
+  "targets": [
+    "darwin-arm64",
+    "linux-x64",
+    "win32-x64"
+  ],
+  "toolchain": {
+    "node": "26.9.0",
+    "npm": "11.19.1",
+    "pnpm": "11.25.0"
+  },
+  "packageManager": "npm",
+  "installPath": "injector",
+  "locks": {
+    "runtime": {
+      "origin": "adapter",
+      "file": "locks/routing-suite-runtime.json"
+    },
+    "build": {
+      "origin": "adapter",
+      "file": "locks/routing-suite-build.json"
+    }
+  },
+  "buildCommands": [
+    [
+      "node",
+      "--input-type=module",
+      "--eval",
+      "import { pathToFileURL } from 'node:url'; process.chdir('injector'); const { build } = await import(pathToFileURL(process.cwd() + '/node_modules/tsdown/dist/index.mjs')); await build({ config: 'tsdown.config.ts' });"
+    ]
+  ],
+  "packageRules": {
+    "localPackages": []
+  },
+  "probes": {
+    "clientModule": "@dsh-external/dsh-super-injector",
+    "native": []
+  },
+  "display": {
+    "name": "DSH Routing Suite · Injector",
+    "category": "tools"
+  },
+  "enabled": true
+}

@@ -1,0 +1,10 @@
+{
+  "name": "dsh-depot",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "npm --prefix distribution test",
+    "distribution:test": "npm --prefix distribution test"
+  }
+}

@@ -1,0 +1,49 @@
+{
+  "schemaVersion": 1,
+  "id": "whale-widget",
+  "repository": "MeteorNOX/DeepSeek-Balance-Whale-Widget",
+  "packagePath": ".",
+  "npmName": "dsh-whale-widget",
+  "channel": {
+    "type": "fixed",
+    "ref": "5247dd6813d6e4430728f39ccc63d43cda046022"
+  },
+  "seed": {
+    "ref": "5247dd6813d6e4430728f39ccc63d43cda046022",
+    "version": "0.4.2",
+    "commit": "5247dd6813d6e4430728f39ccc63d43cda046022"
+  },
+  "allowedVersions": "0.4.2",
+  "hostRange": "^0.2.0-rc.2",
+  "targets": [
+    "darwin-arm64",
+    "linux-x64",
+    "win32-x64"
+  ],
+  "toolchain": {
+    "node": "26.9.0",
+    "npm": "11.19.1",
+    "pnpm": "11.25.0"
+  },
+  "packageManager": "npm",
+  "locks": {
+    "runtime": {
+      "origin": "adapter",
+      "file": "locks/whale-widget-runtime.json"
+    }
+  },
+  "buildCommands": [],
+  "packageRules": {
+    "localPackages": []
+  },
+  "probes": {
+    "clientModule": "/dsh-whale/widget.js",
+    "native": []
+  },
+  "display": {
+    "name": "小鲸鱼记账挂件",
+    "category": "tools"
+  },
+  "enabled": true,
+  "install": false
+}

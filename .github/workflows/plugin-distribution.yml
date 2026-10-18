@@ -1,0 +1,314 @@
+{
+  "name": "DSH plugin distribution",
+  "on": {
+    "schedule": [
+      {
+        "cron": "23 3 * * *"
+      }
+    ],
+    "workflow_dispatch": {
+      "inputs": {
+        "plugin": {
+          "description": "Only a curated plugin ID (empty = all)",
+          "type": "string"
+        },
+        "target": {
+          "description": "Only a platform (empty = all)",
+          "type": "string"
+        },
+        "retry_keys": {
+          "description": "Explicit retry build keys or plugin IDs, comma separated",
+          "type": "string"
+        }
+      }
+    },
+    "push": {
+      "paths": [
+        "distribution/**",
+        ".github/workflows/plugin-distribution.yml"
+      ]
+    },
+    "pull_request": {
+      "paths": [
+        "distribution/**",
+        ".github/workflows/plugin-distribution.yml"
+      ]
+    }
+  },
+  "permissions": {},
+  "jobs": {
+    "test": {
+      "runs-on": "ubuntu-24.04",
+      "permissions": {
+        "contents": "read"
+      },
+      "timeout-minutes": 10,
+      "steps": [
+        {
+          "uses": "actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1",
+          "with": {
+            "persist-credentials": false
+          }
+        },
+        {
+          "uses": "actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1",
+          "with": {
+            "node-version": "26.9.0"
+          }
+        },
+        {
+          "run": "npm --prefix distribution ci --ignore-scripts --registry=https://registry.npmjs.org"
+        },
+        {
+          "run": "npm run distribution:test"
+        }
+      ]
+    },
+    "discover": {
+      "if": "github.event_name != 'pull_request' && github.ref == format('refs/heads/{0}', github.event.repository.default_branch)",
+      "needs": [
+        "test"
+      ],
+      "runs-on": "ubuntu-24.04",
+      "permissions": {
+        "contents": "read"
+      },
+      "timeout-minutes": 10,
+      "outputs": {
+        "matrix": "${{ steps.plan.outputs.matrix }}",
+        "has_tasks": "${{ steps.plan.outputs.has_tasks }}",
+        "source_commit": "${{ github.sha }}"
+      },
+      "steps": [
+        {
+          "uses": "actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1",
+          "with": {
+            "persist-credentials": false
+          }
+        },
+        {
+          "uses": "actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1",
+          "with": {
+            "node-version": "26.9.0"
+          }
+        },
+        {
+          "run": "npm --prefix distribution ci --ignore-scripts --registry=https://registry.npmjs.org"
+        },
+        {
+          "id": "plan",
+          "run": "node distribution/ci.mjs discover",
+          "env": {
+            "GITHUB_TOKEN": "${{ github.token }}",
+            "ONLY_PLUGIN": "${{ inputs.plugin }}",
+            "ONLY_TARGET": "${{ inputs.target }}",
+            "RETRY_KEYS": "${{ inputs.retry_keys }}"
+          }
+        },
+        {
+          "uses": "actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9",
+          "with": {
+            "name": "distribution-batch",
+            "path": ".runtime/distribution/batch",
+            "retention-days": 2,
+            "include-hidden-files": true,
+            "if-no-files-found": "warn"
+          }
+        }
+      ]
+    },
+    "build": {
+      "needs": [
+        "discover"
+      ],
+      "if": "needs.discover.outputs.has_tasks == 'true' && needs.discover.outputs.matrix != ''",
+      "strategy": {
+        "fail-fast": false,
+        "max-parallel": 3,
+        "matrix": "${{ fromJSON(needs.discover.outputs.matrix) }}"
+      },
+      "runs-on": "${{ matrix.runner }}",
+      "permissions": {
+        "contents": "read"
+      },
+      "timeout-minutes": 35,
+      "steps": [
+        {
+          "uses": "actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1",
+          "with": {
+            "persist-credentials": false,
+            "ref": "${{ needs.discover.outputs.source_commit }}"
+          }
+        },
+        {
+          "uses": "actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1",
+          "with": {
+            "node-version": "26.9.0"
+          }
+        },
+        {
+          "run": "npm --prefix distribution ci --ignore-scripts --registry=https://registry.npmjs.org"
+        },
+        {
+          "uses": "actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333",
+          "with": {
+            "name": "distribution-batch",
+            "path": ".runtime/distribution/batch"
+          }
+        },
+        {
+          "run": "node distribution/ci.mjs build",
+          "env": {
+            "BUILD_KEY": "${{ matrix.key }}"
+          }
+        },
+        {
+          "uses": "actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9",
+          "with": {
+            "name": "distribution-result-${{ matrix.key }}",
+            "path": ".runtime/distribution/jobs/${{ matrix.key }}",
+            "retention-days": 2,
+            "include-hidden-files": true,
+            "if-no-files-found": "warn"
+          },
+          "if": "always()"
+        }
+      ]
+    },
+    "publish": {
+      "needs": [
+        "discover",
+        "build"
+      ],
+      "if": "always() && github.event_name != 'pull_request' && github.ref == format('refs/heads/{0}', github.event.repository.default_branch) && needs.discover.result == 'success'",
+      "runs-on": "ubuntu-24.04",
+      "permissions": {
+        "contents": "write"
+      },
+      "timeout-minutes": 15,
+      "concurrency": {
+        "group": "distribution-state-and-pages",
+        "cancel-in-progress": false
+      },
+      "steps": [
+        {
+          "uses": "actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1",
+          "with": {
+            "persist-credentials": false,
+            "ref": "${{ needs.discover.outputs.source_commit }}"
+          }
+        },
+        {
+          "uses": "actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1",
+          "with": {
+            "node-version": "26.9.0"
+          }
+        },
+        {
+          "run": "npm --prefix distribution ci --ignore-scripts --registry=https://registry.npmjs.org"
+        },
+        {
+          "uses": "actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333",
+          "with": {
+            "name": "distribution-batch",
+            "path": ".runtime/distribution/batch"
+          }
+        },
+        {
+          "uses": "actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333",
+          "continue-on-error": true,
+          "with": {
+            "pattern": "distribution-result-*",
+            "path": ".runtime/distribution/jobs",
+            "merge-multiple": false
+          }
+        },
+        {
+          "run": "node distribution/ci.mjs publish",
+          "env": {
+            "GITHUB_TOKEN": "${{ github.token }}"
+          }
+        },
+        {
+          "uses": "actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9",
+          "with": {
+            "name": "distribution-site",
+            "path": ".runtime/distribution/site",
+            "retention-days": 2,
+            "include-hidden-files": true,
+            "if-no-files-found": "warn"
+          }
+        },
+        {
+          "uses": "actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9",
+          "with": {
+            "name": "distribution-publication-report",
+            "path": ".runtime/distribution/publication-plan.json",
+            "retention-days": 2,
+            "include-hidden-files": true,
+            "if-no-files-found": "warn"
+          },
+          "if": "always()"
+        }
+      ]
+    },
+    "pages": {
+      "needs": [
+        "publish"
+      ],
+      "runs-on": "ubuntu-24.04",
+      "permissions": {
+        "pages": "write",
+        "id-token": "write",
+        "actions": "read",
+        "contents": "read"
+      },
+      "timeout-minutes": 10,
+      "concurrency": {
+        "group": "distribution-state-and-pages",
+        "cancel-in-progress": false
+      },
+      "environment": {
+        "name": "github-pages",
+        "url": "${{ steps.deploy.outputs.page_url }}"
+      },
+      "steps": [
+        {
+          "uses": "actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1",
+          "with": {
+            "persist-credentials": false,
+            "ref": "${{ github.event.repository.default_branch }}"
+          }
+        },
+        {
+          "uses": "actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1",
+          "with": {
+            "node-version": "26.9.0"
+          }
+        },
+        {
+          "run": "npm --prefix distribution ci --ignore-scripts --registry=https://registry.npmjs.org"
+        },
+        {
+          "run": "node distribution/ci.mjs deploy-site",
+          "env": {
+            "GITHUB_TOKEN": "${{ github.token }}"
+          }
+        },
+        {
+          "uses": "actions/configure-pages@45bfe0192ca1faeb007ade9deae92b16b8254a0d"
+        },
+        {
+          "uses": "actions/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9",
+          "with": {
+            "path": ".runtime/distribution/site"
+          }
+        },
+        {
+          "uses": "actions/deploy-pages@368f82528645a54fb793d4d04e342629a3f51346",
+          "id": "deploy"
+        }
+      ]
+    }
+  }
+}

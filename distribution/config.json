@@ -1,0 +1,74 @@
+{
+  "schemaVersion": 1,
+  "distributionRepository": "fatevase/dsh_depot",
+  "host": {
+    "version": "0.2.0-rc.2",
+    "node": "26.9.0"
+  },
+  "candidateFeeds": [
+    {
+      "type": "github-topic",
+      "query": "topic:dsh-plugin"
+    }
+  ],
+  "stateBranch": "distribution-state",
+  "registry": "https://registry.npmjs.org",
+  "cohort": {
+    "id": "trending-top10-2026-10-18",
+    "source": "https://dsh-hub.cc/rankings?lang=zh",
+    "apiSource": "https://dsh-hub.cc/api/v1/plugins?scope=all&sort=trending&limit=10",
+    "capturedAt": "2026-10-18T15:43:56.300479+00:00",
+    "plugins": [
+      {
+        "rank": 1,
+        "recipeId": "free-model",
+        "repository": "Ebony-Vinyl/dsh-our-free-model"
+      },
+      {
+        "rank": 2,
+        "recipeId": "dsh-web",
+        "repository": "zhu1090093659/dsh-web"
+      },
+      {
+        "rank": 3,
+        "recipeId": "purge",
+        "repository": "YuJunZhiXue/dsh-purge"
+      },
+      {
+        "rank": 4,
+        "recipeId": "routing-suite",
+        "repository": "yjh051108/dsh-routing-suite"
+      },
+      {
+        "rank": 5,
+        "recipeId": "sidebar",
+        "repository": "omdsh-dev/DSH-better-sidebar"
+      },
+      {
+        "rank": 6,
+        "recipeId": "market",
+        "repository": "dsh-market/dsh-market"
+      },
+      {
+        "rank": 7,
+        "recipeId": "modlens",
+        "repository": "liustack/modlens"
+      },
+      {
+        "rank": 8,
+        "recipeId": "whale-widget",
+        "repository": "MeteorNOX/DeepSeek-Balance-Whale-Widget"
+      },
+      {
+        "rank": 9,
+        "recipeId": "treg",
+        "repository": "superdesigndev/treg"
+      },
+      {
+        "rank": 10,
+        "recipeId": "tui",
+        "repository": "ccch1mneyyy/dsh-TUI"
+      }
+    ]
+  }
+}

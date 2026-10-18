@@ -1,0 +1,46 @@
+{
+  "schemaVersion": 1,
+  "packagePath": "packages/dsh-web-all",
+  "channel": {
+    "type": "fixed",
+    "ref": "3cd18493de81dc2ac4b6ee17677325765d7e84bd"
+  },
+  "allowedVersions": "0.4.6",
+  "hostRange": "^0.2.0-rc.2",
+  "targets": [
+    "darwin-arm64",
+    "linux-x64",
+    "win32-x64"
+  ],
+  "toolchain": {
+    "node": "26.9.0",
+    "npm": "11.19.1",
+    "pnpm": "11.25.0"
+  },
+  "packageManager": "npm",
+  "buildCommands": [],
+  "packageRules": {
+    "localPackages": []
+  },
+  "install": false,
+  "id": "dsh-web",
+  "repository": "zhu1090093659/dsh-web",
+  "npmName": "@linxin666/dsh-web-all",
+  "seed": {
+    "ref": "3cd18493de81dc2ac4b6ee17677325765d7e84bd",
+    "version": "0.4.6",
+    "commit": "3cd18493de81dc2ac4b6ee17677325765d7e84bd"
+  },
+  "probes": {
+    "clientModule": "@linxin666/dsh-web-all",
+    "native": []
+  },
+  "display": {
+    "name": "DSH Web",
+    "category": "workspace"
+  },
+  "enabled": false,
+  "status": "needs_recipe",
+  "blockedReason": "The canonical aggregate uses 15 sibling workspace:* production dependencies. The current packager only supports same-package descendant local packages with no runtime dependencies; it cannot compile and bundle this monorepo dependency closure while preserving identity. Latest 0.4.7 also requires DSH >=0.2.1-rc.2; the pinned 0.4.6 source declares >=0.2.0-rc.2. No artifact is offered until the monorepo adapter is implemented and verified.",
+  "license": "Apache-2.0"
+}

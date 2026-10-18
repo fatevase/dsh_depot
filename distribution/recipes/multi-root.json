@@ -1,0 +1,62 @@
+{
+  "schemaVersion": 1,
+  "id": "multi-root",
+  "repository": "cherrchen/dsh-plugin-multi-root-workspace",
+  "packagePath": ".",
+  "npmName": "@dsh-electron/dsh-plugin-multi-root-workspace",
+  "channel": {
+    "type": "tags",
+    "allowPrerelease": false
+  },
+  "seed": {
+    "ref": "v0.1.8",
+    "version": "0.1.8",
+    "commit": "15c1d26351d069242944aa1f276e6e85aa743632",
+    "archiveSha256": "dcab7ee631fe602c649b3970ce6861ca8c69707a87a8fda28f0c6438c1340674"
+  },
+  "allowedVersions": ">=0.1.8 <1.0.0",
+  "hostRange": "^0.2.0-rc.2",
+  "targets": [
+    "darwin-arm64",
+    "linux-x64",
+    "win32-x64"
+  ],
+  "toolchain": {
+    "node": "26.9.0",
+    "npm": "11.19.1",
+    "pnpm": "11.25.0"
+  },
+  "packageManager": "pnpm",
+  "locks": {
+    "runtime": {
+      "origin": "adapter",
+      "file": "locks/multi-root-runtime.json"
+    },
+    "build": {
+      "origin": "source",
+      "file": "pnpm-lock.yaml"
+    }
+  },
+  "buildCommands": [
+    [
+      "npm",
+      "run",
+      "build"
+    ]
+  ],
+  "packageRules": {
+    "localPackages": []
+  },
+  "probes": {
+    "clientModule": "@dsh-electron/dsh-plugin-multi-root-workspace",
+    "native": [
+      "koffi",
+      "@deepseek-ai/node-addon-system/flock"
+    ]
+  },
+  "display": {
+    "name": "Multi-root Workspace",
+    "category": "workspace"
+  },
+  "enabled": true
+}

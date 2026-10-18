@@ -1,0 +1,60 @@
+{
+  "schemaVersion": 1,
+  "id": "sidebar",
+  "repository": "omdsh-dev/DSH-better-sidebar",
+  "packagePath": ".",
+  "npmName": "dsh-better-sidebar",
+  "channel": {
+    "type": "fixed",
+    "ref": "9323f48d0946432ffd94655df1c115a1cd89f34c"
+  },
+  "seed": {
+    "ref": "v0.26.0",
+    "version": "0.26.0",
+    "commit": "9323f48d0946432ffd94655df1c115a1cd89f34c",
+    "archiveSha256": "edb85c646cb877680e27d599aaec4bb12d9779ec808a2eb5f163b8ed77f63c92"
+  },
+  "allowedVersions": "0.26.0",
+  "hostRange": "^0.2.0-rc.2",
+  "targets": [
+    "darwin-arm64",
+    "linux-x64",
+    "win32-x64"
+  ],
+  "toolchain": {
+    "node": "26.9.0",
+    "npm": "11.19.1",
+    "pnpm": "11.8.0"
+  },
+  "packageManager": "pnpm",
+  "locks": {
+    "runtime": {
+      "origin": "adapter",
+      "file": "locks/sidebar-runtime.json"
+    },
+    "build": {
+      "origin": "source",
+      "file": "pnpm-lock.yaml"
+    }
+  },
+  "buildCommands": [
+    [
+      "npm",
+      "run",
+      "build"
+    ]
+  ],
+  "packageRules": {
+    "localPackages": []
+  },
+  "probes": {
+    "clientModule": "dsh-better-sidebar",
+    "native": []
+  },
+  "display": {
+    "name": "Better Sidebar",
+    "category": "interface"
+  },
+  "enabled": true,
+  "distributionScope": "First cohort uses the compatible source version already exercised against frozen stock DSH0.2.0-rc.2; it does not claim to be the latest upstream release."
+}

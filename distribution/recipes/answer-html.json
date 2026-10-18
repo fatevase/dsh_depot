@@ -1,0 +1,54 @@
+{
+  "schemaVersion": 1,
+  "id": "answer-html",
+  "repository": "QingYunA/answer-me-with-html",
+  "packagePath": ".",
+  "npmName": "answer-me-with-html",
+  "channel": {
+    "type": "fixed",
+    "ref": "7acea24024923eaae8647f5988e826062456dc86"
+  },
+  "seed": {
+    "ref": "7acea24024923eaae8647f5988e826062456dc86",
+    "version": "0.5.5",
+    "commit": "7acea24024923eaae8647f5988e826062456dc86"
+  },
+  "allowedVersions": "0.5.5",
+  "hostRange": "^0.2.0-rc.2",
+  "targets": [
+    "darwin-arm64",
+    "linux-x64",
+    "win32-x64"
+  ],
+  "toolchain": {
+    "node": "26.9.0",
+    "npm": "11.19.1",
+    "pnpm": "11.25.0"
+  },
+  "packageManager": "npm",
+  "locks": {
+    "runtime": {
+      "origin": "adapter",
+      "file": "locks/answer-html-runtime.json"
+    }
+  },
+  "buildCommands": [],
+  "packageRules": {
+    "localPackages": []
+  },
+  "probes": {
+    "registrations": [
+      {
+        "id": "answer-me-with-html-skill",
+        "name": "@deepseek-ai/dsh-skill-filesystem"
+      }
+    ],
+    "native": []
+  },
+  "display": {
+    "name": "Answer me with HTML",
+    "category": "tools"
+  },
+  "enabled": true,
+  "install": false
+}

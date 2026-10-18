@@ -1,0 +1,111 @@
+{
+  "schemaVersion": 1,
+  "id": "trending-top10-2026-10-18",
+  "source": "https://dsh-hub.cc/rankings?lang=zh",
+  "apiSource": "https://dsh-hub.cc/api/v1/plugins?scope=all&sort=trending&limit=10",
+  "capturedAt": "2026-10-18T15:43:56.300479+00:00",
+  "plugins": [
+    {
+      "rank": 1,
+      "recipeId": "free-model",
+      "repository": "Ebony-Vinyl/dsh-our-free-model"
+    },
+    {
+      "rank": 2,
+      "recipeId": "dsh-web",
+      "repository": "zhu1090093659/dsh-web"
+    },
+    {
+      "rank": 3,
+      "recipeId": "purge",
+      "repository": "YuJunZhiXue/dsh-purge"
+    },
+    {
+      "rank": 4,
+      "recipeId": "routing-suite",
+      "repository": "yjh051108/dsh-routing-suite"
+    },
+    {
+      "rank": 5,
+      "recipeId": "sidebar",
+      "repository": "omdsh-dev/DSH-better-sidebar"
+    },
+    {
+      "rank": 6,
+      "recipeId": "market",
+      "repository": "dsh-market/dsh-market"
+    },
+    {
+      "rank": 7,
+      "recipeId": "modlens",
+      "repository": "liustack/modlens"
+    },
+    {
+      "rank": 8,
+      "recipeId": "whale-widget",
+      "repository": "MeteorNOX/DeepSeek-Balance-Whale-Widget"
+    },
+    {
+      "rank": 9,
+      "recipeId": "treg",
+      "repository": "superdesigndev/treg"
+    },
+    {
+      "rank": 10,
+      "recipeId": "tui",
+      "repository": "ccch1mneyyy/dsh-TUI"
+    }
+  ],
+  "items": [
+    {
+      "owner": "Ebony-Vinyl",
+      "name": "dsh-our-free-model",
+      "stars": 18427
+    },
+    {
+      "owner": "zhu1090093659",
+      "name": "dsh-web",
+      "stars": 8807
+    },
+    {
+      "owner": "YuJunZhiXue",
+      "name": "dsh-purge",
+      "stars": 6995
+    },
+    {
+      "owner": "yjh051108",
+      "name": "dsh-routing-suite",
+      "stars": 6987
+    },
+    {
+      "owner": "omdsh-dev",
+      "name": "DSH-better-sidebar",
+      "stars": 4204
+    },
+    {
+      "owner": "dsh-market",
+      "name": "dsh-market",
+      "stars": 6693
+    },
+    {
+      "owner": "liustack",
+      "name": "modlens",
+      "stars": 4305
+    },
+    {
+      "owner": "MeteorNOX",
+      "name": "DeepSeek-Balance-Whale-Widget",
+      "stars": 5234
+    },
+    {
+      "owner": "superdesigndev",
+      "name": "treg",
+      "stars": 5333
+    },
+    {
+      "owner": "ccch1mneyyy",
+      "name": "dsh-TUI",
+      "stars": 4650
+    }
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "name": "@workbench/plugin-distribution-pipeline",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=22.19.0"
+  },
+  "scripts": {
+    "test": "node --test test/*.test.mjs",
+    "depot": "node cli.mjs",
+    "web:dev": "node cli.mjs site && vite web --config vite.config.mjs",
+    "web:build": "node cli.mjs site"
+  },
+  "dependencies": {
+    "semver": "7.7.2",
+    "yaml": "2.9.1"
+  },
+  "devDependencies": {
+    "@sveltejs/vite-plugin-svelte": "7.3.1",
+    "svelte": "5.57.2",
+    "vite": "8.3.4"
+  }
+}
