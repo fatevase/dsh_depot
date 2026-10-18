@@ -80,3 +80,9 @@ test('unverified downloads show an amber warning, honest proof, and stay outside
  const only=render(component,{props:{initialCatalog:c,initialPage:'plugins.html',initialSearch:'?platform=win32-x64&verified=1'}}).body
  assert.match(only,/找到 <strong>0<\/strong>/)
 })
+
+test('old target URL parameters are rejected instead of silently selecting the new macOS target',async t=>{
+ const component=await app(t)
+ const {body}=render(component,{props:{initialCatalog:catalog,initialPage:'plugin.html',initialSearch:'?id=one&platform=darwin-arm64'}})
+ assert.match(body,/目标平台不受支持/);assert.ok(!body.includes('releases/download/batch/one.tgz'))
+})
