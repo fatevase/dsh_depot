@@ -1,4 +1,5 @@
 import { setTimeout as delay } from 'node:timers/promises'
+import { writeFile } from 'node:fs/promises'
 export class Github {
   constructor({ baseUrl = 'https://api.github.com', token, retries = 2, cache = {} } = {}) { this.baseUrl = baseUrl; this.token = token; this.retries = retries; this.cache = cache }
   async request(endpoint, { etag, method = 'GET', body, headers = {} } = {}) {
@@ -25,6 +26,14 @@ export class Github {
       if (data.length < 100 || (result.link && !result.link.includes('rel="next"'))) break
     }
     return items
+  }
+  async download(endpoint,file){
+    if(!/^\/repos\/[\w.-]+\/[\w.-]+\/actions\/artifacts\/\d+\/zip$/.test(endpoint))throw Error('Expected Actions artifact endpoint')
+    const r=await fetch(this.baseUrl+endpoint,{headers:{accept:'application/vnd.github+json',...(this.token?{authorization:`Bearer ${this.token}`}:{})},signal:AbortSignal.timeout(120000)})
+    if(!r.ok)throw Error(`Artifact download HTTP ${r.status}`)
+    const chunks=[];let size=0
+    for await(const chunk of r.body){size+=chunk.length;if(size>536870912)throw Error('Artifact archive too large');chunks.push(chunk)}
+    await writeFile(file,Buffer.concat(chunks))
   }
   async text(repository, file, commit) {
     const endpoint = `/repos/${repository}/contents/${file.split('/').map(encodeURIComponent).join('/')}?ref=${encodeURIComponent(commit)}`

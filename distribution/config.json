@@ -12,6 +12,7 @@
     }
   ],
   "stateBranch": "distribution-state",
+  "publication": {"allowUnverified": true},
   "registry": "https://registry.npmjs.org",
   "cohort": {
     "id": "trending-top10-2026-10-18",

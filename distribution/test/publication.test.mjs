@@ -10,13 +10,13 @@ test('catalog excludes historical publications, pointers and issues outside sele
  for(const id of ['fixture','mobile']){
   state.published[id]={recipeId:id,buildKey:id,status:'published'}
   state.latest[`${id}|host`]=id
-  state.receipts[id]={recipeId:id,target:'linux-x64',status:'failed'}
+  state.receipts[id]={buildKey:id,recipeId:id,target:'linux-x64',status:'failed'}
  }
  state.lastPlan={decisions:[{recipeId:'fixture'},{recipeId:'mobile'}]}
  const before=structuredClone(state),catalog=catalogOf(state,[recipe()])
  assert.deepEqual(catalog.packages.map(p=>p.recipeId),['fixture'])
  assert.deepEqual(catalog.latest,{'fixture|host':'fixture'})
- assert.deepEqual(catalog.issues.map(p=>p.recipeId),['fixture'])
+ assert.deepEqual(catalog.issues.map(p=>[p.recipeId,p.buildKey]),[['fixture','fixture']])
  assert.deepEqual(catalog.decisions,[{recipeId:'fixture'}])
  assert.deepEqual(state,before)
 })
@@ -59,4 +59,21 @@ test('a failed public-link check never records publication and resumes identical
  await assert.rejects(publishBatch(args),/404/);assert.deepEqual(state.published,{})
  const count=uploads;unavailable=false;const result=await publishBatch(args);assert.equal(uploads,count);assert.equal(result.publications.length,1)
  assert.equal((await publishBatch({...args,state:result.state})).actions[0].action,'skip')
+})
+
+test('unverified packages require explicit policy, a completed build and matching failure evidence',async t=>{
+ const r=await fixture(t);r.stage='verify';r.status='unverified';r.verification.status='unverified';r.verification.error={message:'Network isolation controls failed'};r.error=r.verification.error
+ const assets=new Map(),files=new Map(),remote={ensureDraft:async()=>({id:1,draft:true}),asset:async(_,n)=>assets.get(n),upload:async(_,n,file,sha)=>{files.set(n,Buffer.isBuffer(file)?file:await readFile(file));const a={sha256:sha};assets.set(n,a);return a},publish:async()=>{}}
+ const args={batchId:'warning',repository:'x/y',state:initialState(),receipts:[r],tasks:r._tasks,recipes:[r._recipe],remote,dryRun:false}
+ assert.equal((await publishBatch(args)).actions[0].action,'rejected')
+ const result=await publishBatch({...args,allowUnverified:true}),p=result.publications[0]
+ assert.equal(p.publicationChannel,'unverified');assert.equal(p.verification.status,'unverified');assert.equal(p.verification.error.message,r.error.message)
+ assert.equal(JSON.parse(files.get('reports.json')).packages[0].publicationChannel,'unverified')
+ for(const mutate of [r=>r.stage='build',r=>delete r.verification,r=>r.verification.sha256='bad',r=>r.verification.target='linux-x64',r=>r.artifacts.package+='-missing',r=>r.verification.status='passed']){
+  const bad=structuredClone(r);mutate(bad);assert.equal((await publishBatch({...args,receipts:[bad],allowUnverified:true})).actions[0].action,'rejected')
+ }
+ assets.clear() // The upgrade is published in a new immutable release.
+ const upgraded=structuredClone(r);upgraded.status='verified';upgraded.verification.status='passed';delete upgraded.verification.error
+ const next=await publishBatch({...args,receipts:[upgraded],state:result.state,allowUnverified:true,batchId:'upgrade'})
+ assert.equal(next.publications[0].publicationChannel,'verified');assert.equal(next.publications[0].verification.status,'passed')
 })

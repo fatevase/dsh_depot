@@ -10,7 +10,7 @@ test('site emits a real empty catalog and escapes upstream text through data, wi
  const out=await temporary(t),catalog={schemaVersion:1,plugins:[{id:'evil',name:'"\n</script><img src=x onerror=alert(1)>',repository:'a/b'}],packages:[],latest:{},issues:[],lastSuccessfulDiscoveryAt:'2026-10-18'}
  await generateSite({catalog,state:initialState(),outDir:out})
  const saved=JSON.parse(await readFile(path.join(out,'catalog.json')));assert.equal(saved.packages.length,0);assert.equal(saved.plugins[0].name,catalog.plugins[0].name)
- for(const file of ['index.html','plugins.html','plugin.html']){const html=await readFile(path.join(out,file),'utf8');assert.ok(!html.includes('<img src=x'));assert.match(html,/<script[^>]+src="\.\/assets\/[^\"]+\.js"/)}
+ for(const file of ['index.html','plugins.html','plugin.html','guide.html']){const html=await readFile(path.join(out,file),'utf8');assert.ok(!html.includes('<img src=x'));assert.match(html,/<script[^>]+src="\.\/assets\/[^\"]+\.js"/)}
  assert.equal(selectPlugins(saved,{verified:true}).length,0)
 })
 test('filters use published platform packages only and detail return preserves the query',()=>{
