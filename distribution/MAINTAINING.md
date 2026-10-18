@@ -58,9 +58,9 @@ python3 -m http.server 4188 --bind 127.0.0.1 --directory .runtime/distribution/s
 
 - macOS：Seatbelt 的 `localhost` 包含本机其他网卡地址。安装禁用全部网络；启动仍禁止全部出站，DSH 显式绑定 `127.0.0.1`，沙箱外观察器只访问该页面。依赖主动出站回连本地服务的插件可能失败。
 - Linux：独立 network namespace；安装无接口，启动仅开启 lo。GitHub 托管 runner 用 `sudo unshare -n` 创建 namespace 后，降回调用者 UID/GID 执行验证，个人 Linux 使用非特权 user namespace，能力不足不通过。
-- Windows：仅允许 GitHub 托管的临时 runner 使用防火墙适配器，具有超时和独立清理进程。系统若豁免 loopback、阻断无效或清理条件不满足即不通过。不会在日常用户电脑上修改防火墙。
+- Windows：仅允许 GitHub 托管的临时 runner 使用 WFP 动态会话。在 CI 通过 Windows SDK 编译隔离器，安装时阻断 IPv4/IPv6 连接与接收，启动时只允许 127.0.0.0/8 的 IPv4 回环，IPv6 仍阻断。主进程和后代进程都处于同一全局网络限制中。Job Object 约束进程树、超时终止；动态会话在隔离器正常退出或被终止时清理。独立 CI 探针同时检查本机非回环地址、真实外部地址、Node 子进程、Python、失败退出、超时、强制结束后的恢复。验证器仍为每个插件执行原有控制对照，不以独立探针代替插件验证。该限制不属于防恶意代码的文件系统或权限沙箱。不会在日常用户电脑上运行此隔离器。
 
-Top10 实测已有 8 个 macOS arm64 和 8 个 Linux x64 当前版本包通过 CI 验证。Windows 当前 7 个包已完成打包但网络隔离控制未通过，按未验证包发布；ModLens 编译失败，不提供下载；配置目标不表示已验证支持。
+Top10 实测已有 8 个 macOS arm64 和 8 个 Linux x64 当前版本包通过 CI 验证。Windows 使用新的 WFP 适配器单独重跑验证，当前状态以网站目录及报告为准；配置目标不表示已验证支持。
 
 ## 发布与恢复
 

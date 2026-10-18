@@ -56,7 +56,7 @@ export function isolationAdapter({ platform = process.platform, allowCiFirewall 
       const runner = [process.execPath, fileURLToPath(new URL('../isolation/linux.mjs', import.meta.url)), '--run', mode, ...(process.env.GITHUB_ACTIONS === 'true' && process.env.RUNNER_ENVIRONMENT === 'github-hosted' ? ['--as-user',String(process.getuid()),String(process.getgid())] : []), ...argv]
       command = process.env.GITHUB_ACTIONS === 'true' && process.env.RUNNER_ENVIRONMENT === 'github-hosted' ? ['/usr/bin/sudo', '-n', '/usr/bin/unshare', '-n', '--', '/usr/bin/env', '-i', ...Object.entries(env).map(([k,v]) => `${k}=${v}`), ...runner] : ['/usr/bin/unshare', '-Urn', '--', ...runner]
     }
-    else { const job = path.join(cwd, `isolation-${randomUUID()}.json`); await atomicJson(job, { mode, argv, cwd, env, timeoutMs }); command = ['pwsh', '-NoProfile', '-File', fileURLToPath(new URL('../isolation/windows.ps1', import.meta.url)), '-InputFile', job] }
+    else { command = [fileURLToPath(new URL('../../.runtime/distribution/isolation/dsh-network-guard.exe',import.meta.url)),mode,String(timeoutMs),...argv] }
     return command
   }, async run(options) {
     const command = await this.command(options), { cwd, env, timeoutMs = 45000, logFile } = options
