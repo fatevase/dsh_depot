@@ -7,7 +7,8 @@ export async function isolatedEnv(root, { source = process.env, cache, bin } = {
   await mkdir(home, { recursive: true }); await mkdir(config, { recursive: true })
   for (const file of ['user.npmrc', 'global.npmrc']) await writeFile(path.join(config, file), '')
   const env = {}
-  for (const key of ['PATH', 'Path', 'SystemRoot', 'SYSTEMROOT', 'WINDIR', 'COMSPEC', 'PATHEXT', 'TMPDIR', 'TMP', 'TEMP', 'LANG']) if (source[key]) env[key] = source[key]
+  const seen = new Set(['path'])
+  for (const key of ['SystemRoot', 'SYSTEMROOT', 'WINDIR', 'COMSPEC', 'PATHEXT', 'TMPDIR', 'TMP', 'TEMP', 'LANG']) if (source[key]&&!seen.has(key.toLowerCase())) {env[key] = source[key];seen.add(key.toLowerCase())}
   return { ...env, PATH: [bin, source.PATH ?? source.Path].filter(Boolean).join(path.delimiter), HOME: home, USERPROFILE: home, XDG_CACHE_HOME: path.join(home, '.cache'), XDG_CONFIG_HOME: path.join(home, '.config'), npm_config_userconfig: path.join(config, 'user.npmrc'), npm_config_globalconfig: path.join(config, 'global.npmrc'), npm_config_cache: cache ?? path.join(root, 'npm-cache'), npm_config_registry: 'https://registry.npmjs.org', npm_config_audit: 'false', npm_config_fund: 'false', COREPACK_ENABLE_NETWORK: '0', CI: '1', NO_COLOR: '1' }
 }
 export async function runCommand({ argv, cwd, env, timeoutMs = 600000, logFile }) {

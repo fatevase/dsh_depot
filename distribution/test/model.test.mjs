@@ -1,9 +1,14 @@
 import test from 'node:test'
 import assert from 'node:assert/strict'
-import { buildKey, assertRecipe, atomicJson, readJson, readRecipes } from '../lib/model.mjs'
+import { buildKey, assertRecipe, atomicJson, readJson, readRecipes, VERIFIER_VERSION } from '../lib/model.mjs'
 import { writeFile } from 'node:fs/promises'
 import { recipe, source, host, temporary } from './helpers.mjs'
 import path from 'node:path'
+test('Windows environment handoff revision invalidates only Windows verification keys',()=>{
+ const input={recipe:recipe(),source:source(),host}
+ assert.notEqual(buildKey({...input,target:'win32-x64'}),buildKey({...input,target:'win32-x64',verifierVersion:VERIFIER_VERSION}))
+ for(const target of ['darwin-arm64','linux-x64'])assert.equal(buildKey({...input,target}),buildKey({...input,target,verifierVersion:VERIFIER_VERSION}))
+})
 test('keys ignore observation time but change on any build input',()=>{
  const r=recipe(),s=source(),input={recipe:r,source:s,target:'darwin-arm64',host}
  const key=buildKey(input);assert.match(key,/^[a-f0-9]{64}$/)

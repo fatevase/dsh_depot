@@ -10,6 +10,11 @@ import { resolveTools,prepareTools } from '../lib/process.mjs'
 import { buildKey, jsonDigest, fileDigest } from '../lib/model.mjs'
 test('process timeout terminates the child and reports seconds rather than milliseconds',async t=>{const dir=await temporary(t);const r=await runCommand({argv:[process.execPath,'-e','setInterval(()=>{},1000)'],cwd:dir,env:await isolatedEnv(dir),timeoutMs:200,logFile:path.join(dir,'log')});assert.equal(r.timedOut,true);assert.notEqual(r.exitCode,0);assert.ok(r.seconds<3,`incorrect seconds: ${r.seconds}`)})
 test('build environment does not inherit tokens or user package configuration',async t=>{const dir=await temporary(t);const r=await isolatedEnv(dir,{source:{PATH:process.env.PATH,GITHUB_TOKEN:'secret',NPM_TOKEN:'secret',npm_config_userconfig:'/user/secret'}});assert.equal(r.GITHUB_TOKEN,undefined);assert.equal(r.NPM_TOKEN,undefined);assert.notEqual(r.npm_config_userconfig,'/user/secret');assert.notEqual(r.npm_config_globalconfig,r.npm_config_userconfig)})
+test('isolated environment collapses Windows case aliases before JSON and child process handoff',async t=>{
+ const dir=await temporary(t),env=await isolatedEnv(dir,{source:{PATH:'preferred',Path:'other',SystemRoot:'system',SYSTEMROOT:'other-system'},bin:'fixed-tools'})
+ const names=Object.keys(env).map(k=>k.toLowerCase());assert.equal(new Set(names).size,names.length)
+ assert.equal(env.PATH,['fixed-tools','preferred'].join(path.delimiter));assert.equal(env.SystemRoot,'system')
+})
 test('fixed pnpm invocations explicitly prevent switching to an ancestor package manager',async t=>{
  const dir=await temporary(t)
  for(const [name,version,cli] of [['npm','11.19.1','npm-cli.js'],['pnpm','11.25.0','pnpm.cjs']]){const root=path.join(dir,`${name}-${version}`,'node_modules',name);await mkdir(path.join(root,'bin'),{recursive:true});await writeFile(path.join(root,'package.json'),JSON.stringify({name,version}));await writeFile(path.join(root,'bin',cli),'console.log(JSON.stringify(process.argv.slice(2)))')}
