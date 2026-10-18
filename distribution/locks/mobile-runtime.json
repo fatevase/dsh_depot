@@ -1,0 +1,97 @@
+{
+  "name": "@april-jk/dsh-mobile",
+  "version": "0.1.9",
+  "lockfileVersion": 3,
+  "requires": true,
+  "packages": {
+    "": {
+      "name": "@april-jk/dsh-mobile",
+      "version": "0.1.9",
+      "bundleDependencies": [
+        "@deepseek-ai/schemastery",
+        "commander",
+        "qrcode-terminal",
+        "ws"
+      ],
+      "license": "MIT",
+      "dependencies": {
+        "@deepseek-ai/schemastery": "3.18.1",
+        "commander": "13.1.0",
+        "qrcode-terminal": "0.12.0",
+        "ws": "8.21.3"
+      },
+      "bin": {
+        "dsh-mobile": "dist/cli.js"
+      },
+      "engines": {
+        "node": ">=18"
+      }
+    },
+    "node_modules/@deepseek-ai/cosmokit": {
+      "version": "1.8.6",
+      "resolved": "https://registry.npmjs.org/@deepseek-ai/cosmokit/-/cosmokit-1.8.6.tgz",
+      "integrity": "sha512-ZSD/fN52L498LBIOYwjIOlaLv5veY6ZEwI2yzvZUKQtctn0QAPqu8tKdJ+OF5+Tv6NBq1U+wJWH+QI6OGy5EvQ==",
+      "inBundle": true,
+      "license": "MIT"
+    },
+    "node_modules/@deepseek-ai/schemastery": {
+      "version": "3.18.1",
+      "resolved": "https://registry.npmjs.org/@deepseek-ai/schemastery/-/schemastery-3.18.1.tgz",
+      "integrity": "sha512-Qn0FCSwCQnpnj6SB31I6i2sIKgKWnkbJM8O0EU91Gv2UsYVvtZTl6IA0sCwk2e2MZf5S8w5hpq9QkeVvK9qwxg==",
+      "inBundle": true,
+      "license": "MIT",
+      "dependencies": {
+        "@deepseek-ai/cosmokit": "^1.8.2",
+        "@standard-schema/spec": "^1.1.0"
+      }
+    },
+    "node_modules/@standard-schema/spec": {
+      "version": "1.1.0",
+      "resolved": "https://registry.npmjs.org/@standard-schema/spec/-/spec-1.1.0.tgz",
+      "integrity": "sha512-l2aFy5jALhniG5HgqrD6jXLi/rUWrKvqN/qJx6yoJsgKhblVd+iqqU4RCXavm/jPityDo5TCvKMnpjKnOriy0w==",
+      "inBundle": true,
+      "license": "MIT"
+    },
+    "node_modules/commander": {
+      "version": "13.1.0",
+      "resolved": "https://registry.npmjs.org/commander/-/commander-13.1.0.tgz",
+      "integrity": "sha512-/rFeCpNJQbhSZjGVwO9RFV3xPqbnERS8MmIQzCtD/zl6gpJuV/bMLuN92oG3F7d8oDEHHRrujSXNUr8fpjntKw==",
+      "inBundle": true,
+      "license": "MIT",
+      "engines": {
+        "node": ">=18"
+      }
+    },
+    "node_modules/qrcode-terminal": {
+      "version": "0.12.0",
+      "resolved": "https://registry.npmjs.org/qrcode-terminal/-/qrcode-terminal-0.12.0.tgz",
+      "integrity": "sha512-EXtzRZmC+YGmGlDFbXKxQiMZNwCLEO6BANKXG4iCtSIM0yqc/pappSx3RIKr4r0uh5JsBckOXeKrB3Iz7mdQpQ==",
+      "inBundle": true,
+      "bin": {
+        "qrcode-terminal": "bin/qrcode-terminal.js"
+      }
+    },
+    "node_modules/ws": {
+      "version": "8.21.3",
+      "resolved": "https://registry.npmjs.org/ws/-/ws-8.21.3.tgz",
+      "integrity": "sha512-201TZ/kPWxoPr/OKWjquZR1SWKXcvxdH+e1xrx89b3YbmzLMFCLfnaG1HFIgWzJOEWZ7MvpK++odZufgYR50Rw==",
+      "inBundle": true,
+      "license": "MIT",
+      "engines": {
+        "node": ">=10.0.0"
+      },
+      "peerDependencies": {
+        "bufferutil": "^4.0.1",
+        "utf-8-validate": ">=5.0.2"
+      },
+      "peerDependenciesMeta": {
+        "bufferutil": {
+          "optional": true
+        },
+        "utf-8-validate": {
+          "optional": true
+        }
+      }
+    }
+  }
+}

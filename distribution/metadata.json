@@ -1,0 +1,37 @@
+{
+  "taskfold": {
+    "order": 1,
+    "description": "折叠长任务与工具输出，让对话更容易浏览。",
+    "label": "任务整理",
+    "mark": "T",
+    "license": "MIT"
+  },
+  "multi-root": {
+    "order": 2,
+    "description": "在同一处组织多个项目目录，轻松切换工作上下文。",
+    "label": "工作空间",
+    "mark": "M",
+    "license": "MIT"
+  },
+  "mobile": {
+    "order": 3,
+    "description": "让 DSH 的操作与布局，更适合手机上的使用方式。",
+    "label": "移动体验",
+    "mark": "m",
+    "license": "MIT"
+  },
+  "sidebar": {
+    "order": 4,
+    "description": "整理侧栏与导航，为日常工作提供更完整的界面。",
+    "label": "界面增强",
+    "mark": "B",
+    "license": "MIT"
+  },
+  "market": {
+    "order": 5,
+    "description": "在 DSH 中浏览与管理社区插件，补齐常用能力。",
+    "label": "插件管理",
+    "mark": "D",
+    "license": "MIT"
+  }
+}

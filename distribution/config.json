@@ -1,0 +1,8 @@
+{
+  "schemaVersion": 1,
+  "distributionRepository": "fatevase/dsh_depot",
+  "host": {"version": "0.2.0-rc.2", "node": "26.9.0"},
+  "candidateFeeds": [{"type": "github-topic", "query": "topic:dsh-plugin"}],
+  "stateBranch": "distribution-state",
+  "registry": "https://registry.npmjs.org"
+}

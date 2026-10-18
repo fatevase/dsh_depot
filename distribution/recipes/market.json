@@ -1,0 +1,59 @@
+{
+  "schemaVersion": 1,
+  "id": "market",
+  "repository": "dsh-market/dsh-market",
+  "packagePath": ".",
+  "npmName": "dshmarket",
+  "channel": {
+    "type": "tags",
+    "allowPrerelease": false
+  },
+  "seed": {
+    "ref": "v1.66.38",
+    "version": "1.66.38",
+    "commit": "07e0def00366016c0a4d5b637fb5a80673134657",
+    "archiveSha256": "230654e6d6351fec95ab05e530b186ac0c628ef6b08c8aea52064a1290ea2685"
+  },
+  "allowedVersions": ">=1.66.38 <2.0.0",
+  "hostRange": "^0.2.0-rc.2",
+  "targets": [
+    "darwin-arm64",
+    "linux-x64",
+    "win32-x64"
+  ],
+  "toolchain": {
+    "node": "26.9.0",
+    "npm": "11.19.1",
+    "pnpm": "11.25.0"
+  },
+  "packageManager": "npm",
+  "locks": {
+    "runtime": {
+      "origin": "adapter",
+      "file": "locks/market-runtime.json"
+    },
+    "build": {
+      "origin": "source",
+      "file": "package-lock.json"
+    }
+  },
+  "buildCommands": [
+    [
+      "npm",
+      "run",
+      "build"
+    ]
+  ],
+  "packageRules": {
+    "localPackages": []
+  },
+  "probes": {
+    "clientModule": "dshmarket",
+    "native": []
+  },
+  "display": {
+    "name": "DSH Market",
+    "category": "tools"
+  },
+  "enabled": true
+}

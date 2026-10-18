@@ -1,0 +1,60 @@
+{
+  "schemaVersion": 1,
+  "id": "taskfold",
+  "repository": "yindf/taskfold",
+  "packagePath": ".",
+  "npmName": "dsh-taskfold",
+  "channel": {
+    "type": "tags",
+    "allowPrerelease": false
+  },
+  "seed": {
+    "ref": "v0.38.2",
+    "version": "0.38.2",
+    "commit": "01c4905eb1de4bd30561d04e013d210013d4f990",
+    "archiveSha256": "a866377b6b9c98f7f7d50d51cda5bd02302bc661cf90ea0e33f85665d2d5322d"
+  },
+  "allowedVersions": ">=0.38.2 <1.0.0",
+  "hostRange": "^0.2.0-rc.2",
+  "targets": [
+    "darwin-arm64",
+    "linux-x64",
+    "win32-x64"
+  ],
+  "toolchain": {
+    "node": "26.9.0",
+    "npm": "11.19.1",
+    "pnpm": "11.25.0"
+  },
+  "packageManager": "npm",
+  "locks": {
+    "runtime": {
+      "origin": "adapter",
+      "file": "locks/taskfold-runtime.json"
+    }
+  },
+  "buildCommands": [
+    [
+      "node",
+      "scripts/build-client.mjs"
+    ]
+  ],
+  "packageRules": {
+    "localPackages": [
+      {
+        "path": "client",
+        "name": "dsh-taskfold-client"
+      }
+    ]
+  },
+  "probes": {
+    "clientModule": "dsh-taskfold",
+    "native": []
+  },
+  "display": {
+    "name": "Taskfold",
+    "category": "workspace"
+  },
+  "enabled": true,
+  "install": false
+}

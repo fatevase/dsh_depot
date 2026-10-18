@@ -1,0 +1,60 @@
+{
+  "schemaVersion": 1,
+  "id": "mobile",
+  "repository": "april-jk/dsh-mobile-plugin",
+  "packagePath": ".",
+  "npmName": "@april-jk/dsh-mobile",
+  "channel": {
+    "type": "branch",
+    "ref": "main",
+    "allowPrerelease": false
+  },
+  "seed": {
+    "ref": "v0.1.9",
+    "version": "0.1.9",
+    "commit": "489a1a2c0f12246e478a93eb25683f87c1f33832",
+    "archiveSha256": "ee857afaa0365b5ac287ccde235ff05691f6e980dd212a3b2e7e88295137ec2a"
+  },
+  "allowedVersions": ">=0.1.9 <1.0.0",
+  "hostRange": "^0.2.0-rc.2",
+  "targets": [
+    "darwin-arm64",
+    "linux-x64",
+    "win32-x64"
+  ],
+  "toolchain": {
+    "node": "26.9.0",
+    "npm": "11.19.1",
+    "pnpm": "11.25.0"
+  },
+  "packageManager": "npm",
+  "locks": {
+    "runtime": {
+      "origin": "adapter",
+      "file": "locks/mobile-runtime.json"
+    },
+    "build": {
+      "origin": "source",
+      "file": "package-lock.json"
+    }
+  },
+  "buildCommands": [
+    [
+      "npm",
+      "run",
+      "build"
+    ]
+  ],
+  "packageRules": {
+    "localPackages": []
+  },
+  "probes": {
+    "clientModule": "dsh-mobile",
+    "native": []
+  },
+  "display": {
+    "name": "DSH Mobile",
+    "category": "interface"
+  },
+  "enabled": true
+}

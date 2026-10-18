@@ -1,0 +1,12 @@
+{
+  "name": "dsh-taskfold",
+  "version": "0.38.2",
+  "lockfileVersion": 3,
+  "packages": {
+    "": {
+      "name": "dsh-taskfold",
+      "version": "0.38.2",
+      "dependencies": {}
+    }
+  }
+}
