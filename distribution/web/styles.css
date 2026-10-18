@@ -207,3 +207,16 @@ body{margin:0}
 }
 @media(prefers-reduced-motion:reduce){#depot-v2 .dv-plugin{transition:none}}
 @media(pointer:coarse){#depot-v2 button,#depot-v2 select,#depot-v2 .dv-navigation a{min-height:44px}#depot-v2 input[type=search]{font-size:16px}}
+
+/* Installation guidance retains the existing page shell and palette. */
+#depot-v2 .dv-guide-steps{display:grid;grid-template-columns:1fr 1fr;gap:20px 36px;padding-left:20px;margin:20px 0}
+#depot-v2 .dv-guide-steps h3{font-size:13px;font-weight:600;margin-bottom:6px}
+#depot-v2 .dv-guide-steps p{margin:0}
+#depot-v2 .dv-guide-steps code,#depot-v2 .dv-guide-trouble code{font:11px/1.8 ui-monospace,SFMono-Regular,Consolas,monospace;overflow-wrap:anywhere}
+#depot-v2 .dv-guide-trouble{border-top:1px solid var(--depot-line);padding-top:14px}
+#depot-v2 .dv-guide-trouble summary{font-size:12px;cursor:pointer}
+#depot-v2 .dv-guide-trouble p{margin-top:10px}
+#depot-v2 .dv-command-head{display:flex;justify-content:space-between;align-items:center;font-size:11px;color:var(--depot-muted);margin-top:18px}
+#depot-v2 .dv-command-head+.dv-code{margin-top:8px;white-space:pre-wrap}
+#depot-v2 .dv-sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+@media(max-width:700px){#depot-v2 .dv-guide-steps{grid-template-columns:1fr;gap:16px}}

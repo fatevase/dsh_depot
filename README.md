@@ -47,7 +47,7 @@ python3 -m http.server 4188 --bind 127.0.0.1 --directory .runtime/distribution/s
 - 上游构建锁使用 `npm ci` / `pnpm --frozen-lockfile`；运行闭包只消费 `locks/*-runtime.json` 中审核过的精确版本。生产依赖名称或范围超出适配锁时失败并提示 `needs_recipe`，维护者先更新锁，再重建。普通 build 不生成新锁。
 - 构建安装关闭生命周期脚本；recipe 的显式构建命令仍会执行上游代码。环境不继承用户 token、npmrc 或 HOME。构建应在专用 CI runner 上执行；这不是面向恶意源码的文件系统沙箱。
 - `packageRules.localPackages` 从相同源码提交打包嵌套 client。保留 peer、公开 exports、许可证、可选原生文件，不盲目裁剪依赖。当前 Sidebar 的公开子路径需要保留较大的运行闭包。
-- `metadata.json` 维护网站描述与精选顺序，不影响构建 key。源码、recipe、依赖锁、平台、宿主、打包器和验证器版本共同决定 key。宿主清单、工作区设置和 pnpm 锁的摘要也会进入 key，并在宿主准备和验证时核对。改动打包/验证语义时提升 `lib/model.mjs` 对应版本。
+- `metadata.json` 维护网站描述与目录顺序，不影响构建 key。源码、recipe、依赖锁、平台、宿主、打包器和验证器版本共同决定 key。宿主清单、工作区设置和 pnpm 锁的摘要也会进入 key，并在宿主准备和验证时核对。改动打包/验证语义时提升 `lib/model.mjs` 对应版本。
 - tag 身份另存不可丢弃的 refHistory，删除或离开发现窗口后重新出现也会检查原 SHA。tag 移动视为冲突；显式 branch 渠道允许 commit 前进。Mobile 的规范包是 `@april-jk/dsh-mobile`，不是其他同名项目。
 
 ## 验证边界
@@ -60,7 +60,7 @@ python3 -m http.server 4188 --bind 127.0.0.1 --directory .runtime/distribution/s
 - Linux：独立 network namespace；安装无接口，启动仅开启 lo。GitHub 托管 runner 用 `sudo unshare -n` 创建 namespace 后，降回调用者 UID/GID 执行验证，个人 Linux 使用非特权 user namespace，能力不足不通过。
 - Windows：仅允许 GitHub 托管的临时 runner 使用防火墙适配器，具有超时和独立清理进程。系统若豁免 loopback、阻断无效或清理条件不满足即不通过。不会在日常用户电脑上修改防火墙。
 
-目前只有 macOS arm64 有本地真实运行证据。Linux x64 / Windows x64 必须各自在 CI 通过，配置目标不表示已验证支持。
+Top10 实测已有 8 个 macOS arm64 和 8 个 Linux x64 当前版本包通过 CI 验证。Windows 的网络隔离控制未通过，保持未验证且不提供下载；配置目标不表示已验证支持。
 
 ## 发布与恢复
 
@@ -70,7 +70,11 @@ python3 -m http.server 4188 --bind 127.0.0.1 --directory .runtime/distribution/s
 node distribution/cli.mjs publish --receipts .runtime/distribution/jobs --plan .runtime/distribution/plan.json --state .runtime/distribution/state.json --batch 12345 --publish --output .runtime/distribution/publication-plan.json
 ```
 
-批次一般使用 GitHub run ID。每个 receipt 必须与批准计划的 recipe、源码、宿主、平台和重新计算的 key 完全一致，额外或重复 key 拒绝。先建立 draft Release，所有资产上传后核对 SHA-256，再公开。已有同名资产只核对，永不覆盖。上传后状态写入失败时，重跑同批次及保留下来的 receipt，可恢复已有资产。公开批次如果缺资产，使用新批次，不向公开 Release 追加未核对的资产。
+每个 Release 仅列出 `插件-版本-平台.tgz`、一份 `SHA256SUMS` 和一份 `reports.json`。例如 `market-1.66.38-darwin-arm64.tgz`。完整构建 key、来源提交、依赖和验证证据放在合并报告中，文件名不包含 key。
+
+批次一般使用 GitHub run ID。每个 receipt 必须与批准计划的 recipe、源码、宿主、平台和重新计算的 key 完全一致，额外或重复 key 拒绝。先建立 draft Release，所有资产上传后核对 SHA-256，再公开。下载 URL 使用批次的正式 tag 构造，禁止把 GitHub 草稿的 `untagged-*` 临时 URL 写入目录；公开后逐一检查下载、校验清单与报告地址，失败时不提交新发布状态。已有同名资产只核对，永不覆盖。上传后状态写入失败时，重跑同批次及保留下来的 receipt，可恢复已有资产。公开批次如果缺资产，使用新批次，不向公开 Release 追加未核对的资产。
+
+旧版命名/链接的当前包会从正式 Release 按文件名和 SHA-256 找回，下载后再次核对原始字节，并使用原有已验证 receipt 通过正常门禁重新发布。只更新相同 build key 的下载元数据；不重新编译、不更改包字节、不删除历史 Release。`presentationVersion: 2` 标记已整理的发布，后续跳过。
 
 `distribution-state` 分支存储来源、候选、失败报告、发布元数据及当前下载指针，独立于 Actions cache。状态提交使用非强制更新和最多两次 CAS 重试；已发布平台继续可用，新版失败平台保留旧包。缺少 matrix receipt 会记录为 `missing`。相同失败输入不会自动反复编译，手动 `plan --retry-key KEY` 或 `--retry-key PLUGIN_ID` 才重试。
 
@@ -90,7 +94,7 @@ node distribution/cli.mjs rollback --state .runtime/distribution/state.json --pl
 4. 按 `discover → plan → matrix(build+verify) → publish → pages` 检查报告。matrix 单平台失败不取消其他平台；发布器始终汇总并拒绝未验证包。
 5. Pages job 独立重试时读取最新状态重新生成站点，与发布 job 共用串行边界，避免旧 artifact 恢复已撤回链接。暂存 artifacts 留两天，最终字节存 Releases。官方 Actions 以 2026-10-18 解析的 commit 固定；workflow 文件使用 JSON 形式的合法 YAML，便于直接进行结构化权限测试。
 
-本地实现与 UI 复核已完成；真实 CI、Linux/Windows 证据、Releases 与公开站点，必须以目标仓库中的实际运行结果为准。仓库授权已能读取且返回 push 权限，工作流文件写入与代码测试已验证；用户已将 Pages Source 设为 GitHub Actions。完整构建和部署仍需以本轮实际运行记录为准。
+公开站点为 https://fatevase.github.io/dsh_depot/ 。Pages Source 已设为 GitHub Actions。平台支持和当前可下载包，以目录中的正式发布及验证记录为准。
 
 ## 规模扩展
 

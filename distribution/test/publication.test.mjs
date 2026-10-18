@@ -1,7 +1,7 @@
 import test from 'node:test'
 import assert from 'node:assert/strict'
 import path from 'node:path'
-import { writeFile } from 'node:fs/promises'
+import { writeFile, readFile } from 'node:fs/promises'
 import { initialState,fileDigest,buildKey,jsonDigest } from '../lib/model.mjs'
 import { publishBatch, catalogOf } from '../lib/publish.mjs'
 import { temporary,recipe,source,host as baselineHost } from './helpers.mjs'
@@ -42,4 +42,21 @@ test('receipt metadata must match a planned task and duplicate or extra keys are
  const result=await publishBatch({batchId:'1',state:initialState(),receipts:[bad],tasks:[task],recipes:[r._recipe]});assert.equal(result.actions[0].action,'rejected')
  const extra=await publishBatch({batchId:'1',state:initialState(),receipts:[r],tasks:[],recipes:[r._recipe]});assert.equal(extra.actions[0].action,'rejected')
  const dupe=await publishBatch({batchId:'1',state:initialState(),receipts:[r,r],tasks:[task],recipes:[r._recipe]});assert.ok(dupe.actions.every(a=>a.action==='rejected'))
+})
+test('public downloads use the final tag and short filenames; audit data is consolidated',async t=>{
+ const r=await fixture(t),assets=new Map(),files=new Map()
+ const remote={ensureDraft:async()=>({id:1,draft:true,tag_name:'depot-clean'}),asset:async(_,name)=>assets.get(name),upload:async(_,name,file,sha)=>{files.set(name,Buffer.isBuffer(file)?file:await readFile(file));const a={sha256:sha,url:`https://github.com/x/y/releases/download/untagged-temporary/${name}`};assets.set(name,a);return a},publish:async()=>{}}
+ const result=await publishBatch({batchId:'clean',repository:'x/y',state:initialState(),receipts:[r],tasks:r._tasks,recipes:[r._recipe],remote,dryRun:false})
+ assert.deepEqual([...files.keys()],['fixture-1.0.0-darwin-arm64.tgz','SHA256SUMS','reports.json'])
+ const p=result.publications[0];assert.equal(p.fileName,'fixture-1.0.0-darwin-arm64.tgz');assert.equal(p.packageUrl,'https://github.com/x/y/releases/download/depot-clean/fixture-1.0.0-darwin-arm64.tgz');assert.ok(!p.reportUrl.includes('untagged-'))
+ assert.match(files.get('SHA256SUMS').toString(),/  fixture-1.0.0-darwin-arm64.tgz\n$/)
+ const report=JSON.parse(files.get('reports.json'));assert.equal(report.packages[0].buildKey,r.buildKey);assert.equal(report.packages[0].verification.status,'passed')
+})
+test('a failed public-link check never records publication and resumes identical public assets',async t=>{
+ const r=await fixture(t),state=initialState(),assets=new Map(),release={id:1,draft:true,tag_name:'depot-links'};let unavailable=true,uploads=0
+ const remote={ensureDraft:async()=>release,asset:async(_,n)=>assets.get(n),upload:async(_,n,file,sha)=>{uploads++;const a={sha256:sha};assets.set(n,a);return a},publish:async()=>{release.draft=false},assertPublicDownloads:async urls=>{assert.equal(urls.length,3);assert.ok(urls.every(u=>u.includes('/depot-links/')));if(unavailable)throw Error('Public link returned 404')}}
+ const args={batchId:'links',repository:'x/y',state,receipts:[r],tasks:r._tasks,recipes:[r._recipe],remote,dryRun:false}
+ await assert.rejects(publishBatch(args),/404/);assert.deepEqual(state.published,{})
+ const count=uploads;unavailable=false;const result=await publishBatch(args);assert.equal(uploads,count);assert.equal(result.publications.length,1)
+ assert.equal((await publishBatch({...args,state:result.state})).actions[0].action,'skip')
 })
