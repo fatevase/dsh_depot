@@ -144,7 +144,17 @@ body{margin:0}
 #depot-v2 .dv-help{border-top:1px solid var(--depot-line);background:var(--depot-paper);padding:22px 24px;margin-top:28px}
 #depot-v2 .dv-help h2{font-size:18px;margin-bottom:10px}
 #depot-v2 .dv-help p{font-size:12px;color:var(--depot-muted);line-height:1.9;max-width:760px}
-#depot-v2 .dv-help-close{float:right;font-size:16px;min-width:25px;min-height:25px;text-align:center}
+#depot-v2 .dv-guide-page{padding-top:35px}
+#depot-v2 .dv-guide-page>.dv-kicker{margin-top:28px}
+#depot-v2 .dv-guide-page>h1{font-size:36px;margin-top:12px}
+#depot-v2 .dv-card-platforms{display:flex;flex-direction:column;gap:5px;line-height:1.6;min-width:0}
+#depot-v2 .dv-status-unverified{color:#8a5a10}
+#depot-v2 .dv-platform-unverified small{color:#8a5a10}
+#depot-v2 .dv-platform-unverified[aria-pressed=true]{border-color:#dfbd78;background:#fff8e9;color:#80520c}
+#depot-v2 .dv-unverified-warning{border:1px solid #e9cb90;border-left:3px solid #bd8426;background:#fff8e9;color:#80520c;padding:13px 15px;font-size:12px;line-height:1.8;margin:16px 0}
+#depot-v2 .dv-unverified-warning strong{font-weight:600}
+#depot-v2 .dv-unverified-warning p{font-size:11px;color:inherit;margin:5px 0 0;overflow-wrap:anywhere}
+#depot-v2 .dv-download-unverified{background:#986516;border-color:#986516;color:#fff}
 @media(max-width:850px){
  #depot-v2 .dv-wrap{margin-inline:27px}
  #depot-v2 .dv-header{gap:25px}

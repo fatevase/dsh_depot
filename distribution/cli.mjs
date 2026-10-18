@@ -14,6 +14,7 @@ import { generateSite } from './lib/site.mjs'
 import { writeReceipt, loadReceipt, receiptFiles } from './lib/receipts.mjs'
 import { distributionRepository } from './lib/repository.mjs'
 import { recoverPublishedReceipts } from './lib/republication.mjs'
+import { recoverUnverifiedReceipts } from './lib/recover-ci.mjs'
 
 export function argumentsOf(argv) {
   const result = { command: argv[0] }
@@ -74,10 +75,13 @@ export async function main(argv = process.argv.slice(2)) {
       const discovery=await readJson(args.discovered??path.join(workDir,'discovered.json'),null)
       const recovered=real?await recoverPublishedReceipts({state:current,repository,github,workDir:path.join(workDir,'republication'),recipeIds:new Set(recipes.filter(r=>r.enabled).map(r=>r.id)),excludeKeys:new Set(receipts.map(r=>r.buildKey))}):{receipts:[],tasks:[]}
       receipts.push(...recovered.receipts)
+      const recoveredBuilds=real&&config.publication?.allowUnverified===true?await recoverUnverifiedReceipts({state:current,decisions:plan.decisions??[],recipes,repository,github,workDir:path.join(workDir,'recovered-builds'),excludeKeys:new Set(receipts.map(r=>r.buildKey))}):{receipts:[],tasks:[],unavailable:[]}
+      receipts.push(...recoveredBuilds.receipts)
       const state=mergeState(current,{discovery})
       state.lastPlan={createdAt:plan.createdAt,cohort:config.cohort,decisions:plan.decisions??[]}
-      result=await publishBatch({batchId:args.batch??process.env.GITHUB_RUN_ID??'local',repository,state,receipts,tasks:[...plan.tasks,...(plan.publicationTasks??[]),...recovered.tasks],github,dryRun:!real,recipes})
+      result=await publishBatch({batchId:args.batch??process.env.GITHUB_RUN_ID??'local',repository,state,receipts,tasks:[...plan.tasks,...(plan.publicationTasks??[]),...recovered.tasks,...recoveredBuilds.tasks],github,dryRun:!real,recipes,allowUnverified:config.publication?.allowUnverified===true})
       if(real){const merged=await updateStateBranch({store:githubStateStore({repository,branch:config.stateBranch,github}),merge:latest=>{const next=mergeState(mergeState(latest,{discovery}),{receipts,publications:result.publications});if((next.lastPlan?.createdAt??'')<=(plan.createdAt??''))next.lastPlan=state.lastPlan;return next}});result.state=merged.state;result.catalog=catalogOf(merged.state,recipes)}
+      result.unavailableBuilds=recoveredBuilds.unavailable
       result.cohort=config.cohort;result.decisions=plan.decisions??[]
     }else{
       const mutate=s=>args.command==='withdraw'?withdraw(s,args.key,args.reason):rollback(s,{key:args.key,recipeId:args.plugin,target:args.target,host:config.host})
