@@ -1,6 +1,7 @@
 {
   "schemaVersion": 1,
   "packagePath": ".",
+  "sourceArchiveExcludes": [".agents"],
   "channel": {
     "type": "fixed",
     "ref": "6c27d5bfafaf821290f580e713b9fcb159bf2e93"

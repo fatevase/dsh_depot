@@ -45,6 +45,12 @@
       "--input-type=module",
       "--eval",
       "import { pathToFileURL } from 'node:url'; process.chdir('injector'); const { build } = await import(pathToFileURL(process.cwd() + '/node_modules/tsdown/dist/index.mjs')); await build({ config: 'tsdown.config.ts' });"
+    ],
+    [
+      "node",
+      "--input-type=module",
+      "--eval",
+      "import { readFileSync, writeFileSync } from 'node:fs'; const file = 'package.json'; const manifest = JSON.parse(readFileSync(file, 'utf8')); manifest.files = [...new Set([...(manifest.files ?? []), 'injector/package.json'])]; writeFileSync(file, JSON.stringify(manifest, null, 2) + '\\n');"
     ]
   ],
   "packageRules": {

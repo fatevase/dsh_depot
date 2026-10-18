@@ -4,12 +4,12 @@ import { mkdir, copyFile, writeFile, readFile } from 'node:fs/promises'
 import { execFile } from 'node:child_process'
 import { promisify } from 'node:util'
 import { randomUUID } from 'node:crypto'
-import { atomicJson, readJson, fileDigest, jsonDigest, within, buildKey } from './model.mjs'
+import { atomicJson, readJson, fileDigest, jsonDigest, within, buildKey, safeRelative } from './model.mjs'
 import { hostEnvironmentDigest } from './host-environment.mjs'
 import { isolatedEnv, runCommand, commandArgv, prepareTools } from './process.mjs'
 const execute = promisify(execFile)
-export async function extractArchive(archive, directory, { strip = 1, python = process.platform === 'win32' ? 'python' : 'python3' } = {}) {
-  try { await execute(python, [fileURLToPath(new URL('./archive.py', import.meta.url)), archive, directory, '--strip', String(strip)], { maxBuffer: 1024 * 1024 }) } catch (error) { throw new Error(`Unsafe or invalid archive: ${error.stderr || error.message}`) }
+export async function extractArchive(archive, directory, { strip = 1, exclude = [], python = process.platform === 'win32' ? 'python' : 'python3' } = {}) {
+  try { await execute(python, [fileURLToPath(new URL('./archive.py', import.meta.url)), archive, directory, '--strip', String(strip), ...exclude.flatMap(p=>['--exclude',safeRelative(p)])], { maxBuffer: 1024 * 1024 }) } catch (error) { throw new Error(`Unsafe or invalid archive: ${error.stderr || error.message}`) }
   return directory
 }
 export async function downloadArchive(url, output) {
@@ -38,7 +38,7 @@ export async function buildTask(task, { recipe, workDir, tools, sourceArchive } 
     receipt.timings.source = (performance.now() - started) / 1000
     receipt.sourceArchiveSha256 = await fileDigest(archive)
     if (task.source.archiveSha256 && task.source.archiveSha256 !== receipt.sourceArchiveSha256) throw new Error('Source archive checksum mismatch')
-    const sourceRoot = await extractArchive(archive, path.join(workDir, 'source')), packageRoot = within(sourceRoot, recipe.packagePath)
+    const sourceRoot = await extractArchive(archive, path.join(workDir, 'source'), {exclude:recipe.sourceArchiveExcludes??[]}), packageRoot = within(sourceRoot, recipe.packagePath)
     const manifest = await readJson(path.join(packageRoot, 'package.json'))
     if (manifest.name !== recipe.npmName || manifest.version !== task.source.version || jsonDigest(manifest) !== task.source.manifestDigest) throw new Error('Source manifest does not match frozen plan')
     const env = await isolatedEnv(path.join(workDir, 'build-environment'), { bin: tools.bin, cache: tools.cache ?? path.join(workDir, 'build-cache/npm') })
