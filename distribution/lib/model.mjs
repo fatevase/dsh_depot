@@ -30,6 +30,7 @@ export function assertRecipe(r) {
   if (!/^[\w.-]+\/[\w.-]+$/.test(r.repository ?? '')) throw new Error('Invalid repository')
   if (!/^(@[\w.-]+\/)?[\w.-]+$/.test(r.npmName ?? '')) throw new Error('Invalid npm name')
   safeRelative(r.packagePath)
+  if(r.sourceArchiveExcludes){if(!Array.isArray(r.sourceArchiveExcludes))throw Error('Invalid source exclusions');for(const entry of r.sourceArchiveExcludes)safeRelative(entry)}
   if (!['tags', 'releases', 'branch', 'fixed'].includes(r.channel?.type)) throw new Error('Invalid update channel')
   if (!Array.isArray(r.targets) || !r.targets.length || r.targets.some(t => !['darwin-arm64', 'linux-x64', 'win32-x64'].includes(t))) throw new Error('Invalid target')
   if (!Array.isArray(r.buildCommands) || r.buildCommands.some(a => !Array.isArray(a) || !a.length || a.some(v => typeof v !== 'string' || v.includes('\0')))) throw new Error('Commands must be argv arrays')

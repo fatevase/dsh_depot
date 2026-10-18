@@ -18,6 +18,13 @@ test('fixed pnpm invocations explicitly prevent switching to an ancestor package
  assert.deepEqual(JSON.parse(r.output),['--pm-on-fail=ignore','--version'])
 })
 test('archive traversal is rejected without writing outside the output',async t=>{const dir=await temporary(t);const archive=path.join(dir,'bad.tgz');execFileSync('python3',['-c',"import tarfile,io,sys\nt=tarfile.open(sys.argv[1],'w:gz');i=tarfile.TarInfo('package/../../escaped');i.size=3;t.addfile(i,io.BytesIO(b'bad'));t.close()",archive]);await assert.rejects(extractArchive(archive,path.join(dir,'out')),/Unsafe|escape|archive/i);await assert.rejects(readFile(path.join(dir,'escaped')))})
+test('source archive can omit declared development directories while rejecting links elsewhere and traversal even inside exclusions',async t=>{
+ const dir=await temporary(t),archive=path.join(dir,'source.tgz')
+ const make=name=>execFileSync('python3',['-c',"import tarfile,io,sys\nt=tarfile.open(sys.argv[1],'w:gz');i=tarfile.TarInfo(sys.argv[2]);i.type=tarfile.SYMTYPE;i.linkname='../../outside';t.addfile(i);i=tarfile.TarInfo('source/package.json');i.size=2;t.addfile(i,io.BytesIO(b'{}'));t.close()",archive,name])
+ make('source/.agents/skills/dev');await extractArchive(archive,path.join(dir,'allowed'),{exclude:['.agents']});assert.equal(await readFile(path.join(dir,'allowed/package.json'),'utf8'),'{}');await assert.rejects(readFile(path.join(dir,'allowed/.agents/skills/dev')))
+ make('source/runtime/link');await assert.rejects(extractArchive(archive,path.join(dir,'denied'),{exclude:['.agents']}),/special member/)
+ make('source/.agents/../../outside');await assert.rejects(extractArchive(archive,path.join(dir,'traversal'),{exclude:['.agents']}),/Unsafe archive path/)
+})
 test('builder resolves relative work directories before passing paths to npm',async t=>{
  const dir=await temporary(t),manifest={name:'dsh-fixture',version:'1.0.0',main:'index.js'}
  const lock=path.join(dir,'runtime.json');await writeFile(lock,JSON.stringify({lockfileVersion:3,packages:{'':{name:'dsh-fixture',version:'1.0.0',dependencies:{}}}}))

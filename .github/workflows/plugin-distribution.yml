@@ -253,6 +253,7 @@
       ]
     },
     "pages": {
+      "if": "always() && needs.publish.result == 'success'",
       "needs": [
         "publish"
       ],
