@@ -23,7 +23,7 @@
   let unverified=$derived(isUnverifiedPackage(selectedPackage))
   let installCopied=$state('')
   async function copyInstall(){try{await navigator.clipboard.writeText(installCommand(selectedPackage));installCopied='已复制'}catch{installCopied='请手动复制下方命令'}}
-  let canSortSize=$derived(catalog?.packages.some(p=>p.status==='published'&&p.verification?.status==='passed'&&(options.platform==='all'||p.target===options.platform)))
+  let canSortSize=$derived(catalog?.plugins.some(plugin=>packagesFor(catalog,plugin.id).some(p=>(!options.verified||p.verification?.status==='passed')&&(options.platform==='all'||p.target===options.platform))))
   let chips=$derived([
     ...(options.q?[{key:'q',label:`关键词：${options.q}`}]:[]),
     ...(options.category!=='all'?[{key:'category',label:categories[options.category]}]:[]),

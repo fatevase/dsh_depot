@@ -12,7 +12,7 @@
 
 `config.json` 的 `cohort` 固定本轮清单，来源是 DSH Hub 的公开实时 API `scope=all&sort=trending&limit=10`，原始排名摘要位于 `cohorts/trending-top10-2026-10-18.json`。网页搜索缓存与实时榜单可能不同；本轮包含 DSH Market，不包含已经移出前十的 Answer me with HTML。
 
-本轮有 8 个可构建项目，对 macOS arm64、Linux x64、Windows x64 各建一个任务；DSH Web 聚合包和 DSH TUI 明确记录为 `needs_recipe`，不会伪造安装包。前者需要递归工作区依赖打包，后者还需要源码子模块、终端安装和交互验证。未获取有效源码、宿主不兼容、构建失败、验证失败均在计划/状态/报告中保留。
+本轮有 8 个可构建项目，对 macOS arm64、Linux x64、Windows x64 各建一个任务；DSH Web 聚合包和 DSH TUI 明确记录为 `needs_recipe`，不会伪造安装包。前者需要递归工作区依赖打包，后者还需要源码子模块、终端安装和交互验证。未获取有效源码、宿主不兼容、构建失败、验证失败均在计划/状态/报告中保留。已完成的未验证包按当前发布策略提供下载。
 
 源码固定到人工核对的 commit，避免首轮测试中途漂移。Sidebar 与 Market 先采用已经与冻结宿主验证过的兼容版本 0.26.0 / 1.66.38，不冒充最新上游。正常追踪新版本时，维护者再把审核过的渠道切回 tags/releases 或显式 branch。
 

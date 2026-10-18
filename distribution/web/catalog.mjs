@@ -9,7 +9,7 @@ export function platformState(catalog,plugin,target){
  const decision=catalog.decisions?.find(d=>d.recipeId===plugin.id&&d.target===target)
  if(plugin.status==='needs_recipe'||decision?.action==='needs_recipe')return {label:'待适配',message:plugin.availabilityNote??'这个插件的构建适配尚未完成，当前没有可下载的离线包。'}
  const issue=decision?.buildKey?catalog.issues?.find(r=>r.buildKey===decision.buildKey):undefined
- if(issue?.status==='unverified')return {label:'验证未通过',message:issue.error?.message==='Network isolation controls failed'?'已执行打包，但验证环境的网络隔离检查未通过，尚未完成可信的离线验证，因此没有发布安装包。':'已执行打包，但离线验证未通过，因此没有发布安装包。'}
+ if(issue?.status==='unverified'||issue?.stage==='verify')return {label:'验证未通过',message:issue.error?.message==='Network isolation controls failed'?'已执行打包，但验证环境的网络隔离检查未通过，尚未完成可信的离线验证，因此没有发布安装包。':'已执行打包，但离线验证未通过，因此没有发布安装包。'}
  if(issue?.stage==='build'||issue?.status==='failed')return {label:'构建失败',message:'本次编译或打包失败，尚未生成可下载的安装包。'}
  if(decision?.action==='needs_attention')return {label:'构建或验证失败',message:'本次处理未通过，需要修复后重新构建与验证。当前没有可下载的离线包。'}
  return {label:'尚未发布',message:'对应平台完成构建与空缓存离线验证并发布后，这里会提供下载和安装命令。'}

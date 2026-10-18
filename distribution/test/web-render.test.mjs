@@ -75,6 +75,8 @@ test('unverified downloads show an amber warning, honest proof, and stay outside
  const html=render(component,{props:{initialCatalog:c,initialPage:'plugin.html',initialSearch:'?id=one&platform=win32-x64'}}).body
  assert.match(html,/dv-unverified-warning/);assert.match(html,/下载未验证包/);assert.match(html,/网络隔离检查未通过/);assert.match(html,/href="https:\/\/github.com\/x\/y\/releases\/download\/batch\/windows.tgz"/)
  assert.ok(!html.includes('已通过所选平台的离线验证'))
+ const windows=render(component,{props:{initialCatalog:c,initialPage:'plugins.html',initialSearch:'?platform=win32-x64'}}).body
+ assert.match(windows,/<option value="size">包体积从小到大/)
  const only=render(component,{props:{initialCatalog:c,initialPage:'plugins.html',initialSearch:'?platform=win32-x64&verified=1'}}).body
  assert.match(only,/找到 <strong>0<\/strong>/)
 })
