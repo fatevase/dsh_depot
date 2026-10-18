@@ -5,6 +5,7 @@ import path from 'node:path'
 export const SCHEMA = 1
 export const PACKAGER_VERSION = '3'
 export const VERIFIER_VERSION = '2'
+export const PLATFORM_VERIFIER_VERSIONS = { 'win32-x64': '2.windows-2' }
 export const digest = value => createHash('sha256').update(value).digest('hex')
 export const fileDigest = async file => digest(await readFile(file))
 export function canonical(value) {
@@ -58,7 +59,7 @@ export async function readRecipes(dir, { cohort } = {}) {
     return recipe
   })
 }
-export function buildKey({ recipe, source, target, host, packagerVersion = PACKAGER_VERSION, verifierVersion = VERIFIER_VERSION }) {
+export function buildKey({ recipe, source, target, host, packagerVersion = PACKAGER_VERSION, verifierVersion = PLATFORM_VERIFIER_VERSIONS[target] ?? VERIFIER_VERSION }) {
   const { repository, commit, version, manifestDigest, lockDigests, peerDependencies, archiveSha256 } = source
   return jsonDigest({ recipe, source: { repository, commit, version, manifestDigest, lockDigests, peerDependencies, archiveSha256 }, target, host, packagerVersion, verifierVersion })
 }
