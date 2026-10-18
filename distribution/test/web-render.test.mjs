@@ -12,11 +12,11 @@ const {compile}=require('svelte/compiler')
 const {render}=await import(pathToFileURL(require.resolve('svelte/server')))
 async function app(t){
  const dir=await temporary(t)
- for(const name of ['PluginCard','App']){
+ for(const name of ['PluginIcon','PluginCard','App']){
   const source=fileURLToPath(new URL(`../web/${name}.svelte`,import.meta.url))
   const {js}=compile(await readFile(source,'utf8'),{filename:source,generate:'server'})
   const code=js.code.replace(/from (['"])([^'"]+)\1/g,(whole,quote,id)=>{
-   const resolved=id==='./PluginCard.svelte'?path.join(dir,'PluginCard.mjs'):id==='./catalog.mjs'?fileURLToPath(new URL('../web/catalog.mjs',import.meta.url)):require.resolve(id)
+   const resolved=id.endsWith('.svelte')?path.join(dir,path.basename(id,'.svelte')+'.mjs'):id==='./catalog.mjs'?fileURLToPath(new URL('../web/catalog.mjs',import.meta.url)):require.resolve(id)
    return `from ${quote}${pathToFileURL(resolved).href}${quote}`
   })
   await writeFile(path.join(dir,`${name}.mjs`),code)
@@ -38,4 +38,12 @@ test('detail commands, download, and passed proof belong only to the selected pu
  const mac=html('darwin-arm64'),linux=html('linux-x64')
  assert.match(mac,/one-1.0.0-darwin-arm64.tgz/);assert.match(mac,/--offline --ignore-scripts/);assert.match(mac,/releases\/download\/batch\/one.tgz/);assert.match(mac,/全新缓存 · 断网安装<\/span><small[^>]*>通过/)
  assert.ok(!linux.includes('one-1.0.0-darwin-arm64.tgz'));assert.ok(!linux.includes('releases/download/batch/one.tgz'));assert.match(linux,/暂无报告/)
+})
+test('home counts current downloads rather than historical builds, and guide includes usable offline steps',async t=>{
+ const component=await app(t),c=structuredClone(catalog)
+ c.latest={current:'verified-key'};c.packages.push({...c.packages[0],buildKey:'historical-key'})
+ const {body}=render(component,{props:{initialCatalog:c,initialGuide:true}})
+ assert.match(body,/当前可下载 1 个平台包/);assert.ok(!body.includes('精选'))
+ assert.match(body,/pnpm --version/);assert.match(body,/sha256sum/);assert.match(body,/--profile web/);assert.match(body,/下载或安装失败时/)
+ assert.match(body,/<svg[^>]+viewBox="0 0 24 24"/)
 })

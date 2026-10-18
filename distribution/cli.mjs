@@ -13,6 +13,7 @@ import { mergeState, withdraw, rollback, updateStateBranch, githubStateStore } f
 import { generateSite } from './lib/site.mjs'
 import { writeReceipt, loadReceipt, receiptFiles } from './lib/receipts.mjs'
 import { distributionRepository } from './lib/repository.mjs'
+import { recoverPublishedReceipts } from './lib/republication.mjs'
 
 export function argumentsOf(argv) {
   const result = { command: argv[0] }
@@ -71,9 +72,11 @@ export async function main(argv = process.argv.slice(2)) {
       const files=await receiptFiles(path.resolve(args.receipts)),receipts=await Promise.all(files.map(loadReceipt)),plan=await readJson(args.plan??path.join(workDir,'plan.json'),{tasks:[]})
       for(const task of plan.tasks)if(!receipts.some(r=>r.buildKey===task.buildKey))receipts.push({...task,stage:'build',status:'missing',attempt:new Date().toISOString(),error:{message:'Matrix job did not return a receipt'}})
       const discovery=await readJson(args.discovered??path.join(workDir,'discovered.json'),null)
+      const recovered=real?await recoverPublishedReceipts({state:current,repository,github,workDir:path.join(workDir,'republication'),recipeIds:new Set(recipes.filter(r=>r.enabled).map(r=>r.id)),excludeKeys:new Set(receipts.map(r=>r.buildKey))}):{receipts:[],tasks:[]}
+      receipts.push(...recovered.receipts)
       const state=mergeState(current,{discovery})
       state.lastPlan={createdAt:plan.createdAt,cohort:config.cohort,decisions:plan.decisions??[]}
-      result=await publishBatch({batchId:args.batch??process.env.GITHUB_RUN_ID??'local',repository,state,receipts,tasks:[...plan.tasks,...(plan.publicationTasks??[])],github,dryRun:!real,recipes})
+      result=await publishBatch({batchId:args.batch??process.env.GITHUB_RUN_ID??'local',repository,state,receipts,tasks:[...plan.tasks,...(plan.publicationTasks??[]),...recovered.tasks],github,dryRun:!real,recipes})
       if(real){const merged=await updateStateBranch({store:githubStateStore({repository,branch:config.stateBranch,github}),merge:latest=>{const next=mergeState(mergeState(latest,{discovery}),{receipts,publications:result.publications});if((next.lastPlan?.createdAt??'')<=(plan.createdAt??''))next.lastPlan=state.lastPlan;return next}});result.state=merged.state;result.catalog=catalogOf(merged.state,recipes)}
       result.cohort=config.cohort;result.decisions=plan.decisions??[]
     }else{

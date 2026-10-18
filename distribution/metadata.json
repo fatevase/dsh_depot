@@ -8,28 +8,28 @@
   },
   "multi-root": {
     "order": 102,
-    "description": "在同一处组织多个项目目录，轻松切换工作上下文。",
+    "description": "管理多个项目目录并切换工作上下文。",
     "label": "工作空间",
     "mark": "M",
     "license": "MIT"
   },
   "mobile": {
     "order": 103,
-    "description": "让 DSH 的操作与布局，更适合手机上的使用方式。",
+    "description": "为手机屏幕提供 DSH 操作与布局。",
     "label": "移动体验",
     "mark": "m",
     "license": "MIT"
   },
   "sidebar": {
     "order": 5,
-    "description": "整理侧栏与导航，为日常工作提供更完整的界面。",
+    "description": "扩展侧栏导航、会话列表与工作区入口。",
     "label": "界面增强",
     "mark": "B",
     "license": "MIT"
   },
   "market": {
     "order": 6,
-    "description": "在 DSH 中浏览与管理社区插件，补齐常用能力。",
+    "description": "浏览社区插件、查看版本并管理安装。",
     "label": "插件管理",
     "mark": "D",
     "license": "MIT"
