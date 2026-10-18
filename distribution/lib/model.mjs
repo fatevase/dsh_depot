@@ -3,7 +3,7 @@ import { mkdir, readFile, writeFile, rename, readdir } from 'node:fs/promises'
 import path from 'node:path'
 
 export const SCHEMA = 1
-export const PACKAGER_VERSION = '2'
+export const PACKAGER_VERSION = '3'
 export const VERIFIER_VERSION = '2'
 export const digest = value => createHash('sha256').update(value).digest('hex')
 export const fileDigest = async file => digest(await readFile(file))

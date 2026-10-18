@@ -8,6 +8,7 @@ export async function exportRepository(destination){
  const root=fileURLToPath(new URL('../',import.meta.url)),out=path.resolve(destination)
  if(!out.startsWith(path.join(root,'.runtime')+path.sep))throw Error('Export destination must be inside this workspace .runtime directory')
  await mkdir(out,{recursive:false})
+ await cp(path.join(root,'.gitattributes'),path.join(out,'.gitattributes'))
  await cp(path.join(root,'distribution'),path.join(out,'distribution'),{recursive:true,filter:source=>!source.split(path.sep).includes('node_modules')})
  await mkdir(path.join(out,'.github/workflows'),{recursive:true})
  await cp(path.join(root,'.github/workflows/plugin-distribution.yml'),path.join(out,'.github/workflows/plugin-distribution.yml'))
