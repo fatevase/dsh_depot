@@ -13,7 +13,8 @@
         "package-lock.json",
         ".github/workflows/web-pages.yml",
         "distribution/deploy-pages.mjs",
-        "distribution/lib/pages-deployment.mjs"
+        "distribution/lib/pages-deployment.mjs",
+        "distribution/pages-build-identity.mjs"
       ],
       "branches": [
         "main"
@@ -31,7 +32,8 @@
         "package-lock.json",
         ".github/workflows/web-pages.yml",
         "distribution/deploy-pages.mjs",
-        "distribution/lib/pages-deployment.mjs"
+        "distribution/lib/pages-deployment.mjs",
+        "distribution/pages-build-identity.mjs"
       ]
     },
     "workflow_dispatch": {},
@@ -74,7 +76,7 @@
           "run": "npm run web:test"
         },
         {
-          "run": "node --test distribution/test/pages-deployment.test.mjs"
+          "run": "node --test distribution/test/pages-deployment.test.mjs distribution/test/pages-build-identity.test.mjs"
         },
         {
           "run": "npm run web:build"
@@ -91,7 +93,7 @@
         "pages": "write",
         "id-token": "write",
         "actions": "read",
-        "contents": "read"
+        "contents": "write"
       },
       "timeout-minutes": 10,
       "concurrency": {
