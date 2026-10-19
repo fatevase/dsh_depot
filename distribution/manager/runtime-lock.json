@@ -1,0 +1,40 @@
+{
+  "schemaVersion": 1,
+  "version": "26.9.0",
+  "source": "https://nodejs.org/dist/v26.9.0/SHASUMS256.txt",
+  "targets": {
+    "macos-arm64": {
+      "url": "https://nodejs.org/dist/v26.9.0/node-v26.9.0-darwin-arm64.tar.gz",
+      "sha256": "6f3de7ed853ee283b4bf24b6e426618f1d357401ce5815db1866eb85eb4b05d9",
+      "archiveRoot": "node-v26.9.0-darwin-arm64",
+      "nodeEntry": "bin/node",
+      "licenseEntry": "LICENSE",
+      "selectedFiles": [
+        "bin/node",
+        "LICENSE"
+      ]
+    },
+    "linux-x64": {
+      "url": "https://nodejs.org/dist/v26.9.0/node-v26.9.0-linux-x64.tar.xz",
+      "sha256": "c6ecd8efc1c1d395265891675319da7a7b3785c6be174bd78933cf4f057624d1",
+      "archiveRoot": "node-v26.9.0-linux-x64",
+      "nodeEntry": "bin/node",
+      "licenseEntry": "LICENSE",
+      "selectedFiles": [
+        "bin/node",
+        "LICENSE"
+      ]
+    },
+    "win32-x64": {
+      "url": "https://nodejs.org/dist/v26.9.0/node-v26.9.0-win-x64.zip",
+      "sha256": "c8af870b5b3e9789a6cbdb30270e7c212e12d76a7afa7fc7f21b6b21cc22a71b",
+      "archiveRoot": "node-v26.9.0-win-x64",
+      "nodeEntry": "node.exe",
+      "licenseEntry": "LICENSE",
+      "selectedFiles": [
+        "node.exe",
+        "LICENSE"
+      ]
+    }
+  }
+}

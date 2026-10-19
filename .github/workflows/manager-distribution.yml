@@ -1,0 +1,197 @@
+{
+  "name": "DSH manager distributions",
+  "on": {
+    "pull_request": {
+      "paths": [
+        "distribution/manager/**",
+        "distribution/test/manager-*.test.mjs",
+        "distribution/package*.json",
+        ".github/workflows/manager-distribution.yml"
+      ]
+    },
+    "workflow_dispatch": {
+      "inputs": {
+        "publish": {
+          "description": "Publish only fully accepted manager assets (default branch only)",
+          "type": "boolean",
+          "default": false
+        }
+      }
+    }
+  },
+  "permissions": {},
+  "jobs": {
+    "build": {
+      "runs-on": "${{ matrix.runner }}",
+      "permissions": {
+        "contents": "read"
+      },
+      "timeout-minutes": 35,
+      "strategy": {
+        "fail-fast": false,
+        "matrix": {
+          "include": [
+            {
+              "target": "macos-arm64",
+              "runner": "macos-14"
+            },
+            {
+              "target": "linux-x64",
+              "runner": "ubuntu-24.04"
+            },
+            {
+              "target": "win32-x64",
+              "runner": "windows-2025"
+            }
+          ]
+        }
+      },
+      "steps": [
+        {
+          "uses": "actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1",
+          "with": {
+            "persist-credentials": false
+          }
+        },
+        {
+          "uses": "actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1",
+          "with": {
+            "node-version": "26.9.0"
+          }
+        },
+        {
+          "run": "npm --prefix distribution ci --ignore-scripts"
+        },
+        {
+          "run": "node --test distribution/test/manager-*.test.mjs"
+        },
+        {
+          "if": "matrix.target == 'win32-x64'",
+          "shell": "pwsh",
+          "run": "./distribution/isolation/prepare-windows.ps1"
+        },
+        {
+          "run": "node distribution/manager/ci.mjs build ${{ matrix.target }} .runtime/manager-ci/${{ matrix.target }}"
+        },
+        {
+          "uses": "actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9",
+          "if": "always()",
+          "with": {
+            "name": "manager-${{ matrix.target }}",
+            "path": ".runtime/manager-ci/${{ matrix.target }}/*.tgz\n.runtime/manager-ci/${{ matrix.target }}/receipt.json\n.runtime/manager-ci/${{ matrix.target }}/SHA256SUMS\n.runtime/manager-ci/${{ matrix.target }}/manager-verification.json\n.runtime/manager-ci/${{ matrix.target }}/verification/**/*.json\n.runtime/manager-ci/${{ matrix.target }}/verification/**/*.log",
+            "retention-days": 2,
+            "if-no-files-found": "warn"
+          }
+        }
+      ]
+    },
+    "publish": {
+      "if": "always() && github.event_name == 'workflow_dispatch' && inputs.publish && github.ref == format('refs/heads/{0}', github.event.repository.default_branch)",
+      "needs": [
+        "build"
+      ],
+      "runs-on": "ubuntu-24.04",
+      "permissions": {
+        "contents": "write"
+      },
+      "concurrency": {
+        "group": "manager-release",
+        "cancel-in-progress": false
+      },
+      "steps": [
+        {
+          "uses": "actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1",
+          "with": {
+            "persist-credentials": false
+          }
+        },
+        {
+          "uses": "actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1",
+          "with": {
+            "node-version": "26.9.0"
+          }
+        },
+        {
+          "run": "npm --prefix distribution ci --ignore-scripts"
+        },
+        {
+          "uses": "actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333",
+          "with": {
+            "pattern": "manager-*",
+            "path": ".runtime/manager-publication"
+          }
+        },
+        {
+          "run": "node distribution/manager/ci.mjs publication .runtime/manager-publication"
+        },
+        {
+          "name": "Publish exact qualified files",
+          "env": {
+            "GH_TOKEN": "${{ github.token }}",
+            "GH_REPO": "${{ github.repository }}"
+          },
+          "run": "node distribution/manager/publish-release.mjs .runtime/manager-publication/publication.json"
+        }
+      ]
+    },
+    "pages": {
+      "if": "github.event_name == 'workflow_dispatch' && needs.publish.result == 'success'",
+      "needs": [
+        "publish"
+      ],
+      "runs-on": "ubuntu-24.04",
+      "permissions": {
+        "pages": "write",
+        "id-token": "write",
+        "actions": "read",
+        "contents": "read"
+      },
+      "timeout-minutes": 10,
+      "concurrency": {
+        "group": "distribution-state-and-pages",
+        "cancel-in-progress": false
+      },
+      "environment": {
+        "name": "github-pages",
+        "url": "${{ steps.deploy.outputs.page_url }}"
+      },
+      "steps": [
+        {
+          "uses": "actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1",
+          "with": {
+            "persist-credentials": false,
+            "ref": "${{ github.event.repository.default_branch }}"
+          }
+        },
+        {
+          "uses": "actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1",
+          "with": {
+            "node-version": "26.9.0"
+          }
+        },
+        {
+          "run": "npm --prefix distribution ci --ignore-scripts --registry=https://registry.npmjs.org"
+        },
+        {
+          "run": "node distribution/ci.mjs deploy-site",
+          "env": {
+            "GITHUB_TOKEN": "${{ github.token }}"
+          }
+        },
+        {
+          "uses": "actions/configure-pages@45bfe0192ca1faeb007ade9deae92b16b8254a0d"
+        },
+        {
+          "uses": "actions/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9",
+          "with": {
+            "path": ".runtime/distribution/site"
+          }
+        },
+        {
+          "uses": "actions/deploy-pages@368f82528645a54fb793d4d04e342629a3f51346",
+          "id": "deploy"
+        }
+      ]
+    }
+  }
+}

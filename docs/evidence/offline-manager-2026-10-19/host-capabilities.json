@@ -1,0 +1,50 @@
+{
+  "kind": "actual-read-only-probe",
+  "host": {
+    "schemaVersion": 1,
+    "hostId": "fff5550738a6c7959e43011d",
+    "kind": "cli-web",
+    "version": "0.2.0-rc.2",
+    "profileName": "web",
+    "profileDir": "/private/var/folders/ft/gg8gz5t92gsccgfnbrk8hj7m0000gn/T/depot-host-capability-5pKIrY/profiles/web",
+    "home": "/private/var/folders/ft/gg8gz5t92gsccgfnbrk8hj7m0000gn/T/depot-host-capability-5pKIrY",
+    "dshRoot": "/Users/vase/Downloads/aiworkbench-dsh/.runtime/distribution/stock-host/node_modules/@deepseek-ai/dsh",
+    "nodePath": "/opt/homebrew/Cellar/node/26.9.0/bin/node",
+    "ownerId": "501",
+    "runtime": {
+      "source": "host",
+      "kind": "node",
+      "platform": "darwin",
+      "arch": "arm64",
+      "node": "26.9.0",
+      "abi": "147",
+      "napi": 10,
+      "libc": null
+    },
+    "launch": {
+      "executable": "/opt/homebrew/Cellar/node/26.9.0/bin/node",
+      "args": [
+        "--expose-internals",
+        "/Users/vase/Downloads/aiworkbench-dsh/.runtime/distribution/stock-host/node_modules/@deepseek-ai/dsh/lib/bin.js",
+        "--profile",
+        "web"
+      ]
+    },
+    "packageManager": {
+      "command": "pnpm",
+      "args": []
+    },
+    "capabilities": {
+      "inspect": true,
+      "offlineInstall": true,
+      "remove": true,
+      "writeSession": true,
+      "requiresExit": true,
+      "survivesHostExit": false,
+      "blockedReason": null
+    },
+    "fingerprint": "151a643659972e5be0abf4661ff227858459d7d3f829cb29dbb11599d90d31b6",
+    "target": "macos-arm64"
+  },
+  "desktop": "unverified"
+}

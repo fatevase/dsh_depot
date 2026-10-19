@@ -14,10 +14,12 @@
   },
   "dependencies": {
     "semver": "7.7.2",
+    "tar": "7.5.22",
     "yaml": "2.9.1"
   },
   "devDependencies": {
     "@sveltejs/vite-plugin-svelte": "7.3.1",
+    "esbuild": "0.28.2",
     "svelte": "5.57.2",
     "vite": "8.3.4"
   }

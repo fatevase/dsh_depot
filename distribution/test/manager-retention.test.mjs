@@ -1,0 +1,14 @@
+import test from 'node:test'
+import assert from 'node:assert/strict'
+import {mkdtemp,mkdir,writeFile,readFile,rm,access} from 'node:fs/promises'
+import {execFile}from'node:child_process'
+import {promisify}from'node:util'
+import path from 'node:path'
+import os from 'node:os'
+import {pruneRetention}from'../manager/core/retention.mjs'
+import {withManagerLock}from'../manager/core/receipts.mjs'
+test('retention keeps recent recovery points and all unresolved snapshots',async t=>{const root=await mkdtemp(path.join(os.tmpdir(),'depot-retention-'));t.after(()=>rm(root,{recursive:true,force:true}));await mkdir(path.join(root,'operations'));for(let i=0;i<5;i++){const id='snap-'+i;await mkdir(path.join(root,'snapshots',id),{recursive:true});await writeFile(path.join(root,'operations',i+'.json'),JSON.stringify({hostId:'host',state:i===4?'recovery_required':'succeeded',snapshotId:id,createdAt:i*1000}))}const r=await pruneRetention({storeDir:root},90*86400000);assert.deepEqual(r.removed,['snap-0']);await access(path.join(root,'snapshots/snap-4'));assert.ok(r.retained.includes('snap-4'))})
+test('dead writer locks can be safely reclaimed while live owners remain blocked',async t=>{const root=await mkdtemp(path.join(os.tmpdir(),'depot-lock-'));t.after(()=>rm(root,{recursive:true,force:true}));await mkdir(path.join(root,'locks'));const child=await promisify(execFile)(process.execPath,['-e','console.log(process.pid)']);const file=path.join(root,'locks/host.lock');await writeFile(file,JSON.stringify({pid:+child.stdout,hostname:os.hostname()}));let ran=false;await withManagerLock(root,'host',async()=>{ran=true});assert.equal(ran,true);await writeFile(file,JSON.stringify({pid:process.pid,hostname:os.hostname()}));await assert.rejects(()=>withManagerLock(root,'host',async()=>{}),{code:'OPERATION_BUSY'})})
+test('retention bounds recent successful snapshots and keeps installed local archives',async t=>{
+ const {fixture}=await import('./manager-helpers.mjs'),{atomicJson}=await import('../manager/core/files.mjs'),{stat}=await import('node:fs/promises');const f=await fixture(t),storeDir=path.join(f.dir,'state'),id='12345678-1234-1234-1234-123456789abc',archive=path.join(storeDir,'imports',id,'import.tgz');await mkdir(path.dirname(archive),{recursive:true});await writeFile(archive,'installed');await writeFile(path.join(f.profile,'package.json'),JSON.stringify({dependencies:{keep:'file:'+archive}}));const recentTime=Date.now();for(let i=0;i<5;i++){await mkdir(path.join(storeDir,'snapshots','recent-'+i),{recursive:true});await atomicJson(path.join(storeDir,'operations','recent-'+i+'.json'),{operationId:'recent-'+i,state:'succeeded',snapshotId:'recent-'+i,createdAt:recentTime-i*1000})}const result=await pruneRetention({storeDir,profileDir:f.profile},Date.now()+2*86400000);assert.ok(result.removed.includes('recent-4'));assert.ok((await stat(archive)).isFile())
+})

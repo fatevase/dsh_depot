@@ -1,3 +1,4 @@
+import {latestManagerCatalog} from './manager/catalog.mjs'
 import { supportedTarget } from './lib/platform.mjs'
 // CI adapter: all untrusted/event inputs stay data, never interpolated into shell.
 import path from 'node:path'
@@ -50,5 +51,5 @@ if(command==='discover'){
  await main(['site','--catalog',path.join(root,'catalog.json'),'--state',path.join(root,'next-state.json'),'--output',path.join(root,'site')])
 }else if(command==='deploy-site'){
  const store=githubStateStore({repository,branch:config.stateBranch,github:new Github({token:process.env.GITHUB_TOKEN})})
- console.log(await refreshDeployment({store,recipes,outDir:path.join(root,'site')}))
+ console.log(await refreshDeployment({store,recipes,outDir:path.join(root,'site'),managerCatalog:await latestManagerCatalog({github:new Github({token:process.env.GITHUB_TOKEN})})}))
 }else throw Error('Usage: node distribution/ci.mjs discover|build|publish')

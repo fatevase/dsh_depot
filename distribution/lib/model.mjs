@@ -4,7 +4,7 @@ import path from 'node:path'
 import { supportedTarget } from './platform.mjs'
 
 export const SCHEMA = 1
-export const PACKAGER_VERSION = '3'
+export const PACKAGER_VERSION = '4'
 export const VERIFIER_VERSION = '2'
 export const PLATFORM_VERIFIER_VERSIONS = { 'win32-x64': '2.windows-wfp-3' }
 export const digest = value => createHash('sha256').update(value).digest('hex')

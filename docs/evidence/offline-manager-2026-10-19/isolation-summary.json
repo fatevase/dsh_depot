@@ -1,0 +1,20 @@
+{
+  "status": "unverified",
+  "packageSha256": "6665fbdcef1d1204bff3586e45944d524f9c8cf49f1b089797d5fbf4123be1a3",
+  "checks": {
+    "install": true,
+    "compose": true,
+    "host": true,
+    "clientModule": true,
+    "native": null
+  },
+  "missing": [
+    "authenticated-manager-page",
+    "script-install",
+    "replace",
+    "uninstall",
+    "recovery",
+    "native-load"
+  ],
+  "workDir": "/Users/vase/Downloads/aiworkbench-dsh/.runtime/dsh-depot-manager/.runtime/distribution/verification/manager-final/a7b49ab2-5345-4d9a-9812-8bbef842ea90"
+}

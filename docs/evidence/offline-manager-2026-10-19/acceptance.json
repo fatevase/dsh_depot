@@ -1,0 +1,576 @@
+{
+  "schemaVersion": 1,
+  "status": "unverified",
+  "platforms": [
+    {
+      "target": "macos-arm64",
+      "status": "unverified",
+      "os": "macOS-26.5.2-arm64-arm-64bit",
+      "host": {
+        "version": "0.2.0-rc.2",
+        "node": "26.9.0"
+      },
+      "cases": [
+        {
+          "id": "A01",
+          "status": "unverified",
+          "reason": "该完整原生场景尚未验收；局部检查及单元测试不代替整项通过。"
+        },
+        {
+          "id": "A02",
+          "status": "unverified",
+          "reason": "该完整原生场景尚未验收；局部检查及单元测试不代替整项通过。"
+        },
+        {
+          "id": "A03",
+          "status": "unverified",
+          "reason": "该完整原生场景尚未验收；局部检查及单元测试不代替整项通过。"
+        },
+        {
+          "id": "A04",
+          "status": "unverified",
+          "reason": "该完整原生场景尚未验收；局部检查及单元测试不代替整项通过。"
+        },
+        {
+          "id": "A05",
+          "status": "unverified",
+          "reason": "该完整原生场景尚未验收；局部检查及单元测试不代替整项通过。"
+        },
+        {
+          "id": "A06",
+          "status": "unverified",
+          "reason": "该完整原生场景尚未验收；局部检查及单元测试不代替整项通过。"
+        },
+        {
+          "id": "A07",
+          "status": "unverified",
+          "reason": "该完整原生场景尚未验收；局部检查及单元测试不代替整项通过。"
+        },
+        {
+          "id": "A08",
+          "status": "unverified",
+          "reason": "该完整原生场景尚未验收；局部检查及单元测试不代替整项通过。"
+        },
+        {
+          "id": "A09",
+          "status": "unverified",
+          "reason": "该完整原生场景尚未验收；局部检查及单元测试不代替整项通过。"
+        },
+        {
+          "id": "A10",
+          "status": "unverified",
+          "reason": "该完整原生场景尚未验收；局部检查及单元测试不代替整项通过。"
+        },
+        {
+          "id": "P01",
+          "status": "unverified",
+          "reason": "该完整原生场景尚未验收；局部检查及单元测试不代替整项通过。"
+        },
+        {
+          "id": "P02",
+          "status": "unverified",
+          "reason": "该完整原生场景尚未验收；局部检查及单元测试不代替整项通过。"
+        },
+        {
+          "id": "P03",
+          "status": "unverified",
+          "reason": "该完整原生场景尚未验收；局部检查及单元测试不代替整项通过。"
+        },
+        {
+          "id": "P04",
+          "status": "unverified",
+          "reason": "该完整原生场景尚未验收；局部检查及单元测试不代替整项通过。"
+        },
+        {
+          "id": "P05",
+          "status": "unverified",
+          "reason": "该完整原生场景尚未验收；局部检查及单元测试不代替整项通过。"
+        },
+        {
+          "id": "P06",
+          "status": "unverified",
+          "reason": "该完整原生场景尚未验收；局部检查及单元测试不代替整项通过。"
+        },
+        {
+          "id": "P07",
+          "status": "unverified",
+          "reason": "该完整原生场景尚未验收；局部检查及单元测试不代替整项通过。"
+        },
+        {
+          "id": "P08",
+          "status": "unverified",
+          "reason": "该完整原生场景尚未验收；局部检查及单元测试不代替整项通过。"
+        },
+        {
+          "id": "P09",
+          "status": "unverified",
+          "reason": "该完整原生场景尚未验收；局部检查及单元测试不代替整项通过。"
+        },
+        {
+          "id": "T01",
+          "status": "unverified",
+          "reason": "该完整原生场景尚未验收；局部检查及单元测试不代替整项通过。"
+        },
+        {
+          "id": "T02",
+          "status": "unverified",
+          "reason": "该完整原生场景尚未验收；局部检查及单元测试不代替整项通过。"
+        },
+        {
+          "id": "T03",
+          "status": "unverified",
+          "reason": "该完整原生场景尚未验收；局部检查及单元测试不代替整项通过。"
+        },
+        {
+          "id": "T04",
+          "status": "unverified",
+          "reason": "该完整原生场景尚未验收；局部检查及单元测试不代替整项通过。"
+        },
+        {
+          "id": "T05",
+          "status": "unverified",
+          "reason": "该完整原生场景尚未验收；局部检查及单元测试不代替整项通过。"
+        },
+        {
+          "id": "T06",
+          "status": "unverified",
+          "reason": "该完整原生场景尚未验收；局部检查及单元测试不代替整项通过。"
+        },
+        {
+          "id": "T07",
+          "status": "unverified",
+          "reason": "该完整原生场景尚未验收；局部检查及单元测试不代替整项通过。"
+        },
+        {
+          "id": "U01",
+          "status": "unverified",
+          "reason": "该完整原生场景尚未验收；局部检查及单元测试不代替整项通过。"
+        },
+        {
+          "id": "U02",
+          "status": "unverified",
+          "reason": "该完整原生场景尚未验收；局部检查及单元测试不代替整项通过。"
+        },
+        {
+          "id": "U03",
+          "status": "unverified",
+          "reason": "该完整原生场景尚未验收；局部检查及单元测试不代替整项通过。"
+        },
+        {
+          "id": "R01",
+          "status": "unverified",
+          "reason": "该完整原生场景尚未验收；局部检查及单元测试不代替整项通过。"
+        },
+        {
+          "id": "R02",
+          "status": "unverified",
+          "reason": "该完整原生场景尚未验收；局部检查及单元测试不代替整项通过。"
+        }
+      ]
+    },
+    {
+      "target": "linux-x64",
+      "status": "unverified",
+      "os": null,
+      "host": null,
+      "cases": [
+        {
+          "id": "A01",
+          "status": "unverified",
+          "reason": "该完整原生场景尚未验收；局部检查及单元测试不代替整项通过。"
+        },
+        {
+          "id": "A02",
+          "status": "unverified",
+          "reason": "该完整原生场景尚未验收；局部检查及单元测试不代替整项通过。"
+        },
+        {
+          "id": "A03",
+          "status": "unverified",
+          "reason": "该完整原生场景尚未验收；局部检查及单元测试不代替整项通过。"
+        },
+        {
+          "id": "A04",
+          "status": "unverified",
+          "reason": "该完整原生场景尚未验收；局部检查及单元测试不代替整项通过。"
+        },
+        {
+          "id": "A05",
+          "status": "unverified",
+          "reason": "该完整原生场景尚未验收；局部检查及单元测试不代替整项通过。"
+        },
+        {
+          "id": "A06",
+          "status": "unverified",
+          "reason": "该完整原生场景尚未验收；局部检查及单元测试不代替整项通过。"
+        },
+        {
+          "id": "A07",
+          "status": "unverified",
+          "reason": "该完整原生场景尚未验收；局部检查及单元测试不代替整项通过。"
+        },
+        {
+          "id": "A08",
+          "status": "unverified",
+          "reason": "该完整原生场景尚未验收；局部检查及单元测试不代替整项通过。"
+        },
+        {
+          "id": "A09",
+          "status": "unverified",
+          "reason": "该完整原生场景尚未验收；局部检查及单元测试不代替整项通过。"
+        },
+        {
+          "id": "A10",
+          "status": "unverified",
+          "reason": "该完整原生场景尚未验收；局部检查及单元测试不代替整项通过。"
+        },
+        {
+          "id": "P01",
+          "status": "unverified",
+          "reason": "该完整原生场景尚未验收；局部检查及单元测试不代替整项通过。"
+        },
+        {
+          "id": "P02",
+          "status": "unverified",
+          "reason": "该完整原生场景尚未验收；局部检查及单元测试不代替整项通过。"
+        },
+        {
+          "id": "P03",
+          "status": "unverified",
+          "reason": "该完整原生场景尚未验收；局部检查及单元测试不代替整项通过。"
+        },
+        {
+          "id": "P04",
+          "status": "unverified",
+          "reason": "该完整原生场景尚未验收；局部检查及单元测试不代替整项通过。"
+        },
+        {
+          "id": "P05",
+          "status": "unverified",
+          "reason": "该完整原生场景尚未验收；局部检查及单元测试不代替整项通过。"
+        },
+        {
+          "id": "P06",
+          "status": "unverified",
+          "reason": "该完整原生场景尚未验收；局部检查及单元测试不代替整项通过。"
+        },
+        {
+          "id": "P07",
+          "status": "unverified",
+          "reason": "该完整原生场景尚未验收；局部检查及单元测试不代替整项通过。"
+        },
+        {
+          "id": "P08",
+          "status": "unverified",
+          "reason": "该完整原生场景尚未验收；局部检查及单元测试不代替整项通过。"
+        },
+        {
+          "id": "P09",
+          "status": "unverified",
+          "reason": "该完整原生场景尚未验收；局部检查及单元测试不代替整项通过。"
+        },
+        {
+          "id": "T01",
+          "status": "unverified",
+          "reason": "该完整原生场景尚未验收；局部检查及单元测试不代替整项通过。"
+        },
+        {
+          "id": "T02",
+          "status": "unverified",
+          "reason": "该完整原生场景尚未验收；局部检查及单元测试不代替整项通过。"
+        },
+        {
+          "id": "T03",
+          "status": "unverified",
+          "reason": "该完整原生场景尚未验收；局部检查及单元测试不代替整项通过。"
+        },
+        {
+          "id": "T04",
+          "status": "unverified",
+          "reason": "该完整原生场景尚未验收；局部检查及单元测试不代替整项通过。"
+        },
+        {
+          "id": "T05",
+          "status": "unverified",
+          "reason": "该完整原生场景尚未验收；局部检查及单元测试不代替整项通过。"
+        },
+        {
+          "id": "T06",
+          "status": "unverified",
+          "reason": "该完整原生场景尚未验收；局部检查及单元测试不代替整项通过。"
+        },
+        {
+          "id": "T07",
+          "status": "unverified",
+          "reason": "该完整原生场景尚未验收；局部检查及单元测试不代替整项通过。"
+        },
+        {
+          "id": "U01",
+          "status": "unverified",
+          "reason": "该完整原生场景尚未验收；局部检查及单元测试不代替整项通过。"
+        },
+        {
+          "id": "U02",
+          "status": "unverified",
+          "reason": "该完整原生场景尚未验收；局部检查及单元测试不代替整项通过。"
+        },
+        {
+          "id": "U03",
+          "status": "unverified",
+          "reason": "该完整原生场景尚未验收；局部检查及单元测试不代替整项通过。"
+        },
+        {
+          "id": "R01",
+          "status": "unverified",
+          "reason": "该完整原生场景尚未验收；局部检查及单元测试不代替整项通过。"
+        },
+        {
+          "id": "R02",
+          "status": "unverified",
+          "reason": "该完整原生场景尚未验收；局部检查及单元测试不代替整项通过。"
+        }
+      ]
+    },
+    {
+      "target": "win32-x64",
+      "status": "unverified",
+      "os": null,
+      "host": null,
+      "cases": [
+        {
+          "id": "A01",
+          "status": "unverified",
+          "reason": "该完整原生场景尚未验收；局部检查及单元测试不代替整项通过。"
+        },
+        {
+          "id": "A02",
+          "status": "unverified",
+          "reason": "该完整原生场景尚未验收；局部检查及单元测试不代替整项通过。"
+        },
+        {
+          "id": "A03",
+          "status": "unverified",
+          "reason": "该完整原生场景尚未验收；局部检查及单元测试不代替整项通过。"
+        },
+        {
+          "id": "A04",
+          "status": "unverified",
+          "reason": "该完整原生场景尚未验收；局部检查及单元测试不代替整项通过。"
+        },
+        {
+          "id": "A05",
+          "status": "unverified",
+          "reason": "该完整原生场景尚未验收；局部检查及单元测试不代替整项通过。"
+        },
+        {
+          "id": "A06",
+          "status": "unverified",
+          "reason": "该完整原生场景尚未验收；局部检查及单元测试不代替整项通过。"
+        },
+        {
+          "id": "A07",
+          "status": "unverified",
+          "reason": "该完整原生场景尚未验收；局部检查及单元测试不代替整项通过。"
+        },
+        {
+          "id": "A08",
+          "status": "unverified",
+          "reason": "该完整原生场景尚未验收；局部检查及单元测试不代替整项通过。"
+        },
+        {
+          "id": "A09",
+          "status": "unverified",
+          "reason": "该完整原生场景尚未验收；局部检查及单元测试不代替整项通过。"
+        },
+        {
+          "id": "A10",
+          "status": "unverified",
+          "reason": "该完整原生场景尚未验收；局部检查及单元测试不代替整项通过。"
+        },
+        {
+          "id": "P01",
+          "status": "unverified",
+          "reason": "该完整原生场景尚未验收；局部检查及单元测试不代替整项通过。"
+        },
+        {
+          "id": "P02",
+          "status": "unverified",
+          "reason": "该完整原生场景尚未验收；局部检查及单元测试不代替整项通过。"
+        },
+        {
+          "id": "P03",
+          "status": "unverified",
+          "reason": "该完整原生场景尚未验收；局部检查及单元测试不代替整项通过。"
+        },
+        {
+          "id": "P04",
+          "status": "unverified",
+          "reason": "该完整原生场景尚未验收；局部检查及单元测试不代替整项通过。"
+        },
+        {
+          "id": "P05",
+          "status": "unverified",
+          "reason": "该完整原生场景尚未验收；局部检查及单元测试不代替整项通过。"
+        },
+        {
+          "id": "P06",
+          "status": "unverified",
+          "reason": "该完整原生场景尚未验收；局部检查及单元测试不代替整项通过。"
+        },
+        {
+          "id": "P07",
+          "status": "unverified",
+          "reason": "该完整原生场景尚未验收；局部检查及单元测试不代替整项通过。"
+        },
+        {
+          "id": "P08",
+          "status": "unverified",
+          "reason": "该完整原生场景尚未验收；局部检查及单元测试不代替整项通过。"
+        },
+        {
+          "id": "P09",
+          "status": "unverified",
+          "reason": "该完整原生场景尚未验收；局部检查及单元测试不代替整项通过。"
+        },
+        {
+          "id": "T01",
+          "status": "unverified",
+          "reason": "该完整原生场景尚未验收；局部检查及单元测试不代替整项通过。"
+        },
+        {
+          "id": "T02",
+          "status": "unverified",
+          "reason": "该完整原生场景尚未验收；局部检查及单元测试不代替整项通过。"
+        },
+        {
+          "id": "T03",
+          "status": "unverified",
+          "reason": "该完整原生场景尚未验收；局部检查及单元测试不代替整项通过。"
+        },
+        {
+          "id": "T04",
+          "status": "unverified",
+          "reason": "该完整原生场景尚未验收；局部检查及单元测试不代替整项通过。"
+        },
+        {
+          "id": "T05",
+          "status": "unverified",
+          "reason": "该完整原生场景尚未验收；局部检查及单元测试不代替整项通过。"
+        },
+        {
+          "id": "T06",
+          "status": "unverified",
+          "reason": "该完整原生场景尚未验收；局部检查及单元测试不代替整项通过。"
+        },
+        {
+          "id": "T07",
+          "status": "unverified",
+          "reason": "该完整原生场景尚未验收；局部检查及单元测试不代替整项通过。"
+        },
+        {
+          "id": "U01",
+          "status": "unverified",
+          "reason": "该完整原生场景尚未验收；局部检查及单元测试不代替整项通过。"
+        },
+        {
+          "id": "U02",
+          "status": "unverified",
+          "reason": "该完整原生场景尚未验收；局部检查及单元测试不代替整项通过。"
+        },
+        {
+          "id": "U03",
+          "status": "unverified",
+          "reason": "该完整原生场景尚未验收；局部检查及单元测试不代替整项通过。"
+        },
+        {
+          "id": "R01",
+          "status": "unverified",
+          "reason": "该完整原生场景尚未验收；局部检查及单元测试不代替整项通过。"
+        },
+        {
+          "id": "R02",
+          "status": "unverified",
+          "reason": "该完整原生场景尚未验收；局部检查及单元测试不代替整项通过。"
+        }
+      ]
+    }
+  ],
+  "partialEvidence": {
+    "realMacOS": {
+      "os": "macOS-26.5.2-arm64-arm-64bit",
+      "authentication": {
+        "unauthenticatedStatus": 401,
+        "authenticatedStatus": 200,
+        "hostId": "c640939a17d69f077023a0a5",
+        "selectedProfile": "web",
+        "arbitraryProfileIgnored": true
+      },
+      "isolation": {
+        "status": "unverified",
+        "packageSha256": "6665fbdcef1d1204bff3586e45944d524f9c8cf49f1b089797d5fbf4123be1a3",
+        "checks": {
+          "install": true,
+          "compose": true,
+          "host": true,
+          "clientModule": true,
+          "native": null
+        },
+        "missing": [
+          "authenticated-manager-page",
+          "script-install",
+          "replace",
+          "uninstall",
+          "recovery",
+          "native-load"
+        ],
+        "workDir": "/Users/vase/Downloads/aiworkbench-dsh/.runtime/dsh-depot-manager/.runtime/distribution/verification/manager-final/a7b49ab2-5345-4d9a-9812-8bbef842ea90"
+      },
+      "scriptFlow": {
+        "state": "awaiting_reload",
+        "error": null,
+        "managerSha256": "6665fbdcef1d1204bff3586e45944d524f9c8cf49f1b089797d5fbf4123be1a3",
+        "liteSha256": "a2d1d075c396e8c0e625895738ba44ba57ebfbead3e49f127401cdc6a1c4e066",
+        "managerBytes": 150773,
+        "liteBytes": 270882,
+        "stableToolkit": true
+      },
+      "uninstall": {
+        "state": "succeeded",
+        "removed": true,
+        "pluginDeclarationAbsent": true,
+        "managerPreserved": true,
+        "businessDataPreserved": true,
+        "operationId": "08cfd326-1a47-4874-93ac-79110a0e0515"
+      },
+      "currentManagerLoaded": true
+    },
+    "tests": {
+      "passed": 142,
+      "failed": 0,
+      "skipped": 1,
+      "total": 143,
+      "skippedScope": "Windows native script entry on macOS"
+    }
+  },
+  "publication": "blocked until the exact full/lite artifacts complete native acceptance",
+  "assets": {
+    "manager": {
+      "name": "dsh-depot-manager",
+      "version": "0.1.0",
+      "target": "macos-arm64",
+      "fileName": "dsh-depot-manager-0.1.0-macos-arm64.tgz",
+      "sha256": "6665fbdcef1d1204bff3586e45944d524f9c8cf49f1b089797d5fbf4123be1a3",
+      "compressedBytes": 150773,
+      "sourceDigest": "e8555b2968add67866bd480f7cb9fc8e2774759c3695f549ba7b99c0e920f125"
+    },
+    "lite": {
+      "target": "macos-arm64",
+      "flavor": "lite",
+      "fileName": "dsh-depot-manager-0.1.0-macos-arm64-lite.tgz",
+      "sha256": "a2d1d075c396e8c0e625895738ba44ba57ebfbead3e49f127401cdc6a1c4e066",
+      "compressedBytes": 270882,
+      "managerSha256": "6665fbdcef1d1204bff3586e45944d524f9c8cf49f1b089797d5fbf4123be1a3",
+      "runtimeDigest": null
+    }
+  }
+}

@@ -3,6 +3,7 @@
   import PluginCard from './PluginCard.svelte'
   import PluginIcon from './PluginIcon.svelte'
   import Guide from './Guide.svelte'
+  import ManagerDownload from './ManagerDownload.svelte'
   import { categories, platforms, packagesFor, selectPlugins, searchUrl, bytes, downloadUrl, installCommand, platformState, isUnverifiedPackage, verificationMessage } from './catalog.mjs'
   let {initialPage='index.html',initialSearch='',initialCatalog=null}=$props()
   const params=new URLSearchParams(initialSearch)
@@ -10,7 +11,7 @@
   let catalog=$state(initialCatalog),error=$state('')
   let options=$state({q:params.get('q')??'',category:categories[params.get('category')]?params.get('category'):'all',platform:platforms[params.get('platform')]?params.get('platform'):'all',verified:params.get('verified')==='1',sort:params.get('sort')??'curated'})
   let query=$state(options.q),target=$state(platforms[params.get('platform')]&&params.get('platform')!=='all'?params.get('platform'):'macos-arm64'),tab=$state(params.get('tab')==='proof'?'proof':'install')
-  const page=initialPage==='guide.html'?'guide':initialPage==='plugins.html'?'search':initialPage==='plugin.html'?'detail':'home'
+  const page=initialPage==='manager.html'?'manager':initialPage==='guide.html'?'guide':initialPage==='plugins.html'?'search':initialPage==='plugin.html'?'detail':'home'
   const returnValue=params.get('return')??'plugins.html'
   const back=/^(?:plugins|index)\.html(?:\?|$)/.test(returnValue)?returnValue:'plugins.html'
   let items=$derived(catalog?selectPlugins(catalog,options):[])
@@ -49,11 +50,13 @@
 <div id="depot-v2" aria-label="DSH Depot 插件仓">
   <header class="dv-header dv-wrap">
     <a class="dv-brand" href="index.html"><span class="dv-emblem" aria-hidden="true"><b></b><b></b><b></b><b></b></span>DSH Depot <small>插件仓</small></a>
-    <nav class="dv-navigation" aria-label="网站主导航"><a href="index.html" aria-current={page==='home'?'page':undefined}>首页</a><a href="plugins.html" aria-current={['search','detail'].includes(page)?'page':undefined}>插件目录</a><a href="guide.html" aria-current={page==='guide'?'page':undefined}>安装指南</a></nav>
+    <nav class="dv-navigation" aria-label="网站主导航"><a href="index.html" aria-current={page==='home'?'page':undefined}>首页</a><a href="plugins.html" aria-current={['search','detail'].includes(page)?'page':undefined}>插件目录</a><a href="manager.html" aria-current={page==='manager'?'page':undefined}>管理器</a><a href="guide.html" aria-current={page==='guide'?'page':undefined}>安装指南</a></nav>
     <div class="dv-header-end">插件离线包 <span class="dv-mono" style="margin-left:8px">/ DSH DEPOT</span></div>
   </header>
   <main>
-    {#if page==='guide'}
+    {#if page==='manager'}
+      <ManagerDownload/>
+    {:else if page==='guide'}
       <Guide/>
     {:else if unsupportedPlatform}
       <section class="dv-wrap dv-empty"><h1>目标平台不受支持。</h1><p>请从插件目录重新选择平台。</p><a class="dv-text-link" href="plugins.html">浏览插件目录 →</a></section>
