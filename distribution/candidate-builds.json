@@ -1,0 +1,990 @@
+{
+  "schemaVersion": 1,
+  "id": "popular-99-2026-10-19",
+  "sourceList": "distribution/plugin-list.json",
+  "sourceSnapshot": "2026-10-19",
+  "description": "99 个候选进入三平台试编译；产物只保存在 Actions，正式离线发布仍需 recipe 和断网验证。",
+  "issue": 8,
+  "batchSize": 5,
+  "targets": [
+    "macos-arm64",
+    "linux-x64",
+    "win32-x64"
+  ],
+  "entries": [
+    {
+      "repositoryId": 1385896447,
+      "repository": "Ebony-Vinyl/dsh-our-free-model",
+      "ref": "main",
+      "packagePath": ".",
+      "npmName": "dsh-our-free-model",
+      "buildScripts": []
+    },
+    {
+      "repositoryId": 1331636953,
+      "repository": "zhu1090093659/dsh-web",
+      "ref": "dev",
+      "packagePath": ".",
+      "npmName": "dsh-web",
+      "buildScripts": [
+        "build"
+      ],
+      "pnpmVersion": "11.24.0"
+    },
+    {
+      "repositoryId": 1339256252,
+      "repository": "YuJunZhiXue/dsh-purge",
+      "ref": "master",
+      "packagePath": ".",
+      "npmName": "dsh-purge",
+      "buildScripts": [
+        "build:client"
+      ]
+    },
+    {
+      "repositoryId": 1334586481,
+      "repository": "yjh051108/dsh-routing-suite",
+      "ref": "main",
+      "packagePath": ".",
+      "npmName": "@dsh-external/dsh-super-injector",
+      "buildScripts": [
+        "prepare"
+      ]
+    },
+    {
+      "repositoryId": 1301657572,
+      "repository": "superdesigndev/treg",
+      "ref": "main",
+      "packagePath": ".",
+      "npmName": "treg-dsh",
+      "buildScripts": []
+    },
+    {
+      "repositoryId": 1337920628,
+      "repository": "MeteorNOX/DeepSeek-Balance-Whale-Widget",
+      "ref": "main",
+      "packagePath": ".",
+      "npmName": "dsh-whale-widget",
+      "buildScripts": []
+    },
+    {
+      "repositoryId": 1333111893,
+      "repository": "ccch1mneyyy/dsh-TUI",
+      "ref": "main",
+      "packagePath": ".",
+      "npmName": "@deepseek-harness-tui/dsh-tui",
+      "buildScripts": [
+        "build"
+      ],
+      "pnpmVersion": "11.21.0"
+    },
+    {
+      "repositoryId": 1163808211,
+      "repository": "liustack/modlens",
+      "ref": "main",
+      "packagePath": ".",
+      "npmName": "@liustack/modlens",
+      "buildScripts": [
+        "build"
+      ]
+    },
+    {
+      "repositoryId": 1326893710,
+      "repository": "omdsh-dev/DSH-better-sidebar",
+      "ref": "main",
+      "packagePath": ".",
+      "npmName": "dsh-better-sidebar",
+      "buildScripts": [
+        "build"
+      ],
+      "pnpmVersion": "11.8.0"
+    },
+    {
+      "repositoryId": 1401476500,
+      "repository": "QingYunA/answer-me-with-html",
+      "ref": "main",
+      "packagePath": ".",
+      "npmName": "answer-me-with-html",
+      "buildScripts": [
+        "build"
+      ]
+    },
+    {
+      "repositoryId": 1409893258,
+      "repository": "T-Auto/dsh-ops",
+      "ref": "main",
+      "packagePath": ".",
+      "npmName": "dsh-ops",
+      "buildScripts": [
+        "build"
+      ]
+    },
+    {
+      "repositoryId": 1335211378,
+      "repository": "Minglink/dsh-infinite-gen-5",
+      "ref": "master",
+      "packagePath": ".",
+      "npmName": "dsh-infinite-gen-5",
+      "buildScripts": []
+    },
+    {
+      "repositoryId": 1333961389,
+      "repository": "bowenliang123/dsh-context",
+      "ref": "main",
+      "packagePath": ".",
+      "npmName": "dsh-context",
+      "buildScripts": [
+        "build"
+      ]
+    },
+    {
+      "repositoryId": 1332073142,
+      "repository": "NanmiCoder/dsh-agent-teams",
+      "ref": "main",
+      "packagePath": ".",
+      "npmName": "@nanmicoder/dsh-agent-teams",
+      "buildScripts": [
+        "build"
+      ]
+    },
+    {
+      "repositoryId": 1334561781,
+      "repository": "xmanrui/dsh-im",
+      "ref": "main",
+      "packagePath": ".",
+      "npmName": "@xmanrui/dsh-im",
+      "buildScripts": [
+        "build"
+      ]
+    },
+    {
+      "repositoryId": 1334962266,
+      "repository": "shaobeichen/dsh-pocket",
+      "ref": "main",
+      "packagePath": ".",
+      "npmName": "dsh-pocket",
+      "buildScripts": [
+        "build:client"
+      ]
+    },
+    {
+      "repositoryId": 1324949198,
+      "repository": "ranxianglei/billion-context",
+      "ref": "master",
+      "packagePath": ".",
+      "npmName": "billion-context",
+      "buildScripts": [
+        "build"
+      ]
+    },
+    {
+      "repositoryId": 1122873619,
+      "repository": "kenryu42/cc-safety-net",
+      "ref": "main",
+      "packagePath": ".",
+      "npmName": "cc-safety-net",
+      "buildScripts": [
+        "build"
+      ]
+    },
+    {
+      "repositoryId": 1336114531,
+      "repository": "elysia395/dsh-wallpaper-engine",
+      "ref": "main",
+      "packagePath": ".",
+      "npmName": "dsh-plugin-wallpaper-engine",
+      "buildScripts": [
+        "build"
+      ]
+    },
+    {
+      "repositoryId": 1225840521,
+      "repository": "GanyuanRan/Aegis",
+      "ref": "main",
+      "packagePath": ".",
+      "npmName": "aegis",
+      "buildScripts": []
+    },
+    {
+      "repositoryId": 1337545070,
+      "repository": "corrinehu/dsh-workbuddy-connect",
+      "ref": "main",
+      "packagePath": ".",
+      "npmName": "dsh-workbuddy-connect",
+      "buildScripts": [
+        "build"
+      ]
+    },
+    {
+      "repositoryId": 1300173275,
+      "repository": "vshulcz/deja-vu",
+      "ref": "main",
+      "packagePath": ".",
+      "npmName": "dsh-deja",
+      "buildScripts": []
+    },
+    {
+      "repositoryId": 1333446374,
+      "repository": "ysr666/dsh-vision-router",
+      "ref": "main",
+      "packagePath": ".",
+      "npmName": "dsh-vision-router",
+      "buildScripts": [
+        "build"
+      ],
+      "pnpmVersion": "11.20.0"
+    },
+    {
+      "repositoryId": 1374986657,
+      "repository": "Miaotofu01/Study-Mate",
+      "ref": "main",
+      "packagePath": ".",
+      "npmName": "@yunmiao/studymate",
+      "buildScripts": []
+    },
+    {
+      "repositoryId": 1333100071,
+      "repository": "Anionex/dsh-vision-toolkit",
+      "ref": "main",
+      "packagePath": ".",
+      "npmName": "@anionex/dsh-vision-toolkit",
+      "buildScripts": [
+        "build"
+      ],
+      "pnpmVersion": "11.7.0"
+    },
+    {
+      "repositoryId": 1195794651,
+      "repository": "toby-bridges/api-relay-audit",
+      "ref": "master",
+      "packagePath": ".",
+      "npmName": "dsh-api-relay-audit",
+      "buildScripts": []
+    },
+    {
+      "repositoryId": 1171186947,
+      "repository": "LiPu-jpg/Openwrite",
+      "ref": "main",
+      "packagePath": ".",
+      "npmName": "dsh-openwrite",
+      "buildScripts": [
+        "build"
+      ]
+    },
+    {
+      "repositoryId": 1163808542,
+      "repository": "liustack/modsearch",
+      "ref": "main",
+      "packagePath": ".",
+      "npmName": "@liustack/modsearch",
+      "buildScripts": [
+        "build"
+      ]
+    },
+    {
+      "repositoryId": 1336856993,
+      "repository": "SeaOf0/dsh-redteam-model",
+      "ref": "main",
+      "packagePath": ".",
+      "npmName": "@dsh-external/dsh-redteam-model",
+      "buildScripts": [
+        "build"
+      ]
+    },
+    {
+      "repositoryId": 1280115203,
+      "repository": "zhoushoujianwork/easyeda-agent",
+      "ref": "main",
+      "packagePath": ".",
+      "npmName": "easyeda-agent-dsh",
+      "buildScripts": []
+    },
+    {
+      "repositoryId": 1329113397,
+      "repository": "Nagi-ovo/dsh-ads",
+      "ref": "main",
+      "packagePath": ".",
+      "npmName": "@nagi-ovo/dsh-ads",
+      "buildScripts": [
+        "build"
+      ]
+    },
+    {
+      "repositoryId": 1178312395,
+      "repository": "adoresever/graph-memory",
+      "ref": "main",
+      "packagePath": ".",
+      "npmName": "graph-memory",
+      "buildScripts": [
+        "build"
+      ]
+    },
+    {
+      "repositoryId": 1297278222,
+      "repository": "sandbaseai/sandbase-harness",
+      "ref": "main",
+      "packagePath": ".",
+      "npmName": "managed-agents",
+      "buildScripts": [
+        "build"
+      ]
+    },
+    {
+      "repositoryId": 1162230313,
+      "repository": "mnemon-dev/mnemon",
+      "ref": "master",
+      "packagePath": ".",
+      "npmName": "@mnemon-dev/dsh-mnemon",
+      "buildScripts": []
+    },
+    {
+      "repositoryId": 1333128726,
+      "repository": "omdsh-dev/dsh-genui",
+      "ref": "main",
+      "packagePath": ".",
+      "npmName": "@changfenhuang/dsh-genui",
+      "buildScripts": [
+        "build"
+      ],
+      "pnpmVersion": "11.7.0"
+    },
+    {
+      "repositoryId": 1336998801,
+      "repository": "shanliuling/dsh-image-gen",
+      "ref": "main",
+      "packagePath": ".",
+      "npmName": "dsh-image-gen",
+      "buildScripts": [
+        "build"
+      ],
+      "pnpmVersion": "11.7.0"
+    },
+    {
+      "repositoryId": 1335155355,
+      "repository": "howmp/dsh-pentest",
+      "ref": "master",
+      "packagePath": ".",
+      "npmName": "@howmp/dsh-pentest",
+      "buildScripts": []
+    },
+    {
+      "repositoryId": 1329424520,
+      "repository": "omdsh-dev/dsh-mnemon",
+      "ref": "main",
+      "packagePath": ".",
+      "npmName": "dsh-mnemon",
+      "buildScripts": [
+        "build"
+      ]
+    },
+    {
+      "repositoryId": 1335241492,
+      "repository": "dream-num/dsh-univer-office",
+      "ref": "main",
+      "packagePath": ".",
+      "npmName": "dsh-univer-office",
+      "buildScripts": [
+        "build"
+      ],
+      "pnpmVersion": "11.23.0"
+    },
+    {
+      "repositoryId": 1368569221,
+      "repository": "sixtysevenlf/dsh-blender-plugin",
+      "ref": "main",
+      "packagePath": ".",
+      "npmName": "@dsh-external/dsh-blender-plugin",
+      "buildScripts": [
+        "build"
+      ]
+    },
+    {
+      "repositoryId": 1336228384,
+      "repository": "liangmianya/dsh-synapse",
+      "ref": "main",
+      "packagePath": ".",
+      "npmName": "dsh-synapse",
+      "buildScripts": [
+        "build"
+      ]
+    },
+    {
+      "repositoryId": 1333247282,
+      "repository": "anysearch-team/anysearch-dsh",
+      "ref": "main",
+      "packagePath": ".",
+      "npmName": "@anysearch/anysearch-dsh",
+      "buildScripts": [
+        "build"
+      ],
+      "pnpmVersion": "11.7.0"
+    },
+    {
+      "repositoryId": 1224734286,
+      "repository": "Ikalus1988/MisakaNet",
+      "ref": "main",
+      "packagePath": ".",
+      "npmName": "misakanet",
+      "buildScripts": []
+    },
+    {
+      "repositoryId": 1334817483,
+      "repository": "saya-ch/dsh-mobile",
+      "ref": "main",
+      "packagePath": ".",
+      "npmName": "dsh-mobile",
+      "buildScripts": [
+        "build"
+      ]
+    },
+    {
+      "repositoryId": 1334384058,
+      "repository": "DDDMUC/dsh-free-search",
+      "ref": "master",
+      "packagePath": ".",
+      "npmName": "dsh-free-search",
+      "buildScripts": []
+    },
+    {
+      "repositoryId": 1333964468,
+      "repository": "V1ki/dsh-plugin-subscriptions",
+      "ref": "main",
+      "packagePath": ".",
+      "npmName": "dsh-plugin-subscriptions",
+      "buildScripts": [
+        "build"
+      ],
+      "pnpmVersion": "10.26.2"
+    },
+    {
+      "repositoryId": 1333235870,
+      "repository": "Han-1413141/dsh-cost-meter",
+      "ref": "master",
+      "packagePath": ".",
+      "npmName": "dsh-cost-meter",
+      "buildScripts": [
+        "build"
+      ]
+    },
+    {
+      "repositoryId": 1333755311,
+      "repository": "QCYTSN/dsh-dafeiyu",
+      "ref": "main",
+      "packagePath": ".",
+      "npmName": "dsh-dafeiyu",
+      "buildScripts": []
+    },
+    {
+      "repositoryId": 1334211162,
+      "repository": "FuRongJun-1999/dsh-memory",
+      "ref": "main",
+      "packagePath": ".",
+      "npmName": "@furongjun1999/dsh-memory",
+      "buildScripts": [
+        "build"
+      ]
+    },
+    {
+      "repositoryId": 1334118559,
+      "repository": "Mars-Sea/dsh-commandcode-provider",
+      "ref": "main",
+      "packagePath": ".",
+      "npmName": "@mars-sea/dsh-commandcode-provider",
+      "buildScripts": [
+        "build"
+      ]
+    },
+    {
+      "repositoryId": 1323731026,
+      "repository": "csyangwen/dsh-memory-evolve",
+      "ref": "main",
+      "packagePath": ".",
+      "npmName": "dsh-memory-evolve",
+      "buildScripts": [
+        "build"
+      ]
+    },
+    {
+      "repositoryId": 1334618124,
+      "repository": "d-dev0101/open-sea-skin",
+      "ref": "main",
+      "packagePath": ".",
+      "npmName": "open-sea-skin",
+      "buildScripts": [
+        "build"
+      ]
+    },
+    {
+      "repositoryId": 1303848201,
+      "repository": "theBigGavin/marketingdashboard",
+      "ref": "main",
+      "packagePath": ".",
+      "npmName": "my-app",
+      "buildScripts": [
+        "build"
+      ]
+    },
+    {
+      "repositoryId": 1334325657,
+      "repository": "liguobao/ds-harness-remote",
+      "ref": "main",
+      "packagePath": ".",
+      "npmName": "ds-harness-remote",
+      "buildScripts": [],
+      "pnpmVersion": "9.15.4"
+    },
+    {
+      "repositoryId": 1329947687,
+      "repository": "vlln/whale-girl",
+      "ref": "main",
+      "packagePath": ".",
+      "npmName": "whale-girl",
+      "buildScripts": [
+        "build:client"
+      ]
+    },
+    {
+      "repositoryId": 1179983747,
+      "repository": "linhay/harmony-next.skills",
+      "ref": "master",
+      "packagePath": ".",
+      "npmName": "dsh-harmony-next",
+      "buildScripts": []
+    },
+    {
+      "repositoryId": 1333732838,
+      "repository": "shengsheng90/DSH-taskboard",
+      "ref": "main",
+      "packagePath": ".",
+      "npmName": "@shengsheng/dsh-taskboard",
+      "buildScripts": [
+        "build"
+      ],
+      "pnpmVersion": "11.15.1"
+    },
+    {
+      "repositoryId": 1339882322,
+      "repository": "ZSeven-W/dsh-ios",
+      "ref": "main",
+      "packagePath": ".",
+      "npmName": "@zseven-w/dsh-ios",
+      "buildScripts": [
+        "build"
+      ],
+      "pnpmVersion": "10.12.1"
+    },
+    {
+      "repositoryId": 1333132287,
+      "repository": "Nagi-ovo/dsh-visualize",
+      "ref": "main",
+      "packagePath": ".",
+      "npmName": "@nagi-ovo/dsh-visualize",
+      "buildScripts": [
+        "build"
+      ]
+    },
+    {
+      "repositoryId": 1334766747,
+      "repository": "toolclub/dsh-agent-team-gui",
+      "ref": "main",
+      "packagePath": ".",
+      "npmName": "dsh-agent-team-gui",
+      "buildScripts": [
+        "build"
+      ],
+      "pnpmVersion": "9.15.4"
+    },
+    {
+      "repositoryId": 1332692519,
+      "repository": "huiliyi37/dsh-tianshu-tui",
+      "ref": "main",
+      "packagePath": ".",
+      "npmName": "@huiliyi37/dsh-tianshu-tui",
+      "buildScripts": [
+        "build"
+      ]
+    },
+    {
+      "repositoryId": 1336614837,
+      "repository": "wssfk12138/dsh-damage-pulse",
+      "ref": "master",
+      "packagePath": ".",
+      "npmName": "dsh-damage-pulse",
+      "buildScripts": [
+        "build"
+      ],
+      "pnpmVersion": "11.7.0"
+    },
+    {
+      "repositoryId": 1350368388,
+      "repository": "FishBottle7/opencode2dsh",
+      "ref": "master",
+      "packagePath": ".",
+      "npmName": "opencode2dsh",
+      "buildScripts": []
+    },
+    {
+      "repositoryId": 1334214605,
+      "repository": "dhicoc/dsh-reverse-skill",
+      "ref": "main",
+      "packagePath": ".",
+      "npmName": "@dhicoc/dsh-reverse-skill",
+      "buildScripts": [
+        "build"
+      ]
+    },
+    {
+      "repositoryId": 1377916761,
+      "repository": "Devin-AXIS/jev-dsh-decision",
+      "ref": "main",
+      "packagePath": ".",
+      "npmName": "dsh-jev-decision-model",
+      "buildScripts": [],
+      "pnpmVersion": "11.4.0"
+    },
+    {
+      "repositoryId": 1326394141,
+      "repository": "Fisfzy/dsh-ego-browser",
+      "ref": "master",
+      "packagePath": ".",
+      "npmName": "dsh-ego-browser",
+      "buildScripts": [
+        "build"
+      ]
+    },
+    {
+      "repositoryId": 1334737435,
+      "repository": "RevolutionLA/dsh-dream-skin",
+      "ref": "main",
+      "packagePath": ".",
+      "npmName": "dsh-dream-skin",
+      "buildScripts": []
+    },
+    {
+      "repositoryId": 1334246540,
+      "repository": "kingOfSoySauce/dsh-liang-skin",
+      "ref": "main",
+      "packagePath": ".",
+      "npmName": "@leon___/dsh-client-liang-intensity-skin",
+      "buildScripts": [
+        "build"
+      ]
+    },
+    {
+      "repositoryId": 1333200468,
+      "repository": "Nwflower/dsh-chat-import",
+      "ref": "main",
+      "packagePath": ".",
+      "npmName": "dsh-chat-import",
+      "buildScripts": [
+        "build"
+      ]
+    },
+    {
+      "repositoryId": 1408587744,
+      "repository": "xcisxc29/dsh-wechat",
+      "ref": "main",
+      "packagePath": "packages/bundle",
+      "buildScripts": [
+        "build"
+      ],
+      "pnpmVersion": "11.22.0"
+    },
+    {
+      "repositoryId": 1333482618,
+      "repository": "PerryLink/dsh-auto-review",
+      "ref": "main",
+      "packagePath": ".",
+      "npmName": "dsh-auto-review",
+      "buildScripts": [
+        "build"
+      ],
+      "pnpmVersion": "11.7.0"
+    },
+    {
+      "repositoryId": 1334442247,
+      "repository": "HanaAyane/dsh-reasoning-effort",
+      "ref": "main",
+      "packagePath": ".",
+      "npmName": "dsh-reasoning-effort",
+      "buildScripts": [
+        "build"
+      ],
+      "pnpmVersion": "11.7.0"
+    },
+    {
+      "repositoryId": 1334830521,
+      "repository": "MichengAI/dsh-skills-manager",
+      "ref": "master",
+      "packagePath": ".",
+      "npmName": "@michengai/dsh-skills-manager",
+      "buildScripts": [
+        "build"
+      ],
+      "pnpmVersion": "11.22.0"
+    },
+    {
+      "repositoryId": 1333232606,
+      "repository": "yyh-001/dsh-meme",
+      "ref": "main",
+      "packagePath": ".",
+      "npmName": "dsh-meme",
+      "buildScripts": []
+    },
+    {
+      "repositoryId": 1333452358,
+      "repository": "weijiafu14/pi2dsh",
+      "ref": "main",
+      "packagePath": ".",
+      "npmName": "pi2dsh",
+      "buildScripts": [
+        "build"
+      ],
+      "pnpmVersion": "11.7.0"
+    },
+    {
+      "repositoryId": 1274335260,
+      "repository": "zuorn/Tydora",
+      "ref": "main",
+      "packagePath": ".",
+      "npmName": "tydora",
+      "buildScripts": [
+        "build"
+      ]
+    },
+    {
+      "repositoryId": 1339669759,
+      "repository": "PerryLink/dsh-industry-research",
+      "ref": "main",
+      "packagePath": ".",
+      "npmName": "dsh-industry-research",
+      "buildScripts": [
+        "build"
+      ],
+      "pnpmVersion": "11.7.0"
+    },
+    {
+      "repositoryId": 1339655720,
+      "repository": "PerryLink/dsh-research-report",
+      "ref": "main",
+      "packagePath": ".",
+      "npmName": "dsh-research-report",
+      "buildScripts": [
+        "build"
+      ],
+      "pnpmVersion": "11.7.0"
+    },
+    {
+      "repositoryId": 1333986968,
+      "repository": "Phant0Meow/dsh-meow-memory",
+      "ref": "main",
+      "packagePath": ".",
+      "npmName": "meow-memory",
+      "buildScripts": [
+        "build"
+      ]
+    },
+    {
+      "repositoryId": 1333673564,
+      "repository": "Fishquito7/dsh-skill-mcp-panel",
+      "ref": "main",
+      "packagePath": ".",
+      "npmName": "dsh-skill-mcp-panel",
+      "buildScripts": [
+        "build"
+      ]
+    },
+    {
+      "repositoryId": 1331112087,
+      "repository": "omdsh-dev/dsh-data-agent",
+      "ref": "main",
+      "packagePath": ".",
+      "npmName": "@yejiming/dsh-data-agent",
+      "buildScripts": [
+        "build"
+      ]
+    },
+    {
+      "repositoryId": 1335064650,
+      "repository": "e2mcc/dsh-popout-sidebar",
+      "ref": "main",
+      "packagePath": ".",
+      "npmName": "dsh-popout-sidebar",
+      "buildScripts": [
+        "build"
+      ]
+    },
+    {
+      "repositoryId": 1391049410,
+      "repository": "luobosibing2/dsh-jev-plugin",
+      "ref": "main",
+      "packagePath": ".",
+      "npmName": "@dsh-jev/plugin",
+      "buildScripts": [
+        "build"
+      ],
+      "pnpmVersion": "11.7.0"
+    },
+    {
+      "repositoryId": 1354586379,
+      "repository": "FylarOpen/dsh-fylar-office-editor",
+      "ref": "main",
+      "packagePath": ".",
+      "npmName": "@fylar/dsh-fylar-office-editor",
+      "buildScripts": [
+        "build"
+      ]
+    },
+    {
+      "repositoryId": 1334434081,
+      "repository": "xiajiajun516/dsh-config-manager",
+      "ref": "main",
+      "packagePath": ".",
+      "npmName": "dsh-config-manager",
+      "buildScripts": [
+        "build"
+      ]
+    },
+    {
+      "repositoryId": 1337930857,
+      "repository": "wenbin-wb/dsh-bridge",
+      "ref": "main",
+      "packagePath": ".",
+      "npmName": "@wenbin_wb/dsh-bridge",
+      "buildScripts": [
+        "build:client"
+      ]
+    },
+    {
+      "repositoryId": 1339110580,
+      "repository": "oil-oil/dsh-oil-creator",
+      "ref": "main",
+      "packagePath": ".",
+      "npmName": "dsh-oil-creator",
+      "buildScripts": [
+        "build"
+      ],
+      "pnpmVersion": "10.16.1"
+    },
+    {
+      "repositoryId": 1304997851,
+      "repository": "taxueseek/argo",
+      "ref": "main",
+      "packagePath": ".",
+      "npmName": "argo-search",
+      "buildScripts": []
+    },
+    {
+      "repositoryId": 1334096871,
+      "repository": "Hilbert-beinghappy/seektty",
+      "ref": "main",
+      "packagePath": ".",
+      "npmName": "seektty",
+      "buildScripts": [
+        "build"
+      ],
+      "pnpmVersion": "11.7.0"
+    },
+    {
+      "repositoryId": 1333689922,
+      "repository": "awesome-dsh-plugin/dsh-find-plugin",
+      "ref": "main",
+      "packagePath": ".",
+      "npmName": "dsh-find-plugin",
+      "buildScripts": [
+        "build"
+      ]
+    },
+    {
+      "repositoryId": 1268424426,
+      "repository": "tinqiao-oss/engramory",
+      "ref": "master",
+      "packagePath": ".",
+      "npmName": "dsh-engramory",
+      "buildScripts": []
+    },
+    {
+      "repositoryId": 1332212466,
+      "repository": "ZSeven-W/dsh-openpencil",
+      "ref": "main",
+      "packagePath": ".",
+      "npmName": "@zseven-w/dsh-openpencil",
+      "buildScripts": [
+        "build"
+      ],
+      "pnpmVersion": "10.12.1"
+    },
+    {
+      "repositoryId": 1341805689,
+      "repository": "ZSeven-W/dsh-android",
+      "ref": "main",
+      "packagePath": ".",
+      "npmName": "@zseven-w/dsh-android",
+      "buildScripts": [
+        "build"
+      ],
+      "pnpmVersion": "10.12.1"
+    },
+    {
+      "repositoryId": 1335127844,
+      "repository": "cocofhu/anime-find",
+      "ref": "main",
+      "packagePath": ".",
+      "npmName": "@cocofhu/anime-find",
+      "buildScripts": [
+        "build"
+      ],
+      "pnpmVersion": "11.17.0"
+    },
+    {
+      "repositoryId": 1333685863,
+      "repository": "Ychris12138/dsh-usage-stats",
+      "ref": "main",
+      "packagePath": ".",
+      "npmName": "@ychris12138/dsh-usage-stats",
+      "buildScripts": []
+    },
+    {
+      "repositoryId": 1332243516,
+      "repository": "omdsh-dev/dsh_workflow",
+      "ref": "main",
+      "packagePath": ".",
+      "npmName": "@dsh-external/workflow",
+      "buildScripts": [
+        "build"
+      ],
+      "pnpmVersion": "11.7.0"
+    },
+    {
+      "repositoryId": 1339101586,
+      "repository": "amlyczz/dsh-agy-link",
+      "ref": "main",
+      "packagePath": ".",
+      "npmName": "dsh-agy-link",
+      "buildScripts": [
+        "build"
+      ]
+    },
+    {
+      "repositoryId": 1335780030,
+      "repository": "HakureiMonika/dsh-sandbox-escalation-fix",
+      "ref": "main",
+      "packagePath": ".",
+      "npmName": "dsh-sandbox-escalation-fix",
+      "buildScripts": [
+        "build"
+      ]
+    },
+    {
+      "repositoryId": 1340814644,
+      "repository": "hanshanyike/dsh-yolo",
+      "ref": "main",
+      "packagePath": ".",
+      "npmName": "dsh-plugin-yolo",
+      "buildScripts": [
+        "build"
+      ],
+      "pnpmVersion": "11.22.0"
+    }
+  ]
+}
