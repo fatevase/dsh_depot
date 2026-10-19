@@ -24,7 +24,7 @@ export function assembleManagerPublication(receipts,{channel='stable'}={}) {
  return{channel,assets,blocked,verificationRefs}
 }
 export function managerCatalogOf(publications,support) {
- return{schemaVersion:1,generatedAt:new Date().toISOString(),support,packages:publications.filter(p=>['full','lite'].includes(p.flavor)&&isManagerDownload(p)).map(p=>({target:p.target,flavor:p.flavor,channel:p.channel??'stable',reportUrl:p.reportUrl,checksumsUrl:p.checksumsUrl,pluginUrl:p.pluginUrl,fileName:p.fileName,packageUrl:p.packageUrl,sha256:p.sha256,compressedBytes:p.compressedBytes,requirements:p.flavor==='lite'?{node:'^22.19.0 || >=24.0.0'}:{node:'附带独立 Node 26.9.0'},verification:p.verification,testedHosts:p.testedHosts??[]}))}
+ return{schemaVersion:1,generatedAt:new Date().toISOString(),support,packages:publications.filter(p=>['full','lite'].includes(p.flavor)&&isManagerDownload(p)).map(p=>({version:p.version,target:p.target,flavor:p.flavor,channel:p.channel??'stable',reportUrl:p.reportUrl,checksumsUrl:p.checksumsUrl,pluginUrl:p.pluginUrl,fileName:p.fileName,packageUrl:p.packageUrl,sha256:p.sha256,compressedBytes:p.compressedBytes,requirements:p.flavor==='lite'?{node:'^22.19.0 || >=24.0.0'}:{node:'附带独立 Node 26.9.0'},verification:p.verification,testedHosts:p.testedHosts??[]}))}
 }
 export async function buildOnRunner({target,output}) {
  output=path.resolve(output);await mkdir(output,{recursive:true})

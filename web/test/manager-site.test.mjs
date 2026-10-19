@@ -13,9 +13,10 @@ test('three platform previews offer downloads with incomplete and failed checks 
  const C=(await import(pathToFileURL(path.join(dir,'preview.mjs')))).default
  for(const target of ['macos-arm64','linux-x64','win32-x64']){
   const prefix='https://github.com/fatevase/dsh_depot/releases/download/manager-preview-123/',fileName=`manager-${target}-full.tgz`,sha256='a'.repeat(64)
-  const p={target,flavor:'full',channel:'preview',fileName,sha256,compressedBytes:1024,packageUrl:prefix+fileName,reportUrl:prefix+'manager-verification.json',checksumsUrl:prefix+'SHA256SUMS',verification:{status:'failed',bundleSha256:sha256,packageSha256:'b'.repeat(64),validationLevel:'plugin-only',missing:['script-install','network-isolation']}}
+  const p={version:'0.1.2',target,flavor:'full',channel:'preview',fileName,sha256,compressedBytes:1024,packageUrl:prefix+fileName,reportUrl:prefix+'manager-verification.json',checksumsUrl:prefix+'SHA256SUMS',verification:{status:'failed',bundleSha256:sha256,packageSha256:'b'.repeat(64),validationLevel:'plugin-only',missing:['script-install','network-isolation']}}
   const html=render(C,{props:{initialTarget:target,initialCatalog:{schemaVersion:1,packages:[p]}}}).body
   assert.ok(html.includes(p.packageUrl));assert.match(html,/下载测试安装包/);assert.match(html,/测试版 · 未完成完整验收/);assert.match(html,/基础验证存在失败/);assert.match(html,/脚本安装、网络隔离/);assert.ok(html.includes(p.reportUrl));assert.ok(!html.includes('>完整验收通过<'))
+  assert.match(html,/当前版本：0\.1\.2/);assert.match(html,/旧的解压目录不会自动更新/)
   assert.ok(!render(C,{props:{initialTarget:target,initialCatalog:{schemaVersion:1,packages:[{...p,channel:undefined}]}}}).body.includes(p.packageUrl))
  }
 })

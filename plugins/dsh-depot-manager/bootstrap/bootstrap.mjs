@@ -3,7 +3,7 @@ import path from 'node:path'
 import {randomUUID} from 'node:crypto'
 import {resumeBatch} from '../core/batches.mjs'
 import semver from 'semver'
-import {CORE_NODE_RANGE} from '../contracts/constants.mjs'
+import {CORE_NODE_RANGE,MANAGER_VERSION} from '../contracts/constants.mjs'
 import os from 'node:os'
 import {fileURLToPath,pathToFileURL} from 'node:url'
 import {readFile,mkdir} from 'node:fs/promises'
@@ -56,6 +56,7 @@ export async function main(argv,{io,services}={}) {
  try {
   if(!semver.satisfies(process.versions.node,CORE_NODE_RANGE))fail('RUNTIME_UNSUPPORTED',`需要 Node ${CORE_NODE_RANGE}`)
   const args=parse(argv);args.signal=controller.signal
+  if(io.isTTY)io.write(`DSH 离线插件管理器 ${MANAGER_VERSION}\n`)
   if(['install','update','remove'].includes(args.command)&&(!args.plan||args.confirm!==args.plan))fail('INPUT_REQUIRED','执行需要 --plan <编号> --confirm <同一编号>；先 inspect 生成预览')
   if(args.command==='recover'&&args.plan&&args.confirm!==args.plan)fail('INPUT_REQUIRED','恢复需要确认刚生成的恢复计划编号')
   if(!services){const root=fileURLToPath(new URL('.',import.meta.url));const settings=await readDiscoverySettings(root);if(io.isTTY)io.write(`找不到 DSH 时，可编辑：${settings.file}，或在菜单手动输入路径。\n`);const bundle=await readJson(path.join(root,'bundle.json'),null);if(bundle){const toolkit=await prepareToolkit({root,storeDir:baseDir(),target:undefined});if(io.isTTY)io.write(`维护入口已保存：${toolkit.entryPath}\n`);}services=await createServices({discoveryOptions:settings})}

@@ -11,7 +11,9 @@
         "distribution/deploy-site.mjs",
         "package.json",
         "package-lock.json",
-        ".github/workflows/web-pages.yml"
+        ".github/workflows/web-pages.yml",
+        "distribution/deploy-pages.mjs",
+        "distribution/lib/pages-deployment.mjs"
       ],
       "branches": [
         "main"
@@ -27,7 +29,9 @@
         "distribution/deploy-site.mjs",
         "package.json",
         "package-lock.json",
-        ".github/workflows/web-pages.yml"
+        ".github/workflows/web-pages.yml",
+        "distribution/deploy-pages.mjs",
+        "distribution/lib/pages-deployment.mjs"
       ]
     },
     "workflow_dispatch": {},
@@ -68,6 +72,9 @@
         },
         {
           "run": "npm run web:test"
+        },
+        {
+          "run": "node --test distribution/test/pages-deployment.test.mjs"
         },
         {
           "run": "npm run web:build"
@@ -136,12 +143,18 @@
           "with": {
             "path": ".runtime/web/site"
           },
-          "if": "steps.refresh.outputs.allow == 'true'"
+          "if": "steps.refresh.outputs.allow == 'true'",
+          "id": "site-artifact"
         },
         {
-          "uses": "actions/deploy-pages@368f82528645a54fb793d4d04e342629a3f51346",
           "id": "deploy",
-          "if": "steps.refresh.outputs.allow == 'true'"
+          "if": "steps.refresh.outputs.allow == 'true'",
+          "name": "Deploy unique Pages build",
+          "run": "node distribution/deploy-pages.mjs",
+          "env": {
+            "GITHUB_TOKEN": "${{ github.token }}",
+            "PAGES_ARTIFACT_ID": "${{ steps.site-artifact.outputs.artifact_id }}"
+          }
         }
       ]
     }

@@ -12,14 +12,14 @@ test('explicit preview publishes complete bytes without promoting incomplete acc
  const directory=await mkdtemp(path.join(os.tmpdir(),'manager-preview-'));t.after(()=>rm(directory,{recursive:true,force:true}))
  const managerHash=createHash('sha256').update('plugin').digest('hex'),bundleHash=createHash('sha256').update('installer').digest('hex')
  const manager={target:'linux-x64',fileName:'manager.tgz',path:path.join(directory,'manager.tgz'),sha256:managerHash,compressedBytes:6}
- const asset={target:'linux-x64',flavor:'lite',fileName:'manager-lite.tgz',path:path.join(directory,'manager-lite.tgz'),sha256:bundleHash,managerSha256:managerHash,compressedBytes:9}
+ const asset={version:'0.1.2',target:'linux-x64',flavor:'lite',fileName:'manager-lite.tgz',path:path.join(directory,'manager-lite.tgz'),sha256:bundleHash,managerSha256:managerHash,compressedBytes:9}
  await writeFile(manager.path,'plugin');await writeFile(asset.path,'installer')
  const receipt={target:'linux-x64',manager,assets:[asset],verification:{status:'unverified',packageSha256:managerHash,scope:[],evidence:{}}}
  assert.equal(mod.assembleManagerPublication([receipt]).assets.length,0)
  const plan=mod.assembleManagerPublication([receipt],{channel:'preview'});assert.equal(plan.assets.length,2);assert.equal(plan.assets[0].verification.status,'unverified');assert.ok(plan.assets[0].verification.missing.includes('script-install'))
  const {prepareReleaseFiles}=await import('../manager/publish-release.mjs'),{latestManagerCatalog}=await import('../lib/manager-catalog.mjs')
  const prepared=await prepareReleaseFiles(plan,{directory:path.join(directory,'release'),tag:'manager-preview-123'})
- const entry=prepared.catalog.packages[0];assert.equal(entry.channel,'preview');assert.equal(entry.verification.bundleSha256,bundleHash);assert.equal(entry.verification.validationLevel,'plugin-only');assert.match(entry.reportUrl,/manager-verification.json$/)
+ const entry=prepared.catalog.packages[0];assert.equal(entry.version,'0.1.2');assert.equal(entry.channel,'preview');assert.equal(entry.verification.bundleSha256,bundleHash);assert.equal(entry.verification.validationLevel,'plugin-only');assert.match(entry.reportUrl,/manager-verification.json$/)
  const url='https://github.com/fatevase/dsh_depot/releases/download/manager-preview-123/manager-catalog.json'
  const loaded=await latestManagerCatalog({github:{list:async()=>[{prerelease:true,tag_name:'manager-preview-123',assets:[{name:'manager-catalog.json',browser_download_url:url}]}]},fetchImpl:async()=>Response.json(prepared.catalog)})
  assert.deepEqual(loaded.packages,prepared.catalog.packages)
