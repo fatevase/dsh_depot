@@ -1,0 +1,71 @@
+{
+  "schemaVersion": 1,
+  "buildKey": "48d68a77adde7fb788647de59f9d211508cc22b0001049fcd0beae532fc23141",
+  "target": "macos-arm64",
+  "host": {
+    "version": "0.2.0-rc.2",
+    "node": "26.9.0",
+    "environmentDigest": "d7b06cf0c7394141fc0cabdbe8bcf2014caddb853ad862fa8535da90cb4c6384"
+  },
+  "sha256": "9c8ca536feb2bf7929e7d8e0c30ea1cd070a533df427a0dd3ea51a0cac19ba0c",
+  "status": "passed",
+  "timings": {
+    "install": 2.152,
+    "compose": 0.167,
+    "host": 1.592
+  },
+  "checks": {
+    "install": true,
+    "compose": true,
+    "registration": true,
+    "host": true,
+    "clientModule": null,
+    "native": true
+  },
+  "scope": [
+    "cold-install",
+    "config-compose",
+    "host-page-smoke",
+    "config-registration"
+  ],
+  "workDir": "/Users/vase/Downloads/aiworkbench-dsh/.runtime/dsh-depot-manager/.runtime/popular-list/answer-html/verification/7b615a78-3b83-4862-9b2e-9f9406fd028f",
+  "isolationControls": {
+    "status": "passed",
+    "beforeReachable": true,
+    "beforeReachableIPv6": true,
+    "offline": {
+      "externalBlocked": true,
+      "externalBlockedIPv6": true,
+      "childBlockedIPv6": true,
+      "otherProgramBlocked": true,
+      "loopbackAllowed": false,
+      "loopbackBlocked": true,
+      "childBlocked": true,
+      "controlFamilies": [
+        "IPv4",
+        "IPv6-mapped-IPv4"
+      ]
+    },
+    "loopback": {
+      "externalBlocked": true,
+      "externalBlockedIPv6": true,
+      "childBlockedIPv6": true,
+      "otherProgramBlocked": true,
+      "loopbackAllowed": true,
+      "loopbackBlocked": true,
+      "childBlocked": true,
+      "controlFamilies": [
+        "IPv4",
+        "IPv6-mapped-IPv4"
+      ],
+      "observer": "outside-sandbox-inbound-only",
+      "outboundLoopbackBlocked": true
+    }
+  },
+  "registrationEvidence": [
+    {
+      "id": "answer-me-with-html-skill",
+      "name": "@deepseek-ai/dsh-skill-filesystem"
+    }
+  ]
+}

@@ -1,3 +1,5 @@
+import {readPluginList} from './lib/plugin-list.mjs'
+import {fileURLToPath} from 'node:url'
 import { supportedTarget } from './lib/platform.mjs'
 // CI adapter: all untrusted/event inputs stay data, never interpolated into shell.
 import path from 'node:path'
@@ -13,16 +15,19 @@ import { prepareHost, verifyArtifact } from './lib/verify.mjs'
 import { writeReceipt } from './lib/receipts.mjs'
 import { main } from './cli.mjs'
 import { distributionRepository } from './lib/repository.mjs'
-const root=path.resolve('.runtime/distribution'),batch=path.join(root,'batch'),config=await readJson('distribution/config.json'),recipes=await readRecipes('distribution/recipes',{cohort:config.cohort?.plugins}),command=process.argv[2]
+const root=path.resolve('.runtime/distribution'),batch=path.join(root,'batch'),config=await readJson('distribution/config.json'),command=process.argv[2]
 config.host=configuredHost(config.host)
 const repository=distributionRepository(config,{required:true,runningRepository:process.env.GITHUB_REPOSITORY})
+const selection=await readPluginList(config,fileURLToPath(new URL('.',import.meta.url)))
+config.cohort={...config.cohort,plugins:selection.active}
+const recipes=await readRecipes('distribution/recipes',{cohort:selection.active})
 const runners={'macos-arm64':'macos-15','linux-x64':'ubuntu-24.04','win32-x64':'windows-2025'}
 if(process.env.ONLY_TARGET&&!supportedTarget(process.env.ONLY_TARGET))throw Error('Unsupported target')
 if(command==='discover'){
  const github=new Github({token:process.env.GITHUB_TOKEN})
  const current=await githubStateStore({repository,branch:config.stateBranch,github}).read()
  github.cache=current.state.apiCache??{}
- const discovery=await discover({recipes,previous:current.state,github,candidateFeeds:config.candidateFeeds})
+ const discovery=await discover({recipes,previous:current.state,github,candidateFeeds:config.candidateFeeds,maintainedCandidates:selection.candidates})
  const plan=createPlan({recipes,sources:discovery.sources,state:current.state,host:config.host,retryKeys:(process.env.RETRY_KEYS??'').split(',').filter(Boolean)})
  plan.tasks=plan.tasks.filter(t=>(!process.env.ONLY_PLUGIN||t.recipeId===process.env.ONLY_PLUGIN)&&(!process.env.ONLY_TARGET||t.target===process.env.ONLY_TARGET))
  await atomicJson(path.join(batch,'state.json'),current.state);await atomicJson(path.join(batch,'discovered.json'),discovery);await atomicJson(path.join(batch,'plan.json'),plan)

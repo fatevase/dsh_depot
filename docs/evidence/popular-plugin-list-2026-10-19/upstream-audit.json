@@ -1,0 +1,98 @@
+[
+  {
+    "repository": "T-Auto/dsh-ops",
+    "commit": "34ba06f542af5a7feaca49fe5d9b6cd97b86293e",
+    "sourceUrl": "https://github.com/T-Auto/dsh-ops/blob/34ba06f542af5a7feaca49fe5d9b6cd97b86293e/package.json",
+    "npmName": "dsh-ops",
+    "version": "0.4.0",
+    "license": "MIT AND Apache-2.0",
+    "runtimeDependencies": {},
+    "optionalDependencies": {},
+    "build": "node scripts/build.mjs",
+    "state": "needs_recipe",
+    "notes": [
+      "包含 native/Cargo.lock 及运行时 stage/check 入口；需核对 Rust/平台原生运行时闭包与构建步骤。",
+      "需要保留 MIT AND Apache-2.0、NOTICE 和 licenses 目录。"
+    ]
+  },
+  {
+    "repository": "Minglink/dsh-infinite-gen-5",
+    "commit": "eeff0bbeb905bdc57952dc7497d5fdfc33653c0f",
+    "sourceUrl": "https://github.com/Minglink/dsh-infinite-gen-5/blob/eeff0bbeb905bdc57952dc7497d5fdfc33653c0f/package.json",
+    "npmName": "dsh-infinite-gen-5",
+    "version": "1.0.0",
+    "license": "CC-BY-NC-SA-4.0",
+    "runtimeDependencies": {},
+    "optionalDependencies": {},
+    "build": null,
+    "state": "needs_recipe",
+    "notes": [
+      "没有 npm 运行依赖不等于运行时齐全：files 声明 runtimes、third_party、worker 和外部分析引擎，需要检查实际归档内容及平台支持。",
+      "上游声明 CC-BY-NC-SA-4.0；保留许可证并在分发前核对第三方引擎许可与运行依赖。"
+    ]
+  },
+  {
+    "repository": "bowenliang123/dsh-context",
+    "commit": "c22ccb203915897188dd589c69ebf738e95b2d47",
+    "sourceUrl": "https://github.com/bowenliang123/dsh-context/blob/c22ccb203915897188dd589c69ebf738e95b2d47/package.json",
+    "npmName": "dsh-context",
+    "version": "0.73.3",
+    "license": "Apache-2.0",
+    "runtimeDependencies": {
+      "zod": "^4.4.3"
+    },
+    "optionalDependencies": {},
+    "build": "tsdown",
+    "state": "needs_recipe",
+    "notes": [
+      "TypeScript/tsdown 构建，锁定 pnpm 构建依赖和 zod 运行依赖后再打包。",
+      "核对当前冻结 DSH 0.2.0-rc.2 的 peer 与客户端注入模块，不能只看版本声明。"
+    ]
+  },
+  {
+    "repository": "NanmiCoder/dsh-agent-teams",
+    "commit": "673549cbe254afbb56a0e26a34008e3d000690be",
+    "sourceUrl": "https://github.com/NanmiCoder/dsh-agent-teams/blob/673549cbe254afbb56a0e26a34008e3d000690be/package.json",
+    "npmName": "@nanmicoder/dsh-agent-teams",
+    "version": "0.1.25",
+    "license": "MIT",
+    "runtimeDependencies": {},
+    "optionalDependencies": {},
+    "build": "node scripts/clean-build.mjs && tsc -p tsconfig.json && tsc -p tsconfig.client.json && tsdown && node scripts/git-artifacts.mjs --write",
+    "state": "needs_recipe",
+    "notes": [
+      "仓库包含 lib，但需要核对已编译产物与对应源码的一致性。",
+      "开发环境为 DSH 0.2.1-rc.2，peer 声明兼容 0.2.0-rc.2；仍需在当前冻结宿主验证生命周期及客户端加载。"
+    ]
+  },
+  {
+    "repository": "xmanrui/dsh-im",
+    "commit": "2f51dcb3e1d8c8a4faa8dd3ce1e42ba6e4c71a63",
+    "sourceUrl": "https://github.com/xmanrui/dsh-im/blob/2f51dcb3e1d8c8a4faa8dd3ce1e42ba6e4c71a63/package.json",
+    "npmName": "@xmanrui/dsh-im",
+    "version": "5.1.0",
+    "license": "MIT",
+    "runtimeDependencies": {
+      "@matrix-org/olm": "3.2.15",
+      "@tencent-connect/qqbot-connector": "1.2.0",
+      "@tencent-connect/qqbot-nodejs": "1.0.4",
+      "@wecom/aibot-node-sdk": "1.0.7",
+      "dingtalk-stream": "2.1.4",
+      "imapflow": "^2.0.5",
+      "mailparser": "^3.9.28",
+      "nodemailer": "^10.0.10",
+      "qrcode": "1.5.4",
+      "undici": "7.29.1"
+    },
+    "optionalDependencies": {
+      "@tencent-qqmail/agently-cli": "^1.0.18",
+      "sharp": "0.35.5"
+    },
+    "build": "node plugin-src/client/build.mjs && node plugin-src/host/build.mjs",
+    "state": "needs_recipe",
+    "notes": [
+      "10 个直接运行依赖和 2 个可选依赖；需冻结完整依赖闭包。",
+      "可选 sharp 及协议组件涉及平台运行依赖；不能把 npm pack 成功当成离线成品验证。"
+    ]
+  }
+]

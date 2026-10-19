@@ -1,3 +1,4 @@
+import {readPluginList} from './lib/plugin-list.mjs'
 import {readFile,appendFile} from 'node:fs/promises'
 import {fileURLToPath} from 'node:url'
 import path from 'node:path'
@@ -32,7 +33,8 @@ export async function main(command=process.argv[2],env=process.env){
   return{allow}
  }
  if(command==='build'){
-  const recipes=await readRecipes(fileURLToPath(new URL('./recipes/',import.meta.url)),{cohort:config.cohort?.plugins})
+  const selection=await readPluginList(config,fileURLToPath(new URL('.',import.meta.url)))
+  const recipes=await readRecipes(fileURLToPath(new URL('./recipes/',import.meta.url)),{cohort:selection.active})
   const store=githubStateStore({repository,branch:config.stateBranch,github})
   return refreshDeployment({store,recipes,outDir:fileURLToPath(new URL('../.runtime/web/site',import.meta.url)),managerCatalog:await latestManagerCatalog({github})})
  }

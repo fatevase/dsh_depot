@@ -49,6 +49,8 @@ npm run manager:build -- --target linux-x64 --flavor plugin
 
 Windows 为 ZIP + install.cmd，macOS 为 tgz + install.command / install.sh，Linux 为 tgz + install.sh。用户安装时不编译。轻量包需已有兼容 Node；已验证本机独立 Node 复用，尚未证明所有 DSH 内置运行时均可自动发现。
 
+热门候选和 active 构建名单统一保存在 `distribution/plugin-list.json`，用 `node distribution/cli.mjs list --output .runtime/distribution/plugin-list.json` 检查。当前保存 99 个候选快照，11 个 active 条目中仍包含明确待适配项目。
+
 普通插件配置与维护步骤见 [distribution/MAINTAINING.md](distribution/MAINTAINING.md)。
 
 ## Actions 与发布

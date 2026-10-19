@@ -1,8 +1,16 @@
 import semver from 'semver'
 import { digest, jsonDigest, safeRelative } from './model.mjs'
 function repositoryIdentity(repository) { const value = typeof repository === 'object' ? repository.url : repository; return value?.replace(/^git\+/, '').replace(/^git@github.com:/, 'https://github.com/').replace(/\.git$/, '').replace(/^https?:\/\/github.com\//, '').replace(/^github:/, '').toLowerCase() }
-export async function discover({ recipes, previous = {}, github, candidateFeeds = [] }) {
-  const sources = [], candidates = [...(previous.candidates ?? [])], errors = []
+export async function discover({ recipes, previous = {}, github, candidateFeeds = [], maintainedCandidates = [] }) {
+  const known=repository=>recipes.some(r=>r.repository.toLowerCase()===repository.toLowerCase())
+  const sources = [], candidates = (previous.candidates ?? []).filter(c=>!known(c.repository)), errors = []
+  for(const entry of maintainedCandidates){
+    if(known(entry.repository))continue
+    const index=candidates.findIndex(c=>(entry.repositoryId&&c.repositoryId===entry.repositoryId)||c.repository.toLowerCase()===entry.repository.toLowerCase())
+    const old=index<0?{}:candidates[index]
+    const merged={...old,...entry,status:'needs_recipe',source:'maintained-list',discoveredAt:old.discoveredAt??new Date().toISOString()}
+    if(index<0)candidates.push(merged);else candidates[index]=merged
+  }
   for (const recipe of recipes.filter(r => r.enabled)) {
     try {
       let refs
@@ -38,5 +46,5 @@ export async function discover({ recipes, previous = {}, github, candidateFeeds 
       if (/^[\w.-]+\/[\w.-]+$/.test(repository ?? '') && !recipes.some(r => r.repository.toLowerCase() === repository.toLowerCase()) && !candidates.some(c => c.repository.toLowerCase() === repository.toLowerCase())) candidates.push({ repository, status: 'needs_recipe', discoveredAt: new Date().toISOString(), source: feed.type })
     }
   } catch (error) { errors.push({ feed: feed.type, message: error.message }) }
-  return { schemaVersion: 1, sources, candidates, errors, complete: errors.length === 0, apiCache: github.cache, checkedAt: new Date().toISOString() }
+  return { schemaVersion: 1, sources, candidates, activeRepositories: recipes.map(r=>r.repository), activeRepositoryIds: maintainedCandidates.filter(c=>known(c.repository)).map(c=>c.repositoryId).filter(Boolean), errors, complete: errors.length === 0, apiCache: github.cache, checkedAt: new Date().toISOString() }
 }

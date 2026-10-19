@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 import path from 'node:path'
 import { supportedTarget } from './lib/platform.mjs'
+import { readPluginList } from './lib/plugin-list.mjs'
 import { fileURLToPath } from 'node:url'
 import { readRecipes, readJson, atomicJson, initialState, fileDigest } from './lib/model.mjs'
 import { Github } from './lib/github.mjs'
@@ -34,8 +35,11 @@ export async function main(argv = process.argv.slice(2)) {
   const config = await readJson(args.config ?? path.join(root, 'config.json')); config.host=configuredHost(config.host)
   const remote = args.command === 'state-read' || args.publish === true
   const repository = distributionRepository(config, {requested: args.repository, runningRepository: remote ? process.env.GITHUB_REPOSITORY : undefined, required: remote})
+  const selection=await readPluginList(config,path.dirname(path.resolve(args.config??path.join(root,'config.json'))))
+  config.cohort={...config.cohort,plugins:selection.active}
   const workDir = path.resolve(args.work ?? path.join(root, '../.runtime/distribution'))
   const output = path.resolve(args.output ?? path.join(workDir, ({discover:'discovered.json',plan:'plan.json',build:'build-receipt.json',verify:'verification.json',publish:'publication-plan.json',site:'site'}[args.command]??`${args.command}.json`)))
+  if(args.command==='list'){await atomicJson(output,selection);console.log(JSON.stringify({output,active:selection.active?.length??0,candidates:selection.candidates.length}));return selection}
   if (args.command === 'discover' || args.command === 'plan') {
     const recipes = await readRecipes(path.resolve(args.recipes ?? path.join(root, 'recipes')), {cohort:args.recipes?undefined:config.cohort?.plugins})
     const state = await readJson(args.state ?? path.join(workDir, 'state.json'), initialState())
@@ -43,7 +47,7 @@ export async function main(argv = process.argv.slice(2)) {
     state.availableArtifacts={}
     for(const [key,r] of Object.entries(state.receipts??{}))if(r.status==='verified'&&r.artifacts?.package){try{const sha256=await fileDigest(r.artifacts.package);if(sha256===r.artifacts.sha256)state.availableArtifacts[key]={sha256}}catch{}}
     const result = args.command === 'discover'
-      ? await discover({ recipes, previous: state, github, candidateFeeds: config.candidateFeeds })
+      ? await discover({ recipes, previous: state, github, candidateFeeds: config.candidateFeeds, maintainedCandidates: args.recipes?[]:selection.candidates })
       : createPlan({ recipes, sources: (await readJson(args.discovered ?? path.join(workDir, 'discovered.json'))).sources, state, host: config.host, retryKeys: args.retryKeys ?? [] })
     await atomicJson(output, result)
     console.log(JSON.stringify({ command: args.command, output, tasks: result.tasks?.length, decisions: result.decisions?.length, complete: result.complete }))
@@ -97,6 +101,6 @@ export async function main(argv = process.argv.slice(2)) {
     const state=await readJson(args.state??path.join(workDir,'state.json'),initialState()),catalog=args.catalog?await readJson(args.catalog):undefined
     const result=await generateSite({catalog,state,recipes,outDir:output});console.log(JSON.stringify(result));return result
   }
-  throw new Error('Usage: node distribution/cli.mjs discover|plan|build|verify|publish|site|withdraw|rollback|state-read --output <file> [--recipes <directory> --state <file>]')
+  throw new Error('Usage: node distribution/cli.mjs list|discover|plan|build|verify|publish|site|withdraw|rollback|state-read --output <file> [--recipes <directory> --state <file>]')
 }
 if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) main().catch(error => { console.error(error.message); process.exitCode = 1 })
