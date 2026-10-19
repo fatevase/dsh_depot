@@ -8,7 +8,7 @@ import os from 'node:os'
 import {fileURLToPath,pathToFileURL} from 'node:url'
 import {readFile,mkdir} from 'node:fs/promises'
 import {createInterface} from 'node:readline/promises'
-import {discoverHosts,probeHost} from '../adapters/discover.mjs'
+import {discoverEnvironments,probeHost} from '../adapters/discover.mjs'
 import {cliWebAdapter} from '../adapters/cli-web.mjs'
 import {inspectArtifact} from '../core/inspect.mjs'
 import {createOperationPlan} from '../core/plans.mjs'
@@ -18,21 +18,25 @@ import {fail,MANAGER_NAME} from '../contracts/constants.mjs'
 import {pruneRetention} from '../core/retention.mjs'
 import {prepareToolkit} from './toolkit.mjs'
 import {choose} from './menu.mjs'
+import {readDiscoverySettings} from './settings.mjs'
 
 function parse(argv) {
  const [command='menu',...rest]=argv,allowed=new Set(['host','file','plan','confirm','operation','accept-unverified','host-exited'])
- if(!['menu','inspect','install','update','remove','recover','status'].includes(command))fail('INVALID_ARGUMENT','未知命令')
+ if(!['menu','diagnose','inspect','install','update','remove','recover','status'].includes(command))fail('INVALID_ARGUMENT','未知命令')
  const args={command}
  for(let i=0;i<rest.length;i++){const key=rest[i].replace(/^--/,'');if(!rest[i].startsWith('--')||!allowed.has(key)||args[key]!==undefined)fail('INVALID_ARGUMENT','参数无效');if(['accept-unverified','host-exited'].includes(key))args[key]=true;else {if(!rest[i+1]||rest[i+1].startsWith('--'))fail('INVALID_ARGUMENT','缺少参数值');args[key]=rest[++i]}}
  return args
 }
 const baseDir=()=>path.join(depotDataHome(),'manager')
-export async function createServices({storeDir=baseDir()}={}) {
- const hosts=()=>discoverHosts({onIssue:issue=>{if(issue.code!=='ENOENT')process.stderr.write(`${issue.code}: ${issue.message}\n`)}})
+export async function createServices({storeDir=baseDir(),discoveryOptions={}}={}) {
+ const paths=[...(discoveryOptions.paths??[])]
+ const discover=()=>discoverEnvironments({...discoveryOptions,paths})
+ const hosts=async()=>(await discover()).hosts
  async function selected(id){const host=(await hosts()).find(x=>x.hostId===id);if(!host)fail('HOST_NOT_FOUND','没有匹配的 DSH 环境');await pruneRetention({storeDir:path.join(storeDir,'hosts',host.hostId),profileDir:host.profileDir,hostId:host.hostId}).catch(()=>{});return host}
  const local=id=>path.join(storeDir,'hosts',id)
  return {
-  hosts,
+  hosts,discover,
+  async locate(input){let value=input.trim().replace(/^([\"\'])(.*)\1$/,'$2');if(value.startsWith('~/'))value=path.join(os.homedir(),value.slice(2));if(!path.isAbsolute(value))fail('INVALID_PATH','请输入应用、DSH 安装或配置目录的完整路径');paths.push(value);return discover()},
   async inspect(args){const host=await selected(args.host);const inspection=await inspectArtifact({path:args.file,host,workDir:path.join(local(host.hostId),'imports')});const plan=await createOperationPlan({host,inspection,action:'install',acceptUnverified:args['accept-unverified']});plan.ownerId=host.ownerId;await atomicJson(path.join(storeDir,'plans',plan.planId+'.json'),plan);return {planId:plan.planId,hostId:host.hostId,packageName:plan.packageName,version:plan.version,previousVersion:plan.previousVersion,action:plan.action,warnings:inspection.warnings,requiresExit:plan.requiresExit,expiresAt:plan.expiresAt}},
   async execute(args){const plan=await readJson(path.join(storeDir,'plans',safeId(args.plan)+'.json'));const host=await selected(plan.hostId);if(args.host&&args.host!==host.hostId)fail('HOST_CHANGED','环境与预览不符');const refreshed=await probeHost(host);return executePlan(plan,{host:refreshed,adapter:cliWebAdapter(),storeDir:local(host.hostId),quiesced:args['host-exited']===true,signal:args.signal})},
   async pending(id){const {operationsIn}=await import('../core/receipts.mjs');return (await operationsIn(local(id))).filter(o=>o.state==='waiting_for_host_exit').map(o=>({operationId:o.operationId,planId:o.planId,packageName:o.plan.packageName}))},
@@ -54,10 +58,22 @@ export async function main(argv,{io,services}={}) {
   const args=parse(argv);args.signal=controller.signal
   if(['install','update','remove'].includes(args.command)&&(!args.plan||args.confirm!==args.plan))fail('INPUT_REQUIRED','执行需要 --plan <编号> --confirm <同一编号>；先 inspect 生成预览')
   if(args.command==='recover'&&args.plan&&args.confirm!==args.plan)fail('INPUT_REQUIRED','恢复需要确认刚生成的恢复计划编号')
-  if(!services){const root=fileURLToPath(new URL('.',import.meta.url));const bundle=await readJson(path.join(root,'bundle.json'),null);if(bundle){const toolkit=await prepareToolkit({root,storeDir:baseDir(),target:undefined});if(io.isTTY)io.write(`维护入口已保存：${toolkit.entryPath}\n`);}services=await createServices()}
+  if(!services){const root=fileURLToPath(new URL('.',import.meta.url));const settings=await readDiscoverySettings(root);if(io.isTTY)io.write(`找不到 DSH 时，可编辑：${settings.file}，或在菜单手动输入路径。\n`);const bundle=await readJson(path.join(root,'bundle.json'),null);if(bundle){const toolkit=await prepareToolkit({root,storeDir:baseDir(),target:undefined});if(io.isTTY)io.write(`维护入口已保存：${toolkit.entryPath}\n`);}services=await createServices({discoveryOptions:settings})}
+  if(args.command==='diagnose'){io.write(JSON.stringify(await services.discover(),null,2)+'\n');return 0}
   if(args.command==='menu'){
-   const host=await choose(io,'选择要管理的本机 DSH 环境',(await services.hosts()).map(h=>({label:`${h.kind} ${h.version} / ${h.profileName} / ${h.profileDir}`,value:h})))
-   if(!host)return 0
+   let host
+   while(!host){
+    const found=services.discover?await services.discover():{hosts:await services.hosts(),desktop:[]}
+    for(const d of found.desktop??[])io.write(`已找到 DSH Desktop ${d.version}：${d.appPath}\n当前安装器尚未接入 Desktop 安装与恢复；识别结果不会自动授予写入权限。\n`)
+    for(const issue of found.issues??[])io.write(`${issue.code}: ${issue.message}\n`)
+    if(!found.hosts.length)io.write('未找到已初始化的 CLI/Web 环境。可指定应用、DSH 安装目录或配置目录继续检查。\n')
+    const choices=found.hosts.map(h=>({label:`${h.kind} ${h.version} / ${h.profileName} / ${h.profileDir}`,value:h}))
+    if(services.locate)choices.push({label:'手动指定安装或配置路径 / 重新查找',value:'locate'})
+    const selected=await choose(io,'选择要管理的本机 DSH 环境',choices)
+    if(!selected)return 0
+    if(selected==='locate'){const input=await io.ask('完整路径（不要添加 shell 转义；q 返回）：');if(input==='q')continue;await services.locate(input);continue}
+    host=selected
+   }
    const action=await choose(io,'操作',[{label:'安装 / 替换离线成品包',value:'install'},{label:'卸载插件（保留数据）',value:'remove'},{label:'继续待处理任务',value:'resume'},{label:'查看任务',value:'status'},{label:'恢复任务',value:'recover'}]);if(!action)return 0
    if(action==='resume'){const job=await choose(io,'待处理任务',(await services.pending(host.hostId)).map(o=>({label:`${o.packageName} / ${o.operationId}`,value:o})));if(!job)return 0;if(await io.ask('确认目标 DSH 已完全退出？输入 yes：')!=='yes')return 0;io.write(JSON.stringify(publicResult(await services.resume({host:host.hostId,operation:job.operationId,'host-exited':true,signal:controller.signal})),null,2)+'\n');return 0}
    if(action==='status'){io.write(JSON.stringify(await services.status({operation:await io.ask('任务编号：')}),null,2)+'\n');return 0}
