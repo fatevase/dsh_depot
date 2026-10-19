@@ -18,7 +18,7 @@ export async function hostIsRunning(host){
  const live=await json(path.join(depotDataHome(),'manager','hosts',host.hostId,'host-live.json'),null)
  if(live?.hostId===host.hostId&&Number.isInteger(live.pid)){try{process.kill(live.pid,0);return true}catch(e){if(e.code!=='ESRCH')fail('HOST_EXIT_UNVERIFIED','无法核对宿主进程')}}
  const windows=process.platform==='win32'
- const command=windows?{executable:'powershell.exe',args:['-NoProfile','-NonInteractive','-Command','Get-CimInstance Win32_Process | Select-Object ProcessId,CommandLine | ConvertTo-Json -Compress']}:{executable:'ps',args:['-u',String(process.getuid()),'-o','pid=,args=']}
+ const command=windows?{executable:'powershell.exe',args:['-NoProfile','-NonInteractive','-Command',"$ErrorActionPreference='Stop'; $env:PSModulePath=[IO.Path]::Combine($PSHOME,'Modules'); Get-CimInstance Win32_Process | Select-Object ProcessId,CommandLine | ConvertTo-Json -Compress"]}:{executable:'ps',args:['-u',String(process.getuid()),'-o','pid=,args=']}
  const result=await runHostCommand({...command,cwd:host.profileDir},{timeoutMs:10000,maxBytes:8*1024*1024})
  if(result.exitCode||result.timedOut||result.stdout.length>=8*1024*1024)fail('HOST_EXIT_UNVERIFIED','无法完整检查目标宿主进程')
  const rows=windows?[].concat(JSON.parse(result.stdout||'[]')):result.stdout.split('\n').map(line=>{const m=line.trim().match(/^(\d+)\s+(.*)$/);return m?{ProcessId:+m[1],CommandLine:m[2]}:null}).filter(Boolean)
