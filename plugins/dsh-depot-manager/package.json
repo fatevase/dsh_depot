@@ -1,0 +1,20 @@
+{
+  "name": "@dsh-depot/manager-build",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node --test test/*.test.mjs",
+    "build": "node build-cli.mjs"
+  },
+  "dependencies": {
+    "semver": "7.7.2",
+    "tar": "7.5.22",
+    "yaml": "2.9.1",
+    "@dsh-depot/offline-format": "*"
+  },
+  "devDependencies": {
+    "svelte": "5.57.2",
+    "esbuild": "0.28.2"
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "unchangedPageSources": [
+    "web/plugins.html",
+    "web/PluginIcon.svelte",
+    "web/index.html",
+    "web/guide.html",
+    "web/manager.html",
+    "web/styles.css",
+    "web/plugin.html",
+    "web/App.svelte",
+    "web/Guide.svelte",
+    "web/main.js",
+    "web/PluginCard.svelte",
+    "web/ManagerDownload.svelte"
+  ],
+  "changedPageSources": []
+}

@@ -1,5 +1,7 @@
 # DSH Offline Plugin Manager Implementation Plan
 
+> 目录变更：下文路径记录初始实施。当前管理器源码已迁到 `plugins/dsh-depot-manager/`，网站迁到 `web/`；CI 验证和发布编排仍在 `distribution/manager/`。根 `package-lock.json` 是唯一工作区锁文件，命令见 [MAINTAINING.md](../../../MAINTAINING.md)。
+
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
 **Goal:** 构建可由 Windows、macOS、Linux 脚本离线安装的 DSH 插件管理器，支持拖入成品包或目录、安装、替换、卸载和恢复。

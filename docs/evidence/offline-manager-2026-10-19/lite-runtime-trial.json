@@ -1,0 +1,71 @@
+{
+  "sourceCommit": "aba2e695055a97e689afcbb1a9d57a78bfb35f19",
+  "target": "macos-arm64",
+  "workDir": "/Users/vase/Downloads/aiworkbench-dsh/.runtime/dsh-depot-manager/.runtime/manager-lite-trial-nC3I9i",
+  "archiveSha256": "ceadd082de8f07f256283d59f78d3e9d98381e79d3a0acda06f5818caeb3bae3",
+  "compressedBytes": 273918,
+  "bundledNode": false,
+  "reusedNode": "/opt/homebrew/Cellar/node/26.9.0/bin/node",
+  "nodeVersion": "26.9.0",
+  "dshVersion": "0.2.0-rc.2",
+  "hostId": "35277189a8ffde44f61b8116",
+  "checks": {
+    "directDshOsIsolatedColdInstall": true,
+    "directDshOsIsolatedCompose": true,
+    "existingProfileInitialized": true,
+    "installWithOfflinePolicy": true,
+    "configCompose": true,
+    "runtimeReused": true,
+    "noRuntimeCopied": true,
+    "authenticatedManagerPage": true,
+    "clientResources": true,
+    "hostObservedActivation": true
+  },
+  "isolation": {
+    "status": "passed",
+    "beforeReachable": true,
+    "beforeReachableIPv6": true,
+    "offline": {
+      "externalBlocked": true,
+      "externalBlockedIPv6": true,
+      "childBlockedIPv6": true,
+      "otherProgramBlocked": true,
+      "loopbackAllowed": false,
+      "loopbackBlocked": true,
+      "childBlocked": true,
+      "controlFamilies": [
+        "IPv4",
+        "IPv6-mapped-IPv4"
+      ]
+    },
+    "loopback": {
+      "externalBlocked": true,
+      "externalBlockedIPv6": true,
+      "childBlockedIPv6": true,
+      "otherProgramBlocked": true,
+      "loopbackAllowed": true,
+      "loopbackBlocked": true,
+      "childBlocked": true,
+      "controlFamilies": [
+        "IPv4",
+        "IPv6-mapped-IPv4"
+      ],
+      "observer": "outside-sandbox-inbound-only",
+      "outboundLoopbackBlocked": true
+    }
+  },
+  "directDshInstallSeconds": 0.705,
+  "operationId": "b4b957fb-9e44-4304-acaa-d1b8145b5b02",
+  "installerResult": "awaiting_reload",
+  "error": null,
+  "installerNetworkIsolation": "Normal shell execution: macOS Seatbelt cannot spawn the setuid system ps used by the real exit check. Offline package-manager policy is retained; separate direct DSH CLI is tested under OS isolation.",
+  "operationResult": "succeeded",
+  "status": "passed",
+  "scope": {
+    "installer": "Full lightweight script executed with offline package-manager policy, not OS network isolation; system ps is setuid on macOS and cannot be spawned in Seatbelt.",
+    "directDsh": "Cold install and config composition executed under OS network isolation with empty isolated store.",
+    "runtimeDiscovery": "Existing independent Homebrew Node was on PATH; the existing DSH root was explicitly configured. No global dsh CLI was present. Discovery of DSH-bundled Node was not tested.",
+    "platforms": "Only macos-arm64 lightweight end-to-end trial completed here. Windows/Linux lightweight archives were generated and hash-checked, not accepted by this trial.",
+    "qualification": "Development test only; full native acceptance remains unverified."
+  }
+}

@@ -56,4 +56,14 @@ Windows 使用 `install.cmd`，macOS 使用 `install.command`，Linux / SSH 使�
 
 遇到问题，可以在 [Issues](https://github.com/fatevase/dsh_depot/issues) 中提供插件包名、系统架构、DSH 版本及完整报错，避免附上 API Key 等账号信息。
 
-希望维护或扩展收录范围，请阅读[维护说明](https://github.com/fatevase/dsh_depot/blob/main/distribution/MAINTAINING.md)。
+希望维护或扩展收录范围，请阅读[维护说明](https://github.com/fatevase/dsh_depot/blob/main/MAINTAINING.md)。
+
+## 项目组成
+
+网站、配套插件与分发流水线在同一仓库分别维护：
+
+- [web](web/)：插件浏览、搜索、详情、下载和安装指南。
+- [plugins](plugins/)：DSH 离线插件管理器及配套安装脚本。
+- [distribution](distribution/)：插件发现、多平台打包、离线验证和发布。
+
+详细开发与维护步骤见[维护说明](MAINTAINING.md)。

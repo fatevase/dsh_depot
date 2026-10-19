@@ -43,16 +43,17 @@ test('a skill bundle cannot pass its installed-file probe when the declared skil
  const r=await runCommand({argv:[process.execPath,fileURLToPath(new URL('../lib/native-probe.mjs',import.meta.url)),input],cwd:dir,env,logFile:path.join(dir,'skill.log')});assert.notEqual(r.exitCode,0)
 })
 test('install instruction exactly names the immutable downloaded file and rejects unsafe names',async()=>{
- const {installCommand}=await import('../web/catalog.mjs')
+ const {installCommand}=await import('../../web/catalog.mjs')
  assert.equal(installCommand({fileName:'taskfold-1.0.0-key.tgz'}),'dsh plugin --profile web add "./taskfold-1.0.0-key.tgz" --offline --ignore-scripts')
  assert.throws(()=>installCommand({fileName:'bad";echo secret.tgz'}))
 })
 test('default branch publication and latest-state Pages deployment share a serialization boundary',async()=>{
  const w=JSON.parse(await readFile(new URL('../../.github/workflows/plugin-distribution.yml',import.meta.url)))
  for(const name of ['discover','publish'])assert.ok(w.jobs[name].if.includes('default_branch'))
- assert.equal(w.jobs.pages.concurrency.group,w.jobs.publish.concurrency.group)
- assert.ok(w.jobs.pages.steps.some(s=>s.run==='node distribution/ci.mjs deploy-site'))
- assert.ok(!w.jobs.pages.steps.some(s=>s.with?.name==='distribution-site'))
+ const pages=JSON.parse(await readFile(new URL('../../.github/workflows/web-pages.yml',import.meta.url))).jobs.pages
+ assert.equal(pages.concurrency.group,w.jobs.publish.concurrency.group)
+ assert.ok(pages.steps.some(s=>s.run==='node distribution/deploy-site.mjs build'))
+ assert.ok(!pages.steps.some(s=>s.with?.name==='distribution-site'))
 })
 test('an old deployment retry regenerates from current state and cannot resurrect a withdrawal',async t=>{
  const {refreshDeployment}=await import('../lib/deploy.mjs'),dir=await temporary(t),state=initialState()

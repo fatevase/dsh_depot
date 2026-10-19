@@ -1,0 +1,30 @@
+{
+  "clean-web-install": {
+    "status": "passed",
+    "logBytes": 28
+  },
+  "clean-web-test": {
+    "status": "passed",
+    "logBytes": 1358
+  },
+  "clean-web-build": {
+    "status": "passed",
+    "logBytes": 333
+  },
+  "clean-manager-install": {
+    "status": "passed",
+    "logBytes": 28
+  },
+  "clean-manager-build": {
+    "status": "passed",
+    "logBytes": 1178
+  },
+  "clean-all-install": {
+    "status": "passed",
+    "logBytes": 28
+  },
+  "clean-all-tests": {
+    "status": "passed",
+    "logBytes": 15243
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "name": "@dsh-depot/offline-format",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    "./constants": "./constants.mjs",
+    "./files": "./files.mjs",
+    "./platform": "./platform.mjs",
+    "./package-status": "./package-status.mjs",
+    "./package-metadata": "./package-metadata.mjs",
+    "./manager-qualification": "./manager-qualification.mjs"
+  }
+}

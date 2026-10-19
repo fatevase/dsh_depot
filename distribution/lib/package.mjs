@@ -4,7 +4,7 @@ import semver from 'semver'
 import { extractArchive } from './build.mjs'
 import { atomicJson, readJson, fileDigest, within } from './model.mjs'
 import { isolatedEnv, runCommand } from './process.mjs'
-import { writePackageMetadata } from '../manager/core/package-metadata.mjs'
+import { writePackageMetadata } from '@dsh-depot/offline-format/package-metadata'
 
 export async function packageRuntime({ task, recipe, builtPackage, sourceDir, workDir, tools }) {
   const started = performance.now(), staging = path.join(workDir, 'package'), output = path.join(workDir, 'artifacts')

@@ -1,12 +1,12 @@
 import path from 'node:path'
 import {fileURLToPath} from 'node:url'
 import {mkdir,readFile,writeFile,readdir} from 'node:fs/promises'
-import {buildManager} from './build.mjs'
-import {buildBootstrap} from './build-bootstrap.mjs'
+import {buildManager} from '../../plugins/dsh-depot-manager/build.mjs'
+import {buildBootstrap} from '../../plugins/dsh-depot-manager/build-bootstrap.mjs'
 import {verifyManager,qualifyManagerReport} from './verify.mjs'
 import {prepareHost} from '../lib/verify.mjs'
-import {atomicJson,fileHash} from './core/files.mjs'
-import {fail} from './contracts/constants.mjs'
+import {atomicJson,fileHash} from '@dsh-depot/offline-format/files'
+import {fail} from '@dsh-depot/offline-format/constants'
 export function assembleManagerPublication(receipts) {
  const assets=[],blocked=[],verificationRefs=[]
  for(const r of receipts){
@@ -21,7 +21,7 @@ export function managerCatalogOf(publications,support) {
 }
 export async function buildOnRunner({target,output}) {
  output=path.resolve(output);await mkdir(output,{recursive:true})
- const started=Date.now(),manager=await buildManager({target,output}),lock=JSON.parse(await readFile(new URL('./runtime-lock.json',import.meta.url))),record=lock.targets[target]
+ const started=Date.now(),manager=await buildManager({target,output}),lock=JSON.parse(await readFile(new URL('../../plugins/dsh-depot-manager/runtime-lock.json',import.meta.url))),record=lock.targets[target]
  const runtimeFile=path.join(output,path.basename(new URL(record.url).pathname)),response=await fetch(record.url,{signal:AbortSignal.timeout(180000)})
  if(!response.ok)fail('RUNTIME_DOWNLOAD_FAILED','官方 Node 下载失败')
  const handle=await import('node:fs').then(fs=>fs.createWriteStream(runtimeFile));await import('node:stream/promises').then(({pipeline})=>pipeline(response.body,handle))

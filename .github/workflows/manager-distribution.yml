@@ -3,9 +3,15 @@
   "on": {
     "pull_request": {
       "paths": [
+        "plugins/dsh-depot-manager/**",
+        "packages/offline-format/**",
         "distribution/manager/**",
+        "distribution/lib/**",
+        "distribution/isolation/**",
+        "distribution/host/**",
         "distribution/test/manager-*.test.mjs",
-        "distribution/package*.json",
+        "package.json",
+        "package-lock.json",
         ".github/workflows/manager-distribution.yml"
       ]
     },
@@ -17,6 +23,23 @@
           "default": false
         }
       }
+    },
+    "push": {
+      "paths": [
+        "plugins/dsh-depot-manager/**",
+        "packages/offline-format/**",
+        "distribution/manager/**",
+        "distribution/lib/**",
+        "distribution/isolation/**",
+        "distribution/host/**",
+        "distribution/test/manager-*.test.mjs",
+        "package.json",
+        "package-lock.json",
+        ".github/workflows/manager-distribution.yml"
+      ],
+      "branches": [
+        "main"
+      ]
     }
   },
   "permissions": {},
@@ -60,10 +83,10 @@
           }
         },
         {
-          "run": "npm --prefix distribution ci --ignore-scripts"
+          "run": "npm ci --ignore-scripts --registry=https://registry.npmjs.org"
         },
         {
-          "run": "node --test distribution/test/manager-*.test.mjs"
+          "run": "npm run manager:test && node --test distribution/test/manager-*.test.mjs"
         },
         {
           "if": "matrix.target == 'win32-x64'",
@@ -112,7 +135,7 @@
           }
         },
         {
-          "run": "npm --prefix distribution ci --ignore-scripts"
+          "run": "npm ci --ignore-scripts --registry=https://registry.npmjs.org"
         },
         {
           "uses": "actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333",
@@ -131,65 +154,6 @@
             "GH_REPO": "${{ github.repository }}"
           },
           "run": "node distribution/manager/publish-release.mjs .runtime/manager-publication/publication.json"
-        }
-      ]
-    },
-    "pages": {
-      "if": "github.event_name == 'workflow_dispatch' && needs.publish.result == 'success'",
-      "needs": [
-        "publish"
-      ],
-      "runs-on": "ubuntu-24.04",
-      "permissions": {
-        "pages": "write",
-        "id-token": "write",
-        "actions": "read",
-        "contents": "read"
-      },
-      "timeout-minutes": 10,
-      "concurrency": {
-        "group": "distribution-state-and-pages",
-        "cancel-in-progress": false
-      },
-      "environment": {
-        "name": "github-pages",
-        "url": "${{ steps.deploy.outputs.page_url }}"
-      },
-      "steps": [
-        {
-          "uses": "actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1",
-          "with": {
-            "persist-credentials": false,
-            "ref": "${{ github.event.repository.default_branch }}"
-          }
-        },
-        {
-          "uses": "actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1",
-          "with": {
-            "node-version": "26.9.0"
-          }
-        },
-        {
-          "run": "npm --prefix distribution ci --ignore-scripts --registry=https://registry.npmjs.org"
-        },
-        {
-          "run": "node distribution/ci.mjs deploy-site",
-          "env": {
-            "GITHUB_TOKEN": "${{ github.token }}"
-          }
-        },
-        {
-          "uses": "actions/configure-pages@45bfe0192ca1faeb007ade9deae92b16b8254a0d"
-        },
-        {
-          "uses": "actions/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9",
-          "with": {
-            "path": ".runtime/distribution/site"
-          }
-        },
-        {
-          "uses": "actions/deploy-pages@368f82528645a54fb793d4d04e342629a3f51346",
-          "id": "deploy"
         }
       ]
     }

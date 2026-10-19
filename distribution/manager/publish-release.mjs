@@ -3,11 +3,11 @@ import {spawnSync} from 'node:child_process'
 import {fileURLToPath} from 'node:url'
 import path from 'node:path'
 import {Github} from '../lib/github.mjs'
-import {fileHash,atomicJson} from './core/files.mjs'
+import {fileHash,atomicJson} from '@dsh-depot/offline-format/files'
 import {qualifyManagerReport} from './verify.mjs'
-import {latestManagerCatalog} from './catalog.mjs'
+import {latestManagerCatalog} from '../lib/manager-catalog.mjs'
 import {managerCatalogOf} from './ci.mjs'
-import {fail} from './contracts/constants.mjs'
+import {fail} from '@dsh-depot/offline-format/constants'
 export async function prepareReleaseFiles(plan,{directory,tag,previous={packages:[]}}){
  if(!/^manager-\d+$/.test(tag)||!plan.assets?.length)fail('PUBLICATION_DENIED','需要精确的已验收资产')
  await mkdir(directory,{recursive:true});const publicAssets=[]

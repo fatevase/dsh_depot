@@ -1,9 +1,7 @@
-import {latestManagerCatalog} from './manager/catalog.mjs'
 import { supportedTarget } from './lib/platform.mjs'
 // CI adapter: all untrusted/event inputs stay data, never interpolated into shell.
 import path from 'node:path'
 import { appendFile, mkdir } from 'node:fs/promises'
-import { refreshDeployment } from './lib/deploy.mjs'
 import { configuredHost } from './lib/host-environment.mjs'
 import { Github } from './lib/github.mjs'
 import { readRecipes, readJson, atomicJson, initialState } from './lib/model.mjs'
@@ -48,8 +46,4 @@ if(command==='discover'){
 }else if(command==='publish'){
  await mkdir(path.join(root,'jobs'),{recursive:true})
  await main(['publish','--receipts',path.join(root,'jobs'),'--state',path.join(batch,'state.json'),'--plan',path.join(batch,'plan.json'),'--discovered',path.join(batch,'discovered.json'),'--output',path.join(root,'publication-plan.json'),'--batch',process.env.GITHUB_RUN_ID,'--publish'])
- await main(['site','--catalog',path.join(root,'catalog.json'),'--state',path.join(root,'next-state.json'),'--output',path.join(root,'site')])
-}else if(command==='deploy-site'){
- const store=githubStateStore({repository,branch:config.stateBranch,github:new Github({token:process.env.GITHUB_TOKEN})})
- console.log(await refreshDeployment({store,recipes,outDir:path.join(root,'site'),managerCatalog:await latestManagerCatalog({github:new Github({token:process.env.GITHUB_TOKEN})})}))
 }else throw Error('Usage: node distribution/ci.mjs discover|build|publish')

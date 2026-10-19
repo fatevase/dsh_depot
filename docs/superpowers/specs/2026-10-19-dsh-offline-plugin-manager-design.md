@@ -1,5 +1,7 @@
 # DSH 离线插件管理器与脚本安装器设计
 
+> 目录变更：下文路径记录初始实施。当前管理器源码已迁到 `plugins/dsh-depot-manager/`，网站迁到 `web/`；CI 验证和发布编排仍在 `distribution/manager/`。根 `package-lock.json` 是唯一工作区锁文件，命令见 [MAINTAINING.md](../../../MAINTAINING.md)。
+
 日期：2026-10-19，Asia/Shanghai。状态：脚本方案已获用户确认，具体契约与实施计划待审阅。本修订替代同日的独立图形安装器方案；不代表安装器已经实现或通过三平台验证。
 
 ## 1 目标与已确认范围

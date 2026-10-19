@@ -1,0 +1,17 @@
+{
+  "range": "8de7f1b..7f9cfe14fadb73d76ba4af6a5d670ae27ea27f35",
+  "reviewer": "independent read-only gpt-6-astra",
+  "critical": 0,
+  "important": 0,
+  "findings": [
+    {
+      "issue": "push and pull_request duplicated manager native matrix on same-repository PR updates",
+      "resolution": "Limit push to main; preserve PR checks. New RED/GREEN regression test."
+    },
+    {
+      "issue": "Export guide still described minimal distribution-only root and exclusion by tracking status",
+      "resolution": "Document all module roots and actual worktree copying/exclusions."
+    }
+  ],
+  "deferred": []
+}

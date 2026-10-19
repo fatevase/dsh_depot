@@ -1,12 +1,9 @@
 import path from 'node:path'
 import {verifyArtifact} from '../lib/verify.mjs'
 import {hostEnvironmentDigest} from '../lib/host-environment.mjs'
-import {fileHash,atomicJson} from './core/files.mjs'
-const REQUIRED=['network-isolation','cold-install','config-compose','host-page-smoke','authenticated-manager-page','script-install','replace','uninstall','recovery','native-load']
-export function qualifyManagerReport(report) {
- const missing=REQUIRED.filter(check=>!report.scope?.includes(check)||report.evidence?.[check]?.status!=='passed')
- return {...report,status:report.status==='failed'?'failed':missing.length?'unverified':'passed',missing}
-}
+import {fileHash,atomicJson} from '@dsh-depot/offline-format/files'
+import {qualifyManagerReport} from '@dsh-depot/offline-format/manager-qualification'
+export {qualifyManagerReport}
 export async function verifyManager({bundle,host,isolation,workDir}) {
  const recipe={id:'dsh-depot-manager',npmName:'dsh-depot-manager',installTimeoutMs:180000,probes:{clientModule:'离线插件',registrations:[{name:'dsh-depot-manager'}],native:[]}}
  // Existing OS-isolated verifier proves cold installation/composition/startup only.

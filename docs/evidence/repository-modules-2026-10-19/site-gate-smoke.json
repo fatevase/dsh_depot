@@ -1,0 +1,16 @@
+{
+  "sourceCommit": "7f9cfe14fadb73d76ba4af6a5d670ae27ea27f35",
+  "cases": [
+    {
+      "event": "push",
+      "ref": "refs/heads/main",
+      "output": "allow=true"
+    },
+    {
+      "event": "pull_request",
+      "ref": "refs/pull/9/merge",
+      "output": "allow=false"
+    }
+  ],
+  "status": "passed"
+}
