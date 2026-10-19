@@ -7,6 +7,7 @@ import {validateHost} from '../contracts/validate.mjs'
 import {fail} from '../contracts/constants.mjs'
 import {ownershipFacts} from './ownership.mjs'
 import {runHostCommand} from './command.mjs'
+import {locateInstallations} from './locate.mjs'
 export const hash=value=>createHash('sha256').update(typeof value==='string'?value:JSON.stringify(value)).digest('hex')
 export async function json(file,fallback){try{return JSON.parse(await readFile(file,'utf8'))}catch(e){if(e.code==='ENOENT'&&fallback!==undefined)return fallback;throw e}}
 export async function hostFingerprint(host){
@@ -18,7 +19,7 @@ export async function probeHost(candidate){
  if(!/^[a-zA-Z0-9][a-zA-Z0-9_-]*$/.test(profileName))fail('INVALID_PROFILE','配置名称无效')
  const dshRoot=await realpath(candidate.dshRoot),pkg=await json(path.join(dshRoot,'package.json'))
  if(pkg.name!=='@deepseek-ai/dsh')fail('INVALID_DSH','所选目录不是 DSH 安装')
- const profileDir=await realpath(candidate.profileDir??path.join(candidate.home,'profiles',profileName));await json(path.join(profileDir,'package.json'))
+ const profileDir=await realpath(candidate.profileDir??path.join(candidate.home,'profiles',profileName));const profile=await json(path.join(profileDir,'package.json'));const home=await realpath(candidate.home??path.resolve(profileDir,'../..'));let desktopOwned=!!profile.dsh?.desktop;for(const ownerHome of new Set([home,path.resolve(profileDir,'../..')]))try{desktopOwned||=(await stat(path.join(ownerHome,'.desktop-install-state.json'))).isFile()}catch{};if(desktopOwned&&candidate.kind!=='official-desktop')fail('DESKTOP_OWNER_REQUIRED','此配置由 DSH Desktop 管理，不能按 npm CLI 修改')
  if(!candidate.nodePath)fail('HOST_RUNTIME_REQUIRED','请明确选择实际 DSH 使用的 Node；不能使用安装器 Node 代替')
  const nodePath=await realpath(candidate.nodePath)
  const ownership=await ownershipFacts(profileDir),ownerId=ownership.ownerId,owned=!ownership.elevated&&ownership.ownerId===ownership.currentId
@@ -30,9 +31,12 @@ export async function probeHost(candidate){
  const host={schemaVersion:1,hostId:hash({dshRoot,profileDir}).slice(0,24),kind,version:pkg.version,profileName,profileDir,home:await realpath(candidate.home??path.resolve(profileDir,'../..')),dshRoot,nodePath,ownerId,runtime:observed,launch:{executable:nodePath,args:['--expose-internals',path.join(dshRoot,'lib/bin.js'),'--profile',profileName]},packageManager:candidate.packageManager??{command:'pnpm',args:[]},capabilities:{inspect:true,offlineInstall:operations,remove:operations,writeSession:operations,requiresExit:true,survivesHostExit:false,blockedReason:operations?null:!owned?'PROFILE_OWNER_MISMATCH':'HOST_CAPABILITY_UNVERIFIED'}}
  host.fingerprint=await hostFingerprint(host);return validateHost(host)
 }
-async function findHostNode(env){for(const dir of (env.PATH??env.Path??'').split(path.delimiter).filter(Boolean)){const node=path.join(dir,process.platform==='win32'?'node.exe':'node');try{return await realpath(node)}catch{}}return undefined}
-export async function discoverHosts({env=process.env,locations,onIssue}={}){
- if(!locations){const home=env.DSH_HOME??path.join(os.homedir(),'.dsh');const roots=[env.DSH_DEPOT_DSH_ROOT,path.join(env.APPDATA??os.homedir(),'npm/node_modules/@deepseek-ai/dsh'),'/opt/homebrew/lib/node_modules/@deepseek-ai/dsh','/usr/local/lib/node_modules/@deepseek-ai/dsh'];let profiles=[];try{profiles=await readdir(path.join(home,'profiles'))}catch{};const hostNode=env.DSH_DEPOT_NODE??await findHostNode(env);locations=roots.filter(Boolean).flatMap(dshRoot=>profiles.filter(p=>p!=='desktop').map(profileName=>({home,dshRoot,nodePath:hostNode,profileName}))) }
+export async function discoverEnvironments(options={}){
+ const found=await locateInstallations(options),hosts=await discoverHosts({...options,locations:found.locations,onIssue:issue=>{if(!['ENOENT','ENOTDIR'].includes(issue.code)){found.issues.push(issue);options.onIssue?.(issue)}}})
+ return{...found,hosts}
+}
+export async function discoverHosts({env=process.env,locations,onIssue,...options}={}){
+ if(!locations)locations=(await locateInstallations({env,onIssue,...options})).locations
  const hosts=new Map();for(const candidate of locations){try{const h=await probeHost(candidate);hosts.set(h.hostId,h)}catch(e){onIssue?.({candidate,code:e.code??'HOST_PROBE_FAILED',message:e.message})}}
  return [...hosts.values()]
 }

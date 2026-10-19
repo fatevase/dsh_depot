@@ -47,7 +47,11 @@ export async function hostIsRunning(host){
     if(resolved&&(candidate.endsWith('.js')||candidate.endsWith('.mjs')||path.basename(candidate)==='dsh'))resolvedScript=true
    }
   }
-  if(candidateMatch&&!resolvedScript)fail('HOST_EXIT_UNVERIFIED','无法确定正在运行的 DSH 入口所属安装，请检查进程后继续',{pid:row.ProcessId,cwd,script:words[1]})
+  if(candidateMatch&&!resolvedScript){
+   // A process may exit between the process snapshot and cwd/path inspection.
+   try{process.kill(row.ProcessId,0)}catch(e){if(e.code==='ESRCH')continue}
+   fail('HOST_EXIT_UNVERIFIED','无法确定正在运行的 DSH 入口所属安装，请检查进程后继续',{pid:row.ProcessId,cwd,script:words[1]})
+  }
  }
  return false
 }

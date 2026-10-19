@@ -17,7 +17,7 @@ export async function buildBootstrap({target,flavor,managerArchive,output,runtim
   await build({entryPoints:[path.join(here,'bootstrap/bootstrap.mjs')],outfile:path.join(root,'core.mjs'),bundle:true,platform:'node',format:'esm',target:'node22',banner:{js:'import {createRequire as __createRequire} from "node:module";const require=__createRequire(import.meta.url);'}})
   const scripts=target==='win32-x64'?['install.cmd','install.ps1']:target==='macos-arm64'?['install.sh','install.command']:['install.sh']
   for(const script of scripts)await cp(path.join(here,'bootstrap',script),path.join(root,script))
-  await cp(managerArchive,path.join(root,'manager.tgz'))
+  await cp(managerArchive,path.join(root,'manager.tgz'));await cp(path.join(here,'bootstrap/settings.json'),path.join(root,'settings.json'))
   let runtimeDigest=null
   if(flavor==='full') {
    const record=lock.targets[target]
@@ -47,7 +47,11 @@ export async function buildBootstrap({target,flavor,managerArchive,output,runtim
    '请保留所有文件。安装过程不联网下载依赖，不执行编译，不需要管理员权限或 sudo。',
    '后续安装其他插件时可选择其 .tgz 或成品目录；等待退出的任务可重跑入口并选择“继续待处理任务”。',
    '卸载默认保留业务数据。遇到错误先保留完整提示，再从菜单查看任务或恢复。',
-   '官方 DSH Desktop 的写入尚未开放；本包的完整原生验收状态以配套报告为准。',''
+   '自动查找会检查 PATH、常见安装位置与运行进程；仍找不到时，在菜单选择“手动指定安装或配置路径”。',
+   '也可用文本编辑器修改同目录 settings.json：dshHome=配置主目录（包含 profiles），dshRoot=DSH 包目录（包含 package.json），hostNode=目标 DSH 的 Node，desktopApp=桌面版应用路径，searchPaths=其他完整路径数组。空字符串表示自动查找。',
+   'Windows 的 JSON 路径请使用 C:/Users/name/... 或双反斜杠；路径不是命令，不要粘贴 DSH_HOME=... 这样的 shell 表达式。settings.json 非空字段优先于环境变量。',
+   '命令行诊断：Windows 运行 install.cmd diagnose；macOS/Linux 运行 sh install.sh diagnose。诊断不修改 DSH。',
+   '设置只改变查找位置，不会绕过宿主能力检查。已发现 Desktop 与已支持 Desktop 安装是两回事；本包的实际验收范围以配套报告为准。',''
   ].join('\n'))
   const fileName=name+(target==='win32-x64'?'.zip':'.tgz'),archive=path.join(output,fileName)
   if(target==='win32-x64'){

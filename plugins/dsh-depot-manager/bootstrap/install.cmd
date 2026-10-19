@@ -1,5 +1,6 @@
 @echo off
 setlocal DisableDelayedExpansion
+rem If DSH is not found, edit settings.json beside this file or select the manual path menu.
 set "DEPOT_ROOT=%~dp0"
 set "DEPOT_NODE=%~dp0runtime\node.exe"
 if not exist "%DEPOT_NODE%" goto lite

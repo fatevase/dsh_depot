@@ -9,7 +9,7 @@ import {fileHash} from '../core/files.mjs'
 import {verifyBundle} from '../bootstrap/toolkit.mjs'
 const api=await import('../build-bootstrap.mjs').catch(e=>{if(e.code==='ERR_MODULE_NOT_FOUND')return{};throw e})
 test('lite bundle is self-contained and binds the exact manager bytes',async t=>{
- assert.equal(typeof api.buildBootstrap,'function');const dir=await mkdtemp(path.join(os.tmpdir(),'depot-bundle-'));t.after(()=>rm(dir,{recursive:true,force:true}));const manager=path.join(dir,'manager.tgz');await writeFile(manager,'fixture only');const receipt=await api.buildBootstrap({target:'macos-arm64',flavor:'lite',managerArchive:manager,output:dir});assert.match(receipt.fileName,/macos-arm64-lite/);assert.equal(receipt.runtimeDigest,null);const entries=[];await tar.t({file:receipt.path,onReadEntry:e=>entries.push(e.path)});assert.ok(entries.some(x=>x.endsWith('/core.mjs')));assert.ok(entries.some(x=>x.endsWith('/manager.tgz')));assert.ok(!entries.some(x=>x.includes('node_modules')))
+ assert.equal(typeof api.buildBootstrap,'function');const dir=await mkdtemp(path.join(os.tmpdir(),'depot-bundle-'));t.after(()=>rm(dir,{recursive:true,force:true}));const manager=path.join(dir,'manager.tgz');await writeFile(manager,'fixture only');const receipt=await api.buildBootstrap({target:'macos-arm64',flavor:'lite',managerArchive:manager,output:dir});assert.match(receipt.fileName,/macos-arm64-lite/);assert.equal(receipt.runtimeDigest,null);const entries=[];await tar.t({file:receipt.path,onReadEntry:e=>entries.push(e.path)});assert.ok(entries.some(x=>x.endsWith('/core.mjs')));assert.ok(entries.some(x=>x.endsWith('/manager.tgz')));assert.ok(entries.some(x=>x.endsWith('/settings.json')));assert.ok(!entries.some(x=>x.includes('node_modules')))
 })
 test('Windows full bundle extracts as a ZIP with program runtime CMD and instructions intact',async t=>{
  const dir=await mkdtemp(path.join(os.tmpdir(),'depot-windows-zip-'));t.after(()=>rm(dir,{recursive:true,force:true}))
@@ -22,6 +22,6 @@ test('Windows full bundle extracts as a ZIP with program runtime CMD and instruc
  execFileSync(python,['-c',"import zipfile,sys\nwith zipfile.ZipFile(sys.argv[1]) as z:z.extractall(sys.argv[2])",receipt.path,extracted])
  const root=path.join(extracted,receipt.fileName.slice(0,-4));await verifyBundle(root,{target:'win32-x64'})
  assert.equal(await readFile(path.join(root,'runtime/node.exe'),'utf8'),'runtime fixture')
- for(const file of ['core.mjs','install.cmd','README.txt','manager.tgz'])assert.ok((await readFile(path.join(root,file))).length>0)
+ for(const file of ['core.mjs','install.cmd','README.txt','manager.tgz','settings.json'])assert.ok((await readFile(path.join(root,file))).length>0)
  assert.equal(await fileHash(path.join(root,'manager.tgz')),await fileHash(manager))
 })
