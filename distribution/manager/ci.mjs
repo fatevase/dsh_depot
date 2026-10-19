@@ -7,17 +7,24 @@ import {verifyManager,qualifyManagerReport} from './verify.mjs'
 import {prepareHost} from '../lib/verify.mjs'
 import {atomicJson,fileHash} from '@dsh-depot/offline-format/files'
 import {fail} from '@dsh-depot/offline-format/constants'
-export function assembleManagerPublication(receipts) {
+import {isManagerDownload} from '@dsh-depot/offline-format/manager-qualification'
+export function assembleManagerPublication(receipts,{channel='stable'}={}) {
  const assets=[],blocked=[],verificationRefs=[]
  for(const r of receipts){
   const verified=qualifyManagerReport(r.verification??{})
+  if(channel==='preview'){
+   const valid=['macos-arm64','linux-x64','win32-x64'].includes(r.target)&&r.manager&&r.manager.target===r.target&&/^[a-f0-9]{64}$/.test(r.manager.sha256??'')&&r.manager.sha256===verified.packageSha256&&!r.fixture&&r.assets?.length&&r.assets.every(a=>a.target===r.target&&['full','lite'].includes(a.flavor)&&/^[a-f0-9]{64}$/.test(a.sha256??'')&&a.managerSha256===r.manager.sha256)
+   if(!valid){blocked.push({target:r.target,reason:'MANAGER_BYTES_REQUIRED'});continue}
+   for(const a of [...r.assets,{...r.manager,flavor:'plugin'}])assets.push({...a,channel:'preview',verification:{...verified,status:verified.status==='failed'?'failed':'unverified',bundleSha256:a.sha256,validationLevel:'plugin-only'}})
+   verificationRefs.push(r.verificationRef);continue
+  }
   if(verified.status!=='passed'||!r.manager||r.manager.sha256!==verified.packageSha256||r.fixture||!r.assets?.length||!r.assets.every(a=>a.sha256&&a.managerSha256===verified.packageSha256&&a.verification?.bundleSha256===a.sha256&&a.verification?.packageSha256===a.managerSha256&&qualifyManagerReport(a.verification).status==='passed')){blocked.push({target:r.target,reason:'MANAGER_ACCEPTANCE_REQUIRED',missing:verified.missing});continue}
-  assets.push(...r.assets,...(r.manager?[{...r.manager,flavor:'plugin',verification:verified}]:[]));verificationRefs.push(r.verificationRef)
+  assets.push(...r.assets,...(r.manager?[{...r.manager,flavor:'plugin',verification:{...verified,bundleSha256:r.manager.sha256}}]:[]));verificationRefs.push(r.verificationRef)
  }
- return{assets,blocked,verificationRefs}
+ return{channel,assets,blocked,verificationRefs}
 }
 export function managerCatalogOf(publications,support) {
- return{schemaVersion:1,generatedAt:new Date().toISOString(),support,packages:publications.filter(p=>['full','lite'].includes(p.flavor)&&['macos-arm64','linux-x64','win32-x64'].includes(p.target)&&qualifyManagerReport(p.verification??{}).status==='passed'&&p.verification.bundleSha256===p.sha256&&/^https:\/\/github\.com\/fatevase\/dsh_depot\/releases\/download\//.test(p.packageUrl??'')).map(p=>({target:p.target,flavor:p.flavor,fileName:p.fileName,packageUrl:p.packageUrl,sha256:p.sha256,compressedBytes:p.compressedBytes,requirements:p.flavor==='lite'?{node:'^22.19.0 || >=24.0.0'}:{node:'附带独立 Node 26.9.0'},verification:p.verification,testedHosts:p.testedHosts??[]}))}
+ return{schemaVersion:1,generatedAt:new Date().toISOString(),support,packages:publications.filter(p=>['full','lite'].includes(p.flavor)&&isManagerDownload(p)).map(p=>({target:p.target,flavor:p.flavor,channel:p.channel??'stable',reportUrl:p.reportUrl,checksumsUrl:p.checksumsUrl,pluginUrl:p.pluginUrl,fileName:p.fileName,packageUrl:p.packageUrl,sha256:p.sha256,compressedBytes:p.compressedBytes,requirements:p.flavor==='lite'?{node:'^22.19.0 || >=24.0.0'}:{node:'附带独立 Node 26.9.0'},verification:p.verification,testedHosts:p.testedHosts??[]}))}
 }
 export async function buildOnRunner({target,output}) {
  output=path.resolve(output);await mkdir(output,{recursive:true})
@@ -37,7 +44,7 @@ async function main(argv){
  if(command==='build')return buildOnRunner({target,output})
  if(command==='publication'){
   const root=path.resolve(target),receipts=[];for(const dir of await readdir(root)){try{const r=JSON.parse(await readFile(path.join(root,dir,'receipt.json')));if(r.manager)r.manager.path=path.join(root,dir,path.basename(r.manager.fileName));r.assets=r.assets?.map(a=>({...a,path:path.join(root,dir,path.basename(a.fileName))}));receipts.push(r)}catch(e){if(e.code!=='ENOENT')throw e}}
-  const plan=assembleManagerPublication(receipts);await atomicJson(path.join(root,'publication.json'),plan)
+  const plan=assembleManagerPublication(receipts,{channel:output==='preview'?'preview':'stable'});await atomicJson(path.join(root,'publication.json'),plan)
   if(!plan.assets.length)fail('MANAGER_ACCEPTANCE_REQUIRED','暂无满足完整验收条件的管理器资产；只保留 Actions 测试产物')
   return plan
  }

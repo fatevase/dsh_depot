@@ -279,6 +279,9 @@ body{margin:0}
 #depot-v2 .dv-download-asset h3{margin:8px 0;font-size:16px}
 #depot-v2 .dv-download-asset p{margin:0;font-size:11px}
 #depot-v2 .dv-download-status{font-size:10px;color:#377057}
+#depot-v2 .dv-download-status.dv-doc-warning{color:#885b16;padding:5px 8px;border:1px solid #dbc28e}
+#depot-v2 .dv-download-asset>.dv-doc-note{flex-basis:100%;margin:0}
+#depot-v2 .dv-download-asset>.dv-doc-note p{font-size:13px;line-height:1.8;margin-top:8px}
 #depot-v2 .dv-download-hash{width:100%;border-top:1px solid var(--depot-line);padding-top:16px;font-size:10px;color:var(--depot-muted)}
 #depot-v2 .dv-download-hash code{display:block;margin-top:7px;background:transparent!important;overflow-wrap:anywhere;font-size:10px!important}
 #depot-v2 .dv-small-note{font-size:11px!important;color:var(--depot-muted)!important}
