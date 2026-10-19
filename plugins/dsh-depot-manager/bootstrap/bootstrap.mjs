@@ -47,7 +47,7 @@ export async function createServices({storeDir=baseDir(),discoveryOptions={}}={}
   async locate(input){let value=input.trim().replace(/^([\"\'])(.*)\1$/,'$2');if(value.startsWith('~/'))value=path.join(os.homedir(),value.slice(2));if(!path.isAbsolute(value))fail('INVALID_PATH','请输入应用、DSH 安装或配置目录的完整路径');paths.push(value);return discover()},
   async inspect(args){const host=await selected(args.host);const inspection=await inspectArtifact({path:args.file,host,workDir:path.join(local(host.hostId),'imports')});const plan=await createOperationPlan({host,inspection,action:'install',acceptUnverified:args['accept-unverified']});plan.ownerId=host.ownerId;await atomicJson(path.join(storeDir,'plans',plan.planId+'.json'),plan);return {planId:plan.planId,hostId:host.hostId,packageName:plan.packageName,version:plan.version,previousVersion:plan.previousVersion,action:plan.action,warnings:inspection.warnings,requiresExit:plan.requiresExit,expiresAt:plan.expiresAt}},
   async execute(args){const plan=await readJson(path.join(storeDir,'plans',safeId(args.plan)+'.json'));const host=await selected(plan.hostId);if(args.host&&args.host!==host.hostId)fail('HOST_CHANGED','环境与预览不符');const refreshed=await probeHost(host);return executePlan(plan,{host:refreshed,adapter:adapterFor(host),storeDir:local(host.hostId),quiesced:args['host-exited']===true,signal:args.signal,onEvent:args.onEvent,onOutput:args.onOutput})},
-  async pending(id){const {operationsIn}=await import('../core/receipts.mjs');return (await operationsIn(local(id))).filter(o=>o.state==='waiting_for_host_exit').map(o=>({operationId:o.operationId,planId:o.planId,packageName:o.plan.packageName}))},
+  async pending(id){const {operationsIn}=await import('../core/receipts.mjs');return (await operationsIn(local(id))).filter(o=>o.state==='waiting_for_host_exit'||o.state==='queued').map(o=>({execution:o.plan?.execution,operationId:o.operationId,planId:o.planId,packageName:o.plan.packageName}))},
   async resume(args){const host=await selected(args.host),op=await readOperation(safeId(args.operation),{storeDir:local(host.hostId)});return op.batched?resumeBatch(op.operationId,{host,adapter:adapterFor(host),storeDir:local(host.hostId),quiesced:args['host-exited']===true,refreshHost:()=>probeHost(host),signal:args.signal}):executePlan(op.plan,{host:await probeHost(host),adapter:adapterFor(host),storeDir:local(host.hostId),quiesced:args['host-exited']===true,signal:args.signal,onEvent:args.onEvent,onOutput:args.onOutput})},
   async status(args){const found=[];for(const host of await hosts()){try{found.push(await readOperation(safeId(args.operation),{storeDir:local(host.hostId)}))}catch(e){if(e.code!=='ENOENT')throw e}}if(found.length!==1)fail('OPERATION_NOT_FOUND','未找到任务');return publicResult(found[0])},
   async previewRecovery(args){const host=await selected(args.host),preview=await inspectRecovery(safeId(args.operation),{host,storeDir:local(host.hostId)});preview.recoveryPlanId=randomUUID();preview.expiresAt=Date.now()+900000;await atomicJson(path.join(storeDir,'recovery-plans',preview.recoveryPlanId+'.json'),preview);return preview},
@@ -56,14 +56,14 @@ export async function createServices({storeDir=baseDir(),discoveryOptions={}}={}
  }
 }
 const safeId=value=>{if(typeof value!=='string'||!/^[\w-]{1,100}$/.test(value))fail('INVALID_ID','编号无效');return value}
-const publicResult=value=>{const {_inspection,plan,beforeState,snapshot,activationNonce,activationNonceDigest,...safe}=value;return safe}
+const publicResult=value=>{const {_inspection,plan,beforeState,snapshot,activationNonce,reloadNonce,activationNonceDigest,...safe}=value;return safe}
 function showPreview(io,host,preview){
  const action={install:'安装',replace:'替换',remove:'卸载'}[preview.action]??(preview.previousVersion?'替换':'安装')
  io.write(`\n目标：${host.kind==='official-desktop'?'DSH Desktop':'DSH CLI/Web'} / ${host.profileName}\n配置目录：${host.profileDir}\n操作：${action} ${preview.packageName}${preview.version?' '+preview.version:''}${preview.previousVersion?'（当前 '+preview.previousVersion+'）':''}\n`)
  for(const warning of preview.warnings??[])io.write(`提示：${warning.message??warning.code}\n`)
 }
 function showOutcome(io,value){
- const messages={waiting_for_host_exit:'检测到 DSH 仍在运行，任务已保存。完全退出 DSH 后，重新运行脚本并选择“继续待处理任务”。',awaiting_reload:'安装完成，请按原来的方式启动目标 DSH。宿主加载后才能确认插件已启用。',succeeded:value.result?.removed?'插件已卸载，配置与业务数据保留。':'操作完成。',failed_restored:'操作未完成，已恢复原状态。',recovery_required:'操作未完成，需要从“恢复任务”检查恢复点。',failed:'DSH 安装未完成。未自动回滚，请查看下方错误；修正后可重新安装成品包。'}
+ const messages={waiting_for_host_exit:'检测到 DSH 仍在运行，任务已保存。完全退出 DSH 后，重新运行脚本并选择“继续待处理任务”。',awaiting_reload:'安装完成。请重启 DSH 以加载新插件；当前 DSH 无需在安装前退出。',succeeded:value.result?.removed?'插件已卸载，配置与业务数据保留。':'操作完成。',failed_restored:'操作未完成，已恢复原状态。',recovery_required:'操作未完成，需要从“恢复任务”检查恢复点。',failed:'DSH 安装未完成。未自动回滚，请查看下方错误；修正后可重新安装成品包。'}
  io.write((messages[value.state]??`任务状态：${value.state}`)+'\n');if(value.error)io.write(`${value.error.code}: ${value.error.message}\n`);if(value.operationId)io.write(`任务编号：${value.operationId}\n`)
  return ['failed','recovery_required'].includes(value.state)?2:0
 }
@@ -78,7 +78,7 @@ export async function main(argv,{io,services}={}) {
  try {
   if(!semver.satisfies(process.versions.node,CORE_NODE_RANGE))fail('RUNTIME_UNSUPPORTED',`需要 Node ${CORE_NODE_RANGE}`)
   const args=parse(argv);args.signal=controller.signal
-  const progress=event=>{const label={backing_up:'正在备份原插件和依赖…',applying:'正在调用 DSH 的包管理服务安装…',checking_install:'正在检查安装结果和 DSH 配置…',recovering:'正在恢复原配置…'}[event.state];if(label)showPhase(label)}
+  const progress=event=>{const label={backing_up:'正在备份原插件和依赖…',applying:'正在调用目标 DSH 安装…',checking_install:'正在检查安装结果和 DSH 配置…',recovering:'正在恢复原配置…'}[event.state];if(label)showPhase(label)}
   let bannerShown=false
   const banner=()=>{if(io.isTTY&&!bannerShown){io.write(`DSH 离线插件管理器 ${MANAGER_VERSION}\n`);bannerShown=true}}
   if(['install','update','remove'].includes(args.command)&&(!args.plan||args.confirm!==args.plan))fail('INPUT_REQUIRED','执行需要 --plan <编号> --confirm <同一编号>；先 inspect 生成预览')
@@ -118,7 +118,7 @@ export async function main(argv,{io,services}={}) {
    banner()
    io.write(`目标：${host.kind==='official-desktop'?'DSH Desktop':'DSH CLI/Web'} / ${host.profileName}\n配置目录：${host.profileDir}\n`)
    const action=await choose(io,'操作',[{label:'安装 / 替换离线成品包',value:'install'},{label:'卸载插件（保留数据）',value:'remove'},{label:'继续待处理任务',value:'resume'},{label:'查看任务',value:'status'},{label:'恢复任务',value:'recover'}]);if(!action)return 0
-   if(action==='resume'){const pending=await services.pending(host.hostId);if(!pending.length){io.write('没有待处理任务。\n');return 0}const job=pending.length===1?pending[0]:await choose(io,'待处理任务',pending.map(o=>({label:`${o.packageName} / ${o.operationId}`,value:o})));if(!job)return 0;if(await services.isRunning(host.hostId)){io.write('DSH 仍在运行，请完全退出 DSH 后再继续；任务已保留。\n');return 0}return showOutcome(io,await services.resume({host:host.hostId,operation:job.operationId,'host-exited':true,signal:controller.signal,onEvent:progress,onOutput:text=>io.write(text)}))}
+   if(action==='resume'){const pending=await services.pending(host.hostId);if(!pending.length){io.write('没有待处理任务。\n');return 0}const job=pending.length===1?pending[0]:await choose(io,'待处理任务',pending.map(o=>({label:`${o.packageName} / ${o.operationId}`,value:o})));if(!job)return 0;if(job.execution==='snapshot'&&await services.isRunning(host.hostId)){io.write('此旧版恢复任务需要先退出 DSH。\n');return 0}return showOutcome(io,await services.resume({host:host.hostId,operation:job.operationId,'host-exited':true,signal:controller.signal,onEvent:progress,onOutput:text=>io.write(text)}))}
    if(action==='status'){io.write(JSON.stringify(await services.status({operation:await io.ask('任务编号：')}),null,2)+'\n');return 0}
    if(action==='recover'){const id=await io.ask('任务编号：'),preview=await services.previewRecovery({host:host.hostId,operation:id});io.write(JSON.stringify(preview,null,2)+'\n');if(preview.execution==='dsh-cli'&&!['applying','checking_install'].includes(preview.state))return 0;if(await services.isRunning(host.hostId)){io.write('DSH 仍在运行，请完全退出 DSH 后重新检查恢复点。\n');return 0}return showOutcome(io,await services.recover({plan:preview.recoveryPlanId,'host-exited':true,signal:controller.signal}))}
    const file=args.file||(action==='remove'?await io.ask('插件包名：'):fileURLToPath(new URL('./manager.tgz',import.meta.url)))

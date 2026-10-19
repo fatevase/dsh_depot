@@ -14,6 +14,7 @@ import {uploadChunk} from './upload.mjs'
 import {operationsIn,readOperation,saveOperation} from '../../core/receipts.mjs'
 import {recordActivation} from './activation.mjs'
 import {MANAGER_NAME,MANAGER_VERSION,fail} from '../../contracts/constants.mjs'
+const hostStartedAt=Date.now()-process.uptime()*1000
 export const name=MANAGER_NAME
 export const inject=['profileContext','connection','pluginManager','webServer']
 export async function currentEnvironment(ctx) {
@@ -43,10 +44,10 @@ export async function apply(ctx) {
   if(disposed)return
   const [ops,bundles,plugins]=await Promise.all([operationsIn(storeDir),ctx.pluginManager.listBundles(),ctx.pluginManager.listPlugins()])
   for(const batch of ops.filter(o=>o.batched&&o.state==='awaiting_reload')){const children=await Promise.all(batch.result.items.map(i=>readOperation(i.operationId,{storeDir})));batch.result.items=children.map((o,i)=>({...batch.result.items[i],state:o.state}));if(children.every(o=>['succeeded','failed_restored','cancelled'].includes(o.state)))batch.state='succeeded';await saveOperation(batch,{storeDir})}
-  for(const op of ops.filter(o=>o.state==='awaiting_reload'&&o.activationNonce)){
+  for(const op of ops.filter(o=>o.state==='awaiting_reload'&&(o.reloadNonce||o.activationNonce))){
    const b=bundles.find(b=>b.name===op.result.packageName)
    const active=b?.rows?.length>0&&b.rows.every(row=>plugins.some(p=>p.entryId===row.entryId&&p.fiberPhase==='active'))
-   if(active)await recordActivation({operationId:op.operationId,nonce:op.activationNonce,hostId:host.hostId,version:b.version},{storeDir,observed:{name:b.name,version:b.version,active}}).catch(()=>{})
+   if(active)await recordActivation({operationId:op.operationId,nonce:op.reloadNonce??op.activationNonce,hostId:host.hostId,version:b.version},{storeDir,observed:{name:b.name,version:b.version,active,hostStartedAt}}).catch(()=>{})
   }
  }
  const timer=setInterval(()=>{observe().catch(()=>{})},2000);timer.unref();await observe().catch(()=>{})
