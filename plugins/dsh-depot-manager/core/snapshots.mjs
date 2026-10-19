@@ -11,6 +11,7 @@ async function copyGraph(source,destination){
  for(const row of index.filter(r=>r.type==='link')){const file=path.join(destination,row.path);await rm(file);await symlink(path.relative(path.dirname(file),path.join(destination,row.target)),file,process.platform==='win32'?'junction':undefined)}
 }
 export async function configFingerprints(root){const result={};for(const name of ['cordis.yml','pnpm-workspace.yaml'])result[name]=await fileHash(path.join(root,name)).catch(e=>{if(e.code==='ENOENT')return null;throw e});return result}
+export async function configurationFingerprint(root){const rows=[];for(const name of PROFILE_FILES.filter(n=>n!=='node_modules'))rows.push([name,await fileHash(path.join(root,name)).catch(e=>{if(e.code==='ENOENT')return null;throw e})]);return digest(JSON.stringify(rows))}
 export const profileRecords=records
 export const profileFingerprint=async root=>digest(JSON.stringify(await records(root)))
 export async function snapshotProfile(host,{snapshotDir,newBytes=0}={}){
