@@ -20,3 +20,27 @@ test('interactive startup identifies the package version while diagnose remains 
  assert.equal(await cli.main(['diagnose'],{io:{isTTY:false,write:x=>messages.push(x)},services}),0)
  assert.deepEqual(JSON.parse(messages.join('')),{hosts:[],desktop:[]})
 })
+test('empty and invalid manual paths return to the menu instead of terminating the installer',async()=>{
+ const messages=[],answers=['1','','1','relative/path','q'];let attempts=0
+ const services={discover:async()=>({hosts:[],desktop:[]}),locate:async()=>{attempts++;throw Object.assign(Error('请输入完整路径'),{code:'INVALID_PATH'})}}
+ const code=await cli.main(['menu'],{io:{isTTY:true,write:x=>messages.push(x),ask:async()=>answers.shift()},services})
+ assert.equal(code,0);assert.equal(attempts,1);assert.match(messages.join(''),/路径为空/);assert.match(messages.join(''),/请输入完整路径/)
+})
+test('a discovered unsupported Desktop is shown as the actual reason instead of asking the user to keep searching',async()=>{
+ const messages=[]
+ const services={discover:async()=>({hosts:[],desktop:[{version:'0.12.0',appPath:'/Applications/DSH Desktop.app'}]}),locate:async()=>{}}
+ assert.equal(await cli.main(['menu'],{io:{isTTY:true,write:x=>messages.push(x),ask:async()=> 'q'},services}),0)
+ assert.match(messages.join(''),/已找到桌面应用，但当前安装器不能向它安装插件/)
+})
+test('a supported Desktop is selectable without asking the user for a CLI path',async()=>{
+ const desktop={version:'0.12.0',supported:true,appPath:'/Applications/DSH Desktop.app'},messages=[];let opened
+ const services={discover:async()=>({hosts:[],desktop:[desktop]}),openDesktop:async d=>{opened=d;return 0},locate:async()=>{throw Error('must not search again')}}
+ const code=await cli.main(['menu'],{io:{isTTY:true,write:x=>messages.push(x),ask:async()=> '1'},services})
+ assert.equal(code,0);assert.equal(opened,desktop);assert.match(messages.join(''),/使用应用自带 DSH/)
+})
+test('a Desktop host selected after handoff opens the action menu instead of relaunching',async()=>{
+ const answers=['1','q'],messages=[]
+ const host={hostId:'desktop-host',kind:'official-desktop',version:'0.2.0-rc.2',desktop:{version:'0.12.0'},profileName:'web',profileDir:'/data/profiles/web'}
+ const code=await cli.main(['menu'],{services:{discover:async()=>({hosts:[host],desktop:[]})},io:{isTTY:true,write:x=>messages.push(x),ask:async()=>answers.shift()}})
+ assert.equal(code,0);assert.match(messages.join(''),/安装 \/ 替换离线成品包/)
+})

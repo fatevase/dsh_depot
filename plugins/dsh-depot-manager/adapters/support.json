@@ -1,1 +1,14 @@
-{"schemaVersion":1,"hosts":[],"note":"Only actual integration evidence can promote a target/runtime combination. Desktop writes remain disabled."}
+{
+  "schemaVersion": 1,
+  "hosts": [
+    {
+      "kind": "official-desktop",
+      "desktopVersion": "0.12.0",
+      "dshVersion": "0.2.0-rc.2",
+      "target": "macos-arm64",
+      "evidence": "docs/evidence/offline-manager-desktop-2026-10-19/report.json",
+      "validation": "isolated-profile-and-authenticated-page"
+    }
+  ],
+  "note": "Other Desktop versions/platforms remain unavailable; installer releases remain preview until complete matrix acceptance."
+}
