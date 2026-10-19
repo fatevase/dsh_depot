@@ -8,8 +8,8 @@
       "paths": [
         "distribution/candidate-builds.json",
         "distribution/candidate-ci.mjs",
-        "distribution/lib/candidate-build.mjs",
-        "distribution/test/candidate-build.test.mjs",
+        "distribution/lib/**",
+        "distribution/test/**",
         ".github/workflows/candidate-builds.yml"
       ]
     },
@@ -17,8 +17,8 @@
       "paths": [
         "distribution/candidate-builds.json",
         "distribution/candidate-ci.mjs",
-        "distribution/lib/candidate-build.mjs",
-        "distribution/test/candidate-build.test.mjs",
+        "distribution/lib/**",
+        "distribution/test/**",
         ".github/workflows/candidate-builds.yml"
       ]
     },
@@ -70,7 +70,7 @@
           "run": "npm ci --ignore-scripts --registry=https://registry.npmjs.org"
         },
         {
-          "run": "node --test distribution/test/candidate-build.test.mjs"
+          "run": "node --test distribution/test/*.test.mjs"
         }
       ]
     },
@@ -171,7 +171,7 @@
           "uses": "actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9",
           "with": {
             "name": "candidate-batch-${{ matrix.batch }}-${{ matrix.target }}",
-            "path": ".runtime/candidate-builds/results/*/receipt.json\n.runtime/candidate-builds/results/*/*-*.log\n.runtime/candidate-builds/results/*/package-lock.json\n.runtime/candidate-builds/results/*/pnpm-lock.yaml\n.runtime/candidate-builds/results/*/packages/*.tgz",
+            "path": ".runtime/candidate-builds/results/*/receipt.json\n.runtime/candidate-builds/results/*/*-*.log\n.runtime/candidate-builds/results/*/dependency-locks/**/*\n.runtime/candidate-builds/results/*/package-lock.json\n.runtime/candidate-builds/results/*/pnpm-lock.yaml\n.runtime/candidate-builds/results/*/packages/*",
             "retention-days": 7,
             "if-no-files-found": "warn",
             "include-hidden-files": true

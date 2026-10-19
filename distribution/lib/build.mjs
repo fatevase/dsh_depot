@@ -1,7 +1,10 @@
 import { runtimeTarget } from './platform.mjs'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
-import { mkdir, copyFile, writeFile, readFile } from 'node:fs/promises'
+import { mkdir, copyFile, writeFile, readFile, rm } from 'node:fs/promises'
+import { createWriteStream } from 'node:fs'
+import { Transform } from 'node:stream'
+import { pipeline } from 'node:stream/promises'
 import { execFile } from 'node:child_process'
 import { promisify } from 'node:util'
 import { randomUUID } from 'node:crypto'
@@ -9,18 +12,24 @@ import { atomicJson, readJson, fileDigest, jsonDigest, within, buildKey, safeRel
 import { hostEnvironmentDigest } from './host-environment.mjs'
 import { isolatedEnv, runCommand, commandArgv, prepareTools } from './process.mjs'
 const execute = promisify(execFile)
-export async function extractArchive(archive, directory, { strip = 1, exclude = [], python = process.platform === 'win32' ? 'python' : 'python3' } = {}) {
-  try { await execute(python, [fileURLToPath(new URL('./archive.py', import.meta.url)), archive, directory, '--strip', String(strip), ...exclude.flatMap(p=>['--exclude',safeRelative(p)])], { maxBuffer: 1024 * 1024 }) } catch (error) { throw new Error(`Unsafe or invalid archive: ${error.stderr || error.message}`) }
+export async function extractArchive(archive, directory, { strip = 1, exclude = [], links = 'reject', python = process.platform === 'win32' ? 'python' : 'python3' } = {}) {
+  try { await execute(python, [fileURLToPath(new URL('./archive.py', import.meta.url)), archive, directory, '--strip', String(strip), '--links', links, ...exclude.flatMap(p=>['--exclude',safeRelative(p)])], { maxBuffer: 1024 * 1024 }) } catch (error) { throw new Error(`Unsafe or invalid archive: ${error.stderr || error.message}`) }
   return directory
 }
-export async function downloadArchive(url, output) {
+export async function downloadArchive(url, output, { maxBytes = 536870912, sha256 } = {}) {
   if (!url.startsWith('https://')) throw new Error('Source archive requires HTTPS')
+  if (!Number.isSafeInteger(maxBytes) || maxBytes < 1 || maxBytes > 2147483648) throw new Error('Invalid download size limit')
   const response = await fetch(url, { signal: AbortSignal.timeout(120000) })
   if (!response.ok) throw new Error(`Archive download HTTP ${response.status}`)
-  if (+response.headers.get('content-length') > 536870912) throw new Error('Archive download too large')
-  let total = 0; const chunks = []
-  for await (const chunk of response.body) { total += chunk.length; if (total > 536870912) throw new Error('Archive download too large'); chunks.push(chunk) }
-  await writeFile(output, Buffer.concat(chunks)); return output
+  if (+response.headers.get('content-length') > maxBytes) { await response.body?.cancel(); throw new Error(`Archive download too large (limit ${maxBytes} bytes)`) }
+  let total = 0, created = false
+  try {
+    const destination = createWriteStream(output, {flags:'wx'})
+    destination.once('open', () => { created = true })
+    await pipeline(response.body, new Transform({ transform(chunk, encoding, callback) { total += chunk.length; callback(total > maxBytes ? new Error(`Archive download too large (limit ${maxBytes} bytes)`) : null, chunk) } }), destination)
+    if (sha256 && (!/^[a-f0-9]{64}$/.test(sha256) || await fileDigest(output) !== sha256)) throw new Error('Downloaded artifact checksum mismatch')
+    return output
+  } catch (error) { if (created) await rm(output, {force:true}); throw error }
 }
 export async function buildTask(task, { recipe, workDir, tools, sourceArchive } = {}) {
   const receiptDir = path.resolve(workDir)
@@ -63,7 +72,7 @@ export async function buildTask(task, { recipe, workDir, tools, sourceArchive } 
     const authored = path.join(workDir, 'authored'); await mkdir(authored)
     const packed = await runCommand({ argv: [...tools.npm, 'pack', '--ignore-scripts', '--json', '--pack-destination', authored], cwd: packageRoot, env, logFile: path.join(workDir, 'authored-pack.log') })
     if (packed.exitCode) throw new Error(`Authored pack failed: ${packed.output.slice(-1000)}`)
-    const filename = JSON.parse(packed.output)[0].filename
+    const filename = JSON.parse(packed.stdout)[0].filename
     const { packageRuntime } = await import('./package.mjs')
     const packaged = await packageRuntime({ task, recipe, builtPackage: path.join(authored, filename), sourceDir: packageRoot, workDir: path.join(workDir, 'runtime'), tools })
     Object.assign(receipt, packaged, { timings: { ...receipt.timings, ...packaged.timings }, sourceArchiveSha256: receipt.sourceArchiveSha256 })
