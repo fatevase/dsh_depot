@@ -1,6 +1,6 @@
 # DSH 离线插件管理器
 
-在 DSH 内查看、安装和移除离线插件，支持拖入已构建的 .tgz 或成品目录，卸载默认保留配置和业务数据。
+在 DSH「设置 → 本地插件」中查看、安装和移除离线插件。上方拖入已构建的 .tgz 或成品目录，下方显示插件列表与卸载操作。页面使用宿主主题变量，随 DSH Desktop 自动切换浅深主题。卸载默认保留配置和业务数据。
 
 `plugin/` 是装入 DSH 的插件，`core/`、`adapters/`、`worker/` 管理检查与操作，`bootstrap/` 提供终端安装入口。build.mjs 生成已编译的标准插件，build-bootstrap.mjs 将插件与入口放进完整包或轻量包。构建验证与发布编排位于 `distribution/manager/`。
 

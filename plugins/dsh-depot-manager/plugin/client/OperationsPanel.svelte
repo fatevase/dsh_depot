@@ -1,5 +1,19 @@
-<script>import {stateLabel} from './state.mjs';let {items=[],oncancel=()=>{}}=$props()</script>
-<section class="panel"><div class="section-title"><span class="number">04</span><h2>操作记录</h2></div>
- {#if !items.length}<p class="empty">安装、卸载和恢复记录会保存在本机。</p>{/if}
- {#each items as op (op.operationId)}<div class="operation"><div class="list-row"><strong>{op.result?.packageName??op.operationId}</strong><span class="badge" class:warning={['waiting_for_host_exit','recovery_required','awaiting_reload'].includes(op.state)} class:success={op.state==='succeeded'}>{op.state==='cancelled'&&op.result?.supersededBy?'已被后续操作替换':op.result?.batch&&op.state==='succeeded'?'批次已完成':op.result?.removed&&op.state==='succeeded'?'已移除':stateLabel(op.state)}</span></div><small>任务 {op.operationId}</small>{#each op.result?.items??[] as item}<p>{item.packageName} · {stateLabel(item.state)}</p>{/each}{#if op.error}<p class="error">{op.error.code}：{op.error.message}</p>{/if}{#if op.state==='failed'}<p>未自动回滚。请查看错误日志，修正后重新安装相同成品或先前版本。</p>{/if}{#if ['waiting_for_host_exit','recovery_required'].includes(op.state)}<p>重跑外部脚本，选择“继续待处理任务”或“恢复任务”。恢复旧版完整恢复点前需要退出 DSH。</p>{/if}{#if ['applying','backing_up','queued'].includes(op.state)}<button class="secondary" onclick={()=>oncancel(op.operationId)}>取消</button>{/if}</div>{/each}
-</section>
+<script>
+ import {stateLabel} from './state.mjs'
+ let {items = [], oncancel = () => {}} = $props()
+ const label = operation => operation.result?.removed && operation.state === 'succeeded' ? '已卸载' : stateLabel(operation.state)
+</script>
+
+<ul class="depot-operation-list">
+ {#each [...items].sort((a, b) => b.updatedAt - a.updatedAt) as operation (operation.operationId)}
+  <li>
+   <div class="depot-row">
+    <span>{operation.result?.packageName ?? '插件操作'}</span>
+    <span class="depot-muted">{label(operation)}</span>
+   </div>
+   {#if operation.error}<p class="depot-error">{operation.error.message}</p>{/if}
+   {#if ['waiting_for_host_exit', 'recovery_required'].includes(operation.state)}<p class="depot-muted">请从外部安装脚本继续此操作。</p>{/if}
+   {#if ['applying', 'backing_up', 'queued'].includes(operation.state)}<button class="depot-button depot-outline depot-small" onclick={() => oncancel(operation.operationId)}>取消操作</button>{/if}
+  </li>
+ {/each}
+</ul>

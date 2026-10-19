@@ -3,26 +3,166 @@
  import ImportPanel from './ImportPanel.svelte'
  import InstalledPanel from './InstalledPanel.svelte'
  import OperationsPanel from './OperationsPanel.svelte'
- import {emptyState,reduceManagerState} from './state.mjs'
- let {client,initialState=emptyState()}=$props(),state=$state(initialState),busy=$state(false),error=$state(''),plan=$state(null),accepted=$state(false)
- const dispatch=event=>state=reduceManagerState(state,event)
- async function refresh(){const [host,installed,operations]=await Promise.all([client.current(),client.installed(),client.operations()]);dispatch({type:'host',value:host});dispatch({type:'installed',value:installed});dispatch({type:'operations',value:operations})}
- async function act(fn){busy=true;error='';try{await fn()}catch(e){error=`${e.code??'操作失败'}：${e.message}`}finally{busy=false}}
- async function importGroups(groups,e){if(e){error=e.message;return}await act(async()=>{if(groups.length>20)throw new Error('每批最多 20 项');for(const files of groups){try{dispatch({type:'import',value:await client.importFiles(files)})}catch(e){dispatch({type:'import',value:{importId:crypto.randomUUID(),packageName:files[0]?.file.name??'导入项',blockers:[{code:e.code,message:e.message}],warnings:[],checks:{}}})}}})}
- async function preview(item){await act(async()=>{plan=await client.plan({action:'install',importId:item.importId,acceptUnverified:accepted})})}
- async function remove(item){await act(async()=>{plan=await client.plan({action:'remove',packageName:item.name,installedFingerprint:item.fingerprint})})}
- async function execute(){await act(async()=>{dispatch({type:'operation',value:await (plan.batchId?client.startBatch(plan.batchId):client.start(plan.planId))});plan=null;await refresh()})}
- onMount(()=>{if(!client)return;refresh().catch(e=>error=e.message);const timer=setInterval(()=>refresh().catch(()=>dispatch({type:'connection',value:'disconnected'})),2500);return()=>clearInterval(timer)})
+ import {emptyState, reduceManagerState} from './state.mjs'
+
+ let {client, initialState = emptyState()} = $props()
+ let state = $state(initialState)
+ let busy = $state(false)
+ let progress = $state('')
+ let error = $state('')
+ let feedback = $state('')
+ let selection = $state(null)
+ let accepted = $state(false)
+ let dialog = $state()
+ let alive = true
+ let refreshing = false
+ const visiblePlugins = $derived(state.installed.filter(item => item.installed !== false && !item.name.startsWith('@deepseek-ai/')))
+ const dispatch = event => { if (alive) state = reduceManagerState(state, event) }
+
+ async function refresh() {
+  if (refreshing) return
+  refreshing = true
+  try {
+   const [host, installed, operations] = await Promise.all([client.current(), client.installed(), client.operations()])
+   dispatch({type: 'host', value: host})
+   dispatch({type: 'installed', value: installed})
+   dispatch({type: 'operations', value: operations})
+  } finally { refreshing = false }
+ }
+
+ async function act(fn) {
+  if (busy) return
+  busy = true
+  error = ''
+  feedback = ''
+  try { await fn() } catch (e) { error = e.message }
+  finally { busy = false; progress = '' }
+ }
+
+ async function importGroups(groups, failure) {
+  if (failure) { error = failure.message; return }
+  await act(async () => {
+   if (groups.length > 20) throw new Error('一次最多选择 20 个安装包')
+   for (const files of groups) {
+    progress = `正在检查 ${files[0]?.file.name ?? '安装包'}…`
+    try { dispatch({type: 'import', value: await client.importFiles(files)}) }
+    catch (e) {
+     dispatch({type: 'import', value: {
+      importId: crypto.randomUUID(), packageName: files[0]?.file.name ?? '安装包',
+      blockers: [{code: e.code, message: e.message}], warnings: [], checks: {},
+     }})
+    }
+   }
+  })
+ }
+
+ function confirm(action, item) {
+  error = ''
+  accepted = false
+  selection = {action, item}
+ }
+
+ async function execute() {
+  const request = selection
+  await act(async () => {
+   const removing = request.action === 'remove'
+   progress = removing ? '正在卸载…' : '正在安装…'
+   const plan = await client.plan(removing
+    ? {action: 'remove', packageName: request.item.name, installedFingerprint: request.item.fingerprint}
+    : {action: 'install', importId: request.item.importId, acceptUnverified: accepted})
+   const operation = await client.start(plan.planId)
+   dispatch({type: 'operation', value: operation})
+   selection = null
+   if (operation.error) error = operation.error.message
+   else {
+    feedback = removing
+     ? `已卸载 ${request.item.name}，配置和数据已保留。`
+     : `${plan.packageName} ${plan.version} 已安装，重启 DSH 后生效。`
+    if (!removing) dispatch({type: 'dismiss-import', importId: request.item.importId})
+   }
+   await refresh()
+  })
+ }
+
+ $effect(() => {
+  if (!dialog) return
+  if (selection && !dialog.open) dialog.showModal()
+  if (!selection && dialog.open) dialog.close()
+ })
+
+ onMount(() => {
+  alive = true
+  refresh().catch(e => { error = e.message })
+  const timer = setInterval(() => refresh().catch(() => dispatch({type: 'connection', value: 'disconnected'})), 2500)
+  return () => { alive = false; clearInterval(timer) }
+ })
 </script>
-<svelte:head><title>离线插件 · DSH</title></svelte:head>
-<div class="manager-shell"><header><a class="back" href="/">← 返回 DSH</a><div class="brand">DSH <span>/</span> 离线插件</div><span class="connection">{state.connection==='connected'?'已连接当前宿主':'正在读取宿主状态'}</span></header>
- <main><div class="intro"><div><span class="eyebrow">LOCAL PLUGIN MANAGER</span><h1>本机插件，有序管理。</h1><p>检查离线包，确认环境，再安装。每一步都留下可查看的记录。</p></div><span class="version">v0.1.0</span></div>
- <section class="environment" aria-label="当前环境"><div><span class="eyebrow">当前环境</span><strong>{state.host?.profileName??'正在读取'}</strong></div><div><span>宿主</span><strong>{state.host?.kind??'—'} {state.host?.version??''}</strong></div><div><span>平台 / 运行时</span><strong>{state.host?.runtimeTarget??'—'} · Node {state.host?.runtime?.node??'—'}</strong></div><span class="badge neutral">仅管理此环境</span></section>
- {#if error}<p role="alert" class="error notice">{error}</p>{/if}
- <div class="workspace"><div class="primary"><ImportPanel onimport={importGroups} {busy}/>
- <section class="panel"><div class="section-title"><span class="number">02</span><h2>安装预览</h2></div>{#if state.imports.filter(i=>!i.blockers?.length).length>1}<button class="secondary" disabled={busy} onclick={()=>act(async()=>{plan=await client.batchPlan({importIds:state.imports.filter(i=>!i.blockers?.length).map(i=>i.importId),acceptUnverified:accepted})})}>批量预览 {state.imports.filter(i=>!i.blockers?.length).length} 项</button>{/if}{#if !state.imports.length}<p class="empty">导入后查看插件版本、完整性与验证状态。</p>{/if}
- {#each state.imports as item (item.importId)}<article class="import-row"><div class="list-row"><strong>{item.packageName} <small>{item.version??''}</small></strong><span class="badge" class:warning={!item.checks?.publication}>{item.blockers?.length?'已阻止':item.checks?.publication?'有对应验证证据':'未验证包'}</span></div><p class="subtle">{item.target??'未声明平台'} · 文件完整性：{item.checks?.integrity?'已核对':'未提供包内清单'}</p>{#each item.warnings??[] as warning}<p class="warning-text">{warning.code} {warning.message??''}</p>{/each}{#each item.blockers??[] as blocker}<p class="error">{blocker.code} {blocker.message??''}</p>{/each}<button class="secondary" disabled={busy||!!item.blockers?.length} onclick={()=>preview(item)}>查看变更</button></article>{/each}
- {#if state.imports.some(x=>x.warnings?.length)}<label class="accept"><input type="checkbox" bind:checked={accepted}/>我已了解未验证条件，允许尝试可检查的包</label>{/if}
- {#if plan}<div class="plan"><h3>确认{plan.batchId?'批量安装':plan.action==='remove'?'卸载':plan.action==='replace'?'替换':'安装'} {plan.packageName??''}</h3>{#each plan.items??[] as item}<p>{item.packageName} · {item.version}</p>{/each}<p>目标：{state.host?.profileName} · {plan.previousVersion??'未安装'} → {plan.version??'移除'}</p><p>检查成品后直接调用目标 DSH 安装，不扫描或备份整个依赖目录。{plan.action==='remove'?'保留用户数据。':''}</p>{#if plan.requiresExit}<p class="warning-text">此宿主需退出后执行。确认后保存任务，再运行外部脚本继续。</p>{/if}<div class="actions"><button disabled={busy} onclick={execute}>{plan.requiresExit?'确认并保存任务':'确认安装'}</button><button class="secondary" onclick={()=>plan=null}>取消预览</button></div></div>{/if}
- </section><InstalledPanel items={state.installed} onremove={remove} {busy}/></div><aside><OperationsPanel items={state.operations} oncancel={id=>act(()=>client.cancel(id))}/><div class="help"><strong>遇到中断时</strong>{#if state.host?.capabilities?.toolkitEntry}<p>外部维护入口：<code style="overflow-wrap:anywhere">{state.host.capabilities.toolkitEntry}</code></p>{:else}<p>尚未注册维护工具，请先运行安装脚本。</p>{/if}<p>重跑安装脚本可查看任务记录。常规安装完成后重启 DSH；恢复旧版完整恢复点前需退出。新安装不创建完整恢复点；旧版恢复点仍可恢复。等待加载不代表失败；不要反复安装同一份包。</p></div></aside></div>
- </main><footer>运行依赖来自离线包；插件的在线业务功能仍可能需要网络。</footer></div>
+
+<div class="depot-settings" aria-busy={busy}>
+ <h2>本地插件</h2>
+ <ImportPanel onimport={importGroups} busy={busy || state.connection !== 'connected'} />
+
+ <div class="depot-status" aria-live="polite">
+  {#if progress}<p class="depot-muted">{progress}</p>{/if}
+  {#if feedback}<p>{feedback}</p>{/if}
+  {#if error}<p class="depot-error" role="alert">{error}</p>{/if}
+  {#if state.connection === 'disconnected'}
+   <p class="depot-error">连接已断开。<button class="depot-link" onclick={() => act(refresh)}>重新连接</button></p>
+  {/if}
+ </div>
+
+ {#if state.imports.length}
+  <section class="depot-pending" aria-label="待安装">
+   {#each state.imports as item (item.importId)}
+    <div class="depot-import">
+     <div class="depot-row">
+      <div class="depot-identity"><strong>{item.packageName}</strong>{#if item.version}<span class="depot-muted">{item.version}</span>{/if}</div>
+      <div class="depot-actions">
+       <button class="depot-button depot-primary depot-small" disabled={busy || !!item.blockers?.length} onclick={() => confirm('install', item)}>
+        {visiblePlugins.some(p => p.name === item.packageName) ? '替换' : '安装'}
+       </button>
+       <button class="depot-icon-button" aria-label={`移除待安装项 ${item.packageName}`} disabled={busy} onclick={() => dispatch({type: 'dismiss-import', importId: item.importId})}>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"/></svg>
+       </button>
+      </div>
+     </div>
+     {#each item.blockers ?? [] as blocker}<p class="depot-error">{blocker.message}</p>{/each}
+    </div>
+   {/each}
+  </section>
+ {/if}
+
+ <InstalledPanel items={visiblePlugins} onremove={item => confirm('remove', item)} {busy} loading={state.connection === 'connecting'} />
+
+ {#if state.operations.length}
+  <details class="depot-history">
+   <summary>操作记录 <span class="depot-muted">{state.operations.length}</span></summary>
+   <OperationsPanel items={state.operations} oncancel={id => act(() => client.cancel(id))} />
+  </details>
+ {/if}
+
+ <dialog class="depot-confirm" bind:this={dialog} aria-labelledby="depot-confirm-title" onclose={() => { selection = null }} oncancel={event => { if (busy) event.preventDefault(); else selection = null }}>
+  {#if selection}
+   {@const removing = selection.action === 'remove'}
+   <h3 id="depot-confirm-title">{removing ? '卸载插件' : '安装插件'}</h3>
+   <p class="depot-confirm-name">{removing ? selection.item.name : selection.item.packageName}</p>
+   {#if selection.item.version}<p class="depot-muted">{selection.item.version}</p>{/if}
+   {#if removing}
+    <p>卸载后保留插件的配置和数据。</p>
+   {:else}
+    {#if visiblePlugins.some(p => p.name === selection.item.packageName)}<p>当前已安装的版本将被替换。</p>{/if}
+    {#if selection.item.warnings?.length}
+     <details class="depot-checks"><summary>安装包检查结果</summary>{#each selection.item.warnings as warning}<p>{warning.message}</p>{/each}</details>
+     <label class="depot-trust"><input type="checkbox" bind:checked={accepted} />我已了解检查结果，信任此安装包</label>
+    {/if}
+   {/if}
+   {#if error}<p role="alert" class="depot-error">{error}</p>{/if}
+   <div class="depot-confirm-actions">
+    <button class="depot-button depot-outline" disabled={busy} onclick={() => { selection = null }}>取消</button>
+    <button class="depot-button" class:depot-danger={removing} class:depot-primary={!removing} disabled={busy || (!removing && !!selection.item.warnings?.length && !accepted)} onclick={execute}>
+     {busy ? progress : removing ? '卸载' : '安装'}
+    </button>
+   </div>
+  {/if}
+ </dialog>
+</div>
