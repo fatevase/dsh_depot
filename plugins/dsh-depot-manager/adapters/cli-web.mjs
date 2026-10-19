@@ -77,7 +77,7 @@ export function cliWebAdapter({runningProbe=hostIsRunning,loadPublicServices,own
     const flags=['--offline','--ignore-scripts','--config.auto-install-peers=false','--config.manage-package-manager-versions=false']
     const options={...host.packageManager,execution:'service',outputBytes:262144,lockWaitMs:10000,lookupTimeoutMs:10000,idleTimeoutMs:30000,signal,env:{...host.packageManager?.env,npm_config_offline:'true',npm_config_ignore_scripts:'true',npm_config_auto_install_peers:'false',npm_config_manage_package_manager_versions:'false',COREPACK_ENABLE_NETWORK:'0'}}
     const perform=async(dir,args,store)=>{
-     const r=await operations.runProfilePnpm({profile:host.profileName,dir,home:host.home,installAnchor:path.join(host.dshRoot,'package.json'),cwd:dir},args,{...options,args:[...(options.args??[]),'--config.offline=true','--config.ignore-scripts=true','--config.auto-install-peers=false','--config.manage-package-manager-versions=false','--config.store-dir='+(store??args[args.indexOf('--store-dir')+1])],env:policyEnv(host.packageManager?.env,store??args[args.indexOf('--store-dir')+1])})
+     const r=await operations.runProfilePnpm({profile:host.profileName,dir,home:host.home,installAnchor:path.join(host.dshRoot,'package.json'),cwd:dir},args,{...options,args:[...(options.args??[]),'--config.offline=true','--config.ignore-scripts=true','--config.auto-install-peers=false','--config.manage-package-manager-versions=false',...(args.some(a=>a.startsWith('--config.store-dir='))?[]:['--config.store-dir='+(store??args[args.indexOf('--store-dir')+1])])],env:policyEnv(host.packageManager?.env,store??args[args.indexOf('--store-dir')+1])})
      if(r.exitCode!==0)fail('PACKAGE_OPERATION_FAILED','离线包操作失败',{exitCode:r.exitCode,output:r.output,logPath:r.logPath});return r
     }
     let installedStore
@@ -91,7 +91,7 @@ export function cliWebAdapter({runningProbe=hostIsRunning,loadPublicServices,own
     const store=installedStore??path.join(action.storeDir,'target-store')
     return perform(host.profileDir,action.action==='remove'?['remove',action.packageName,'--config.offline=true','--config.ignore-scripts=true','--config.auto-install-peers=false','--config.manage-package-manager-versions=false','--config.store-dir='+store]:['add',action.path,...flags,'--store-dir',store],store)
    },
-   async compose(){const r=await runHostCommand({executable:host.nodePath,args:[...host.launch.args,'--dump-config'],cwd:host.profileDir,envAllowlist:{DSH_HOME:host.home}},{signal});if(r.exitCode||/skipping profile bundle|failed to import/i.test(r.stderr))fail('COMPOSE_FAILED','DSH 配置合成失败',{output:r.stderr});return r.stdout}
+   async compose(){const r=await runHostCommand({executable:host.nodePath,args:[...host.launch.args,'--dump-config'],cwd:host.profileDir,envAllowlist:{...host.runtimeEnv,DSH_HOME:host.home}},{signal});if(r.exitCode||/skipping profile bundle|failed to import/i.test(r.stderr))fail('COMPOSE_FAILED','DSH 配置合成失败',{output:r.stderr});return r.stdout}
   })},{waitMs:10000})
  }
 }}

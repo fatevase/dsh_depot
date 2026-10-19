@@ -9,7 +9,8 @@ import {fileURLToPath,pathToFileURL} from 'node:url'
 import {readFile,mkdir} from 'node:fs/promises'
 import {createInterface} from 'node:readline/promises'
 import {discoverEnvironments,probeHost} from '../adapters/discover.mjs'
-import {cliWebAdapter} from '../adapters/cli-web.mjs'
+import {adapterFor} from '../adapters/select.mjs'
+import {openDesktopInstaller} from './desktop.mjs'
 import {inspectArtifact} from '../core/inspect.mjs'
 import {createOperationPlan} from '../core/plans.mjs'
 import {executePlan,recoverOperation,readOperation,inspectRecovery} from '../core/operations.mjs'
@@ -36,14 +37,15 @@ export async function createServices({storeDir=baseDir(),discoveryOptions={}}={}
  const local=id=>path.join(storeDir,'hosts',id)
  return {
   hosts,discover,
+  openDesktop:process.versions.electron&&(discoveryOptions.env??process.env).DSH_DEPOT_DESKTOP_APP?undefined:desktop=>openDesktopInstaller(desktop,{entry:fileURLToPath(import.meta.url),env:{...(discoveryOptions.env??process.env),DSH_DEPOT_SEARCH_PATHS:JSON.stringify(paths)}}),
   async locate(input){let value=input.trim().replace(/^([\"\'])(.*)\1$/,'$2');if(value.startsWith('~/'))value=path.join(os.homedir(),value.slice(2));if(!path.isAbsolute(value))fail('INVALID_PATH','请输入应用、DSH 安装或配置目录的完整路径');paths.push(value);return discover()},
   async inspect(args){const host=await selected(args.host);const inspection=await inspectArtifact({path:args.file,host,workDir:path.join(local(host.hostId),'imports')});const plan=await createOperationPlan({host,inspection,action:'install',acceptUnverified:args['accept-unverified']});plan.ownerId=host.ownerId;await atomicJson(path.join(storeDir,'plans',plan.planId+'.json'),plan);return {planId:plan.planId,hostId:host.hostId,packageName:plan.packageName,version:plan.version,previousVersion:plan.previousVersion,action:plan.action,warnings:inspection.warnings,requiresExit:plan.requiresExit,expiresAt:plan.expiresAt}},
-  async execute(args){const plan=await readJson(path.join(storeDir,'plans',safeId(args.plan)+'.json'));const host=await selected(plan.hostId);if(args.host&&args.host!==host.hostId)fail('HOST_CHANGED','环境与预览不符');const refreshed=await probeHost(host);return executePlan(plan,{host:refreshed,adapter:cliWebAdapter(),storeDir:local(host.hostId),quiesced:args['host-exited']===true,signal:args.signal})},
+  async execute(args){const plan=await readJson(path.join(storeDir,'plans',safeId(args.plan)+'.json'));const host=await selected(plan.hostId);if(args.host&&args.host!==host.hostId)fail('HOST_CHANGED','环境与预览不符');const refreshed=await probeHost(host);return executePlan(plan,{host:refreshed,adapter:adapterFor(host),storeDir:local(host.hostId),quiesced:args['host-exited']===true,signal:args.signal})},
   async pending(id){const {operationsIn}=await import('../core/receipts.mjs');return (await operationsIn(local(id))).filter(o=>o.state==='waiting_for_host_exit').map(o=>({operationId:o.operationId,planId:o.planId,packageName:o.plan.packageName}))},
-  async resume(args){const host=await selected(args.host),op=await readOperation(safeId(args.operation),{storeDir:local(host.hostId)});return op.batched?resumeBatch(op.operationId,{host,adapter:cliWebAdapter(),storeDir:local(host.hostId),quiesced:args['host-exited']===true,refreshHost:()=>probeHost(host),signal:args.signal}):executePlan(op.plan,{host:await probeHost(host),adapter:cliWebAdapter(),storeDir:local(host.hostId),quiesced:args['host-exited']===true,signal:args.signal})},
+  async resume(args){const host=await selected(args.host),op=await readOperation(safeId(args.operation),{storeDir:local(host.hostId)});return op.batched?resumeBatch(op.operationId,{host,adapter:adapterFor(host),storeDir:local(host.hostId),quiesced:args['host-exited']===true,refreshHost:()=>probeHost(host),signal:args.signal}):executePlan(op.plan,{host:await probeHost(host),adapter:adapterFor(host),storeDir:local(host.hostId),quiesced:args['host-exited']===true,signal:args.signal})},
   async status(args){const found=[];for(const host of await hosts()){try{found.push(await readOperation(safeId(args.operation),{storeDir:local(host.hostId)}))}catch(e){if(e.code!=='ENOENT')throw e}}if(found.length!==1)fail('OPERATION_NOT_FOUND','未找到任务');return publicResult(found[0])},
   async previewRecovery(args){const host=await selected(args.host),preview=await inspectRecovery(safeId(args.operation),{host,storeDir:local(host.hostId)});preview.recoveryPlanId=randomUUID();preview.expiresAt=Date.now()+900000;await atomicJson(path.join(storeDir,'recovery-plans',preview.recoveryPlanId+'.json'),preview);return preview},
-  async recover(args){const preview=await readJson(path.join(storeDir,'recovery-plans',safeId(args.plan)+'.json'));if(Date.now()>=preview.expiresAt)fail('PLAN_EXPIRED','恢复预览已过期');const host=await selected(preview.hostId);return recoverOperation(preview.operationId,{host,adapter:cliWebAdapter(),storeDir:local(host.hostId),expectedCurrentFingerprint:preview.currentFingerprint,quiesced:args['host-exited']===true,signal:args.signal})},
+  async recover(args){const preview=await readJson(path.join(storeDir,'recovery-plans',safeId(args.plan)+'.json'));if(Date.now()>=preview.expiresAt)fail('PLAN_EXPIRED','恢复预览已过期');const host=await selected(preview.hostId);return recoverOperation(preview.operationId,{host,adapter:adapterFor(host),storeDir:local(host.hostId),expectedCurrentFingerprint:preview.currentFingerprint,quiesced:args['host-exited']===true,signal:args.signal})},
   async previewRemove(args){const host=await selected(args.host),name=args.file;if(!name)fail('INPUT_REQUIRED','请提供要移除的插件名');const p=await readJson(path.join(host.profileDir,'package.json'));const plan=await createOperationPlan({host,packageName:name,installedFingerprint:JSON.stringify(p.dependencies?.[name]),action:'remove'});await atomicJson(path.join(storeDir,'plans',plan.planId+'.json'),plan);return publicResult(plan)}
  }
 }
@@ -59,20 +61,27 @@ export async function main(argv,{io,services}={}) {
   if(io.isTTY)io.write(`DSH 离线插件管理器 ${MANAGER_VERSION}\n`)
   if(['install','update','remove'].includes(args.command)&&(!args.plan||args.confirm!==args.plan))fail('INPUT_REQUIRED','执行需要 --plan <编号> --confirm <同一编号>；先 inspect 生成预览')
   if(args.command==='recover'&&args.plan&&args.confirm!==args.plan)fail('INPUT_REQUIRED','恢复需要确认刚生成的恢复计划编号')
-  if(!services){const root=fileURLToPath(new URL('.',import.meta.url));const settings=await readDiscoverySettings(root);if(io.isTTY)io.write(`找不到 DSH 时，可编辑：${settings.file}，或在菜单手动输入路径。\n`);const bundle=await readJson(path.join(root,'bundle.json'),null);if(bundle){const toolkit=await prepareToolkit({root,storeDir:baseDir(),target:undefined});if(io.isTTY)io.write(`维护入口已保存：${toolkit.entryPath}\n`);}services=await createServices({discoveryOptions:settings})}
+  if(!services){const root=fileURLToPath(new URL('.',import.meta.url));const settings=await readDiscoverySettings(root);if(io.isTTY)io.write(`找不到 DSH 时，可编辑：${settings.file}，或在菜单手动输入路径。\n`);const bundle=await readJson(path.join(root,'bundle.json'),null);if(bundle){const toolkit=await prepareToolkit({root,storeDir:baseDir(),target:undefined,nodePath:bundle.flavor==='full'?path.join(root,'runtime',process.platform==='win32'?'node.exe':'node'):process.execPath});if(io.isTTY)io.write(`维护入口已保存：${toolkit.entryPath}\n`);}services=await createServices({discoveryOptions:settings})}
   if(args.command==='diagnose'){io.write(JSON.stringify(await services.discover(),null,2)+'\n');return 0}
   if(args.command==='menu'){
    let host
    while(!host){
     const found=services.discover?await services.discover():{hosts:await services.hosts(),desktop:[]}
-    for(const d of found.desktop??[])io.write(`已找到 DSH Desktop ${d.version}：${d.appPath}\n当前安装器尚未接入 Desktop 安装与恢复；识别结果不会自动授予写入权限。\n`)
+    for(const d of found.desktop??[])io.write(`已找到 DSH Desktop ${d.version}：${d.appPath}\n${d.supported?'可选择下面的桌面入口，使用应用自带的 DSH 与运行时。':'已找到桌面应用，但当前安装器不能向它安装插件；继续搜索或手填同一路径不会解除此限制。'}\n`)
     for(const issue of found.issues??[])io.write(`${issue.code}: ${issue.message}\n`)
-    if(!found.hosts.length)io.write('未找到已初始化的 CLI/Web 环境。可指定应用、DSH 安装目录或配置目录继续检查。\n')
-    const choices=found.hosts.map(h=>({label:`${h.kind} ${h.version} / ${h.profileName} / ${h.profileDir}`,value:h}))
+    if(!found.hosts.length&&!found.desktop?.length)io.write('未找到已初始化的 DSH 环境。可指定应用、DSH 安装目录或配置目录继续检查。\n')
+    if(!found.hosts.length&&found.desktop?.length&&!services.openDesktop)io.write('未找到可操作的已初始化配置。请先启动过一次 DSH，或手动指定其配置主目录；仅填写应用路径不会创建配置。\n')
+    const choices=found.hosts.map(h=>({label:`${h.kind==='official-desktop'?'DSH Desktop '+h.desktop.version:'DSH CLI/Web'} · DSH ${h.version} / ${h.profileName} / ${h.profileDir}`,value:h}))
+    if(services.openDesktop&&!found.hosts.some(h=>h.kind==='official-desktop'))for(const d of found.desktop??[])if(d.supported)choices.push({label:`DSH Desktop ${d.version} / 使用应用自带 DSH`,value:{desktop:d}})
     if(services.locate)choices.push({label:'手动指定安装或配置路径 / 重新查找',value:'locate'})
     const selected=await choose(io,'选择要管理的本机 DSH 环境',choices)
     if(!selected)return 0
-    if(selected==='locate'){const input=await io.ask('完整路径（不要添加 shell 转义；q 返回）：');if(input==='q')continue;await services.locate(input);continue}
+    if(selected==='locate'){
+     const input=(await io.ask('完整路径（不要添加 shell 转义；q 返回）：')).trim();if(input==='q')continue
+     if(!input){io.write('路径为空，已返回选择菜单。\n');continue}
+     try{await services.locate(input)}catch(e){if(!['INVALID_PATH','ENOENT','ENOTDIR','EACCES'].includes(e.code))throw e;io.write(`${e.code}: ${e.message}；请重新输入或退出。\n`)}continue
+    }
+    if(selected.desktop&&!selected.hostId){rl?.close();return await services.openDesktop(selected.desktop)}
     host=selected
    }
    const action=await choose(io,'操作',[{label:'安装 / 替换离线成品包',value:'install'},{label:'卸载插件（保留数据）',value:'remove'},{label:'继续待处理任务',value:'resume'},{label:'查看任务',value:'status'},{label:'恢复任务',value:'recover'}]);if(!action)return 0

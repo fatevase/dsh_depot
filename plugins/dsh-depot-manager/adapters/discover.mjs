@@ -7,7 +7,7 @@ import {validateHost} from '../contracts/validate.mjs'
 import {fail} from '../contracts/constants.mjs'
 import {ownershipFacts} from './ownership.mjs'
 import {runHostCommand} from './command.mjs'
-import {locateInstallations} from './locate.mjs'
+import {locateInstallations,desktopAt} from './locate.mjs'
 export const hash=value=>createHash('sha256').update(typeof value==='string'?value:JSON.stringify(value)).digest('hex')
 export async function json(file,fallback){try{return JSON.parse(await readFile(file,'utf8'))}catch(e){if(e.code==='ENOENT'&&fallback!==undefined)return fallback;throw e}}
 export async function hostFingerprint(host){
@@ -23,12 +23,18 @@ export async function probeHost(candidate){
  if(!candidate.nodePath)fail('HOST_RUNTIME_REQUIRED','请明确选择实际 DSH 使用的 Node；不能使用安装器 Node 代替')
  const nodePath=await realpath(candidate.nodePath)
  const ownership=await ownershipFacts(profileDir),ownerId=ownership.ownerId,owned=!ownership.elevated&&ownership.ownerId===ownership.currentId
- const runtime=await runHostCommand({executable:nodePath,args:['-e','console.log(JSON.stringify({source:"host",kind:process.versions.electron?"electron":"node",platform:process.platform,arch:process.arch,node:process.versions.node,abi:process.versions.modules,napi:+process.versions.napi,libc:process.platform==="linux"?{name:process.report.getReport().header.glibcVersionRuntime?"glibc":"unknown",version:process.report.getReport().header.glibcVersionRuntime??""}:null}))'],cwd:profileDir},{timeoutMs:10000})
+ const runtime=await runHostCommand({executable:nodePath,args:['-e','console.log(JSON.stringify({source:"host",kind:process.versions.electron?"electron":"node",platform:process.platform,arch:process.arch,node:process.versions.node,abi:process.versions.modules,napi:+process.versions.napi,libc:process.platform==="linux"?{name:process.report.getReport().header.glibcVersionRuntime?"glibc":"unknown",version:process.report.getReport().header.glibcVersionRuntime??""}:null}))'],cwd:profileDir,envAllowlist:candidate.runtimeEnv},{timeoutMs:10000})
  if(runtime.exitCode)fail('HOST_RUNTIME_REQUIRED','无法检查所选宿主 Node')
  const observed=JSON.parse(runtime.stdout.trim()),req=createRequire(path.join(dshRoot,'package.json'));let operations=false
  try{req.resolve('@deepseek-ai/dsh-plugin-manager/operations');req.resolve('@deepseek-ai/dsh-atomic-write');operations=pkg.version==='0.2.0-rc.2'}catch{}
- const kind=candidate.kind??'cli-web';operations=operations&&owned;if(kind==='official-desktop')operations=false
+ const kind=candidate.kind??'cli-web';operations=operations&&owned
+ let desktop
+ if(kind==='official-desktop'){
+  desktop=candidate.desktop&&await desktopAt(candidate.desktop.appPath)
+  operations=operations&&!!desktop?.supported&&process.versions.electron!==undefined&&observed.kind==='electron'&&nodePath.startsWith(desktop.appPath+path.sep)&&dshRoot===await realpath(path.join(desktop.runtimeRoot,'node_modules/@deepseek-ai/dsh'))
+ }
  const host={schemaVersion:1,hostId:hash({dshRoot,profileDir}).slice(0,24),kind,version:pkg.version,profileName,profileDir,home:await realpath(candidate.home??path.resolve(profileDir,'../..')),dshRoot,nodePath,ownerId,runtime:observed,launch:{executable:nodePath,args:['--expose-internals',path.join(dshRoot,'lib/bin.js'),'--profile',profileName]},packageManager:candidate.packageManager??{command:'pnpm',args:[]},capabilities:{inspect:true,offlineInstall:operations,remove:operations,writeSession:operations,requiresExit:true,survivesHostExit:false,blockedReason:operations?null:!owned?'PROFILE_OWNER_MISMATCH':'HOST_CAPABILITY_UNVERIFIED'}}
+ if(kind==='official-desktop'){host.desktop=desktop;host.runtimeEnv={ELECTRON_RUN_AS_NODE:'1'}}
  host.fingerprint=await hostFingerprint(host);return validateHost(host)
 }
 export async function discoverEnvironments(options={}){

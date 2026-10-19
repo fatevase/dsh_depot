@@ -7,7 +7,8 @@ import {registeredToolkit} from '../../bootstrap/toolkit.mjs'
 import {atomicJson} from '../../core/files.mjs'
 import {pruneRetention} from '../../core/retention.mjs'
 import {probeHost} from '../../adapters/discover.mjs'
-import {cliWebAdapter} from '../../adapters/cli-web.mjs'
+import {adapterFor} from '../../adapters/select.mjs'
+import {desktopAt} from '../../adapters/locate.mjs'
 import {createManagerApi} from './api.mjs'
 import {uploadChunk} from './upload.mjs'
 import {operationsIn,readOperation,saveOperation} from '../../core/receipts.mjs'
@@ -18,14 +19,15 @@ export const inject=['profileContext','connection','pluginManager','webServer']
 export async function currentEnvironment(ctx) {
  const p=ctx.profileContext
  if(!p?.dir||!p?.installAnchor)fail('HOST_CONTEXT_REQUIRED','缺少公开配置上下文')
- const host=await probeHost({kind:'cli-web',profileName:p.name,profileDir:p.dir,home:p.home,dshRoot:path.dirname(await realpath(p.installAnchor)),nodePath:process.execPath,packageManager:p.packageManager})
+ const root=path.dirname(await realpath(p.installAnchor)),desktop=process.versions.electron?await desktopAt(root):null
+ const host=await probeHost({kind:desktop?'official-desktop':'cli-web',desktop,runtimeEnv:desktop?{ELECTRON_RUN_AS_NODE:'1'}:undefined,profileName:p.name,profileDir:p.dir,home:p.home,dshRoot:path.dirname(await realpath(p.installAnchor)),nodePath:process.execPath,packageManager:p.packageManager})
  const toolkit=await registeredToolkit(path.join(depotDataHome(),'manager'));host.capabilities.externalToolkit=!!toolkit;host.capabilities.toolkitEntry=toolkit?.entryPath??null;return host
 }
 export async function apply(ctx) {
  const host=await currentEnvironment(ctx),ownerId=host.ownerId,storeDir=path.join(depotDataHome(),'manager','hosts',host.hostId)
  await atomicJson(path.join(storeDir,'host-live.json'),{hostId:host.hostId,pid:process.pid,startedAt:Date.now()})
  await pruneRetention({storeDir,profileDir:host.profileDir,hostId:host.hostId}).catch(()=>{})
- const api=createManagerApi({host,ownerId,storeDir,adapter:cliWebAdapter(),listBundles:()=>ctx.pluginManager.listBundles()})
+ const api=createManagerApi({host,ownerId,storeDir,adapter:adapterFor(host),listBundles:()=>ctx.pluginManager.listBundles()})
  const disposers=[],root=fileURLToPath(new URL('.',import.meta.url))
  // The public Connection registry supplies Host/Origin admission and browser authentication.
  disposers.push(ctx.connection.fetch.register({path:'/api/depot/rpc',methods:['POST'],requestBody:'buffered',async fetch(request){

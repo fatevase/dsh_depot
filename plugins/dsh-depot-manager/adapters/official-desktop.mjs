@@ -1,2 +1,21 @@
+import path from 'node:path'
 import {fail} from '../contracts/constants.mjs'
-export function officialDesktopAdapter(){return{async isRunning(){return true},async launch(host){return host.launch},async withWriteSession(){fail('DESKTOP_CAPABILITY_UNVERIFIED','尚未完成该桌面版本公开写入和恢复验证，请保留原版插件安装入口')}}}
+import {cliWebAdapter} from './cli-web.mjs'
+import {runningProcesses} from './locate.mjs'
+export async function desktopIsRunning(host,{processes}={}){
+ if(!host.desktop?.appPath)fail('DESKTOP_CAPABILITY_UNVERIFIED','缺少已验证的桌面安装身份')
+ const root=host.desktop.appPath+path.sep
+ for(const row of processes??await runningProcesses()){
+  if(row.pid===process.pid)continue
+  const command=(row.command??'').replace(/^"/,'')
+  if(command.startsWith(root)||/[/\\](?:DSH Desktop(?: Helper[^/\\]*)?|dsh-desktop)(?:\.exe)?(?:["'\s]|$)/i.test(command))return true
+ }
+ return false
+}
+export function officialDesktopAdapter({runningProbe=desktopIsRunning,...options}={}){
+ const adapter=cliWebAdapter({...options,runningProbe})
+ return {...adapter,async withWriteSession(host,fn,context){
+  if(!host.desktop?.supported||!host.capabilities.writeSession)fail('DESKTOP_CAPABILITY_UNVERIFIED','此桌面版本尚未完成安装适配')
+  return adapter.withWriteSession(host,fn,context)
+ }}
+}

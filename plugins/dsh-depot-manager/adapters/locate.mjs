@@ -24,6 +24,7 @@ async function nodeFor(root,env){
 }
 async function desktopManifest(resources){
  try{return await json(path.join(resources,'app/package.json'))}catch{}
+ if(process.versions.electron)try{return await json(path.join(resources,'app.asar/package.json'))}catch{}
  const file=await open(path.join(resources,'app.asar'),'r')
  try{
   const size=(await file.stat()).size,header=Buffer.alloc(16);if((await file.read(header,0,16,0)).bytesRead!==16)return null
@@ -36,12 +37,16 @@ async function desktopManifest(resources){
   return JSON.parse(content)
  }finally{await file.close()}
 }
-async function desktopAt(input){
+export async function desktopAt(input){
  let dir=await canonical(input);if(!dir)return null
  if(!(await stat(dir)).isDirectory())dir=path.dirname(dir)
  for(let i=0;i<5;i++){
   for(const resources of [path.join(dir,'Contents/Resources'),path.join(dir,'resources'),path.basename(dir).toLowerCase()==='resources'?dir:null].filter(Boolean)){
-   try{const pkg=await desktopManifest(resources);if(pkg?.name==='dsh-desktop'&&typeof pkg.version==='string')return{kind:'official-desktop',appPath:await canonical(resources.endsWith(path.join('Contents','Resources'))?path.resolve(resources,'../..'):path.dirname(resources)),version:pkg.version,dshVersion:pkg.dependencies?.['@deepseek-ai/dsh'],capabilities:{inspect:true,writeSession:false},blockedReason:'DESKTOP_CAPABILITY_UNVERIFIED'}}catch{}
+   try{const pkg=await desktopManifest(resources);if(pkg?.name==='dsh-desktop'&&typeof pkg.version==='string'){
+    const appPath=await canonical(resources.endsWith(path.join('Contents','Resources'))?path.resolve(resources,'../..'):path.dirname(resources)),executable=path.join(appPath,'Contents/MacOS/DSH Desktop')
+    const supported=process.platform==='darwin'&&pkg.version==='0.12.0'&&pkg.dependencies?.['@deepseek-ai/dsh']==='0.2.0-rc.2'&&!!await canonical(executable)
+    return{kind:'official-desktop',appPath,resources,executable,supported,runtimeRoot:await canonical(path.join(resources,'app'))??path.join(resources,'app.asar'),version:pkg.version,dshVersion:pkg.dependencies?.['@deepseek-ai/dsh'],capabilities:{inspect:true,writeSession:false},blockedReason:'DESKTOP_CAPABILITY_UNVERIFIED'}
+   }}catch{}
   }
   const parent=path.dirname(dir);if(parent===dir)break;dir=parent
  }
@@ -83,7 +88,7 @@ export async function locateInstallations({env=process.env,paths=[],processes,us
  }
  const standardRoots=[env.DSH_DEPOT_DSH_ROOT,path.join(env.APPDATA??userHome,'npm/node_modules/@deepseek-ai/dsh'),'/opt/homebrew/lib/node_modules/@deepseek-ai/dsh','/usr/local/lib/node_modules/@deepseek-ai/dsh']
  const apps=process.platform==='darwin'?['/Applications/DSH Desktop.app',path.join(userHome,'Applications/DSH Desktop.app')]:process.platform==='win32'?[path.join(env.LOCALAPPDATA??path.join(userHome,'AppData/Local'),'Programs/DSH Desktop'),path.join(env.LOCALAPPDATA??path.join(userHome,'AppData/Local'),'Programs/dsh-desktop'),path.join(env.ProgramFiles??'C:\\Program Files','DSH Desktop')]:['/opt/DSH Desktop','/opt/dsh-desktop','/usr/lib/dsh-desktop']
- for(const input of [...standardRoots,...apps,...paths].filter(Boolean))await addPath(input)
+ for(const input of [...standardRoots,...apps,env.DSH_DEPOT_DESKTOP_APP,...paths].filter(Boolean))await addPath(input)
  for(const dir of (env.PATH??env.Path??'').split(path.delimiter).filter(Boolean)){
   for(const name of process.platform==='win32'?['dsh.cmd','dsh.exe','dsh-desktop.exe','DSH Desktop.exe']:['dsh','dsh-desktop'])await addPath(path.join(dir,name))
   await addPath(path.join(dir,'node_modules/@deepseek-ai/dsh'));await addPath(path.join(dir,'../lib/node_modules/@deepseek-ai/dsh'))
@@ -113,6 +118,14 @@ export async function locateInstallations({env=process.env,paths=[],processes,us
  if(env.DSH_HOME)await addHome(env.DSH_HOME)
  const desktopOwnedHomes=new Set(await Promise.all(desktopHomes.map(canonical)))
  const locations=[]
+ const selected=desktop.get(await canonical(env.DSH_DEPOT_DESKTOP_APP??''))
+ if(selected?.supported&&process.versions.electron&&(await canonical(process.execPath))?.startsWith(selected.appPath+path.sep)){
+  for(const home of new Set(desktopHomes)){
+   const resolved=await canonical(home);if(!resolved)continue
+   try{await stat(path.join(resolved,'profiles/web/package.json'));await stat(path.join(resolved,'.desktop-install-state.json'))}catch{continue}
+   locations.push({kind:'official-desktop',home:resolved,profileName:'web',dshRoot:path.join(selected.runtimeRoot,'node_modules/@deepseek-ai/dsh'),nodePath:process.execPath,desktop:selected,runtimeEnv:{ELECTRON_RUN_AS_NODE:'1'},packageManager:{command:process.execPath,args:[path.join(selected.runtimeRoot,'node_modules/pnpm/bin/pnpm.cjs')],env:{ELECTRON_RUN_AS_NODE:'1'}}})
+  }
+ }
  for(const home of homes){const resolved=await canonical(home);if(!resolved||desktopOwnedHomes.has(resolved))continue
   let profiles;try{profiles=await readdir(path.join(resolved,'profiles'))}catch{continue}
   for(const profileName of profiles.filter(p=>/^[a-zA-Z0-9][a-zA-Z0-9_-]*$/.test(p)&&p!=='desktop'))for(const [dshRoot,nodePath]of roots)locations.push({home:resolved,dshRoot,nodePath,profileName})

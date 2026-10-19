@@ -37,10 +37,10 @@ export async function buildBootstrap({target,flavor,managerArchive,output,runtim
   await writeFile(path.join(root,'README.txt'),[
    `DSH 离线插件管理器 ${MANAGER_VERSION}`,'',
    '更新安装器：重新下载并完整解压新版；旧的解压目录和维护入口不会自动更新。',
-   '使用前：已安装并初始化 DSH 0.2.0-rc.2 Web。请先完全退出要修改的 DSH。',
+   '使用前：已安装并初始化 DSH 0.2.0-rc.2 Web，或 macOS DSH Desktop 0.12.0。请先完全退出要修改的 DSH。',
    '1. 将整个压缩包解压到本机可写目录；不要在压缩包预览窗口中运行。',
    `2. ${entry}。`,
-   '3. 选择目标 DSH，选择“安装 / 替换离线成品包”。首次询问包路径时直接回车，使用随包 manager.tgz。',
+   '3. 桌面版先选“使用应用自带 DSH”，再选配置目录；CLI/Web 直接选配置。选择“安装 / 替换离线成品包”。首次询问包路径时直接回车，使用随包 manager.tgz。',
    '4. 核对显示的环境和安装计划，按提示确认。完成后用原来的方式启动 DSH。',
    '5. 从 DSH 中的“离线插件”进入管理页。只有宿主实际加载后才算启用成功。','',
    flavor==='full'?'本包已附带 Node，无需额外安装 Node、依赖或编译工具。':'这是轻量包，需要已有 Node ^22.19.0 或 >=24；未准备 Node 时请使用完整包。',
@@ -52,7 +52,7 @@ export async function buildBootstrap({target,flavor,managerArchive,output,runtim
    '也可用文本编辑器修改同目录 settings.json：dshHome=配置主目录（包含 profiles），dshRoot=DSH 包目录（包含 package.json），hostNode=目标 DSH 的 Node，desktopApp=桌面版应用路径，searchPaths=其他完整路径数组。空字符串表示自动查找。',
    'Windows 的 JSON 路径请使用 C:/Users/name/... 或双反斜杠；路径不是命令，不要粘贴 DSH_HOME=... 这样的 shell 表达式。settings.json 非空字段优先于环境变量。',
    '命令行诊断：Windows 运行 install.cmd diagnose；macOS/Linux 运行 sh install.sh diagnose。诊断不修改 DSH。',
-   '设置只改变查找位置，不会绕过宿主能力检查。已发现 Desktop 与已支持 Desktop 安装是两回事；本包的实际验收范围以配套报告为准。',''
+   '设置只改变查找位置，不会绕过宿主能力检查。Desktop 当前适配 macOS 0.12.0；其他版本不开放写入。需要完全退出所有 DSH Desktop 实例后才能执行。',''
   ].join('\n'))
   const fileName=name+(target==='win32-x64'?'.zip':'.tgz'),archive=path.join(output,fileName)
   if(target==='win32-x64'){
