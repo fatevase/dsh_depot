@@ -545,11 +545,11 @@
       "currentManagerLoaded": true
     },
     "tests": {
-      "passed": 142,
+      "passed": 143,
       "failed": 0,
       "skipped": 2,
-      "total": 144,
-      "skippedScope": "Two native Windows checks on macOS; both passed in Windows CI"
+      "total": 145,
+      "skippedScope": "Two Windows-only checks skipped on macOS; native Windows suite passed in CI"
     },
     "nativeCI": {
       "sourceCommit": "5a20cef087a0370fc5f09f2ee6bf5d4b44042684",
@@ -616,6 +616,12 @@
           ]
         }
       ]
+    },
+    "simpleBundles": {
+      "sourceCommit": "aba2e695055a97e689afcbb1a9d57a78bfb35f19",
+      "runUrl": "https://github.com/fatevase/dsh_depot/actions/runs/39199768910",
+      "receipts": "simple-bundle-receipts.json",
+      "checks": "All three native cold install, compose, Host startup and client resource checks passed; full native qualification remains unverified."
     }
   },
   "publication": "blocked until the exact full/lite artifacts complete native acceptance",

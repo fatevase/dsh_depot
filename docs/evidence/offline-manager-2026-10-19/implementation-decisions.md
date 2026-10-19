@@ -22,4 +22,6 @@
 
 - Ruling: retain original local artifact receipts as historical byte-bound manual macOS evidence; Windows CI fixes produce separate artifacts whose CI receipts are recorded independently — avoids transferring old acceptance to new archive bytes — cost: pending native manual acceptance remains required for new artifacts.
 
+- Ruling: user explicitly chose a simple archive containing program/runtime, CMD and instructions; stop executable/UI framework exploration. Keep existing Node/JS core and terminal scripts, use ZIP for Windows and tgz for POSIX modes — lowest-change delivery — cost: users extract all files before running the entry. This supersedes the earlier Windows-tgz envelope ruling.
+
 原生完整验收未完成；此报告不授权合并、Release 发布或 Pages 部署。
