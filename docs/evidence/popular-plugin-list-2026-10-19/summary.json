@@ -1,0 +1,68 @@
+{
+  "snapshot": {
+    "capturedDate": "2026-10-19",
+    "timezone": "Asia/Shanghai",
+    "source": "https://dsh-hub.cc/rankings?lang=zh",
+    "rankings": [
+      "trending",
+      "rating",
+      "comments"
+    ],
+    "entriesPerRanking": 100,
+    "minStars": 50,
+    "cutoffInclusive": "2026-09-19T00:00:00+08:00",
+    "freshnessField": "GitHub pushed_at",
+    "deduplicateBy": "GitHub numeric repository ID",
+    "entries": 300,
+    "unique": 154,
+    "retained": 99,
+    "excluded": 55,
+    "notes": [
+      "仅统计三个榜单页面当前展示的各前 100 名；目录 API 的 total=20624 是全站索引数，不是榜单长度。",
+      "按 GitHub 数字仓库 ID 去重；重命名 Minglink/dsh-infinite-gen-4 已跟随至 dsh-infinite-gen-5。",
+      "网页和 API 有条目差异，以网页列表及排名为准；评分人数只作 API 补充，GitHub 指标另行实时核实。",
+      "一个月按自然月且精确到日期：北京时间 2026-09-19 00:00 起；不是最近 30×24 小时。",
+      "评分榜包含未评分条目；评论最多榜包含 0 评论条目，均按用户规则保留参与筛选。",
+      "只按 Star 和更新时间筛选；保留项目中，12 个未被 GitHub 识别出明确的许可证标识，1 个仓库已归档（howmp/dsh-pentest）。这些不作为此次额外淘汰条件。",
+      "许可证文件、宿主兼容性、子包结构和原生依赖尚未逐个审核。",
+      "统计结果是仓库候选数，不等于可直接安装或离线构建成功的包数。现有发布状态对照本地已核实的发布目录。",
+      "active 保留原先十个目录条目作为回归基线（含未出现在此次网页榜单中的 Market）；它与99个候选快照分开维护。"
+    ]
+  },
+  "activeCount": 11,
+  "candidateCount": 99,
+  "neverIntegratedCount": 89,
+  "auditedRepositories": [
+    "T-Auto/dsh-ops",
+    "Minglink/dsh-infinite-gen-5",
+    "bowenliang123/dsh-context",
+    "NanmiCoder/dsh-agent-teams",
+    "xmanrui/dsh-im"
+  ],
+  "tests": {
+    "tests": 155,
+    "pass": 153,
+    "fail": 0,
+    "skipped": 2
+  },
+  "merge": {
+    "pr": 9,
+    "commit": "a6012f3c311ea3773561346b15a0625225bdb99e",
+    "pagesRun": 39209614184,
+    "pagesStatus": "success",
+    "livePages": [
+      "index.html",
+      "plugins.html",
+      "plugin.html",
+      "guide.html",
+      "manager.html"
+    ],
+    "httpStatus": 200,
+    "siteUrl": "https://fatevase.github.io/dsh_depot/",
+    "catalogRefreshRun": 39210941491
+  },
+  "review": {
+    "importantFound": 1,
+    "resolved": "discover → mergeState integration covers metadata refresh, numeric-ID rename, activation removal and stale replay; concurrent candidates preserved"
+  }
+}

@@ -6,10 +6,28 @@ export function mergeState(previous = initialState(), { discovery, receipts = []
   state.refHistory ??= {}
   for(const s of [...(previous.sources??[]),...(discovery?.sources??[])])if(s.repository&&s.ref&&!s.error){const key=`${s.repository.toLowerCase()}|${s.ref}`;state.refHistory[key]??=structuredClone(s)}
   if (discovery) {
-    const candidates = new Map(state.candidates.map(c=>[c.repository.toLowerCase(),c]))
-    for(const c of discovery.candidates??[])if(!candidates.has(c.repository.toLowerCase()))candidates.set(c.repository.toLowerCase(),c)
-    state.candidates=[...candidates.values()]
-    if((discovery.checkedAt??'') >= (state.lastDiscoveryAt??'')) { state.sources=discovery.sources; state.discoveryErrors=discovery.errors??[]; state.lastDiscoveryAt=discovery.checkedAt; state.apiCache=discovery.apiCache??state.apiCache }
+    const current = (discovery.checkedAt??'') >= (state.lastDiscoveryAt??'')
+    if (current && discovery.activeRepositories) state.activeRepositories = discovery.activeRepositories
+    if (current && discovery.activeRepositoryIds) state.activeRepositoryIds = discovery.activeRepositoryIds
+    const active = new Set((state.activeRepositories??[]).map(r=>r.toLowerCase()))
+    const activeIds = new Set(state.activeRepositoryIds??[])
+    const activated = c => active.has(c.repository.toLowerCase()) || (c.repositoryId && activeIds.has(c.repositoryId))
+    const candidates = []
+    const same = (a,b) => (a.repositoryId && a.repositoryId === b.repositoryId) || a.repository.toLowerCase() === b.repository.toLowerCase()
+    for (const c of state.candidates) {
+      if (activated(c)) continue
+      const index = candidates.findIndex(old=>same(old,c))
+      if (index < 0) candidates.push(c)
+      else candidates[index] = {...candidates[index],...c}
+    }
+    for (const c of discovery.candidates??[]) {
+      if (activated(c)) continue
+      const index = candidates.findIndex(old=>same(old,c))
+      if (index < 0) candidates.push(c)
+      else if (current) candidates[index] = {...candidates[index],...c}
+    }
+    state.candidates = candidates
+    if(current) { state.sources=discovery.sources; state.discoveryErrors=discovery.errors??[]; state.lastDiscoveryAt=discovery.checkedAt; state.apiCache=discovery.apiCache??state.apiCache }
     if(discovery.complete && (discovery.checkedAt??'') >= (state.lastSuccessfulDiscoveryAt??'')) state.lastSuccessfulDiscoveryAt=discovery.checkedAt
   }
   for (const receipt of receipts) {

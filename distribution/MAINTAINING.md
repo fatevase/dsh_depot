@@ -12,13 +12,15 @@
 
 ## 首轮 Top 10 测试
 
-`config.json` 的 `cohort` 固定本轮清单，来源是 DSH Hub 的公开实时 API `scope=all&sort=trending&limit=10`，原始排名摘要位于 `cohorts/trending-top10-2026-10-18.json`。网页搜索缓存与实时榜单可能不同；本轮包含 DSH Market，不包含已经移出前十的 Answer me with HTML。
+历史首轮清单保存在 `cohorts/trending-top10-2026-10-18.json`，来源是 DSH Hub 的公开实时 API `scope=all&sort=trending&limit=10`，原始排名摘要位于 `cohorts/trending-top10-2026-10-18.json`。网页搜索缓存与实时榜单可能不同；本轮包含 DSH Market，不包含已经移出前十的 Answer me with HTML。
 
 本轮有 8 个可构建项目，对 macOS arm64、Linux x64、Windows x64 各建一个任务；DSH Web 聚合包和 DSH TUI 明确记录为 `needs_recipe`，不会伪造安装包。前者需要递归工作区依赖打包，后者还需要源码子模块、终端安装和交互验证。未获取有效源码、宿主不兼容、构建失败、验证失败均在计划/状态/报告中保留。已完成的未验证包按当前发布策略提供下载。
 
 源码固定到人工核对的 commit，避免首轮测试中途漂移。Sidebar 与 Market 先采用已经与冻结宿主验证过的兼容版本 0.26.0 / 1.66.38，不冒充最新上游。正常追踪新版本时，维护者再把审核过的渠道切回 tags/releases 或显式 branch。
 
 `treg` 分发范围是上游 DSH 技能包，Python CLI/服务并未包含；外部 MCP 仍需要凭据及网络。保留其完整自定义许可证，以 `LicenseRef-tools-registry` 标识。Routing Suite 的根包只打包 Injector，且上游 manifest/许可证文件标注不同，目录使用 `LicenseRef-Upstream-Conflict` 并保留原文件。
+
+当前启用名单改由 `plugin-list.json` 的 `active` 维护，已在原十项基础上加入 Answer me with HTML。下文 Top10 的构建数量是历史首轮数据；当前包状态以网站目录为准。候选快照与处理方法见本文末尾“热门插件清单”。
 
 ## 本地运行
 
@@ -113,3 +115,23 @@ node distribution/cli.mjs rollback --state .runtime/distribution/state.json --pl
 首次启用策略时，发布器可从本仓库默认分支的 distribution workflow 查找尚未过期的 Actions 构建产物，核对原记录及包摘要后复用；不重新编译。过期产物在报告的 unavailableBuilds 中列出，需要显式重试重建。发布 job 仅增加 actions:read 以下载这些产物。验证通过状态与 unverified 发布通道一起写入 reports.json 和目录；同 key 后续验证通过可升级状态。
 
 站点将未验证包显示为琥珀色，下载按钮写“下载未验证包”，说明已失败或尚未完成的检查；“只看验证通过的包”排除它们。通用安装说明位于独立 guide.html，详情保留包对应的命令和校验值。
+
+## 热门候选与构建名单
+
+统一维护 `distribution/plugin-list.json`，`config.json` 仅通过 pluginList 引用它：
+
+- `active` 是实际选品列表，每项包含 recipeId 和 repository。新增项必须与 recipes 中的身份一致；recipe 仍独立决定 enabled、平台、源码版本、锁文件及探针。
+- `candidates` 是 2026-10-19 三榜调研保留的 99 个仓库，记录 GitHub 数字仓库 ID、历史别名、排名、Star、pushedAt、观测时间及处理说明。来源类别保存在 upstreamCategory，不改站点已确认的分类。
+- `processing` 保存人工处理状态、批次、说明、初查和局部验证。它不等于包已经发布；真正可下载状态仍来自各平台验证及发布收据。
+
+本次快照共 300 个榜单条目，按数字仓库 ID 去重为 154 个，保留 Star >=50 且 pushedAt 不早于北京时间 2026-09-19 00:00 的 99 个。更新调研时明确更新 snapshot 的 cutoff、指标及来源，不把旧 Star 冒充实时数据。未知许可证/已归档按原筛选规则保留提示，后续适配时单独核对。
+
+原十个 active 条目保留（含此次网页榜单中没有的 Market），本轮新增 Answer me with HTML，形成 11 个构建/待适配条目。此前该 recipe 已存在，但不在原 Top 10 选品中；新增后由原生 runner 分别决定三平台结果。DSH Web 和 TUI 仍显示待适配。
+
+候选进入清单只产生 needs_recipe 状态，不自动获取源码运行构建脚本、不扩张构建矩阵。定时发现将清单合并到状态候选；同一数字仓库 ID 的改名更新 canonical repository，保留原人工 notes。已有 recipe 的活跃项目不重复列入候选。
+
+```sh
+node distribution/cli.mjs list --output .runtime/distribution/plugin-list.json
+```
+
+处理一个新项目时，先在 candidates 中写批次和检查说明，再编写固定源码、依赖锁、构建步骤及运行验证的 recipe。本机验证只证明对应平台的相同归档字节；添加 active 后，仍由三端 runner 构建/验证。仅改 candidates 的处理说明不会把它变成可下载包。

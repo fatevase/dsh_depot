@@ -91,5 +91,13 @@
     "license": "MIT",
     "order": 10,
     "availabilityNote": "该插件需要终端安装与交互验证，目前不提供此安装方式的离线包。"
+  },
+  "answer-html": {
+    "order": 11,
+    "description": "提供 HTML 页面生成与交付的 DSH 技能包。",
+    "label": "页面生成",
+    "mark": "H",
+    "license": "MIT",
+    "availabilityNote": "本包分发上游 DSH 技能及随包资源；安装包状态以各平台验证结果为准。"
   }
 }

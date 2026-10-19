@@ -1,0 +1,2796 @@
+{
+  "schemaVersion": 1,
+  "description": "候选是筛选快照；只有 active 中且存在人工 recipe 的项目进入构建。",
+  "selection": {
+    "capturedDate": "2026-10-19",
+    "timezone": "Asia/Shanghai",
+    "source": "https://dsh-hub.cc/rankings?lang=zh",
+    "rankings": [
+      "trending",
+      "rating",
+      "comments"
+    ],
+    "entriesPerRanking": 100,
+    "minStars": 50,
+    "cutoffInclusive": "2026-09-19T00:00:00+08:00",
+    "freshnessField": "GitHub pushed_at",
+    "deduplicateBy": "GitHub numeric repository ID",
+    "entries": 300,
+    "unique": 154,
+    "retained": 99,
+    "excluded": 55,
+    "notes": [
+      "仅统计三个榜单页面当前展示的各前 100 名；目录 API 的 total=20624 是全站索引数，不是榜单长度。",
+      "按 GitHub 数字仓库 ID 去重；重命名 Minglink/dsh-infinite-gen-4 已跟随至 dsh-infinite-gen-5。",
+      "网页和 API 有条目差异，以网页列表及排名为准；评分人数只作 API 补充，GitHub 指标另行实时核实。",
+      "一个月按自然月且精确到日期：北京时间 2026-09-19 00:00 起；不是最近 30×24 小时。",
+      "评分榜包含未评分条目；评论最多榜包含 0 评论条目，均按用户规则保留参与筛选。",
+      "只按 Star 和更新时间筛选；保留项目中，12 个未被 GitHub 识别出明确的许可证标识，1 个仓库已归档（howmp/dsh-pentest）。这些不作为此次额外淘汰条件。",
+      "许可证文件、宿主兼容性、子包结构和原生依赖尚未逐个审核。",
+      "统计结果是仓库候选数，不等于可直接安装或离线构建成功的包数。现有发布状态对照本地已核实的发布目录。",
+      "active 保留原先十个目录条目作为回归基线（含未出现在此次网页榜单中的 Market）；它与99个候选快照分开维护。"
+    ]
+  },
+  "active": [
+    {
+      "rank": 1,
+      "recipeId": "free-model",
+      "repository": "Ebony-Vinyl/dsh-our-free-model"
+    },
+    {
+      "rank": 2,
+      "recipeId": "dsh-web",
+      "repository": "zhu1090093659/dsh-web"
+    },
+    {
+      "rank": 3,
+      "recipeId": "purge",
+      "repository": "YuJunZhiXue/dsh-purge"
+    },
+    {
+      "rank": 4,
+      "recipeId": "routing-suite",
+      "repository": "yjh051108/dsh-routing-suite"
+    },
+    {
+      "rank": 5,
+      "recipeId": "sidebar",
+      "repository": "omdsh-dev/DSH-better-sidebar"
+    },
+    {
+      "rank": 6,
+      "recipeId": "market",
+      "repository": "dsh-market/dsh-market"
+    },
+    {
+      "rank": 7,
+      "recipeId": "modlens",
+      "repository": "liustack/modlens"
+    },
+    {
+      "rank": 8,
+      "recipeId": "whale-widget",
+      "repository": "MeteorNOX/DeepSeek-Balance-Whale-Widget"
+    },
+    {
+      "rank": 9,
+      "recipeId": "treg",
+      "repository": "superdesigndev/treg"
+    },
+    {
+      "rank": 10,
+      "recipeId": "tui",
+      "repository": "ccch1mneyyy/dsh-TUI"
+    },
+    {
+      "recipeId": "answer-html",
+      "repository": "QingYunA/answer-me-with-html"
+    }
+  ],
+  "candidates": [
+    {
+      "repositoryId": 1385896447,
+      "repository": "Ebony-Vinyl/dsh-our-free-model",
+      "aliases": [
+        "Ebony-Vinyl/dsh-our-free-model"
+      ],
+      "url": "https://github.com/Ebony-Vinyl/dsh-our-free-model",
+      "ranks": {
+        "trending": 1,
+        "rating": 4,
+        "comments": 2
+      },
+      "upstreamCategory": "智能体",
+      "stars": 24566,
+      "pushedAt": "2026-10-18T06:42:26Z",
+      "observedAt": "2026-10-18T18:04:19.323Z",
+      "defaultBranch": "main",
+      "language": "JavaScript",
+      "license": "MIT",
+      "archived": false,
+      "recipeId": "free-model",
+      "processing": {
+        "state": "active",
+        "batch": null,
+        "notes": []
+      }
+    },
+    {
+      "repositoryId": 1331636953,
+      "repository": "zhu1090093659/dsh-web",
+      "aliases": [
+        "zhu1090093659/dsh-web"
+      ],
+      "url": "https://github.com/zhu1090093659/dsh-web",
+      "ranks": {
+        "trending": 2,
+        "rating": 61,
+        "comments": 3
+      },
+      "upstreamCategory": "界面",
+      "stars": 8963,
+      "pushedAt": "2026-10-18T15:42:23Z",
+      "observedAt": "2026-10-18T18:04:20.052Z",
+      "defaultBranch": "dev",
+      "language": "TypeScript",
+      "license": "Apache-2.0",
+      "archived": false,
+      "recipeId": "dsh-web",
+      "processing": {
+        "state": "active",
+        "batch": null,
+        "notes": []
+      }
+    },
+    {
+      "repositoryId": 1339256252,
+      "repository": "YuJunZhiXue/dsh-purge",
+      "aliases": [
+        "YuJunZhiXue/dsh-purge"
+      ],
+      "url": "https://github.com/YuJunZhiXue/dsh-purge",
+      "ranks": {
+        "trending": 3,
+        "rating": 8,
+        "comments": 4
+      },
+      "upstreamCategory": "其他",
+      "stars": 7053,
+      "pushedAt": "2026-10-12T06:10:34Z",
+      "observedAt": "2026-10-18T18:04:20.092Z",
+      "defaultBranch": "master",
+      "language": "JavaScript",
+      "license": "MIT",
+      "archived": false,
+      "recipeId": "purge",
+      "processing": {
+        "state": "active",
+        "batch": null,
+        "notes": []
+      }
+    },
+    {
+      "repositoryId": 1334586481,
+      "repository": "yjh051108/dsh-routing-suite",
+      "aliases": [
+        "yjh051108/dsh-routing-suite"
+      ],
+      "url": "https://github.com/yjh051108/dsh-routing-suite",
+      "ranks": {
+        "trending": 4,
+        "rating": 62,
+        "comments": 5
+      },
+      "upstreamCategory": "界面",
+      "stars": 6989,
+      "pushedAt": "2026-09-18T23:10:58Z",
+      "observedAt": "2026-10-18T18:04:19.862Z",
+      "defaultBranch": "main",
+      "language": "JavaScript",
+      "license": "MIT",
+      "archived": false,
+      "recipeId": "routing-suite",
+      "processing": {
+        "state": "active",
+        "batch": null,
+        "notes": []
+      }
+    },
+    {
+      "repositoryId": 1301657572,
+      "repository": "superdesigndev/treg",
+      "aliases": [
+        "superdesigndev/treg"
+      ],
+      "url": "https://github.com/superdesigndev/treg",
+      "ranks": {
+        "trending": 8,
+        "rating": 63,
+        "comments": 6
+      },
+      "upstreamCategory": "通信",
+      "stars": 5739,
+      "pushedAt": "2026-10-18T16:51:34Z",
+      "observedAt": "2026-10-18T18:04:20.681Z",
+      "defaultBranch": "main",
+      "language": "Python",
+      "license": "NOASSERTION",
+      "archived": false,
+      "recipeId": "treg",
+      "processing": {
+        "state": "active",
+        "batch": null,
+        "notes": []
+      }
+    },
+    {
+      "repositoryId": 1337920628,
+      "repository": "MeteorNOX/DeepSeek-Balance-Whale-Widget",
+      "aliases": [
+        "MeteorNOX/DeepSeek-Balance-Whale-Widget"
+      ],
+      "url": "https://github.com/MeteorNOX/DeepSeek-Balance-Whale-Widget",
+      "ranks": {
+        "trending": 7,
+        "rating": 9,
+        "comments": 7
+      },
+      "upstreamCategory": "开发工具",
+      "stars": 5263,
+      "pushedAt": "2026-10-11T12:25:55Z",
+      "observedAt": "2026-10-18T18:04:20.480Z",
+      "defaultBranch": "main",
+      "language": "JavaScript",
+      "license": "MIT",
+      "archived": false,
+      "recipeId": "whale-widget",
+      "processing": {
+        "state": "active",
+        "batch": null,
+        "notes": []
+      }
+    },
+    {
+      "repositoryId": 1333111893,
+      "repository": "ccch1mneyyy/dsh-TUI",
+      "aliases": [
+        "ccch1mneyyy/dsh-TUI"
+      ],
+      "url": "https://github.com/ccch1mneyyy/dsh-TUI",
+      "ranks": {
+        "trending": 9,
+        "rating": 10,
+        "comments": 8
+      },
+      "upstreamCategory": "界面",
+      "stars": 4802,
+      "pushedAt": "2026-10-18T17:45:07Z",
+      "observedAt": "2026-10-18T18:04:20.671Z",
+      "defaultBranch": "main",
+      "language": "TypeScript",
+      "license": "MIT",
+      "archived": false,
+      "recipeId": "tui",
+      "processing": {
+        "state": "active",
+        "batch": null,
+        "notes": []
+      }
+    },
+    {
+      "repositoryId": 1163808211,
+      "repository": "liustack/modlens",
+      "aliases": [
+        "liustack/modlens"
+      ],
+      "url": "https://github.com/liustack/modlens",
+      "ranks": {
+        "trending": 6,
+        "rating": 1,
+        "comments": 9
+      },
+      "upstreamCategory": "智能体",
+      "stars": 4309,
+      "pushedAt": "2026-10-15T19:22:02Z",
+      "observedAt": "2026-10-18T18:04:20.144Z",
+      "defaultBranch": "main",
+      "language": "TypeScript",
+      "license": "MIT",
+      "archived": false,
+      "recipeId": "modlens",
+      "processing": {
+        "state": "active",
+        "batch": null,
+        "notes": []
+      }
+    },
+    {
+      "repositoryId": 1326893710,
+      "repository": "omdsh-dev/DSH-better-sidebar",
+      "aliases": [
+        "omdsh-dev/DSH-better-sidebar"
+      ],
+      "url": "https://github.com/omdsh-dev/DSH-better-sidebar",
+      "ranks": {
+        "trending": 5,
+        "rating": 56,
+        "comments": 10
+      },
+      "upstreamCategory": "界面",
+      "stars": 4284,
+      "pushedAt": "2026-10-17T16:15:27Z",
+      "observedAt": "2026-10-18T18:04:20.138Z",
+      "defaultBranch": "main",
+      "language": "TypeScript",
+      "license": "MIT",
+      "archived": false,
+      "recipeId": "sidebar",
+      "processing": {
+        "state": "active",
+        "batch": null,
+        "notes": []
+      }
+    },
+    {
+      "repositoryId": 1401476500,
+      "repository": "QingYunA/answer-me-with-html",
+      "aliases": [
+        "QingYunA/answer-me-with-html"
+      ],
+      "url": "https://github.com/QingYunA/answer-me-with-html",
+      "ranks": {
+        "trending": 10,
+        "rating": 64,
+        "comments": 11
+      },
+      "upstreamCategory": "智能体",
+      "stars": 3690,
+      "pushedAt": "2026-10-18T04:24:30Z",
+      "observedAt": "2026-10-18T18:04:20.673Z",
+      "defaultBranch": "main",
+      "language": "JavaScript",
+      "license": "MIT",
+      "archived": false,
+      "recipeId": "answer-html",
+      "processing": {
+        "state": "active",
+        "batch": null,
+        "notes": [
+          "2026-10-19 macos-arm64 本机空缓存 OS 断网安装、配置注册及宿主启动通过；其他平台由对应 runner 继续验证。"
+        ],
+        "localTrial": {
+          "target": "macos-arm64",
+          "version": "0.5.5",
+          "status": "passed",
+          "compressedBytes": 1810315,
+          "sha256": "9c8ca536feb2bf7929e7d8e0c30ea1cd070a533df427a0dd3ea51a0cac19ba0c",
+          "report": "docs/evidence/popular-plugin-list-2026-10-19/answer-html-verification.json"
+        }
+      }
+    },
+    {
+      "repositoryId": 1409893258,
+      "repository": "T-Auto/dsh-ops",
+      "aliases": [
+        "T-Auto/dsh-ops"
+      ],
+      "url": "https://github.com/T-Auto/dsh-ops",
+      "ranks": {
+        "trending": 14,
+        "rating": 65,
+        "comments": 13
+      },
+      "upstreamCategory": "其他",
+      "stars": 3052,
+      "pushedAt": "2026-10-18T18:00:14Z",
+      "observedAt": "2026-10-18T18:04:21.292Z",
+      "defaultBranch": "main",
+      "language": "JavaScript",
+      "license": "NOASSERTION",
+      "archived": false,
+      "recipeId": null,
+      "processing": {
+        "state": "needs_recipe",
+        "batch": "initial-popular-audit",
+        "notes": [
+          "包含 native/Cargo.lock 及运行时 stage/check 入口；需核对 Rust/平台原生运行时闭包与构建步骤。",
+          "需要保留 MIT AND Apache-2.0、NOTICE 和 licenses 目录。"
+        ],
+        "audit": {
+          "checkedAt": "2026-10-19T06:30:46.617033+00:00",
+          "commit": "34ba06f542af5a7feaca49fe5d9b6cd97b86293e",
+          "version": "0.4.0",
+          "npmName": "dsh-ops",
+          "sourceUrl": "https://github.com/T-Auto/dsh-ops/blob/34ba06f542af5a7feaca49fe5d9b6cd97b86293e/package.json",
+          "runtimeDependencies": {},
+          "optionalDependencies": {},
+          "license": "MIT AND Apache-2.0"
+        }
+      }
+    },
+    {
+      "repositoryId": 1335211378,
+      "repository": "Minglink/dsh-infinite-gen-5",
+      "aliases": [
+        "Minglink/dsh-infinite-gen-4"
+      ],
+      "url": "https://github.com/Minglink/dsh-infinite-gen-5",
+      "ranks": {
+        "trending": 13,
+        "rating": 11,
+        "comments": 12
+      },
+      "upstreamCategory": "其他",
+      "stars": 3049,
+      "pushedAt": "2026-10-12T15:57:45Z",
+      "observedAt": "2026-10-18T18:05:00.453568+00:00",
+      "defaultBranch": "master",
+      "language": "JavaScript",
+      "license": "NOASSERTION",
+      "archived": false,
+      "recipeId": null,
+      "processing": {
+        "state": "needs_recipe",
+        "batch": "initial-popular-audit",
+        "notes": [
+          "没有 npm 运行依赖不等于运行时齐全：files 声明 runtimes、third_party、worker 和外部分析引擎，需要检查实际归档内容及平台支持。",
+          "上游声明 CC-BY-NC-SA-4.0；保留许可证并在分发前核对第三方引擎许可与运行依赖。"
+        ],
+        "audit": {
+          "checkedAt": "2026-10-19T06:30:46.617033+00:00",
+          "commit": "eeff0bbeb905bdc57952dc7497d5fdfc33653c0f",
+          "version": "1.0.0",
+          "npmName": "dsh-infinite-gen-5",
+          "sourceUrl": "https://github.com/Minglink/dsh-infinite-gen-5/blob/eeff0bbeb905bdc57952dc7497d5fdfc33653c0f/package.json",
+          "runtimeDependencies": {},
+          "optionalDependencies": {},
+          "license": "CC-BY-NC-SA-4.0"
+        }
+      }
+    },
+    {
+      "repositoryId": 1333961389,
+      "repository": "bowenliang123/dsh-context",
+      "aliases": [
+        "bowenliang123/dsh-context"
+      ],
+      "url": "https://github.com/bowenliang123/dsh-context",
+      "ranks": {
+        "trending": 12,
+        "rating": 12,
+        "comments": 15
+      },
+      "upstreamCategory": "记忆",
+      "stars": 2293,
+      "pushedAt": "2026-10-18T13:30:47Z",
+      "observedAt": "2026-10-18T18:04:20.692Z",
+      "defaultBranch": "main",
+      "language": "TypeScript",
+      "license": "Apache-2.0",
+      "archived": false,
+      "recipeId": null,
+      "processing": {
+        "state": "needs_recipe",
+        "batch": "initial-popular-audit",
+        "notes": [
+          "TypeScript/tsdown 构建，锁定 pnpm 构建依赖和 zod 运行依赖后再打包。",
+          "核对当前冻结 DSH 0.2.0-rc.2 的 peer 与客户端注入模块，不能只看版本声明。"
+        ],
+        "audit": {
+          "checkedAt": "2026-10-19T06:30:46.617033+00:00",
+          "commit": "c22ccb203915897188dd589c69ebf738e95b2d47",
+          "version": "0.73.3",
+          "npmName": "dsh-context",
+          "sourceUrl": "https://github.com/bowenliang123/dsh-context/blob/c22ccb203915897188dd589c69ebf738e95b2d47/package.json",
+          "runtimeDependencies": {
+            "zod": "^4.4.3"
+          },
+          "optionalDependencies": {},
+          "license": "Apache-2.0"
+        }
+      }
+    },
+    {
+      "repositoryId": 1332073142,
+      "repository": "NanmiCoder/dsh-agent-teams",
+      "aliases": [
+        "NanmiCoder/dsh-agent-teams"
+      ],
+      "url": "https://github.com/NanmiCoder/dsh-agent-teams",
+      "ranks": {
+        "trending": 11,
+        "rating": 66,
+        "comments": 14
+      },
+      "upstreamCategory": "智能体",
+      "stars": 2238,
+      "pushedAt": "2026-10-18T04:19:48Z",
+      "observedAt": "2026-10-18T18:04:20.721Z",
+      "defaultBranch": "main",
+      "language": "JavaScript",
+      "license": "MIT",
+      "archived": false,
+      "recipeId": null,
+      "processing": {
+        "state": "needs_recipe",
+        "batch": "initial-popular-audit",
+        "notes": [
+          "仓库包含 lib，但需要核对已编译产物与对应源码的一致性。",
+          "开发环境为 DSH 0.2.1-rc.2，peer 声明兼容 0.2.0-rc.2；仍需在当前冻结宿主验证生命周期及客户端加载。"
+        ],
+        "audit": {
+          "checkedAt": "2026-10-19T06:30:46.617033+00:00",
+          "commit": "673549cbe254afbb56a0e26a34008e3d000690be",
+          "version": "0.1.25",
+          "npmName": "@nanmicoder/dsh-agent-teams",
+          "sourceUrl": "https://github.com/NanmiCoder/dsh-agent-teams/blob/673549cbe254afbb56a0e26a34008e3d000690be/package.json",
+          "runtimeDependencies": {},
+          "optionalDependencies": {},
+          "license": "MIT"
+        }
+      }
+    },
+    {
+      "repositoryId": 1334561781,
+      "repository": "xmanrui/dsh-im",
+      "aliases": [
+        "xmanrui/dsh-im"
+      ],
+      "url": "https://github.com/xmanrui/dsh-im",
+      "ranks": {
+        "trending": 15,
+        "rating": 13,
+        "comments": 16
+      },
+      "upstreamCategory": "通信",
+      "stars": 2137,
+      "pushedAt": "2026-10-18T18:02:02Z",
+      "observedAt": "2026-10-18T18:04:21.277Z",
+      "defaultBranch": "main",
+      "language": "JavaScript",
+      "license": "MIT",
+      "archived": false,
+      "recipeId": null,
+      "processing": {
+        "state": "needs_recipe",
+        "batch": "initial-popular-audit",
+        "notes": [
+          "10 个直接运行依赖和 2 个可选依赖；需冻结完整依赖闭包。",
+          "可选 sharp 及协议组件涉及平台运行依赖；不能把 npm pack 成功当成离线成品验证。"
+        ],
+        "audit": {
+          "checkedAt": "2026-10-19T06:30:46.617033+00:00",
+          "commit": "2f51dcb3e1d8c8a4faa8dd3ce1e42ba6e4c71a63",
+          "version": "5.1.0",
+          "npmName": "@xmanrui/dsh-im",
+          "sourceUrl": "https://github.com/xmanrui/dsh-im/blob/2f51dcb3e1d8c8a4faa8dd3ce1e42ba6e4c71a63/package.json",
+          "runtimeDependencies": {
+            "@matrix-org/olm": "3.2.15",
+            "@tencent-connect/qqbot-connector": "1.2.0",
+            "@tencent-connect/qqbot-nodejs": "1.0.4",
+            "@wecom/aibot-node-sdk": "1.0.7",
+            "dingtalk-stream": "2.1.4",
+            "imapflow": "^2.0.5",
+            "mailparser": "^3.9.28",
+            "nodemailer": "^10.0.10",
+            "qrcode": "1.5.4",
+            "undici": "7.29.1"
+          },
+          "optionalDependencies": {
+            "@tencent-qqmail/agently-cli": "^1.0.18",
+            "sharp": "0.35.5"
+          },
+          "license": "MIT"
+        }
+      }
+    },
+    {
+      "repositoryId": 1334962266,
+      "repository": "shaobeichen/dsh-pocket",
+      "aliases": [
+        "shaobeichen/dsh-pocket"
+      ],
+      "url": "https://github.com/shaobeichen/dsh-pocket",
+      "ranks": {
+        "trending": 16,
+        "rating": 67,
+        "comments": 17
+      },
+      "upstreamCategory": "开发工具",
+      "stars": 1879,
+      "pushedAt": "2026-10-17T09:48:40Z",
+      "observedAt": "2026-10-18T18:04:21.215Z",
+      "defaultBranch": "main",
+      "language": "JavaScript",
+      "license": "GPL-2.0",
+      "archived": false,
+      "recipeId": null,
+      "processing": {
+        "state": "needs_recipe",
+        "batch": null,
+        "notes": []
+      }
+    },
+    {
+      "repositoryId": 1324949198,
+      "repository": "ranxianglei/billion-context",
+      "aliases": [
+        "ranxianglei/billion-context"
+      ],
+      "url": "https://github.com/ranxianglei/billion-context",
+      "ranks": {
+        "trending": 21,
+        "rating": 70,
+        "comments": 20
+      },
+      "upstreamCategory": "记忆",
+      "stars": 1859,
+      "pushedAt": "2026-10-18T18:03:35Z",
+      "observedAt": "2026-10-18T18:04:21.853Z",
+      "defaultBranch": "master",
+      "language": "TypeScript",
+      "license": "NOASSERTION",
+      "archived": false,
+      "recipeId": null,
+      "processing": {
+        "state": "needs_recipe",
+        "batch": null,
+        "notes": []
+      }
+    },
+    {
+      "repositoryId": 1122873619,
+      "repository": "kenryu42/cc-safety-net",
+      "aliases": [
+        "kenryu42/cc-safety-net"
+      ],
+      "url": "https://github.com/kenryu42/cc-safety-net",
+      "ranks": {
+        "trending": 17,
+        "rating": 68,
+        "comments": 18
+      },
+      "upstreamCategory": "安全",
+      "stars": 1665,
+      "pushedAt": "2026-10-18T14:17:12Z",
+      "observedAt": "2026-10-18T18:04:21.319Z",
+      "defaultBranch": "main",
+      "language": "TypeScript",
+      "license": "MIT",
+      "archived": false,
+      "recipeId": null,
+      "processing": {
+        "state": "needs_recipe",
+        "batch": null,
+        "notes": []
+      }
+    },
+    {
+      "repositoryId": 1336114531,
+      "repository": "elysia395/dsh-wallpaper-engine",
+      "aliases": [
+        "elysia395/dsh-wallpaper-engine"
+      ],
+      "url": "https://github.com/elysia395/dsh-wallpaper-engine",
+      "ranks": {
+        "trending": 18,
+        "rating": 69,
+        "comments": 19
+      },
+      "upstreamCategory": "界面",
+      "stars": 1553,
+      "pushedAt": "2026-10-18T16:12:58Z",
+      "observedAt": "2026-10-18T18:04:21.323Z",
+      "defaultBranch": "main",
+      "language": "JavaScript",
+      "license": "MIT",
+      "archived": false,
+      "recipeId": null,
+      "processing": {
+        "state": "needs_recipe",
+        "batch": null,
+        "notes": []
+      }
+    },
+    {
+      "repositoryId": 1225840521,
+      "repository": "GanyuanRan/Aegis",
+      "aliases": [
+        "GanyuanRan/Aegis"
+      ],
+      "url": "https://github.com/GanyuanRan/Aegis",
+      "ranks": {
+        "trending": 19,
+        "rating": 71,
+        "comments": 21
+      },
+      "upstreamCategory": "智能体",
+      "stars": 1358,
+      "pushedAt": "2026-10-18T05:44:13Z",
+      "observedAt": "2026-10-18T18:04:21.546Z",
+      "defaultBranch": "main",
+      "language": "Python",
+      "license": "MIT",
+      "archived": false,
+      "recipeId": null,
+      "processing": {
+        "state": "needs_recipe",
+        "batch": null,
+        "notes": []
+      }
+    },
+    {
+      "repositoryId": 1337545070,
+      "repository": "corrinehu/dsh-workbuddy-connect",
+      "aliases": [
+        "corrinehu/dsh-workbuddy-connect"
+      ],
+      "url": "https://github.com/corrinehu/dsh-workbuddy-connect",
+      "ranks": {
+        "trending": 26,
+        "rating": 73,
+        "comments": 24
+      },
+      "upstreamCategory": "其他",
+      "stars": 1324,
+      "pushedAt": "2026-10-18T13:02:19Z",
+      "observedAt": "2026-10-18T18:04:22.359Z",
+      "defaultBranch": "main",
+      "language": "TypeScript",
+      "license": "MIT",
+      "archived": false,
+      "recipeId": null,
+      "processing": {
+        "state": "needs_recipe",
+        "batch": null,
+        "notes": []
+      }
+    },
+    {
+      "repositoryId": 1300173275,
+      "repository": "vshulcz/deja-vu",
+      "aliases": [
+        "vshulcz/deja-vu"
+      ],
+      "url": "https://github.com/vshulcz/deja-vu",
+      "ranks": {
+        "trending": 24,
+        "rating": 72,
+        "comments": 22
+      },
+      "upstreamCategory": "界面",
+      "stars": 1240,
+      "pushedAt": "2026-10-18T14:09:08Z",
+      "observedAt": "2026-10-18T18:04:22.074Z",
+      "defaultBranch": "main",
+      "language": "Go",
+      "license": "MIT",
+      "archived": false,
+      "recipeId": null,
+      "processing": {
+        "state": "needs_recipe",
+        "batch": null,
+        "notes": []
+      }
+    },
+    {
+      "repositoryId": 1333446374,
+      "repository": "ysr666/dsh-vision-router",
+      "aliases": [
+        "ysr666/dsh-vision-router"
+      ],
+      "url": "https://github.com/ysr666/dsh-vision-router",
+      "ranks": {
+        "trending": 23,
+        "rating": 14,
+        "comments": 23
+      },
+      "upstreamCategory": "界面",
+      "stars": 1154,
+      "pushedAt": "2026-10-18T04:32:03Z",
+      "observedAt": "2026-10-18T18:04:21.944Z",
+      "defaultBranch": "main",
+      "language": "JavaScript",
+      "license": "MIT",
+      "archived": false,
+      "recipeId": null,
+      "processing": {
+        "state": "needs_recipe",
+        "batch": null,
+        "notes": []
+      }
+    },
+    {
+      "repositoryId": 1374986657,
+      "repository": "Miaotofu01/Study-Mate",
+      "aliases": [
+        "Miaotofu01/Study-Mate"
+      ],
+      "url": "https://github.com/Miaotofu01/Study-Mate",
+      "ranks": {
+        "trending": 27,
+        "rating": 74,
+        "comments": 25
+      },
+      "upstreamCategory": "智能体",
+      "stars": 1055,
+      "pushedAt": "2026-10-17T17:51:39Z",
+      "observedAt": "2026-10-18T18:04:22.372Z",
+      "defaultBranch": "main",
+      "language": "JavaScript",
+      "license": "MIT",
+      "archived": false,
+      "recipeId": null,
+      "processing": {
+        "state": "needs_recipe",
+        "batch": null,
+        "notes": []
+      }
+    },
+    {
+      "repositoryId": 1333100071,
+      "repository": "Anionex/dsh-vision-toolkit",
+      "aliases": [
+        "Anionex/dsh-vision-toolkit"
+      ],
+      "url": "https://github.com/Anionex/dsh-vision-toolkit",
+      "ranks": {
+        "trending": 22,
+        "rating": 75,
+        "comments": 26
+      },
+      "upstreamCategory": "界面",
+      "stars": 897,
+      "pushedAt": "2026-10-18T02:42:13Z",
+      "observedAt": "2026-10-18T18:04:21.862Z",
+      "defaultBranch": "main",
+      "language": "TypeScript",
+      "license": "MIT",
+      "archived": false,
+      "recipeId": null,
+      "processing": {
+        "state": "needs_recipe",
+        "batch": null,
+        "notes": []
+      }
+    },
+    {
+      "repositoryId": 1195794651,
+      "repository": "toby-bridges/api-relay-audit",
+      "aliases": [
+        "toby-bridges/api-relay-audit"
+      ],
+      "url": "https://github.com/toby-bridges/api-relay-audit",
+      "ranks": {
+        "trending": 28,
+        "rating": 76,
+        "comments": 27
+      },
+      "upstreamCategory": "安全",
+      "stars": 885,
+      "pushedAt": "2026-10-17T15:24:51Z",
+      "observedAt": "2026-10-18T18:04:22.421Z",
+      "defaultBranch": "master",
+      "language": "Python",
+      "license": "AGPL-3.0",
+      "archived": false,
+      "recipeId": null,
+      "processing": {
+        "state": "needs_recipe",
+        "batch": null,
+        "notes": []
+      }
+    },
+    {
+      "repositoryId": 1171186947,
+      "repository": "LiPu-jpg/Openwrite",
+      "aliases": [
+        "LiPu-jpg/Openwrite"
+      ],
+      "url": "https://github.com/LiPu-jpg/Openwrite",
+      "ranks": {
+        "trending": 29,
+        "rating": 77,
+        "comments": 28
+      },
+      "upstreamCategory": "智能体",
+      "stars": 841,
+      "pushedAt": "2026-10-18T04:23:49Z",
+      "observedAt": "2026-10-18T18:04:22.487Z",
+      "defaultBranch": "main",
+      "language": "TypeScript",
+      "license": "Apache-2.0",
+      "archived": false,
+      "recipeId": null,
+      "processing": {
+        "state": "needs_recipe",
+        "batch": null,
+        "notes": []
+      }
+    },
+    {
+      "repositoryId": 1163808542,
+      "repository": "liustack/modsearch",
+      "aliases": [
+        "liustack/modsearch"
+      ],
+      "url": "https://github.com/liustack/modsearch",
+      "ranks": {
+        "trending": 20,
+        "rating": 78,
+        "comments": 29
+      },
+      "upstreamCategory": "搜索与知识",
+      "stars": 745,
+      "pushedAt": "2026-10-18T16:23:15Z",
+      "observedAt": "2026-10-18T18:04:21.787Z",
+      "defaultBranch": "main",
+      "language": "TypeScript",
+      "license": "MIT",
+      "archived": false,
+      "recipeId": null,
+      "processing": {
+        "state": "needs_recipe",
+        "batch": null,
+        "notes": []
+      }
+    },
+    {
+      "repositoryId": 1336856993,
+      "repository": "SeaOf0/dsh-redteam-model",
+      "aliases": [
+        "SeaOf0/dsh-redteam-model"
+      ],
+      "url": "https://github.com/SeaOf0/dsh-redteam-model",
+      "ranks": {
+        "trending": 31,
+        "rating": 79,
+        "comments": 30
+      },
+      "upstreamCategory": "其他",
+      "stars": 728,
+      "pushedAt": "2026-10-14T11:09:57Z",
+      "observedAt": "2026-10-18T18:04:22.653Z",
+      "defaultBranch": "main",
+      "language": "Python",
+      "license": "MIT",
+      "archived": false,
+      "recipeId": null,
+      "processing": {
+        "state": "needs_recipe",
+        "batch": null,
+        "notes": []
+      }
+    },
+    {
+      "repositoryId": 1280115203,
+      "repository": "zhoushoujianwork/easyeda-agent",
+      "aliases": [
+        "zhoushoujianwork/easyeda-agent"
+      ],
+      "url": "https://github.com/zhoushoujianwork/easyeda-agent",
+      "ranks": {
+        "trending": 34,
+        "rating": 80,
+        "comments": 31
+      },
+      "upstreamCategory": "智能体",
+      "stars": 702,
+      "pushedAt": "2026-10-18T05:58:53Z",
+      "observedAt": "2026-10-18T18:04:23.005Z",
+      "defaultBranch": "main",
+      "language": "Go",
+      "license": "NOASSERTION",
+      "archived": false,
+      "recipeId": null,
+      "processing": {
+        "state": "needs_recipe",
+        "batch": null,
+        "notes": []
+      }
+    },
+    {
+      "repositoryId": 1329113397,
+      "repository": "Nagi-ovo/dsh-ads",
+      "aliases": [
+        "Nagi-ovo/dsh-ads"
+      ],
+      "url": "https://github.com/Nagi-ovo/dsh-ads",
+      "ranks": {
+        "trending": 32,
+        "rating": 81,
+        "comments": 32
+      },
+      "upstreamCategory": "界面",
+      "stars": 676,
+      "pushedAt": "2026-10-17T12:35:00Z",
+      "observedAt": "2026-10-18T18:04:22.915Z",
+      "defaultBranch": "main",
+      "language": "TypeScript",
+      "license": "BSD-3-Clause",
+      "archived": false,
+      "recipeId": null,
+      "processing": {
+        "state": "needs_recipe",
+        "batch": null,
+        "notes": []
+      }
+    },
+    {
+      "repositoryId": 1178312395,
+      "repository": "adoresever/graph-memory",
+      "aliases": [
+        "adoresever/graph-memory"
+      ],
+      "url": "https://github.com/adoresever/graph-memory",
+      "ranks": {
+        "trending": 25,
+        "rating": 82,
+        "comments": 33
+      },
+      "upstreamCategory": "记忆",
+      "stars": 655,
+      "pushedAt": "2026-10-01T00:45:49Z",
+      "observedAt": "2026-10-18T18:04:22.095Z",
+      "defaultBranch": "main",
+      "language": "TypeScript",
+      "license": "MIT",
+      "archived": false,
+      "recipeId": null,
+      "processing": {
+        "state": "needs_recipe",
+        "batch": null,
+        "notes": []
+      }
+    },
+    {
+      "repositoryId": 1297278222,
+      "repository": "sandbaseai/sandbase-harness",
+      "aliases": [
+        "sandbaseai/sandbase-harness"
+      ],
+      "url": "https://github.com/sandbaseai/sandbase-harness",
+      "ranks": {
+        "trending": 36,
+        "rating": 83,
+        "comments": 34
+      },
+      "upstreamCategory": "安全",
+      "stars": 639,
+      "pushedAt": "2026-10-18T14:15:46Z",
+      "observedAt": "2026-10-18T18:04:23.342Z",
+      "defaultBranch": "main",
+      "language": "TypeScript",
+      "license": "Apache-2.0",
+      "archived": false,
+      "recipeId": null,
+      "processing": {
+        "state": "needs_recipe",
+        "batch": null,
+        "notes": []
+      }
+    },
+    {
+      "repositoryId": 1162230313,
+      "repository": "mnemon-dev/mnemon",
+      "aliases": [
+        "mnemon-dev/mnemon"
+      ],
+      "url": "https://github.com/mnemon-dev/mnemon",
+      "ranks": {
+        "trending": 37,
+        "rating": 84,
+        "comments": 35
+      },
+      "upstreamCategory": "记忆",
+      "stars": 638,
+      "pushedAt": "2026-10-18T12:38:32Z",
+      "observedAt": "2026-10-18T18:04:23.342Z",
+      "defaultBranch": "master",
+      "language": "Go",
+      "license": "Apache-2.0",
+      "archived": false,
+      "recipeId": null,
+      "processing": {
+        "state": "needs_recipe",
+        "batch": null,
+        "notes": []
+      }
+    },
+    {
+      "repositoryId": 1333128726,
+      "repository": "omdsh-dev/dsh-genui",
+      "aliases": [
+        "omdsh-dev/dsh-genui"
+      ],
+      "url": "https://github.com/omdsh-dev/dsh-genui",
+      "ranks": {
+        "trending": 35,
+        "rating": 5,
+        "comments": 37
+      },
+      "upstreamCategory": "界面",
+      "stars": 633,
+      "pushedAt": "2026-10-17T15:57:56Z",
+      "observedAt": "2026-10-18T18:04:23.121Z",
+      "defaultBranch": "main",
+      "language": "TypeScript",
+      "license": "MIT",
+      "archived": false,
+      "recipeId": null,
+      "processing": {
+        "state": "needs_recipe",
+        "batch": null,
+        "notes": []
+      }
+    },
+    {
+      "repositoryId": 1336998801,
+      "repository": "shanliuling/dsh-image-gen",
+      "aliases": [
+        "shanliuling/dsh-image-gen"
+      ],
+      "url": "https://github.com/shanliuling/dsh-image-gen",
+      "ranks": {
+        "trending": 39,
+        "rating": 85,
+        "comments": 36
+      },
+      "upstreamCategory": "界面",
+      "stars": 628,
+      "pushedAt": "2026-10-18T17:02:58Z",
+      "observedAt": "2026-10-18T18:04:23.525Z",
+      "defaultBranch": "main",
+      "language": "TypeScript",
+      "license": "Apache-2.0",
+      "archived": false,
+      "recipeId": null,
+      "processing": {
+        "state": "needs_recipe",
+        "batch": null,
+        "notes": []
+      }
+    },
+    {
+      "repositoryId": 1335155355,
+      "repository": "howmp/dsh-pentest",
+      "aliases": [
+        "howmp/dsh-pentest"
+      ],
+      "url": "https://github.com/howmp/dsh-pentest",
+      "ranks": {
+        "trending": 38,
+        "rating": 86,
+        "comments": 38
+      },
+      "upstreamCategory": "开发工具",
+      "stars": 607,
+      "pushedAt": "2026-10-09T11:19:50Z",
+      "observedAt": "2026-10-18T18:04:23.447Z",
+      "defaultBranch": "master",
+      "language": "JavaScript",
+      "license": null,
+      "archived": true,
+      "recipeId": null,
+      "processing": {
+        "state": "needs_recipe",
+        "batch": null,
+        "notes": []
+      }
+    },
+    {
+      "repositoryId": 1329424520,
+      "repository": "omdsh-dev/dsh-mnemon",
+      "aliases": [
+        "omdsh-dev/dsh-mnemon"
+      ],
+      "url": "https://github.com/omdsh-dev/dsh-mnemon",
+      "ranks": {
+        "trending": 41,
+        "rating": 87,
+        "comments": 39
+      },
+      "upstreamCategory": "记忆",
+      "stars": 581,
+      "pushedAt": "2026-10-18T16:28:03Z",
+      "observedAt": "2026-10-18T18:04:23.791Z",
+      "defaultBranch": "main",
+      "language": "TypeScript",
+      "license": "MIT",
+      "archived": false,
+      "recipeId": null,
+      "processing": {
+        "state": "needs_recipe",
+        "batch": null,
+        "notes": []
+      }
+    },
+    {
+      "repositoryId": 1335241492,
+      "repository": "dream-num/dsh-univer-office",
+      "aliases": [
+        "dream-num/dsh-univer-office"
+      ],
+      "url": "https://github.com/dream-num/dsh-univer-office",
+      "ranks": {
+        "trending": 40,
+        "rating": 88,
+        "comments": 40
+      },
+      "upstreamCategory": "数据分析",
+      "stars": 562,
+      "pushedAt": "2026-10-08T08:36:16Z",
+      "observedAt": "2026-10-18T18:04:23.697Z",
+      "defaultBranch": "main",
+      "language": "TypeScript",
+      "license": "Apache-2.0",
+      "archived": false,
+      "recipeId": null,
+      "processing": {
+        "state": "needs_recipe",
+        "batch": null,
+        "notes": []
+      }
+    },
+    {
+      "repositoryId": 1368569221,
+      "repository": "sixtysevenlf/dsh-blender-plugin",
+      "aliases": [
+        "sixtysevenlf/dsh-blender-plugin"
+      ],
+      "url": "https://github.com/sixtysevenlf/dsh-blender-plugin",
+      "ranks": {
+        "trending": 73,
+        "comments": 65
+      },
+      "upstreamCategory": "记忆",
+      "stars": 556,
+      "pushedAt": "2026-10-17T14:31:19Z",
+      "observedAt": "2026-10-18T18:04:27.429Z",
+      "defaultBranch": "main",
+      "language": "Python",
+      "license": "BSD-3-Clause",
+      "archived": false,
+      "recipeId": null,
+      "processing": {
+        "state": "needs_recipe",
+        "batch": null,
+        "notes": []
+      }
+    },
+    {
+      "repositoryId": 1336228384,
+      "repository": "liangmianya/dsh-synapse",
+      "aliases": [
+        "liangmianya/dsh-synapse"
+      ],
+      "url": "https://github.com/liangmianya/dsh-synapse",
+      "ranks": {
+        "trending": 45,
+        "rating": 89,
+        "comments": 41
+      },
+      "upstreamCategory": "其他",
+      "stars": 538,
+      "pushedAt": "2026-10-05T11:19:39Z",
+      "observedAt": "2026-10-18T18:04:24.080Z",
+      "defaultBranch": "main",
+      "language": "JavaScript",
+      "license": "MIT",
+      "archived": false,
+      "recipeId": null,
+      "processing": {
+        "state": "needs_recipe",
+        "batch": null,
+        "notes": []
+      }
+    },
+    {
+      "repositoryId": 1333247282,
+      "repository": "anysearch-team/anysearch-dsh",
+      "aliases": [
+        "anysearch-team/anysearch-dsh"
+      ],
+      "url": "https://github.com/anysearch-team/anysearch-dsh",
+      "ranks": {
+        "trending": 43,
+        "rating": 90,
+        "comments": 42
+      },
+      "upstreamCategory": "搜索与知识",
+      "stars": 529,
+      "pushedAt": "2026-10-10T08:54:47Z",
+      "observedAt": "2026-10-18T18:04:24.102Z",
+      "defaultBranch": "main",
+      "language": "TypeScript",
+      "license": "MIT",
+      "archived": false,
+      "recipeId": null,
+      "processing": {
+        "state": "needs_recipe",
+        "batch": null,
+        "notes": []
+      }
+    },
+    {
+      "repositoryId": 1224734286,
+      "repository": "Ikalus1988/MisakaNet",
+      "aliases": [
+        "Ikalus1988/MisakaNet"
+      ],
+      "url": "https://github.com/Ikalus1988/MisakaNet",
+      "ranks": {
+        "trending": 47,
+        "rating": 91,
+        "comments": 43
+      },
+      "upstreamCategory": "记忆",
+      "stars": 528,
+      "pushedAt": "2026-10-18T17:10:35Z",
+      "observedAt": "2026-10-18T18:04:24.384Z",
+      "defaultBranch": "main",
+      "language": "Python",
+      "license": "Apache-2.0",
+      "archived": false,
+      "recipeId": null,
+      "processing": {
+        "state": "needs_recipe",
+        "batch": null,
+        "notes": []
+      }
+    },
+    {
+      "repositoryId": 1334817483,
+      "repository": "saya-ch/dsh-mobile",
+      "aliases": [
+        "saya-ch/dsh-mobile"
+      ],
+      "url": "https://github.com/saya-ch/dsh-mobile",
+      "ranks": {
+        "trending": 50,
+        "rating": 93,
+        "comments": 45
+      },
+      "upstreamCategory": "其他",
+      "stars": 507,
+      "pushedAt": "2026-10-18T05:26:22Z",
+      "observedAt": "2026-10-18T18:04:25.132Z",
+      "defaultBranch": "main",
+      "language": "TypeScript",
+      "license": "Apache-2.0",
+      "archived": false,
+      "recipeId": null,
+      "processing": {
+        "state": "needs_recipe",
+        "batch": null,
+        "notes": []
+      }
+    },
+    {
+      "repositoryId": 1334384058,
+      "repository": "DDDMUC/dsh-free-search",
+      "aliases": [
+        "DDDMUC/dsh-free-search"
+      ],
+      "url": "https://github.com/DDDMUC/dsh-free-search",
+      "ranks": {
+        "trending": 52,
+        "rating": 97,
+        "comments": 48
+      },
+      "upstreamCategory": "搜索与知识",
+      "stars": 484,
+      "pushedAt": "2026-10-18T12:24:09Z",
+      "observedAt": "2026-10-18T18:04:25.159Z",
+      "defaultBranch": "master",
+      "language": "JavaScript",
+      "license": "MIT",
+      "archived": false,
+      "recipeId": null,
+      "processing": {
+        "state": "needs_recipe",
+        "batch": null,
+        "notes": []
+      }
+    },
+    {
+      "repositoryId": 1333964468,
+      "repository": "V1ki/dsh-plugin-subscriptions",
+      "aliases": [
+        "V1ki/dsh-plugin-subscriptions"
+      ],
+      "url": "https://github.com/V1ki/dsh-plugin-subscriptions",
+      "ranks": {
+        "trending": 51,
+        "rating": 94,
+        "comments": 46
+      },
+      "upstreamCategory": "界面",
+      "stars": 478,
+      "pushedAt": "2026-10-09T00:25:31Z",
+      "observedAt": "2026-10-18T18:04:24.809Z",
+      "defaultBranch": "main",
+      "language": "TypeScript",
+      "license": "MIT",
+      "archived": false,
+      "recipeId": null,
+      "processing": {
+        "state": "needs_recipe",
+        "batch": null,
+        "notes": []
+      }
+    },
+    {
+      "repositoryId": 1333235870,
+      "repository": "Han-1413141/dsh-cost-meter",
+      "aliases": [
+        "Han-1413141/dsh-cost-meter"
+      ],
+      "url": "https://github.com/Han-1413141/dsh-cost-meter",
+      "ranks": {
+        "trending": 49,
+        "rating": 98,
+        "comments": 50
+      },
+      "upstreamCategory": "界面",
+      "stars": 455,
+      "pushedAt": "2026-10-18T15:52:42Z",
+      "observedAt": "2026-10-18T18:04:24.596Z",
+      "defaultBranch": "master",
+      "language": "JavaScript",
+      "license": "MIT",
+      "archived": false,
+      "recipeId": null,
+      "processing": {
+        "state": "needs_recipe",
+        "batch": null,
+        "notes": []
+      }
+    },
+    {
+      "repositoryId": 1333755311,
+      "repository": "QCYTSN/dsh-dafeiyu",
+      "aliases": [
+        "QCYTSN/dsh-dafeiyu"
+      ],
+      "url": "https://github.com/QCYTSN/dsh-dafeiyu",
+      "ranks": {
+        "trending": 53,
+        "rating": 95,
+        "comments": 47
+      },
+      "upstreamCategory": "智能体",
+      "stars": 454,
+      "pushedAt": "2026-10-10T05:47:31Z",
+      "observedAt": "2026-10-18T18:04:25.161Z",
+      "defaultBranch": "main",
+      "language": "JavaScript",
+      "license": "MIT",
+      "archived": false,
+      "recipeId": null,
+      "processing": {
+        "state": "needs_recipe",
+        "batch": null,
+        "notes": []
+      }
+    },
+    {
+      "repositoryId": 1334211162,
+      "repository": "FuRongJun-1999/dsh-memory",
+      "aliases": [
+        "FuRongJun-1999/dsh-memory"
+      ],
+      "url": "https://github.com/FuRongJun-1999/dsh-memory",
+      "ranks": {
+        "trending": 56,
+        "rating": 100,
+        "comments": 52
+      },
+      "upstreamCategory": "记忆",
+      "stars": 411,
+      "pushedAt": "2026-10-18T18:04:19Z",
+      "observedAt": "2026-10-18T18:04:25.639Z",
+      "defaultBranch": "main",
+      "language": "Python",
+      "license": "MIT",
+      "archived": false,
+      "recipeId": null,
+      "processing": {
+        "state": "needs_recipe",
+        "batch": null,
+        "notes": []
+      }
+    },
+    {
+      "repositoryId": 1334118559,
+      "repository": "Mars-Sea/dsh-commandcode-provider",
+      "aliases": [
+        "Mars-Sea/dsh-commandcode-provider"
+      ],
+      "url": "https://github.com/Mars-Sea/dsh-commandcode-provider",
+      "ranks": {
+        "trending": 58,
+        "comments": 54
+      },
+      "upstreamCategory": "搜索与知识",
+      "stars": 407,
+      "pushedAt": "2026-10-18T11:14:13Z",
+      "observedAt": "2026-10-18T18:04:25.807Z",
+      "defaultBranch": "main",
+      "language": "TypeScript",
+      "license": "MIT",
+      "archived": false,
+      "recipeId": null,
+      "processing": {
+        "state": "needs_recipe",
+        "batch": null,
+        "notes": []
+      }
+    },
+    {
+      "repositoryId": 1323731026,
+      "repository": "csyangwen/dsh-memory-evolve",
+      "aliases": [
+        "csyangwen/dsh-memory-evolve"
+      ],
+      "url": "https://github.com/csyangwen/dsh-memory-evolve",
+      "ranks": {
+        "trending": 30,
+        "rating": 99,
+        "comments": 51
+      },
+      "upstreamCategory": "开发工具",
+      "stars": 402,
+      "pushedAt": "2026-09-29T12:52:46Z",
+      "observedAt": "2026-10-18T18:04:22.639Z",
+      "defaultBranch": "main",
+      "language": "JavaScript",
+      "license": "MIT",
+      "archived": false,
+      "recipeId": null,
+      "processing": {
+        "state": "needs_recipe",
+        "batch": null,
+        "notes": []
+      }
+    },
+    {
+      "repositoryId": 1334618124,
+      "repository": "d-dev0101/open-sea-skin",
+      "aliases": [
+        "d-dev0101/open-sea-skin"
+      ],
+      "url": "https://github.com/d-dev0101/open-sea-skin",
+      "ranks": {
+        "trending": 48,
+        "comments": 53
+      },
+      "upstreamCategory": "界面",
+      "stars": 398,
+      "pushedAt": "2026-10-11T17:17:28Z",
+      "observedAt": "2026-10-18T18:04:24.809Z",
+      "defaultBranch": "main",
+      "language": "JavaScript",
+      "license": "MIT",
+      "archived": false,
+      "recipeId": null,
+      "processing": {
+        "state": "needs_recipe",
+        "batch": null,
+        "notes": []
+      }
+    },
+    {
+      "repositoryId": 1303848201,
+      "repository": "theBigGavin/marketingdashboard",
+      "aliases": [
+        "theBigGavin/marketingdashboard"
+      ],
+      "url": "https://github.com/theBigGavin/marketingdashboard",
+      "ranks": {
+        "trending": 57,
+        "comments": 55
+      },
+      "upstreamCategory": "搜索与知识",
+      "stars": 394,
+      "pushedAt": "2026-09-28T20:11:15Z",
+      "observedAt": "2026-10-18T18:04:25.827Z",
+      "defaultBranch": "main",
+      "language": "TypeScript",
+      "license": "MIT",
+      "archived": false,
+      "recipeId": null,
+      "processing": {
+        "state": "needs_recipe",
+        "batch": null,
+        "notes": []
+      }
+    },
+    {
+      "repositoryId": 1334325657,
+      "repository": "liguobao/ds-harness-remote",
+      "aliases": [
+        "liguobao/ds-harness-remote"
+      ],
+      "url": "https://github.com/liguobao/ds-harness-remote",
+      "ranks": {
+        "trending": 62,
+        "comments": 58
+      },
+      "upstreamCategory": "界面",
+      "stars": 370,
+      "pushedAt": "2026-10-18T17:08:58Z",
+      "observedAt": "2026-10-18T18:04:26.214Z",
+      "defaultBranch": "main",
+      "language": "TypeScript",
+      "license": null,
+      "archived": false,
+      "recipeId": null,
+      "processing": {
+        "state": "needs_recipe",
+        "batch": null,
+        "notes": []
+      }
+    },
+    {
+      "repositoryId": 1329947687,
+      "repository": "vlln/whale-girl",
+      "aliases": [
+        "vlln/whale-girl"
+      ],
+      "url": "https://github.com/vlln/whale-girl",
+      "ranks": {
+        "trending": 42,
+        "comments": 56
+      },
+      "upstreamCategory": "界面",
+      "stars": 364,
+      "pushedAt": "2026-10-16T11:26:13Z",
+      "observedAt": "2026-10-18T18:04:23.917Z",
+      "defaultBranch": "main",
+      "language": "JavaScript",
+      "license": "MIT",
+      "archived": false,
+      "recipeId": null,
+      "processing": {
+        "state": "needs_recipe",
+        "batch": null,
+        "notes": []
+      }
+    },
+    {
+      "repositoryId": 1179983747,
+      "repository": "linhay/harmony-next.skills",
+      "aliases": [
+        "linhay/harmony-next.skills"
+      ],
+      "url": "https://github.com/linhay/harmony-next.skills",
+      "ranks": {
+        "trending": 61,
+        "comments": 57
+      },
+      "upstreamCategory": "界面",
+      "stars": 362,
+      "pushedAt": "2026-09-20T07:21:18Z",
+      "observedAt": "2026-10-18T18:04:26.159Z",
+      "defaultBranch": "master",
+      "language": "Python",
+      "license": null,
+      "archived": false,
+      "recipeId": null,
+      "processing": {
+        "state": "needs_recipe",
+        "batch": null,
+        "notes": []
+      }
+    },
+    {
+      "repositoryId": 1333732838,
+      "repository": "shengsheng90/DSH-taskboard",
+      "aliases": [
+        "shengsheng90/DSH-taskboard"
+      ],
+      "url": "https://github.com/shengsheng90/DSH-taskboard",
+      "ranks": {
+        "trending": 64,
+        "comments": 59
+      },
+      "upstreamCategory": "界面",
+      "stars": 336,
+      "pushedAt": "2026-10-13T07:32:18Z",
+      "observedAt": "2026-10-18T18:04:26.339Z",
+      "defaultBranch": "main",
+      "language": "TypeScript",
+      "license": "Apache-2.0",
+      "archived": false,
+      "recipeId": null,
+      "processing": {
+        "state": "needs_recipe",
+        "batch": null,
+        "notes": []
+      }
+    },
+    {
+      "repositoryId": 1339882322,
+      "repository": "ZSeven-W/dsh-ios",
+      "aliases": [
+        "ZSeven-W/dsh-ios"
+      ],
+      "url": "https://github.com/ZSeven-W/dsh-ios",
+      "ranks": {
+        "trending": 65,
+        "comments": 60
+      },
+      "upstreamCategory": "界面",
+      "stars": 327,
+      "pushedAt": "2026-09-24T21:40:18Z",
+      "observedAt": "2026-10-18T18:04:26.440Z",
+      "defaultBranch": "main",
+      "language": "TypeScript",
+      "license": "MIT",
+      "archived": false,
+      "recipeId": null,
+      "processing": {
+        "state": "needs_recipe",
+        "batch": null,
+        "notes": []
+      }
+    },
+    {
+      "repositoryId": 1333132287,
+      "repository": "Nagi-ovo/dsh-visualize",
+      "aliases": [
+        "Nagi-ovo/dsh-visualize"
+      ],
+      "url": "https://github.com/Nagi-ovo/dsh-visualize",
+      "ranks": {
+        "trending": 59,
+        "rating": 15,
+        "comments": 62
+      },
+      "upstreamCategory": "数据分析",
+      "stars": 309,
+      "pushedAt": "2026-10-18T06:44:32Z",
+      "observedAt": "2026-10-18T18:04:25.787Z",
+      "defaultBranch": "main",
+      "language": "TypeScript",
+      "license": "BSD-3-Clause",
+      "archived": false,
+      "recipeId": null,
+      "processing": {
+        "state": "needs_recipe",
+        "batch": null,
+        "notes": []
+      }
+    },
+    {
+      "repositoryId": 1334766747,
+      "repository": "toolclub/dsh-agent-team-gui",
+      "aliases": [
+        "toolclub/dsh-agent-team-gui"
+      ],
+      "url": "https://github.com/toolclub/dsh-agent-team-gui",
+      "ranks": {
+        "trending": 67,
+        "comments": 63
+      },
+      "upstreamCategory": "智能体",
+      "stars": 289,
+      "pushedAt": "2026-10-12T19:57:27Z",
+      "observedAt": "2026-10-18T18:04:26.908Z",
+      "defaultBranch": "main",
+      "language": "TypeScript",
+      "license": "MIT",
+      "archived": false,
+      "recipeId": null,
+      "processing": {
+        "state": "needs_recipe",
+        "batch": null,
+        "notes": []
+      }
+    },
+    {
+      "repositoryId": 1332692519,
+      "repository": "huiliyi37/dsh-tianshu-tui",
+      "aliases": [
+        "huiliyi37/dsh-tianshu-tui"
+      ],
+      "url": "https://github.com/huiliyi37/dsh-tianshu-tui",
+      "ranks": {
+        "trending": 68,
+        "comments": 64
+      },
+      "upstreamCategory": "界面",
+      "stars": 287,
+      "pushedAt": "2026-09-30T11:13:01Z",
+      "observedAt": "2026-10-18T18:04:26.994Z",
+      "defaultBranch": "main",
+      "language": "TypeScript",
+      "license": "Apache-2.0",
+      "archived": false,
+      "recipeId": null,
+      "processing": {
+        "state": "needs_recipe",
+        "batch": null,
+        "notes": []
+      }
+    },
+    {
+      "repositoryId": 1336614837,
+      "repository": "wssfk12138/dsh-damage-pulse",
+      "aliases": [
+        "wssfk12138/dsh-damage-pulse"
+      ],
+      "url": "https://github.com/wssfk12138/dsh-damage-pulse",
+      "ranks": {
+        "trending": 75,
+        "comments": 66
+      },
+      "upstreamCategory": "其他",
+      "stars": 269,
+      "pushedAt": "2026-10-17T11:30:14Z",
+      "observedAt": "2026-10-18T18:04:27.569Z",
+      "defaultBranch": "master",
+      "language": "JavaScript",
+      "license": "MIT",
+      "archived": false,
+      "recipeId": null,
+      "processing": {
+        "state": "needs_recipe",
+        "batch": null,
+        "notes": []
+      }
+    },
+    {
+      "repositoryId": 1350368388,
+      "repository": "FishBottle7/opencode2dsh",
+      "aliases": [
+        "FishBottle7/opencode2dsh"
+      ],
+      "url": "https://github.com/FishBottle7/opencode2dsh",
+      "ranks": {
+        "trending": 70,
+        "comments": 67
+      },
+      "upstreamCategory": "智能体",
+      "stars": 265,
+      "pushedAt": "2026-10-14T02:36:13Z",
+      "observedAt": "2026-10-18T18:04:27.171Z",
+      "defaultBranch": "master",
+      "language": "TypeScript",
+      "license": "MIT",
+      "archived": false,
+      "recipeId": null,
+      "processing": {
+        "state": "needs_recipe",
+        "batch": null,
+        "notes": []
+      }
+    },
+    {
+      "repositoryId": 1334214605,
+      "repository": "dhicoc/dsh-reverse-skill",
+      "aliases": [
+        "dhicoc/dsh-reverse-skill"
+      ],
+      "url": "https://github.com/dhicoc/dsh-reverse-skill",
+      "ranks": {
+        "trending": 69,
+        "comments": 68
+      },
+      "upstreamCategory": "安全",
+      "stars": 264,
+      "pushedAt": "2026-10-08T09:10:26Z",
+      "observedAt": "2026-10-18T18:04:26.930Z",
+      "defaultBranch": "main",
+      "language": "PowerShell",
+      "license": "MIT",
+      "archived": false,
+      "recipeId": null,
+      "processing": {
+        "state": "needs_recipe",
+        "batch": null,
+        "notes": []
+      }
+    },
+    {
+      "repositoryId": 1377916761,
+      "repository": "Devin-AXIS/jev-dsh-decision",
+      "aliases": [
+        "Devin-AXIS/jev-dsh-decision"
+      ],
+      "url": "https://github.com/Devin-AXIS/jev-dsh-decision",
+      "ranks": {
+        "trending": 77,
+        "comments": 69
+      },
+      "upstreamCategory": "智能体",
+      "stars": 256,
+      "pushedAt": "2026-09-20T04:59:32Z",
+      "observedAt": "2026-10-18T18:04:27.753Z",
+      "defaultBranch": "main",
+      "language": "JavaScript",
+      "license": null,
+      "archived": false,
+      "recipeId": null,
+      "processing": {
+        "state": "needs_recipe",
+        "batch": null,
+        "notes": []
+      }
+    },
+    {
+      "repositoryId": 1326394141,
+      "repository": "Fisfzy/dsh-ego-browser",
+      "aliases": [
+        "Fisfzy/dsh-ego-browser"
+      ],
+      "url": "https://github.com/Fisfzy/dsh-ego-browser",
+      "ranks": {
+        "trending": 71,
+        "comments": 70
+      },
+      "upstreamCategory": "智能体",
+      "stars": 254,
+      "pushedAt": "2026-09-28T15:18:34Z",
+      "observedAt": "2026-10-18T18:04:27.009Z",
+      "defaultBranch": "master",
+      "language": "JavaScript",
+      "license": "NOASSERTION",
+      "archived": false,
+      "recipeId": null,
+      "processing": {
+        "state": "needs_recipe",
+        "batch": null,
+        "notes": []
+      }
+    },
+    {
+      "repositoryId": 1334737435,
+      "repository": "RevolutionLA/dsh-dream-skin",
+      "aliases": [
+        "RevolutionLA/dsh-dream-skin"
+      ],
+      "url": "https://github.com/RevolutionLA/dsh-dream-skin",
+      "ranks": {
+        "trending": 55,
+        "rating": 16,
+        "comments": 72
+      },
+      "upstreamCategory": "界面",
+      "stars": 253,
+      "pushedAt": "2026-10-18T07:59:43Z",
+      "observedAt": "2026-10-18T18:04:25.424Z",
+      "defaultBranch": "main",
+      "language": "JavaScript",
+      "license": "MIT",
+      "archived": false,
+      "recipeId": null,
+      "processing": {
+        "state": "needs_recipe",
+        "batch": null,
+        "notes": []
+      }
+    },
+    {
+      "repositoryId": 1334246540,
+      "repository": "kingOfSoySauce/dsh-liang-skin",
+      "aliases": [
+        "kingOfSoySauce/dsh-liang-skin"
+      ],
+      "url": "https://github.com/kingOfSoySauce/dsh-liang-skin",
+      "ranks": {
+        "trending": 46,
+        "comments": 73
+      },
+      "upstreamCategory": "其他",
+      "stars": 252,
+      "pushedAt": "2026-10-16T09:58:41Z",
+      "observedAt": "2026-10-18T18:04:24.270Z",
+      "defaultBranch": "main",
+      "language": "TypeScript",
+      "license": null,
+      "archived": false,
+      "recipeId": null,
+      "processing": {
+        "state": "needs_recipe",
+        "batch": null,
+        "notes": []
+      }
+    },
+    {
+      "repositoryId": 1333200468,
+      "repository": "Nwflower/dsh-chat-import",
+      "aliases": [
+        "Nwflower/dsh-chat-import"
+      ],
+      "url": "https://github.com/Nwflower/dsh-chat-import",
+      "ranks": {
+        "trending": 79,
+        "comments": 74
+      },
+      "upstreamCategory": "智能体",
+      "stars": 238,
+      "pushedAt": "2026-10-17T12:56:35Z",
+      "observedAt": "2026-10-18T18:04:27.980Z",
+      "defaultBranch": "main",
+      "language": "JavaScript",
+      "license": "MIT",
+      "archived": false,
+      "recipeId": null,
+      "processing": {
+        "state": "needs_recipe",
+        "batch": null,
+        "notes": []
+      }
+    },
+    {
+      "repositoryId": 1408587744,
+      "repository": "xcisxc29/dsh-wechat",
+      "aliases": [
+        "xcisxc29/dsh-wechat"
+      ],
+      "url": "https://github.com/xcisxc29/dsh-wechat",
+      "ranks": {
+        "trending": 91,
+        "comments": 80
+      },
+      "upstreamCategory": "通信",
+      "stars": 235,
+      "pushedAt": "2026-10-17T16:33:57Z",
+      "observedAt": "2026-10-18T18:04:29.458Z",
+      "defaultBranch": "main",
+      "language": "TypeScript",
+      "license": "MIT",
+      "archived": false,
+      "recipeId": null,
+      "processing": {
+        "state": "needs_recipe",
+        "batch": null,
+        "notes": []
+      }
+    },
+    {
+      "repositoryId": 1333482618,
+      "repository": "PerryLink/dsh-auto-review",
+      "aliases": [
+        "PerryLink/dsh-auto-review"
+      ],
+      "url": "https://github.com/PerryLink/dsh-auto-review",
+      "ranks": {
+        "trending": 80,
+        "comments": 75
+      },
+      "upstreamCategory": "安全",
+      "stars": 234,
+      "pushedAt": "2026-10-18T18:02:36Z",
+      "observedAt": "2026-10-18T18:04:28.114Z",
+      "defaultBranch": "main",
+      "language": "TypeScript",
+      "license": "Apache-2.0",
+      "archived": false,
+      "recipeId": null,
+      "processing": {
+        "state": "needs_recipe",
+        "batch": null,
+        "notes": []
+      }
+    },
+    {
+      "repositoryId": 1334442247,
+      "repository": "HanaAyane/dsh-reasoning-effort",
+      "aliases": [
+        "HanaAyane/dsh-reasoning-effort"
+      ],
+      "url": "https://github.com/HanaAyane/dsh-reasoning-effort",
+      "ranks": {
+        "trending": 72,
+        "comments": 76
+      },
+      "upstreamCategory": "开发工具",
+      "stars": 232,
+      "pushedAt": "2026-10-17T17:22:18Z",
+      "observedAt": "2026-10-18T18:04:27.432Z",
+      "defaultBranch": "main",
+      "language": "TypeScript",
+      "license": "MIT",
+      "archived": false,
+      "recipeId": null,
+      "processing": {
+        "state": "needs_recipe",
+        "batch": null,
+        "notes": []
+      }
+    },
+    {
+      "repositoryId": 1334830521,
+      "repository": "MichengAI/dsh-skills-manager",
+      "aliases": [
+        "MichengAI/dsh-skills-manager"
+      ],
+      "url": "https://github.com/MichengAI/dsh-skills-manager",
+      "ranks": {
+        "comments": 100
+      },
+      "upstreamCategory": "智能体",
+      "stars": 229,
+      "pushedAt": "2026-10-18T03:40:26Z",
+      "observedAt": "2026-10-18T18:05:45.623Z",
+      "defaultBranch": "master",
+      "language": "JavaScript",
+      "license": "Apache-2.0",
+      "archived": false,
+      "recipeId": null,
+      "processing": {
+        "state": "needs_recipe",
+        "batch": null,
+        "notes": []
+      }
+    },
+    {
+      "repositoryId": 1333232606,
+      "repository": "yyh-001/dsh-meme",
+      "aliases": [
+        "yyh-001/dsh-meme"
+      ],
+      "url": "https://github.com/yyh-001/dsh-meme",
+      "ranks": {
+        "trending": 83,
+        "comments": 78
+      },
+      "upstreamCategory": "搜索与知识",
+      "stars": 229,
+      "pushedAt": "2026-10-17T11:29:22Z",
+      "observedAt": "2026-10-18T18:04:28.572Z",
+      "defaultBranch": "main",
+      "language": "JavaScript",
+      "license": "MIT",
+      "archived": false,
+      "recipeId": null,
+      "processing": {
+        "state": "needs_recipe",
+        "batch": null,
+        "notes": []
+      }
+    },
+    {
+      "repositoryId": 1333452358,
+      "repository": "weijiafu14/pi2dsh",
+      "aliases": [
+        "weijiafu14/pi2dsh"
+      ],
+      "url": "https://github.com/weijiafu14/pi2dsh",
+      "ranks": {
+        "trending": 87,
+        "comments": 77
+      },
+      "upstreamCategory": "智能体",
+      "stars": 218,
+      "pushedAt": "2026-10-14T06:20:10Z",
+      "observedAt": "2026-10-18T18:04:28.897Z",
+      "defaultBranch": "main",
+      "language": "TypeScript",
+      "license": "MIT",
+      "archived": false,
+      "recipeId": null,
+      "processing": {
+        "state": "needs_recipe",
+        "batch": null,
+        "notes": []
+      }
+    },
+    {
+      "repositoryId": 1274335260,
+      "repository": "zuorn/Tydora",
+      "aliases": [
+        "zuorn/Tydora"
+      ],
+      "url": "https://github.com/zuorn/Tydora",
+      "ranks": {
+        "trending": 90,
+        "comments": 79
+      },
+      "upstreamCategory": "其他",
+      "stars": 216,
+      "pushedAt": "2026-10-12T03:02:10Z",
+      "observedAt": "2026-10-18T18:04:29.331Z",
+      "defaultBranch": "main",
+      "language": "TypeScript",
+      "license": "Apache-2.0",
+      "archived": false,
+      "recipeId": null,
+      "processing": {
+        "state": "needs_recipe",
+        "batch": null,
+        "notes": []
+      }
+    },
+    {
+      "repositoryId": 1339669759,
+      "repository": "PerryLink/dsh-industry-research",
+      "aliases": [
+        "PerryLink/dsh-industry-research"
+      ],
+      "url": "https://github.com/PerryLink/dsh-industry-research",
+      "ranks": {
+        "trending": 93,
+        "comments": 81
+      },
+      "upstreamCategory": "安全",
+      "stars": 214,
+      "pushedAt": "2026-10-18T14:17:08Z",
+      "observedAt": "2026-10-18T18:04:29.426Z",
+      "defaultBranch": "main",
+      "language": "TypeScript",
+      "license": "Apache-2.0",
+      "archived": false,
+      "recipeId": null,
+      "processing": {
+        "state": "needs_recipe",
+        "batch": null,
+        "notes": []
+      }
+    },
+    {
+      "repositoryId": 1339655720,
+      "repository": "PerryLink/dsh-research-report",
+      "aliases": [
+        "PerryLink/dsh-research-report"
+      ],
+      "url": "https://github.com/PerryLink/dsh-research-report",
+      "ranks": {
+        "trending": 94,
+        "comments": 82
+      },
+      "upstreamCategory": "安全",
+      "stars": 213,
+      "pushedAt": "2026-10-18T16:56:09Z",
+      "observedAt": "2026-10-18T18:04:29.662Z",
+      "defaultBranch": "main",
+      "language": "TypeScript",
+      "license": "Apache-2.0",
+      "archived": false,
+      "recipeId": null,
+      "processing": {
+        "state": "needs_recipe",
+        "batch": null,
+        "notes": []
+      }
+    },
+    {
+      "repositoryId": 1333986968,
+      "repository": "Phant0Meow/dsh-meow-memory",
+      "aliases": [
+        "Phant0Meow/dsh-meow-memory"
+      ],
+      "url": "https://github.com/Phant0Meow/dsh-meow-memory",
+      "ranks": {
+        "trending": 84,
+        "comments": 87
+      },
+      "upstreamCategory": "记忆",
+      "stars": 211,
+      "pushedAt": "2026-10-17T16:47:16Z",
+      "observedAt": "2026-10-18T18:04:28.723Z",
+      "defaultBranch": "main",
+      "language": "TypeScript",
+      "license": "MIT",
+      "archived": false,
+      "recipeId": null,
+      "processing": {
+        "state": "needs_recipe",
+        "batch": null,
+        "notes": []
+      }
+    },
+    {
+      "repositoryId": 1333673564,
+      "repository": "Fishquito7/dsh-skill-mcp-panel",
+      "aliases": [
+        "Fishquito7/dsh-skill-mcp-panel"
+      ],
+      "url": "https://github.com/Fishquito7/dsh-skill-mcp-panel",
+      "ranks": {
+        "trending": 89,
+        "comments": 85
+      },
+      "upstreamCategory": "界面",
+      "stars": 210,
+      "pushedAt": "2026-10-18T18:00:07Z",
+      "observedAt": "2026-10-18T18:04:29.254Z",
+      "defaultBranch": "main",
+      "language": "JavaScript",
+      "license": "MIT",
+      "archived": false,
+      "recipeId": null,
+      "processing": {
+        "state": "needs_recipe",
+        "batch": null,
+        "notes": []
+      }
+    },
+    {
+      "repositoryId": 1331112087,
+      "repository": "omdsh-dev/dsh-data-agent",
+      "aliases": [
+        "omdsh-dev/dsh-data-agent"
+      ],
+      "url": "https://github.com/omdsh-dev/dsh-data-agent",
+      "ranks": {
+        "trending": 97,
+        "comments": 83
+      },
+      "upstreamCategory": "数据分析",
+      "stars": 209,
+      "pushedAt": "2026-09-29T11:52:25Z",
+      "observedAt": "2026-10-18T18:04:29.998Z",
+      "defaultBranch": "main",
+      "language": "JavaScript",
+      "license": "MIT",
+      "archived": false,
+      "recipeId": null,
+      "processing": {
+        "state": "needs_recipe",
+        "batch": null,
+        "notes": []
+      }
+    },
+    {
+      "repositoryId": 1335064650,
+      "repository": "e2mcc/dsh-popout-sidebar",
+      "aliases": [
+        "e2mcc/dsh-popout-sidebar"
+      ],
+      "url": "https://github.com/e2mcc/dsh-popout-sidebar",
+      "ranks": {
+        "trending": 88,
+        "comments": 84
+      },
+      "upstreamCategory": "搜索与知识",
+      "stars": 208,
+      "pushedAt": "2026-10-10T18:25:33Z",
+      "observedAt": "2026-10-18T18:04:29.106Z",
+      "defaultBranch": "main",
+      "language": "JavaScript",
+      "license": "MIT",
+      "archived": false,
+      "recipeId": null,
+      "processing": {
+        "state": "needs_recipe",
+        "batch": null,
+        "notes": []
+      }
+    },
+    {
+      "repositoryId": 1391049410,
+      "repository": "luobosibing2/dsh-jev-plugin",
+      "aliases": [
+        "luobosibing2/dsh-jev-plugin"
+      ],
+      "url": "https://github.com/luobosibing2/dsh-jev-plugin",
+      "ranks": {
+        "trending": 99,
+        "comments": 86
+      },
+      "upstreamCategory": "智能体",
+      "stars": 208,
+      "pushedAt": "2026-10-18T03:11:44Z",
+      "observedAt": "2026-10-18T18:04:34.550Z",
+      "defaultBranch": "main",
+      "language": "JavaScript",
+      "license": "MIT",
+      "archived": false,
+      "recipeId": null,
+      "processing": {
+        "state": "needs_recipe",
+        "batch": null,
+        "notes": []
+      }
+    },
+    {
+      "repositoryId": 1354586379,
+      "repository": "FylarOpen/dsh-fylar-office-editor",
+      "aliases": [
+        "FylarOpen/dsh-fylar-office-editor"
+      ],
+      "url": "https://github.com/FylarOpen/dsh-fylar-office-editor",
+      "ranks": {
+        "trending": 100,
+        "comments": 88
+      },
+      "upstreamCategory": "其他",
+      "stars": 207,
+      "pushedAt": "2026-10-15T06:30:32Z",
+      "observedAt": "2026-10-18T18:04:34.788Z",
+      "defaultBranch": "main",
+      "language": "TypeScript",
+      "license": null,
+      "archived": false,
+      "recipeId": null,
+      "processing": {
+        "state": "needs_recipe",
+        "batch": null,
+        "notes": []
+      }
+    },
+    {
+      "repositoryId": 1334434081,
+      "repository": "xiajiajun516/dsh-config-manager",
+      "aliases": [
+        "xiajiajun516/dsh-config-manager"
+      ],
+      "url": "https://github.com/xiajiajun516/dsh-config-manager",
+      "ranks": {
+        "trending": 98,
+        "comments": 93
+      },
+      "upstreamCategory": "其他",
+      "stars": 207,
+      "pushedAt": "2026-10-18T17:24:31Z",
+      "observedAt": "2026-10-18T18:04:34.963Z",
+      "defaultBranch": "main",
+      "language": "TypeScript",
+      "license": "MIT",
+      "archived": false,
+      "recipeId": null,
+      "processing": {
+        "state": "needs_recipe",
+        "batch": null,
+        "notes": []
+      }
+    },
+    {
+      "repositoryId": 1337930857,
+      "repository": "wenbin-wb/dsh-bridge",
+      "aliases": [
+        "wenbin-wb/dsh-bridge"
+      ],
+      "url": "https://github.com/wenbin-wb/dsh-bridge",
+      "ranks": {
+        "trending": 96,
+        "comments": 92
+      },
+      "upstreamCategory": "通信",
+      "stars": 203,
+      "pushedAt": "2026-10-17T05:16:08Z",
+      "observedAt": "2026-10-18T18:04:29.868Z",
+      "defaultBranch": "main",
+      "language": "JavaScript",
+      "license": "MIT",
+      "archived": false,
+      "recipeId": null,
+      "processing": {
+        "state": "needs_recipe",
+        "batch": null,
+        "notes": []
+      }
+    },
+    {
+      "repositoryId": 1339110580,
+      "repository": "oil-oil/dsh-oil-creator",
+      "aliases": [
+        "oil-oil/dsh-oil-creator"
+      ],
+      "url": "https://github.com/oil-oil/dsh-oil-creator",
+      "ranks": {
+        "comments": 90
+      },
+      "upstreamCategory": "其他",
+      "stars": 201,
+      "pushedAt": "2026-10-10T03:19:51Z",
+      "observedAt": "2026-10-18T18:04:34.958Z",
+      "defaultBranch": "main",
+      "language": "JavaScript",
+      "license": "MIT",
+      "archived": false,
+      "recipeId": null,
+      "processing": {
+        "state": "needs_recipe",
+        "batch": null,
+        "notes": []
+      }
+    },
+    {
+      "repositoryId": 1304997851,
+      "repository": "taxueseek/argo",
+      "aliases": [
+        "taxueseek/argo"
+      ],
+      "url": "https://github.com/taxueseek/argo",
+      "ranks": {
+        "trending": 86,
+        "comments": 97
+      },
+      "upstreamCategory": "搜索与知识",
+      "stars": 197,
+      "pushedAt": "2026-10-18T14:49:06Z",
+      "observedAt": "2026-10-18T18:04:28.740Z",
+      "defaultBranch": "main",
+      "language": "Python",
+      "license": "MIT",
+      "archived": false,
+      "recipeId": null,
+      "processing": {
+        "state": "needs_recipe",
+        "batch": null,
+        "notes": []
+      }
+    },
+    {
+      "repositoryId": 1334096871,
+      "repository": "Hilbert-beinghappy/seektty",
+      "aliases": [
+        "Hilbert-beinghappy/seektty"
+      ],
+      "url": "https://github.com/Hilbert-beinghappy/seektty",
+      "ranks": {
+        "comments": 94
+      },
+      "upstreamCategory": "界面",
+      "stars": 196,
+      "pushedAt": "2026-10-13T06:04:40Z",
+      "observedAt": "2026-10-18T18:04:34.990Z",
+      "defaultBranch": "main",
+      "language": "TypeScript",
+      "license": "MIT",
+      "archived": false,
+      "recipeId": null,
+      "processing": {
+        "state": "needs_recipe",
+        "batch": null,
+        "notes": []
+      }
+    },
+    {
+      "repositoryId": 1333689922,
+      "repository": "awesome-dsh-plugin/dsh-find-plugin",
+      "aliases": [
+        "awesome-dsh-plugin/dsh-find-plugin"
+      ],
+      "url": "https://github.com/awesome-dsh-plugin/dsh-find-plugin",
+      "ranks": {
+        "trending": 85,
+        "comments": 95
+      },
+      "upstreamCategory": "搜索与知识",
+      "stars": 195,
+      "pushedAt": "2026-09-25T14:58:33Z",
+      "observedAt": "2026-10-18T18:04:28.729Z",
+      "defaultBranch": "main",
+      "language": "JavaScript",
+      "license": "MIT",
+      "archived": false,
+      "recipeId": null,
+      "processing": {
+        "state": "needs_recipe",
+        "batch": null,
+        "notes": []
+      }
+    },
+    {
+      "repositoryId": 1268424426,
+      "repository": "tinqiao-oss/engramory",
+      "aliases": [
+        "tinqiao-oss/engramory"
+      ],
+      "url": "https://github.com/tinqiao-oss/engramory",
+      "ranks": {
+        "comments": 96
+      },
+      "upstreamCategory": "记忆",
+      "stars": 195,
+      "pushedAt": "2026-09-24T03:16:00Z",
+      "observedAt": "2026-10-18T18:04:35.254Z",
+      "defaultBranch": "master",
+      "language": "Python",
+      "license": "MIT",
+      "archived": false,
+      "recipeId": null,
+      "processing": {
+        "state": "needs_recipe",
+        "batch": null,
+        "notes": []
+      }
+    },
+    {
+      "repositoryId": 1332212466,
+      "repository": "ZSeven-W/dsh-openpencil",
+      "aliases": [
+        "ZSeven-W/dsh-openpencil"
+      ],
+      "url": "https://github.com/ZSeven-W/dsh-openpencil",
+      "ranks": {
+        "comments": 98
+      },
+      "upstreamCategory": "界面",
+      "stars": 188,
+      "pushedAt": "2026-10-06T19:56:23Z",
+      "observedAt": "2026-10-18T18:05:45.880Z",
+      "defaultBranch": "main",
+      "language": "TypeScript",
+      "license": "MIT",
+      "archived": false,
+      "recipeId": null,
+      "processing": {
+        "state": "needs_recipe",
+        "batch": null,
+        "notes": []
+      }
+    },
+    {
+      "repositoryId": 1341805689,
+      "repository": "ZSeven-W/dsh-android",
+      "aliases": [
+        "ZSeven-W/dsh-android"
+      ],
+      "url": "https://github.com/ZSeven-W/dsh-android",
+      "ranks": {
+        "comments": 99
+      },
+      "upstreamCategory": "界面",
+      "stars": 187,
+      "pushedAt": "2026-10-08T09:30:51Z",
+      "observedAt": "2026-10-18T18:05:45.654Z",
+      "defaultBranch": "main",
+      "language": "TypeScript",
+      "license": "MIT",
+      "archived": false,
+      "recipeId": null,
+      "processing": {
+        "state": "needs_recipe",
+        "batch": null,
+        "notes": []
+      }
+    },
+    {
+      "repositoryId": 1335127844,
+      "repository": "cocofhu/anime-find",
+      "aliases": [
+        "cocofhu/anime-find"
+      ],
+      "url": "https://github.com/cocofhu/anime-find",
+      "ranks": {
+        "trending": 76
+      },
+      "upstreamCategory": "搜索与知识",
+      "stars": 177,
+      "pushedAt": "2026-10-17T12:43:04Z",
+      "observedAt": "2026-10-18T18:04:27.612Z",
+      "defaultBranch": "main",
+      "language": "TypeScript",
+      "license": "MIT",
+      "archived": false,
+      "recipeId": null,
+      "processing": {
+        "state": "needs_recipe",
+        "batch": null,
+        "notes": []
+      }
+    },
+    {
+      "repositoryId": 1333685863,
+      "repository": "Ychris12138/dsh-usage-stats",
+      "aliases": [
+        "Ychris12138/dsh-usage-stats"
+      ],
+      "url": "https://github.com/Ychris12138/dsh-usage-stats",
+      "ranks": {
+        "trending": 95
+      },
+      "upstreamCategory": "界面",
+      "stars": 177,
+      "pushedAt": "2026-10-17T18:00:57Z",
+      "observedAt": "2026-10-18T18:04:29.830Z",
+      "defaultBranch": "main",
+      "language": "JavaScript",
+      "license": "MIT",
+      "archived": false,
+      "recipeId": null,
+      "processing": {
+        "state": "needs_recipe",
+        "batch": null,
+        "notes": []
+      }
+    },
+    {
+      "repositoryId": 1332243516,
+      "repository": "omdsh-dev/dsh_workflow",
+      "aliases": [
+        "omdsh-dev/dsh_workflow"
+      ],
+      "url": "https://github.com/omdsh-dev/dsh_workflow",
+      "ranks": {
+        "trending": 66
+      },
+      "upstreamCategory": "智能体",
+      "stars": 147,
+      "pushedAt": "2026-10-14T01:10:07Z",
+      "observedAt": "2026-10-18T18:04:26.725Z",
+      "defaultBranch": "main",
+      "language": "TypeScript",
+      "license": "MIT",
+      "archived": false,
+      "recipeId": null,
+      "processing": {
+        "state": "needs_recipe",
+        "batch": null,
+        "notes": []
+      }
+    },
+    {
+      "repositoryId": 1339101586,
+      "repository": "amlyczz/dsh-agy-link",
+      "aliases": [
+        "amlyczz/dsh-agy-link"
+      ],
+      "url": "https://github.com/amlyczz/dsh-agy-link",
+      "ranks": {
+        "rating": 17
+      },
+      "upstreamCategory": "界面",
+      "stars": 117,
+      "pushedAt": "2026-10-18T18:00:55Z",
+      "observedAt": "2026-10-18T18:04:30.413Z",
+      "defaultBranch": "main",
+      "language": "TypeScript",
+      "license": "MIT",
+      "archived": false,
+      "recipeId": null,
+      "processing": {
+        "state": "needs_recipe",
+        "batch": null,
+        "notes": []
+      }
+    },
+    {
+      "repositoryId": 1335780030,
+      "repository": "HakureiMonika/dsh-sandbox-escalation-fix",
+      "aliases": [
+        "HakureiMonika/dsh-sandbox-escalation-fix"
+      ],
+      "url": "https://github.com/HakureiMonika/dsh-sandbox-escalation-fix",
+      "ranks": {
+        "rating": 18
+      },
+      "upstreamCategory": "安全",
+      "stars": 56,
+      "pushedAt": "2026-09-19T15:54:02Z",
+      "observedAt": "2026-10-18T18:04:30.690Z",
+      "defaultBranch": "main",
+      "language": "TypeScript",
+      "license": "MIT",
+      "archived": false,
+      "recipeId": null,
+      "processing": {
+        "state": "needs_recipe",
+        "batch": null,
+        "notes": []
+      }
+    },
+    {
+      "repositoryId": 1340814644,
+      "repository": "hanshanyike/dsh-yolo",
+      "aliases": [
+        "hanshanyike/dsh-yolo"
+      ],
+      "url": "https://github.com/hanshanyike/dsh-yolo",
+      "ranks": {
+        "rating": 19
+      },
+      "upstreamCategory": "记忆",
+      "stars": 56,
+      "pushedAt": "2026-09-28T15:07:21Z",
+      "observedAt": "2026-10-18T18:04:30.576Z",
+      "defaultBranch": "main",
+      "language": "TypeScript",
+      "license": "MIT",
+      "archived": false,
+      "recipeId": null,
+      "processing": {
+        "state": "needs_recipe",
+        "batch": null,
+        "notes": []
+      }
+    }
+  ]
+}
