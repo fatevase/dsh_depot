@@ -33,6 +33,14 @@
 
 目录提供“只看验证通过的包”筛选，方便按需要选择。
 
+## 离线插件管理器
+
+配套管理器支持拖入 `.tgz` 或已构建的成品目录，查看安装预览、已安装插件和恢复记录。卸载默认保留配置与业务数据。首次由脚本选择 DSH，后续从 DSH 的“离线插件”入口打开。
+
+Windows 使用 `install.cmd`，macOS 使用 `install.command`，Linux / SSH 使用 `install.sh`。完整包附带独立 Node，轻量包复用符合要求的 Node。各平台只有完成对应验收才提供正式下载；目前开发分支的测试产物不等于正式安装包。
+
+[管理器下载状态](https://fatevase.github.io/dsh_depot/manager.html) · [三平台与恢复指南](https://fatevase.github.io/dsh_depot/guide.html#manager)
+
 ## 如何安装
 
 1. 准备 DSH、Node 和 pnpm，并确认系统架构与插件详情中的环境要求。
@@ -48,4 +56,14 @@
 
 遇到问题，可以在 [Issues](https://github.com/fatevase/dsh_depot/issues) 中提供插件包名、系统架构、DSH 版本及完整报错，避免附上 API Key 等账号信息。
 
-希望维护或扩展收录范围，请阅读[维护说明](https://github.com/fatevase/dsh_depot/blob/main/distribution/MAINTAINING.md)。
+希望维护或扩展收录范围，请阅读[维护说明](https://github.com/fatevase/dsh_depot/blob/main/MAINTAINING.md)。
+
+## 项目组成
+
+网站、配套插件与分发流水线在同一仓库分别维护：
+
+- [web](web/)：插件浏览、搜索、详情、下载和安装指南。
+- [plugins](plugins/)：DSH 离线插件管理器及配套安装脚本。
+- [distribution](distribution/)：插件发现、多平台打包、离线验证和发布。
+
+详细开发与维护步骤见[维护说明](MAINTAINING.md)。

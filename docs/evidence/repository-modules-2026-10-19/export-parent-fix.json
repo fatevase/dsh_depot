@@ -1,0 +1,15 @@
+{
+  "initialRun": 39207604922,
+  "initialJob": 117913735531,
+  "cause": "Fresh checkout lacked .runtime parent; first fixture attempted mkdtemp before export.",
+  "regression": "Use an absent nested destination and call real exportRepository.",
+  "red": "ENOENT from mkdir of nested export destination",
+  "fix": "After destination boundary validation, create destination parent recursively before exclusive creation of target.",
+  "green": true,
+  "fullSuite": {
+    "tests": 152,
+    "passed": 150,
+    "skipped": 2,
+    "failed": 0
+  }
+}

@@ -25,12 +25,21 @@
     "push": {
       "paths": [
         "distribution/**",
+        "packages/offline-format/**",
+        "package.json",
+        "package-lock.json",
         ".github/workflows/plugin-distribution.yml"
+      ],
+      "branches": [
+        "main"
       ]
     },
     "pull_request": {
       "paths": [
         "distribution/**",
+        "packages/offline-format/**",
+        "package.json",
+        "package-lock.json",
         ".github/workflows/plugin-distribution.yml"
       ]
     }
@@ -57,7 +66,7 @@
           }
         },
         {
-          "run": "npm --prefix distribution ci --ignore-scripts --registry=https://registry.npmjs.org"
+          "run": "npm ci --ignore-scripts --registry=https://registry.npmjs.org"
         },
         {
           "run": "npm run distribution:test"
@@ -93,7 +102,7 @@
           }
         },
         {
-          "run": "npm --prefix distribution ci --ignore-scripts --registry=https://registry.npmjs.org"
+          "run": "npm ci --ignore-scripts --registry=https://registry.npmjs.org"
         },
         {
           "id": "plan",
@@ -147,7 +156,7 @@
           }
         },
         {
-          "run": "npm --prefix distribution ci --ignore-scripts --registry=https://registry.npmjs.org"
+          "run": "npm ci --ignore-scripts --registry=https://registry.npmjs.org"
         },
         {
           "uses": "actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333",
@@ -210,7 +219,7 @@
           }
         },
         {
-          "run": "npm --prefix distribution ci --ignore-scripts --registry=https://registry.npmjs.org"
+          "run": "npm ci --ignore-scripts --registry=https://registry.npmjs.org"
         },
         {
           "uses": "actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333",
@@ -237,16 +246,6 @@
         {
           "uses": "actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9",
           "with": {
-            "name": "distribution-site",
-            "path": ".runtime/distribution/site",
-            "retention-days": 2,
-            "include-hidden-files": true,
-            "if-no-files-found": "warn"
-          }
-        },
-        {
-          "uses": "actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9",
-          "with": {
             "name": "distribution-publication-report",
             "path": ".runtime/distribution/publication-plan.json",
             "retention-days": 2,
@@ -254,65 +253,6 @@
             "if-no-files-found": "warn"
           },
           "if": "always()"
-        }
-      ]
-    },
-    "pages": {
-      "if": "always() && needs.publish.result == 'success'",
-      "needs": [
-        "publish"
-      ],
-      "runs-on": "ubuntu-24.04",
-      "permissions": {
-        "pages": "write",
-        "id-token": "write",
-        "actions": "read",
-        "contents": "read"
-      },
-      "timeout-minutes": 10,
-      "concurrency": {
-        "group": "distribution-state-and-pages",
-        "cancel-in-progress": false
-      },
-      "environment": {
-        "name": "github-pages",
-        "url": "${{ steps.deploy.outputs.page_url }}"
-      },
-      "steps": [
-        {
-          "uses": "actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1",
-          "with": {
-            "persist-credentials": false,
-            "ref": "${{ github.event.repository.default_branch }}"
-          }
-        },
-        {
-          "uses": "actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1",
-          "with": {
-            "node-version": "26.9.0"
-          }
-        },
-        {
-          "run": "npm --prefix distribution ci --ignore-scripts --registry=https://registry.npmjs.org"
-        },
-        {
-          "run": "node distribution/ci.mjs deploy-site",
-          "env": {
-            "GITHUB_TOKEN": "${{ github.token }}"
-          }
-        },
-        {
-          "uses": "actions/configure-pages@45bfe0192ca1faeb007ade9deae92b16b8254a0d"
-        },
-        {
-          "uses": "actions/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9",
-          "with": {
-            "path": ".runtime/distribution/site"
-          }
-        },
-        {
-          "uses": "actions/deploy-pages@368f82528645a54fb793d4d04e342629a3f51346",
-          "id": "deploy"
         }
       ]
     },
@@ -337,7 +277,7 @@
           }
         },
         {
-          "run": "npm --prefix distribution ci --ignore-scripts --registry=https://registry.npmjs.org"
+          "run": "npm ci --ignore-scripts --registry=https://registry.npmjs.org"
         },
         {
           "run": "./distribution/isolation/prepare-windows.ps1"

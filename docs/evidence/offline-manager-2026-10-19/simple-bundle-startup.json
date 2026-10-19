@@ -1,0 +1,9 @@
+{
+  "target": "macos-arm64",
+  "node": "v26.9.0",
+  "archiveSha256": "e65fa3f6afd3279b1a5333859d9b96ee753d6ef916611744dd4587d7c708d338",
+  "entryStarted": true,
+  "stableToolkitRegistered": true,
+  "statusResult": "OPERATION_NOT_FOUND: 未找到任务",
+  "note": "Read-only missing-task probe; not a complete installation acceptance."
+}

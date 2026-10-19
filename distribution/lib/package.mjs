@@ -4,6 +4,7 @@ import semver from 'semver'
 import { extractArchive } from './build.mjs'
 import { atomicJson, readJson, fileDigest, within } from './model.mjs'
 import { isolatedEnv, runCommand } from './process.mjs'
+import { writePackageMetadata } from '@dsh-depot/offline-format/package-metadata'
 
 export async function packageRuntime({ task, recipe, builtPackage, sourceDir, workDir, tools }) {
   const started = performance.now(), staging = path.join(workDir, 'package'), output = path.join(workDir, 'artifacts')
@@ -43,6 +44,7 @@ export async function packageRuntime({ task, recipe, builtPackage, sourceDir, wo
   manifest.bundleDependencies = [...Object.keys(manifest.dependencies), ...Object.keys(manifest.optionalDependencies)].sort()
   if (!Object.keys(manifest.optionalDependencies).length) delete manifest.optionalDependencies
   await atomicJson(path.join(staging, 'package.json'), manifest)
+  await writePackageMetadata(staging, {task,recipe})
   const packed = await runCommand({ argv: [...tools.npm, 'pack', '--ignore-scripts', '--json', '--pack-destination', output], cwd: staging, env, logFile: path.join(workDir, 'offline-pack.log') })
   if (packed.exitCode) throw new Error(`Offline pack failed: ${packed.output.slice(-1500)}`)
   const metadata = JSON.parse(packed.output)[0], originalArchive = path.join(output, metadata.filename)

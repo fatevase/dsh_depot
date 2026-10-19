@@ -4,9 +4,11 @@
 
 ## 网站与统一仓库
 
+仓库结构与三个独立工作流见[根维护说明](../MAINTAINING.md)。本目录只维护发现、构建、验证、状态和发布；站点代码在 web，管理器源码在 plugins/dsh-depot-manager。
+
 唯一目标仓库是 `fatevase/dsh_depot`，配置在 `distribution/config.json` 的 `distributionRepository`。状态分支、Releases、Pages 共用这个目标。命令行 `--repository` 只能核对目标，不能覆盖配置；CI 如果运行在别的仓库会在访问远端前停止。
 
-网站采用 Svelte 5 + Vite，源码位于 `distribution/web/`。保留已确认的融合设计：分类按钮列表、目标平台下拉框、筛选标签、详情双标签页和平台状态。构建输出为四个静态入口，使用相对资源路径，支持 Pages 仓库子路径。`site` 命令会编译前端再写入目录数据；不需要单独的常驻前端服务。开发预览运行 `npm --prefix distribution run web:dev`。
+网站采用 Svelte 5 + Vite，源码位于 `web/`。保留已确认的融合设计：分类按钮列表、目标平台下拉框、筛选标签、详情双标签页和平台状态。构建输出为五个静态入口，使用相对资源路径，支持 Pages 仓库子路径。`site` 命令会编译前端再写入目录数据；不需要单独的常驻前端服务。开发预览运行 `npm run web:dev`。
 
 ## 首轮 Top 10 测试
 
@@ -23,7 +25,7 @@
 从仓库根目录运行。Node **26.9.0**、Python ≥3.9；构建器会在专用目录准备 recipe 固定的 npm/pnpm。准备宿主与构建需要联网，验证阶段自动断网。
 
 ```sh
-npm --prefix distribution ci --ignore-scripts --registry=https://registry.npmjs.org
+npm ci --ignore-scripts --registry=https://registry.npmjs.org
 npm run distribution:test
 node distribution/cli.mjs discover --output .runtime/distribution/discovered.json
 node distribution/cli.mjs plan --discovered .runtime/distribution/discovered.json --output .runtime/distribution/plan.json
@@ -88,10 +90,10 @@ node distribution/cli.mjs rollback --state .runtime/distribution/state.json --pl
 
 ## 首次部署
 
-1. 目标固定为 `fatevase/dsh_depot`。用 `node distribution/export.mjs --output .runtime/dsh-depot-repository` 生成独立的分发仓库文件，包括 `distribution/`、workflow 和最小根入口；不会带入桌面 Workbench、node_modules、本地运行产物或其他未跟踪文件。
+1. 目标固定为 `fatevase/dsh_depot`。用 `node distribution/export.mjs --output .runtime/dsh-depot-repository` 生成独立的分发仓库文件，包括 web、plugins、distribution、packages、docs、工作流、根入口及工作区锁文件。只导出当前 Depot 仓库的这些目录，排除 node_modules、.runtime 和 dist；模块目录中的其他文件会随工作副本复制，导出不按 Git 跟踪状态筛选。
 2. Settings → Pages 选择 GitHub Actions，允许 Actions 创建 Releases 和 `distribution-state` 分支。公共仓库可使用标准托管 runner；具体免费额度以账户及 GitHub 当前政策为准。
 3. 仅默认分支允许发现与发布，非默认分支手动运行也不会获得发布入口。各 job 使用发现阶段固定的提交。手动触发 `DSH plugin distribution`，可指定插件、平台及 retry key。默认每天 UTC 03:23，PR 只跑测试，不发布。
-4. 按 `discover → plan → matrix(build+verify) → publish → pages` 检查报告。matrix 单平台失败不取消其他平台；发布器始终汇总：验证通过的包正常发布；配置允许时，已完成打包且验证失败的包标为未验证发布；构建失败、缺少包或身份/校验和不匹配的记录拒绝发布。
+4. 按 `discover → plan → matrix(build+verify) → publish；独立 web-pages 工作流刷新目录并部署 Pages` 检查报告。matrix 单平台失败不取消其他平台；发布器始终汇总：验证通过的包正常发布；配置允许时，已完成打包且验证失败的包标为未验证发布；构建失败、缺少包或身份/校验和不匹配的记录拒绝发布。
 5. Pages job 独立重试时读取最新状态重新生成站点，与发布 job 共用串行边界，避免旧 artifact 恢复已撤回链接。暂存 artifacts 留两天，最终字节存 Releases。官方 Actions 以 2026-10-18 解析的 commit 固定；workflow 文件使用 JSON 形式的合法 YAML，便于直接进行结构化权限测试。
 
 公开站点为 https://fatevase.github.io/dsh_depot/ 。Pages Source 已设为 GitHub Actions。平台支持和当前可下载包，以目录中的正式发布及验证记录为准。

@@ -1,0 +1,24 @@
+{
+  "sourceCommit": "7f9cfe14fadb73d76ba4af6a5d670ae27ea27f35",
+  "sourceTree": "7f452fb377887ade4cb7057784c02bd6ddd74788",
+  "manager": {
+    "name": "dsh-depot-manager",
+    "version": "0.1.0",
+    "target": "macos-arm64",
+    "path": "/Users/vase/Downloads/aiworkbench-dsh/.runtime/dsh-depot-manager/.runtime/manager-local/dsh-depot-manager-0.1.0-macos-arm64.tgz",
+    "fileName": "dsh-depot-manager-0.1.0-macos-arm64.tgz",
+    "sha256": "d3f0f40eaf9040c0c62f96e1b81f9a74783d7b9e1ef741af4eb9c510995b9686",
+    "compressedBytes": 150777,
+    "sourceDigest": "dea1422b3f3a54ec639cb32d9c120513160ae562579b0094b3d1961af59a07e8"
+  },
+  "bundle": {
+    "target": "macos-arm64",
+    "flavor": "lite",
+    "fileName": "dsh-depot-manager-0.1.0-macos-arm64-lite.tgz",
+    "path": "/Users/vase/Downloads/aiworkbench-dsh/.runtime/dsh-depot-manager/.runtime/manager-local/dsh-depot-manager-0.1.0-macos-arm64-lite.tgz",
+    "sha256": "1ee21692ce7057d9a770379cca3cc743ecd27261cf697a0094b78c135a3bfc41",
+    "compressedBytes": 271941,
+    "managerSha256": "d3f0f40eaf9040c0c62f96e1b81f9a74783d7b9e1ef741af4eb9c510995b9686",
+    "runtimeDigest": null
+  }
+}

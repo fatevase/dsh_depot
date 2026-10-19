@@ -1,0 +1,98 @@
+[
+  {
+    "operationId": "f0157bc2-0172-441b-a6c2-13c92fd58f8a",
+    "hostId": "c640939a17d69f077023a0a5",
+    "planId": "5949ff0e-266d-44f9-801f-d2b54fd172ec",
+    "state": "failed_restored",
+    "eventCursor": 7,
+    "snapshotId": "bd093f69-5da7-4fd8-ab2a-d0c74ddbd388",
+    "result": {
+      "restored": true
+    },
+    "error": {
+      "code": "PACKAGE_OPERATION_FAILED",
+      "message": "离线包操作失败"
+    },
+    "createdAt": 1792375950043,
+    "updatedAt": 1792376032379,
+    "activation": null,
+    "action": "remove",
+    "packageName": "depot-acceptance-plugin",
+    "version": null,
+    "packageSha256": null
+  },
+  {
+    "operationId": "ef5899cf-c491-44d6-bb96-9a2bb91f0833",
+    "hostId": "c640939a17d69f077023a0a5",
+    "planId": "65c74028-8361-4009-8fce-c00efabb0fcd",
+    "state": "failed_restored",
+    "eventCursor": 7,
+    "snapshotId": "e6e36480-7798-4b02-a725-36c846247de9",
+    "result": {
+      "restored": true
+    },
+    "error": {
+      "code": "PACKAGE_OPERATION_FAILED",
+      "message": "离线包操作失败"
+    },
+    "createdAt": 1792373132383,
+    "updatedAt": 1792373193509,
+    "activation": null,
+    "action": "install",
+    "packageName": "depot-acceptance-plugin",
+    "version": "1.0.0",
+    "packageSha256": "0aa79669c6031c798c849ac874e2d758d348e2116d946aa8213f3bd746787d95"
+  },
+  {
+    "operationId": "08cfd326-1a47-4874-93ac-79110a0e0515",
+    "hostId": "c640939a17d69f077023a0a5",
+    "planId": "fb699ff1-7f1b-46b8-88e8-c12f414f861e",
+    "state": "succeeded",
+    "eventCursor": 5,
+    "snapshotId": null,
+    "result": {
+      "installed": false,
+      "removed": true,
+      "loaded": false,
+      "packageName": "depot-acceptance-plugin",
+      "version": null
+    },
+    "error": null,
+    "createdAt": 1792376150394,
+    "updatedAt": 1792376152647,
+    "activation": null,
+    "action": "remove",
+    "packageName": "depot-acceptance-plugin",
+    "version": null,
+    "packageSha256": null
+  },
+  {
+    "operationId": "2cca1ba3-5317-485a-8b18-8fbda5d2f9b3",
+    "hostId": "c640939a17d69f077023a0a5",
+    "planId": "bd516401-4e56-4901-83af-47a8f707f272",
+    "state": "succeeded",
+    "eventCursor": 5,
+    "snapshotId": "5c079713-6953-464d-992e-9376b3fc1a67",
+    "result": {
+      "installed": true,
+      "removed": false,
+      "loaded": true,
+      "packageName": "dsh-depot-manager",
+      "version": "0.1.0"
+    },
+    "error": null,
+    "createdAt": 1792376705894,
+    "updatedAt": 1792376708489,
+    "activation": {
+      "operationId": "2cca1ba3-5317-485a-8b18-8fbda5d2f9b3",
+      "hostId": "c640939a17d69f077023a0a5",
+      "managerVersion": "0.1.0",
+      "loadedAt": 1792376904587,
+      "nonceDigest": "3c101c011cf45f47fa723cdc594e2ce1d2d2c5eccc622c28d64f76b4125d6e67"
+    },
+    "action": "replace",
+    "packageName": "dsh-depot-manager",
+    "version": "0.1.0",
+    "packageSha256": "6665fbdcef1d1204bff3586e45944d524f9c8cf49f1b089797d5fbf4123be1a3"
+  }
+]

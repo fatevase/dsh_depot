@@ -3,8 +3,22 @@
   "version": "0.1.0",
   "private": true,
   "type": "module",
+  "engines": {
+    "node": ">=22.19.0"
+  },
+  "workspaces": [
+    "web",
+    "plugins/*",
+    "distribution",
+    "packages/*"
+  ],
   "scripts": {
-    "test": "npm --prefix distribution test",
-    "distribution:test": "npm --prefix distribution test"
+    "test": "npm run test --workspaces --if-present",
+    "web:dev": "npm run dev --workspace @dsh-depot/web",
+    "web:build": "npm run build --workspace @dsh-depot/web",
+    "web:test": "npm test --workspace @dsh-depot/web",
+    "manager:test": "npm test --workspace @dsh-depot/manager-build",
+    "manager:build": "npm run build --workspace @dsh-depot/manager-build --",
+    "distribution:test": "npm test --workspace @dsh-depot/distribution"
   }
 }

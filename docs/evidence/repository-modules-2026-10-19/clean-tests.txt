@@ -1,0 +1,192 @@
+
+> dsh-depot@0.1.0 test
+> npm run test --workspaces --if-present
+
+
+> @dsh-depot/web@0.1.0 test
+> node --test test/*.test.mjs
+
+✔ manager downloads stay absent until a real qualified asset exists (439.144042ms)
+✔ site emits a real empty catalog and escapes upstream text through data, without fake downloads (12925.44575ms)
+✔ filters use published platform packages only and detail return preserves the query (1.555542ms)
+✔ platform selection keeps curated plugin information visible until verified-only is selected (0.273875ms)
+✔ actual Svelte cards escape upstream markup and link back to retained search filters (1050.801917ms)
+✔ detail commands, download, and passed proof belong only to the selected published platform (349.045542ms)
+✔ home counts current downloads and links to the separate guide (313.742625ms)
+✔ guide has its own page and renders without needing a plugin catalog (1365.031125ms)
+✔ all-platform cards show both available systems and the current Windows verification failure (532.757958ms)
+✔ unverified downloads show an amber warning, honest proof, and stay outside verified-only results (468.138542ms)
+✔ old target URL parameters are rejected instead of silently selecting the new macOS target (396.888416ms)
+ℹ tests 11
+ℹ suites 0
+ℹ pass 11
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 14638.983792
+
+> @dsh-depot/manager-build@0.1.0 test
+> node --test test/*.test.mjs
+
+✔ only host-observed matching version and nonce may mark loaded (494.431208ms)
+✔ API binds environment and user; only actual top-level bundles can be removed (231.783166ms)
+✔ current environment exposes the canonical product target (108.048416ms)
+✔ one accepted batch replans only its own sequential changes and preserves partial successes (3250.000083ms)
+✔ real POSIX entry preserves literal paths and checks bundled runtime before execution (2488.859791ms)
+﹣ Windows entry quoting is exercised on a native runner (0.445375ms) # SKIP
+✔ manager artifact contains built Svelte and bundled core without another host runtime (4411.729542ms)
+✔ lite bundle is self-contained and binds the exact manager bytes (1212.9125ms)
+✔ Windows full bundle extracts as a ZIP with program runtime CMD and instructions intact (3016.257208ms)
+✔ noninteractive writes require an explicit confirmed plan and never choose an environment (166.182167ms)
+✔ runtime is independent of host and missing lite runtime fails without downloads (735.1995ms)
+✔ status in an SSH environment only prints durable state (1.2705ms)
+✔ actual manager Svelte renders scoped areas, recovery text, and escapes package HTML (1134.228333ms)
+✔ partial batch failures preserve other results and awaiting reload is never loaded (2.375167ms)
+✔ timeout waits for actual child termination and escalates an ignored termination signal (323.610417ms)
+✔ plans reject executable commands and unsupported schema before accepting mutations (3.154458ms)
+✔ host validation accepts real target identities and rejects toolkit runtime substitution (0.763709ms)
+✔ input resource validation rejects overflow at each declared boundary (0.772959ms)
+✔ rollback preserves concurrent cordis configuration edits (1050.041875ms)
+✔ snapshots reject external dependency links (124.179666ms)
+✔ crash recovery provides a fingerprint-bound preview and safely closes pre-mutation interruptions (54.683708ms)
+✔ external host probe never silently uses the toolkit Node (141.026167ms)
+✔ removal is checked as absence and completes independently of an activation receipt (276.728375ms)
+✔ owner mismatch and elevated execution reject rather than adopting another profile (29.013417ms)
+✔ every public pnpm child inherits offline/no-script policy, including upstream repair (452.229417ms)
+✔ host detection recognizes npm symlinks and relative launch paths without path-word exclusions (21.244ms)
+✔ browser directory upload restores declared executable permissions before integrity checking (1333.83075ms)
+✔ pnpm remove receives configuration policy without unsupported add-only options (14.130042ms)
+✔ case-variant host settings cannot weaken the inherited pnpm repair policy (8.796917ms)
+✔ replacing a not-yet-loaded artifact retires its old load nonce (1394.605083ms)
+✔ discovery canonicalizes duplicate profile paths and retains distinct homes (2862.4025ms)
+✔ host fingerprint detects changed directory links and npm cannot manage desktop (1978.212ms)
+✔ CLI adapter refuses write admission while the selected Host is still running (150.68ms)
+✔ process identity distinguishes a second DSH installation and resolves a literal alias (22126.046958ms)
+﹣ Windows ownership uses its own PowerShell modules rather than inherited Core modules (1.286833ms) # SKIP
+✔ archive inspection blocks traversal links device names collisions and live symlink parents (306.79525ms)
+✔ archive expansion limits stop before extraction rather than trusting compressed size (9.723875ms)
+✔ portable folder import leaves original unchanged and blocks missing runtime closure (644.254292ms)
+✔ imports do not execute lifecycle scripts and unknown hashes do not inherit publication evidence (51.645292ms)
+✔ npm CPU declarations reject incompatible runtime before installation (103.757958ms)
+✔ native packages reject insufficient glibc even when OS and CPU match (749.736875ms)
+✔ file upload finish recognizes a single tgz and seals the original import session (730.169833ms)
+✔ package metadata binds actual payload without self referencing its own hashes (474.055625ms)
+✔ persistent toolkit follows each platform data convention and explicit overrides (9.082083ms)
+✔ failed package changes restore the entire dependency graph and preserve user data (1232.457042ms)
+✔ recovery does not overwrite unrelated edits made during a failed operation (761.419833ms)
+✔ cancel after dependency mutation restores the complete snapshot (609.656917ms)
+✔ crashed operation requires explicit recovery and corrupted backups never overwrite current files (191.321625ms)
+✔ preflight refuses unrealistic disk needs without changing the profile (241.997209ms)
+✔ retention keeps recent recovery points and all unresolved snapshots (94.054291ms)
+✔ dead writer locks can be safely reclaimed while live owners remain blocked (1317.091375ms)
+✔ retention bounds recent successful snapshots and keeps installed local archives (446.231375ms)
+✔ full runtime refuses a changed binary before evaluating it (84.875458ms)
+✔ toolkit verifies every bundled payload, stages outside the download and preserves its entry (1807.782167ms)
+✔ expired or changed plans reject before a package is written (328.618ms)
+✔ successful execution is idempotent and installation waits for actual load evidence (493.099583ms)
+✔ confirmed jobs waiting for host exit resume once without expiring their accepted execution (251.746625ms)
+✔ durable job authenticates nonce owner host and expiry before executing (132.86375ms)
+ℹ tests 58
+ℹ suites 0
+ℹ pass 56
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 2
+ℹ todo 0
+ℹ duration_ms 32288.818333
+
+> @dsh-depot/distribution@0.1.0 test
+> node --test test/*.test.mjs
+
+✔ process timeout terminates the child and reports seconds rather than milliseconds (269.856708ms)
+✔ build environment does not inherit tokens or user package configuration (29.038166ms)
+✔ isolated environment collapses Windows case aliases before JSON and child process handoff (16.718375ms)
+✔ fixed pnpm invocations explicitly prevent switching to an ancestor package manager (643.43925ms)
+✔ archive traversal is rejected without writing outside the output (797.034416ms)
+✔ source archive can omit declared development directories while rejecting links elsewhere and traversal even inside exclusions (2017.247084ms)
+✔ builder resolves relative work directories before passing paths to npm (6582.185417ms)
+✔ CLI writes a reusable plan without downloading or building a plugin (1145.049ms)
+✔ default site command creates a site directory under the selected work root (5049.419625ms)
+✔ CLI refuses an alternate publication destination before inspecting receipts or making requests (1275.188667ms)
+✔ remote commands require the configured destination rather than accepting a CLI-only destination (967.726333ms)
+✔ CI rejects running the distribution pipeline in a different repository (636.674583ms)
+✔ direct CLI remote entrypoints also reject a fork before any GitHub request (669.124458ms)
+✔ large frozen state files use the Git blob when the Contents API omits inline content (232.624417ms)
+✔ discovery freezes annotated tags, reads identity and records lock digests (99.849959ms)
+✔ fetch errors preserve previous observations and do not count as a successful check (26.498584ms)
+✔ GitHub retries transient responses at most twice and supports cached 304 (145.151875ms)
+✔ explicit branch tracking accepts a new commit while immutable tags reject movement (22.36525ms)
+✔ transient 503 retries twice and exhausted retries stop (624.44525ms)
+✔ moved tags preserve the old commit and unknown topic repositories stay candidates (47.042709ms)
+✔ same npm name from a different declared repository is rejected (33.147708ms)
+✔ export preserves all workspace roots and the single authoritative dependency lock (3199.550042ms)
+✔ a host that never becomes ready fails within the configured deadline and retains logs (2195.460708ms)
+✔ a page that renders while a plugin logs a startup TypeError cannot pass the host gate (1732.293041ms)
+✔ real platform isolation proves cold denial and loopback-only startup (4258.287833ms)
+✔ Windows adapter uses the native WFP guard with the requested timeout (18.925ms)
+✔ missing real isolation evidence can never qualify manager bootstrap (2.242084ms)
+✔ new package metadata invalidates old cached build identities (3.495875ms)
+✔ manager bootstrap cannot publish under ordinary allowUnverified policy (6.337583ms)
+✔ only complete verified matching assets enter the separate manager catalog (14.478875ms)
+✔ published catalog is loaded by deployment rather than replaced with an empty one (159.541625ms)
+✔ manager workflow builds on native runners without PR write authority (189.3705ms)
+✔ Windows environment handoff revision invalidates only Windows verification keys (10.678791ms)
+✔ keys ignore observation time but change on any build input (16.121958ms)
+✔ recipes reject command strings and escaping paths (5.0305ms)
+✔ atomic JSON writes preserve a readable schema document (180.023417ms)
+✔ a frozen cohort limits default processing and rejects a source identity mismatch (61.3885ms)
+✔ standalone website build emits supplied catalogs without reading distribution state (5028.330708ms)
+✔ manager and pipeline consume the same metadata verifier without runtime cross imports (248.083625ms)
+✔ a real packed plugin bundles its same-source client and preserves peers, license and exports (6014.9135ms)
+✔ new compatible source fans out to three independent target tasks (24.715292ms)
+✔ published inputs skip; failed inputs require explicit retry (14.784292ms)
+✔ latest incompatible version falls back to highest compatible source (1.094958ms)
+✔ unknown sources, shifted tags, missing locks and withdrawn packages do not build blindly (11.704291ms)
+✔ unchanged unverified targets do not automatically consume more build minutes (3.48225ms)
+✔ publication resumes only when staged bytes match the verified hash (2.381416ms)
+✔ unsupported cohort members receive an explicit needs-recipe outcome for every target (0.530208ms)
+✔ a cohort member with no usable source is reported instead of disappearing from the plan (0.263333ms)
+✔ macOS uses one target identity throughout configuration, runner matching and filenames (5.764291ms)
+✔ the current catalog excludes old target publications and pointers instead of aliasing them (3.320125ms)
+✔ catalog excludes historical publications, pointers and issues outside selected recipes without mutating state (29.530708ms)
+✔ dry run is default; invalid bytes, missing reports and withdrawn keys never upload (192.354084ms)
+✔ verified assets resume without overwrite, and all uploads precede public release (120.677416ms)
+✔ receipt metadata must match a planned task and duplicate or extra keys are rejected (50.64375ms)
+✔ public downloads use the final tag and short filenames; audit data is consolidated (80.936917ms)
+✔ a failed public-link check never records publication and resumes identical public assets (78.607834ms)
+✔ unverified packages require explicit policy, a completed build and matching failure evidence (77.014292ms)
+✔ only matching completed builds from the default-branch distribution workflow can be recovered (119.419625ms)
+✔ CI ZIP extraction rejects escaping paths and symlinks, and reads only the declared package (2120.620084ms)
+✔ existing verified packages are recovered by final asset URL and checksum without rebuilding (73.635625ms)
+✔ retired target pointers are never recovered or renamed, regardless of presentation version (9.492083ms)
+✔ host graph changes enter deterministic build identity (359.35125ms)
+✔ late and retried equal-version old-source jobs never replace the newer source (67.832375ms)
+✔ deleted immutable ref identity remains remembered after active discovery changes (43.639084ms)
+✔ normal seed discovery retains the pinned source archive hash (1.940791ms)
+✔ native probes reject dependencies satisfied outside the installed closure (879.261584ms)
+✔ a skill bundle cannot pass its installed-file probe when the declared skill is absent (532.518125ms)
+✔ install instruction exactly names the immutable downloaded file and rejects unsafe names (5.833625ms)
+✔ default branch publication and latest-state Pages deployment share a serialization boundary (5.849041ms)
+✔ an old deployment retry regenerates from current state and cannot resurrect a withdrawal (2356.375708ms)
+✔ namespace wrapper can drop back to the invoking runner user before executing verification (521.452042ms)
+✔ published catalogs refresh after successful publication even if a platform matrix failed (12.427625ms)
+✔ persistent receipts, monotonic pointers, withdrawal and explicit rollback (65.1725ms)
+✔ state CAS conflict reads current state and recalculates without losing concurrent receipts (3.535875ms)
+✔ a stale discovery cannot erase a newer observation or concurrent candidate (0.388958ms)
+✔ publishing needs the same artifact, target, host and actual isolation controls (39.44325ms)
+✔ skill bundles require their declared registration evidence instead of a fabricated client module (10.368208ms)
+✔ composition evidence requires exact enabled rows and never assumes a JavaScript disabled expression is false (54.095708ms)
+✔ Windows autocrlf checkout preserves frozen lock and host bytes (493.425ms)
+✔ workflow separates permission domains and aggregates failed or missing matrix jobs (6.01975ms)
+✔ website changes do not select either native build workflow (21.468ms)
+✔ only the website workflow owns Pages authority and uses trusted default-branch deployment code (3.52825ms)
+✔ PR updates run once instead of duplicating native matrices on a branch push (11.138292ms)
+ℹ tests 83
+ℹ suites 0
+ℹ pass 83
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 12342.474834

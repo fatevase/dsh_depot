@@ -1,0 +1,149 @@
+{
+  "name": "DSH website Pages",
+  "on": {
+    "push": {
+      "paths": [
+        "web/**",
+        "packages/offline-format/**",
+        "distribution/lib/site*.mjs",
+        "distribution/lib/deploy.mjs",
+        "distribution/lib/manager-catalog.mjs",
+        "distribution/deploy-site.mjs",
+        "package.json",
+        "package-lock.json",
+        ".github/workflows/web-pages.yml"
+      ],
+      "branches": [
+        "main"
+      ]
+    },
+    "pull_request": {
+      "paths": [
+        "web/**",
+        "packages/offline-format/**",
+        "distribution/lib/site*.mjs",
+        "distribution/lib/deploy.mjs",
+        "distribution/lib/manager-catalog.mjs",
+        "distribution/deploy-site.mjs",
+        "package.json",
+        "package-lock.json",
+        ".github/workflows/web-pages.yml"
+      ]
+    },
+    "workflow_dispatch": {},
+    "workflow_run": {
+      "workflows": [
+        "DSH plugin distribution",
+        "DSH manager distributions"
+      ],
+      "types": [
+        "completed"
+      ]
+    }
+  },
+  "permissions": {},
+  "jobs": {
+    "preview": {
+      "if": "github.event_name != 'workflow_run'",
+      "runs-on": "ubuntu-24.04",
+      "permissions": {
+        "contents": "read"
+      },
+      "timeout-minutes": 10,
+      "steps": [
+        {
+          "uses": "actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1",
+          "with": {
+            "persist-credentials": false
+          }
+        },
+        {
+          "uses": "actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1",
+          "with": {
+            "node-version": "26.9.0"
+          }
+        },
+        {
+          "run": "npm ci --ignore-scripts --registry=https://registry.npmjs.org"
+        },
+        {
+          "run": "npm run web:test"
+        },
+        {
+          "run": "npm run web:build"
+        }
+      ]
+    },
+    "pages": {
+      "if": "always() && ((github.event_name == 'workflow_run' && github.event.workflow_run.head_branch == github.event.repository.default_branch && github.event.workflow_run.event != 'pull_request') || ((github.event_name == 'push' || github.event_name == 'workflow_dispatch') && github.ref == format('refs/heads/{0}', github.event.repository.default_branch) && needs.preview.result == 'success'))",
+      "needs": [
+        "preview"
+      ],
+      "runs-on": "ubuntu-24.04",
+      "permissions": {
+        "pages": "write",
+        "id-token": "write",
+        "actions": "read",
+        "contents": "read"
+      },
+      "timeout-minutes": 10,
+      "concurrency": {
+        "group": "distribution-state-and-pages",
+        "cancel-in-progress": false
+      },
+      "environment": {
+        "name": "github-pages",
+        "url": "${{ steps.deploy.outputs.page_url }}"
+      },
+      "steps": [
+        {
+          "uses": "actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1",
+          "with": {
+            "persist-credentials": false,
+            "ref": "${{ github.event.repository.default_branch }}"
+          }
+        },
+        {
+          "uses": "actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1",
+          "with": {
+            "node-version": "26.9.0"
+          }
+        },
+        {
+          "run": "npm ci --ignore-scripts --registry=https://registry.npmjs.org"
+        },
+        {
+          "name": "Check published catalog refresh",
+          "id": "refresh",
+          "run": "node distribution/deploy-site.mjs gate",
+          "env": {
+            "GITHUB_TOKEN": "${{ github.token }}"
+          }
+        },
+        {
+          "run": "node distribution/deploy-site.mjs build",
+          "env": {
+            "GITHUB_TOKEN": "${{ github.token }}"
+          },
+          "if": "steps.refresh.outputs.allow == 'true'"
+        },
+        {
+          "uses": "actions/configure-pages@45bfe0192ca1faeb007ade9deae92b16b8254a0d",
+          "if": "steps.refresh.outputs.allow == 'true'"
+        },
+        {
+          "uses": "actions/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9",
+          "with": {
+            "path": ".runtime/web/site"
+          },
+          "if": "steps.refresh.outputs.allow == 'true'"
+        },
+        {
+          "uses": "actions/deploy-pages@368f82528645a54fb793d4d04e342629a3f51346",
+          "id": "deploy",
+          "if": "steps.refresh.outputs.allow == 'true'"
+        }
+      ]
+    }
+  }
+}

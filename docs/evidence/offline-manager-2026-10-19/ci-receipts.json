@@ -1,0 +1,645 @@
+{
+  "schemaVersion": 1,
+  "sourceCommit": "5a20cef087a0370fc5f09f2ee6bf5d4b44042684",
+  "sourceTree": "f3e128068b78e6da927566aad3d33ea83150fb37",
+  "pullRequest": "https://github.com/fatevase/dsh_depot/pull/9",
+  "runUrl": "https://github.com/fatevase/dsh_depot/actions/runs/39190897924",
+  "workflowConclusion": "success",
+  "qualification": "unverified",
+  "qualificationNote": "Build/test/cold-host smoke success does not satisfy the full installer and native acceptance matrix.",
+  "targets": [
+    {
+      "target": "macos-arm64",
+      "jobId": 117863238279,
+      "receipt": {
+        "schemaVersion": 1,
+        "target": "macos-arm64",
+        "manager": {
+          "name": "dsh-depot-manager",
+          "version": "0.1.0",
+          "target": "macos-arm64",
+          "path": "/Users/runner/work/dsh_depot/dsh_depot/.runtime/manager-ci/macos-arm64/dsh-depot-manager-0.1.0-macos-arm64.tgz",
+          "fileName": "dsh-depot-manager-0.1.0-macos-arm64.tgz",
+          "sha256": "181fc4666c6cddacf603a9be4e59a820f3cbcbbcf0172daeb0c95e3c11888957",
+          "compressedBytes": 151520,
+          "sourceDigest": "c9284cf54ca21b585d04b1ca2b1ab8b52e9e87820e2ea5ac024a402afa43a8f3"
+        },
+        "assets": [
+          {
+            "target": "macos-arm64",
+            "flavor": "full",
+            "fileName": "dsh-depot-manager-0.1.0-macos-arm64-full.tgz",
+            "path": "/Users/runner/work/dsh_depot/dsh_depot/.runtime/manager-ci/macos-arm64/dsh-depot-manager-0.1.0-macos-arm64-full.tgz",
+            "sha256": "1a99407d081830ca1fd55d4b4525f98dffefcc23552f94f8ef171ca052788369",
+            "compressedBytes": 46203227,
+            "managerSha256": "181fc4666c6cddacf603a9be4e59a820f3cbcbbcf0172daeb0c95e3c11888957",
+            "runtimeDigest": "8bebc3d846767864093af8619b1a6dc2ff01dea4f643b8bdb5e8cbd51bf6756d"
+          },
+          {
+            "target": "macos-arm64",
+            "flavor": "lite",
+            "fileName": "dsh-depot-manager-0.1.0-macos-arm64-lite.tgz",
+            "path": "/Users/runner/work/dsh_depot/dsh_depot/.runtime/manager-ci/macos-arm64/dsh-depot-manager-0.1.0-macos-arm64-lite.tgz",
+            "sha256": "39f4668bad6f0ebe0980a83b3a5743a402dcaa48330b463aef2d12ca28e533d2",
+            "compressedBytes": 273006,
+            "managerSha256": "181fc4666c6cddacf603a9be4e59a820f3cbcbbcf0172daeb0c95e3c11888957",
+            "runtimeDigest": null
+          }
+        ],
+        "verification": {
+          "schemaVersion": 1,
+          "target": "macos-arm64",
+          "host": {
+            "version": "0.2.0-rc.2",
+            "node": "26.9.0"
+          },
+          "packageSha256": "181fc4666c6cddacf603a9be4e59a820f3cbcbbcf0172daeb0c95e3c11888957",
+          "bundleSha256": null,
+          "status": "unverified",
+          "scope": [
+            "cold-install",
+            "config-compose",
+            "host-page-smoke",
+            "network-isolation"
+          ],
+          "checks": {
+            "install": true,
+            "compose": true,
+            "host": true,
+            "clientModule": true,
+            "native": null
+          },
+          "evidence": {
+            "cold-install": {
+              "status": "passed",
+              "log": "/Users/runner/work/dsh_depot/dsh_depot/.runtime/manager-ci/macos-arm64/verification/faf86735-b662-4f38-9584-26361cb2ae59"
+            },
+            "config-compose": {
+              "status": "passed",
+              "log": "/Users/runner/work/dsh_depot/dsh_depot/.runtime/manager-ci/macos-arm64/verification/faf86735-b662-4f38-9584-26361cb2ae59"
+            },
+            "host-page-smoke": {
+              "status": "passed",
+              "log": "/Users/runner/work/dsh_depot/dsh_depot/.runtime/manager-ci/macos-arm64/verification/faf86735-b662-4f38-9584-26361cb2ae59"
+            },
+            "network-isolation": {
+              "status": "passed",
+              "controls": {
+                "status": "passed",
+                "beforeReachable": true,
+                "beforeReachableIPv6": true,
+                "offline": {
+                  "externalBlocked": true,
+                  "externalBlockedIPv6": true,
+                  "childBlockedIPv6": true,
+                  "otherProgramBlocked": true,
+                  "loopbackAllowed": false,
+                  "loopbackBlocked": true,
+                  "childBlocked": true,
+                  "controlFamilies": [
+                    "IPv4",
+                    "IPv6-mapped-IPv4"
+                  ]
+                },
+                "loopback": {
+                  "externalBlocked": true,
+                  "externalBlockedIPv6": true,
+                  "childBlockedIPv6": true,
+                  "otherProgramBlocked": true,
+                  "loopbackAllowed": true,
+                  "loopbackBlocked": true,
+                  "childBlocked": true,
+                  "controlFamilies": [
+                    "IPv4",
+                    "IPv6-mapped-IPv4"
+                  ],
+                  "observer": "outside-sandbox-inbound-only",
+                  "outboundLoopbackBlocked": true
+                }
+              }
+            }
+          },
+          "verification": {
+            "schemaVersion": 1,
+            "buildKey": "c9284cf54ca21b585d04b1ca2b1ab8b52e9e87820e2ea5ac024a402afa43a8f3",
+            "target": "macos-arm64",
+            "host": {
+              "node": "26.9.0",
+              "version": "0.2.0-rc.2",
+              "environmentDigest": "d7b06cf0c7394141fc0cabdbe8bcf2014caddb853ad862fa8535da90cb4c6384"
+            },
+            "sha256": "181fc4666c6cddacf603a9be4e59a820f3cbcbbcf0172daeb0c95e3c11888957",
+            "status": "passed",
+            "timings": {
+              "install": 0.773,
+              "compose": 0.087,
+              "host": 1.605
+            },
+            "checks": {
+              "install": true,
+              "compose": true,
+              "host": true,
+              "clientModule": true,
+              "native": true
+            },
+            "scope": [
+              "cold-install",
+              "config-compose",
+              "host-page-smoke"
+            ],
+            "workDir": "/Users/runner/work/dsh_depot/dsh_depot/.runtime/manager-ci/macos-arm64/verification/faf86735-b662-4f38-9584-26361cb2ae59",
+            "isolationControls": {
+              "status": "passed",
+              "beforeReachable": true,
+              "beforeReachableIPv6": true,
+              "offline": {
+                "externalBlocked": true,
+                "externalBlockedIPv6": true,
+                "childBlockedIPv6": true,
+                "otherProgramBlocked": true,
+                "loopbackAllowed": false,
+                "loopbackBlocked": true,
+                "childBlocked": true,
+                "controlFamilies": [
+                  "IPv4",
+                  "IPv6-mapped-IPv4"
+                ]
+              },
+              "loopback": {
+                "externalBlocked": true,
+                "externalBlockedIPv6": true,
+                "childBlockedIPv6": true,
+                "otherProgramBlocked": true,
+                "loopbackAllowed": true,
+                "loopbackBlocked": true,
+                "childBlocked": true,
+                "controlFamilies": [
+                  "IPv4",
+                  "IPv6-mapped-IPv4"
+                ],
+                "observer": "outside-sandbox-inbound-only",
+                "outboundLoopbackBlocked": true
+              }
+            }
+          },
+          "missing": [
+            "authenticated-manager-page",
+            "script-install",
+            "replace",
+            "uninstall",
+            "recovery",
+            "native-load"
+          ]
+        },
+        "verificationRef": "manager-verification.json",
+        "seconds": 27.633,
+        "platformEvidence": {
+          "os": "darwin",
+          "arch": "arm64",
+          "node": "26.9.0",
+          "ssh": "unverified",
+          "fedora": "unverified"
+        }
+      }
+    },
+    {
+      "target": "linux-x64",
+      "jobId": 117863238246,
+      "receipt": {
+        "schemaVersion": 1,
+        "target": "linux-x64",
+        "manager": {
+          "name": "dsh-depot-manager",
+          "version": "0.1.0",
+          "target": "linux-x64",
+          "path": "/home/runner/work/dsh_depot/dsh_depot/.runtime/manager-ci/linux-x64/dsh-depot-manager-0.1.0-linux-x64.tgz",
+          "fileName": "dsh-depot-manager-0.1.0-linux-x64.tgz",
+          "sha256": "3417ef10a4b5ef4c19660203974e1a66e77b83f13b25b5ce349463510459de27",
+          "compressedBytes": 151521,
+          "sourceDigest": "c9284cf54ca21b585d04b1ca2b1ab8b52e9e87820e2ea5ac024a402afa43a8f3"
+        },
+        "assets": [
+          {
+            "target": "linux-x64",
+            "flavor": "full",
+            "fileName": "dsh-depot-manager-0.1.0-linux-x64-full.tgz",
+            "path": "/home/runner/work/dsh_depot/dsh_depot/.runtime/manager-ci/linux-x64/dsh-depot-manager-0.1.0-linux-x64-full.tgz",
+            "sha256": "11b0a4456e68c3876d46d972f6d815c5c4760ec493f4fa9ff7ff91b9a7669e46",
+            "compressedBytes": 50754767,
+            "managerSha256": "3417ef10a4b5ef4c19660203974e1a66e77b83f13b25b5ce349463510459de27",
+            "runtimeDigest": "05757b064ad2a221b41874794da42361c9bab033c7c33c1f1b458c25a7de7e59"
+          },
+          {
+            "target": "linux-x64",
+            "flavor": "lite",
+            "fileName": "dsh-depot-manager-0.1.0-linux-x64-lite.tgz",
+            "path": "/home/runner/work/dsh_depot/dsh_depot/.runtime/manager-ci/linux-x64/dsh-depot-manager-0.1.0-linux-x64-lite.tgz",
+            "sha256": "0e682fc34544d6702a50905f00ec41c9f849fe78e561616500c924ca98fdae68",
+            "compressedBytes": 272865,
+            "managerSha256": "3417ef10a4b5ef4c19660203974e1a66e77b83f13b25b5ce349463510459de27",
+            "runtimeDigest": null
+          }
+        ],
+        "verification": {
+          "schemaVersion": 1,
+          "target": "linux-x64",
+          "host": {
+            "version": "0.2.0-rc.2",
+            "node": "26.9.0"
+          },
+          "packageSha256": "3417ef10a4b5ef4c19660203974e1a66e77b83f13b25b5ce349463510459de27",
+          "bundleSha256": null,
+          "status": "unverified",
+          "scope": [
+            "cold-install",
+            "config-compose",
+            "host-page-smoke",
+            "network-isolation"
+          ],
+          "checks": {
+            "install": true,
+            "compose": true,
+            "host": true,
+            "clientModule": true,
+            "native": null
+          },
+          "evidence": {
+            "cold-install": {
+              "status": "passed",
+              "log": "/home/runner/work/dsh_depot/dsh_depot/.runtime/manager-ci/linux-x64/verification/d0703fae-0f4b-49f3-b233-9dd7424ebcc7"
+            },
+            "config-compose": {
+              "status": "passed",
+              "log": "/home/runner/work/dsh_depot/dsh_depot/.runtime/manager-ci/linux-x64/verification/d0703fae-0f4b-49f3-b233-9dd7424ebcc7"
+            },
+            "host-page-smoke": {
+              "status": "passed",
+              "log": "/home/runner/work/dsh_depot/dsh_depot/.runtime/manager-ci/linux-x64/verification/d0703fae-0f4b-49f3-b233-9dd7424ebcc7"
+            },
+            "network-isolation": {
+              "status": "passed",
+              "controls": {
+                "status": "passed",
+                "beforeReachable": true,
+                "beforeReachableIPv6": true,
+                "offline": {
+                  "externalBlocked": true,
+                  "externalBlockedIPv6": true,
+                  "childBlockedIPv6": true,
+                  "otherProgramBlocked": true,
+                  "loopbackAllowed": false,
+                  "loopbackBlocked": true,
+                  "childBlocked": true,
+                  "controlFamilies": [
+                    "IPv4",
+                    "IPv6-mapped-IPv4"
+                  ]
+                },
+                "loopback": {
+                  "externalBlocked": true,
+                  "externalBlockedIPv6": true,
+                  "childBlockedIPv6": true,
+                  "otherProgramBlocked": true,
+                  "loopbackAllowed": true,
+                  "loopbackBlocked": false,
+                  "childBlocked": true,
+                  "controlFamilies": [
+                    "IPv4",
+                    "IPv6-mapped-IPv4"
+                  ]
+                }
+              }
+            }
+          },
+          "verification": {
+            "schemaVersion": 1,
+            "buildKey": "c9284cf54ca21b585d04b1ca2b1ab8b52e9e87820e2ea5ac024a402afa43a8f3",
+            "target": "linux-x64",
+            "host": {
+              "node": "26.9.0",
+              "version": "0.2.0-rc.2",
+              "environmentDigest": "d7b06cf0c7394141fc0cabdbe8bcf2014caddb853ad862fa8535da90cb4c6384"
+            },
+            "sha256": "3417ef10a4b5ef4c19660203974e1a66e77b83f13b25b5ce349463510459de27",
+            "status": "passed",
+            "timings": {
+              "install": 0.678,
+              "compose": 0.114,
+              "host": 1.319
+            },
+            "checks": {
+              "install": true,
+              "compose": true,
+              "host": true,
+              "clientModule": true,
+              "native": true
+            },
+            "scope": [
+              "cold-install",
+              "config-compose",
+              "host-page-smoke"
+            ],
+            "workDir": "/home/runner/work/dsh_depot/dsh_depot/.runtime/manager-ci/linux-x64/verification/d0703fae-0f4b-49f3-b233-9dd7424ebcc7",
+            "isolationControls": {
+              "status": "passed",
+              "beforeReachable": true,
+              "beforeReachableIPv6": true,
+              "offline": {
+                "externalBlocked": true,
+                "externalBlockedIPv6": true,
+                "childBlockedIPv6": true,
+                "otherProgramBlocked": true,
+                "loopbackAllowed": false,
+                "loopbackBlocked": true,
+                "childBlocked": true,
+                "controlFamilies": [
+                  "IPv4",
+                  "IPv6-mapped-IPv4"
+                ]
+              },
+              "loopback": {
+                "externalBlocked": true,
+                "externalBlockedIPv6": true,
+                "childBlockedIPv6": true,
+                "otherProgramBlocked": true,
+                "loopbackAllowed": true,
+                "loopbackBlocked": false,
+                "childBlocked": true,
+                "controlFamilies": [
+                  "IPv4",
+                  "IPv6-mapped-IPv4"
+                ]
+              }
+            }
+          },
+          "missing": [
+            "authenticated-manager-page",
+            "script-install",
+            "replace",
+            "uninstall",
+            "recovery",
+            "native-load"
+          ]
+        },
+        "verificationRef": "manager-verification.json",
+        "seconds": 22.724,
+        "platformEvidence": {
+          "os": "linux",
+          "arch": "x64",
+          "node": "26.9.0",
+          "ssh": "unverified",
+          "fedora": "unverified"
+        }
+      }
+    },
+    {
+      "target": "win32-x64",
+      "jobId": 117863238047,
+      "receipt": {
+        "schemaVersion": 1,
+        "target": "win32-x64",
+        "manager": {
+          "name": "dsh-depot-manager",
+          "version": "0.1.0",
+          "target": "win32-x64",
+          "path": "D:\\a\\dsh_depot\\dsh_depot\\.runtime\\manager-ci\\win32-x64\\dsh-depot-manager-0.1.0-win32-x64.tgz",
+          "fileName": "dsh-depot-manager-0.1.0-win32-x64.tgz",
+          "sha256": "13885780b4e790e1d8a68c4c2d700c186c694fcf37d66233c0e3a0f55935521a",
+          "compressedBytes": 151506,
+          "sourceDigest": "386b7d6c3668ca5db30ea22dfc43fb536caaab795180ee7b4170da4c0aac607e"
+        },
+        "assets": [
+          {
+            "target": "win32-x64",
+            "flavor": "full",
+            "fileName": "dsh-depot-manager-0.1.0-win32-x64-full.tgz",
+            "path": "D:\\a\\dsh_depot\\dsh_depot\\.runtime\\manager-ci\\win32-x64\\dsh-depot-manager-0.1.0-win32-x64-full.tgz",
+            "sha256": "9376e656ef8d6d7ecf1c2a30b1e98c930c6e121e6aff987c768a20235feacb16",
+            "compressedBytes": 39848962,
+            "managerSha256": "13885780b4e790e1d8a68c4c2d700c186c694fcf37d66233c0e3a0f55935521a",
+            "runtimeDigest": "8490398f5e0082772dfb0ae5a6ebdff98a97696a20cb9778b4f82eec79b6d0a1"
+          },
+          {
+            "target": "win32-x64",
+            "flavor": "lite",
+            "fileName": "dsh-depot-manager-0.1.0-win32-x64-lite.tgz",
+            "path": "D:\\a\\dsh_depot\\dsh_depot\\.runtime\\manager-ci\\win32-x64\\dsh-depot-manager-0.1.0-win32-x64-lite.tgz",
+            "sha256": "0ccbb73a6683d720a784414de9e55928b54686c5a10e3089930b1511a11a8613",
+            "compressedBytes": 272894,
+            "managerSha256": "13885780b4e790e1d8a68c4c2d700c186c694fcf37d66233c0e3a0f55935521a",
+            "runtimeDigest": null
+          }
+        ],
+        "verification": {
+          "schemaVersion": 1,
+          "target": "win32-x64",
+          "host": {
+            "version": "0.2.0-rc.2",
+            "node": "26.9.0"
+          },
+          "packageSha256": "13885780b4e790e1d8a68c4c2d700c186c694fcf37d66233c0e3a0f55935521a",
+          "bundleSha256": null,
+          "status": "unverified",
+          "scope": [
+            "cold-install",
+            "config-compose",
+            "host-page-smoke",
+            "network-isolation"
+          ],
+          "checks": {
+            "install": true,
+            "compose": true,
+            "host": true,
+            "clientModule": true,
+            "native": null
+          },
+          "evidence": {
+            "cold-install": {
+              "status": "passed",
+              "log": "D:\\a\\dsh_depot\\dsh_depot\\.runtime\\manager-ci\\win32-x64\\verification\\5461c57e-736e-4872-a811-7be640e57617"
+            },
+            "config-compose": {
+              "status": "passed",
+              "log": "D:\\a\\dsh_depot\\dsh_depot\\.runtime\\manager-ci\\win32-x64\\verification\\5461c57e-736e-4872-a811-7be640e57617"
+            },
+            "host-page-smoke": {
+              "status": "passed",
+              "log": "D:\\a\\dsh_depot\\dsh_depot\\.runtime\\manager-ci\\win32-x64\\verification\\5461c57e-736e-4872-a811-7be640e57617"
+            },
+            "network-isolation": {
+              "status": "passed",
+              "controls": {
+                "status": "passed",
+                "beforeReachable": true,
+                "beforeReachableIPv6": true,
+                "offline": {
+                  "externalBlocked": true,
+                  "externalBlockedIPv6": true,
+                  "childBlockedIPv6": true,
+                  "otherProgramBlocked": true,
+                  "loopbackAllowed": false,
+                  "loopbackBlocked": true,
+                  "childBlocked": true,
+                  "controlFamilies": [
+                    "IPv4",
+                    "IPv6-mapped-IPv4"
+                  ]
+                },
+                "loopback": {
+                  "externalBlocked": true,
+                  "externalBlockedIPv6": true,
+                  "childBlockedIPv6": true,
+                  "otherProgramBlocked": true,
+                  "loopbackAllowed": true,
+                  "loopbackBlocked": false,
+                  "childBlocked": true,
+                  "controlFamilies": [
+                    "IPv4",
+                    "IPv6-mapped-IPv4"
+                  ]
+                }
+              }
+            }
+          },
+          "verification": {
+            "schemaVersion": 1,
+            "buildKey": "386b7d6c3668ca5db30ea22dfc43fb536caaab795180ee7b4170da4c0aac607e",
+            "target": "win32-x64",
+            "host": {
+              "node": "26.9.0",
+              "version": "0.2.0-rc.2",
+              "environmentDigest": "d7b06cf0c7394141fc0cabdbe8bcf2014caddb853ad862fa8535da90cb4c6384"
+            },
+            "sha256": "13885780b4e790e1d8a68c4c2d700c186c694fcf37d66233c0e3a0f55935521a",
+            "status": "passed",
+            "timings": {
+              "install": 1.002,
+              "compose": 0.151,
+              "host": 7.469
+            },
+            "checks": {
+              "install": true,
+              "compose": true,
+              "host": true,
+              "clientModule": true,
+              "native": true
+            },
+            "scope": [
+              "cold-install",
+              "config-compose",
+              "host-page-smoke"
+            ],
+            "workDir": "D:\\a\\dsh_depot\\dsh_depot\\.runtime\\manager-ci\\win32-x64\\verification\\5461c57e-736e-4872-a811-7be640e57617",
+            "isolationControls": {
+              "status": "passed",
+              "beforeReachable": true,
+              "beforeReachableIPv6": true,
+              "offline": {
+                "externalBlocked": true,
+                "externalBlockedIPv6": true,
+                "childBlockedIPv6": true,
+                "otherProgramBlocked": true,
+                "loopbackAllowed": false,
+                "loopbackBlocked": true,
+                "childBlocked": true,
+                "controlFamilies": [
+                  "IPv4",
+                  "IPv6-mapped-IPv4"
+                ]
+              },
+              "loopback": {
+                "externalBlocked": true,
+                "externalBlockedIPv6": true,
+                "childBlockedIPv6": true,
+                "otherProgramBlocked": true,
+                "loopbackAllowed": true,
+                "loopbackBlocked": false,
+                "childBlocked": true,
+                "controlFamilies": [
+                  "IPv4",
+                  "IPv6-mapped-IPv4"
+                ]
+              }
+            }
+          },
+          "missing": [
+            "authenticated-manager-page",
+            "script-install",
+            "replace",
+            "uninstall",
+            "recovery",
+            "native-load"
+          ]
+        },
+        "verificationRef": "manager-verification.json",
+        "seconds": 45.032,
+        "platformEvidence": {
+          "os": "win32",
+          "arch": "x64",
+          "node": "26.9.0",
+          "ssh": "unverified",
+          "fedora": "unverified"
+        }
+      }
+    }
+  ],
+  "artifacts": [
+    {
+      "id": 12160032178,
+      "name": "manager-macos-arm64",
+      "size_in_bytes": 46176100,
+      "url": "https://api.github.com/repos/fatevase/dsh_depot/actions/artifacts/12160032178",
+      "archive_download_url": "https://api.github.com/repos/fatevase/dsh_depot/actions/artifacts/12160032178/zip",
+      "expired": false,
+      "created_at": "2026-10-19T02:39:01Z",
+      "expires_at": "2026-10-21T02:38:58Z",
+      "updated_at": "2026-10-19T02:39:01Z",
+      "digest": "sha256:1ee1a35a048a60cae3cd546cab633fba4d28b47a4a84d669e4e7b83a5311f63f",
+      "workflow_run": {
+        "id": 39190897924,
+        "repository_id": 1424431238,
+        "head_repository_id": 1424431238,
+        "head_branch": "codex/offline-plugin-manager",
+        "head_sha": "5a20cef087a0370fc5f09f2ee6bf5d4b44042684"
+      }
+    },
+    {
+      "id": 12159972325,
+      "name": "manager-linux-x64",
+      "size_in_bytes": 50966300,
+      "url": "https://api.github.com/repos/fatevase/dsh_depot/actions/artifacts/12159972325",
+      "archive_download_url": "https://api.github.com/repos/fatevase/dsh_depot/actions/artifacts/12159972325/zip",
+      "expired": false,
+      "created_at": "2026-10-19T02:38:51Z",
+      "expires_at": "2026-10-21T02:38:49Z",
+      "updated_at": "2026-10-19T02:38:51Z",
+      "digest": "sha256:1f43698e52505e36ef18dab5c5f869aedd846254358052273969db5abdaec1d4",
+      "workflow_run": {
+        "id": 39190897924,
+        "repository_id": 1424431238,
+        "head_repository_id": 1424431238,
+        "head_branch": "codex/offline-plugin-manager",
+        "head_sha": "5a20cef087a0370fc5f09f2ee6bf5d4b44042684"
+      }
+    },
+    {
+      "id": 12159931826,
+      "name": "manager-win32-x64",
+      "size_in_bytes": 40150521,
+      "url": "https://api.github.com/repos/fatevase/dsh_depot/actions/artifacts/12159931826",
+      "archive_download_url": "https://api.github.com/repos/fatevase/dsh_depot/actions/artifacts/12159931826/zip",
+      "expired": false,
+      "created_at": "2026-10-19T02:39:49Z",
+      "expires_at": "2026-10-21T02:39:46Z",
+      "updated_at": "2026-10-19T02:39:49Z",
+      "digest": "sha256:03f115a4e07c8c94fe5b0bf8c3a91224a4331bd870d4599987558dbe438f0b08",
+      "workflow_run": {
+        "id": 39190897924,
+        "repository_id": 1424431238,
+        "head_repository_id": 1424431238,
+        "head_branch": "codex/offline-plugin-manager",
+        "head_sha": "5a20cef087a0370fc5f09f2ee6bf5d4b44042684"
+      }
+    }
+  ]
+}
