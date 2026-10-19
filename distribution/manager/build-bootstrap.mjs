@@ -33,8 +33,27 @@ export async function buildBootstrap({target,flavor,managerArchive,output,runtim
   const managerSha256=await fileHash(managerArchive),entryHashes=Object.fromEntries(await Promise.all(scripts.map(async name=>[name,await fileHash(path.join(root,name))])))
   await atomicJson(path.join(root,'bundle.json'),{schemaVersion:1,target,flavor,version:MANAGER_VERSION,managerSha256,runtimeDigest,entryHashes,nodeRange:'^22.19.0 || >=24.0.0'})
   await writeFile(path.join(root,'payload.sha256'),(await Promise.all(['core.mjs','manager.tgz','bundle.json'].map(async name=>`${await fileHash(path.join(root,name))}  ${name}`))).join('\n')+'\n')
-  await writeFile(path.join(root,'README.txt'),'DSH 离线插件管理器\n先解压，再运行本平台 install 入口。首次使用请明确选择本机 DSH 配置并退出宿主。\nLinux/SSH: sh install.sh\n完整包附带独立 Node；轻量包需要已有 Node。无需 sudo，不会下载依赖。\n')
-  const fileName=name+'.tgz',archive=path.join(output,fileName);await tar.c({file:archive,gzip:true,cwd:temp,portable:true},[name])
+  const entry=target==='win32-x64'?'双击 install.cmd':target==='macos-arm64'?'打开 install.command；也可在终端运行 sh install.sh':'在终端运行 sh install.sh（支持 SSH）'
+  await writeFile(path.join(root,'README.txt'),[
+   'DSH 离线插件管理器','',
+   '使用前：已安装并初始化 DSH 0.2.0-rc.2 Web。请先完全退出要修改的 DSH。',
+   '1. 将整个压缩包解压到本机可写目录；不要在压缩包预览窗口中运行。',
+   `2. ${entry}。`,
+   '3. 选择目标 DSH，选择“安装 / 替换离线成品包”。首次询问包路径时直接回车，使用随包 manager.tgz。',
+   '4. 核对显示的环境和安装计划，按提示确认。完成后用原来的方式启动 DSH。',
+   '5. 从 DSH 中的“离线插件”进入管理页。只有宿主实际加载后才算启用成功。','',
+   flavor==='full'?'本包已附带 Node，无需额外安装 Node、依赖或编译工具。':'这是轻量包，需要已有 Node ^22.19.0 或 >=24；未准备 Node 时请使用完整包。',
+   'core.mjs 是程序；runtime 是附带运行时；manager.tgz 是安装进 DSH 的插件成品。',
+   '请保留所有文件。安装过程不联网下载依赖，不执行编译，不需要管理员权限或 sudo。',
+   '后续安装其他插件时可选择其 .tgz 或成品目录；等待退出的任务可重跑入口并选择“继续待处理任务”。',
+   '卸载默认保留业务数据。遇到错误先保留完整提示，再从菜单查看任务或恢复。',
+   '官方 DSH Desktop 的写入尚未开放；本包的完整原生验收状态以配套报告为准。',''
+  ].join('\n'))
+  const fileName=name+(target==='win32-x64'?'.zip':'.tgz'),archive=path.join(output,fileName)
+  if(target==='win32-x64'){
+   const result=await runHostCommand({executable:process.platform==='win32'?'python':'python3',args:['-c',"import pathlib,sys,zipfile\nroot=pathlib.Path(sys.argv[1])\nwith zipfile.ZipFile(sys.argv[2],'w',zipfile.ZIP_DEFLATED) as z:\n for file in sorted(root.rglob('*')):\n  if file.is_file():z.write(file,file.relative_to(root.parent))",root,archive],cwd:temp})
+   if(result.exitCode)fail('BUNDLE_ARCHIVE_FAILED',result.stderr)
+  }else await tar.c({file:archive,gzip:true,cwd:temp,portable:true},[name])
   return{target,flavor,fileName,path:archive,sha256:await fileHash(archive),compressedBytes:(await stat(archive)).size,managerSha256,runtimeDigest}
  }finally{await rm(temp,{recursive:true,force:true})}
 }

@@ -73,7 +73,7 @@ Windows 10、macOS Intel、Linux arm64、Windows arm64、Linux musl 不在首轮
 
 完整包的 Linux Node 运行时仍有 libc 和系统库要求，报告记录实际基线，不静默下载系统依赖。全部插件操作以目标配置的普通用户身份执行；root 或身份不匹配时停止，不向 root 的 HOME 或其他用户配置误装。
 
-完整包名称示例为 `depot-setup-0.1.0-win32-x64.zip`、`depot-setup-0.1.0-macos-arm64.tar.gz`、`depot-setup-0.1.0-linux-x64.tar.gz`；轻量包追加 `-lite`，不拼哈希。解压内容为对应入口、`bootstrap.mjs`、封装好的 `core/`、管理器 `.tgz`、`bundle.json`、`SHA256SUMS`、`README.zh.md`，完整包另含 `runtime/` 与许可证。包内不需要再运行 npm install。
+首版直接提供“程序＋运行时＋启动脚本＋说明文件”的压缩包。Windows 为 `dsh-depot-manager-0.1.0-win32-x64-full.zip`，macOS / Linux 为对应平台的 `dsh-depot-manager-0.1.0-<平台>-full.tgz`；轻量包使用 `-lite`，不拼哈希。解压内容包括对应入口、打包好的 `core.mjs`、`manager.tgz`、`bundle.json`、`payload.sha256` 和 `README.txt`，完整包另含 `runtime/` 与许可证。用户直接运行 CMD / command / sh，不需要安装依赖或编译。首版不引入 SEA、Rust 或桌面 UI 外壳。
 
 `bundle.json` 使用 schemaVersion=1，固定 version、target、flavor、entrypoints、coreVersion、manager 的文件/包名/版本/sha256、runtime 的来源/版本/文件摘要，以及不包含自身的负载索引。最终归档 SHA-256 在发布报告中记录。启动包内 Node 之前，Unix 使用系统 sha256sum 或 shasum，Windows 使用系统哈希命令核对该可执行文件；缺少必要工具时清晰停止，不能先执行待核对的 Node 再用它为自身证明完整性。默认 CMD 可调用固定的 PowerShell Get-FileHash 命令，但不把 PS1 内容读取后当 Command 执行来绕过策略。
 

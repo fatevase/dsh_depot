@@ -237,3 +237,7 @@ Task 1 定义以下 JSDoc 契约，后续任务使用同名字段，禁止临时
 已在受控分发分支实现基础代码、三端入口、Svelte 页面与分发门禁。本机 144 项测试中 142 项通过、2 项 Windows 原生检查在 macOS 跳过；macOS 完成局部真实安装、替换、卸载、系统隔离与宿主验证。完整 31 项与其他原生平台验收仍未完成，整体计划不标记完成。详见 `docs/evidence/offline-manager-2026-10-19/report.html`。本轮未合并、未发布、未部署。
 
 三平台 Actions 原生测试与构建已通过，完整/轻量包均生成，空缓存隔离宿主检查通过。Windows CMD 与所有权回归已在原生 runner 通过。完整安装器和恢复等剩余验收仍未通过，因此发布门禁保持关闭。草稿 PR： https://github.com/fatevase/dsh_depot/pull/9 。
+
+## 首版交付收敛
+
+按用户最新决定，直接提供程序、附带 Node、平台启动脚本和说明文件组成的压缩包。Windows 用 ZIP 及 CMD，macOS / Linux 用 .tgz 及 command / sh。复用既有核心，不引入 SEA、Rust 或桌面 UI 框架；独立标准插件 .tgz 路径保留。
