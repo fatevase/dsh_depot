@@ -46,6 +46,7 @@ export async function buildBootstrap({target,flavor,managerArchive,output,runtim
    '4. 查看显示的目标和阶段提示。无需事先退出 DSH，安装完成后按提示重启。旧的待处理任务可选择第 3 项继续。',
    '5. 从 DSH 中的“离线插件”进入管理页。只有宿主实际加载后才算启用成功。','',
    flavor==='full'?'本包附带独立 Node 和 pnpm 10/11 兼容工具，无需依赖系统中的 Node、pnpm 或编译工具。':'这是轻量包，需要已有 Node ^22.19.0 或 >=24；未准备 Node 时请使用完整包。',
+   'Desktop 使用应用自带的独立插件后端，不重新解析已有插件依赖；CLI 使用随包兼容工具，保留原 store。',
    'core.mjs 是程序；runtime 是附带运行时；package-managers.tgz 是离线兼容工具；manager.tgz 是插件成品。',
    '请保留所有文件。安装过程不联网下载依赖，不执行编译，不需要管理员权限或 sudo。',
    '后续通常在 DSH 的“离线插件”页面导入其他成品。也可运行 install.cmd menu --file "D:/plugins/plugin.tgz" 或 sh install.sh menu --file "/path/plugin.tgz"，再选择第 1 项安装指定包。',

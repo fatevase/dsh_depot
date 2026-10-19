@@ -18,11 +18,11 @@ export async function executeDirectPlan(plan,{host,adapter,storeDir,signal,onEve
   if(signal?.aborted){await emit('cancelled');return op}
   try{
    await emit('applying')
-   const result=await adapter.applyDirect(host,{action:plan.action,packageName:plan.packageName,path:plan._inspection?.archivePath,storeDir:path.join(storeDir,'stores',op.operationId)},{signal,onOutput})
+   const result=await adapter.applyDirect(host,{action:plan.action,packageName:plan.packageName,version:plan.version,contentRoot:plan._inspection?.contentRoot,path:plan._inspection?.archivePath,storeDir:path.join(storeDir,'stores',op.operationId)},{signal,onOutput})
    await emit('checking_install')
    const manifest=await readJson(path.join(host.profileDir,'package.json'))
    if(plan.action==='remove'){if(Object.hasOwn(manifest.dependencies??{},plan.packageName))fail('REMOVE_NOT_APPLIED','插件声明仍存在')}
-   else {const installed=await readJson(path.join(host.profileDir,'node_modules',plan.packageName,'package.json'),{});if(!Object.hasOwn(manifest.dependencies??{},plan.packageName)||installed.name!==plan.packageName||installed.version!==plan.version)fail('INSTALL_IDENTITY_MISMATCH','实际安装版本与安装包不一致')}
+   else {const installed=await readJson(path.join(result?.packageDir??path.join(host.profileDir,'node_modules',plan.packageName),'package.json'),{});if(!Object.hasOwn(manifest.dependencies??{},plan.packageName)||installed.name!==plan.packageName||installed.version!==plan.version)fail('INSTALL_IDENTITY_MISMATCH','实际安装版本与安装包不一致')}
    op.afterFingerprint=await configurationFingerprint(host.profileDir)
    op.result={installed:plan.action!=='remove',removed:plan.action==='remove',loaded:false,packageName:plan.packageName,version:plan.version,logPath:result?.logPath}
    op.reloadNonce=randomUUID();op.activationNonceDigest=digest(op.reloadNonce)

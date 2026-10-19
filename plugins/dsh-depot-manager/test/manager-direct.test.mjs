@@ -32,6 +32,7 @@ test('a failed direct install reports failure without claiming a rollback',async
 })
 test('DSH CLI uses literal offline add/remove arguments and the target home',async t=>{
  const f=await fixture(t),{applyDshCli}=await import('../adapters/dsh-cli.mjs'),root=path.join(f.dir,'dsh'),record=path.join(f.profile,'argv.json')
+ const previousDepot=process.env.DSH_DEPOT_HOME;process.env.DSH_DEPOT_HOME=path.join(f.dir,'isolated-depot');t.after(()=>{if(previousDepot===undefined)delete process.env.DSH_DEPOT_HOME;else process.env.DSH_DEPOT_HOME=previousDepot})
  await mkdir(path.join(root,'lib'),{recursive:true})
  await writeFile(path.join(root,'lib/bin.js'),`exports.runCli=async()=>{require('node:fs').writeFileSync(${JSON.stringify(record)},JSON.stringify({argv:process.argv.slice(2),home:process.env.DSH_HOME}))}`)
  const host={...f.host,dshRoot:root,nodePath:process.execPath,home:f.dir,capabilities:{writeSession:true,requiresExit:false},launch:{args:[path.join(root,'lib/bin.js'),'--profile','web']}}
@@ -79,4 +80,11 @@ test('normal installation never requires stopping the running DSH',async t=>{
  adapter.isRunning=async()=>{throw Error('Normal installation must use DSH locking, not process exit checks')}
  assert.equal(plan.requiresExit,false)
  assert.equal((await executePlan(plan,{host:f.host,adapter,storeDir:path.join(f.dir,'state')})).state,'awaiting_reload')
+})
+
+test('Desktop may publish a verified new generation while its old physical copy waits for restart',async t=>{
+ const f=await fixture(t),old=path.join(f.profile,'node_modules/new-plugin'),generation=path.join(f.dir,'native-generation/new-plugin');await mkdir(old,{recursive:true});await mkdir(generation,{recursive:true});await writeFile(path.join(old,'package.json'),JSON.stringify({name:'new-plugin',version:'0.9.0'}));await writeFile(path.join(generation,'package.json'),JSON.stringify({name:'new-plugin',version:'1.0.0'}))
+ const plan=await createOperationPlan({host:f.host,inspection:f.inspection,action:'install'})
+ const op=await executePlan(plan,{host:f.host,storeDir:path.join(f.dir,'state'),adapter:{async applyDirect(){const manifest=JSON.parse(await readFile(path.join(f.profile,'package.json')));manifest.dependencies['new-plugin']='1.0.0';await writeFile(path.join(f.profile,'package.json'),JSON.stringify(manifest));return{packageDir:generation}}}})
+ assert.equal(op.state,'awaiting_reload');assert.equal(op.result.version,'1.0.0');assert.equal(JSON.parse(await readFile(path.join(old,'package.json'))).version,'0.9.0')
 })
