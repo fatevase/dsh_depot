@@ -3,7 +3,7 @@
   "on": {
     "schedule": [
       {
-        "cron": "23 3 * * *"
+        "cron": "23 */6 * * *"
       }
     ],
     "workflow_dispatch": {
@@ -298,5 +298,9 @@
         }
       ]
     }
+  },
+  "concurrency": {
+    "group": "plugin-distribution-${{ github.event.pull_request.number || github.ref }}",
+    "cancel-in-progress": false
   }
 }

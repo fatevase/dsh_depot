@@ -135,3 +135,34 @@ node distribution/cli.mjs list --output .runtime/distribution/plugin-list.json
 ```
 
 处理一个新项目时，先在 candidates 中写批次和检查说明，再编写固定源码、依赖锁、构建步骤及运行验证的 recipe。本机验证只证明对应平台的相同归档字节；添加 active 后，仍由三端 runner 构建/验证。仅改 candidates 的处理说明不会把它变成可下载包。
+
+## 自动处理、分批与更新规则
+
+`distribution/plugin-list.json` 仍是选品与人工处理记录入口；`distribution/config.json` 的 `batchPolicy` 控制每轮最多 5 个插件、15 个平台任务。Actions 的平台并发保持 3，完整工作流按分支串行，防止多个定时/手动运行重复编译相同输入。
+
+| 触发或条件 | 处理方式 |
+| --- | --- |
+| 每 6 小时的定时检查 | 重新发现已启用 recipe 的版本与输入，刷新 GitHub 仓库推送时间 |
+| main 上的清单、recipe、锁或分发代码变更 | 自动重新规划；没有新构建输入时不重建 |
+| 手动 Run workflow | 可指定 plugin、target；retry_keys 显式重试失败 key 或插件 ID |
+| 候选尚无适配，或 recipe disabled | 保留待适配说明，不执行上游构建脚本 |
+| 已有相同输入的公开包 | 跳过，保留现有下载 |
+| 新版本满足 recipe 允许版本、宿主与锁文件规则 | 生成新平台任务，进入本轮预算筛选 |
+| 超出本轮上限 | 标记 queued，保持为未处理；下一轮依据持久状态重新规划，不记为缺失 receipt |
+| 同一插件的待构建平台 | 作为一个预算组，不因批次上限拆开；手动 target 筛选仍有效 |
+| 相同输入已失败、未验证或没有回执 | 不无限自动重试，需显式 retry_keys；新输入按新 key 重新判断 |
+| source 固定 commit | 不自动漂移到上游最新版；维护者审查后改 recipe，才构建新版本 |
+
+顺序优先显式重试，再按最久没有尝试的插件处理（新插件优先），并以 active 顺序和插件 ID 稳定打破平局。没有永久队列服务：成功/失败回执、已发布 key 与本轮 queued 说明都进入 distribution-state；下一次从这些状态继续，避免某几个频繁更新的项目长期挤占其他插件。
+
+定时是 GitHub Actions 调度，可能延迟，不保证精确的六小时间隔。当前仓库是公开仓库，使用标准托管 runner；参考 [GitHub runner 说明](https://docs.github.com/en/actions/reference/runners/github-hosted-runners) 与 [Actions 限制](https://docs.github.com/en/actions/reference/limits)。批次平台任务上限拒绝超过 240，给 256 项矩阵限制保留余量。这里只处理已经维护好 recipe 的软件；它不会自动为 99 个候选生成构建配置。
+
+构建 key 对比源码提交、manifest、锁文件、recipe、宿主、平台以及打包器/验证器版本。修改打包或验证语义后，维护者仍需提升对应版本号；不是所有源码编辑都会无条件使已有包过期。
+
+## 网站时间与证据
+
+插件目录分别提供“上游最近更新”和“离线包最近发布”排序。前者使用发现阶段读取的 GitHub pushed_at；未更新的条目保留原调研快照及观测时间。后者按当前平台筛选后的已发布包时间计算。上游发生推送不表示本站固定版本的包已同步。
+
+“构建与验证”按所选归档展示源码、体积、工具链、运行依赖、隔离对照、冷安装、配置、宿主响应、模块/技能注册及声明的探针。旧包没有记录的字段显示未知或指向原始报告，不能用当前 recipe 的工具版本补写历史事实。失败新任务与仍可下载旧包分别说明；未声明原生探针不会显示原生验证通过。Answer me with HTML 增加随包 SKILL.md 的实际可读、非空及安装闭包检查。完整浏览器操作和在线业务仍明确标为未覆盖。
+
+管理器下载与说明只在 manager.html；guide.html 只讲原版 DSH 命令安装。正式管理器发布仍要求原有完整验收，尚未生成正式下载。测试版是独立产品决定，本次没有把构建产物冒充完整验收包，也没有降低正式发布门槛。

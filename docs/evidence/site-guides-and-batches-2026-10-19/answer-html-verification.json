@@ -1,0 +1,71 @@
+{
+  "schemaVersion": 1,
+  "buildKey": "6bc804844b7f1e5449aecadbdd809a7360ea6ad31a2264c4ad52716d143aaed3",
+  "target": "macos-arm64",
+  "host": {
+    "version": "0.2.0-rc.2",
+    "node": "26.9.0",
+    "environmentDigest": "d7b06cf0c7394141fc0cabdbe8bcf2014caddb853ad862fa8535da90cb4c6384"
+  },
+  "sha256": "9c8ca536feb2bf7929e7d8e0c30ea1cd070a533df427a0dd3ea51a0cac19ba0c",
+  "status": "passed",
+  "timings": {
+    "install": 2.738,
+    "compose": 0.315,
+    "host": 2.252
+  },
+  "checks": {
+    "install": true,
+    "compose": true,
+    "registration": true,
+    "host": true,
+    "clientModule": null,
+    "native": true
+  },
+  "scope": [
+    "cold-install",
+    "config-compose",
+    "host-page-smoke",
+    "config-registration",
+    "bundled-skill-files"
+  ],
+  "isolationControls": {
+    "status": "passed",
+    "beforeReachable": true,
+    "beforeReachableIPv6": true,
+    "offline": {
+      "externalBlocked": true,
+      "externalBlockedIPv6": true,
+      "childBlockedIPv6": true,
+      "otherProgramBlocked": true,
+      "loopbackAllowed": false,
+      "loopbackBlocked": true,
+      "childBlocked": true,
+      "controlFamilies": [
+        "IPv4",
+        "IPv6-mapped-IPv4"
+      ]
+    },
+    "loopback": {
+      "externalBlocked": true,
+      "externalBlockedIPv6": true,
+      "childBlockedIPv6": true,
+      "otherProgramBlocked": true,
+      "loopbackAllowed": true,
+      "loopbackBlocked": true,
+      "childBlocked": true,
+      "controlFamilies": [
+        "IPv4",
+        "IPv6-mapped-IPv4"
+      ],
+      "observer": "outside-sandbox-inbound-only",
+      "outboundLoopbackBlocked": true
+    }
+  },
+  "registrationEvidence": [
+    {
+      "id": "answer-me-with-html-skill",
+      "name": "@deepseek-ai/dsh-skill-filesystem"
+    }
+  ]
+}

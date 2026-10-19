@@ -11,7 +11,8 @@
   "seed": {
     "ref": "7acea24024923eaae8647f5988e826062456dc86",
     "version": "0.5.5",
-    "commit": "7acea24024923eaae8647f5988e826062456dc86"
+    "commit": "7acea24024923eaae8647f5988e826062456dc86",
+    "archiveSha256": "8ceb435db1f8c55910017591578715b8c580ff16aa17cf38ade3e08e8b20fea1"
   },
   "allowedVersions": "0.5.5",
   "hostRange": "^0.2.0-rc.2",
@@ -43,7 +44,10 @@
         "name": "@deepseek-ai/dsh-skill-filesystem"
       }
     ],
-    "native": []
+    "native": [],
+    "skillFiles": [
+      "skills/answer-me-with-html/SKILL.md"
+    ]
   },
   "display": {
     "name": "Answer me with HTML",

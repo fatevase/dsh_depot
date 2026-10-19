@@ -22,3 +22,12 @@ test('platform selection keeps curated plugin information visible until verified
  assert.equal(selectPlugins(catalog,{platform:'linux-x64'}).length,1)
  assert.equal(selectPlugins(catalog,{platform:'linux-x64',verified:true}).length,0)
 })
+test('update sorting uses upstream time, release sorting uses visible platform packages, unknown dates go last',()=>{
+ const c={plugins:[{id:'old',name:'Old',upstreamUpdatedAt:'2026-10-01'},{id:'unknown',name:'Unknown',upstreamUpdatedAt:'invalid'},{id:'new',name:'New',upstreamUpdatedAt:'2026-10-19'}],packages:[
+ {recipeId:'old',target:'linux-x64',status:'published',publishedAt:'2026-10-19',verification:{status:'passed'}},
+ {recipeId:'new',target:'linux-x64',status:'published',publishedAt:'2026-10-02',verification:{status:'passed'}},
+ {recipeId:'new',target:'win32-x64',status:'published',publishedAt:'2026-10-20',verification:{status:'passed'}}]}
+ assert.deepEqual(selectPlugins(c,{sort:'updated'}).map(p=>p.id),['new','old','unknown'])
+ assert.deepEqual(selectPlugins(c,{sort:'released',platform:'linux-x64'}).map(p=>p.id),['old','new','unknown'])
+ assert.deepEqual(selectPlugins(c,{sort:'released',platform:'win32-x64'}).map(p=>p.id),['new','old','unknown'])
+})

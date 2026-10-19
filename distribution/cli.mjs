@@ -2,6 +2,7 @@
 import path from 'node:path'
 import { supportedTarget } from './lib/platform.mjs'
 import { readPluginList } from './lib/plugin-list.mjs'
+import { selectBuildBatch } from './lib/batch-policy.mjs'
 import { fileURLToPath } from 'node:url'
 import { readRecipes, readJson, atomicJson, initialState, fileDigest } from './lib/model.mjs'
 import { Github } from './lib/github.mjs'
@@ -48,7 +49,7 @@ export async function main(argv = process.argv.slice(2)) {
     for(const [key,r] of Object.entries(state.receipts??{}))if(r.status==='verified'&&r.artifacts?.package){try{const sha256=await fileDigest(r.artifacts.package);if(sha256===r.artifacts.sha256)state.availableArtifacts[key]={sha256}}catch{}}
     const result = args.command === 'discover'
       ? await discover({ recipes, previous: state, github, candidateFeeds: config.candidateFeeds, maintainedCandidates: args.recipes?[]:selection.candidates })
-      : createPlan({ recipes, sources: (await readJson(args.discovered ?? path.join(workDir, 'discovered.json'))).sources, state, host: config.host, retryKeys: args.retryKeys ?? [] })
+      : selectBuildBatch(createPlan({ recipes, sources: (await readJson(args.discovered ?? path.join(workDir, 'discovered.json'))).sources, state, host: config.host, retryKeys: args.retryKeys ?? [] }),{policy:config.batchPolicy,state,recipeOrder:selection.active?.map(p=>p.recipeId),retryKeys:args.retryKeys??[]})
     await atomicJson(output, result)
     console.log(JSON.stringify({ command: args.command, output, tasks: result.tasks?.length, decisions: result.decisions?.length, complete: result.complete }))
     if (result.complete === false) process.exitCode = 1
@@ -84,11 +85,11 @@ export async function main(argv = process.argv.slice(2)) {
       const recoveredBuilds=real&&config.publication?.allowUnverified===true?await recoverUnverifiedReceipts({state:current,decisions:plan.decisions??[],recipes,repository,github,workDir:path.join(workDir,'recovered-builds'),excludeKeys:new Set(receipts.map(r=>r.buildKey))}):{receipts:[],tasks:[],unavailable:[]}
       receipts.push(...recoveredBuilds.receipts)
       const state=mergeState(current,{discovery})
-      state.lastPlan={createdAt:plan.createdAt,cohort:config.cohort,decisions:plan.decisions??[]}
+      state.lastPlan={createdAt:plan.createdAt,cohort:config.cohort,decisions:plan.decisions??[],batch:plan.batch}
       result=await publishBatch({batchId:args.batch??process.env.GITHUB_RUN_ID??'local',repository,state,receipts,tasks:[...plan.tasks,...(plan.publicationTasks??[]),...recovered.tasks,...recoveredBuilds.tasks],github,dryRun:!real,recipes,allowUnverified:config.publication?.allowUnverified===true})
       if(real){const merged=await updateStateBranch({store:githubStateStore({repository,branch:config.stateBranch,github}),merge:latest=>{const next=mergeState(mergeState(latest,{discovery}),{receipts,publications:result.publications});if((next.lastPlan?.createdAt??'')<=(plan.createdAt??''))next.lastPlan=state.lastPlan;return next}});result.state=merged.state;result.catalog=catalogOf(merged.state,recipes)}
       result.unavailableBuilds=recoveredBuilds.unavailable
-      result.cohort=config.cohort;result.decisions=plan.decisions??[]
+      result.cohort=config.cohort;result.batch=plan.batch;result.decisions=plan.decisions??[]
     }else{
       const mutate=s=>args.command==='withdraw'?withdraw(s,args.key,args.reason):rollback(s,{key:args.key,recipeId:args.plugin,target:args.target,host:config.host})
       const state=real?(await updateStateBranch({store:githubStateStore({repository,branch:config.stateBranch,github}),merge:mutate})).state:mutate(current)

@@ -1,0 +1,51 @@
+{
+  "base": "f9c287cf7832b74ca0321003ac0d45bf197eef29",
+  "scope": [
+    "separate original DSH guide and manager download/tutorial",
+    "upstream and current-platform release sorting",
+    "honest stage-specific proof and latest failure visibility",
+    "budget existing approved plans; no automatic recipe generation",
+    "answer-html bundled skill-file probe"
+  ],
+  "batchPolicy": {
+    "maxPlugins": 5,
+    "maxTasks": 15,
+    "maxParallel": 3,
+    "cronUTC": "23 */6 * * *"
+  },
+  "tests": {
+    "total": 161,
+    "pass": 159,
+    "skip": 2,
+    "fail": 0
+  },
+  "nativeBrowserChecks": [
+    "Safari: manager platform selection changes to Windows ZIP/install.cmd",
+    "Safari: guide has independent command steps",
+    "Safari: upstream sort reorders actual catalog; unknown dates last; URL sort=updated"
+  ],
+  "limitations": [
+    "manager has no fully accepted formal Release; preview publication choice pending",
+    "official desktop writes remain disabled",
+    "browser business flows and external API checks are not covered",
+    "remaining unadapted candidates are not compiled automatically"
+  ],
+  "review": {
+    "critical": 0,
+    "important": 0,
+    "scope": "9741cc4; later recipe archive checksum pinned to a hash verified against prior three-platform reports"
+  },
+  "localSkillProbe": {
+    "target": "macos-arm64",
+    "buildKey": "6bc804844b7f1e5449aecadbdd809a7360ea6ad31a2264c4ad52716d143aaed3",
+    "status": "passed",
+    "scope": [
+      "cold-install",
+      "config-compose",
+      "host-page-smoke",
+      "config-registration",
+      "bundled-skill-files"
+    ],
+    "sourceArchiveSha256": "8ceb435db1f8c55910017591578715b8c580ff16aa17cf38ade3e08e8b20fea1"
+  }
+}
