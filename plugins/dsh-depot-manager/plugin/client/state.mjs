@@ -4,6 +4,7 @@ export function reduceManagerState(state=emptyState(),event) {
  switch(event.type){
   case 'host':return {...state,host:event.value,connection:'connected'}
   case 'import':return {...state,imports:upsert(state.imports,event.value,'importId')}
+  case 'dismiss-import':return {...state,imports:state.imports.filter(item=>item.importId!==event.importId)}
   case 'operation':return {...state,operations:upsert(state.operations,event.value,'operationId')}
   case 'installed':case 'operations':return {...state,[event.type]:event.value}
   case 'select':return {...state,selection:event.value}

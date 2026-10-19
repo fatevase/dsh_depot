@@ -1,4 +1,5 @@
 import path from 'node:path'
+import {applyDesktopPackage} from './desktop-package.mjs'
 import {fail} from '../contracts/constants.mjs'
 import {cliWebAdapter} from './cli-web.mjs'
 import {runningProcesses} from './locate.mjs'
@@ -14,7 +15,7 @@ export async function desktopIsRunning(host,{processes}={}){
 }
 export function officialDesktopAdapter({runningProbe=desktopIsRunning,...options}={}){
  const adapter=cliWebAdapter({...options,runningProbe})
- return {...adapter,async withWriteSession(host,fn,context){
+ return {...adapter,applyDirect:(host,action,context)=>applyDesktopPackage(host,action,{...options,...context}),async withWriteSession(host,fn,context){
   if(!host.desktop?.supported||!host.capabilities.writeSession)fail('DESKTOP_CAPABILITY_UNVERIFIED','此桌面版本尚未完成安装适配')
   return adapter.withWriteSession(host,fn,context)
  }}
