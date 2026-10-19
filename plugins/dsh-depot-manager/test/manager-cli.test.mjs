@@ -11,3 +11,12 @@ test('runtime is independent of host and missing lite runtime fails without down
 test('status in an SSH environment only prints durable state',async()=>{
  const messages=[];const code=await cli.main(['status','--operation','sample'],{io:{isTTY:false,write:x=>messages.push(x)},services:{status:async()=>({state:'awaiting_reload',result:{loaded:false}})}});assert.equal(code,0);assert.match(messages.join(''),/awaiting_reload/);assert.doesNotMatch(messages.join(''),/succeeded/)
 })
+test('interactive startup identifies the package version while diagnose remains JSON',async()=>{
+ const {MANAGER_VERSION}=await import('../contracts/constants.mjs'),messages=[]
+ const services={discover:async()=>({hosts:[],desktop:[]}),locate:async()=>{}}
+ assert.equal(await cli.main(['menu'],{io:{isTTY:true,write:x=>messages.push(x),ask:async()=> 'q'},services}),0)
+ assert.ok(messages.join('').includes(`DSH 离线插件管理器 ${MANAGER_VERSION}`))
+ messages.length=0
+ assert.equal(await cli.main(['diagnose'],{io:{isTTY:false,write:x=>messages.push(x)},services}),0)
+ assert.deepEqual(JSON.parse(messages.join('')),{hosts:[],desktop:[]})
+})

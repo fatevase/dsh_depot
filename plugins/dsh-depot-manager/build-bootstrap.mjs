@@ -35,7 +35,8 @@ export async function buildBootstrap({target,flavor,managerArchive,output,runtim
   await writeFile(path.join(root,'payload.sha256'),(await Promise.all(['core.mjs','manager.tgz','bundle.json'].map(async name=>`${await fileHash(path.join(root,name))}  ${name}`))).join('\n')+'\n')
   const entry=target==='win32-x64'?'双击 install.cmd':target==='macos-arm64'?'打开 install.command；也可在终端运行 sh install.sh':'在终端运行 sh install.sh（支持 SSH）'
   await writeFile(path.join(root,'README.txt'),[
-   'DSH 离线插件管理器','',
+   `DSH 离线插件管理器 ${MANAGER_VERSION}`,'',
+   '更新安装器：重新下载并完整解压新版；旧的解压目录和维护入口不会自动更新。',
    '使用前：已安装并初始化 DSH 0.2.0-rc.2 Web。请先完全退出要修改的 DSH。',
    '1. 将整个压缩包解压到本机可写目录；不要在压缩包预览窗口中运行。',
    `2. ${entry}。`,
@@ -58,6 +59,6 @@ export async function buildBootstrap({target,flavor,managerArchive,output,runtim
    const result=await runHostCommand({executable:process.platform==='win32'?'python':'python3',args:['-c',"import pathlib,sys,zipfile\nroot=pathlib.Path(sys.argv[1])\nwith zipfile.ZipFile(sys.argv[2],'w',zipfile.ZIP_DEFLATED) as z:\n for file in sorted(root.rglob('*')):\n  if file.is_file():z.write(file,file.relative_to(root.parent))",root,archive],cwd:temp})
    if(result.exitCode)fail('BUNDLE_ARCHIVE_FAILED',result.stderr)
   }else await tar.c({file:archive,gzip:true,cwd:temp,portable:true},[name])
-  return{target,flavor,fileName,path:archive,sha256:await fileHash(archive),compressedBytes:(await stat(archive)).size,managerSha256,runtimeDigest}
+  return{version:MANAGER_VERSION,target,flavor,fileName,path:archive,sha256:await fileHash(archive),compressedBytes:(await stat(archive)).size,managerSha256,runtimeDigest}
  }finally{await rm(temp,{recursive:true,force:true})}
 }
