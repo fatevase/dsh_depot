@@ -1,0 +1,33 @@
+{
+  "buildKey": "6bc804844b7f1e5449aecadbdd809a7360ea6ad31a2264c4ad52716d143aaed3",
+  "source": {
+    "archiveSha256": "8ceb435db1f8c55910017591578715b8c580ff16aa17cf38ade3e08e8b20fea1",
+    "recipeId": "answer-html",
+    "repository": "QingYunA/answer-me-with-html",
+    "ref": "7acea24024923eaae8647f5988e826062456dc86",
+    "commit": "7acea24024923eaae8647f5988e826062456dc86",
+    "version": "0.5.5",
+    "manifestDigest": "e1ce072447cb50f5d74fc8093602a19b52de51b9945637b12ecfef95d0bf0c2e",
+    "lockDigests": {},
+    "peerDependencies": {},
+    "peerDependenciesMeta": {},
+    "observedAt": "2026-10-19T07:31:13.336Z"
+  },
+  "target": "macos-arm64",
+  "host": {
+    "version": "0.2.0-rc.2",
+    "node": "26.9.0",
+    "environmentDigest": "d7b06cf0c7394141fc0cabdbe8bcf2014caddb853ad862fa8535da90cb4c6384"
+  },
+  "sourceArchiveSha256": "8ceb435db1f8c55910017591578715b8c580ff16aa17cf38ade3e08e8b20fea1",
+  "timings": {
+    "source": 0.010446707999999943,
+    "packaging": 1.7826
+  },
+  "artifact": {
+    "sha256": "9c8ca536feb2bf7929e7d8e0c30ea1cd070a533df427a0dd3ea51a0cac19ba0c",
+    "compressedBytes": 1810315,
+    "unpackedBytes": 6400320
+  },
+  "sourceReuse": "First online source download timed out; retry used the pinned cached source whose SHA-256 matches the prior local receipt and all three published native reports."
+}

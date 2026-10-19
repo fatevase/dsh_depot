@@ -29,5 +29,23 @@
     "official desktop writes remain disabled",
     "browser business flows and external API checks are not covered",
     "remaining unadapted candidates are not compiled automatically"
-  ]
+  ],
+  "review": {
+    "critical": 0,
+    "important": 0,
+    "scope": "9741cc4; later recipe archive checksum pinned to a hash verified against prior three-platform reports"
+  },
+  "localSkillProbe": {
+    "target": "macos-arm64",
+    "buildKey": "6bc804844b7f1e5449aecadbdd809a7360ea6ad31a2264c4ad52716d143aaed3",
+    "status": "passed",
+    "scope": [
+      "cold-install",
+      "config-compose",
+      "host-page-smoke",
+      "config-registration",
+      "bundled-skill-files"
+    ],
+    "sourceArchiveSha256": "8ceb435db1f8c55910017591578715b8c580ff16aa17cf38ade3e08e8b20fea1"
+  }
 }
