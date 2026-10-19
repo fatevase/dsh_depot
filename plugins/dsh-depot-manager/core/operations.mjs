@@ -9,7 +9,7 @@ import {withManagerLock,readOperation,saveOperation,operationsIn} from './receip
 export {readOperation} from './receipts.mjs'
 export async function executePlan(plan,{host,adapter,storeDir,signal,onEvent,now=Date.now(),quiesced=false,accepted=false,onOutput}={}){
  validatePlan(plan)
- if(plan.execution===undefined){if(plan.hostId!==host.hostId||plan.hostFingerprint!==host.fingerprint)fail('HOST_CHANGED','目标配置已变化，请重新检查');plan={...plan,execution:'dsh-cli',recoveryBytes:0,beforeState:{...plan.beforeState,fingerprint:await configurationFingerprint(host.profileDir)}}}
+ if(plan.execution===undefined){if(plan.hostId!==host.hostId||plan.hostFingerprint!==host.fingerprint)fail('HOST_CHANGED','目标配置已变化，请重新检查');plan={...plan,execution:'dsh-cli',requiresExit:false,recoveryBytes:0,beforeState:{...plan.beforeState,fingerprint:await configurationFingerprint(host.profileDir)}}}
  if(plan.execution==='dsh-cli')return executeDirectPlan(plan,{host,adapter,storeDir,signal,onEvent,onOutput,now,quiesced,accepted})
  return withManagerLock(storeDir,host.hostId,async()=>{
   const old=await operationsIn(storeDir),same=old.find(o=>o.planId===plan.planId);if(same&&!(quiesced&&same.state==='waiting_for_host_exit'))return same
@@ -32,7 +32,7 @@ export async function executePlan(plan,{host,adapter,storeDir,signal,onEvent,now
     if(signal?.aborted)throw Object.assign(new Error('操作已取消'),{code:'ABORT_ERR'})
     await emit('checking_install');await session.compose();if(JSON.stringify(await configFingerprints(host.profileDir))!==JSON.stringify(plan.beforeState.configFingerprints)||unrelatedManifestChanged(plan.beforeState.manifest,(await session.readState()).manifest,plan.packageName))fail('EXTERNAL_CONFIG_CHANGED','执行期间配置被外部修改，已暂停后续操作');op.activationNonce=randomUUID();op.activationNonceDigest=digest(op.activationNonce);op.afterFingerprint=await profileFingerprint(host.profileDir);if(plan.action==='remove'&&Object.hasOwn((await session.readState()).manifest.dependencies??{},plan.packageName))fail('REMOVE_NOT_APPLIED','插件声明仍存在')
     if(plan.action!=='remove'&&session.readInventory){const row=(await session.readInventory()).find(i=>i.name===plan.packageName);if(!row||row.version!==plan.version)fail('INSTALL_IDENTITY_MISMATCH','实际安装的插件或版本与预览不一致')}
-    op.result={installed:plan.action!=='remove',removed:plan.action==='remove',loaded:false,packageName:plan.packageName,version:plan.version};for(const prior of old.filter(o=>o.state==='awaiting_reload'&&o.plan?.packageName===plan.packageName)){prior.state='cancelled';prior.result={...prior.result,loaded:false,supersededBy:op.operationId,reason:plan.action==='remove'?'removed':'replaced'};delete prior.activationNonce;await saveOperation(prior,{storeDir})}
+    op.result={installed:plan.action!=='remove',removed:plan.action==='remove',loaded:false,packageName:plan.packageName,version:plan.version};for(const prior of old.filter(o=>o.state==='awaiting_reload'&&o.plan?.packageName===plan.packageName)){prior.state='cancelled';prior.result={...prior.result,loaded:false,supersededBy:op.operationId,reason:plan.action==='remove'?'removed':'replaced'};delete prior.activationNonce;delete prior.reloadNonce;await saveOperation(prior,{storeDir})}
     await emit(plan.action==='remove'?'succeeded':'awaiting_reload');return op
    }catch(e){
     op.error={code:e.code??'OPERATION_FAILED',message:e.message};op.afterFingerprint=await profileFingerprint(host.profileDir).catch(()=>null)
@@ -56,7 +56,7 @@ export async function recoverOperation(id,{host,adapter,storeDir,expectedCurrent
   const op=await readOperation(id,{storeDir});if(op.hostId!==host.hostId)fail('RECOVERY_HOST_MISMATCH','此任务属于其他环境')
   if(op.plan?.execution==='dsh-cli'){if(!quiesced||await adapter.isRunning(host))fail('HOST_STILL_RUNNING','请退出 DSH 后检查中断任务');if(!['applying','checking_install'].includes(op.state))fail('NO_SNAPSHOT','此任务未创建恢复点；请重新安装成品包');op.state='failed';op.error={code:'INTERRUPTED',message:'中断任务已结束，请重新安装成品包；未修改或还原依赖目录'};op.result={installed:false,loaded:false,rollback:false};await saveOperation(op,{storeDir});return op}
   const expected=expectedCurrentFingerprint??op.afterFingerprint;if(!expected)fail('RECOVERY_CONFIRMATION_REQUIRED','请先检查当前配置并确认恢复计划')
-  return adapter.withWriteSession(host,async()=>{
+  return adapter.withWriteSession({...host,capabilities:{...host.capabilities,requiresExit:true}},async()=>{
    if(!op.snapshot){
     if(!['queued','backing_up'].includes(op.state)||await profileFingerprint(host.profileDir)!==op.plan?.beforeState?.fingerprint||expected!==op.plan.beforeState.fingerprint)fail('SNAPSHOT_MISSING','缺少恢复点且当前配置已变化，需要人工检查')
     op.result={changed:false,restored:true}

@@ -16,6 +16,8 @@
 
 每个安装包附带可编辑的 `settings.json`：`dshHome` 是包含 profiles 的配置主目录，`dshRoot` 是 DSH 包目录，`hostNode` 是目标 DSH 的运行时，`desktopApp` 是桌面应用位置，`searchPaths` 是其他待查路径。留空自动查找，非空字段优先于环境变量。Windows 路径可用正斜杠，如 `D:/Apps/DSH`。不要把 shell 命令粘贴进路径字段。
 
-Windows 用 `install.cmd diagnose`，macOS/Linux 用 `sh install.sh diagnose` 查看只读诊断。完整包的 Node 用于运行安装器，不会自动冒充目标宿主的 Node。找到唯一的受支持 Desktop 后自动使用它并显示五项操作。选择第 1 项直接安装随包管理器，不再要求 yes。DSH 仍在运行时保存待处理任务；完全退出后选择第 3 项继续。多个独立环境才要求选择目标。其他桌面版本尚未适配。
+Windows 用 `install.cmd diagnose`，macOS/Linux 用 `sh install.sh diagnose` 查看只读诊断。完整包的 Node 用于运行安装器，不会自动冒充目标宿主的 Node。找到唯一的受支持 Desktop 后自动使用它并显示五项操作。选择第 1 项直接安装随包管理器，不再要求 yes。正常安装不要求 DSH 退出；安装完成后重启即可。第 3 项仍可继续旧的待处理任务。多个独立环境才要求选择目标。其他桌面版本尚未适配。
 
 常规安装只检查离线成品和目标配置，直接调用对应 DSH 的公共插件命令；不扫描或备份整个已安装依赖目录。失败会记录真实错误与日志，不自动回滚；可以重新安装成品或先前版本。旧版恢复点仍可恢复。
+
+安装助手附带 pnpm 10/11 兼容工具，按现有 profile 的包管理器记录选择，并核对 store 实际路径。目标 DSH 的运行时保持原样，安装工具不修改全局 pnpm 配置。

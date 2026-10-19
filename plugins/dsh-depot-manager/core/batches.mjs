@@ -15,7 +15,7 @@ export async function createBatch({host,inspections,acceptUnverified=false,owner
  const items=[];for(const inspection of inspections){const p=await createOperationPlan({host,inspection,action:'install',acceptUnverified,execution});items.push({inspection,sha256:p.packageSha256})}
  const batch={schemaVersion:1,execution,batchId:randomUUID(),hostId:host.hostId,ownerId,hostIdentity:identity(host),beforeFingerprint:await fingerprint({execution},host.profileDir),items,expiresAt:Date.now()+LIMITS.planTtlMs,acceptedAt:null,next:0,results:[],activePlan:null}
  await atomicJson(batchFile(storeDir,batch.batchId),batch)
- return{batchId:batch.batchId,hostId:batch.hostId,expiresAt:batch.expiresAt,items:items.map(({inspection:i})=>({packageName:i.packageName,version:i.version,sha256:i.sha256,warnings:i.warnings})),requiresExit:host.capabilities.requiresExit!==false}
+ return{batchId:batch.batchId,hostId:batch.hostId,expiresAt:batch.expiresAt,items:items.map(({inspection:i})=>({packageName:i.packageName,version:i.version,sha256:i.sha256,warnings:i.warnings})),requiresExit:execution==='snapshot'}
 }
 export async function startBatch(id,{host,storeDir}){
  return withManagerLock(storeDir,host.hostId,async()=>{
@@ -25,13 +25,13 @@ export async function startBatch(id,{host,storeDir}){
   if(await fingerprint(b,host.profileDir)!==b.beforeFingerprint)fail('HOST_CHANGED','批次预览后配置已变化')
   for(const {inspection,sha256}of b.items)if(await fileHash(inspection.archivePath)!==sha256)fail('ARTIFACT_CHANGED','批次中有包已改变')
   b.acceptedAt=Date.now();b.expectedFingerprint=b.beforeFingerprint;await atomicJson(batchFile(storeDir,id),b)
-  const op={schemaVersion:1,operationId:id,planId:id,hostId:host.hostId,batched:true,state:'waiting_for_host_exit',createdAt:Date.now(),plan:{execution:b.execution,ownerId:b.ownerId,packageName:`批量安装（${b.items.length} 项）`},result:{batch:true,items:[]},eventCursor:1};await saveOperation(op,{storeDir});return op
+  const op={schemaVersion:1,operationId:id,planId:id,hostId:host.hostId,batched:true,state:b.execution==='dsh-cli'?'queued':'waiting_for_host_exit',createdAt:Date.now(),plan:{execution:b.execution,ownerId:b.ownerId,packageName:`批量安装（${b.items.length} 项）`},result:{batch:true,items:[]},eventCursor:1};await saveOperation(op,{storeDir});return op
  })
 }
 export async function resumeBatch(id,{host,adapter,storeDir,quiesced=false,refreshHost=async()=>host,signal}){
  return withManagerLock(storeDir,'batch-'+checkedId(id),async()=>{
   const b=await readJson(batchFile(storeDir,id));if(!b.acceptedAt)fail('BATCH_NOT_CONFIRMED','请先确认批次')
-  const aggregate=await readOperation(id,{storeDir});if(!quiesced)return aggregate
+  const aggregate=await readOperation(id,{storeDir});if(b.execution==='snapshot'&&!quiesced)return aggregate
   if(b.recoveryOperationId){const r=await readOperation(b.recoveryOperationId,{storeDir});if(r.state!=='failed_restored'||!r.result?.restored)return aggregate;b.expectedFingerprint=r.plan.beforeState.fingerprint;delete b.recoveryOperationId}
   if(b.execution===undefined){
    if(b.hostIdentity!==identity(host))fail('HOST_CHANGED','目标宿主运行时或目录已变化')
@@ -39,7 +39,7 @@ export async function resumeBatch(id,{host,adapter,storeDir,quiesced=false,refre
    if(active&&['applying','checking_install','backing_up','recovering','recovery_required'].includes(active.state)){b.recoveryOperationId=active.operationId;aggregate.state='recovery_required';aggregate.result.items=[...b.results,{operationId:active.operationId,packageName:b.activePlan.packageName,state:active.state}];await atomicJson(batchFile(storeDir,id),b);await saveOperation(aggregate,{storeDir});return aggregate}
    const current=await configurationFingerprint(host.profileDir)
    if(active&&['succeeded','awaiting_reload','failed_restored','cancelled'].includes(active.state)){b.results.push({operationId:active.operationId,packageName:b.activePlan.packageName,state:active.state,error:active.error});b.next++;b.activePlan=null}
-   if(b.activePlan)b.activePlan={...b.activePlan,execution:'dsh-cli',recoveryBytes:0,beforeState:{...b.activePlan.beforeState,fingerprint:current}}
+   if(b.activePlan)b.activePlan={...b.activePlan,execution:'dsh-cli',requiresExit:false,recoveryBytes:0,beforeState:{...b.activePlan.beforeState,fingerprint:current}}
    b.execution='dsh-cli';b.expectedFingerprint=current;aggregate.plan.execution='dsh-cli';await atomicJson(batchFile(storeDir,id),b)
   }
   aggregate.state='waiting_for_host_exit';await saveOperation(aggregate,{storeDir})

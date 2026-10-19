@@ -8,13 +8,15 @@
     "build": "node build-cli.mjs"
   },
   "dependencies": {
+    "@dsh-depot/offline-format": "*",
     "semver": "7.7.2",
     "tar": "7.5.22",
-    "yaml": "2.9.1",
-    "@dsh-depot/offline-format": "*"
+    "yaml": "2.9.1"
   },
   "devDependencies": {
-    "svelte": "5.57.2",
-    "esbuild": "0.28.2"
+    "esbuild": "0.28.2",
+    "pnpm-10": "npm:pnpm@10.34.5",
+    "pnpm-11": "npm:pnpm@11.25.0",
+    "svelte": "5.57.2"
   }
 }

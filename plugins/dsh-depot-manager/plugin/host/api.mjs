@@ -1,5 +1,5 @@
 import path from 'node:path'
-import {createBatch,startBatch} from '../../core/batches.mjs'
+import {createBatch,startBatch,resumeBatch} from '../../core/batches.mjs'
 import {hostFingerprint} from '../../adapters/discover.mjs'
 import {createImport,finishImport} from '../../core/imports.mjs'
 import {createOperationPlan} from '../../core/plans.mjs'
@@ -30,7 +30,7 @@ export function createManagerApi({host,ownerId,storeDir,adapter,listBundles,trus
     return createBatch({host,inspections,acceptUnverified:input.acceptUnverified===true,ownerId,storeDir})
    }
    case 'batches.start':{
-    const b=await readJson(path.join(storeDir,'batches',checkedId(input.batchId)+'.json'));if(b.ownerId!==ownerId)fail('FORBIDDEN','批次属于其他用户');if(host.capabilities.requiresExit&&!host.capabilities.externalToolkit)fail('TOOLKIT_REQUIRED','请先运行外部脚本注册维护工具');return publicOperation(await startBatch(input.batchId,{host,storeDir}))
+    const b=await readJson(path.join(storeDir,'batches',checkedId(input.batchId)+'.json'));if(b.ownerId!==ownerId)fail('FORBIDDEN','批次属于其他用户');if(host.capabilities.requiresExit&&!host.capabilities.externalToolkit)fail('TOOLKIT_REQUIRED','请先运行外部脚本注册维护工具');const queued=await startBatch(input.batchId,{host,storeDir});return publicOperation(host.capabilities.requiresExit?queued:await resumeBatch(input.batchId,{host,storeDir,adapter,refreshHost:async()=>{host.fingerprint=await hostFingerprint(host);return host}}))
    }
    case 'plans.create':{
     let inspection,installedFingerprint

@@ -48,7 +48,7 @@ function menuFixture({running=false}={}){
  const host={hostId:'h',kind:'cli-web',version:'0.2.0-rc.2',profileName:'web',profileDir:'/data/profiles/web'},messages=[],prompts=[],calls=[]
  const answers=['1'],services={
   discover:async()=>({hosts:[host],desktop:[]}),
-  inspect:async input=>{calls.push({method:'inspect',input});return{planId:'p',packageName:'dsh-depot-manager',version:'0.1.4',previousVersion:null,requiresExit:true,warnings:[{code:'UNVERIFIED_PACKAGE',message:'此包没有完整验收记录'}]}},
+  inspect:async input=>{calls.push({method:'inspect',input});return{planId:'p',packageName:'dsh-depot-manager',version:'0.1.4',previousVersion:null,requiresExit:false,warnings:[{code:'UNVERIFIED_PACKAGE',message:'此包没有完整验收记录'}]}},
   isRunning:async()=>running,
   execute:async input=>{calls.push({method:'execute',input});return{operationId:'o',state:input['host-exited']?'awaiting_reload':'waiting_for_host_exit',result:{installed:input['host-exited']}}}
  }
@@ -70,10 +70,10 @@ test('a discovered supported Desktop is used automatically before the main menu'
  const code=await cli.main(['menu'],{services,io:{isTTY:true,write:()=>{},ask:async()=>{throw Error('No target confirmation expected')}}})
  assert.equal(code,0);assert.equal(opened,true)
 })
-test('a running host queues the accepted installation instead of asking the user to attest exit',async()=>{
+test('a running host installs immediately and only asks for a restart afterward',async()=>{
  const f=menuFixture({running:true});assert.equal(await cli.main(['menu'],f),0)
- assert.equal(f.calls.find(c=>c.method==='execute').input['host-exited'],false)
- assert.match(f.messages.join(''),/退出 DSH/)
+ assert.equal(f.calls.find(c=>c.method==='execute').input['host-exited'],true)
+ assert.match(f.messages.join(''),/重启 DSH/)
 })
 test('an explicit target stays selected when several environments are discovered',async()=>{
  const f=menuFixture(),other={...f.host,hostId:'other',profileDir:'/other/profiles/web'}

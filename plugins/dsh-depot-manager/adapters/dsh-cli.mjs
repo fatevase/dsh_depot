@@ -1,6 +1,8 @@
 import path from 'node:path'
 import {readFile,mkdir,writeFile} from 'node:fs/promises'
-import {parse as parseYaml} from 'yaml'
+import {resolveProfilePnpm} from './profile-pnpm.mjs'
+import {registeredToolkit} from '../bootstrap/toolkit.mjs'
+import {depotDataHome} from '../core/paths.mjs'
 import {runHostCommand} from './command.mjs'
 import {assertOwnership} from './ownership.mjs'
 import {fail} from '../contracts/constants.mjs'
@@ -9,14 +11,14 @@ import {fail} from '../contracts/constants.mjs'
 const entry=`import {pathToFileURL} from 'node:url';const input=JSON.parse(process.argv[1]);process.argv=[process.execPath,input.bin,...input.args];const {runCli}=await import(pathToFileURL(input.bin));await runCli({packageManager:input.packageManager});`
 export async function applyDshCli(host,action,{signal,onOutput,runningProbe,ownershipCheck=assertOwnership}={}){
  if(!host.capabilities?.writeSession||host.kind==='official-desktop'&&!host.desktop?.supported)fail('HOST_CAPABILITY_UNVERIFIED','此 DSH 尚未适配安装')
- if(host.capabilities.requiresExit&&runningProbe&&await runningProbe(host))fail('HOST_STILL_RUNNING','DSH 仍在运行，请完全退出后继续')
  await ownershipCheck(host.profileDir)
  const flags=[...(action.action==='remove'?['--config.offline=true','--config.ignore-scripts=true']:['--offline','--ignore-scripts']),'--config.auto-install-peers=false','--config.manage-package-manager-versions=false']
- let store;try{store=parseYaml(await readFile(path.join(host.profileDir,'node_modules/.modules.yaml'),'utf8'))?.storeDir}catch(e){if(e.code!=='ENOENT')throw e}
- if(store)flags.push('--store-dir',store)
+ const packageManager=await resolveProfilePnpm(host,{toolkit:await registeredToolkit(path.join(depotDataHome(),'manager')),workDir:action.storeDir})
+ if(packageManager.storeDir)flags.push('--store-dir',packageManager.storeDir)
+ if(packageManager.version)onOutput?.(`使用兼容工具 pnpm ${packageManager.version}，保留现有 store。\n`)
  const args=['plugin','--profile',host.profileName,action.action==='remove'?'remove':'add',action.action==='remove'?action.packageName:action.path,...flags]
  const env={...host.runtimeEnv,DSH_HOME:host.home,npm_config_offline:'true',npm_config_ignore_scripts:'true',npm_config_auto_install_peers:'false',npm_config_manage_package_manager_versions:'false',COREPACK_ENABLE_NETWORK:'0'}
- const payload={bin:path.join(host.dshRoot,'lib/bin.js'),args,packageManager:{...host.packageManager,env:{...host.packageManager?.env,...env}}}
+ const payload={bin:path.join(host.dshRoot,'lib/bin.js'),args,packageManager:{...packageManager,env:{...packageManager.env,...env}}}
  const result=await runHostCommand({executable:host.nodePath,args:['--expose-internals','--input-type=module','-e',entry,JSON.stringify(payload)],cwd:host.profileDir,envAllowlist:env},{signal,timeoutMs:300000,onOutput})
  await mkdir(action.storeDir,{recursive:true,mode:0o700});const logPath=path.join(action.storeDir,'dsh.log')
  await writeFile(logPath,result.stdout+'\n'+result.stderr,{mode:0o600})

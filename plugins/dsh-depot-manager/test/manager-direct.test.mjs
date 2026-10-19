@@ -20,6 +20,7 @@ test('normal execution calls DSH directly without making a dependency backup',as
  const f=await fixture(t),storeDir=path.join(f.dir,'state'),plan=await createOperationPlan({host:f.host,inspection:f.inspection,action:'install'})
  const op=await executePlan(plan,{host:f.host,adapter:directAdapter(f),storeDir})
  assert.equal(op.state,'awaiting_reload');assert.equal(op.snapshotId,null)
+ assert.equal(op.activationNonce,undefined);assert.equal(typeof op.reloadNonce,'string')
  await assert.rejects(access(path.join(storeDir,'snapshots')),{code:'ENOENT'})
  assert.equal(await readFile(path.join(f.profile,'node_modules/old/index.js'),'utf8'),'old content')
 })
@@ -42,15 +43,12 @@ test('DSH CLI uses literal offline add/remove arguments and the target home',asy
   else assert.equal(observed.argv[4],path.join(f.dir,'space ; literal.tgz'))
  }
 })
-test('a direct batch paused by a running host stays resumable without requiring a snapshot',async t=>{
+test('a direct batch installs through DSH while the host is running',async t=>{
  const f=await fixture(t),{createBatch,startBatch,resumeBatch}=await import('../core/batches.mjs'),storeDir=path.join(f.dir,'state')
- const batch=await createBatch({host:f.host,inspections:[f.inspection],ownerId:'u',storeDir});f.host.capabilities.requiresExit=true
- await startBatch(batch.batchId,{host:f.host,storeDir});const adapter=directAdapter(f);adapter.isRunning=async()=>true
- const waiting=await resumeBatch(batch.batchId,{host:f.host,adapter,storeDir,quiesced:true})
- assert.equal(waiting.state,'waiting_for_host_exit')
- adapter.isRunning=async()=>false
- const resumed=await resumeBatch(batch.batchId,{host:f.host,adapter,storeDir,quiesced:true})
- assert.equal(resumed.state,'awaiting_reload')
+ f.host.capabilities.requiresExit=true
+ const batch=await createBatch({host:f.host,inspections:[f.inspection],ownerId:'u',storeDir});assert.equal(batch.requiresExit,false)
+ await startBatch(batch.batchId,{host:f.host,storeDir});const adapter=directAdapter(f);adapter.isRunning=async()=>{throw Error('Do not require host exit')}
+ assert.equal((await resumeBatch(batch.batchId,{host:f.host,adapter,storeDir})).state,'awaiting_reload')
 })
 test('a legacy queued plan upgrades to direct installation without scanning dependencies',async t=>{
  const f=await fixture(t),storeDir=path.join(f.dir,'state'),plan=await createOperationPlan({host:f.host,inspection:f.inspection,action:'install',execution:'snapshot'})
@@ -74,4 +72,11 @@ test('legacy batches with a pending active item migrate the whole remaining batc
  await writeFile(file,JSON.stringify(b))
  const result=await resumeBatch(batch.batchId,{host:f.host,adapter:directAdapter(f),storeDir,quiesced:true})
  assert.equal(result.state,'awaiting_reload');assert.equal(JSON.parse(await readFile(file)).execution,'dsh-cli')
+})
+test('normal installation never requires stopping the running DSH',async t=>{
+ const f=await fixture(t);f.host.capabilities.requiresExit=true
+ const plan=await createOperationPlan({host:f.host,inspection:f.inspection,action:'install'}),adapter=directAdapter(f)
+ adapter.isRunning=async()=>{throw Error('Normal installation must use DSH locking, not process exit checks')}
+ assert.equal(plan.requiresExit,false)
+ assert.equal((await executePlan(plan,{host:f.host,adapter,storeDir:path.join(f.dir,'state')})).state,'awaiting_reload')
 })
