@@ -1,4 +1,4 @@
-import { cp, mkdir, readFile, writeFile } from 'node:fs/promises'
+import { cp, mkdir } from 'node:fs/promises'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { argumentsOf } from './cli.mjs'
@@ -7,6 +7,7 @@ import { argumentsOf } from './cli.mjs'
 export async function exportRepository(destination){
  const root=fileURLToPath(new URL('../',import.meta.url)),out=path.resolve(destination)
  if(!out.startsWith(path.join(root,'.runtime')+path.sep))throw Error('Export destination must be inside this workspace .runtime directory')
+  await mkdir(path.dirname(out),{recursive:true})
  await mkdir(out,{recursive:false})
   for(const name of ['.gitattributes','.gitignore','README.md','MAINTAINING.md','package.json','package-lock.json'])await cp(path.join(root,name),path.join(out,name))
   for(const name of ['distribution','web','plugins','packages','.github','docs'])await cp(path.join(root,name),path.join(out,name),{recursive:true,filter:source=>!path.relative(root,source).split(path.sep).some(p=>['node_modules','.runtime','dist','.DS_Store'].includes(p))})
