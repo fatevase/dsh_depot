@@ -35,7 +35,8 @@ test('DSH CLI uses literal offline add/remove arguments and the target home',asy
  await writeFile(path.join(root,'lib/bin.js'),`exports.runCli=async()=>{require('node:fs').writeFileSync(${JSON.stringify(record)},JSON.stringify({argv:process.argv.slice(2),home:process.env.DSH_HOME}))}`)
  const host={...f.host,dshRoot:root,nodePath:process.execPath,home:f.dir,capabilities:{writeSession:true,requiresExit:false},launch:{args:[path.join(root,'lib/bin.js'),'--profile','web']}}
  for(const action of ['install','remove']){
-  await applyDshCli(host,{action,path:path.join(f.dir,'space ; literal.tgz'),packageName:'new-plugin',storeDir:path.join(f.dir,'logs')})
+  // This carrier fixture runs under elevated Windows CI; ownership policy is tested separately.
+  await applyDshCli(host,{action,path:path.join(f.dir,'space ; literal.tgz'),packageName:'new-plugin',storeDir:path.join(f.dir,'logs')},{ownershipCheck:async()=>{}})
   const observed=JSON.parse(await readFile(record));assert.equal(observed.home,f.dir);assert.deepEqual(observed.argv.slice(0,3),['plugin','--profile','web'])
   if(action==='remove'){assert.ok(observed.argv.includes('--config.offline=true'));assert.ok(!observed.argv.includes('--offline'));assert.ok(!observed.argv.includes('--ignore-scripts'))}
   else assert.equal(observed.argv[4],path.join(f.dir,'space ; literal.tgz'))
