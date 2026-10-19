@@ -1,3 +1,4 @@
+import {applyDshCli} from './dsh-cli.mjs'
 import {depotDataHome} from '../core/paths.mjs'
 import {createRequire} from 'node:module'
 import {pathToFileURL} from 'node:url'
@@ -58,6 +59,7 @@ export async function hostIsRunning(host){
 const policyEnv=(env={},store)=>({...Object.fromEntries(Object.entries(env).filter(([key])=>!/^npm_config_(?:offline|ignore_scripts|auto_install_peers|manage_package_manager_versions|store_dir)$/i.test(key))),npm_config_offline:'true',npm_config_ignore_scripts:'true',npm_config_auto_install_peers:'false',npm_config_manage_package_manager_versions:'false',COREPACK_ENABLE_NETWORK:'0',...(store?{npm_config_store_dir:store}:{})})
 export function cliWebAdapter({runningProbe=hostIsRunning,loadPublicServices,ownershipCheck=assertOwnership}={}){return {
  isRunning:runningProbe,
+ applyDirect:(host,action,options)=>applyDshCli(host,action,{...options,runningProbe,ownershipCheck}),
  async launch(host){return host.launch},
  async withWriteSession(host,fn,{signal,quiesced=false}={}){
   if(!host.capabilities.writeSession)fail('HOST_CAPABILITY_UNVERIFIED','此 DSH 尚未验证安全写入能力')

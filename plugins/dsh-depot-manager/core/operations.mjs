@@ -1,13 +1,16 @@
+import {executeDirectPlan} from './direct-operations.mjs'
 import {randomUUID} from 'node:crypto'
 import path from 'node:path'
 import {validatePlan} from '../contracts/validate.mjs'
 import {fail} from '../contracts/constants.mjs'
 import {fileHash,readJson,atomicJson,digest} from './files.mjs'
-import {profileFingerprint,snapshotProfile,restoreProfile,unrelatedManifestChanged,configFingerprints,profileRecords} from './snapshots.mjs'
+import {profileFingerprint,configurationFingerprint,snapshotProfile,restoreProfile,unrelatedManifestChanged,configFingerprints,profileRecords} from './snapshots.mjs'
 import {withManagerLock,readOperation,saveOperation,operationsIn} from './receipts.mjs'
 export {readOperation} from './receipts.mjs'
-export async function executePlan(plan,{host,adapter,storeDir,signal,onEvent,now=Date.now(),quiesced=false,accepted=false}={}){
+export async function executePlan(plan,{host,adapter,storeDir,signal,onEvent,now=Date.now(),quiesced=false,accepted=false,onOutput}={}){
  validatePlan(plan)
+ if(plan.execution===undefined){if(plan.hostId!==host.hostId||plan.hostFingerprint!==host.fingerprint)fail('HOST_CHANGED','目标配置已变化，请重新检查');plan={...plan,execution:'dsh-cli',recoveryBytes:0,beforeState:{...plan.beforeState,fingerprint:await configurationFingerprint(host.profileDir)}}}
+ if(plan.execution==='dsh-cli')return executeDirectPlan(plan,{host,adapter,storeDir,signal,onEvent,onOutput,now,quiesced,accepted})
  return withManagerLock(storeDir,host.hostId,async()=>{
   const old=await operationsIn(storeDir),same=old.find(o=>o.planId===plan.planId);if(same&&!(quiesced&&same.state==='waiting_for_host_exit'))return same
   if(old.some(o=>o.hostId===host.hostId&&['recovery_required','applying','recovering','backing_up','checking_install'].includes(o.state)))fail('RECOVERY_REQUIRED','先检查并恢复未完成任务')
@@ -43,6 +46,7 @@ export async function executePlan(plan,{host,adapter,storeDir,signal,onEvent,now
 }
 export async function inspectRecovery(id,{host,storeDir}){
  const op=await readOperation(id,{storeDir});if(op.hostId!==host.hostId)fail('RECOVERY_HOST_MISMATCH','恢复任务属于其他环境')
+ if(op.plan?.execution==='dsh-cli')return{operationId:id,hostId:host.hostId,state:op.state,snapshotId:null,execution:'dsh-cli',notice:'此任务直接调用 DSH，未创建完整恢复点。可重新安装相同成品包重试，或安装先前版本；安装器不会覆盖整个依赖目录。'}
  const currentFingerprint=await profileFingerprint(host.profileDir)
  let changedFiles=[];if(op.snapshot){const before=await profileRecords(op.snapshot.payload),after=await profileRecords(host.profileDir),a=new Map(before.map(r=>[r.path,JSON.stringify(r)])),b=new Map(after.map(r=>[r.path,JSON.stringify(r)]));changedFiles=[...new Set([...a.keys(),...b.keys()])].filter(p=>a.get(p)!==b.get(p))}
  return{changedFiles:changedFiles.slice(0,200),changedFilesCount:changedFiles.length,operationId:id,hostId:host.hostId,state:op.state,snapshotId:op.snapshotId??null,currentFingerprint,snapshotFingerprint:op.snapshot?.fingerprint??null,changedSinceStart:currentFingerprint!==op.plan?.beforeState?.fingerprint,requiresExit:host.capabilities.requiresExit,notice:'恢复会替换受管理的依赖与配置，请先检查外部修改；用户业务目录保留。'}
@@ -50,6 +54,7 @@ export async function inspectRecovery(id,{host,storeDir}){
 export async function recoverOperation(id,{host,adapter,storeDir,expectedCurrentFingerprint,quiesced=false,onEvent}={}){
  return withManagerLock(storeDir,host.hostId,async()=>{
   const op=await readOperation(id,{storeDir});if(op.hostId!==host.hostId)fail('RECOVERY_HOST_MISMATCH','此任务属于其他环境')
+  if(op.plan?.execution==='dsh-cli'){if(!quiesced||await adapter.isRunning(host))fail('HOST_STILL_RUNNING','请退出 DSH 后检查中断任务');if(!['applying','checking_install'].includes(op.state))fail('NO_SNAPSHOT','此任务未创建恢复点；请重新安装成品包');op.state='failed';op.error={code:'INTERRUPTED',message:'中断任务已结束，请重新安装成品包；未修改或还原依赖目录'};op.result={installed:false,loaded:false,rollback:false};await saveOperation(op,{storeDir});return op}
   const expected=expectedCurrentFingerprint??op.afterFingerprint;if(!expected)fail('RECOVERY_CONFIRMATION_REQUIRED','请先检查当前配置并确认恢复计划')
   return adapter.withWriteSession(host,async()=>{
    if(!op.snapshot){

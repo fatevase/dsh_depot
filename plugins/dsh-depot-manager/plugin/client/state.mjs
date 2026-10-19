@@ -11,4 +11,4 @@ export function reduceManagerState(state=emptyState(),event) {
   default:return state
  }
 }
-export const stateLabel=state=>({inspecting:'正在检查',ready:'待确认',blocked:'已阻止',queued:'等待执行',waiting_for_host_exit:'等待退出 DSH · 请运行外部脚本',backing_up:'备份中',applying:'正在安装',checking_install:'检查安装结果',awaiting_reload:'已安装 · 等待 DSH 加载',succeeded:'已加载',recovering:'恢复中',failed_restored:'失败 · 已恢复原状态',recovery_required:'需要检查恢复点 · 请运行外部脚本',cancelled:'已取消'})[state]??state
+export const stateLabel=state=>({inspecting:'正在检查',ready:'待确认',blocked:'已阻止',queued:'等待执行',waiting_for_host_exit:'等待退出 DSH · 请运行外部脚本',backing_up:'备份中',applying:'正在安装',checking_install:'检查安装结果',awaiting_reload:'已安装 · 等待 DSH 加载',succeeded:'已加载',recovering:'恢复中',failed:'安装未完成 · 未自动回滚',failed_restored:'失败 · 已恢复原状态',recovery_required:'需要检查恢复点 · 请运行外部脚本',cancelled:'已取消'})[state]??state

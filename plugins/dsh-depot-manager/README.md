@@ -6,7 +6,7 @@
 
 在仓库根目录运行 `npm run manager:test`；`npm run manager:build` 默认构建当前平台轻量包，输出 `.runtime/manager-local/`。平台选项、依赖准备和完整包要求见[维护说明](../../MAINTAINING.md)。
 
-目前适配 DSH 0.2.0-rc.2 Web；Desktop 写入未开放。网站提供三平台完整包和轻量测试包，并显示尚未完成的验收及已知失败。测试版可下载，不代表已通过完整原生验收。
+目前适配 DSH 0.2.0-rc.2 Web，以及 macOS DSH Desktop 0.12.0（使用应用自带 DSH 和 Electron）。网站提供三平台完整包和轻量测试包，并显示尚未完成的验收及已知失败。测试版可下载，不代表已通过完整原生验收。
 
 [下载管理器与查看逐步说明](https://fatevase.github.io/dsh_depot/manager.html)
 
@@ -16,4 +16,6 @@
 
 每个安装包附带可编辑的 `settings.json`：`dshHome` 是包含 profiles 的配置主目录，`dshRoot` 是 DSH 包目录，`hostNode` 是目标 DSH 的运行时，`desktopApp` 是桌面应用位置，`searchPaths` 是其他待查路径。留空自动查找，非空字段优先于环境变量。Windows 路径可用正斜杠，如 `D:/Apps/DSH`。不要把 shell 命令粘贴进路径字段。
 
-Windows 用 `install.cmd diagnose`，macOS/Linux 用 `sh install.sh diagnose` 查看只读诊断。完整包的 Node 用于运行安装器，不会自动冒充目标宿主的 Node。当前版本能识别 Desktop，Desktop 安装与恢复仍未接入；填写路径不会取消该能力检查。
+Windows 用 `install.cmd diagnose`，macOS/Linux 用 `sh install.sh diagnose` 查看只读诊断。完整包的 Node 用于运行安装器，不会自动冒充目标宿主的 Node。找到唯一的受支持 Desktop 后自动使用它并显示五项操作。选择第 1 项直接安装随包管理器，不再要求 yes。DSH 仍在运行时保存待处理任务；完全退出后选择第 3 项继续。多个独立环境才要求选择目标。其他桌面版本尚未适配。
+
+常规安装只检查离线成品和目标配置，直接调用对应 DSH 的公共插件命令；不扫描或备份整个已安装依赖目录。失败会记录真实错误与日志，不自动回滚；可以重新安装成品或先前版本。旧版恢复点仍可恢复。
