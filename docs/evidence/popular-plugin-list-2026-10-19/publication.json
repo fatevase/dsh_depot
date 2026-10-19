@@ -1,0 +1,33 @@
+{
+  "pipelineRun": 39211863869,
+  "pagesRun": 39212174078,
+  "release": "https://github.com/fatevase/dsh_depot/releases/tag/depot-39211863869",
+  "downloads": [
+    {
+      "target": "linux-x64",
+      "status": 200,
+      "verification": "passed",
+      "bytes": 1815814,
+      "sha256": "64559f574c7324c302bfed7892c0a5757b1f4a0154224f4e392f6b98d6129d6b",
+      "url": "https://github.com/fatevase/dsh_depot/releases/download/depot-39211863869/answer-html-0.5.5-linux-x64.tgz"
+    },
+    {
+      "target": "win32-x64",
+      "status": 200,
+      "verification": "passed",
+      "bytes": 1815775,
+      "sha256": "e3dab6a2d153f211524c30a5a101b8b29d6a19bac72ac99a709bd43e1e1cbfde",
+      "url": "https://github.com/fatevase/dsh_depot/releases/download/depot-39211863869/answer-html-0.5.5-win32-x64.tgz"
+    },
+    {
+      "target": "macos-arm64",
+      "status": 200,
+      "verification": "passed",
+      "bytes": 1815814,
+      "sha256": "64559f574c7324c302bfed7892c0a5757b1f4a0154224f4e392f6b98d6129d6b",
+      "url": "https://github.com/fatevase/dsh_depot/releases/download/depot-39211863869/answer-html-0.5.5-macos-arm64.tgz"
+    }
+  ],
+  "checksumsVerified": true,
+  "reportsHttp": 200
+}
