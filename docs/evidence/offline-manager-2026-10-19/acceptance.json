@@ -547,9 +547,75 @@
     "tests": {
       "passed": 142,
       "failed": 0,
-      "skipped": 1,
-      "total": 143,
-      "skippedScope": "Windows native script entry on macOS"
+      "skipped": 2,
+      "total": 144,
+      "skippedScope": "Two native Windows checks on macOS; both passed in Windows CI"
+    },
+    "nativeCI": {
+      "sourceCommit": "5a20cef087a0370fc5f09f2ee6bf5d4b44042684",
+      "runUrl": "https://github.com/fatevase/dsh_depot/actions/runs/39190897924",
+      "receiptFile": "ci-receipts.json",
+      "workflowConclusion": "success",
+      "qualification": "unverified",
+      "targets": [
+        {
+          "target": "macos-arm64",
+          "packageSha256": "181fc4666c6cddacf603a9be4e59a820f3cbcbbcf0172daeb0c95e3c11888957",
+          "checks": {
+            "install": true,
+            "compose": true,
+            "host": true,
+            "clientModule": true,
+            "native": null
+          },
+          "missing": [
+            "authenticated-manager-page",
+            "script-install",
+            "replace",
+            "uninstall",
+            "recovery",
+            "native-load"
+          ]
+        },
+        {
+          "target": "linux-x64",
+          "packageSha256": "3417ef10a4b5ef4c19660203974e1a66e77b83f13b25b5ce349463510459de27",
+          "checks": {
+            "install": true,
+            "compose": true,
+            "host": true,
+            "clientModule": true,
+            "native": null
+          },
+          "missing": [
+            "authenticated-manager-page",
+            "script-install",
+            "replace",
+            "uninstall",
+            "recovery",
+            "native-load"
+          ]
+        },
+        {
+          "target": "win32-x64",
+          "packageSha256": "13885780b4e790e1d8a68c4c2d700c186c694fcf37d66233c0e3a0f55935521a",
+          "checks": {
+            "install": true,
+            "compose": true,
+            "host": true,
+            "clientModule": true,
+            "native": null
+          },
+          "missing": [
+            "authenticated-manager-page",
+            "script-install",
+            "replace",
+            "uninstall",
+            "recovery",
+            "native-load"
+          ]
+        }
+      ]
     }
   },
   "publication": "blocked until the exact full/lite artifacts complete native acceptance",

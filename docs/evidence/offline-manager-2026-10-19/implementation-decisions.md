@@ -20,4 +20,6 @@
 
 - Final: Ruling: rc.2 manual continuation, Desktop write gating, authenticated dedicated Web page, Windows tgz extraction, unchanged website styling, and excluded agent/source-build/auto-update/kernel work remain as specified or previously ledgered — cost: these are explicit first-version limits, not implied support.
 
-原生验收未完成；此报告不授权合并、Release 发布或 Pages 部署。
+- Ruling: retain original local artifact receipts as historical byte-bound manual macOS evidence; Windows CI fixes produce separate artifacts whose CI receipts are recorded independently — avoids transferring old acceptance to new archive bytes — cost: pending native manual acceptance remains required for new artifacts.
+
+原生完整验收未完成；此报告不授权合并、Release 发布或 Pages 部署。
