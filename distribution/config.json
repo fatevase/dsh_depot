@@ -22,5 +22,9 @@
     "capturedAt": "2026-10-19",
     "listFile": "plugin-list.json"
   },
-  "pluginList": "plugin-list.json"
+  "pluginList": "plugin-list.json",
+  "batchPolicy": {
+    "maxPlugins": 5,
+    "maxTasks": 15
+  }
 }

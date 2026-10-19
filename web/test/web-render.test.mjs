@@ -12,7 +12,7 @@ const {compile}=require('svelte/compiler')
 const {render}=await import(pathToFileURL(require.resolve('svelte/server')))
 async function app(t){
  const dir=await temporary(t)
- for(const name of ['PluginIcon','PluginCard','Guide','ManagerDownload','App']){
+ for(const name of ['PluginIcon','PluginCard','Guide','ManagerDownload','BuildProof','App']){
   const source=fileURLToPath(new URL(`../${name}.svelte`,import.meta.url))
   const {js}=compile(await readFile(source,'utf8'),{filename:source,generate:'server'})
   const code=js.code.replace(/from (['"])([^'"]+)\1/g,(whole,quote,id)=>{
@@ -36,8 +36,8 @@ test('detail commands, download, and passed proof belong only to the selected pu
  const component=await app(t)
  const html=platform=>render(component,{props:{initialCatalog:catalog,initialPage:'plugin.html',initialSearch:`?id=one&platform=${platform}&tab=proof`}}).body
  const mac=html('macos-arm64'),linux=html('linux-x64')
- assert.match(mac,/one-1.0.0-macos-arm64.tgz/);assert.match(mac,/--offline --ignore-scripts/);assert.match(mac,/releases\/download\/batch\/one.tgz/);assert.match(mac,/全新缓存 · 断网安装<\/span><small[^>]*>通过/)
- assert.ok(!linux.includes('one-1.0.0-macos-arm64.tgz'));assert.ok(!linux.includes('releases/download/batch/one.tgz'));assert.match(linux,/暂无报告/)
+ assert.match(mac,/one-1.0.0-macos-arm64.tgz/);assert.match(mac,/--offline --ignore-scripts/);assert.match(mac,/releases\/download\/batch\/one.tgz/);assert.match(mac,/空缓存离线安装<\/h3><p>[^<]+<\/p><\/div><span[^>]*dv-check-passed[^>]*>通过/)
+ assert.ok(!linux.includes('one-1.0.0-macos-arm64.tgz'));assert.ok(!linux.includes('releases/download/batch/one.tgz'));assert.match(linux,/未执行／无记录/)
 })
 test('home counts current downloads and links to the separate guide',async t=>{
  const component=await app(t),c=structuredClone(catalog)

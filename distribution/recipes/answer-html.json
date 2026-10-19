@@ -43,7 +43,10 @@
         "name": "@deepseek-ai/dsh-skill-filesystem"
       }
     ],
-    "native": []
+    "native": [],
+    "skillFiles": [
+      "skills/answer-me-with-html/SKILL.md"
+    ]
   },
   "display": {
     "name": "Answer me with HTML",

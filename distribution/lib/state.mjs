@@ -7,6 +7,7 @@ export function mergeState(previous = initialState(), { discovery, receipts = []
   for(const s of [...(previous.sources??[]),...(discovery?.sources??[])])if(s.repository&&s.ref&&!s.error){const key=`${s.repository.toLowerCase()}|${s.ref}`;state.refHistory[key]??=structuredClone(s)}
   if (discovery) {
     const current = (discovery.checkedAt??'') >= (state.lastDiscoveryAt??'')
+    if(current){state.repositoryMetadata={...state.repositoryMetadata,...discovery.repositoryMetadata};state.metadataErrors=discovery.metadataErrors??[]}
     if (current && discovery.activeRepositories) state.activeRepositories = discovery.activeRepositories
     if (current && discovery.activeRepositoryIds) state.activeRepositoryIds = discovery.activeRepositoryIds
     const active = new Set((state.activeRepositories??[]).map(r=>r.toLowerCase()))

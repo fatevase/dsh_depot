@@ -67,3 +67,5 @@ Windows 使用 `install.cmd`，macOS 使用 `install.command`，Linux / SSH 使�
 - [distribution](distribution/)：插件发现、多平台打包、离线验证和发布。
 
 详细开发与维护步骤见[维护说明](MAINTAINING.md)。
+
+插件目录支持按上游更新时间或离线包发布时间排序。管理器的下载与操作步骤位于独立的管理器页面，原版 DSH 命令安装说明位于安装指南。已适配插件按固定规则分批构建；候选尚未适配时保留明确状态。

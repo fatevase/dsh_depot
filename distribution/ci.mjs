@@ -10,6 +10,7 @@ import { readRecipes, readJson, atomicJson, initialState } from './lib/model.mjs
 import { githubStateStore } from './lib/state.mjs'
 import { discover } from './lib/discover.mjs'
 import { createPlan } from './lib/plan.mjs'
+import { selectBuildBatch } from './lib/batch-policy.mjs'
 import { buildTask } from './lib/build.mjs'
 import { prepareHost, verifyArtifact } from './lib/verify.mjs'
 import { writeReceipt } from './lib/receipts.mjs'
@@ -28,12 +29,15 @@ if(command==='discover'){
  const current=await githubStateStore({repository,branch:config.stateBranch,github}).read()
  github.cache=current.state.apiCache??{}
  const discovery=await discover({recipes,previous:current.state,github,candidateFeeds:config.candidateFeeds,maintainedCandidates:selection.candidates})
- const plan=createPlan({recipes,sources:discovery.sources,state:current.state,host:config.host,retryKeys:(process.env.RETRY_KEYS??'').split(',').filter(Boolean)})
+ if(process.env.ONLY_PLUGIN&&!recipes.some(r=>r.id===process.env.ONLY_PLUGIN))throw Error('Unknown selected plugin')
+ const retryKeys=(process.env.RETRY_KEYS??'').split(',').filter(Boolean)
+ let plan=createPlan({recipes,sources:discovery.sources,state:current.state,host:config.host,retryKeys})
  plan.tasks=plan.tasks.filter(t=>(!process.env.ONLY_PLUGIN||t.recipeId===process.env.ONLY_PLUGIN)&&(!process.env.ONLY_TARGET||t.target===process.env.ONLY_TARGET))
+ plan=selectBuildBatch(plan,{policy:config.batchPolicy,state:current.state,recipeOrder:selection.active.map(p=>p.recipeId),retryKeys})
  await atomicJson(path.join(batch,'state.json'),current.state);await atomicJson(path.join(batch,'discovered.json'),discovery);await atomicJson(path.join(batch,'plan.json'),plan)
  const matrix={include:plan.tasks.map(t=>({key:t.buildKey,runner:runners[t.target],target:t.target,recipeId:t.recipeId}))}
  if(process.env.GITHUB_OUTPUT)await appendFile(process.env.GITHUB_OUTPUT,`matrix=${JSON.stringify(matrix)}\nhas_tasks=${plan.tasks.length>0}\n`)
- console.log(JSON.stringify({tasks:plan.tasks.length,decisions:plan.decisions,discoveryErrors:discovery.errors}))
+ console.log(JSON.stringify({tasks:plan.tasks.length,batch:plan.batch,decisions:plan.decisions,discoveryErrors:discovery.errors,metadataErrors:discovery.metadataErrors}))
 }else if(command==='build'){
  const plan=await readJson(path.join(batch,'plan.json')),task=plan.tasks.find(t=>t.buildKey===process.env.BUILD_KEY);if(!task)throw Error('Unknown matrix build key')
  const recipe=recipes.find(r=>r.id===task.recipeId),job=path.join(root,'jobs',task.buildKey);await mkdir(job,{recursive:true})
