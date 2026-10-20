@@ -12,7 +12,7 @@ const {compile}=require('svelte/compiler')
 const {render}=await import(pathToFileURL(require.resolve('svelte/server')))
 async function app(t){
  const dir=await temporary(t)
- for(const name of ['PluginIcon','PluginCard','Guide','ManagerDownload','BuildProof','App']){
+ for(const name of ['PluginIcon','PluginCard','Guide','ManagerDownload','BuildProof','CandidateBuild','App']){
   const source=fileURLToPath(new URL(`../${name}.svelte`,import.meta.url))
   const {js}=compile(await readFile(source,'utf8'),{filename:source,generate:'server'})
   const code=js.code.replace(/from (['"])([^'"]+)\1/g,(whole,quote,id)=>{

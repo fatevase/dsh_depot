@@ -4,7 +4,7 @@
   let {plugin, catalog, target='all', verifiedOnly=false, href} = $props()
   let packages = $derived(packagesFor(catalog,plugin.id).filter(p=>target==='all'||p.target===target))
   let smallest = $derived([...packages].sort((a,b)=>a.compressedBytes-b.compressedBytes)[0])
-  let version = $derived(smallest?.version??plugin.seed?.version)
+  let version = $derived(smallest?.version??plugin.trial?.results?.[target==='all'?'macos-arm64':target]?.version??plugin.seed?.version)
 </script>
 
 <article class="dv-plugin">

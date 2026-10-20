@@ -6,7 +6,6 @@
         "web/**",
         "packages/offline-format/**",
         "distribution/lib/site*.mjs",
-        "distribution/lib/deploy.mjs",
         "distribution/lib/manager-catalog.mjs",
         "distribution/deploy-site.mjs",
         "package.json",
@@ -14,7 +13,9 @@
         ".github/workflows/web-pages.yml",
         "distribution/deploy-pages.mjs",
         "distribution/lib/pages-deployment.mjs",
-        "distribution/pages-build-identity.mjs"
+        "distribution/pages-build-identity.mjs",
+        "distribution/candidate-catalog.mjs",
+        "distribution/candidate-builds.json"
       ],
       "branches": [
         "main"
@@ -25,7 +26,6 @@
         "web/**",
         "packages/offline-format/**",
         "distribution/lib/site*.mjs",
-        "distribution/lib/deploy.mjs",
         "distribution/lib/manager-catalog.mjs",
         "distribution/deploy-site.mjs",
         "package.json",
@@ -33,14 +33,17 @@
         ".github/workflows/web-pages.yml",
         "distribution/deploy-pages.mjs",
         "distribution/lib/pages-deployment.mjs",
-        "distribution/pages-build-identity.mjs"
+        "distribution/pages-build-identity.mjs",
+        "distribution/candidate-catalog.mjs",
+        "distribution/candidate-builds.json"
       ]
     },
     "workflow_dispatch": {},
     "workflow_run": {
       "workflows": [
         "DSH plugin distribution",
-        "DSH manager distributions"
+        "DSH manager distributions",
+        "Popular candidate builds (99 plugins)"
       ],
       "types": [
         "completed"
