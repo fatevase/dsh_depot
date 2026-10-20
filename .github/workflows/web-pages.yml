@@ -18,7 +18,8 @@
         "distribution/candidate-builds.json",
         "distribution/candidate-public-catalog.mjs",
         "distribution/repository-about.mjs",
-        "docs/evidence/repository-about-2026-10-20.json"
+        "docs/evidence/repository-about-2026-10-20.json",
+        "distribution/plugin-list.json"
       ],
       "branches": [
         "main"
@@ -41,7 +42,8 @@
         "distribution/candidate-builds.json",
         "distribution/candidate-public-catalog.mjs",
         "distribution/repository-about.mjs",
-        "docs/evidence/repository-about-2026-10-20.json"
+        "docs/evidence/repository-about-2026-10-20.json",
+        "distribution/plugin-list.json"
       ]
     },
     "workflow_dispatch": {},

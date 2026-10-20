@@ -1,3 +1,4 @@
+import {writeBuildData} from './build-data.mjs'
 import { supportedTarget } from '@dsh-depot/offline-format/platform'
 import { mkdir, readdir } from 'node:fs/promises'
 import path from 'node:path'
@@ -9,7 +10,8 @@ export async function generateSite({catalog={schemaVersion:1,plugins:[],packages
   for(const p of catalog.packages)if(!supportedTarget(p.target)||!isDownloadablePackage(p)||!/^https:\/\/github\.com\//.test(p.packageUrl??''))throw Error('Catalog contains an unpublished or unlabelled download')
   const [{build},{svelte}]=await Promise.all([import('vite'),import('@sveltejs/vite-plugin-svelte')])
   await mkdir(outDir,{recursive:true})
-  await build({configFile:false,root:sourceDir,base:'./',plugins:[svelte({configFile:false})],logLevel:'error',build:{outDir:path.resolve(outDir),emptyOutDir:false,rollupOptions:{input:Object.fromEntries(['index','plugins','plugin','guide','manager'].map(name=>[name,path.join(sourceDir,`${name}.html`)]))}}})
+  await build({configFile:false,root:sourceDir,base:'./',plugins:[svelte({configFile:false})],logLevel:'error',build:{outDir:path.resolve(outDir),emptyOutDir:false,rollupOptions:{input:Object.fromEntries(['index','plugins','plugin','guide','manager','builds'].map(name=>[name,path.join(sourceDir,`${name}.html`)]))}}})
+  catalog=await writeBuildData(catalog,outDir)
   await atomicJson(path.join(outDir,'catalog.json'),catalog)
   await atomicJson(path.join(outDir,'manager-catalog.json'),managerCatalog)
   return {files:await readdir(outDir),catalogDigest:digest(JSON.stringify(catalog))}

@@ -5,15 +5,17 @@
   import Guide from './Guide.svelte'
   import ManagerDownload from './ManagerDownload.svelte'
   import BuildProof from './BuildProof.svelte'
+  import BuildHistory from './BuildHistory.svelte'
+  import {categoryKey} from './categories.mjs'
   import CandidateBuild from './CandidateBuild.svelte'
   import { categories, platforms, packagesFor, selectPlugins, searchUrl, bytes, downloadUrl, installCommand, platformState, isUnverifiedPackage, verificationMessage } from './catalog.mjs'
   let {initialPage='index.html',initialSearch='',initialCatalog=null}=$props()
   const params=new URLSearchParams(initialSearch)
   const unsupportedPlatform=params.has('platform')&&!Object.hasOwn(platforms,params.get('platform'))
   let catalog=$state(initialCatalog),error=$state('')
-  let options=$state({q:params.get('q')??'',category:categories[params.get('category')]?params.get('category'):'all',platform:platforms[params.get('platform')]?params.get('platform'):'all',verified:params.get('verified')==='1',sort:params.get('sort')??'curated'})
+  let options=$state({q:params.get('q')??'',category:params.has('category')?categoryKey(params.get('category')):'all',platform:platforms[params.get('platform')]?params.get('platform'):'all',verified:params.get('verified')==='1',sort:params.get('sort')??'curated'})
   let query=$state(options.q),target=$state(platforms[params.get('platform')]&&params.get('platform')!=='all'?params.get('platform'):'macos-arm64'),tab=$state(params.get('tab')==='proof'?'proof':'install')
-  const page=initialPage==='manager.html'?'manager':initialPage==='guide.html'?'guide':initialPage==='plugins.html'?'search':initialPage==='plugin.html'?'detail':'home'
+  const page=initialPage==='builds.html'?'builds':initialPage==='manager.html'?'manager':initialPage==='guide.html'?'guide':initialPage==='plugins.html'?'search':initialPage==='plugin.html'?'detail':'home'
   const returnValue=params.get('return')??'plugins.html'
   const back=/^(?:plugins|index)\.html(?:\?|$)/.test(returnValue)?returnValue:'plugins.html'
   let items=$derived(catalog?selectPlugins(catalog,options):[])
@@ -49,17 +51,19 @@
   function detailUrl(id){const state=new URLSearchParams();for(const key of ['q','category','platform','sort'])if(options[key]&&!['all','curated'].includes(options[key]))state.set(key,options[key]);if(options.verified)state.set('verified','1');return `plugin.html?${new URLSearchParams({id,return:page==='search'?searchUrl(state):'index.html',...(options.platform!=='all'?{platform:options.platform}:{})})}`}
   function setDetail(key,value){if(key==='platform'){target=value;installCopied=''}else tab=value;const next=new URLSearchParams(location.search);next.set(key,value);history.replaceState(null,'',`plugin.html?${next}`)}
   function tabKey(e){if(!['ArrowLeft','ArrowRight','Home','End'].includes(e.key))return;e.preventDefault();const next=e.key==='Home'?'install':e.key==='End'?'proof':tab==='install'?'proof':'install';setDetail('tab',next);document.getElementById(`depot-${next}-tab`)?.focus()}
-  onMount(()=>{if(!['guide','manager'].includes(page)&&!unsupportedPlatform&&!catalog){fetch('catalog.json',{cache:'no-cache'}).then(r=>{if(!r.ok)throw Error('目录读取失败');return r.json()}).then(value=>{if(value.schemaVersion!==1)throw Error('目录版本不支持');catalog=value}).catch(e=>error=e.message)}})
+  onMount(()=>{if(!['guide','manager','builds'].includes(page)&&!unsupportedPlatform&&!catalog){fetch('catalog.json',{cache:'no-cache'}).then(r=>{if(!r.ok)throw Error('目录读取失败');return r.json()}).then(value=>{if(value.schemaVersion!==1)throw Error('目录版本不支持');catalog=value}).catch(e=>error=e.message)}})
 </script>
 
 <div id="depot-v2" aria-label="DSH Depot 插件仓">
   <header class="dv-header dv-wrap">
     <a class="dv-brand" href="index.html"><span class="dv-emblem" aria-hidden="true"><b></b><b></b><b></b><b></b></span>DSH Depot <small>插件仓</small></a>
-    <nav class="dv-navigation" aria-label="网站主导航"><a href="index.html" aria-current={page==='home'?'page':undefined}>首页</a><a href="plugins.html" aria-current={['search','detail'].includes(page)?'page':undefined}>插件目录</a><a href="manager.html" aria-current={page==='manager'?'page':undefined}>管理器</a><a href="guide.html" aria-current={page==='guide'?'page':undefined}>安装指南</a></nav>
+    <nav class="dv-navigation" aria-label="网站主导航"><a href="index.html" aria-current={page==='home'?'page':undefined}>首页</a><a href="plugins.html" aria-current={['search','detail'].includes(page)?'page':undefined}>插件目录</a><a href="builds.html" aria-current={page==='builds'?'page':undefined}>构建记录</a><a href="manager.html" aria-current={page==='manager'?'page':undefined}>管理器</a><a href="guide.html" aria-current={page==='guide'?'page':undefined}>安装指南</a></nav>
     <div class="dv-header-end">插件离线包 <span class="dv-mono" style="margin-left:8px">/ DSH DEPOT</span></div>
   </header>
   <main>
-    {#if page==='manager'}
+    {#if page==='builds'}
+      <BuildHistory/>
+    {:else if page==='manager'}
       <ManagerDownload/>
     {:else if page==='guide'}
       <Guide/>
@@ -83,7 +87,7 @@
     {:else if page==='search'}
       <section class="dv-wrap" aria-label="插件搜索页面">
         <div class="dv-search-head"><div class="dv-breadcrumb"><a href="index.html">首页</a><span aria-hidden="true">/</span><span>插件目录</span></div><div class="dv-search-title"><div><div class="dv-kicker">The plugin directory</div><h1>搜索 DSH 插件</h1><p>按名称、作者或功能搜索，再选择系统平台和验证状态。</p></div><span class="dv-caption">收录插件 <span class="dv-mono">/ {String(catalog.plugins.length).padStart(2,'0')}</span></span></div><form class="dv-search-form" role="search" aria-label="搜索插件" onsubmit={e=>{e.preventDefault();filter('q',query.trim().slice(0,150))}}><label class="dv-input-wrap"><span aria-hidden="true">⌕</span><input type="search" name="query" aria-label="搜索插件关键词" placeholder="搜索插件、作者或功能…" autocomplete="off" bind:value={query}></label><button class="dv-primary" type="submit">搜索 <span aria-hidden="true">→</span></button></form></div>
-        {#if catalog.candidateBuild}<div class="dv-home-note" role="status"><span>最近构建 · {catalog.candidateBuild.pluginCount} 个插件 · {catalog.candidateBuild.counts.compiled} 个平台产物就绪 · {catalog.candidateBuild.counts.failed} 项失败</span><a class="dv-text-link" href={catalog.candidateBuild.runUrl}>查看构建记录 ↗</a></div>{/if}
+        {#if catalog.candidateBuild}<div class="dv-home-note" role="status"><span>最近构建 · {catalog.candidateBuild.pluginCount} 个插件 · {catalog.candidateBuild.counts.compiled} 个平台产物就绪 · {catalog.candidateBuild.counts.failed} 项失败</span><a class="dv-text-link" href="builds.html">查看构建记录 →</a></div>{/if}
         <div class="dv-search-layout">
           <aside class="dv-search-filters" aria-label="插件筛选条件">
             <div class="dv-filter-block"><span class="dv-filter-title">插件分类</span><div class="dv-category-list">{#each Object.entries(categories) as [key,label]}<button class="dv-category-button" type="button" aria-pressed={options.category===key} onclick={()=>filter('category',key)}><span>{label}</span><small>{catalog.plugins.filter(p=>key==='all'||p.category===key).length}</small></button>{/each}</div></div>
@@ -110,11 +114,11 @@
                 <div class="dv-install-step"><span>01</span><div><h3>确认环境与安装包</h3><p>当前包对应 {platforms[target]}。{unverified?'构建使用的宿主为':'已验证宿主为'} DSH {selectedPackage.host.version}、Node {selectedPackage.host.node}。</p></div></div>
                 <div class="dv-install-step"><span>02</span><div><h3>核对 SHA-256</h3><p>在终端中校验文件，结果应与“构建与验证”中的 SHA-256 完全一致。</p><code class="dv-code">{target==='win32-x64'?`Get-FileHash -Algorithm SHA256 "./${selectedPackage.fileName}"`:`${target==='linux-x64'?'sha256sum':'shasum -a 256'} "./${selectedPackage.fileName}"`}</code></div></div>
                 <div class="dv-install-step"><span>03</span><div><h3>从本地安装</h3><p>将命令中的相对路径替换为你的实际包路径。</p></div></div><div class="dv-command-head"><span>安装命令</span><button type="button" class="dv-text-link" onclick={copyInstall}>{installCopied||'复制命令'}</button><span class="dv-sr-only" role="status">{installCopied}</span></div><code class="dv-code">{installCommand(selectedPackage)}</code><p>安装完成后重新启动 DSH，再查看插件是否启用。此命令安装到 web profile；使用其他 profile 时替换 <span class="dv-mono">web</span>。DSH、Node 和外部 API 凭据需要预先准备。</p>
-              {:else if plugin.trial}<CandidateBuild trial={plugin.trial} {target}/>{:else}<div class="dv-empty" style="text-align:left;padding:24px 19px"><h2>{platforms[target]} · {platformState(catalog,plugin,target).label}</h2><p style="margin:10px 0 0">{platformState(catalog,plugin,target).message}</p></div>{/if}
+              {:else if plugin.trial}<CandidateBuild trial={plugin.trial} {target} active={tab==='install'}/>{:else}<div class="dv-empty" style="text-align:left;padding:24px 19px"><h2>{platforms[target]} · {platformState(catalog,plugin,target).label}</h2><p style="margin:10px 0 0">{platformState(catalog,plugin,target).message}</p></div>{/if}
             </section>
-            <section id="depot-proof-panel" role="tabpanel" aria-labelledby="depot-proof-tab" hidden={tab!=='proof'}><h2>构建与验证记录</h2>{#if plugin.trial}<CandidateBuild trial={plugin.trial} {target}/>{/if}<p>{selectedPackage?unverified?'当前包已完成打包，验证未通过。下面逐项列出已有检查结果；没有通过记录的项目不表示可用。':'下面是当前所选平台安装包的验证范围。平台切换后，报告与校验值对应所选包。':'当前平台尚无公开发布的包。'}</p>
+            <section id="depot-proof-panel" role="tabpanel" aria-labelledby="depot-proof-tab" hidden={tab!=='proof'}><h2>构建与验证记录</h2>{#if plugin.trial}<CandidateBuild trial={plugin.trial} {target} active={tab==='proof'}/>{/if}<p>{selectedPackage?unverified?'当前包已完成打包，验证未通过。下面逐项列出已有检查结果；没有通过记录的项目不表示可用。':'下面是当前所选平台安装包的验证范围。平台切换后，报告与校验值对应所选包。':'当前平台尚无公开发布的包。'}</p>
               {#if unverified}<div class="dv-unverified-warning"><strong>验证未通过</strong><p>{verificationMessage(selectedPackage)}</p><p class="dv-mono">{proof.error.message}</p></div>{/if}
-              {#if currentIssue&&currentIssue.buildKey!==selectedPackage?.buildKey}<div class="dv-doc-note dv-doc-warning"><strong>最近一次{currentIssue.stage==='build'?'构建':'验证'}未通过</strong><p>{currentIssue.version?'版本 '+currentIssue.version+'：':''}{currentIssue.error?.message??'请查看原始报告'}</p><p>{selectedPackage?'下方是仍可下载的旧包记录；它不代表最近一次处理通过。':'当前没有对应的新安装包。'}</p></div>{:else if currentDecision?.action==='queued'}<div class="dv-doc-note"><strong>新任务排队中</strong><p>已满足构建规则，本轮因批次数量限制留待下一轮处理。</p></div>{/if}<BuildProof package={selectedPackage} {plugin}/>
+              {#if currentIssue&&currentIssue.buildKey!==selectedPackage?.buildKey}<div class="dv-doc-note dv-doc-warning"><strong>最近一次{currentIssue.stage==='build'?'构建':'验证'}未通过</strong><p>{currentIssue.version?'版本 '+currentIssue.version+'：':''}{currentIssue.error?.message??'请查看原始报告'}</p><p>{selectedPackage?'下方是仍可下载的旧包记录；它不代表最近一次处理通过。':'当前没有对应的新安装包。'}</p></div>{:else if currentDecision?.action==='queued'}<div class="dv-doc-note"><strong>新任务排队中</strong><p>已满足构建规则，本轮因批次数量限制留待下一轮处理。</p></div>{/if}<BuildProof package={selectedPackage} {plugin} active={tab==='proof'}/>
               <p>{selectedPackage?`测试环境：${platforms[target]} · DSH ${selectedPackage.host.version} · Node ${selectedPackage.host.node}。其他平台独立验证。`:'各平台独立验证，切换目标平台查看对应记录。'}</p><h3 style="font-size:13px;margin-top:22px">产物校验值</h3><code class="dv-code">{selectedPackage?.sha256??'尚未发布'}</code><p class="dv-mono">源码：<a class="dv-text-link" href={`https://github.com/${plugin.repository}/tree/${selectedPackage?.source?.commit??plugin.seed?.commit??''}`}>{plugin.repository} · {selectedPackage?.source?.commit??plugin.seed?.commit??'待确认'}</a></p>{#if downloadUrl(selectedPackage?.reportUrl)}<a class="dv-text-link" href={downloadUrl(selectedPackage.reportUrl)}>下载构建报告 ↗</a>{#if downloadUrl(selectedPackage?.assets?.checksums)}<span aria-hidden="true"> · </span><a class="dv-text-link" href={downloadUrl(selectedPackage.assets.checksums)}>下载校验清单 ↗</a>{/if}{/if}
             </section>
           </div>

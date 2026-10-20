@@ -12,7 +12,7 @@ const {compile}=require('svelte/compiler')
 const {render}=await import(pathToFileURL(require.resolve('svelte/server')))
 async function app(t){
  const dir=await temporary(t)
- for(const name of ['PluginIcon','PluginCard','Guide','ManagerDownload','BuildProof','CandidateBuild','App']){
+ for(const name of ['PluginIcon','PluginCard','Guide','ManagerDownload','BuildProof','CandidateBuild','BuildHistory','App']){
   const source=fileURLToPath(new URL(`../${name}.svelte`,import.meta.url))
   const {js}=compile(await readFile(source,'utf8'),{filename:source,generate:'server'})
   const code=js.code.replace(/from (['"])([^'"]+)\1/g,(whole,quote,id)=>{
@@ -29,7 +29,7 @@ test('actual Svelte cards escape upstream markup and link back to retained searc
  const {body}=render(component,{props:{initialCatalog:catalog,initialPage:'plugins.html',initialSearch:'?category=workspace&platform=linux-x64'}})
  assert.ok(!body.includes('<img src=x'))
  assert.match(body,/&lt;img src=x/)
- assert.match(body,/return=plugins.html%3Fcategory%3Dworkspace%26platform%3Dlinux-x64/)
+ assert.match(body,/return=plugins.html%3Fcategory%3Ddevelopment%26platform%3Dlinux-x64/)
  assert.match(body,/Linux · x64 · 尚未发布/)
 })
 test('detail commands, download, and passed proof belong only to the selected published platform',async t=>{
