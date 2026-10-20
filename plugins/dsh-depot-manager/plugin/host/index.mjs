@@ -10,6 +10,7 @@ import {probeHost} from '../../adapters/discover.mjs'
 import {adapterFor} from '../../adapters/select.mjs'
 import {desktopAt} from '../../adapters/locate.mjs'
 import {createManagerApi} from './api.mjs'
+import {exportDownloadResponse} from './export-download.mjs'
 import {uploadChunk} from './upload.mjs'
 import {operationsIn,readOperation,saveOperation} from '../../core/receipts.mjs'
 import {recordActivation} from './activation.mjs'
@@ -37,6 +38,7 @@ export async function apply(ctx) {
  disposers.push(ctx.connection.fetch.register({path:'/api/depot/upload',methods:['POST'],requestBody:'streaming',async fetch(request){
   try{const url=new URL(request.url);let bytes=0;const chunks=[];for await(const chunk of request.body??[]){bytes+=chunk.length;if(bytes>262144)fail('UPLOAD_LIMIT','分块过大');chunks.push(chunk)}const result=await uploadChunk({importId:url.searchParams.get('id'),relative:url.searchParams.get('path'),offset:Number(url.searchParams.get('offset')),final:url.searchParams.get('final')==='1',bytes:Buffer.concat(chunks)},api.uploadContext);return Response.json({ok:true,value:result})}catch(e){return Response.json({ok:false,error:{code:e.code??'UPLOAD_FAILED',message:e.message}},{status:400})}
  }}))
+ disposers.push(ctx.connection.fetch.register({path:'/api/depot/export-download',methods:['GET'],requestBody:'buffered',async fetch(request){try{return await exportDownloadResponse(request,api.exports)}catch(e){return Response.json({ok:false,error:{code:e.code??'DOWNLOAD_FAILED',message:e.code==='FORBIDDEN'?'无权下载此任务':'导出尚未完成、已过期或文件不可用'}},{status:e.code==='FORBIDDEN'?403:404})}}}))
  for(const [url,file,type] of [['/api/depot/manager','manager.html','text/html; charset=utf-8'],['/api/depot/client.js','client.js','text/javascript'],['/api/depot/client.css','client.css','text/css']])disposers.push(ctx.connection.fetch.register({path:url,methods:['GET'],requestBody:'buffered',async fetch(){return new Response(await readFile(path.join(root,file)),{headers:{'content-type':type,'cache-control':'no-store','x-content-type-options':'nosniff'}})}}))
  disposers.push(ctx.on('webserver/index-inject',table=>table.push({kind:'html',placement:'body',html:'<a href="/api/depot/manager" style="position:fixed;right:16px;bottom:12px;z-index:90;padding:7px 12px;border:1px solid #b8c7c1;border-radius:8px;background:#fff;color:#244c40;font:13px system-ui;text-decoration:none">离线插件</a>'})))
  let disposed=false
@@ -51,6 +53,6 @@ export async function apply(ctx) {
   }
  }
  const timer=setInterval(()=>{observe().catch(()=>{})},2000);timer.unref();await observe().catch(()=>{})
- const dispose=async()=>{disposed=true;clearInterval(timer);await rm(path.join(storeDir,'host-live.json'),{force:true});for(const d of disposers.reverse())await d()}
+ const dispose=async()=>{disposed=true;clearInterval(timer);await api.dispose();await rm(path.join(storeDir,'host-live.json'),{force:true});for(const d of disposers.reverse())await d()}
  ctx.on('dispose',dispose);return dispose
 }

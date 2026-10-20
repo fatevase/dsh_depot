@@ -1,0 +1,4 @@
+import path from 'node:path'
+import {mkdir,writeFile} from 'node:fs/promises'
+import {temporary} from './helpers.mjs'
+export async function exportFixture(t){const dir=await temporary(t),root=path.join(dir,'source');await mkdir(root);await writeFile(path.join(root,'package.json'),JSON.stringify({name:'fixture',version:'1.0.0',main:'index.js',dsh:{bundle:{patch:'cordis.patch.yml'}}}));await writeFile(path.join(root,'index.js'),'module.exports=42');await writeFile(path.join(root,'cordis.patch.yml'),'[]');const bundle={name:'fixture',version:'1.0.0',installed:true,enabled:true};return {dir,root,bundle,host:{hostId:'host1',dshRoot:dir,profileDir:dir,version:'0.2.0-rc.2',target:'macos-arm64',runtime:{node:'24.17.0',platform:'darwin',arch:'arm64',abi:'137',kind:'electron'}},ownerId:'owner1',storeDir:dir,listBundles:async()=>[bundle],resolveBundleDir:()=>root}}

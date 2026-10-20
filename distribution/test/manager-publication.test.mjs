@@ -14,11 +14,12 @@ test('explicit preview publishes complete bytes without promoting incomplete acc
  const manager={target:'linux-x64',fileName:'manager.tgz',path:path.join(directory,'manager.tgz'),sha256:managerHash,compressedBytes:6}
  const asset={version:'0.1.2',target:'linux-x64',flavor:'lite',fileName:'manager-lite.tgz',path:path.join(directory,'manager-lite.tgz'),sha256:bundleHash,managerSha256:managerHash,compressedBytes:9}
  await writeFile(manager.path,'plugin');await writeFile(asset.path,'installer')
- const receipt={target:'linux-x64',manager,assets:[asset],verification:{status:'unverified',packageSha256:managerHash,scope:[],evidence:{}}}
+ const localExport={status:'passed',target:'linux-x64',managerSha256:managerHash,artifact:{sha256:'e'.repeat(64)},verification:{status:'passed',target:'linux-x64',sha256:'e'.repeat(64)}},receipt={target:'linux-x64',manager,assets:[asset],localExport,verification:{status:'unverified',packageSha256:managerHash,scope:[],evidence:{}}}
  assert.equal(mod.assembleManagerPublication([receipt]).assets.length,0)
- const plan=mod.assembleManagerPublication([receipt],{channel:'preview'});assert.equal(plan.assets.length,2);assert.equal(plan.assets[0].verification.status,'unverified');assert.ok(plan.assets[0].verification.missing.includes('script-install'))
+ const plan=mod.assembleManagerPublication([receipt],{channel:'preview'});assert.equal(plan.assets.length,2);assert.deepEqual(plan.assets[0].verification.localExport,localExport);assert.equal(plan.assets[0].verification.status,'unverified');assert.ok(plan.assets[0].verification.missing.includes('script-install'))
  const {prepareReleaseFiles}=await import('../manager/publish-release.mjs'),{latestManagerCatalog}=await import('../lib/manager-catalog.mjs')
  const prepared=await prepareReleaseFiles(plan,{directory:path.join(directory,'release'),tag:'manager-preview-123'})
+ assert.deepEqual(JSON.parse(await readFile(path.join(directory,'release/manager-verification.json'))).assets[0].verification.localExport,localExport)
  const entry=prepared.catalog.packages[0];assert.equal(entry.version,'0.1.2');assert.equal(entry.channel,'preview');assert.equal(entry.verification.bundleSha256,bundleHash);assert.equal(entry.verification.validationLevel,'plugin-only');assert.match(entry.reportUrl,/manager-verification.json$/)
  const url='https://github.com/fatevase/dsh_depot/releases/download/manager-preview-123/manager-catalog.json'
  const loaded=await latestManagerCatalog({github:{list:async()=>[{prerelease:true,tag_name:'manager-preview-123',assets:[{name:'manager-catalog.json',browser_download_url:url}]}]},fetchImpl:async()=>Response.json(prepared.catalog)})
@@ -26,5 +27,9 @@ test('explicit preview publishes complete bytes without promoting incomplete acc
  assert.match(await readFile(path.join(directory,'release/SHA256SUMS'),'utf8'),new RegExp(bundleHash))
  assert.equal(mod.assembleManagerPublication([{...receipt,fixture:true}],{channel:'preview'}).assets.length,0)
  assert.equal(mod.assembleManagerPublication([{...receipt,assets:[{...asset,managerSha256:'0'.repeat(64)}]}],{channel:'preview'}).assets.length,0)
+ assert.equal(mod.assembleManagerPublication([{...receipt,manager:{...manager,version:'0.1.8'},localExport:undefined}],{channel:'preview'}).assets.length,0)
+ assert.equal(mod.assembleManagerPublication([{...receipt,localExport:{...localExport,status:'failed'}}],{channel:'preview'}).assets.length,0)
+ assert.equal(mod.assembleManagerPublication([{...receipt,localExport:{...localExport,managerSha256:'0'.repeat(64)}}],{channel:'preview'}).assets.length,0)
+ assert.equal(mod.assembleManagerPublication([{...receipt,localExport:{...localExport,verification:{...localExport.verification,sha256:'f'.repeat(64)}}}],{channel:'preview'}).assets.length,0)
  await writeFile(asset.path,'changed');await assert.rejects(prepareReleaseFiles(plan,{directory:path.join(directory,'bad'),tag:'manager-preview-124'}),/资产/)
 })

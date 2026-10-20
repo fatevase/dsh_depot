@@ -6,8 +6,8 @@ const excluded=['depot-files.json','depot-manifest.json']
 export async function writePackageMetadata(root,{task,recipe}){
  const p=await readJson(path.join(root,'package.json')),filesIndex=await auditTree(root,{exclude:excluded});await atomicJson(path.join(root,'depot-files.json'),filesIndex)
  const filesSha256=await fileHash(path.join(root,'depot-files.json'))
- const nativePresent=filesIndex.some(f=>/\.(?:node|dll|dylib|so)$/.test(f.path))||!!recipe.probes?.native?.length
- const manifest={schemaVersion:1,package:{name:p.name,version:p.version,recipeId:recipe.id},target:task.target,compatibility:{dshRange:recipe.hostRange??task.host.version,nodeRange:p.engines?.node??task.host.node,hostPeers:p.peerDependencies??{},testedEnvironments:[task.host]},native:{present:nativePresent,...(recipe.nativeConstraints??{})},source:task.source,build:{buildKey:task.buildKey,recipeDigest:task.recipeDigest??null,packagerVersion:'4'},filesSha256}
+ const nativePresent=filesIndex.some(f=>/\.(?:node|dll|dylib|so)(?:\.|$)/.test(f.path))||!!recipe.probes?.native?.length
+ const manifest={schemaVersion:1,package:{name:p.name,version:p.version,recipeId:recipe.id},target:task.target,compatibility:{dshRange:recipe.hostRange??task.host.version,nodeRange:p.engines?.node??task.host.node,hostPeers:p.peerDependencies??{},testedEnvironments:task.testedEnvironments??[task.host]},native:{present:nativePresent,...(recipe.nativeConstraints??{})},source:task.source,build:{buildKey:task.buildKey,recipeDigest:task.recipeDigest??null,packagerVersion:'4'},filesSha256}
  await atomicJson(path.join(root,'depot-manifest.json'),manifest);return{manifest,filesIndex,filesSha256}
 }
 export async function verifyPackageMetadata(root){

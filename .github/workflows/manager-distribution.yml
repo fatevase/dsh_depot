@@ -101,7 +101,7 @@
           "if": "always()",
           "with": {
             "name": "manager-${{ matrix.target }}",
-            "path": ".runtime/manager-ci/${{ matrix.target }}/*.tgz\n.runtime/manager-ci/${{ matrix.target }}/*.zip\n.runtime/manager-ci/${{ matrix.target }}/receipt.json\n.runtime/manager-ci/${{ matrix.target }}/SHA256SUMS\n.runtime/manager-ci/${{ matrix.target }}/manager-verification.json\n.runtime/manager-ci/${{ matrix.target }}/verification/**/*.json\n.runtime/manager-ci/${{ matrix.target }}/verification/**/*.log",
+            "path": ".runtime/manager-ci/${{ matrix.target }}/*.tgz\n.runtime/manager-ci/${{ matrix.target }}/*.zip\n.runtime/manager-ci/${{ matrix.target }}/receipt.json\n.runtime/manager-ci/${{ matrix.target }}/SHA256SUMS\n.runtime/manager-ci/${{ matrix.target }}/manager-verification.json\n.runtime/manager-ci/${{ matrix.target }}/verification/**/*.json\n.runtime/manager-ci/${{ matrix.target }}/verification/**/*.log\n.runtime/manager-ci/${{ matrix.target }}/export-roundtrip.json\n.runtime/manager-ci/${{ matrix.target }}/export-roundtrip/target-verification/**/*.json\n.runtime/manager-ci/${{ matrix.target }}/export-roundtrip/*.log\n.runtime/manager-ci/${{ matrix.target }}/export-roundtrip/target-verification/**/*.log",
             "retention-days": 2,
             "if-no-files-found": "warn"
           }
