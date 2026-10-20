@@ -10,6 +10,8 @@ import {generateSite} from './lib/site.mjs'
 import {catalogOf} from './lib/publish.mjs'
 import {latestManagerCatalog} from './lib/manager-catalog.mjs'
 import {latestCandidateReport,withCandidateReport,retainCandidateReport} from './candidate-catalog.mjs'
+import {candidatePublicDownloads} from './candidate-public-catalog.mjs'
+import {refreshRepositoryAbout,applyRepositoryAbout} from './repository-about.mjs'
 import {shouldRefreshWebsite} from './lib/site-trigger.mjs'
 
 export async function main(command=process.argv[2],env=process.env){
@@ -21,7 +23,7 @@ export async function main(command=process.argv[2],env=process.env){
   let allow=false
   if(env.GITHUB_EVENT_NAME==='workflow_run'){
    const run=event.workflow_run
-   if(run?.head_repository?.full_name===repository && run.head_branch===event.repository.default_branch && ['push','schedule','workflow_dispatch'].includes(run.event) && Number.isSafeInteger(run.id)){
+   if(run?.head_repository?.full_name===repository && run.head_branch===event.repository.default_branch && (['push','schedule','workflow_dispatch'].includes(run.event)||run.path==='.github/workflows/candidate-downloads.yml'&&run.event==='workflow_run') && Number.isSafeInteger(run.id)){
     const jobs=[]
     for(let page=1;page<=10;page++){
      const result=await github.request(`/repos/${repository}/actions/runs/${run.id}/jobs?filter=latest&per_page=100&page=${page}`)
@@ -43,7 +45,11 @@ export async function main(command=process.argv[2],env=process.env){
   let current=await store.read()
   const candidateReport=await latestCandidateReport({github,repository,config:await readJson(new URL('./candidate-builds.json',import.meta.url)),previous:current.state.candidateReport})
   if(candidateReport)current=await updateStateBranch({store,merge:state=>retainCandidateReport(state,candidateReport)})
-  const catalog=withCandidateReport(catalogOf(current.state,recipes),current.state.candidateReport)
+  const baseCatalog=withCandidateReport(catalogOf(current.state,recipes),await candidatePublicDownloads({github,snapshot:current.state.candidateReport}))
+  const seed=await readJson(new URL('../docs/evidence/repository-about-2026-10-20.json',import.meta.url))
+  const about=await refreshRepositoryAbout({github,repositories:baseCatalog.plugins.map(p=>({repository:p.repository,repositoryId:p.trial?.repositoryId})),previous:{...seed.repositories,...current.state.repositoryAbout}})
+  current=await updateStateBranch({store,merge:state=>({...state,repositoryAbout:{...state.repositoryAbout,...about}})})
+  const catalog=applyRepositoryAbout(baseCatalog,about)
   const result=await generateSite({catalog,outDir:fileURLToPath(new URL('../.runtime/web/site',import.meta.url)),managerCatalog:await latestManagerCatalog({github})})
   return {...result,stateCommit:current.commit,candidateBuild:catalog.candidateBuild}
  }

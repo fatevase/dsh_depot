@@ -15,7 +15,10 @@
         "distribution/lib/pages-deployment.mjs",
         "distribution/pages-build-identity.mjs",
         "distribution/candidate-catalog.mjs",
-        "distribution/candidate-builds.json"
+        "distribution/candidate-builds.json",
+        "distribution/candidate-public-catalog.mjs",
+        "distribution/repository-about.mjs",
+        "docs/evidence/repository-about-2026-10-20.json"
       ],
       "branches": [
         "main"
@@ -35,7 +38,10 @@
         "distribution/lib/pages-deployment.mjs",
         "distribution/pages-build-identity.mjs",
         "distribution/candidate-catalog.mjs",
-        "distribution/candidate-builds.json"
+        "distribution/candidate-builds.json",
+        "distribution/candidate-public-catalog.mjs",
+        "distribution/repository-about.mjs",
+        "docs/evidence/repository-about-2026-10-20.json"
       ]
     },
     "workflow_dispatch": {},
@@ -43,7 +49,8 @@
       "workflows": [
         "DSH plugin distribution",
         "DSH manager distributions",
-        "Popular candidate builds (99 plugins)"
+        "Popular candidate builds (99 plugins)",
+        "Candidate package downloads"
       ],
       "types": [
         "completed"

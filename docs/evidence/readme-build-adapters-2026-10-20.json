@@ -1,0 +1,1350 @@
+{
+  "schemaVersion": 1,
+  "status": "README/package/workflow/release research; not offline/runtime verification",
+  "groupA": {
+    "researchedAt": "2026-10-20",
+    "method": "GitHub connector reads only; no builds or tests run",
+    "repositories": [
+      {
+        "repository": "yjh051108/dsh-routing-suite",
+        "commit": "195273352f23bff7f9023ebe2ec0cdbdf9c98f10",
+        "files": [
+          {
+            "path": "README.md",
+            "url": "https://github.com/yjh051108/dsh-routing-suite/blob/195273352f23bff7f9023ebe2ec0cdbdf9c98f10/README.md",
+            "blobSha": "b07bec7a8d464e95835ad5090fbe4db07a713fa8",
+            "content": {
+              "sha256": "02664fcf0e9b314a4911b8443e55095848e02702fb99fa969d8b3f3232627c83",
+              "characters": 5287,
+              "note": "Full source remains at the linked pinned upstream URL."
+            }
+          },
+          {
+            "path": "package.json",
+            "url": "https://github.com/yjh051108/dsh-routing-suite/blob/195273352f23bff7f9023ebe2ec0cdbdf9c98f10/package.json",
+            "blobSha": "731123a53803a53b76e8cefed9b4310e4f3eb136",
+            "content": "{\n  \"name\": \"@dsh-external/dsh-super-injector\",\n  \"version\": \"0.3.3\",\n  \"description\": \"dsh-routing-suite 分发入口：DSH 超级模组注入器（BepInEx 式运行时注入，免重启）+ router-standard 预设仓库。插件入口为 injector/，预设位于 preset/。\",\n  \"private\": true,\n  \"scripts\": {\n    \"prepare\": \"node injector/scripts/prepare.mjs\"\n  },\n  \"type\": \"module\",\n  \"main\": \"./injector/lib/index.js\",\n  \"types\": \"./injector/lib/types/index.d.ts\",\n  \"exports\": {\n    \".\": {\n      \"types\": \"./injector/lib/types/index.d.ts\",\n      \"default\": \"./injector/lib/index.js\"\n    },\n    \"./client\": {\n      \"types\": \"./injector/lib/types/client/index.d.ts\",\n      \"default\": \"./injector/lib/client.js\"\n    },\n    \"./package.json\": \"./package.json\"\n  },\n  \"files\": [\n    \"injector/lib\",\n    \"injector/scripts\",\n    \"cordis.patch.yml\",\n    \"LICENSE\",\n    \"README.md\",\n    \"README.en.md\"\n  ],\n  \"license\": \"BSD-3-Clause\",\n  \"keywords\": [\n    \"dsh\",\n    \"dsh-plugin\",\n    \"deepseek-harness\",\n    \"injector\",\n    \"super-injector\",\n    \"preset\",\n    \"router-standard\",\n    \"cordis\",\n    \"progressive-disclosure\"\n  ],\n  \"repository\": {\n    \"type\": \"git\",\n    \"url\": \"git+https://github.com/yjh051108/dsh-routing-suite.git\"\n  },\n  \"homepage\": \"https://github.com/yjh051108/dsh-routing-suite\",\n  \"bugs\": {\n    \"url\": \"https://github.com/yjh051108/dsh-routing-suite/issues\"\n  },\n  \"engines\": { \"node\": \">=22\" },\n  \"dsh\": {\n    \"bundle\": {\n      \"patch\": \"./cordis.patch.yml\"\n    },\n    \"client\": {\n      \"inject\": [\n        \"@deepseek-ai/dsh-client-runtime\",\n        \"@deepseek-ai/dsh-client-ui-slots\"\n      ],\n      \"platform\": \"web\"\n    }\n  },\n  \"peerDependencies\": {\n    \"@deepseek-ai/dsh-tools\": \">=0.0.1-rc <2\",\n    \"cordis\": \">=4.0.0-rc <5\",\n    \"schemastery\": \"^3.18.0\"\n  }\n}\n"
+          },
+          {
+            "path": "injector/README.md",
+            "url": "https://github.com/yjh051108/dsh-routing-suite/blob/195273352f23bff7f9023ebe2ec0cdbdf9c98f10/injector/README.md",
+            "blobSha": "07f451a872e3abfaf8f95140b5474051d1e4ef4f",
+            "content": {
+              "sha256": "f29df75d0674ed8d3e5c81cb59fa731df3245b966eaa1729fb10ce5b673865be",
+              "characters": 11196,
+              "note": "Full source remains at the linked pinned upstream URL."
+            }
+          },
+          {
+            "path": "injector/package.json",
+            "url": "https://github.com/yjh051108/dsh-routing-suite/blob/195273352f23bff7f9023ebe2ec0cdbdf9c98f10/injector/package.json",
+            "blobSha": "9216f12e8c22b67ab62553f88858585fb94ae0c9",
+            "content": "{\n  \"name\": \"@dsh-external/dsh-super-injector\",\n  \"version\": \"0.3.3\",\n  \"description\": \"超级模组注入器：运行时注入任意本地 DSH 插件包（junction 链接 + loader.create，不碰 patch/package.json/不重启），热重载全家桶 + 开发侧挂区一键转正 + 一键卸载 + 路由自愈 + 插件管理 UI（设置页：列表/卸载/拖入内化），清单持久化重启自动恢复——DSH 生态的 BepInEx 式模组注入入口\",\n  \"private\": true,\n  \"type\": \"module\",\n  \"main\": \"./lib/index.js\",\n  \"types\": \"./lib/types/index.d.ts\",\n  \"exports\": {\n    \".\": {\n      \"types\": \"./lib/types/index.d.ts\",\n      \"default\": \"./lib/index.js\"\n    },\n    \"./client\": {\n      \"types\": \"./lib/types/client/index.d.ts\",\n      \"default\": \"./lib/client.js\"\n    },\n    \"./package.json\": \"./package.json\"\n  },\n  \"files\": [\n    \"lib\",\n    \"cordis.patch.yml\",\n    \"scripts/build.sh\",\n    \"scripts/fix-patch.mjs\",\n    \"scripts/prepare.mjs\"\n  ],\n  \"license\": \"BSD-3-Clause\",\n  \"dsh\": {\n    \"bundle\": {\n      \"patch\": \"./cordis.patch.yml\"\n    },\n    \"client\": {\n      \"inject\": [\n        \"@deepseek-ai/dsh-client-runtime\",\n        \"@deepseek-ai/dsh-client-ui-slots\"\n      ],\n      \"platform\": \"web\"\n    }\n  },\n  \"peerDependencies\": {\n    \"@deepseek-ai/dsh-tools\": \">=0.0.1-rc <2\",\n    \"@deepseek-ai/cordis\": \">=4.0.0-rc <5\",\n    \"@deepseek-ai/schemastery\": \"^3.18.2\"\n  },\n  \"devDependencies\": {\n    \"@deepseek-ai/cordis-plugin-loader\": \"^1.0.2\",\n    \"@types/node\": \"^24.13.3\",\n    \"tsdown\": \"^0.22.14\",\n    \"typescript\": \"^5.9.3\"\n  },\n  \"scripts\": {\n    \"build\": \"bash scripts/build.sh\",\n    \"prepare\": \"node scripts/prepare.mjs\",\n    \"build:client\": \"tsdown\",\n    \"typecheck\": \"tsc -p tsconfig.json --noEmit\"\n  }\n}\n"
+          },
+          {
+            "path": "injector/scripts/prepare.mjs",
+            "url": "https://github.com/yjh051108/dsh-routing-suite/blob/195273352f23bff7f9023ebe2ec0cdbdf9c98f10/injector/scripts/prepare.mjs",
+            "blobSha": "aca203e41fa72677594521e2a6bec7b317108c38",
+            "content": {
+              "sha256": "e9b21f15a0d3fa6562f4b6ea2d180ea258bdc7e9b536e4766df20884a3ea61c0",
+              "characters": 2872,
+              "note": "Full source remains at the linked pinned upstream URL."
+            }
+          },
+          {
+            "path": "injector/scripts/build.sh",
+            "url": "https://github.com/yjh051108/dsh-routing-suite/blob/195273352f23bff7f9023ebe2ec0cdbdf9c98f10/injector/scripts/build.sh",
+            "blobSha": "38b6538692adb9040019c2a241d4e9400b4f5bdb",
+            "content": {
+              "sha256": "69c0b6f764fc401f5f7ffd60f6e2ea0729bf22a425facfa2693ecd9f02acffb8",
+              "characters": 2423,
+              "note": "Full source remains at the linked pinned upstream URL."
+            }
+          },
+          {
+            "path": "injector/tsconfig.json",
+            "url": "https://github.com/yjh051108/dsh-routing-suite/blob/195273352f23bff7f9023ebe2ec0cdbdf9c98f10/injector/tsconfig.json",
+            "blobSha": "df1d7cf7100ae32222df5377117a5e84771c28a8",
+            "content": "{\n  \"compilerOptions\": {\n    \"target\": \"ES2023\",\n    \"module\": \"NodeNext\",\n    \"moduleResolution\": \"NodeNext\",\n    \"lib\": [\"ES2023\"],\n    \"strict\": true,\n    \"types\": [\"node\"],\n    \"declaration\": true,\n    \"declarationDir\": \"lib/types\",\n    \"outDir\": \"lib\",\n    \"rootDir\": \"src\",\n    \"skipLibCheck\": true,\n    \"esModuleInterop\": true,\n    \"forceConsistentCasingInFileNames\": true,\n    \"sourceMap\": true\n  },\n  \"include\": [\"src\"],\n  \"exclude\": [\"src/client\"]\n}\n"
+          },
+          {
+            "path": "injector/tsdown.config.ts",
+            "url": "https://github.com/yjh051108/dsh-routing-suite/blob/195273352f23bff7f9023ebe2ec0cdbdf9c98f10/injector/tsdown.config.ts",
+            "blobSha": "39c71a917d812191a87576fb483776e5d5c73cc2",
+            "content": "import { fileURLToPath } from 'node:url'\nimport type { UserConfig } from 'tsdown'\n\nconst PLUGIN_ID = '@dsh-external/dsh-super-injector'\n\nconst CLIENT_EXTERNALS = [\n  'react', 'react/jsx-runtime', 'react-dom', 'react-dom/client',\n  'cordis',\n  '@deepseek-ai/dsh-client-ui-slots',\n  '@deepseek-ai/dsh-client-runtime/client',\n]\n\nconst clientBundle: UserConfig = {\n  entry: { client: 'src/client/index.ts' },\n  outDir: 'lib',\n  format: 'cjs',\n  platform: 'browser',\n  dts: false,\n  sourcemap: true,\n  clean: false,\n  define: {\n    'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV ?? 'production'),\n  },\n  deps: {\n    neverBundle: [...CLIENT_EXTERNALS],\n    alwaysBundle: (id: string) => !CLIENT_EXTERNALS.includes(id),\n  },\n  outputOptions: {\n    entryFileNames: 'client.js',\n    banner: 'window.__ModuleLoader__.load({ id: ' + JSON.stringify(PLUGIN_ID) + ', factory: (require) => {',\n    footer: 'return module.exports; } });',\n    intro: 'var module = { exports: {} }; var exports = module.exports;',\n    codeSplitting: false,\n  },\n}\n\n// 宿主自包含打包：把 @deepseek-ai/dsh-tools / schemastery 等运行时依赖打进\n// lib/index.js（node: 内置模块保持 external）。官方装配（dsh plugin add <目录>）\n// 对目录外 link: 依赖不装 peers，Node 从包真实路径解析不到\n// '@deepseek-ai/dsh-tools' 会整棵 plugin tree 加载失败（issue #1）——\n// 打包后 lib 零外部依赖，任何装配路径都能加载。\nconst hostBundle: UserConfig = {\n  entry: { index: 'src/index.ts' },\n  outDir: 'lib',\n  format: 'esm',\n  platform: 'node',\n  dts: false,\n  sourcemap: true,\n  clean: false,\n  deps: {\n    alwaysBundle: (id: string) => !id.startsWith('node:'),\n  },\n  outputOptions: {\n    entryFileNames: 'index.js',\n  },\n}\n\nexport default [hostBundle, clientBundle] satisfies UserConfig[]\n"
+          }
+        ],
+        "releases": [
+          {
+            "tag": "0.0.1-rc1",
+            "target": "main",
+            "published": "2026-09-02T17:33:33Z",
+            "url": "https://github.com/yjh051108/dsh-routing-suite/releases/tag/0.0.1-rc1",
+            "assets": [
+              {
+                "name": "dsh-external-dsh-graded-mode-0.0.1-rc1.tgz",
+                "url": "https://github.com/yjh051108/dsh-routing-suite/releases/download/0.0.1-rc1/dsh-external-dsh-graded-mode-0.0.1-rc1.tgz",
+                "digest": "sha256:14c5fe510c2a33834e2a1a33973d5bc49f4e66c79d31d3f6d4bc868da8153932",
+                "size": 108154
+              }
+            ]
+          }
+        ],
+        "releaseTagResolvedCommit": null
+      },
+      {
+        "repository": "ccch1mneyyy/dsh-TUI",
+        "commit": "5e0146bc8d25f8b105860a766a72d48eda385177",
+        "files": [
+          {
+            "path": "README.md",
+            "url": "https://github.com/ccch1mneyyy/dsh-TUI/blob/5e0146bc8d25f8b105860a766a72d48eda385177/README.md",
+            "blobSha": "1c4562cd8eba32bf2d1fffb129dc178b8e413327",
+            "content": {
+              "sha256": "4bf4f3b66e30a4a99931dc403b209e3e54e56724f4c17538e8bb1fece9af94e7",
+              "characters": 54984,
+              "note": "Full source remains at the linked pinned upstream URL."
+            }
+          },
+          {
+            "path": "package.json",
+            "url": "https://github.com/ccch1mneyyy/dsh-TUI/blob/5e0146bc8d25f8b105860a766a72d48eda385177/package.json",
+            "blobSha": "5f37bac193bc8bde6e5af16a1c279f924989e945",
+            "content": {
+              "sha256": "eb5c42805de8f62e05c1a077cc6efa0ae9d655175bc25c965b58c38433554978",
+              "characters": 45473,
+              "note": "Full source remains at the linked pinned upstream URL."
+            }
+          },
+          {
+            "path": "docs/getting-started.en.md",
+            "url": "https://github.com/ccch1mneyyy/dsh-TUI/blob/5e0146bc8d25f8b105860a766a72d48eda385177/docs/getting-started.en.md",
+            "blobSha": "eb49d72d0927d81e7564bf6245f9635de7b0beb6",
+            "content": {
+              "sha256": "6b62938eba47b56f096a1394befcbcabed16b0f6cd85a6a3237f1fdbb5a95e12",
+              "characters": 18152,
+              "note": "Full source remains at the linked pinned upstream URL."
+            }
+          },
+          {
+            "path": ".github/workflows/publish.yml",
+            "url": "https://github.com/ccch1mneyyy/dsh-TUI/blob/5e0146bc8d25f8b105860a766a72d48eda385177/.github/workflows/publish.yml",
+            "blobSha": "a735ba7c20fa56cfed2673524d0f2d6009f89526",
+            "content": {
+              "sha256": "957e108d5997b8ca08bc0b979731a8b2582ec5e3f1b5c2a758f874f370a8adff",
+              "characters": 9855,
+              "note": "Full source remains at the linked pinned upstream URL."
+            }
+          },
+          {
+            "path": "scripts/with-publish-manifest.mjs",
+            "url": "https://github.com/ccch1mneyyy/dsh-TUI/blob/5e0146bc8d25f8b105860a766a72d48eda385177/scripts/with-publish-manifest.mjs",
+            "blobSha": "f718ace512e96e085ebf964a2a178075ace7dffe",
+            "content": {
+              "sha256": "aa0c10ab351b5166747f0a1de232f20f2b33f1337a49e8589530d158984949c1",
+              "characters": 3141,
+              "note": "Full source remains at the linked pinned upstream URL."
+            }
+          },
+          {
+            "path": ".gitmodules",
+            "url": "https://github.com/ccch1mneyyy/dsh-TUI/blob/5e0146bc8d25f8b105860a766a72d48eda385177/.gitmodules",
+            "blobSha": "8aa1ff94b79e9802f7874fcaef6ae7159416d2bd",
+            "content": "[submodule \"vendor/dsh-std\"]\n\tpath = vendor/dsh-std\n\turl = https://github.com/T-Auto/dsh-std.git\n"
+          }
+        ],
+        "releases": [
+          {
+            "tag": "v0.16.1",
+            "target": "main",
+            "published": "2026-10-17T21:33:29Z",
+            "url": "https://github.com/ccch1mneyyy/dsh-TUI/releases/tag/v0.16.1",
+            "assets": [
+              {
+                "name": "dsh-tui-setup.zip",
+                "url": "https://github.com/ccch1mneyyy/dsh-TUI/releases/download/v0.16.1/dsh-tui-setup.zip",
+                "digest": "sha256:1a471d7fe530ae03ddccde10be4a7a2b63ad1c13587fb79ed93f81fa3630aa73",
+                "size": 6546
+              },
+              {
+                "name": "dsh-tui-standalone-darwin-arm64.tar.gz",
+                "url": "https://github.com/ccch1mneyyy/dsh-TUI/releases/download/v0.16.1/dsh-tui-standalone-darwin-arm64.tar.gz",
+                "digest": "sha256:214412412d156776c02dc9efe817dc4f18db3473de75313d2d2e8de702405d84",
+                "size": 192097405
+              },
+              {
+                "name": "dsh-tui-standalone-darwin-x64.tar.gz",
+                "url": "https://github.com/ccch1mneyyy/dsh-TUI/releases/download/v0.16.1/dsh-tui-standalone-darwin-x64.tar.gz",
+                "digest": "sha256:bf9fc93f84af5b0ac05979a274a2581749add7fd1977c5f91d18bcec5e1cfc9b",
+                "size": 193280681
+              },
+              {
+                "name": "dsh-tui-standalone-linux-arm64.tar.gz",
+                "url": "https://github.com/ccch1mneyyy/dsh-TUI/releases/download/v0.16.1/dsh-tui-standalone-linux-arm64.tar.gz",
+                "digest": "sha256:4036378fcdc9d9a39128f4f59cffec451fa60f3302f081c38ad492cba266644f",
+                "size": 195545226
+              },
+              {
+                "name": "dsh-tui-standalone-linux-x64.tar.gz",
+                "url": "https://github.com/ccch1mneyyy/dsh-TUI/releases/download/v0.16.1/dsh-tui-standalone-linux-x64.tar.gz",
+                "digest": "sha256:f817e70745a34cbbf03f0d172c5e83e26d8ef80b323f8d09339bc9e83793fb3e",
+                "size": 196010824
+              },
+              {
+                "name": "dsh-tui-standalone-win-x64.zip",
+                "url": "https://github.com/ccch1mneyyy/dsh-TUI/releases/download/v0.16.1/dsh-tui-standalone-win-x64.zip",
+                "digest": "sha256:5de304cb7fbf2cc8dce310dbd7115748ae77d4a3dd33cc9066bd54ee39f208b6",
+                "size": 203496942
+              },
+              {
+                "name": "SHA256SUMS",
+                "url": "https://github.com/ccch1mneyyy/dsh-TUI/releases/download/v0.16.1/SHA256SUMS",
+                "digest": "sha256:07e92a22ebf885dbc968362159f6214fe91bdf439029c63e601feba725151f8e",
+                "size": 595
+              }
+            ]
+          }
+        ],
+        "releaseTagResolvedCommit": "73ff99fbed56563bf154d719effd09f9f9725349"
+      },
+      {
+        "repository": "QCYTSN/dsh-dafeiyu",
+        "commit": "43542f8fc9567f45ce98534d407abca2ff4ff74e",
+        "files": [
+          {
+            "path": "README.md",
+            "url": "https://github.com/QCYTSN/dsh-dafeiyu/blob/43542f8fc9567f45ce98534d407abca2ff4ff74e/README.md",
+            "blobSha": "b172871655ffaeec3485b52746e5561e8f29a3fb",
+            "content": {
+              "sha256": "69a6562fd09f354212c710be68474254125db2079e90376c473025d6d3df35ce",
+              "characters": 6972,
+              "note": "Full source remains at the linked pinned upstream URL."
+            }
+          },
+          {
+            "path": "package.json",
+            "url": "https://github.com/QCYTSN/dsh-dafeiyu/blob/43542f8fc9567f45ce98534d407abca2ff4ff74e/package.json",
+            "blobSha": "572b203728e57ea8aa6afd672a8db3c2c0890a97",
+            "content": {
+              "sha256": "e8c0e99b14392ee6468f55d8dcd6506d1097a4e7647006e80b82472df6939e07",
+              "characters": 3003,
+              "note": "Full source remains at the linked pinned upstream URL."
+            }
+          },
+          {
+            "path": ".github/workflows/publish.yml",
+            "url": "https://github.com/QCYTSN/dsh-dafeiyu/blob/43542f8fc9567f45ce98534d407abca2ff4ff74e/.github/workflows/publish.yml",
+            "blobSha": "7f851f3137b16a090b1e286111b474734929853a",
+            "content": {
+              "sha256": "289499c6a55d95cc45dc3871c1870a52a2668be168e2f3ff856dce1e712f3c8d",
+              "characters": 12251,
+              "note": "Full source remains at the linked pinned upstream URL."
+            }
+          }
+        ],
+        "releases": [
+          {
+            "tag": "v0.1.18",
+            "target": "43542f8fc9567f45ce98534d407abca2ff4ff74e",
+            "published": "2026-10-10T05:52:37Z",
+            "url": "https://github.com/QCYTSN/dsh-dafeiyu/releases/tag/v0.1.18",
+            "assets": [
+              {
+                "name": "dsh-dafeiyu-0.1.18.tgz",
+                "url": "https://github.com/QCYTSN/dsh-dafeiyu/releases/download/v0.1.18/dsh-dafeiyu-0.1.18.tgz",
+                "digest": "sha256:31d8cb8e465132d00fabdcda1e6c47e9db1d5d4063925265b181e9bf4c808730",
+                "size": 179241989
+              }
+            ]
+          }
+        ],
+        "releaseTagResolvedCommit": "43542f8fc9567f45ce98534d407abca2ff4ff74e"
+      },
+      {
+        "repository": "kenryu42/cc-safety-net",
+        "commit": "c696ca1aaa82728840f3d1958e3a0fb2208b26b1",
+        "files": [
+          {
+            "path": "README.md",
+            "url": "https://github.com/kenryu42/cc-safety-net/blob/c696ca1aaa82728840f3d1958e3a0fb2208b26b1/README.md",
+            "blobSha": "8918453bdbd694d993e4658b5f6e4ff3865d9b2e",
+            "content": {
+              "sha256": "afb96396cdf0318d36922796e21f7753351289d1d265bfa054c6208488205a22",
+              "characters": 8695,
+              "note": "Full source remains at the linked pinned upstream URL."
+            }
+          },
+          {
+            "path": "package.json",
+            "url": "https://github.com/kenryu42/cc-safety-net/blob/c696ca1aaa82728840f3d1958e3a0fb2208b26b1/package.json",
+            "blobSha": "5ab0a3cf6792a51347f017d32242c42e4d199344",
+            "content": {
+              "sha256": "e6a4af71f62ca187b0a449345fd75e439445a5eee5161339c3245deba9195358",
+              "characters": 4925,
+              "note": "Full source remains at the linked pinned upstream URL."
+            }
+          },
+          {
+            "path": ".github/workflows/publish.yml",
+            "url": "https://github.com/kenryu42/cc-safety-net/blob/c696ca1aaa82728840f3d1958e3a0fb2208b26b1/.github/workflows/publish.yml",
+            "blobSha": "da3d86a059eabf33f62259e24c4904301d381a3d",
+            "content": {
+              "sha256": "2bc086c0bbde4a68a57c95adf264eed98a928faccbf7bc19fa1e12a66aff6ac2",
+              "characters": 8178,
+              "note": "Full source remains at the linked pinned upstream URL."
+            }
+          },
+          {
+            "path": "scripts/project-bun.ts",
+            "url": "https://github.com/kenryu42/cc-safety-net/blob/c696ca1aaa82728840f3d1958e3a0fb2208b26b1/scripts/project-bun.ts",
+            "blobSha": "498c576e8b36131b1895f187c1cc81540c4ddbad",
+            "content": "import { delimiter, dirname } from 'node:path';\nimport pkg from '../package.json';\n\nconst pathKey = Object.keys(process.env).find((key) => key.toLowerCase() === 'path') ?? 'PATH';\nconst result = Bun.spawnSync(\n  Bun.version === pkg.packageManager.slice(4)\n    ? [process.execPath, ...process.argv.slice(2)]\n    : [process.execPath, 'x', '--package', pkg.packageManager, 'bun', ...process.argv.slice(2)],\n  {\n    env: {\n      ...process.env,\n      [pathKey]: `${dirname(process.execPath)}${delimiter}${process.env[pathKey] ?? ''}`,\n    },\n    stdin: 'inherit',\n    stdout: 'inherit',\n    stderr: 'inherit',\n  },\n);\nprocess.exit(result.exitCode);\n"
+          }
+        ],
+        "releases": [
+          {
+            "tag": "v2.6.16",
+            "target": "main",
+            "published": "2026-10-19T11:48:12Z",
+            "url": "https://github.com/kenryu42/cc-safety-net/releases/tag/v2.6.16",
+            "assets": [
+              {
+                "name": "cc-safety-net-2.6.16.tgz",
+                "url": "https://github.com/kenryu42/cc-safety-net/releases/download/v2.6.16/cc-safety-net-2.6.16.tgz",
+                "digest": "sha256:49604cbbe07090df2cdc0af7f02739e47357b2cd7fbdad915cbc5becfd17cf54",
+                "size": 642576
+              },
+              {
+                "name": "SHA256SUMS",
+                "url": "https://github.com/kenryu42/cc-safety-net/releases/download/v2.6.16/SHA256SUMS",
+                "digest": "sha256:ffe5946d7b785f5f9e1cc0b99691486daa5c48db78d74aa9e91276764eb66b93",
+                "size": 91
+              }
+            ]
+          }
+        ],
+        "releaseTagResolvedCommit": "c2526afe39744f65281304687ba6e41de02559c4"
+      },
+      {
+        "repository": "xiajiajun516/dsh-config-manager",
+        "commit": "865c4efdd5c77b8a64f55d2af6cadf50d73e00d8",
+        "files": [
+          {
+            "path": "README.md",
+            "url": "https://github.com/xiajiajun516/dsh-config-manager/blob/865c4efdd5c77b8a64f55d2af6cadf50d73e00d8/README.md",
+            "blobSha": "3382b0df0bc7708162844a836c0000ad4f253da4",
+            "content": {
+              "sha256": "52ccd01e95fe739e6ab6c14e624425a3cfa9a97ccf7b057a0fdcdea1c65f9c75",
+              "characters": 72035,
+              "note": "Full source remains at the linked pinned upstream URL."
+            }
+          },
+          {
+            "path": "package.json",
+            "url": "https://github.com/xiajiajun516/dsh-config-manager/blob/865c4efdd5c77b8a64f55d2af6cadf50d73e00d8/package.json",
+            "blobSha": "f120e45cf96fe8f5c1103890cbc015ac3d115110",
+            "content": {
+              "sha256": "c4d384f6697a7fd7ffb4e8653735422bbf7f35b6ac363d234901b5a9c36e6fab",
+              "characters": 6163,
+              "note": "Full source remains at the linked pinned upstream URL."
+            }
+          },
+          {
+            "path": ".github/workflows/publish.yml",
+            "url": "https://github.com/xiajiajun516/dsh-config-manager/blob/865c4efdd5c77b8a64f55d2af6cadf50d73e00d8/.github/workflows/publish.yml",
+            "blobSha": "9460187a4bfbcff291c5838e06cc92232e4baa14",
+            "content": {
+              "sha256": "a793b424f7de22db6671391d58f752801fe57288b7898847ea1dfc946789bcbd",
+              "characters": 5241,
+              "note": "Full source remains at the linked pinned upstream URL."
+            }
+          },
+          {
+            "path": ".github/workflows/ci.yml",
+            "url": "https://github.com/xiajiajun516/dsh-config-manager/blob/865c4efdd5c77b8a64f55d2af6cadf50d73e00d8/.github/workflows/ci.yml",
+            "blobSha": "3d72ad6e712942997f4cfc246095f7e6816e8c5b",
+            "content": {
+              "sha256": "8b5ae84810e4df78300d6497a467b0e316de552777f8534dbd05f3dabab9180e",
+              "characters": 4232,
+              "note": "Full source remains at the linked pinned upstream URL."
+            }
+          }
+        ],
+        "releases": [
+          {
+            "tag": "v0.1.78",
+            "target": "main",
+            "published": "2026-10-17T18:49:18Z",
+            "url": "https://github.com/xiajiajun516/dsh-config-manager/releases/tag/v0.1.78",
+            "assets": [
+              {
+                "name": "dsh-config-manager-0.1.78.tgz",
+                "url": "https://github.com/xiajiajun516/dsh-config-manager/releases/download/v0.1.78/dsh-config-manager-0.1.78.tgz",
+                "digest": "sha256:ba1338e7e340e20bff96614fbe188593bd2b1eff6a26f89942d5f836461f3b4e",
+                "size": 6564622
+              }
+            ]
+          }
+        ],
+        "releaseTagResolvedCommit": "865c4efdd5c77b8a64f55d2af6cadf50d73e00d8"
+      }
+    ]
+  },
+  "groupB": {
+    "accessedAt": "2026-10-20",
+    "source": "GitHub connector pinned files",
+    "repositories": [
+      [
+        "ios",
+        "ZSeven-W/dsh-ios",
+        "d9a9731ccd73b38858fcfbf2f35d7120a861654c"
+      ],
+      [
+        "tydora",
+        "zuorn/Tydora",
+        "4af1de4d458c7d03adc2615893e4793766c1bb87"
+      ],
+      [
+        "openpencil",
+        "ZSeven-W/dsh-openpencil",
+        "34cf7b45ed10fc7de43c3ccb30406e6c40b449ae"
+      ],
+      [
+        "anime",
+        "cocofhu/anime-find",
+        "841cdfa8aebf87c90f0d5a44a4a95710f1cdf493"
+      ],
+      [
+        "workflow",
+        "omdsh-dev/dsh_workflow",
+        "44b83c182aa02d1be8a0803e8446cb495f93cd8f"
+      ]
+    ],
+    "evidence": [
+      {
+        "key": "ios",
+        "path": "README.md",
+        "content": {
+          "sha256": "5aafbf63516ad1b3fd8de9429aa75c1010bea8a4b9674568c0b33ba4cdd8431f",
+          "characters": 31902,
+          "note": "Full source remains at the linked pinned upstream URL."
+        },
+        "encoding": "utf-8",
+        "sha": "427f1d19719e7d1f57816946646c26c8a6e503d4",
+        "display_url": "https://github.com/ZSeven-W/dsh-ios/blob/d9a9731ccd73b38858fcfbf2f35d7120a861654c/README.md",
+        "display_title": "README.md"
+      },
+      {
+        "key": "ios",
+        "path": "package.json",
+        "content": {
+          "sha256": "bc2b75cf6547c9bdb2202968ecdf993d655e6a06efb00e9284871fee73cc510b",
+          "characters": 5238,
+          "note": "Full source remains at the linked pinned upstream URL."
+        },
+        "encoding": "utf-8",
+        "sha": "2bc45eb96c39b832aaaf9dde298a8df20ab506eb",
+        "display_url": "https://github.com/ZSeven-W/dsh-ios/blob/d9a9731ccd73b38858fcfbf2f35d7120a861654c/package.json",
+        "display_title": "package.json"
+      },
+      {
+        "key": "ios",
+        "path": "scripts/run-tool.mjs",
+        "content": {
+          "sha256": "cc6beae593b31b2ef619c1b31ae485e9c05438781d2a2074ff333ff3e8620de1",
+          "characters": 3120,
+          "note": "Full source remains at the linked pinned upstream URL."
+        },
+        "encoding": "utf-8",
+        "sha": "33ac02b302e8aaf6d17c278df523df6fe8b8f4e9",
+        "display_url": "https://github.com/ZSeven-W/dsh-ios/blob/d9a9731ccd73b38858fcfbf2f35d7120a861654c/scripts/run-tool.mjs",
+        "display_title": "run-tool.mjs"
+      },
+      {
+        "key": "ios",
+        "path": ".github/workflows/check.yml",
+        "content": {
+          "sha256": "b039f9462e6eba8063a6decd95a508829901f42d00418a63f368d96a064e88ac",
+          "characters": 2797,
+          "note": "Full source remains at the linked pinned upstream URL."
+        },
+        "encoding": "utf-8",
+        "sha": "148fee78f09223e9c3e1eafaa9573426d8f4a2fe",
+        "display_url": "https://github.com/ZSeven-W/dsh-ios/blob/d9a9731ccd73b38858fcfbf2f35d7120a861654c/.github/workflows/check.yml",
+        "display_title": "check.yml"
+      },
+      {
+        "key": "tydora",
+        "path": "README.md",
+        "content": {
+          "sha256": "467ee5775a8e5aac36479054a129055f038db5d323d9a613956fa9b1e2296f37",
+          "characters": 5247,
+          "note": "Full source remains at the linked pinned upstream URL."
+        },
+        "encoding": "utf-8",
+        "sha": "0466f15fa7ec0347b7de40503a5f45b9f155688c",
+        "display_url": "https://github.com/zuorn/Tydora/blob/4af1de4d458c7d03adc2615893e4793766c1bb87/README.md",
+        "display_title": "README.md"
+      },
+      {
+        "key": "tydora",
+        "path": "package.json",
+        "content": {
+          "sha256": "f0d08799725832c12b0211c94c4062c2bef2656eff31c3b946c7e5ce9125e869",
+          "characters": 5011,
+          "note": "Full source remains at the linked pinned upstream URL."
+        },
+        "encoding": "utf-8",
+        "sha": "6444c74138f0dd4c2ef9a201c27602f4e948cd3a",
+        "display_url": "https://github.com/zuorn/Tydora/blob/4af1de4d458c7d03adc2615893e4793766c1bb87/package.json",
+        "display_title": "package.json"
+      },
+      {
+        "key": "tydora",
+        "path": "package-lock.json",
+        "content": {
+          "sha256": "8279baf6c0c3b52e97103959b18baaa0c051d2dc3c47d5d5c7ef30c693fa1e43",
+          "characters": 668196,
+          "note": "Full source remains at the linked pinned upstream URL."
+        },
+        "encoding": "utf-8",
+        "sha": "277662eab972a4cc8bceb2d4fecda7aff3b2d88c",
+        "display_url": "https://github.com/zuorn/Tydora/blob/4af1de4d458c7d03adc2615893e4793766c1bb87/package-lock.json",
+        "display_title": "package-lock.json"
+      },
+      {
+        "key": "tydora",
+        "path": ".github/workflows/release.yml",
+        "content": {
+          "sha256": "e9245f235f643b9cd51bb04aaf85eff8aa9eb02d6f53a1b4e6075a1a2cd0756c",
+          "characters": 12414,
+          "note": "Full source remains at the linked pinned upstream URL."
+        },
+        "encoding": "utf-8",
+        "sha": "b50be256a60de7907e7e5fc63e58a9672743ca07",
+        "display_url": "https://github.com/zuorn/Tydora/blob/4af1de4d458c7d03adc2615893e4793766c1bb87/.github/workflows/release.yml",
+        "display_title": "release.yml"
+      },
+      {
+        "key": "tydora",
+        "path": "cordis.patch.yml"
+      },
+      {
+        "key": "openpencil",
+        "path": "README.md",
+        "content": {
+          "sha256": "7553926684ef15b18745e139b941f4fa6c4e4ce46c5b7778f999a6e480ecd59c",
+          "characters": 39926,
+          "note": "Full source remains at the linked pinned upstream URL."
+        },
+        "encoding": "utf-8",
+        "sha": "74821ad77ab8245d5c572aef6bd1354e76f1ca13",
+        "display_url": "https://github.com/ZSeven-W/dsh-openpencil/blob/34cf7b45ed10fc7de43c3ccb30406e6c40b449ae/README.md",
+        "display_title": "README.md"
+      },
+      {
+        "key": "openpencil",
+        "path": "package.json",
+        "content": {
+          "sha256": "688f666e48bb981971c7aeca1f8fd878195c92bcfdcba8499731fdbbd78f870a",
+          "characters": 7042,
+          "note": "Full source remains at the linked pinned upstream URL."
+        },
+        "encoding": "utf-8",
+        "sha": "b848c0a646394e5e6510f08811d7fd3f0db964bd",
+        "display_url": "https://github.com/ZSeven-W/dsh-openpencil/blob/34cf7b45ed10fc7de43c3ccb30406e6c40b449ae/package.json",
+        "display_title": "package.json"
+      },
+      {
+        "key": "openpencil",
+        "path": ".gitmodules",
+        "content": "[submodule \"vendor/openpencil\"]\n\tpath = vendor/openpencil\n\turl = https://github.com/ZSeven-W/openpencil.git\n",
+        "encoding": "utf-8",
+        "sha": "45927e29d68940e361c54d280858115f54dd5826",
+        "display_url": "https://github.com/ZSeven-W/dsh-openpencil/blob/34cf7b45ed10fc7de43c3ccb30406e6c40b449ae/.gitmodules",
+        "display_title": ".gitmodules"
+      },
+      {
+        "key": "openpencil",
+        "path": "platforms.json",
+        "content": "{\n  \"schemaVersion\": 1,\n  \"openPencil\": {\n    \"version\": \"0.8.5\",\n    \"revision\": \"442c48418697ae944db8bad5bad57f62ee57b1cc\"\n  },\n  \"platforms\": [\n    {\n      \"id\": \"darwin-arm64\",\n      \"os\": \"darwin\",\n      \"cpu\": \"arm64\",\n      \"rustTarget\": \"aarch64-apple-darwin\",\n      \"runner\": \"macos-15\",\n      \"packageName\": \"@zseven-w/dsh-openpencil-darwin-arm64\",\n      \"binaryName\": \"op-host-web-server\"\n    },\n    {\n      \"id\": \"darwin-x64\",\n      \"os\": \"darwin\",\n      \"cpu\": \"x64\",\n      \"rustTarget\": \"x86_64-apple-darwin\",\n      \"runner\": \"macos-15-intel\",\n      \"packageName\": \"@zseven-w/dsh-openpencil-darwin-x64\",\n      \"binaryName\": \"op-host-web-server\"\n    },\n    {\n      \"id\": \"linux-arm64\",\n      \"os\": \"linux\",\n      \"cpu\": \"arm64\",\n      \"libc\": \"glibc\",\n      \"rustTarget\": \"aarch64-unknown-linux-gnu\",\n      \"runner\": \"ubuntu-24.04-arm\",\n      \"packageName\": \"@zseven-w/dsh-openpencil-linux-arm64\",\n      \"binaryName\": \"op-host-web-server\"\n    },\n    {\n      \"id\": \"linux-x64\",\n      \"os\": \"linux\",\n      \"cpu\": \"x64\",\n      \"libc\": \"glibc\",\n      \"rustTarget\": \"x86_64-unknown-linux-gnu\",\n      \"runner\": \"ubuntu-22.04\",\n      \"packageName\": \"@zseven-w/dsh-openpencil-linux-x64\",\n      \"binaryName\": \"op-host-web-server\"\n    },\n    {\n      \"id\": \"win32-arm64\",\n      \"os\": \"win32\",\n      \"cpu\": \"arm64\",\n      \"rustTarget\": \"aarch64-pc-windows-msvc\",\n      \"runner\": \"windows-11-arm\",\n      \"packageName\": \"@zseven-w/dsh-openpencil-win32-arm64\",\n      \"binaryName\": \"op-host-web-server.exe\"\n    },\n    {\n      \"id\": \"win32-x64\",\n      \"os\": \"win32\",\n      \"cpu\": \"x64\",\n      \"rustTarget\": \"x86_64-pc-windows-msvc\",\n      \"runner\": \"windows-2025\",\n      \"packageName\": \"@zseven-w/dsh-openpencil-win32-x64\",\n      \"binaryName\": \"op-host-web-server.exe\"\n    }\n  ]\n}\n",
+        "encoding": "utf-8",
+        "sha": "105a7b910cdca5fcc43a09cac10e9f12ba065d07",
+        "display_url": "https://github.com/ZSeven-W/dsh-openpencil/blob/34cf7b45ed10fc7de43c3ccb30406e6c40b449ae/platforms.json",
+        "display_title": "platforms.json"
+      },
+      {
+        "key": "openpencil",
+        "path": ".github/workflows/release.yml",
+        "content": {
+          "sha256": "92e0035b0bf3bbdbc1834bec4c97eead641cf42bef9b2faa036e923c63da4247",
+          "characters": 15475,
+          "note": "Full source remains at the linked pinned upstream URL."
+        },
+        "encoding": "utf-8",
+        "sha": "8e41d85a409acdd8c210767ac1c1204651fd9ed1",
+        "display_url": "https://github.com/ZSeven-W/dsh-openpencil/blob/34cf7b45ed10fc7de43c3ccb30406e6c40b449ae/.github/workflows/release.yml",
+        "display_title": "release.yml"
+      },
+      {
+        "key": "openpencil",
+        "path": "scripts/run-tool.mjs",
+        "content": {
+          "sha256": "55e21084a5f4329ee0f378680373fcb8b050175beb48ab8db966385f793034fd",
+          "characters": 2786,
+          "note": "Full source remains at the linked pinned upstream URL."
+        },
+        "encoding": "utf-8",
+        "sha": "21c263a08ab9680f6d5b1ad2da1677d58733f84e",
+        "display_url": "https://github.com/ZSeven-W/dsh-openpencil/blob/34cf7b45ed10fc7de43c3ccb30406e6c40b449ae/scripts/run-tool.mjs",
+        "display_title": "run-tool.mjs"
+      },
+      {
+        "key": "anime",
+        "path": "README.md",
+        "content": {
+          "sha256": "0539f7e7d45143e64363d1743c680904999c89d1a3d07c07fb341b4b209f3125",
+          "characters": 5786,
+          "note": "Full source remains at the linked pinned upstream URL."
+        },
+        "encoding": "utf-8",
+        "sha": "6a3b093642420a259b90c405d76c0f1964d90e99",
+        "display_url": "https://github.com/cocofhu/anime-find/blob/841cdfa8aebf87c90f0d5a44a4a95710f1cdf493/README.md",
+        "display_title": "README.md"
+      },
+      {
+        "key": "anime",
+        "path": "package.json",
+        "content": {
+          "sha256": "12161c5a4cbc2ab223b24f4d401bd0cc8919648b090f9749a81d1bdb2de6db91",
+          "characters": 2063,
+          "note": "Full source remains at the linked pinned upstream URL."
+        },
+        "encoding": "utf-8",
+        "sha": "08ea16914491e075c848c8b15a5896f06ec3b663",
+        "display_url": "https://github.com/cocofhu/anime-find/blob/841cdfa8aebf87c90f0d5a44a4a95710f1cdf493/package.json",
+        "display_title": "package.json"
+      },
+      {
+        "key": "anime",
+        "path": ".github/workflows/ci.yml",
+        "content": "name: CI\n\non:\n  push:\n    branches: [main]\n  pull_request:\n\npermissions:\n  contents: read\n\nconcurrency:\n  group: ci-${{ github.workflow }}-${{ github.ref }}\n  cancel-in-progress: true\n\njobs:\n  test:\n    name: Node.js ${{ matrix.node }}\n    runs-on: ubuntu-latest\n    strategy:\n      fail-fast: false\n      matrix:\n        node: [22, 24]\n\n    steps:\n      - name: Checkout\n        uses: actions/checkout@v7\n\n      - name: Set up pnpm\n        uses: pnpm/action-setup@v6\n\n      - name: Set up Node.js\n        uses: actions/setup-node@v7\n        with:\n          node-version: ${{ matrix.node }}\n          cache: pnpm\n\n      - name: Install dependencies\n        run: pnpm install --frozen-lockfile\n\n      - name: Type check\n        run: pnpm typecheck\n\n      - name: Run tests\n        run: pnpm test\n\n      - name: Verify package contents\n        if: matrix.node == 22\n        run: pnpm pack --pack-destination /tmp\n",
+        "encoding": "utf-8",
+        "sha": "4c7869eb11a5992b7f7aa53ab189c18d5ca6779b",
+        "display_url": "https://github.com/cocofhu/anime-find/blob/841cdfa8aebf87c90f0d5a44a4a95710f1cdf493/.github/workflows/ci.yml",
+        "display_title": "ci.yml"
+      },
+      {
+        "key": "workflow",
+        "path": "README.md",
+        "content": {
+          "sha256": "2181dedc33894a73dadb42e1f833f4b9a850568910f042063b6b3faee8e2f6b3",
+          "characters": 10471,
+          "note": "Full source remains at the linked pinned upstream URL."
+        },
+        "encoding": "utf-8",
+        "sha": "09fffe8ce12c33389be272cf80a610308277734b",
+        "display_url": "https://github.com/omdsh-dev/dsh_workflow/blob/44b83c182aa02d1be8a0803e8446cb495f93cd8f/README.md",
+        "display_title": "README.md"
+      },
+      {
+        "key": "workflow",
+        "path": "package.json",
+        "content": {
+          "sha256": "c5b1ede620a6fce8baa67deb0633b0ed64894ba22a5eff6f3e1f031a6442e063",
+          "characters": 4174,
+          "note": "Full source remains at the linked pinned upstream URL."
+        },
+        "encoding": "utf-8",
+        "sha": "f01143301d7b9937b3dec53b79fc9143fe54ea1a",
+        "display_url": "https://github.com/omdsh-dev/dsh_workflow/blob/44b83c182aa02d1be8a0803e8446cb495f93cd8f/package.json",
+        "display_title": "package.json"
+      },
+      {
+        "key": "workflow",
+        "path": "compatibility.json",
+        "content": "{\n  \"repository\": \"https://github.com/dsh2026/test-icetomoyo.git\",\n  \"branch\": \"snapshots/20260812T172954Z-final-unwatermarked-5fa48343c7\",\n  \"commit\": \"7b9644f2b664e46c9518506035aa6c8d5af4d8e8\",\n  \"version\": \"0.0.1-rc.2\",\n  \"testedAt\": \"2026-08-13T10:01:44+08:00\"\n}\n",
+        "encoding": "utf-8",
+        "sha": "7b0b15dddbede517f6dcad09c136c1a89f58f92b",
+        "display_url": "https://github.com/omdsh-dev/dsh_workflow/blob/44b83c182aa02d1be8a0803e8446cb495f93cd8f/compatibility.json",
+        "display_title": "compatibility.json"
+      },
+      {
+        "key": "workflow",
+        "path": "tsconfig.json",
+        "content": {
+          "sha256": "c18b76426e8020601c62cd4199f82300161858508e6048f98af541b1382a4a9c",
+          "characters": 2173,
+          "note": "Full source remains at the linked pinned upstream URL."
+        },
+        "encoding": "utf-8",
+        "sha": "bc95c730efe23e6b51b132bac84a965d4042747f",
+        "display_url": "https://github.com/omdsh-dev/dsh_workflow/blob/44b83c182aa02d1be8a0803e8446cb495f93cd8f/tsconfig.json",
+        "display_title": "tsconfig.json"
+      },
+      {
+        "key": "workflow",
+        "path": ".npmrc",
+        "content": "auto-install-peers=false\nautoInstallPeers=false\n",
+        "encoding": "utf-8",
+        "sha": "cec2ba45f87ed266ab5ff7d8b769a0e08172c415",
+        "display_url": "https://github.com/omdsh-dev/dsh_workflow/blob/44b83c182aa02d1be8a0803e8446cb495f93cd8f/.npmrc",
+        "display_title": ".npmrc"
+      },
+      {
+        "key": "tydora",
+        "path": "cordis.patch.yml",
+        "content": "# Tydora 的 DSH 组合包补丁层。\n# 被 package.json 的 dsh.bundle.patch 引用；用户执行 `dsh plugin add` 时应用此层。\n# name 指向仓库内的插件入口（相对本文件）。\n- insert:\n    - id: tydora\n      name: './dsh/index.ts'\n",
+        "encoding": "utf-8",
+        "sha": "e0f6dd19b9567acfc835ce593240fea457d769df",
+        "display_url": "https://github.com/zuorn/Tydora/blob/4af1de4d458c7d03adc2615893e4793766c1bb87/cordis.patch.yml",
+        "display_title": "cordis.patch.yml"
+      }
+    ]
+  },
+  "followup": {
+    "animeWindowsSourcePatch": {
+      "path": "package.json",
+      "sha256": "12161c5a4cbc2ab223b24f4d401bd0cc8919648b090f9749a81d1bdb2de6db91",
+      "targets": [
+        "win32-x64"
+      ],
+      "reason": "Replace POSIX mkdir/cp with portable Node filesystem operations while preserving tsc and copied artifacts.",
+      "replacements": [
+        {
+          "from": "\"tsc -p tsconfig.json && mkdir -p lib/tests/fixtures && cp src/client.js lib/client.js && cp node_modules/hls.js/dist/hls.min.js lib/hls.min.js && cp src/tests/fixtures/* lib/tests/fixtures/\"",
+          "to": "\"tsc -p tsconfig.json && node -e \\\"const fs=require('node:fs');fs.mkdirSync('lib/tests/fixtures',{recursive:true});fs.copyFileSync('src/client.js','lib/client.js');fs.copyFileSync('node_modules/hls.js/dist/hls.min.js','lib/hls.min.js');for(const name of fs.readdirSync('src/tests/fixtures'))fs.copyFileSync('src/tests/fixtures/'+name,'lib/tests/fixtures/'+name)\\\"\""
+        }
+      ]
+    },
+    "preferredCandidateApproach": "Use direct buildCommands in recommendations.json to avoid pnpm run automatic-install behavior; source patch alone fixes only POSIX command portability.",
+    "tydoraPluginSource": {
+      "content": "// Tydora 的 DSH 插件骨架（最小可加载版本）。\n//\n// 说明：\n// - 本文件在 dsh/ 目录下，已被 Tydora 的 tsconfig（include 仅含 src）排除，\n//   因此不会影响 Tydora 自身的 tsc / vite / tauri 构建。\n// - `import type` 在编译时被擦除，运行时无 cordis 依赖；cordis 由 dsh 宿主提供。\n//\n// 想让 Tydora 真正给 DSH 智能体贡献能力时，在这里通过 ctx 注册工具 / 命令 / 服务。\n// 参考：src/content/lessons/dev/02-write-tool/zh.mdx\nimport type { Context } from 'cordis'\n\nexport const name = 'tydora'\n\nexport function apply(ctx: Context) {\n  // 最小骨架：加载即生效，目前不注册任何能力。\n  // 示例（取消注释并补充实现即可启用）：\n  // ctx.logger?.info('[tydora] plugin loaded')\n}\n",
+      "encoding": "utf-8",
+      "sha": "459d79dd569615b7d1c8164c954e85bef029408d",
+      "display_url": "https://github.com/zuorn/Tydora/blob/4af1de4d458c7d03adc2615893e4793766c1bb87/dsh/index.ts",
+      "display_title": "index.ts"
+    },
+    "workflowReleaseEvidence": [
+      {
+        "path": "tsconfig.json",
+        "content": "{\n  \"compilerOptions\": {\n    \"target\": \"ES2023\",\n    \"module\": \"NodeNext\",\n    \"moduleResolution\": \"NodeNext\",\n    \"strict\": true,\n    \"noImplicitOverride\": true,\n    \"noUncheckedIndexedAccess\": true,\n    \"exactOptionalPropertyTypes\": true,\n    \"verbatimModuleSyntax\": true,\n    \"declaration\": true,\n    \"declarationMap\": false,\n    \"sourceMap\": false,\n    \"rootDir\": \"src\",\n    \"outDir\": \"lib\",\n    \"skipLibCheck\": false\n  },\n  \"include\": [\"src/**/*.ts\"]\n}\n",
+        "encoding": "utf-8",
+        "sha": "b4ae9c36b79f05e89a56b0dd69c99c5261107b3d",
+        "display_url": "https://github.com/omdsh-dev/dsh_workflow/blob/804e4c38e4e1649f5777f92fed28fa29d17aa62d/tsconfig.json",
+        "display_title": "tsconfig.json"
+      },
+      {
+        "path": "README.md",
+        "content": {
+          "sha256": "7411ed9406dbc75fae929758e1a465981b0f0d520cc1d0f8d4f26a2f1909ae5a",
+          "characters": 8348,
+          "note": "Full source remains at the linked pinned upstream URL."
+        },
+        "encoding": "utf-8",
+        "sha": "63fc5919484c416f3d20290d9ed297f7427379aa",
+        "display_url": "https://github.com/omdsh-dev/dsh_workflow/blob/804e4c38e4e1649f5777f92fed28fa29d17aa62d/README.md",
+        "display_title": "README.md"
+      },
+      {
+        "path": "compatibility.json",
+        "content": "{\n  \"repository\": \"https://github.com/deepseek-ai/deepseek-harness.git\",\n  \"branch\": \"master\",\n  \"commit\": \"47f943859bef60e4160492346772ded9b24f765a\",\n  \"version\": \"0.1.0-rc.5\",\n  \"testedAt\": \"2026-08-14T07:35:00+08:00\"\n}\n",
+        "encoding": "utf-8",
+        "sha": "175c265cb7a5e8e84b047e4baebe9d3ee515c646",
+        "display_url": "https://github.com/omdsh-dev/dsh_workflow/blob/804e4c38e4e1649f5777f92fed28fa29d17aa62d/compatibility.json",
+        "display_title": "compatibility.json"
+      }
+    ]
+  },
+  "sourcePins": [
+    {
+      "key": "ios",
+      "repository": "ZSeven-W/dsh-ios",
+      "release": "v0.1.0-rc.10",
+      "tagObject": {
+        "sha": "3d9f19841d0e1e7b20c6e109ffa3c1daf40ddd29",
+        "type": "tag",
+        "url": "https://api.github.com/repos/ZSeven-W/dsh-ios/git/tags/3d9f19841d0e1e7b20c6e109ffa3c1daf40ddd29"
+      },
+      "commit": "ed785afb2872e0cf5c5c325be94f81a7b8451284"
+    },
+    {
+      "key": "openpencil",
+      "repository": "ZSeven-W/dsh-openpencil",
+      "release": "v0.1.0-rc.13",
+      "tagObject": {
+        "sha": "7ea79ff889bd85718dc56850128ef5a4b7fc9039",
+        "type": "tag",
+        "url": "https://api.github.com/repos/ZSeven-W/dsh-openpencil/git/tags/7ea79ff889bd85718dc56850128ef5a4b7fc9039"
+      },
+      "commit": "34cf7b45ed10fc7de43c3ccb30406e6c40b449ae"
+    },
+    {
+      "key": "anime",
+      "repository": "cocofhu/anime-find",
+      "release": "v0.1.12",
+      "tagObject": {
+        "sha": "6783e16dd82378c0a1f742c1ecdf8689a83ffc16",
+        "type": "tag",
+        "url": "https://api.github.com/repos/cocofhu/anime-find/git/tags/6783e16dd82378c0a1f742c1ecdf8689a83ffc16"
+      },
+      "commit": "a772e4d74608469507a48bf5bfe8445cd567064f"
+    },
+    {
+      "key": "workflow",
+      "repository": "omdsh-dev/dsh_workflow",
+      "release": "v0.1.3",
+      "tagObject": {
+        "sha": "5e4c3667c0814b53f4f958216943cf95f4bd10f7",
+        "type": "tag",
+        "url": "https://api.github.com/repos/omdsh-dev/dsh_workflow/git/tags/5e4c3667c0814b53f4f958216943cf95f4bd10f7"
+      },
+      "commit": "804e4c38e4e1649f5777f92fed28fa29d17aa62d"
+    }
+  ],
+  "prebuilt": [
+    {
+      "name": "@zseven-w/dsh-openpencil",
+      "version": "0.1.0-rc.13",
+      "url": "https://registry.npmjs.org/@zseven-w/dsh-openpencil/-/dsh-openpencil-0.1.0-rc.13.tgz",
+      "sha256": "d3a56f2706d8b9172e8d728a8291d5259b7885a75240e4ad7cc02568ea10839d",
+      "bytes": 11579857,
+      "integrityVerified": true,
+      "gitHead": null,
+      "runtimeAssets": [
+        "package/lib/viewer-assets/canvaskit/canvaskit.wasm",
+        "package/lib/viewer-assets/op_web_sdk_bg.wasm"
+      ]
+    },
+    {
+      "name": "@zseven-w/dsh-openpencil-darwin-arm64",
+      "version": "0.1.0-rc.13",
+      "url": "https://registry.npmjs.org/@zseven-w/dsh-openpencil-darwin-arm64/-/dsh-openpencil-darwin-arm64-0.1.0-rc.13.tgz",
+      "sha256": "161e5327e7aaa7ed73786990a71274ef37465d3b73c71c52dcad84e3b561dec6",
+      "bytes": 42750702,
+      "integrityVerified": true,
+      "gitHead": null,
+      "runtimeAssets": [
+        "package/bin/web-bundle/canvaskit/LICENSE",
+        "package/bin/web-bundle/assets/scene_template_previews/app-onboarding-triptych.jpg",
+        "package/bin/web-bundle/assets/scene_template_previews/banxin-rule-deck.jpg",
+        "package/bin/web-bundle/assets/scene_template_previews/before-after.jpg",
+        "package/bin/web-bundle/assets/scene_template_previews/bookreview-silk-carousel.jpg",
+        "package/bin/web-bundle/assets/scene_template_previews/brand-concept-sheet.jpg",
+        "package/bin/web-bundle/assets/scene_template_previews/challenge-tracker-infographic.jpg",
+        "package/bin/web-bundle/assets/scene_template_previews/cityguide-film-carousel.jpg",
+        "package/bin/web-bundle/assets/prompt_center_previews/component-data-grid.jpg",
+        "package/bin/web-bundle/assets/prompt_center_previews/component-form-lab.jpg",
+        "package/bin/web-bundle/assets/scene_template_previews/concept-contrast-infographic.jpg",
+        "package/bin/web-bundle/assets/scene_template_previews/daily-sign-card.jpg",
+        "package/bin/web-bundle/assets/prompt_center_previews/dashboard-pulse.jpg",
+        "package/bin/web-bundle/assets/prompt_center_previews/dashboard-sentinel.jpg",
+        "package/bin/web-bundle/assets/scene_template_previews/data-report-infographic.jpg",
+        "package/bin/web-bundle/assets/scene_template_previews/data-story-infographic.jpg",
+        "package/bin/web-bundle/assets/scene_template_previews/datareport-grid-carousel.jpg",
+        "package/bin/web-bundle/assets/scene_template_previews/diy-blueprint-guide.jpg",
+        "package/bin/web-bundle/assets/scene_template_previews/do-dont-comparison.jpg",
+        "package/bin/web-bundle/assets/scene_template_previews/dossier-linen-deck.jpg"
+      ]
+    },
+    {
+      "name": "@zseven-w/dsh-openpencil-linux-x64",
+      "version": "0.1.0-rc.13",
+      "url": "https://registry.npmjs.org/@zseven-w/dsh-openpencil-linux-x64/-/dsh-openpencil-linux-x64-0.1.0-rc.13.tgz",
+      "sha256": "4a5f8098736083b291c0695e76553a1f0f6213ffe022b457858a799e54be47e9",
+      "bytes": 44785705,
+      "integrityVerified": true,
+      "gitHead": null,
+      "runtimeAssets": [
+        "package/bin/web-bundle/canvaskit/LICENSE",
+        "package/bin/web-bundle/assets/scene_template_previews/app-onboarding-triptych.jpg",
+        "package/bin/web-bundle/assets/scene_template_previews/banxin-rule-deck.jpg",
+        "package/bin/web-bundle/assets/scene_template_previews/before-after.jpg",
+        "package/bin/web-bundle/assets/scene_template_previews/bookreview-silk-carousel.jpg",
+        "package/bin/web-bundle/assets/scene_template_previews/brand-concept-sheet.jpg",
+        "package/bin/web-bundle/assets/scene_template_previews/challenge-tracker-infographic.jpg",
+        "package/bin/web-bundle/assets/scene_template_previews/cityguide-film-carousel.jpg",
+        "package/bin/web-bundle/assets/prompt_center_previews/component-data-grid.jpg",
+        "package/bin/web-bundle/assets/prompt_center_previews/component-form-lab.jpg",
+        "package/bin/web-bundle/assets/scene_template_previews/concept-contrast-infographic.jpg",
+        "package/bin/web-bundle/assets/scene_template_previews/daily-sign-card.jpg",
+        "package/bin/web-bundle/assets/prompt_center_previews/dashboard-pulse.jpg",
+        "package/bin/web-bundle/assets/prompt_center_previews/dashboard-sentinel.jpg",
+        "package/bin/web-bundle/assets/scene_template_previews/data-report-infographic.jpg",
+        "package/bin/web-bundle/assets/scene_template_previews/data-story-infographic.jpg",
+        "package/bin/web-bundle/assets/scene_template_previews/datareport-grid-carousel.jpg",
+        "package/bin/web-bundle/assets/scene_template_previews/diy-blueprint-guide.jpg",
+        "package/bin/web-bundle/assets/scene_template_previews/do-dont-comparison.jpg",
+        "package/bin/web-bundle/assets/scene_template_previews/dossier-linen-deck.jpg"
+      ]
+    },
+    {
+      "name": "@zseven-w/dsh-openpencil-win32-x64",
+      "version": "0.1.0-rc.13",
+      "url": "https://registry.npmjs.org/@zseven-w/dsh-openpencil-win32-x64/-/dsh-openpencil-win32-x64-0.1.0-rc.13.tgz",
+      "sha256": "8392dbfffa818fab35f1164a71349f4851d0df7d15b4c62a4fd29a04749c4884",
+      "bytes": 44541734,
+      "integrityVerified": true,
+      "gitHead": null,
+      "runtimeAssets": [
+        "package/bin/web-bundle/canvaskit/LICENSE",
+        "package/bin/op-host-web-server.exe",
+        "package/bin/web-bundle/assets/scene_template_previews/app-onboarding-triptych.jpg",
+        "package/bin/web-bundle/assets/scene_template_previews/banxin-rule-deck.jpg",
+        "package/bin/web-bundle/assets/scene_template_previews/before-after.jpg",
+        "package/bin/web-bundle/assets/scene_template_previews/bookreview-silk-carousel.jpg",
+        "package/bin/web-bundle/assets/scene_template_previews/brand-concept-sheet.jpg",
+        "package/bin/web-bundle/assets/scene_template_previews/challenge-tracker-infographic.jpg",
+        "package/bin/web-bundle/assets/scene_template_previews/cityguide-film-carousel.jpg",
+        "package/bin/web-bundle/assets/prompt_center_previews/component-data-grid.jpg",
+        "package/bin/web-bundle/assets/prompt_center_previews/component-form-lab.jpg",
+        "package/bin/web-bundle/assets/scene_template_previews/concept-contrast-infographic.jpg",
+        "package/bin/web-bundle/assets/scene_template_previews/daily-sign-card.jpg",
+        "package/bin/web-bundle/assets/prompt_center_previews/dashboard-pulse.jpg",
+        "package/bin/web-bundle/assets/prompt_center_previews/dashboard-sentinel.jpg",
+        "package/bin/web-bundle/assets/scene_template_previews/data-report-infographic.jpg",
+        "package/bin/web-bundle/assets/scene_template_previews/data-story-infographic.jpg",
+        "package/bin/web-bundle/assets/scene_template_previews/datareport-grid-carousel.jpg",
+        "package/bin/web-bundle/assets/scene_template_previews/diy-blueprint-guide.jpg",
+        "package/bin/web-bundle/assets/scene_template_previews/do-dont-comparison.jpg"
+      ]
+    },
+    {
+      "name": "@zseven-w/dsh-ios",
+      "version": "0.1.0-rc.10",
+      "url": "https://registry.npmjs.org/@zseven-w/dsh-ios/-/dsh-ios-0.1.0-rc.10.tgz",
+      "sha256": "c10e22b5b04058d5b9ff6778c6bf9b125aaa54b2091ef7d4b02795c80a8a4aed",
+      "bytes": 1287913,
+      "integrityVerified": true,
+      "gitHead": "ed785afb2872e0cf5c5c325be94f81a7b8451284",
+      "runtimeAssets": []
+    },
+    {
+      "name": "@cocofhu/anime-find",
+      "version": "0.1.12",
+      "url": "https://registry.npmjs.org/@cocofhu/anime-find/-/anime-find-0.1.12.tgz",
+      "sha256": "85146f0f67d102a80b24828cc5eba608d8ab26a2c6b37dab3e535ce316956bb7",
+      "bytes": 244829,
+      "integrityVerified": true,
+      "gitHead": "a772e4d74608469507a48bf5bfe8445cd567064f",
+      "runtimeAssets": []
+    }
+  ],
+  "provenance": [
+    {
+      "name": "@zseven-w/dsh-openpencil",
+      "url": "https://registry.npmjs.org/-/npm/v1/attestations/@zseven-w%2fdsh-openpencil@0.1.0-rc.13",
+      "statements": [
+        {
+          "_type": "https://in-toto.io/Statement/v0.1",
+          "subject": [
+            {
+              "name": "pkg:npm/%40zseven-w/dsh-openpencil@0.1.0-rc.13",
+              "digest": {
+                "sha512": "6f99dd4007d50d95ba730c555eb76ae9bd356b1c0f98bda18fe4d940a376ceb000bb2676c6d2ef464e0ac52a593f6f750c6a79a1e12f786303d516ae5dd370ee"
+              }
+            }
+          ],
+          "predicateType": "https://github.com/npm/attestation/tree/main/specs/publish/v0.1",
+          "predicate": {
+            "name": "@zseven-w/dsh-openpencil",
+            "version": "0.1.0-rc.13",
+            "registry": "https://registry.npmjs.org"
+          }
+        },
+        {
+          "_type": "https://in-toto.io/Statement/v1",
+          "subject": [
+            {
+              "name": "pkg:npm/%40zseven-w/dsh-openpencil@0.1.0-rc.13",
+              "digest": {
+                "sha512": "6f99dd4007d50d95ba730c555eb76ae9bd356b1c0f98bda18fe4d940a376ceb000bb2676c6d2ef464e0ac52a593f6f750c6a79a1e12f786303d516ae5dd370ee"
+              }
+            }
+          ],
+          "predicateType": "https://slsa.dev/provenance/v1",
+          "predicate": {
+            "buildDefinition": {
+              "buildType": "https://slsa-framework.github.io/github-actions-buildtypes/workflow/v1",
+              "externalParameters": {
+                "workflow": {
+                  "ref": "refs/tags/v0.1.0-rc.13",
+                  "repository": "https://github.com/ZSeven-W/dsh-openpencil",
+                  "path": ".github/workflows/release.yml"
+                }
+              },
+              "internalParameters": {
+                "github": {
+                  "event_name": "push",
+                  "repository_id": "1332212466",
+                  "repository_owner_id": "218180147"
+                }
+              },
+              "resolvedDependencies": [
+                {
+                  "uri": "git+https://github.com/ZSeven-W/dsh-openpencil@refs/tags/v0.1.0-rc.13",
+                  "digest": {
+                    "gitCommit": "34cf7b45ed10fc7de43c3ccb30406e6c40b449ae"
+                  }
+                }
+              ]
+            },
+            "runDetails": {
+              "builder": {
+                "id": "https://github.com/actions/runner/github-hosted"
+              },
+              "metadata": {
+                "invocationId": "https://github.com/ZSeven-W/dsh-openpencil/actions/runs/37522652762/attempts/1"
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "@zseven-w/dsh-openpencil-darwin-arm64",
+      "url": "https://registry.npmjs.org/-/npm/v1/attestations/@zseven-w%2fdsh-openpencil-darwin-arm64@0.1.0-rc.13",
+      "statements": [
+        {
+          "_type": "https://in-toto.io/Statement/v0.1",
+          "subject": [
+            {
+              "name": "pkg:npm/%40zseven-w/dsh-openpencil-darwin-arm64@0.1.0-rc.13",
+              "digest": {
+                "sha512": "492958eaeb172294e8ff36a302d0c5b971e332225268c4c1002523c2d9bb9b0558b12674026637a01bb4c79e008ebed5ea31d76269d65140484236ca71f0ee2d"
+              }
+            }
+          ],
+          "predicateType": "https://github.com/npm/attestation/tree/main/specs/publish/v0.1",
+          "predicate": {
+            "name": "@zseven-w/dsh-openpencil-darwin-arm64",
+            "version": "0.1.0-rc.13",
+            "registry": "https://registry.npmjs.org"
+          }
+        },
+        {
+          "_type": "https://in-toto.io/Statement/v1",
+          "subject": [
+            {
+              "name": "pkg:npm/%40zseven-w/dsh-openpencil-darwin-arm64@0.1.0-rc.13",
+              "digest": {
+                "sha512": "492958eaeb172294e8ff36a302d0c5b971e332225268c4c1002523c2d9bb9b0558b12674026637a01bb4c79e008ebed5ea31d76269d65140484236ca71f0ee2d"
+              }
+            }
+          ],
+          "predicateType": "https://slsa.dev/provenance/v1",
+          "predicate": {
+            "buildDefinition": {
+              "buildType": "https://slsa-framework.github.io/github-actions-buildtypes/workflow/v1",
+              "externalParameters": {
+                "workflow": {
+                  "ref": "refs/tags/v0.1.0-rc.13",
+                  "repository": "https://github.com/ZSeven-W/dsh-openpencil",
+                  "path": ".github/workflows/release.yml"
+                }
+              },
+              "internalParameters": {
+                "github": {
+                  "event_name": "push",
+                  "repository_id": "1332212466",
+                  "repository_owner_id": "218180147"
+                }
+              },
+              "resolvedDependencies": [
+                {
+                  "uri": "git+https://github.com/ZSeven-W/dsh-openpencil@refs/tags/v0.1.0-rc.13",
+                  "digest": {
+                    "gitCommit": "34cf7b45ed10fc7de43c3ccb30406e6c40b449ae"
+                  }
+                }
+              ]
+            },
+            "runDetails": {
+              "builder": {
+                "id": "https://github.com/actions/runner/github-hosted"
+              },
+              "metadata": {
+                "invocationId": "https://github.com/ZSeven-W/dsh-openpencil/actions/runs/37522652762/attempts/1"
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "@zseven-w/dsh-openpencil-linux-x64",
+      "url": "https://registry.npmjs.org/-/npm/v1/attestations/@zseven-w%2fdsh-openpencil-linux-x64@0.1.0-rc.13",
+      "statements": [
+        {
+          "_type": "https://in-toto.io/Statement/v0.1",
+          "subject": [
+            {
+              "name": "pkg:npm/%40zseven-w/dsh-openpencil-linux-x64@0.1.0-rc.13",
+              "digest": {
+                "sha512": "8560babac476c32f5d4d28b7c77c2d8b86824b8656d60bb458de0b7592c714abcd675900425e1537f09556a4a0096677b2aee2b6dd6086bcf08af69c7beb4e01"
+              }
+            }
+          ],
+          "predicateType": "https://github.com/npm/attestation/tree/main/specs/publish/v0.1",
+          "predicate": {
+            "name": "@zseven-w/dsh-openpencil-linux-x64",
+            "version": "0.1.0-rc.13",
+            "registry": "https://registry.npmjs.org"
+          }
+        },
+        {
+          "_type": "https://in-toto.io/Statement/v1",
+          "subject": [
+            {
+              "name": "pkg:npm/%40zseven-w/dsh-openpencil-linux-x64@0.1.0-rc.13",
+              "digest": {
+                "sha512": "8560babac476c32f5d4d28b7c77c2d8b86824b8656d60bb458de0b7592c714abcd675900425e1537f09556a4a0096677b2aee2b6dd6086bcf08af69c7beb4e01"
+              }
+            }
+          ],
+          "predicateType": "https://slsa.dev/provenance/v1",
+          "predicate": {
+            "buildDefinition": {
+              "buildType": "https://slsa-framework.github.io/github-actions-buildtypes/workflow/v1",
+              "externalParameters": {
+                "workflow": {
+                  "ref": "refs/tags/v0.1.0-rc.13",
+                  "repository": "https://github.com/ZSeven-W/dsh-openpencil",
+                  "path": ".github/workflows/release.yml"
+                }
+              },
+              "internalParameters": {
+                "github": {
+                  "event_name": "push",
+                  "repository_id": "1332212466",
+                  "repository_owner_id": "218180147"
+                }
+              },
+              "resolvedDependencies": [
+                {
+                  "uri": "git+https://github.com/ZSeven-W/dsh-openpencil@refs/tags/v0.1.0-rc.13",
+                  "digest": {
+                    "gitCommit": "34cf7b45ed10fc7de43c3ccb30406e6c40b449ae"
+                  }
+                }
+              ]
+            },
+            "runDetails": {
+              "builder": {
+                "id": "https://github.com/actions/runner/github-hosted"
+              },
+              "metadata": {
+                "invocationId": "https://github.com/ZSeven-W/dsh-openpencil/actions/runs/37522652762/attempts/1"
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "@zseven-w/dsh-openpencil-win32-x64",
+      "url": "https://registry.npmjs.org/-/npm/v1/attestations/@zseven-w%2fdsh-openpencil-win32-x64@0.1.0-rc.13",
+      "statements": [
+        {
+          "_type": "https://in-toto.io/Statement/v0.1",
+          "subject": [
+            {
+              "name": "pkg:npm/%40zseven-w/dsh-openpencil-win32-x64@0.1.0-rc.13",
+              "digest": {
+                "sha512": "951dcceacd79fbbbb2883bf7ad88edb37f31784d06b3e3e268c9fd61fc4e1158850fb1299274a9ee89e4f6a3627b6e8a95122de216686e99d636abef858afef3"
+              }
+            }
+          ],
+          "predicateType": "https://github.com/npm/attestation/tree/main/specs/publish/v0.1",
+          "predicate": {
+            "name": "@zseven-w/dsh-openpencil-win32-x64",
+            "version": "0.1.0-rc.13",
+            "registry": "https://registry.npmjs.org"
+          }
+        },
+        {
+          "_type": "https://in-toto.io/Statement/v1",
+          "subject": [
+            {
+              "name": "pkg:npm/%40zseven-w/dsh-openpencil-win32-x64@0.1.0-rc.13",
+              "digest": {
+                "sha512": "951dcceacd79fbbbb2883bf7ad88edb37f31784d06b3e3e268c9fd61fc4e1158850fb1299274a9ee89e4f6a3627b6e8a95122de216686e99d636abef858afef3"
+              }
+            }
+          ],
+          "predicateType": "https://slsa.dev/provenance/v1",
+          "predicate": {
+            "buildDefinition": {
+              "buildType": "https://slsa-framework.github.io/github-actions-buildtypes/workflow/v1",
+              "externalParameters": {
+                "workflow": {
+                  "ref": "refs/tags/v0.1.0-rc.13",
+                  "repository": "https://github.com/ZSeven-W/dsh-openpencil",
+                  "path": ".github/workflows/release.yml"
+                }
+              },
+              "internalParameters": {
+                "github": {
+                  "event_name": "push",
+                  "repository_id": "1332212466",
+                  "repository_owner_id": "218180147"
+                }
+              },
+              "resolvedDependencies": [
+                {
+                  "uri": "git+https://github.com/ZSeven-W/dsh-openpencil@refs/tags/v0.1.0-rc.13",
+                  "digest": {
+                    "gitCommit": "34cf7b45ed10fc7de43c3ccb30406e6c40b449ae"
+                  }
+                }
+              ]
+            },
+            "runDetails": {
+              "builder": {
+                "id": "https://github.com/actions/runner/github-hosted"
+              },
+              "metadata": {
+                "invocationId": "https://github.com/ZSeven-W/dsh-openpencil/actions/runs/37522652762/attempts/1"
+              }
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "actualBuilds": {
+    "automatedTestsRunLocally": false,
+    "source": "Previously downloaded registry bytes, with npm SHA512 and exact SHA256 checked.",
+    "platform": "macos-arm64",
+    "results": [
+      {
+        "repository": "ZSeven-W/dsh-openpencil",
+        "status": "compiled",
+        "seconds": 12.948,
+        "artifact": {
+          "filename": "zseven-w-dsh-openpencil-0.1.0-rc.13.tgz",
+          "kind": "plugin",
+          "warnings": [],
+          "name": "@zseven-w/dsh-openpencil",
+          "version": "0.1.0-rc.13",
+          "bytes": 53271174,
+          "sha256": "5da82191e113b5a86d5dbc2e33039faff8e063a1554edd7b2a9ea5edbe39af64",
+          "url": "https://registry.npmjs.org/@zseven-w/dsh-openpencil/-/dsh-openpencil-0.1.0-rc.13.tgz",
+          "inputs": [
+            {
+              "url": "https://registry.npmjs.org/@zseven-w/dsh-openpencil/-/dsh-openpencil-0.1.0-rc.13.tgz",
+              "sha256": "d3a56f2706d8b9172e8d728a8291d5259b7885a75240e4ad7cc02568ea10839d"
+            },
+            {
+              "url": "https://registry.npmjs.org/@zseven-w/dsh-openpencil-darwin-arm64/-/dsh-openpencil-darwin-arm64-0.1.0-rc.13.tgz",
+              "sha256": "161e5327e7aaa7ed73786990a71274ef37465d3b73c71c52dcad84e3b561dec6"
+            }
+          ],
+          "origin": "upstream-prebuilt-with-runtime",
+          "runtimeDependencies": {
+            "@zseven-w/dsh-openpencil-darwin-arm64": "0.1.0-rc.13"
+          },
+          "hostPeers": {
+            "react": "^18.2.0",
+            "react-dom": "^18.2.0"
+          },
+          "hostCompatibility": null
+        }
+      },
+      {
+        "repository": "ZSeven-W/dsh-ios",
+        "status": "compiled",
+        "seconds": 0.276,
+        "artifact": {
+          "filename": "dsh-ios-0.1.0-rc.10.tgz",
+          "kind": "plugin",
+          "warnings": [],
+          "name": "@zseven-w/dsh-ios",
+          "version": "0.1.0-rc.10",
+          "bytes": 1287913,
+          "sha256": "c10e22b5b04058d5b9ff6778c6bf9b125aaa54b2091ef7d4b02795c80a8a4aed",
+          "url": "https://registry.npmjs.org/@zseven-w/dsh-ios/-/dsh-ios-0.1.0-rc.10.tgz",
+          "inputs": [
+            {
+              "url": "https://registry.npmjs.org/@zseven-w/dsh-ios/-/dsh-ios-0.1.0-rc.10.tgz",
+              "sha256": "c10e22b5b04058d5b9ff6778c6bf9b125aaa54b2091ef7d4b02795c80a8a4aed"
+            }
+          ],
+          "origin": "upstream-prebuilt",
+          "runtimeDependencies": {
+            "serve-sim": "^0.1.45"
+          },
+          "hostPeers": {},
+          "hostCompatibility": null
+        }
+      },
+      {
+        "repository": "cocofhu/anime-find",
+        "status": "compiled",
+        "seconds": 0.106,
+        "artifact": {
+          "filename": "anime-find-0.1.12.tgz",
+          "kind": "plugin",
+          "warnings": [],
+          "name": "@cocofhu/anime-find",
+          "version": "0.1.12",
+          "bytes": 244829,
+          "sha256": "85146f0f67d102a80b24828cc5eba608d8ab26a2c6b37dab3e535ce316956bb7",
+          "url": "https://registry.npmjs.org/@cocofhu/anime-find/-/anime-find-0.1.12.tgz",
+          "inputs": [
+            {
+              "url": "https://registry.npmjs.org/@cocofhu/anime-find/-/anime-find-0.1.12.tgz",
+              "sha256": "85146f0f67d102a80b24828cc5eba608d8ab26a2c6b37dab3e535ce316956bb7"
+            }
+          ],
+          "origin": "upstream-prebuilt",
+          "runtimeDependencies": {
+            "cheerio": "^1.1.2",
+            "hls.js": "^1.7.0"
+          },
+          "hostPeers": {
+            "@deepseek-ai/cordis": "*",
+            "@deepseek-ai/dsh-settings": "*",
+            "@deepseek-ai/dsh-tools": "*",
+            "@deepseek-ai/schemastery": "*",
+            "react": "^18.2.0"
+          },
+          "hostCompatibility": null
+        }
+      }
+    ]
+  },
+  "actualBatchRecovery": {
+    "sourceArtifact": 12231786279,
+    "checks": [
+      {
+        "repository": "GanyuanRan/Aegis",
+        "filename": "aegis-2.13.1.tgz",
+        "bytes": 3395706,
+        "sha256": "cda57cf437254fa7cd92d894ff69808a2e6273e27ce839c7d0e1a71e077f8ede",
+        "matches": true
+      },
+      {
+        "repository": "ranxianglei/billion-context",
+        "filename": "billion-context-0.1.202.tgz",
+        "bytes": 8932854,
+        "sha256": "77fe8a666028f040adc642868a65bcd9ee53c0392aa6ef9b0b98461b0f80e7f2",
+        "matches": true
+      },
+      {
+        "repository": "shaobeichen/dsh-pocket",
+        "filename": "dsh-pocket-2.12.0.tgz",
+        "bytes": 180183,
+        "sha256": "aa75689af6a2ded126248e0704ab5000224d2bb755734aa0a2d1aecb41b796d0",
+        "matches": true
+      },
+      {
+        "repository": "elysia395/dsh-wallpaper-engine",
+        "filename": "dsh-plugin-wallpaper-engine-1.3.3.tgz",
+        "bytes": 3529468,
+        "sha256": "52d7ababdccf0bfa289196914493af8d61a8802f253c9f6ceefe079e70421c67",
+        "matches": true
+      }
+    ]
+  }
+}

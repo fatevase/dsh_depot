@@ -52,7 +52,7 @@ export function candidateSnapshot(report,{run,artifacts,config,repository}){
    if(r.status!=='missing'&&(r.verification!=='not-run'||r.repositoryId!==p.repositoryId||r.commit!==p.commit||r.target!==target))throw Error('Candidate receipt identity mismatch')
    const batch=Math.floor(config.entries.findIndex(e=>e.repositoryId===p.repositoryId)/config.batchSize)+1
    const artifact=artifacts.find(a=>a.name===`candidate-batch-${batch}-${target}`&&!a.expired)
-   return [target,{status:r.status,version:r.package?.version,error:r.error?.slice(0,5000),errorCategory:r.errorCategory,
+   return [target,{status:r.status,version:r.package?.version,error:r.error?.slice(0,5000),errorCategory:r.errorCategory,warnings:r.warnings??[],
     artifactsUrl:r.status==='compiled'&&artifact?`${runUrl}/artifacts/${artifact.id}`:undefined,
     artifactsExpiresAt:artifact?.expires_at,
     files:(r.artifacts??[]).map(a=>({name:a.name,version:a.version,filename:a.filename,bytes:a.bytes,sha256:a.sha256}))}]
@@ -61,7 +61,7 @@ export function candidateSnapshot(report,{run,artifacts,config,repository}){
  })
  if(seen.size!==expected.size)throw Error('Candidate snapshot does not cover the maintained list')
  for(const key of Object.keys(counts))if(report.counts?.[key]!==counts[key])throw Error('Candidate report counts mismatch')
- return {schemaVersion:1,runId:run.id,runUrl,completedAt:run.updated_at,counts,plugins}
+ return {schemaVersion:1,runId:run.id,runAttempt:run.run_attempt,runUrl,completedAt:run.updated_at,counts,plugins}
 }
 
 export function withCandidateReport(catalog,snapshot){
@@ -69,7 +69,7 @@ export function withCandidateReport(catalog,snapshot){
  const plugins=catalog.plugins.map(p=>({...p})),byRepo=new Map(plugins.map(p=>[p.repository.toLowerCase(),p]))
  for(const trial of snapshot.plugins){
   const old=byRepo.get(trial.repository.toLowerCase())
-  const visible={...trial,results:Object.fromEntries(Object.entries(trial.results).map(([t,r])=>[t,{...r,artifactsUrl:Date.parse(r.artifactsExpiresAt)>Date.now()?r.artifactsUrl:undefined}]))}
+  const visible={...trial,results:Object.fromEntries(Object.entries(trial.results).map(([t,r])=>[t,{...r,artifactsUrl:undefined}]))}
   if(old){old.trial=visible;continue}
   plugins.push({id:`candidate-${trial.repositoryId}`,name:trial.repository.split('/')[1],repository:trial.repository,npmName:trial.npmName,category:'tools',status:'trial',description:'',seed:{commit:trial.commit},trial:visible})
  }

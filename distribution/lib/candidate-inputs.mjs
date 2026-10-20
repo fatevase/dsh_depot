@@ -18,6 +18,7 @@ export function assertArtifact(input) {
 }
 export function assertCandidate(entry) {
  repository(entry.repository); relative(entry.packagePath)
+ if(entry.packWrapper)relative(entry.packWrapper)
  if (entry.source) {
   if (entry.source.mode !== 'git-tree' || !entry.source.paths?.length) throw Error('Invalid component source selection')
   for (const p of entry.source.paths) relative(p)
@@ -51,6 +52,7 @@ export function assertCandidate(entry) {
   if (!semver.valid(entry.prebuilt.version)) throw Error('Prebuilt packages require an exact version')
   commit(entry.prebuilt.sourceCommit)
   for (const input of Object.values(entry.prebuilt.targets)) assertArtifact(input)
+  for(const input of Object.values(entry.prebuilt.runtimePackages??{})){assertArtifact(input);if(!/^(@[\w.-]+\/)?[\w.-]+$/.test(input.name)||!semver.valid(input.version))throw Error('Invalid pinned runtime package');if(!input.integrityManifest)throw Error('Native packages require an integrity manifest');relative(input.integrityManifest)}
  }
  return entry
 }

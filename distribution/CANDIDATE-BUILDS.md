@@ -50,3 +50,13 @@
 - Marketing Dashboard、Reverse Skill：显式允许试编译刷新不同步锁并留存结果。
 
 这些配置表示已实现处理路径，不能代替实际构建结果。失败记录新增 stage、errorCategory、适配配置摘要、源码依赖摘要、每个组件产物及宿主依赖。新的分类会保留在汇总报告中；试编译结果仍不进入正式发布流程。
+
+## 独立公开下载与上游构建依据
+
+- 内部批次只用于调度；网站不再链接需要登录且混装多个插件的 Actions ZIP。`Candidate package downloads` 校验原主分支计划、回执、文件字节和 SHA-256 后，把成功包逐个发布为 prerelease 资源。名称包含仓库 ID、包版本和平台；不会标为已离线验证。
+- 该流程会恢复已有完整构建的包，不要求重编译成功项。之后每轮完整候选构建完成会自动发布并刷新 Pages。`candidate-downloads.json` 和 `SHA256SUMS` 记录所有独立文件。
+- `packWrapper` 按上游脚本包装打包命令；TUI 使用官方 with-publish-manifest + npm pack。
+- `prebuilt.runtimePackages` 固定平台依赖包及资源清单；OpenPencil 将官方平台运行包嵌入对应平台 .tgz，合包前后核对资源摘要。原始输入校验值保留。
+- 缺失导出的类型声明只记警告；JS 主入口、DSH patch、平台资源缺失仍阻断。不能将桌面应用空的插件入口当作已完成插件。
+- 已逐项核对十个失败项目的 README、构建脚本、CI 和发布元数据。大肥鱼、配置管理器、OpenPencil、iOS、搜番引用明确版本/源码提交/校验值的上游成品；Safety Net 与 Workflow 使用源码提交内已构建的 lib/dist，明确记录未重编译。Tydora 的上游 DSH 入口仍为空骨架，记录真实阻断原因。
+- 证据：`docs/evidence/readme-build-adapters-2026-10-20.json`。本轮未新增或在本地运行自动测试。
