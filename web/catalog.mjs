@@ -1,6 +1,7 @@
 import { isDownloadablePackage, isUnverifiedPackage, verificationMessage } from '@dsh-depot/offline-format/package-status'
 export { isUnverifiedPackage, verificationMessage }
-export const categories = {all:'全部插件',interface:'界面体验',workspace:'工作空间',tools:'实用工具'}
+import {categoryKey} from './categories.mjs'
+export {categories} from './categories.mjs'
 export const platforms = {all:'全部平台','macos-arm64':'macOS · arm64','linux-x64':'Linux · x64','win32-x64':'Windows · x64'}
 export const packagesFor = (catalog,id) => catalog.packages.filter(p=>p.recipeId===id&&isDownloadablePackage(p)&&(!catalog.latest||Object.values(catalog.latest).includes(p.buildKey)))
 export function platformState(catalog,plugin,target){
@@ -8,7 +9,7 @@ export function platformState(catalog,plugin,target){
  if(published)return {label:isUnverifiedPackage(published)?'未验证 · 可下载':'已验证 · 可下载',package:published,unverified:isUnverifiedPackage(published)}
  const trial=plugin.trial?.results?.[target]
  if(trial){
-  if(trial.status==='compiled')return {label:'已构建 · 未离线验证',message:'已完成源码编译打包或固定成品包检查，尚未完成离线安装验证。构建产物保存在 Actions，下载需要登录 GitHub。',unverified:true,trial}
+  if(trial.status==='compiled')return {label:'已构建 · 未离线验证',message:'已完成源码编译打包或固定成品包检查，尚未完成离线安装验证。可直接下载已发布的构建包；构建步骤和检查结果见站内记录。',unverified:true,trial}
   if(trial.status==='failed')return {label:'构建失败',message:trial.error??'本次编译或打包失败。',trial}
   return {label:'未收到构建结果',message:'本次没有收到该平台的构建结果。',trial}
  }
@@ -23,7 +24,7 @@ export function platformState(catalog,plugin,target){
 }
 export function selectPlugins(catalog,{q='',category='all',platform='all',verified=false,sort='curated'}={}){
  const query=q.trim().toLocaleLowerCase()
- const list=catalog.plugins.filter(p=>(!query||[p.name,p.repository,p.npmName,p.description,p.label].join(' ').toLocaleLowerCase().includes(query))&&(category==='all'||p.category===category)).map(p=>({...p,packages:packagesFor(catalog,p.id).filter(a=>(platform==='all'||a.target===platform)&&(!verified||a.verification?.status==='passed'))})).filter(p=>!verified||p.packages.some(a=>a.verification?.status==='passed'))
+ const list=catalog.plugins.filter(p=>(!query||[p.name,p.repository,p.npmName,p.description,p.label].join(' ').toLocaleLowerCase().includes(query))&&(category==='all'||categoryKey(p.category)===categoryKey(category))).map(p=>({...p,packages:packagesFor(catalog,p.id).filter(a=>(platform==='all'||a.target===platform)&&(!verified||a.verification?.status==='passed'))})).filter(p=>!verified||p.packages.some(a=>a.verification?.status==='passed'))
  if(sort==='name')list.sort((a,b)=>a.name.localeCompare(b.name))
  const time=value=>Number.isFinite(Date.parse(value))?Date.parse(value):0
  if(sort==='updated')list.sort((a,b)=>time(b.upstreamUpdatedAt)-time(a.upstreamUpdatedAt))

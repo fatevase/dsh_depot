@@ -12,6 +12,7 @@ import {latestManagerCatalog} from './lib/manager-catalog.mjs'
 import {latestCandidateReport,withCandidateReport,retainCandidateReport} from './candidate-catalog.mjs'
 import {candidatePublicDownloads} from './candidate-public-catalog.mjs'
 import {refreshRepositoryAbout,applyRepositoryAbout} from './repository-about.mjs'
+import {applyCategories} from '../web/categories.mjs'
 import {shouldRefreshWebsite} from './lib/site-trigger.mjs'
 
 export async function main(command=process.argv[2],env=process.env){
@@ -49,7 +50,7 @@ export async function main(command=process.argv[2],env=process.env){
   const seed=await readJson(new URL('../docs/evidence/repository-about-2026-10-20.json',import.meta.url))
   const about=await refreshRepositoryAbout({github,repositories:baseCatalog.plugins.map(p=>({repository:p.repository,repositoryId:p.trial?.repositoryId})),previous:{...seed.repositories,...current.state.repositoryAbout}})
   current=await updateStateBranch({store,merge:state=>({...state,repositoryAbout:{...state.repositoryAbout,...about}})})
-  const catalog=applyRepositoryAbout(baseCatalog,about)
+  const catalog=applyCategories(applyRepositoryAbout(baseCatalog,about),selection.candidates)
   const result=await generateSite({catalog,outDir:fileURLToPath(new URL('../.runtime/web/site',import.meta.url)),managerCatalog:await latestManagerCatalog({github})})
   return {...result,stateCommit:current.commit,candidateBuild:catalog.candidateBuild}
  }

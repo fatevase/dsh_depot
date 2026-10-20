@@ -12,7 +12,7 @@ export async function latestCandidateReport({github,repository,config,previous})
  const runs=(await github.request(`/repos/${repository}/actions/workflows/candidate-builds.yml/runs?branch=${encodeURIComponent(repo.default_branch)}&status=completed&per_page=30`)).data.workflow_runs
  for(const run of runs){
   if(run.path!==repoPath||run.head_repository?.id!==repo.id||run.head_branch!==repo.default_branch||!['push','workflow_dispatch'].includes(run.event))continue
-  if(previous?.runId===run.id&&previous.completedAt===run.updated_at)return previous
+  if(previous?.projectionVersion===2&&previous.runId===run.id&&previous.completedAt===run.updated_at)return previous
   const artifacts=(await github.request(`/repos/${repository}/actions/runs/${run.id}/artifacts?per_page=100`)).data.artifacts
   const artifact=artifacts.find(a=>a.name==='candidate-build-report'&&!a.expired)
   if(!artifact)continue
@@ -52,16 +52,19 @@ export function candidateSnapshot(report,{run,artifacts,config,repository}){
    if(r.status!=='missing'&&(r.verification!=='not-run'||r.repositoryId!==p.repositoryId||r.commit!==p.commit||r.target!==target))throw Error('Candidate receipt identity mismatch')
    const batch=Math.floor(config.entries.findIndex(e=>e.repositoryId===p.repositoryId)/config.batchSize)+1
    const artifact=artifacts.find(a=>a.name===`candidate-batch-${batch}-${target}`&&!a.expired)
-   return [target,{status:r.status,version:r.package?.version,error:r.error?.slice(0,5000),errorCategory:r.errorCategory,warnings:r.warnings??[],
+   return [target,{status:r.status,verification:'not-run',startedAt:r.startedAt,seconds:r.seconds,stage:r.stage,dependencyMode:r.dependencyMode,adapterDigest:r.adapterDigest,sourceSha256:r.sourceSha256,lockSha256:r.lockSha256,
+    steps:(r.steps??[]).map(s=>({stage:s.stage,argv:s.argv,cwd:s.cwd,exitCode:s.exitCode,seconds:s.seconds})),
+    dependencies:r.dependencies,runtimeDependencies:r.runtimeDependencies,buildDependencies:r.buildDependencies,
+    version:r.package?.version,error:r.error?.slice(0,5000),errorCategory:r.errorCategory,warnings:r.warnings??[],
     artifactsUrl:r.status==='compiled'&&artifact?`${runUrl}/artifacts/${artifact.id}`:undefined,
     artifactsExpiresAt:artifact?.expires_at,
-    files:(r.artifacts??[]).map(a=>({name:a.name,version:a.version,filename:a.filename,bytes:a.bytes,sha256:a.sha256}))}]
+    files:(r.artifacts??[]).map(a=>({name:a.name,version:a.version,filename:a.filename,bytes:a.bytes,sha256:a.sha256,origin:a.origin,inputs:a.inputs,hostPeers:a.hostPeers,hostCompatibility:a.hostCompatibility}))}]
   }))
   return {repositoryId:p.repositoryId,repository:p.repository,npmName:p.npmName,commit:p.commit,runUrl,results}
  })
  if(seen.size!==expected.size)throw Error('Candidate snapshot does not cover the maintained list')
  for(const key of Object.keys(counts))if(report.counts?.[key]!==counts[key])throw Error('Candidate report counts mismatch')
- return {schemaVersion:1,runId:run.id,runAttempt:run.run_attempt,runUrl,completedAt:run.updated_at,counts,plugins}
+ return {schemaVersion:1,projectionVersion:2,runId:run.id,runAttempt:run.run_attempt,runUrl,completedAt:run.updated_at,counts,plugins}
 }
 
 export function withCandidateReport(catalog,snapshot){
@@ -73,11 +76,11 @@ export function withCandidateReport(catalog,snapshot){
   if(old){old.trial=visible;continue}
   plugins.push({id:`candidate-${trial.repositoryId}`,name:trial.repository.split('/')[1],repository:trial.repository,npmName:trial.npmName,category:'tools',status:'trial',description:'',seed:{commit:trial.commit},trial:visible})
  }
- return {...catalog,plugins,candidateBuild:{runId:snapshot.runId,runUrl:snapshot.runUrl,completedAt:snapshot.completedAt,counts:snapshot.counts,pluginCount:snapshot.plugins.length}}
+ return {...catalog,plugins,candidateBuild:{runId:snapshot.runId,runAttempt:snapshot.runAttempt??1,runUrl:snapshot.runUrl,completedAt:snapshot.completedAt,counts:snapshot.counts,pluginCount:snapshot.plugins.length}}
 }
 
 export function retainCandidateReport(state,snapshot){
  const old=state.candidateReport
- if(!snapshot||old&&(old.runId>snapshot.runId||old.runId===snapshot.runId&&Date.parse(old.completedAt)>=Date.parse(snapshot.completedAt)))return state
+ if(!snapshot||old&&(old.runId>snapshot.runId||old.runId===snapshot.runId&&(old.projectionVersion??1)>=(snapshot.projectionVersion??1)&&Date.parse(old.completedAt)>=Date.parse(snapshot.completedAt)))return state
  return {...state,candidateReport:snapshot}
 }
