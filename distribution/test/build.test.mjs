@@ -21,7 +21,7 @@ test('fixed pnpm invocations explicitly prevent switching to an ancestor package
  for(const [name,version,cli] of [['npm','11.19.1','npm-cli.js'],['pnpm','11.25.0','pnpm.cjs']]){const root=path.join(dir,`${name}-${version}`,'node_modules',name);await mkdir(path.join(root,'bin'),{recursive:true});await writeFile(path.join(root,'package.json'),JSON.stringify({name,version}));await writeFile(path.join(root,'bin',cli),'console.log(JSON.stringify(process.argv.slice(2)))')}
  const tools=await prepareTools({node:process.versions.node,npm:'11.19.1',pnpm:'11.25.0'},dir)
  const r=await runCommand({argv:[...tools.pnpm,'--version'],cwd:dir,env:await isolatedEnv(path.join(dir,'child')),logFile:path.join(dir,'argv.log')})
- assert.deepEqual(JSON.parse(r.output),['--pm-on-fail=ignore','--version'])
+ assert.deepEqual(JSON.parse(r.stdout),['--config.manage-package-manager-versions=false','--pm-on-fail=ignore','--version'])
 })
 test('archive traversal is rejected without writing outside the output',async t=>{const dir=await temporary(t);const archive=path.join(dir,'bad.tgz');execFileSync('python3',['-c',"import tarfile,io,sys\nt=tarfile.open(sys.argv[1],'w:gz');i=tarfile.TarInfo('package/../../escaped');i.size=3;t.addfile(i,io.BytesIO(b'bad'));t.close()",archive]);await assert.rejects(extractArchive(archive,path.join(dir,'out')),/Unsafe|escape|archive/i);await assert.rejects(readFile(path.join(dir,'escaped')))})
 test('source archive can omit declared development directories while rejecting links elsewhere and traversal even inside exclusions',async t=>{

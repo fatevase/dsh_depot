@@ -74,7 +74,7 @@ export async function checkIsolation({ adapter, control, env, workDir }) {
     if (observerFile) { for (let i = 0; i < 80; i++) { try { const port = await readFile(observerFile, 'utf8'); observed = await connect('127.0.0.1', +port); await writeFile(observerFile + '.done', 'done'); break } catch {} await delay(100) } }
     const command = await running
     if (command.exitCode) { result.error = command.output; return result }
-    try { result[mode] = JSON.parse(command.output.trim()) } catch { return result }
+    try { result[mode] = JSON.parse(command.stdout.trim()) } catch { return result }
     if (observerFile) { result[mode].loopbackAllowed = observed; result[mode].observer = 'outside-sandbox-inbound-only'; result[mode].outboundLoopbackBlocked = result[mode].loopbackBlocked }
   }
   if (result.beforeReachableIPv6 && result.offline.externalBlockedIPv6 && result.loopback.externalBlockedIPv6 && result.offline.childBlockedIPv6 && result.loopback.childBlockedIPv6 && result.offline.otherProgramBlocked && result.loopback.otherProgramBlocked && result.offline.externalBlocked && result.offline.childBlocked && result.offline.loopbackBlocked && result.loopback.externalBlocked && result.loopback.childBlocked && result.loopback.loopbackAllowed) result.status = 'passed'
@@ -127,7 +127,7 @@ export async function verifyArtifact({ task, recipe, artifact, host, workDir, is
     const probeInput = path.join(workDir, 'host-input.json'); await atomicJson(probeInput, { hostPrefix, dshBin: host.dshBin, npmName: recipe.npmName, probes: recipe.probes, logFile: path.join(workDir, 'host.log') })
     const boot = await (hostPrefix.length ? runCommand : options => isolation.run({ mode: 'loopback', ...options }))({ argv: [process.execPath, path.join(directory, 'host-probe.mjs'), probeInput], cwd: workDir, env, timeoutMs: 90000, logFile: path.join(workDir, 'host-result.log') })
     verification.timings.host = boot.seconds
-    let result; try { result = JSON.parse(boot.output.trim()) } catch { throw new Error(`Invalid host result: ${boot.output.slice(-1000)}`) }
+    let result; try { result = JSON.parse(boot.stdout.trim()) } catch { throw new Error(`Invalid host result: ${boot.output.slice(-1000)}`) }
     const native = await isolation.run({ mode: 'offline', argv: [process.execPath, path.join(directory, 'native-probe.mjs'), probeInput], cwd: workDir, env, logFile: path.join(workDir, 'native.log') })
     Object.assign(verification.checks, { host: boot.exitCode === 0 && result.host, clientModule: result.clientModule, native: native.exitCode === 0 })
     verification.status = 'passed'; assertVerification(verification, task, artifact.sha256,recipe)

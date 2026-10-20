@@ -12,17 +12,18 @@ export async function isolatedEnv(root, { source = process.env, cache, bin } = {
   return { ...env, PATH: [bin, source.PATH ?? source.Path].filter(Boolean).join(path.delimiter), HOME: home, USERPROFILE: home, XDG_CACHE_HOME: path.join(home, '.cache'), XDG_CONFIG_HOME: path.join(home, '.config'), npm_config_userconfig: path.join(config, 'user.npmrc'), npm_config_globalconfig: path.join(config, 'global.npmrc'), npm_config_cache: cache ?? path.join(root, 'npm-cache'), npm_config_registry: 'https://registry.npmjs.org', npm_config_audit: 'false', npm_config_fund: 'false', COREPACK_ENABLE_NETWORK: '0', CI: '1', NO_COLOR: '1' }
 }
 export async function runCommand({ argv, cwd, env, timeoutMs = 600000, logFile }) {
-  const started = performance.now(); let output = '', timedOut = false, truncated = false
+  const started = performance.now(); let output = '', stdout = '', stderr = '', bytes = 0, timedOut = false, truncated = false
   await mkdir(path.dirname(logFile), { recursive: true })
   const child = spawn(argv[0], argv.slice(1), { cwd, env, stdio: ['ignore', 'pipe', 'pipe'], detached: process.platform !== 'win32', windowsHide: true })
   const stop = () => { try { if (process.platform === 'win32') execFileSync('taskkill', ['/PID', String(child.pid), '/T', '/F'], { stdio: 'ignore' }); else process.kill(-child.pid, 'SIGKILL') } catch {} }
   const timer = setTimeout(() => { timedOut = true; stop() }, timeoutMs)
-  const collect = chunk => { if (output.length + chunk.length > 32 * 1024 * 1024) { truncated = true; stop(); return } output += chunk.toString() }
-  child.stdout.on('data', collect); child.stderr.on('data', collect)
-  const exitCode = await new Promise(resolve => { child.once('error', error => { output += error.message; resolve(127) }); child.once('close', code => resolve(code ?? 1)) })
+  // Machine-readable stdout must not contain package-manager warnings from stderr.
+  const collect = channel => chunk => { bytes += chunk.length; if (bytes > 32 * 1024 * 1024) { truncated = true; stop(); return } const text = chunk.toString(); output += text; if (channel === 'stdout') stdout += text; else stderr += text }
+  child.stdout.on('data', collect('stdout')); child.stderr.on('data', collect('stderr'))
+  const exitCode = await new Promise(resolve => { child.once('error', error => { output += error.message; stderr += error.message; resolve(127) }); child.once('close', code => resolve(code ?? 1)) })
   clearTimeout(timer)
   await writeFile(logFile, redact(output))
-  return { exitCode: timedOut || truncated ? 124 : exitCode, timedOut, truncated, seconds: +((performance.now() - started) / 1000).toFixed(3), logFile, output: redact(output) }
+  return { exitCode: timedOut || truncated ? 124 : exitCode, timedOut, truncated, seconds: +((performance.now() - started) / 1000).toFixed(3), logFile, output: redact(output), stdout: redact(stdout), stderr: redact(stderr) }
 }
 async function available(file) { try { await access(file); return file } catch { return undefined } }
 async function findCli(name) {
@@ -50,7 +51,8 @@ export async function prepareTools(toolchain, root) {
       if (result.exitCode) throw new Error(`Cannot prepare ${name}@${version}: ${result.output.slice(-1000)}`)
     }
     const cli = path.join(prefix, 'node_modules', name, 'bin', name === 'npm' ? 'npm-cli.js' : 'pnpm.cjs')
-    const fixedArgs=name==='pnpm'?['--pm-on-fail=ignore']:[]
+    // pm-on-fail was introduced in pnpm 11. Older pinned versions reject it.
+    const fixedArgs=name==='pnpm'?['--config.manage-package-manager-versions=false',...(Number(version.split('.')[0])>=11?['--pm-on-fail=ignore']:[])]:[]
     tools[name] = [process.execPath, cli,...fixedArgs]
     const quote = s => `'${s.replaceAll("'", "'\"'\"'")}'`
     if (process.platform === 'win32') await writeFile(path.join(bin, `${name}.cmd`), `@"${process.execPath}" "${cli}" ${fixedArgs.join(' ')} %*\r\n`)

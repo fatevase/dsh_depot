@@ -29,7 +29,118 @@
       "buildScripts": [
         "build"
       ],
-      "pnpmVersion": "11.24.0"
+      "pnpmVersion": "11.24.0",
+      "source": {
+        "mode": "git-tree",
+        "paths": [
+          "package.json",
+          "pnpm-lock.yaml",
+          "pnpm-workspace.yaml",
+          "LICENSE",
+          "shared",
+          "packages",
+          "scripts"
+        ]
+      },
+      "outputs": [
+        {
+          "path": "packages/dsh-web-all",
+          "npmName": "@linxin666/dsh-web-all",
+          "kind": "plugin"
+        },
+        {
+          "path": "packages/dsh-git-graph",
+          "npmName": "@linxin666/dsh-client-ui-git-graph",
+          "kind": "plugin"
+        },
+        {
+          "path": "packages/dsh-i18n",
+          "npmName": "@linxin666/dsh-i18n",
+          "kind": "plugin"
+        },
+        {
+          "path": "packages/dsh-liangshen",
+          "npmName": "@linxin666/dsh-liangshen",
+          "kind": "plugin"
+        },
+        {
+          "path": "packages/dsh-market",
+          "npmName": "@linxin666/dsh-client-ui-market",
+          "kind": "plugin"
+        },
+        {
+          "path": "packages/dsh-plugin-manager",
+          "npmName": "@linxin666/dsh-client-ui-plugin-manager",
+          "kind": "plugin"
+        },
+        {
+          "path": "packages/dsh-remote-bridge",
+          "npmName": "@linxin666/dsh-remote-bridge",
+          "kind": "plugin"
+        },
+        {
+          "path": "packages/dsh-remote-web-ui",
+          "npmName": "@linxin666/dsh-remote-web-ui",
+          "kind": "plugin"
+        },
+        {
+          "path": "packages/dsh-session-archive",
+          "npmName": "@linxin666/dsh-session-archive",
+          "kind": "plugin"
+        },
+        {
+          "path": "packages/dsh-session-id",
+          "npmName": "@linxin666/dsh-client-ui-session-id",
+          "kind": "plugin"
+        },
+        {
+          "path": "packages/dsh-skill-explorer",
+          "npmName": "@linxin666/dsh-client-ui-skill-explorer",
+          "kind": "plugin"
+        },
+        {
+          "path": "packages/dsh-ssh",
+          "npmName": "@linxin666/dsh-ssh",
+          "kind": "plugin"
+        },
+        {
+          "path": "packages/dsh-task-board",
+          "npmName": "@linxin666/dsh-client-ui-task-board",
+          "kind": "plugin"
+        },
+        {
+          "path": "packages/dsh-task-board-github",
+          "npmName": "@linxin666/dsh-client-ui-task-board-github",
+          "kind": "plugin"
+        },
+        {
+          "path": "packages/dsh-task-board-remote",
+          "npmName": "@linxin666/dsh-task-board-remote",
+          "kind": "plugin"
+        },
+        {
+          "path": "packages/dsh-update",
+          "npmName": "@linxin666/dsh-update",
+          "kind": "plugin"
+        },
+        {
+          "path": "packages/dsh-usage",
+          "npmName": "@linxin666/dsh-usage",
+          "kind": "plugin"
+        },
+        {
+          "path": "packages/dsh-web-settings",
+          "npmName": "@linxin666/dsh-client-ui-web-ui-settings",
+          "kind": "plugin"
+        },
+        {
+          "path": "packages/dsh-win-bash",
+          "npmName": "@linxin666/dsh-win-bash",
+          "kind": "plugin"
+        }
+      ],
+      "packManager": "pnpm",
+      "adapterNotes": "只获取构建所需 Git 子树；排除 market/dist、站点媒体和归档文档。聚合包及各组件分别打包，保留真实依赖和宿主要求。"
     },
     {
       "repositoryId": 1339256252,
@@ -57,7 +168,17 @@
       "ref": "main",
       "packagePath": ".",
       "npmName": "treg-dsh",
-      "buildScripts": []
+      "buildScripts": [],
+      "source": {
+        "mode": "git-tree",
+        "paths": [
+          "package.json",
+          "dsh",
+          "LICENSE",
+          "README.md"
+        ]
+      },
+      "adapterNotes": "DSH 插件仅位于 dsh 子目录；只取插件源码及根说明、许可证，避免下载完整工具站点和其他资源。"
     },
     {
       "repositoryId": 1337920628,
@@ -74,9 +195,17 @@
       "packagePath": ".",
       "npmName": "@deepseek-harness-tui/dsh-tui",
       "buildScripts": [
-        "build"
+        "compile"
       ],
-      "pnpmVersion": "11.21.0"
+      "pnpmVersion": "11.21.0",
+      "sourceDependencies": [
+        {
+          "repository": "T-Auto/dsh-std",
+          "path": "vendor/dsh-std",
+          "submodule": "vendor/dsh-std"
+        }
+      ],
+      "adapterNotes": "准备阶段读取父提交固定的 dsh-std 子模块 SHA；编译脚本先构建 vendor。此次仅编译，终端交互和离线安装另行验收。"
     },
     {
       "repositoryId": 1163808211,
@@ -112,11 +241,57 @@
     {
       "repositoryId": 1409893258,
       "repository": "T-Auto/dsh-ops",
-      "ref": "main",
+      "ref": "34ba06f542af5a7feaca49fe5d9b6cd97b86293e",
       "packagePath": ".",
       "npmName": "dsh-ops",
       "buildScripts": [
         "build"
+      ],
+      "buildDependencies": {
+        "@deepseek-ai/dsh-agent": "0.2.0-rc.2",
+        "@deepseek-ai/dsh-atomic-write": "0.2.0-rc.2",
+        "@deepseek-ai/dsh-fs": "0.2.0-rc.2",
+        "@deepseek-ai/dsh-llm": "0.2.0-rc.2",
+        "@deepseek-ai/dsh-sandbox": "0.2.0-rc.2",
+        "@deepseek-ai/dsh-sandbox-policy": "0.2.0-rc.2",
+        "@deepseek-ai/dsh-session": "0.2.0-rc.2"
+      },
+      "adapterNotes": "保持上游 TypeScript 检查；将缺失的 SDK 显式补为与原构建配置一致的 0.2.0-rc.2，并保存适配后的锁。原生运行包按同一发行版引用。",
+      "assets": [
+        {
+          "path": "runtime",
+          "targets": {
+            "macos-arm64": {
+              "url": "https://github.com/T-Auto/dsh-ops/releases/download/v0.4.0-alpha1/native-darwin-arm64-runtime-v0.4.0-alpha1.zip",
+              "sha256": "b44bc13a4fbd59da7ab0dd3053ddefddde9da02b037dcf9283d1de8da354b3ba",
+              "path": "runtime/darwin-arm64",
+              "strip": 0
+            },
+            "linux-x64": {
+              "url": "https://github.com/T-Auto/dsh-ops/releases/download/v0.4.0-alpha1/native-linux-x64-runtime-v0.4.0-alpha1.zip",
+              "sha256": "4debaec4e939b2f169e51fb8690333452d3a32b08e37e7406c10905cea9fccb8",
+              "path": "runtime/linux-x64",
+              "strip": 0
+            },
+            "win32-x64": {
+              "url": "https://github.com/T-Auto/dsh-ops/releases/download/v0.4.0-alpha1/native-win32-x64-runtime-v0.4.0-alpha1.zip",
+              "sha256": "791dfa634d698231295ba72f190fdbe26546e55af29251c922cad79ebb51bb02",
+              "path": "runtime/win32-x64",
+              "strip": 0
+            }
+          }
+        }
+      ],
+      "buildCommands": [
+        {
+          "cwd": ".",
+          "argv": [
+            "node",
+            "bin/native-runtime.mjs",
+            "check",
+            "--staged"
+          ]
+        }
       ]
     },
     {
@@ -269,7 +444,14 @@
       "npmName": "dsh-openwrite",
       "buildScripts": [
         "build"
-      ]
+      ],
+      "installPaths": [
+        ".",
+        "packages/openwrite-bridge",
+        "packages/studio-panel",
+        "vendor/dsh-dog"
+      ],
+      "adapterNotes": "分别按各子项目锁文件准备开发依赖，随后执行原有分组件构建。运行资源沿用源码内固定产物。"
     },
     {
       "repositoryId": 1163808542,
@@ -391,12 +573,21 @@
     {
       "repositoryId": 1368569221,
       "repository": "sixtysevenlf/dsh-blender-plugin",
-      "ref": "main",
+      "ref": "f044a019bbb97513443b24cc5ebcad111a002628",
       "packagePath": ".",
       "npmName": "@dsh-external/dsh-blender-plugin",
-      "buildScripts": [
-        "build"
-      ]
+      "buildScripts": [],
+      "prebuilt": {
+        "version": "2.5.0",
+        "targets": {
+          "all": {
+            "url": "https://github.com/sixtysevenlf/dsh-blender-plugin/releases/download/v2.5.0/dsh-external-dsh-blender-plugin-2.5.0.tgz",
+            "sha256": "f4d1f5bb4129b5a37533bae9d416e3ca9180bc95e090b3f989b6c62cf17710b2"
+          }
+        },
+        "sourceCommit": "f044a019bbb97513443b24cc5ebcad111a002628"
+      },
+      "adapterNotes": "直接引用同一 tag 的上游成品；核对 SHA-256、包名、版本、平台声明和包内入口，不再为上游构建脚本伪造 DSH_CHECKOUT。"
     },
     {
       "repositoryId": 1336228384,
@@ -502,7 +693,14 @@
       "npmName": "dsh-memory-evolve",
       "buildScripts": [
         "build"
-      ]
+      ],
+      "buildDependencies": {
+        "esbuild": "0.28.1"
+      },
+      "envPaths": {
+        "DSH_SOURCE": "."
+      },
+      "adapterNotes": "上游构建器仅从 DSH_SOURCE 寻找 esbuild；提供其文档使用的精确 esbuild 版本，并将工具解析根指向当前构建目录，不需要伪造 DSH 源码。"
     },
     {
       "repositoryId": 1334618124,
@@ -522,7 +720,9 @@
       "npmName": "my-app",
       "buildScripts": [
         "build"
-      ]
+      ],
+      "lockPolicy": "refresh",
+      "adapterNotes": "上游 manifest 与锁文件不同步，显式允许本次试编译重新解析并保存锁；结果仍须后续依赖审核与离线验证。"
     },
     {
       "repositoryId": 1334325657,
@@ -541,6 +741,26 @@
       "npmName": "whale-girl",
       "buildScripts": [
         "build:client"
+      ],
+      "sourcePatches": [
+        {
+          "path": "scripts/build-client.mjs",
+          "sha256": "9a352594f43d23478c402b4ea1d070627e4b8a406533a9bc4474e99b2971b6c5",
+          "targets": [
+            "win32-x64"
+          ],
+          "reason": "Windows 无法直接 spawn .bin 无扩展名脚本，改为解析已安装 esbuild 的原生 Windows 可执行文件；保留原有生成器。",
+          "replacements": [
+            {
+              "from": "import { spawnSync } from 'node:child_process'",
+              "to": "import { spawnSync } from 'node:child_process'\nimport { createRequire } from 'node:module'"
+            },
+            {
+              "from": "  const esbuildBin = resolveEsbuildBin()",
+              "to": "  const esbuildBin = process.platform === 'win32' ? createRequire(import.meta.url).resolve('@esbuild/win32-x64/esbuild.exe') : resolveEsbuildBin()"
+            }
+          ]
+        }
       ]
     },
     {
@@ -619,9 +839,26 @@
       "repositoryId": 1350368388,
       "repository": "FishBottle7/opencode2dsh",
       "ref": "master",
-      "packagePath": ".",
-      "npmName": "opencode2dsh",
-      "buildScripts": []
+      "packagePath": "packages/plugin",
+      "npmName": "@opencode2dsh/dsh-plugin",
+      "buildScripts": [
+        "build",
+        "build:client"
+      ],
+      "installPath": "packages/plugin",
+      "installPaths": [
+        "packages/plugin"
+      ],
+      "buildCommands": [
+        {
+          "cwd": ".",
+          "argv": [
+            "node",
+            "scripts/prepare-package.mjs"
+          ]
+        }
+      ],
+      "adapterNotes": "根目录只是无版本的入口包装；构建并打包 packages/plugin，显式执行上游打包准备脚本，生命周期脚本仍关闭。"
     },
     {
       "repositoryId": 1334214605,
@@ -631,7 +868,9 @@
       "npmName": "@dhicoc/dsh-reverse-skill",
       "buildScripts": [
         "build"
-      ]
+      ],
+      "lockPolicy": "refresh",
+      "adapterNotes": "上游 manifest 与锁文件不同步，显式允许本次试编译重新解析并保存锁；结果仍须后续依赖审核与离线验证。"
     },
     {
       "repositoryId": 1377916761,
@@ -750,6 +989,23 @@
       "npmName": "tydora",
       "buildScripts": [
         "build"
+      ],
+      "sourcePatches": [
+        {
+          "path": "app/tydora-web/src/mindmap/MindmapView.tsx",
+          "sha256": "c1538bdeafb03301ebbb30a3997246fed74df55979a083daec00813478705fe1",
+          "reason": "为两个 catch 回调的异常参数补上 unknown 类型，保留严格 TypeScript 检查。",
+          "replacements": [
+            {
+              "from": "loadCSS(assets.styles).catch((err) =>",
+              "to": "loadCSS(assets.styles).catch((err: unknown) =>"
+            },
+            {
+              "from": "}).catch((err) =>",
+              "to": "}).catch((err: unknown) =>"
+            }
+          ]
+        }
       ]
     },
     {
@@ -782,7 +1038,12 @@
       "npmName": "meow-memory",
       "buildScripts": [
         "build"
-      ]
+      ],
+      "buildDependencies": {
+        "@deepseek-ai/cordis": "4.0.2",
+        "@deepseek-ai/dsh-timeout": "0.1.1-rc.2"
+      },
+      "adapterNotes": "补齐上游锁已记录、但 legacy-peer-deps 未安装的构建 SDK，版本沿用原锁。"
     },
     {
       "repositoryId": 1333673564,

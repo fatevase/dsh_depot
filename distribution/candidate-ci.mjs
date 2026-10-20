@@ -5,6 +5,7 @@ import {readJson, atomicJson} from './lib/model.mjs'
 import {prepareTools} from './lib/process.mjs'
 import {runtimeTarget} from './lib/platform.mjs'
 import {campaignMatrix, buildCandidate, summarizeCampaign, campaignMarkdown} from './lib/candidate-build.mjs'
+import {freezeCandidateInputs} from './lib/candidate-inputs.mjs'
 
 const root=path.resolve('.runtime/candidate-builds'),command=process.argv[2]
 const config=await readJson('distribution/candidate-builds.json')
@@ -27,6 +28,7 @@ if(command==='prepare'){
    const commit=(await github.request(`/repos/${e.repository}/commits/${encodeURIComponent(e.ref)}`)).data.sha
    if(!/^[a-f0-9]{40}$/.test(commit))throw Error('Invalid source commit')
    e.commit=commit
+   await freezeCandidateInputs(e,github)
   }catch(error){e.error=`Source discovery: ${error.message}`}
  }))
  const plan={...config,entries,targets:[...new Set(matrix.include.map(j=>j.target))],matrix,createdAt:new Date().toISOString(),sourceCommit:process.env.GITHUB_SHA}
@@ -40,15 +42,17 @@ if(command==='prepare'){
  const tools=new Map();let failed=0
  for(const entry of job.entries){
   const workDir=path.join(root,'results',String(entry.repositoryId));await mkdir(workDir,{recursive:true})
-  let prepared
+  let prepared,preparationError
   try{
-   const key=entry.pnpmVersion??'11.25.0'
-   if(!tools.has(key))tools.set(key,await prepareTools({node:'26.9.0',npm:'11.19.1',pnpm:key},path.join(root,'tools',key)))
-   prepared=tools.get(key)
-  }catch(error){entry.error=`Toolchain: ${error.message}`}
-  const receipt=await buildCandidate(entry,{workDir,tools:prepared})
+   if(!entry.prebuilt&&!entry.error){
+    const key=entry.pnpmVersion??'11.25.0'
+    if(!tools.has(key))tools.set(key,await prepareTools({node:'26.9.0',npm:'11.19.1',pnpm:key},path.join(root,'tools',key)))
+    prepared=tools.get(key)
+   }
+  }catch(error){preparationError=`Toolchain: ${error.message}`}
+  const receipt=await buildCandidate(entry,{workDir,tools:prepared,preparationError})
   if(receipt.status!=='compiled')failed++
-  console.log(JSON.stringify({repository:entry.repository,target:job.target,status:receipt.status,error:receipt.error,seconds:receipt.seconds}))
+  console.log(JSON.stringify({repository:entry.repository,target:job.target,status:receipt.status,error:receipt.error,errorCategory:receipt.errorCategory,components:receipt.artifacts?.length,seconds:receipt.seconds}))
  }
  if(failed)process.exitCode=1
 }else if(command==='report'){

@@ -1,14 +1,15 @@
 import { createHash, randomUUID } from 'node:crypto'
+import { createReadStream } from 'node:fs'
 import { mkdir, readFile, writeFile, rename, readdir } from 'node:fs/promises'
 import path from 'node:path'
 import { supportedTarget } from './platform.mjs'
 
 export const SCHEMA = 1
-export const PACKAGER_VERSION = '4'
-export const VERIFIER_VERSION = '2'
-export const PLATFORM_VERIFIER_VERSIONS = { 'win32-x64': '2.windows-wfp-3' }
+export const PACKAGER_VERSION = '5'
+export const VERIFIER_VERSION = '3'
+export const PLATFORM_VERIFIER_VERSIONS = { 'win32-x64': '3.windows-wfp-3' }
 export const digest = value => createHash('sha256').update(value).digest('hex')
-export const fileDigest = async file => digest(await readFile(file))
+export const fileDigest = async file => { const hash=createHash('sha256'); for await(const chunk of createReadStream(file))hash.update(chunk); return hash.digest('hex') }
 export function canonical(value) {
   if (Array.isArray(value)) return value.map(canonical)
   if (value && typeof value === 'object') return Object.fromEntries(Object.keys(value).sort().filter(k => !k.startsWith('_') && value[k] !== undefined).map(k => [k, canonical(value[k])]))

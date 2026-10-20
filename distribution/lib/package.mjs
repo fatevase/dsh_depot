@@ -37,7 +37,7 @@ export async function packageRuntime({ task, recipe, builtPackage, sourceDir, wo
     if (Object.keys(info.dependencies ?? {}).length || Object.keys(info.optionalDependencies ?? {}).length) throw new Error('Local client has runtime dependencies; recipe must provide their closure')
     const packed = await runCommand({ argv: [...tools.npm, 'pack', '--ignore-scripts', '--json', '--pack-destination', output], cwd: localRoot, env, logFile: path.join(workDir, `local-${item.name.replaceAll('/', '-')}.log`) })
     if (packed.exitCode) throw new Error(`Cannot pack same-source client: ${packed.output.slice(-2000)}`)
-    const archive = path.join(output, JSON.parse(packed.output)[0].filename), dest = within(path.join(staging, 'node_modules'), item.name)
+    const archive = path.join(output, JSON.parse(packed.stdout)[0].filename), dest = within(path.join(staging, 'node_modules'), item.name)
     await extractArchive(archive, dest)
     manifest.dependencies[item.name] = info.version
   }
@@ -47,7 +47,7 @@ export async function packageRuntime({ task, recipe, builtPackage, sourceDir, wo
   await writePackageMetadata(staging, {task,recipe})
   const packed = await runCommand({ argv: [...tools.npm, 'pack', '--ignore-scripts', '--json', '--pack-destination', output], cwd: staging, env, logFile: path.join(workDir, 'offline-pack.log') })
   if (packed.exitCode) throw new Error(`Offline pack failed: ${packed.output.slice(-1500)}`)
-  const metadata = JSON.parse(packed.output)[0], originalArchive = path.join(output, metadata.filename)
+  const metadata = JSON.parse(packed.stdout)[0], originalArchive = path.join(output, metadata.filename)
   const artifact = path.join(output, `${recipe.id}-${task.source.version}-${task.target}-${task.buildKey}.tgz`)
   await copyFile(originalArchive, artifact)
   const sha256 = await fileDigest(artifact)

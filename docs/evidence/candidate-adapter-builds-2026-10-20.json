@@ -1,0 +1,64 @@
+{
+  "date": "2026-10-20",
+  "baseCommit": "271529eed46f2bc72bfb27197ffca76e0e8fd0fc",
+  "automatedTestsRunLocally": false,
+  "syntaxAndConfigurationChecks": "passed",
+  "actualSourceBuilds": [
+    {
+      "repository": "csyangwen/dsh-memory-evolve",
+      "sourceCommit": "e6f6b84c56f0fc18ba4a6a1a5959fbf86ea9ec8b",
+      "target": "macos-arm64",
+      "status": "compiled",
+      "artifact": {
+        "file": "/Users/vase/Downloads/aiworkbench-dsh/.runtime/dsh-depot-manager/.runtime/candidate-adapter-research/memory-1792432784744/packages/dsh-memory-evolve-0.1.0.tgz",
+        "filename": "dsh-memory-evolve-0.1.0.tgz",
+        "kind": "plugin",
+        "name": "dsh-memory-evolve",
+        "version": "0.1.0",
+        "sourcePath": ".",
+        "bytes": 5712436,
+        "sha256": "ffbf1607c6fc77579768d79934086cce755e3b035499a69c1f985fbffec948a0",
+        "runtimeDependencies": {},
+        "hostPeers": {},
+        "hostCompatibility": null
+      },
+      "receipt": ".runtime/candidate-adapter-research/memory-1792432784744/receipt.json"
+    },
+    {
+      "repository": "superdesigndev/treg",
+      "sourceCommit": "50faed150f4810b16e9ba11ad487c854961917c1",
+      "target": "macos-arm64",
+      "status": "compiled",
+      "artifact": {
+        "file": "/Users/vase/Downloads/aiworkbench-dsh/.runtime/dsh-depot-manager/.runtime/candidate-adapter-research/treg-1792432897941/packages/treg-dsh-0.26.0.tgz",
+        "filename": "treg-dsh-0.26.0.tgz",
+        "kind": "plugin",
+        "name": "treg-dsh",
+        "version": "0.26.0",
+        "sourcePath": ".",
+        "bytes": 32178,
+        "sha256": "5f277e9ff7036b3b5800637cab7e5cf3380bf3411a1a3d72fe27ecce9323b350",
+        "runtimeDependencies": {},
+        "hostPeers": {},
+        "hostCompatibility": null
+      },
+      "receipt": ".runtime/candidate-adapter-research/treg-1792432897941/receipt.json"
+    }
+  ],
+  "sourceLinkMaterialization": {
+    "repository": "superdesigndev/treg",
+    "archiveSha256": "d14fd2f6526358c871883d5884a69dc7e962b760b61377f80a3fb9d7f6ab0f0d",
+    "result": "extracted and packed successfully"
+  },
+  "limitations": [
+    "Selected Git-tree source retrieval timed out locally; final DSH Web and Treg component-fetch configurations await runner results",
+    "Local GitHub release-asset downloads timed out; prebuilt and native-asset routes await runner results",
+    "No claim of offline installation, runtime compatibility or full three-platform acceptance"
+  ],
+  "localBuildSourceMode": "Cached real source directories; no local offline/runtime acceptance claim",
+  "staticReview": {
+    "importantFinding": "Keep toolchain preparation errors separate from frozen entries so a failed task cannot invalidate campaign reporting",
+    "corrected": true,
+    "otherConfirmedBlockers": 0
+  }
+}
