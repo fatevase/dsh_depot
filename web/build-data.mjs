@@ -30,7 +30,8 @@ export async function writeBuildData(input,outDir){
   const ref=await write(`builds/packages/${digest(pkg.buildKey)}.json`,record)
   // Public browsing needs status and downloads, not every verification payload.
   pkg.verification={status:pkg.verification?.status,...(pkg.verification?.error?.message?{error:{message:pkg.verification.error.message}}:{})}
-  for(const key of ['dependencies','toolchain','timings','sourceArchiveSha256','assets'])delete pkg[key]
+  for(const key of ['dependencies','toolchain','timings','sourceArchiveSha256'])delete pkg[key]
+  if(pkg.assets)pkg.assets={checksums:pkg.assets.checksums}
   Object.assign(pkg,ref)
  }
  const index={schemaVersion:1,campaign:catalog.candidateBuild??null,records}
