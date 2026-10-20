@@ -23,6 +23,7 @@ test('maintained candidates refresh renamed metadata without creating build sour
 test('discovery persists candidate updates, repository renames and activation without losing concurrent candidates',async()=>{
  const previous={...initialState(),lastDiscoveryAt:'2026-10-18T00:00:00Z',candidates:[{...candidate,notes:'keep'},{repositoryId:456,repository:'active/plugin'},{repository:'concurrent/plugin'}]}
  const refreshed=await discover({recipes:[],github:{cache:{}},previous,maintainedCandidates:[{...candidate,stars:60,processing:{state:'auditing'}}]})
+ refreshed.checkedAt='2026-10-19T00:00:00Z'
  const updated=mergeState(previous,{discovery:refreshed})
  assert.equal(updated.candidates.find(c=>c.repositoryId===123).stars,60)
  assert.equal(updated.candidates.find(c=>c.repositoryId===123).processing.state,'auditing')
