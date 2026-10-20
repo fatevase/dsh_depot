@@ -5,9 +5,11 @@ import path from 'node:path'
 import {Github} from './lib/github.mjs'
 import {readJson,readRecipes} from './lib/model.mjs'
 import {distributionRepository} from './lib/repository.mjs'
-import {githubStateStore} from './lib/state.mjs'
-import {refreshDeployment} from './lib/deploy.mjs'
+import {githubStateStore,updateStateBranch} from './lib/state.mjs'
+import {generateSite} from './lib/site.mjs'
+import {catalogOf} from './lib/publish.mjs'
 import {latestManagerCatalog} from './lib/manager-catalog.mjs'
+import {latestCandidateReport,withCandidateReport,retainCandidateReport} from './candidate-catalog.mjs'
 import {shouldRefreshWebsite} from './lib/site-trigger.mjs'
 
 export async function main(command=process.argv[2],env=process.env){
@@ -26,7 +28,9 @@ export async function main(command=process.argv[2],env=process.env){
      jobs.push(...result.data.jobs)
      if(result.data.jobs.length<100)break
     }
-    allow=shouldRefreshWebsite({run,jobs,repository,defaultBranch:event.repository.default_branch})
+    allow=run.path==='.github/workflows/candidate-builds.yml'
+     ? jobs.some(job=>job.name==='report'&&job.conclusion==='success')
+     : shouldRefreshWebsite({run,jobs,repository,defaultBranch:event.repository.default_branch})
    }
   }else allow=['push','workflow_dispatch'].includes(env.GITHUB_EVENT_NAME) && env.GITHUB_REF===`refs/heads/${event.repository.default_branch}`
   if(env.GITHUB_OUTPUT)await appendFile(env.GITHUB_OUTPUT,`allow=${allow}\n`)
@@ -36,7 +40,12 @@ export async function main(command=process.argv[2],env=process.env){
   const selection=await readPluginList(config,fileURLToPath(new URL('.',import.meta.url)))
   const recipes=await readRecipes(fileURLToPath(new URL('./recipes/',import.meta.url)),{cohort:selection.active})
   const store=githubStateStore({repository,branch:config.stateBranch,github})
-  return refreshDeployment({store,recipes,outDir:fileURLToPath(new URL('../.runtime/web/site',import.meta.url)),managerCatalog:await latestManagerCatalog({github})})
+  let current=await store.read()
+  const candidateReport=await latestCandidateReport({github,repository,config:await readJson(new URL('./candidate-builds.json',import.meta.url)),previous:current.state.candidateReport})
+  if(candidateReport)current=await updateStateBranch({store,merge:state=>retainCandidateReport(state,candidateReport)})
+  const catalog=withCandidateReport(catalogOf(current.state,recipes),current.state.candidateReport)
+  const result=await generateSite({catalog,outDir:fileURLToPath(new URL('../.runtime/web/site',import.meta.url)),managerCatalog:await latestManagerCatalog({github})})
+  return {...result,stateCommit:current.commit,candidateBuild:catalog.candidateBuild}
  }
  throw Error('Usage: node distribution/deploy-site.mjs gate|build')
 }
