@@ -15,8 +15,6 @@
   },
   "devDependencies": {
     "esbuild": "0.28.2",
-    "pnpm-10": "npm:pnpm@10.34.5",
-    "pnpm-11": "npm:pnpm@11.25.0",
     "svelte": "5.57.2"
   }
 }

@@ -33,15 +33,41 @@ test('a failed direct install reports failure without claiming a rollback',async
 test('DSH CLI uses literal offline add/remove arguments and the target home',async t=>{
  const f=await fixture(t),{applyDshCli}=await import('../adapters/dsh-cli.mjs'),root=path.join(f.dir,'dsh'),record=path.join(f.profile,'argv.json')
  await mkdir(path.join(root,'lib'),{recursive:true})
- await writeFile(path.join(root,'lib/bin.js'),`exports.runCli=async()=>{require('node:fs').writeFileSync(${JSON.stringify(record)},JSON.stringify({argv:process.argv.slice(2),home:process.env.DSH_HOME}))}`)
+ await writeFile(path.join(root,'lib/bin.js'),`exports.runCli=async(options)=>{require('node:fs').writeFileSync(${JSON.stringify(record)},JSON.stringify({argv:process.argv.slice(2),home:process.env.DSH_HOME,options:options??{}}))}`)
  const host={...f.host,dshRoot:root,nodePath:process.execPath,home:f.dir,capabilities:{writeSession:true,requiresExit:false},launch:{args:[path.join(root,'lib/bin.js'),'--profile','web']}}
  for(const action of ['install','remove']){
   // This carrier fixture runs under elevated Windows CI; ownership policy is tested separately.
   await applyDshCli(host,{action,path:path.join(f.dir,'space ; literal.tgz'),packageName:'new-plugin',storeDir:path.join(f.dir,'logs')},{ownershipCheck:async()=>{}})
   const observed=JSON.parse(await readFile(record));assert.equal(observed.home,f.dir);assert.deepEqual(observed.argv.slice(0,3),['plugin','--profile','web'])
+  assert.deepEqual(observed.options,{})
+  assert.ok(!observed.argv.some(a=>/store-dir|auto-install-peers|manage-package-manager/.test(a)))
   if(action==='remove'){assert.ok(observed.argv.includes('--config.offline=true'));assert.ok(!observed.argv.includes('--offline'));assert.ok(!observed.argv.includes('--ignore-scripts'))}
   else assert.equal(observed.argv[4],path.join(f.dir,'space ; literal.tgz'))
  }
+})
+test('direct installation preserves the host package-manager wrapper and ignores profile pnpm version',async t=>{
+ const f=await fixture(t),{applyDshCli}=await import('../adapters/dsh-cli.mjs'),root=path.join(f.dir,'dsh'),record=path.join(f.profile,'carrier.json')
+ await mkdir(path.join(root,'lib'),{recursive:true})
+ await writeFile(path.join(root,'lib/bin.js'),`exports.runCli=async(options)=>{require('node:fs').writeFileSync(${JSON.stringify(record)},JSON.stringify(options))}`)
+ await writeFile(path.join(f.profile,'node_modules/.modules.yaml'),'packageManager: pnpm@99.0.0\nstoreDir: /do-not-change-store\n')
+ const packageManager={command:process.execPath,args:['/host/lock-recovery.mjs','/host/pnpm.cjs'],env:{ELECTRON_RUN_AS_NODE:'1',DSH_HOST_MARKER:'preserved'}}
+ const host={...f.host,dshRoot:root,nodePath:process.execPath,home:f.dir,packageManager,capabilities:{writeSession:true},launch:{args:[path.join(root,'lib/bin.js'),'--profile','web']}}
+ await applyDshCli(host,{action:'install',path:f.inspection.archivePath,packageName:'new-plugin',storeDir:path.join(f.dir,'logs')},{ownershipCheck:async()=>{}})
+ const observed=JSON.parse(await readFile(record))
+ assert.deepEqual(observed.packageManager,packageManager)
+ assert.match(await readFile(path.join(f.profile,'node_modules/.modules.yaml'),'utf8'),/pnpm@99\.0\.0/)
+})
+test('Desktop installation and composition both use the installation harness entry',async t=>{
+ const f=await fixture(t),{applyDshCli}=await import('../adapters/dsh-cli.mjs'),root=path.join(f.dir,'dsh'),resources=path.join(f.dir,'resources'),record=path.join(f.dir,'harness.jsonl')
+ await mkdir(resources);await mkdir(path.join(root,'lib'),{recursive:true})
+ await writeFile(path.join(root,'lib/bin.js'),"throw Error('must use Desktop harness')")
+ const harness=path.join(resources,'harness-node-entry.mjs')
+ await writeFile(harness,`import fs from 'node:fs';fs.appendFileSync(${JSON.stringify(record)},JSON.stringify({argv:process.argv.slice(2),entry:process.env.DSH_DESKTOP_PNPM_ENTRY,runner:process.env.DSH_DESKTOP_PNPM_RUNNER})+'\\n')`)
+ const host={...f.host,kind:'official-desktop',desktop:{supported:true,resources},dshRoot:root,nodePath:process.execPath,home:f.dir,capabilities:{writeSession:true},runtimeEnv:{DSH_DESKTOP_PNPM_ENTRY:'/host/pnpm.cjs',DSH_DESKTOP_PNPM_RUNNER:'/host/pnpm-runner.mjs'},launch:{args:[harness,path.join(root,'lib/bin.js'),'--profile','web']}}
+ await applyDshCli(host,{action:'install',packageName:'new-plugin',path:f.inspection.archivePath,storeDir:path.join(f.dir,'logs')},{ownershipCheck:async()=>{}})
+ const rows=(await readFile(record,'utf8')).trim().split('\n').map(JSON.parse)
+ assert.equal(rows.length,2);assert.equal(rows[0].argv[1],'plugin');assert.equal(rows[1].argv.at(-1),'--dump-config')
+ assert.ok(rows.every(r=>r.entry==='/host/pnpm.cjs'&&r.runner==='/host/pnpm-runner.mjs'))
 })
 test('a direct batch installs through DSH while the host is running',async t=>{
  const f=await fixture(t),{createBatch,startBatch,resumeBatch}=await import('../core/batches.mjs'),storeDir=path.join(f.dir,'state')

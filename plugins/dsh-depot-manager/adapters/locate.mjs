@@ -123,7 +123,7 @@ export async function locateInstallations({env=process.env,paths=[],processes,us
   for(const home of new Set(desktopHomes)){
    const resolved=await canonical(home);if(!resolved)continue
    try{await stat(path.join(resolved,'profiles/web/package.json'));await stat(path.join(resolved,'.desktop-install-state.json'))}catch{continue}
-   locations.push({kind:'official-desktop',home:resolved,profileName:'web',dshRoot:path.join(selected.runtimeRoot,'node_modules/@deepseek-ai/dsh'),nodePath:process.execPath,desktop:selected,runtimeEnv:{ELECTRON_RUN_AS_NODE:'1'},packageManager:{command:process.execPath,args:[path.join(selected.runtimeRoot,'node_modules/pnpm/bin/pnpm.cjs')],env:{ELECTRON_RUN_AS_NODE:'1'}}})
+   locations.push({kind:'official-desktop',home:resolved,profileName:'web',dshRoot:path.join(selected.runtimeRoot,'node_modules/@deepseek-ai/dsh'),nodePath:process.execPath,desktop:selected,runtimeEnv:{ELECTRON_RUN_AS_NODE:'1'}})
   }
  }
  for(const home of homes){const resolved=await canonical(home);if(!resolved||desktopOwnedHomes.has(resolved))continue

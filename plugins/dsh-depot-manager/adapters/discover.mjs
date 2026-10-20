@@ -8,6 +8,7 @@ import {fail} from '../contracts/constants.mjs'
 import {ownershipFacts} from './ownership.mjs'
 import {runHostCommand} from './command.mjs'
 import {locateInstallations,desktopAt} from './locate.mjs'
+import {desktopPackageManager,desktopPnpmEnvironment} from './host-pnpm.mjs'
 export const hash=value=>createHash('sha256').update(typeof value==='string'?value:JSON.stringify(value)).digest('hex')
 export async function json(file,fallback){try{return JSON.parse(await readFile(file,'utf8'))}catch(e){if(e.code==='ENOENT'&&fallback!==undefined)return fallback;throw e}}
 export async function hostFingerprint(host){
@@ -33,8 +34,13 @@ export async function probeHost(candidate){
   desktop=candidate.desktop&&await desktopAt(candidate.desktop.appPath)
   operations=operations&&!!desktop?.supported&&process.versions.electron!==undefined&&observed.kind==='electron'&&nodePath.startsWith(desktop.appPath+path.sep)&&dshRoot===await realpath(path.join(desktop.runtimeRoot,'node_modules/@deepseek-ai/dsh'))
  }
- const host={schemaVersion:1,hostId:hash({dshRoot,profileDir}).slice(0,24),kind,version:pkg.version,profileName,profileDir,home:await realpath(candidate.home??path.resolve(profileDir,'../..')),dshRoot,nodePath,ownerId,runtime:observed,launch:{executable:nodePath,args:['--expose-internals',path.join(dshRoot,'lib/bin.js'),'--profile',profileName]},packageManager:candidate.packageManager??{command:'pnpm',args:[]},capabilities:{inspect:true,offlineInstall:operations,remove:operations,writeSession:operations,requiresExit:false,survivesHostExit:false,blockedReason:operations?null:!owned?'PROFILE_OWNER_MISMATCH':'HOST_CAPABILITY_UNVERIFIED'}}
- if(kind==='official-desktop'){host.desktop=desktop;host.runtimeEnv={ELECTRON_RUN_AS_NODE:'1'}}
+ const packageManager=kind==='official-desktop'&&operations?await desktopPackageManager(desktop,{nodePath}):candidate.packageManager
+ const host={schemaVersion:1,hostId:hash({dshRoot,profileDir}).slice(0,24),kind,version:pkg.version,profileName,profileDir,home:await realpath(candidate.home??path.resolve(profileDir,'../..')),dshRoot,nodePath,ownerId,runtime:observed,launch:{executable:nodePath,args:['--expose-internals',path.join(dshRoot,'lib/bin.js'),'--profile',profileName]},packageManager,capabilities:{inspect:true,offlineInstall:operations,remove:operations,writeSession:operations,requiresExit:false,survivesHostExit:false,blockedReason:operations?null:!owned?'PROFILE_OWNER_MISMATCH':'HOST_CAPABILITY_UNVERIFIED'}}
+ if(kind==='official-desktop'){
+  host.desktop=desktop
+  host.runtimeEnv=packageManager?desktopPnpmEnvironment(packageManager):{ELECTRON_RUN_AS_NODE:'1'}
+  if(packageManager&&desktop?.resources)host.launch.args=['--expose-internals',path.join(desktop.resources,'harness-node-entry.mjs'),path.join(dshRoot,'lib/bin.js'),'--profile',profileName]
+ }
  host.fingerprint=await hostFingerprint(host);return validateHost(host)
 }
 export async function discoverEnvironments(options={}){

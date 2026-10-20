@@ -24,4 +24,6 @@ test('Windows full bundle extracts as a ZIP with program runtime CMD and instruc
  assert.equal(await readFile(path.join(root,'runtime/node.exe'),'utf8'),'runtime fixture')
  for(const file of ['core.mjs','install.cmd','README.txt','manager.tgz','settings.json'])assert.ok((await readFile(path.join(root,file))).length>0)
  assert.equal(await fileHash(path.join(root,'manager.tgz')),await fileHash(manager))
+ assert.equal(JSON.parse(await readFile(path.join(root,'bundle.json'))).packageManagers,undefined)
+ await assert.rejects(readFile(path.join(root,'package-managers.tgz')),{code:'ENOENT'})
 })
