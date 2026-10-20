@@ -205,7 +205,9 @@
           "submodule": "vendor/dsh-std"
         }
       ],
-      "adapterNotes": "准备阶段读取父提交固定的 dsh-std 子模块 SHA；编译脚本先构建 vendor。此次仅编译，终端交互和离线安装另行验收。"
+      "adapterNotes": "Use upstream publish wrapper with npm pack after compile; https://github.com/ccch1mneyyy/dsh-TUI/blob/5e0146bc8d25f8b105860a766a72d48eda385177/.github/workflows/publish.yml",
+      "packManager": "npm",
+      "packWrapper": "scripts/with-publish-manifest.mjs"
     },
     {
       "repositoryId": 1163808211,
@@ -358,9 +360,9 @@
       "ref": "main",
       "packagePath": ".",
       "npmName": "cc-safety-net",
-      "buildScripts": [
-        "build"
-      ]
+      "buildScripts": [],
+      "packManager": "npm",
+      "adapterNotes": "Pinned source commit already includes dist; pack source-committed prebuilt files without running the Bun rebuild. Not a new compilation."
     },
     {
       "repositoryId": 1336114531,
@@ -660,10 +662,21 @@
     {
       "repositoryId": 1333755311,
       "repository": "QCYTSN/dsh-dafeiyu",
-      "ref": "main",
+      "ref": "43542f8fc9567f45ce98534d407abca2ff4ff74e",
       "packagePath": ".",
       "npmName": "dsh-dafeiyu",
-      "buildScripts": []
+      "buildScripts": [],
+      "prebuilt": {
+        "version": "0.1.18",
+        "sourceCommit": "43542f8fc9567f45ce98534d407abca2ff4ff74e",
+        "targets": {
+          "all": {
+            "url": "https://github.com/QCYTSN/dsh-dafeiyu/releases/download/v0.1.18/dsh-dafeiyu-0.1.18.tgz",
+            "sha256": "31d8cb8e465132d00fabdcda1e6c47e9db1d5d4063925265b181e9bf4c808730"
+          }
+        }
+      },
+      "adapterNotes": "Pinned official prebuilt npm tarball from matching immutable release tag; preserve runtime dependency and host peer declarations; not runtime/offline verified."
     },
     {
       "repositoryId": 1334211162,
@@ -785,13 +798,22 @@
     {
       "repositoryId": 1339882322,
       "repository": "ZSeven-W/dsh-ios",
-      "ref": "main",
+      "ref": "ed785afb2872e0cf5c5c325be94f81a7b8451284",
       "packagePath": ".",
       "npmName": "@zseven-w/dsh-ios",
-      "buildScripts": [
-        "build"
-      ],
-      "pnpmVersion": "10.12.1"
+      "buildScripts": [],
+      "pnpmVersion": "10.12.1",
+      "adapterNotes": "Use upstream published npm artifact with exact checksum/source release pin; no blind source-only rebuild. See docs/evidence/readme-build-adapters-2026-10-20.json.",
+      "prebuilt": {
+        "version": "0.1.0-rc.10",
+        "sourceCommit": "ed785afb2872e0cf5c5c325be94f81a7b8451284",
+        "targets": {
+          "all": {
+            "url": "https://registry.npmjs.org/@zseven-w/dsh-ios/-/dsh-ios-0.1.0-rc.10.tgz",
+            "sha256": "c10e22b5b04058d5b9ff6778c6bf9b125aaa54b2091ef7d4b02795c80a8a4aed"
+          }
+        }
+      }
     },
     {
       "repositoryId": 1333132287,
@@ -987,9 +1009,7 @@
       "ref": "main",
       "packagePath": ".",
       "npmName": "tydora",
-      "buildScripts": [
-        "build"
-      ],
+      "buildScripts": [],
       "sourcePatches": [
         {
           "path": "app/tydora-web/src/mindmap/MindmapView.tsx",
@@ -1006,7 +1026,9 @@
             }
           ]
         }
-      ]
+      ],
+      "adapterNotes": "Install missing pinned markmap peer for frontend build. Native desktop packaging/local vendor dependency still requires upstream product adapter.",
+      "blockedReason": "上游 DSH 入口仅为空骨架，官方产物为独立 Tauri 桌面应用，尚无完整 DSH 插件包。"
     },
     {
       "repositoryId": 1339669759,
@@ -1099,12 +1121,21 @@
     {
       "repositoryId": 1334434081,
       "repository": "xiajiajun516/dsh-config-manager",
-      "ref": "main",
+      "ref": "865c4efdd5c77b8a64f55d2af6cadf50d73e00d8",
       "packagePath": ".",
       "npmName": "dsh-config-manager",
-      "buildScripts": [
-        "build"
-      ]
+      "buildScripts": [],
+      "prebuilt": {
+        "version": "0.1.78",
+        "sourceCommit": "865c4efdd5c77b8a64f55d2af6cadf50d73e00d8",
+        "targets": {
+          "all": {
+            "url": "https://github.com/xiajiajun516/dsh-config-manager/releases/download/v0.1.78/dsh-config-manager-0.1.78.tgz",
+            "sha256": "ba1338e7e340e20bff96614fbe188593bd2b1eff6a26f89942d5f836461f3b4e"
+          }
+        }
+      },
+      "adapterNotes": "Pinned official prebuilt npm tarball from matching immutable release tag; preserve runtime dependency and host peer declarations; not runtime/offline verified."
     },
     {
       "repositoryId": 1337930857,
@@ -1167,13 +1198,45 @@
     {
       "repositoryId": 1332212466,
       "repository": "ZSeven-W/dsh-openpencil",
-      "ref": "main",
+      "ref": "34cf7b45ed10fc7de43c3ccb30406e6c40b449ae",
       "packagePath": ".",
       "npmName": "@zseven-w/dsh-openpencil",
-      "buildScripts": [
-        "build"
-      ],
-      "pnpmVersion": "10.12.1"
+      "buildScripts": [],
+      "pnpmVersion": "10.12.1",
+      "adapterNotes": "Use upstream published npm artifact with exact checksum/source release pin; no blind source-only rebuild. See docs/evidence/readme-build-adapters-2026-10-20.json.",
+      "prebuilt": {
+        "version": "0.1.0-rc.13",
+        "sourceCommit": "34cf7b45ed10fc7de43c3ccb30406e6c40b449ae",
+        "targets": {
+          "all": {
+            "url": "https://registry.npmjs.org/@zseven-w/dsh-openpencil/-/dsh-openpencil-0.1.0-rc.13.tgz",
+            "sha256": "d3a56f2706d8b9172e8d728a8291d5259b7885a75240e4ad7cc02568ea10839d"
+          }
+        },
+        "runtimePackages": {
+          "macos-arm64": {
+            "name": "@zseven-w/dsh-openpencil-darwin-arm64",
+            "version": "0.1.0-rc.13",
+            "url": "https://registry.npmjs.org/@zseven-w/dsh-openpencil-darwin-arm64/-/dsh-openpencil-darwin-arm64-0.1.0-rc.13.tgz",
+            "sha256": "161e5327e7aaa7ed73786990a71274ef37465d3b73c71c52dcad84e3b561dec6",
+            "integrityManifest": "openpencil-runtime.json"
+          },
+          "linux-x64": {
+            "name": "@zseven-w/dsh-openpencil-linux-x64",
+            "version": "0.1.0-rc.13",
+            "url": "https://registry.npmjs.org/@zseven-w/dsh-openpencil-linux-x64/-/dsh-openpencil-linux-x64-0.1.0-rc.13.tgz",
+            "sha256": "4a5f8098736083b291c0695e76553a1f0f6213ffe022b457858a799e54be47e9",
+            "integrityManifest": "openpencil-runtime.json"
+          },
+          "win32-x64": {
+            "name": "@zseven-w/dsh-openpencil-win32-x64",
+            "version": "0.1.0-rc.13",
+            "url": "https://registry.npmjs.org/@zseven-w/dsh-openpencil-win32-x64/-/dsh-openpencil-win32-x64-0.1.0-rc.13.tgz",
+            "sha256": "8392dbfffa818fab35f1164a71349f4851d0df7d15b4c62a4fd29a04749c4884",
+            "integrityManifest": "openpencil-runtime.json"
+          }
+        }
+      }
     },
     {
       "repositoryId": 1341805689,
@@ -1189,13 +1252,23 @@
     {
       "repositoryId": 1335127844,
       "repository": "cocofhu/anime-find",
-      "ref": "main",
+      "ref": "a772e4d74608469507a48bf5bfe8445cd567064f",
       "packagePath": ".",
       "npmName": "@cocofhu/anime-find",
-      "buildScripts": [
-        "build"
-      ],
-      "pnpmVersion": "11.17.0"
+      "buildScripts": [],
+      "pnpmVersion": "11.17.0",
+      "packManager": "npm",
+      "adapterNotes": "Use upstream published npm artifact with exact checksum/source release pin; no blind source-only rebuild. See docs/evidence/readme-build-adapters-2026-10-20.json.",
+      "prebuilt": {
+        "version": "0.1.12",
+        "sourceCommit": "a772e4d74608469507a48bf5bfe8445cd567064f",
+        "targets": {
+          "all": {
+            "url": "https://registry.npmjs.org/@cocofhu/anime-find/-/anime-find-0.1.12.tgz",
+            "sha256": "85146f0f67d102a80b24828cc5eba608d8ab26a2c6b37dab3e535ce316956bb7"
+          }
+        }
+      }
     },
     {
       "repositoryId": 1333685863,
@@ -1208,13 +1281,13 @@
     {
       "repositoryId": 1332243516,
       "repository": "omdsh-dev/dsh_workflow",
-      "ref": "main",
+      "ref": "804e4c38e4e1649f5777f92fed28fa29d17aa62d",
       "packagePath": ".",
       "npmName": "@dsh-external/workflow",
-      "buildScripts": [
-        "build"
-      ],
-      "pnpmVersion": "11.7.0"
+      "buildScripts": [],
+      "pnpmVersion": "11.7.0",
+      "packManager": "npm",
+      "adapterNotes": "Use upstream v0.1.3 committed lib output; its release removes unavailable sibling SDK paths. README permits installation without compilation."
     },
     {
       "repositoryId": 1339101586,

@@ -1,4 +1,4 @@
-// Trial compilation only. These receipts cannot enter the release publisher.
+// Trial compilation receipts stay outside the formal offline-verified publisher.
 import path from 'node:path'
 import {mkdir, access, copyFile} from 'node:fs/promises'
 import {readJson, atomicJson, fileDigest, jsonDigest, within} from './model.mjs'
@@ -45,11 +45,12 @@ export async function buildCandidate(entry,{sourceDir,workDir,tools,preparationE
   receipt.adapterDigest=jsonDigest(entry)
   if(entry.error)throw Error(entry.error)
   if(preparationError)throw Error(preparationError)
+  if(entry.blockedReason)throw Error('Upstream package incomplete: '+entry.blockedReason)
   if(!/^[a-f0-9]{40}$/.test(entry.commit??''))throw Error('Missing frozen source commit')
   if(entry.prebuilt){
    receipt.stage='prebuilt'
    if(entry.prebuilt.sourceCommit!==entry.commit)throw Error('Prebuilt source commit does not match the frozen plan')
-   const artifact=await importPrebuilt(entry,{workDir,target:receipt.target})
+   const artifact=await importPrebuilt(entry,{workDir,target:receipt.target,tools,run})
    receipt.artifact=artifact;receipt.artifacts=[artifact];receipt.package={name:artifact.name,version:artifact.version}
    receipt.dependencyMode='upstream-prebuilt';receipt.runtimeDependencies=Object.keys(artifact.runtimeDependencies)
    receipt.status='compiled'
@@ -113,6 +114,7 @@ export async function buildCandidate(entry,{sourceDir,workDir,tools,preparationE
   receipt.status='compiled'
   }
  }catch(error){receipt.error=error.message;receipt.errorCategory=failureCategory(error.message,receipt.stage)}
+ receipt.warnings=[...new Set((receipt.artifacts??[]).flatMap(a=>a.warnings??[]))]
  receipt.seconds=+((performance.now()-started)/1000).toFixed(3)
  await atomicJson(path.join(workDir,'receipt.json'),receipt)
  return receipt
@@ -126,7 +128,7 @@ export function failureCategory(message,stage=''){
  if(/Unsafe|Archive (?:link|path|member)|archive special|Cyclic archive|Duplicate archive|Case-colliding/.test(message))return 'source_archive'
  if(/checksum|identity|changed|pinned|frozen|SHA-256/i.test(message))return 'input_identity'
  if(/not valid JSON|JSON/.test(message))return 'tool_output'
- if(/Missing source submodule|source commit|DSH_CHECKOUT|Missing dependency tool|Configured build script/.test(message))return 'prerequisite'
+ if(/Upstream package incomplete|Missing source submodule|source commit|DSH_CHECKOUT|Missing dependency tool|Configured build script/.test(message))return 'prerequisite'
  if(/dependencies/.test(stage))return 'dependencies'
  if(/source/.test(stage))return 'source_fetch'
  if(/prebuilt|assets/.test(stage))return 'artifact_input'

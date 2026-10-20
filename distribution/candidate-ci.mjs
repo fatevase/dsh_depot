@@ -44,7 +44,7 @@ if(command==='prepare'){
   const workDir=path.join(root,'results',String(entry.repositoryId));await mkdir(workDir,{recursive:true})
   let prepared,preparationError
   try{
-   if(!entry.prebuilt&&!entry.error){
+   if((!entry.prebuilt||entry.prebuilt.runtimePackages)&&!entry.error&&!entry.blockedReason){
     const key=entry.pnpmVersion??'11.25.0'
     if(!tools.has(key))tools.set(key,await prepareTools({node:'26.9.0',npm:'11.19.1',pnpm:key},path.join(root,'tools',key)))
     prepared=tools.get(key)
