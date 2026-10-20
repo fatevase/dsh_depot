@@ -3,16 +3,17 @@ import {mkdir,lstat,readlink,symlink,chmod,rm,stat,realpath} from 'node:fs/promi
 import {createReadStream,createWriteStream} from 'node:fs'
 import {pipeline} from 'node:stream/promises'
 import * as tar from 'tar'
-import {listExportFiles,fileIdentity,checkExportAbort,installedDependency} from './export-dependencies.mjs'
+import {listExportFiles,fileIdentity,checkExportAbort,installedDependency,exportedPeerVersion} from './export-dependencies.mjs'
 import {atomicJson,fileHash,readJson,auditTree,digest} from './files.mjs'
 import {writePackageMetadata} from './package-metadata.mjs'
 import {inspectArtifact} from './inspect.mjs'
 import {fail} from '../contracts/constants.mjs'
 const installHooks=new Set(['preinstall','install','postinstall','prepare','prepublish','prepublishOnly','postpublish','prepack','postpack'])
-async function unchanged(graph,signal){
+async function unchanged(graph,signal,host){
  for(const node of graph.nodes){
   const files=await listExportFiles(node.root,{budget:{entries:0,bytes:0},limits:graph.limits,signal})
   if(digest(JSON.stringify(files))!==node.fingerprint)fail('SOURCE_CHANGED','导出期间源文件发生变化，请稍后重试')
+  for(const [name,peer]of Object.entries(node.peerSources??{})){const location=await installedDependency(node.root,name),hostLocation=host.dshRoot&&await installedDependency(host.dshRoot,name);if(location!==peer.location||(hostLocation??null)!==peer.hostLocation||await exportedPeerVersion(host,name)!==peer.version)fail('SOURCE_CHANGED','共享依赖上下文发生变化');for(const [dir,sha256]of Object.entries(peer.manifests??{}))if(await fileHash(path.join(dir,'package.json'))!==sha256)fail('SOURCE_CHANGED','共享依赖清单发生变化')}
   for(const [name,edge]of Object.entries({...node.dependencies,...node.optionalDependencies}))if(await installedDependency(node.root,name)!==graph.nodes[edge.nodeId].root)fail('SOURCE_CHANGED','运行依赖位置发生变化')
  }
 }
@@ -21,7 +22,7 @@ export async function exportInstalledPackage({graph,host,workDir,signal,onProgre
  let copied=0
  const progress=stage=>onProgress({stage,files:copied,totalFiles:graph.budget.entries,unpackedBytes:graph.budget.bytes})
  try{
-  await unchanged(graph,signal);progress('collecting')
+  await unchanged(graph,signal,host);progress('collecting')
   async function copyNode(id,dest){
    const node=graph.nodes[id];await mkdir(dest,{recursive:true,mode:0o700})
    for(const item of node.files){
@@ -52,7 +53,7 @@ export async function exportInstalledPackage({graph,host,workDir,signal,onProgre
   pack.on('data',chunk=>{bytes+=chunk.length;if(bytes>graph.limits.compressedBytes)pack.destroy(Object.assign(new Error('压缩包超过限制'),{code:'RESOURCE_LIMIT'}))})
   await pipeline(pack,output,{signal});checkExportAbort(signal);progress('checking')
   const inspection=await inspectArtifact({path:archive,host,workDir:path.join(workDir,'inspection'),limits:graph.limits})
-  await unchanged(graph,signal);checkExportAbort(signal)
+  await unchanged(graph,signal,host);checkExportAbort(signal)
   return {fileName,path:archive,sha256:await fileHash(archive),compressedBytes:(await stat(archive)).size,inspection,warnings:[...graph.warnings,...inspection.warnings]}
  }finally{await rm(path.join(workDir,'staging'),{recursive:true,force:true});await rm(path.join(workDir,'inspection'),{recursive:true,force:true})}
 }

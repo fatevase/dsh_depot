@@ -1,4 +1,5 @@
 import path from 'node:path'
+import semver from 'semver'
 import {fileURLToPath} from 'node:url'
 import {mkdir,readFile,writeFile,readdir} from 'node:fs/promises'
 import {buildManager} from '../../plugins/dsh-depot-manager/build.mjs'
@@ -12,7 +13,10 @@ import {isManagerDownload} from '@dsh-depot/offline-format/manager-qualification
 export function assembleManagerPublication(receipts,{channel='stable'}={}) {
  const assets=[],blocked=[],verificationRefs=[]
  for(const r of receipts){
-  const verified=qualifyManagerReport(r.verification??{})
+  const localExport=r.localExport
+  if(r.manager?.version&&semver.gte(r.manager.version,'0.1.8')&&!localExport){blocked.push({target:r.target,reason:'LOCAL_EXPORT_MIGRATION_REQUIRED'});continue}
+  if(localExport&&(localExport.status!=='passed'||localExport.target!==r.target||localExport.managerSha256!==r.manager?.sha256||!localExport.artifact?.sha256||localExport.verification?.status!=='passed'||localExport.verification.target!==r.target||localExport.verification.sha256!==localExport.artifact.sha256)){blocked.push({target:r.target,reason:'LOCAL_EXPORT_MIGRATION_REQUIRED'});continue}
+  const verified=qualifyManagerReport({...r.verification,...(localExport?{localExport}:{})})
   if(channel==='preview'){
    const valid=['macos-arm64','linux-x64','win32-x64'].includes(r.target)&&r.manager&&r.manager.target===r.target&&/^[a-f0-9]{64}$/.test(r.manager.sha256??'')&&r.manager.sha256===verified.packageSha256&&!r.fixture&&r.assets?.length&&r.assets.every(a=>a.target===r.target&&['full','lite'].includes(a.flavor)&&/^[a-f0-9]{64}$/.test(a.sha256??'')&&a.managerSha256===r.manager.sha256)
    if(!valid){blocked.push({target:r.target,reason:'MANAGER_BYTES_REQUIRED'});continue}
@@ -38,6 +42,7 @@ export async function buildOnRunner({target,output}) {
  const host=await prepareHost({workDir:path.join(output,'stock-host')})
  const verification=await verifyManager({bundle:manager,host,workDir:path.join(output,'verification')})
  const localExport=await verifyExportRoundTrip({host,workDir:path.join(output,'export-roundtrip')})
+ localExport.managerSha256=manager.sha256
  await atomicJson(path.join(output,'export-roundtrip.json'),localExport)
  if(localExport.status!=='passed')fail('LOCAL_EXPORT_MIGRATION_FAILED',localExport.error?.message??'本机导出迁移验收未通过')
  const receipt={schemaVersion:1,target,manager,assets,verification,localExport,verificationRef:'manager-verification.json',seconds:(Date.now()-started)/1000,platformEvidence:{os:process.platform,arch:process.arch,node:process.versions.node,ssh:'unverified',fedora:'unverified'}}

@@ -39,27 +39,27 @@
         "outboundLoopbackBlocked": true
       }
     },
-    "exportSeconds": 0.079,
+    "exportSeconds": 0.077,
     "artifact": {
       "fileName": "depot-export-fixture-1.0.0-macos-arm64.tgz",
-      "sha256": "66f952a5f9eca933643031b99de7e726caa2712bf5e0d70983040389f0bd2a49",
-      "compressedBytes": 2076
+      "sha256": "246ef418b907eee2de545d73a9f14e2a15a061b9f0b86968c4ecbbf014f1cd1f",
+      "compressedBytes": 2075
     },
     "verification": {
       "schemaVersion": 1,
-      "buildKey": "66f952a5f9eca933643031b99de7e726caa2712bf5e0d70983040389f0bd2a49",
+      "buildKey": "246ef418b907eee2de545d73a9f14e2a15a061b9f0b86968c4ecbbf014f1cd1f",
       "target": "macos-arm64",
       "host": {
         "node": "26.9.0",
         "version": "0.2.0-rc.2",
         "environmentDigest": "d7b06cf0c7394141fc0cabdbe8bcf2014caddb853ad862fa8535da90cb4c6384"
       },
-      "sha256": "66f952a5f9eca933643031b99de7e726caa2712bf5e0d70983040389f0bd2a49",
+      "sha256": "246ef418b907eee2de545d73a9f14e2a15a061b9f0b86968c4ecbbf014f1cd1f",
       "status": "passed",
       "timings": {
-        "install": 2.086,
-        "compose": 0.136,
-        "host": 1.832
+        "install": 0.812,
+        "compose": 0.138,
+        "host": 1.756
       },
       "checks": {
         "install": true,
@@ -123,6 +123,8 @@
     "desktopVersion": "0.12.0",
     "node": "24.17.0",
     "managerVersion": "0.1.8",
+    "managerSha256": "3fc7622313771b023678b6c09d964753eb095eb37013b2250ad9b9a5bb0634f2",
+    "managerSelfExport": true,
     "authenticatedExport": true,
     "anonymousDownloadStatus": 401,
     "backgroundWorker": true,
@@ -130,8 +132,8 @@
     "sourceConfigUnchanged": true,
     "artifact": {
       "fileName": "depot-export-fixture-1.0.0-macos-arm64.tgz",
-      "sha256": "a7868f1b2acde1284c29f843af2eb310b3c6d272c34d0a2176711e583dbe77bb",
-      "compressedBytes": 2066
+      "sha256": "799293aff91d3fbbee322d2412f1b9cc7a24126b4182a373a28edbf34727967a",
+      "compressedBytes": 2068
     },
     "networkIsolation": "not claimed by this Desktop smoke; separate stock DSH roundtrip provides OS isolation"
   }
