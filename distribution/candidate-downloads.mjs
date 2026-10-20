@@ -2,6 +2,7 @@
 import path from 'node:path'
 import {mkdir,readdir,writeFile,stat,rm} from 'node:fs/promises'
 import {fileURLToPath} from 'node:url'
+import {setTimeout as delay} from 'node:timers/promises'
 import {Github} from './lib/github.mjs'
 import {readJson,atomicJson,fileDigest,jsonDigest,digest,within} from './lib/model.mjs'
 import {extractArchive} from './lib/build.mjs'
@@ -83,18 +84,26 @@ export async function publishCandidateDownloads({github,runId,workDir}){
   const old=existing.get(name)
   if(old){if(old.digest!==`sha256:${sha}`)throw Error('Immutable candidate asset checksum conflict');return}
   if(!release.draft)throw Error('Public candidate release is incomplete; use a new run attempt')
-  const result=await remote.upload(release,name,file,sha)
-  if(result.sha256!==sha)throw Error('Uploaded candidate checksum mismatch')
+  for(let attempt=0;attempt<3;attempt++){
+   try{const result=await remote.upload(release,name,file,sha);if(result.sha256!==sha)throw Error('Uploaded candidate checksum mismatch');return}
+   catch(error){
+    if(attempt===2)throw error
+    await delay(5000*(attempt+1))
+    const found=(await github.list(`${base}/releases/${release.id}/assets`)).find(a=>a.name===name)
+    if(found){if(found.digest!==`sha256:${sha}`)throw Error('Immutable candidate asset checksum conflict');return}
+   }
+  }
  }
  for(let offset=0;offset<packages.length;offset+=4){
   await Promise.all(packages.slice(offset,offset+4).map(p=>upload(p.assetName,p.file,p.sha256)))
   console.log(JSON.stringify({uploaded:Math.min(offset+4,packages.length),total:packages.length}))
+  if(offset+4<packages.length)await delay(4000)
  }
  const manifest={schemaVersion:1,runId:run.id,runAttempt:run.run_attempt,sourceCommit:run.head_sha,verification:'not-run',releaseTag:tag,counts:report.counts,packages:packages.map(({file,...p})=>({...p,url:url(p.assetName)}))}
  const data=Buffer.from(JSON.stringify(manifest,null,2)+'\n'),sums=Buffer.from(packages.map(p=>`${p.sha256}  ${p.assetName}`).join('\n')+'\n')
  await upload('candidate-downloads.json',data,digest(data));await upload('SHA256SUMS',sums,digest(sums))
  await remote.publish(release)
- await remote.assertPublicDownloads([url('candidate-downloads.json'),url(packages[0].assetName),url(packages.at(-1).assetName)])
+ for(let attempt=0;;attempt++){try{await remote.assertPublicDownloads([url('candidate-downloads.json'),url(packages[0].assetName),url(packages.at(-1).assetName)]);break}catch(error){if(attempt>=2)throw error;await delay(3000)}}
  await atomicJson(path.join(workDir,'published.json'),manifest)
  return {runId:run.id,releaseTag:tag,packages:packages.length,catalogUrl:url('candidate-downloads.json')}
 }
