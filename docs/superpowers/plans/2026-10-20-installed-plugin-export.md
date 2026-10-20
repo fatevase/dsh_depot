@@ -8,7 +8,7 @@
 
 **Tech Stack:** 现有 JavaScript ESM、Node fs/streams/worker_threads、tar、semver、Svelte、node:test；不新增 npm/pnpm 或其他运行依赖。
 
-**Spec:** [已安装插件导出设计](../specs/2026-10-20-installed-plugin-export-design.md)。状态：实施中。
+**Spec:** [已安装插件导出设计](../specs/2026-10-20-installed-plugin-export-design.md)。状态：已实现、通过三平台原生迁移门禁，0.1.8 测试版已发布；证据见 docs/evidence/installed-plugin-export。
 
 ## Global Constraints
 
@@ -107,5 +107,5 @@
 - [x] macOS 对已支持 Desktop0.12.0 增加独立配置实测；不修改日常配置，也不宣称其他 Desktop 版本已支持。
 - [x] 记录 npm/pnpm 布局、包大小、耗时、检查失败与平台限制；包字节和报告绑定。发布版本在实现完成时依据当前主线递增，不提前指定过期版本号。
 - [x] 运行管理器、共享格式、分发管理器和受影响网页测试；请求独立代码复核，处理重要问题后提交 PR。
-- [ ] 按已有发布授权与三平台门禁发布相同验证字节，更新下载指南；核对线上目录和真实下载链接。
+- [x] 按已有发布授权与三平台门禁发布相同验证字节，更新下载指南；核对线上目录和真实下载链接。
 - [x] Commit: `test(manager): verify exported plugins migrate offline through stock DSH`。

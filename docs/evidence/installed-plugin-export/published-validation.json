@@ -1,0 +1,78 @@
+{
+  "date": "2026-10-20",
+  "version": "0.1.8",
+  "channel": "preview",
+  "pullRequest": "https://github.com/fatevase/dsh_depot/pull/27",
+  "mergeCommit": "dcb89971df9c2dcf34cc74e8f077a2855a2311fd",
+  "release": "https://github.com/fatevase/dsh_depot/releases/tag/manager-preview-39387441396",
+  "mainRun": 39387441396,
+  "finalPullRequestRun": 39387186793,
+  "pagesRun": 39387674399,
+  "installerDownloadHTTPStatus": 200,
+  "installerDownloads": 6,
+  "targets": [
+    {
+      "target": "linux-x64",
+      "managerSha256": "277f84f2492609221b50393ee37e932e8a165e693804ae93ba3efe1f05288826",
+      "artifact": {
+        "fileName": "depot-export-fixture-1.0.0-linux-x64.tgz",
+        "sha256": "635ffa0922a1b87e1572756db818474470e90871e73605c56602241f4645a9e9",
+        "compressedBytes": 2068
+      },
+      "status": "passed",
+      "sourceConfigurationPreserved": true,
+      "sourceIsolation": "passed",
+      "targetIsolation": "passed",
+      "checks": {
+        "install": true,
+        "compose": true,
+        "registration": true,
+        "host": true,
+        "clientModule": null,
+        "native": true
+      }
+    },
+    {
+      "target": "macos-arm64",
+      "managerSha256": "8ee7dcd75b54cbc7512a93193b8d6ee60ade90c2f9ae43e862aa640a7dd9502d",
+      "artifact": {
+        "fileName": "depot-export-fixture-1.0.0-macos-arm64.tgz",
+        "sha256": "ff952828b9f26ffbbc1dfcaecf0cf2871e8d904e5327187fd71ba9232dcf71d7",
+        "compressedBytes": 2052
+      },
+      "status": "passed",
+      "sourceConfigurationPreserved": true,
+      "sourceIsolation": "passed",
+      "targetIsolation": "passed",
+      "checks": {
+        "install": true,
+        "compose": true,
+        "registration": true,
+        "host": true,
+        "clientModule": null,
+        "native": true
+      }
+    },
+    {
+      "target": "win32-x64",
+      "managerSha256": "ce39eb02a4a3f83e81edd80d96eb8cf43fe3fe8790de4522eb029a44e4e75845",
+      "artifact": {
+        "fileName": "depot-export-fixture-1.0.0-win32-x64.tgz",
+        "sha256": "a678e815441ba54c9ef33d9750bcec772c9d10d43012585698226ba098ee7e82",
+        "compressedBytes": 2044
+      },
+      "status": "passed",
+      "sourceConfigurationPreserved": true,
+      "sourceIsolation": "passed",
+      "targetIsolation": "passed",
+      "checks": {
+        "install": true,
+        "compose": true,
+        "registration": true,
+        "host": true,
+        "clientModule": null,
+        "native": true
+      }
+    }
+  ]
+}
