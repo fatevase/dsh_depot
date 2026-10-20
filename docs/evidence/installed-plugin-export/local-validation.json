@@ -1,0 +1,138 @@
+{
+  "date": "2026-10-20",
+  "cli": {
+    "schemaVersion": 1,
+    "status": "passed",
+    "target": "macos-arm64",
+    "sourceInstall": true,
+    "sourceConfigurationPreserved": true,
+    "isolationControls": {
+      "status": "passed",
+      "beforeReachable": true,
+      "beforeReachableIPv6": true,
+      "offline": {
+        "externalBlocked": true,
+        "externalBlockedIPv6": true,
+        "childBlockedIPv6": true,
+        "otherProgramBlocked": true,
+        "loopbackAllowed": false,
+        "loopbackBlocked": true,
+        "childBlocked": true,
+        "controlFamilies": [
+          "IPv4",
+          "IPv6-mapped-IPv4"
+        ]
+      },
+      "loopback": {
+        "externalBlocked": true,
+        "externalBlockedIPv6": true,
+        "childBlockedIPv6": true,
+        "otherProgramBlocked": true,
+        "loopbackAllowed": true,
+        "loopbackBlocked": true,
+        "childBlocked": true,
+        "controlFamilies": [
+          "IPv4",
+          "IPv6-mapped-IPv4"
+        ],
+        "observer": "outside-sandbox-inbound-only",
+        "outboundLoopbackBlocked": true
+      }
+    },
+    "exportSeconds": 0.079,
+    "artifact": {
+      "fileName": "depot-export-fixture-1.0.0-macos-arm64.tgz",
+      "sha256": "66f952a5f9eca933643031b99de7e726caa2712bf5e0d70983040389f0bd2a49",
+      "compressedBytes": 2076
+    },
+    "verification": {
+      "schemaVersion": 1,
+      "buildKey": "66f952a5f9eca933643031b99de7e726caa2712bf5e0d70983040389f0bd2a49",
+      "target": "macos-arm64",
+      "host": {
+        "node": "26.9.0",
+        "version": "0.2.0-rc.2",
+        "environmentDigest": "d7b06cf0c7394141fc0cabdbe8bcf2014caddb853ad862fa8535da90cb4c6384"
+      },
+      "sha256": "66f952a5f9eca933643031b99de7e726caa2712bf5e0d70983040389f0bd2a49",
+      "status": "passed",
+      "timings": {
+        "install": 2.086,
+        "compose": 0.136,
+        "host": 1.832
+      },
+      "checks": {
+        "install": true,
+        "compose": true,
+        "registration": true,
+        "host": true,
+        "clientModule": null,
+        "native": true
+      },
+      "scope": [
+        "cold-install",
+        "config-compose",
+        "host-page-smoke",
+        "config-registration"
+      ],
+      "workDir": "workspace-disposable-target-profile",
+      "isolationControls": {
+        "status": "passed",
+        "beforeReachable": true,
+        "beforeReachableIPv6": true,
+        "offline": {
+          "externalBlocked": true,
+          "externalBlockedIPv6": true,
+          "childBlockedIPv6": true,
+          "otherProgramBlocked": true,
+          "loopbackAllowed": false,
+          "loopbackBlocked": true,
+          "childBlocked": true,
+          "controlFamilies": [
+            "IPv4",
+            "IPv6-mapped-IPv4"
+          ]
+        },
+        "loopback": {
+          "externalBlocked": true,
+          "externalBlockedIPv6": true,
+          "childBlockedIPv6": true,
+          "otherProgramBlocked": true,
+          "loopbackAllowed": true,
+          "loopbackBlocked": true,
+          "childBlocked": true,
+          "controlFamilies": [
+            "IPv4",
+            "IPv6-mapped-IPv4"
+          ],
+          "observer": "outside-sandbox-inbound-only",
+          "outboundLoopbackBlocked": true
+        }
+      },
+      "registrationEvidence": [
+        {
+          "id": "depot-export-fixture",
+          "name": "depot-export-fixture"
+        }
+      ]
+    }
+  },
+  "desktop": {
+    "schemaVersion": 1,
+    "status": "passed",
+    "desktopVersion": "0.12.0",
+    "node": "24.17.0",
+    "managerVersion": "0.1.8",
+    "authenticatedExport": true,
+    "anonymousDownloadStatus": 401,
+    "backgroundWorker": true,
+    "targetInstallAndCompose": true,
+    "sourceConfigUnchanged": true,
+    "artifact": {
+      "fileName": "depot-export-fixture-1.0.0-macos-arm64.tgz",
+      "sha256": "a7868f1b2acde1284c29f843af2eb310b3c6d272c34d0a2176711e583dbe77bb",
+      "compressedBytes": 2066
+    },
+    "networkIsolation": "not claimed by this Desktop smoke; separate stock DSH roundtrip provides OS isolation"
+  }
+}

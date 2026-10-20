@@ -9,6 +9,7 @@
     "./platform": "./platform.mjs",
     "./package-status": "./package-status.mjs",
     "./package-metadata": "./package-metadata.mjs",
-    "./manager-qualification": "./manager-qualification.mjs"
+    "./manager-qualification": "./manager-qualification.mjs",
+    "./host-packages": "./host-packages.mjs"
   }
 }

@@ -3,6 +3,7 @@ import App from './App.svelte'
 export function createManagerClient(transport) {
  const call=(method,input={})=>transport.call(method,input)
  return {
+  createExport:input=>call('exports.create',input),exports:()=>call('exports.list'),exportStatus:exportId=>call('exports.status',{exportId}),cancelExport:exportId=>call('exports.cancel',{exportId}),
   current:()=>call('environment.current'),installed:()=>call('installed.list'),operations:()=>call('operations.list'),
   batchPlan:input=>call('batches.create',input),startBatch:batchId=>call('batches.start',{batchId}),
   plan:input=>call('plans.create',input),start:planId=>call('operations.start',{planId}),status:operationId=>call('operations.status',{operationId}),cancel:operationId=>call('operations.cancel',{operationId}),

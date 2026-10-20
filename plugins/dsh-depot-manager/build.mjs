@@ -15,7 +15,8 @@ export async function buildManager({target,output}={}) {
  try {
   await mkdir(lib,{recursive:true});await mkdir(output,{recursive:true})
   const banner={js:'import {createRequire as __createRequire} from "node:module";const require=__createRequire(import.meta.url);'}
-  await build({entryPoints:[path.join(here,'plugin/host/index.mjs')],outfile:path.join(lib,'index.js'),bundle:true,platform:'node',format:'esm',target:'node22',banner})
+  await build({entryPoints:[path.join(here,'plugin/host/index.mjs')],outfile:path.join(lib,'index.js'),bundle:true,platform:'node',format:'esm',target:'node22',banner,define:{__DEPOT_EXPORT_WORKER__:'"./export-worker.mjs"'}})
+  await build({entryPoints:[path.join(here,'worker/export.mjs')],outfile:path.join(lib,'export-worker.mjs'),bundle:true,platform:'node',format:'esm',target:'node22',banner})
   const entry=path.join(temp,'client-entry.mjs');await writeFile(entry,`import {mountManager} from ${JSON.stringify(path.join(here,'plugin/client/client.mjs'))};mountManager(document.getElementById('manager'));`)
   await build({
    entryPoints:[entry],outfile:path.join(lib,'client.js'),bundle:true,platform:'browser',format:'esm',minify:true,charset:'utf8',define:{'process.env.NODE_ENV':'"production"'},conditions:['browser'],

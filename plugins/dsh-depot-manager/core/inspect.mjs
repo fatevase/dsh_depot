@@ -2,6 +2,8 @@ import {cp,mkdir,stat,realpath,readFile} from 'node:fs/promises'
 import path from 'node:path'
 import {randomUUID} from 'node:crypto'
 import semver from 'semver'
+import {isHostPackage,dependencyIdentity} from '@dsh-depot/offline-format/host-packages'
+import {exportedPeerVersion} from './export-dependencies.mjs'
 import * as tar from 'tar'
 import {extractSafeArchive} from './archive.mjs'
 import {verifyPackageMetadata} from './package-metadata.mjs'
@@ -13,13 +15,13 @@ async function dependencies(root,p,host,warnings){
  async function visit(dir,manifest){if(visited.has(dir))return;visited.add(dir)
   for(const [name,range]of Object.entries({...manifest.dependencies,...manifest.optionalDependencies})){
    if(!validPackageName(name))fail('INVALID_PACKAGE_NAME','依赖包名无效')
-   if(name.startsWith('@deepseek-ai/'))fail('DUPLICATE_HOST_RUNTIME','宿主核心包必须由 host peer 提供')
+   if(isHostPackage(dependencyIdentity(name,range).name))fail('DUPLICATE_HOST_RUNTIME','宿主核心包必须由 host peer 提供')
    if(/^(?:file|link|workspace|git|https?):/.test(range))fail('NONPORTABLE_DEPENDENCY','依赖包含本地或远程引用')
    let current=dir,location;while(current.startsWith(root)){const candidate=path.join(current,'node_modules',name);try{const r=await realpath(candidate);if(!r.startsWith(root+path.sep))fail('NONPORTABLE_DEPENDENCY','依赖链接位于包外');location=r;break}catch(e){if(!['ENOENT','ENOTDIR'].includes(e.code))throw e}if(current===root)break;current=path.dirname(current)}
    if(!location){if(Object.hasOwn(manifest.optionalDependencies??{},name)){warnings.push({code:'OPTIONAL_DEPENDENCY_ABSENT',message:`缺少可选依赖 ${name}`});continue}fail('MISSING_DEPENDENCY',`缺少离线运行依赖 ${name}`)}
-   const dep=await readJson(path.join(location,'package.json'));if(dep.name!==name||!semver.satisfies(dep.version,range,{includePrerelease:true}))fail('DEPENDENCY_VERSION_MISMATCH',`运行依赖版本不符：${name}`);await visit(location,dep)
+   const dep=await readJson(path.join(location,'package.json'));if(dep.name!==dependencyIdentity(name,range).name||!semver.satisfies(dep.version,dependencyIdentity(name,range).range,{includePrerelease:true}))fail('DEPENDENCY_VERSION_MISMATCH',`运行依赖版本不符：${name}`);await visit(location,dep)
   }
-  for(const [name,range]of Object.entries(manifest.peerDependencies??{})){const provided=host?.providedPeers?.[name]??(name.startsWith('@deepseek-ai/')?host?.version:undefined);if(provided&&!semver.satisfies(provided,range,{includePrerelease:true}))fail('HOST_INCOMPATIBLE',`宿主 peer 不兼容：${name}`);if(!provided&&!manifest.peerDependenciesMeta?.[name]?.optional)warnings.push({code:'PEER_UNCONFIRMED',message:`尚未确认宿主 peer ${name}`})}
+  for(const [name,range]of Object.entries(manifest.peerDependencies??{})){const provided=host&&await exportedPeerVersion(host,name);if(provided&&!semver.satisfies(provided,range,{includePrerelease:true}))fail('HOST_INCOMPATIBLE',`宿主 peer 不兼容：${name}`);if(!provided&&!manifest.peerDependenciesMeta?.[name]?.optional)warnings.push({code:'PEER_UNCONFIRMED',message:`尚未确认宿主 peer ${name}`})}
  }
  await visit(root,p)
 }
@@ -41,6 +43,7 @@ export async function inspectArtifact({path:input,host,trustIndex={},workDir,lim
  const nodeRange=metadata?.compatibility?.nodeRange??p.engines?.node;if(nodeRange&&!semver.satisfies(host.runtime.node,nodeRange,{includePrerelease:true}))fail('NODE_INCOMPATIBLE','插件与宿主 Node 版本不兼容')
  if(metadata?.native?.present){const n=metadata.native;if(n.nodeAbi&&String(n.nodeAbi)!==String(host.runtime.abi))fail('NATIVE_ABI_MISMATCH','原生模块 ABI 不兼容');if(n.napiMinimum&&n.napiMinimum>host.runtime.napi)fail('NATIVE_ABI_MISMATCH','Node-API 版本不足');if(n.runtimeKinds&&!n.runtimeKinds.includes(host.runtime.kind))fail('NATIVE_RUNTIME_MISMATCH','原生运行时不匹配');if(n.libc&&(host.runtime.libc?.name!==n.libc.name||n.libc.minimumVersion&&(!host.runtime.libc?.version||semver.lt(semver.coerce(host.runtime.libc.version),semver.coerce(n.libc.minimumVersion)))))fail('LIBC_INCOMPATIBLE','Linux libc 不兼容');if(!n.nodeAbi&&!n.napiMinimum)warnings.push({code:'NATIVE_UNCONFIRMED',message:'原生运行时条件尚未确认'})}
  await dependencies(await realpath(root),p,host,warnings)
+ if(metadata?.source?.type==='local-export')warnings.push({code:'LOCAL_EXPORT',message:'本机导出，目标环境尚未验证；系统工具和外部服务需在目标机另行准备'})
  const publication=!!trusted&&trusted.verification?.status==='passed';if(!publication)warnings.push({code:'UNVERIFIED_PACKAGE',message:'没有匹配当前字节的公开验证证据'});if(!metadata&&!trusted)warnings.push({code:'UNKNOWN_PLATFORM',message:'未提供可核实的平台清单'})
  return{schemaVersion:1,importId,packageName:p.name,version:p.version,sha256,target,checks:{integrity:!!metadata,publication,dependencies:true},warnings,blockers:[],contentRoot:root,archivePath:archive,unpackedBytes:(await auditTree(root)).reduce((n,f)=>n+(f.size??0),0),directory,metadata,manifest:p}
 }

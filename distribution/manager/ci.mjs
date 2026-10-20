@@ -4,6 +4,7 @@ import {mkdir,readFile,writeFile,readdir} from 'node:fs/promises'
 import {buildManager} from '../../plugins/dsh-depot-manager/build.mjs'
 import {buildBootstrap} from '../../plugins/dsh-depot-manager/build-bootstrap.mjs'
 import {verifyManager,qualifyManagerReport} from './verify.mjs'
+import {verifyExportRoundTrip} from './export-roundtrip.mjs'
 import {prepareHost} from '../lib/verify.mjs'
 import {atomicJson,fileHash} from '@dsh-depot/offline-format/files'
 import {fail} from '@dsh-depot/offline-format/constants'
@@ -36,7 +37,10 @@ export async function buildOnRunner({target,output}) {
  const assets=[];for(const flavor of ['full','lite'])assets.push(await buildBootstrap({target,flavor,managerArchive:manager.path,output,runtimeArchive:runtimeFile}))
  const host=await prepareHost({workDir:path.join(output,'stock-host')})
  const verification=await verifyManager({bundle:manager,host,workDir:path.join(output,'verification')})
- const receipt={schemaVersion:1,target,manager,assets,verification,verificationRef:'manager-verification.json',seconds:(Date.now()-started)/1000,platformEvidence:{os:process.platform,arch:process.arch,node:process.versions.node,ssh:'unverified',fedora:'unverified'}}
+ const localExport=await verifyExportRoundTrip({host,workDir:path.join(output,'export-roundtrip')})
+ await atomicJson(path.join(output,'export-roundtrip.json'),localExport)
+ if(localExport.status!=='passed')fail('LOCAL_EXPORT_MIGRATION_FAILED',localExport.error?.message??'本机导出迁移验收未通过')
+ const receipt={schemaVersion:1,target,manager,assets,verification,localExport,verificationRef:'manager-verification.json',seconds:(Date.now()-started)/1000,platformEvidence:{os:process.platform,arch:process.arch,node:process.versions.node,ssh:'unverified',fedora:'unverified'}}
  await atomicJson(path.join(output,'receipt.json'),receipt);await writeFile(path.join(output,'SHA256SUMS'),[manager,...assets].map(a=>`${a.sha256}  ${a.fileName}`).join('\n')+'\n');return receipt
 }
 async function main(argv){
