@@ -20,4 +20,4 @@ Windows 用 `install.cmd diagnose`，macOS/Linux 用 `sh install.sh diagnose` �
 
 常规安装只检查离线成品和目标配置，直接调用对应 DSH 的公共插件命令；不扫描或备份整个已安装依赖目录。失败会记录真实错误与日志，不自动回滚；可以重新安装成品或先前版本。旧版恢复点仍可恢复。
 
-安装助手附带 pnpm 10/11 兼容工具，按现有 profile 的包管理器记录选择，并核对 store 实际路径。目标 DSH 的运行时保持原样，安装工具不修改全局 pnpm 配置。
+安装助手复用目标 DSH 的包管理入口。Desktop 使用应用自带的 pnpm、启动包装和锁恢复入口；CLI 使用其原有解析方式。安装包不再附带另一套 pnpm，也不按 profile 记录另选版本或强制指定 store。缺少 Desktop 安装入口时会说明具体问题，请先修复或更新 DSH。完整包内的 Node 仅用于启动安装助手，安装操作使用目标 DSH 的运行时。

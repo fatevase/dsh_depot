@@ -1,0 +1,64 @@
+{
+  "version": "0.1.7",
+  "testedAt": "2026-10-20",
+  "host": {
+    "desktop": "0.12.0",
+    "dsh": "0.2.0-rc.2",
+    "platform": "macos-arm64",
+    "runtime": "Desktop Electron Node 24.17.0",
+    "pnpm": "Desktop bundled 10.34.5",
+    "invocation": [
+      "installed harness-node-entry.mjs",
+      "installed packaged-pnpm-invocation.mjs",
+      "installed dsh-desktop-market-installer/pnpm-runner.mjs",
+      "installed pnpm/bin/pnpm.cjs"
+    ]
+  },
+  "profile": "isolated workspace profile initialized with stock DSH initProfile; daily profile untouched",
+  "operations": [
+    {
+      "action": "install",
+      "status": "passed",
+      "installed": true
+    },
+    {
+      "action": "install",
+      "status": "passed",
+      "installed": true
+    },
+    {
+      "action": "remove",
+      "status": "passed",
+      "installed": false
+    }
+  ],
+  "archiveEntry": {
+    "entry": "install.command",
+    "menuChoice": 1,
+    "result": "awaiting_reload",
+    "packageInstalled": true,
+    "liteCompressedBytes": 289108,
+    "bundledPnpm": false
+  },
+  "checks": {
+    "managerTests": {
+      "total": 102,
+      "passed": 100,
+      "skipped": 2,
+      "failed": 0
+    },
+    "distributionManagerTests": {
+      "passed": 7,
+      "failed": 0
+    },
+    "webTests": {
+      "passed": 14,
+      "failed": 0
+    }
+  },
+  "limitations": [
+    "Real Desktop test is macOS 0.12.0 only; Windows/Linux Desktop remain outside the supported baseline.",
+    "Offline CLI flags were used; this smoke is not an OS network-isolation attestation.",
+    "Script installation reached awaiting_reload; full authenticated page and activation acceptance is not claimed."
+  ]
+}
