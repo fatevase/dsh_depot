@@ -21,13 +21,16 @@ export async function writeBuildData(input,outDir){
    const record={schemaVersion:1,kind:'candidate',pluginId:plugin.id,repository:trial.repository,repositoryId:trial.repositoryId,runId,runAttempt:attempt,completedAt:catalog.candidateBuild.completedAt,sourceCommit:trial.commit,runUrl:trial.runUrl,target,result}
    const ref=await write(url,record)
    records.push({pluginId:plugin.id,name:plugin.name,repository:plugin.repository,category:plugin.category,target,status:result.status,version:result.version,runId,runAttempt:attempt,completedAt:record.completedAt,errorCategory:result.errorCategory,warnings:result.warnings?.length??0,...ref})
-   trial.results[target]={status:result.status,version:result.version,errorCategory:result.errorCategory,files:result.files,...ref}
+   trial.results[target]={status:result.status,version:result.version,errorCategory:result.errorCategory,files:(result.files??[]).map(({name,version,filename,bytes,sha256,url,downloadFilename})=>({name,version,filename,bytes,sha256,url,downloadFilename})),...ref}
   }
  }
  for(const pkg of catalog.packages){
   if(!pkg.buildKey)continue
   const record={schemaVersion:1,kind:'package',buildKey:pkg.buildKey,target:pkg.target,package:structuredClone(pkg)}
   const ref=await write(`builds/packages/${digest(pkg.buildKey)}.json`,record)
+  // Public browsing needs status and downloads, not every verification payload.
+  pkg.verification={status:pkg.verification?.status,...(pkg.verification?.error?.message?{error:{message:pkg.verification.error.message}}:{})}
+  for(const key of ['dependencies','toolchain','timings','sourceArchiveSha256','assets'])delete pkg[key]
   Object.assign(pkg,ref)
  }
  const index={schemaVersion:1,campaign:catalog.candidateBuild??null,records}
