@@ -97,7 +97,8 @@
           "run": "npm ci --ignore-scripts --registry=https://registry.npmjs.org --no-audit --no-fund"
         },
         {
-          "run": "npm run manager:test && node --test distribution/test/manager-*.test.mjs"
+          "run": "node --test --test-concurrency=4 plugins/dsh-depot-manager/test/*.test.mjs && node --test distribution/test/manager-*.test.mjs",
+          "name": "Test manager with bounded process concurrency"
         },
         {
           "if": "matrix.target == 'win32-x64'",
