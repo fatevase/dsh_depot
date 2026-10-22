@@ -1,12 +1,26 @@
 import {createReadStream} from 'node:fs'
-import {readFile,writeFile,mkdir,rename,lstat,readdir,readlink,realpath} from 'node:fs/promises'
+import {readFile,writeFile,mkdir,rename,lstat,readdir,readlink,realpath,rm} from 'node:fs/promises'
 import {createHash,randomUUID} from 'node:crypto'
 import path from 'node:path'
+import {setTimeout as delay} from 'node:timers/promises'
 import {fail,LIMITS} from './constants.mjs'
 export const digest=data=>createHash('sha256').update(data).digest('hex')
 export async function fileHash(file){const hash=createHash('sha256');for await(const b of createReadStream(file))hash.update(b);return hash.digest('hex')}
 export async function readJson(file,fallback){try{return JSON.parse(await readFile(file,'utf8'))}catch(e){if(e.code==='ENOENT'&&fallback!==undefined)return fallback;throw e}}
-export async function atomicJson(file,value){await mkdir(path.dirname(file),{recursive:true,mode:0o700});const tmp=file+'.'+randomUUID()+'.tmp';await writeFile(tmp,JSON.stringify(value,null,2)+'\n',{mode:0o600,flag:'wx'});await rename(tmp,file)}
+export async function atomicJson(file,value){
+ await mkdir(path.dirname(file),{recursive:true,mode:0o700})
+ const tmp=file+'.'+randomUUID()+'.tmp'
+ await writeFile(tmp,JSON.stringify(value,null,2)+'\n',{mode:0o600,flag:'wx'})
+ try{
+  for(let attempt=0;;attempt++){
+   try{await rename(tmp,file);return}catch(e){
+    if(process.platform!=='win32'||!['EPERM','EACCES','EBUSY'].includes(e.code)||attempt>=6)throw e
+    // Windows may temporarily deny replacement while a reader or scanner holds the record.
+    await delay(25*(attempt+1))
+   }
+  }
+ }catch(e){await rm(tmp,{force:true}).catch(()=>{});throw e}
+}
 export function safeRelative(input){
  if(typeof input!=='string'||!input||input.includes('\\')||/[\x00-\x1f\x7f:]/.test(input)||path.posix.isAbsolute(input))fail('UNSAFE_PATH','归档或上传路径无效')
  const parts=input.replace(/\/$/,'').split('/');if(parts.some(p=>!p||p==='.'||p==='..'||/[. ]$/.test(p)||/^(?:con|prn|aux|nul|com[0-9]|lpt[0-9])(?:\.|$)/i.test(p)))fail('UNSAFE_PATH','路径包含保留名称或越界成分')
