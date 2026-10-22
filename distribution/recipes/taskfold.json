@@ -5,17 +5,17 @@
   "packagePath": ".",
   "npmName": "dsh-taskfold",
   "channel": {
-    "type": "tags",
+    "type": "fixed",
+    "ref": "6107bc5046578de3501e212da2ab3dbba790bf09",
     "allowPrerelease": false
   },
   "seed": {
-    "ref": "v0.38.2",
-    "version": "0.38.2",
-    "commit": "01c4905eb1de4bd30561d04e013d210013d4f990",
-    "archiveSha256": "a866377b6b9c98f7f7d50d51cda5bd02302bc661cf90ea0e33f85665d2d5322d"
+    "ref": "v0.38.3",
+    "commit": "6107bc5046578de3501e212da2ab3dbba790bf09",
+    "version": "0.38.3"
   },
-  "allowedVersions": ">=0.38.2 <1.0.0",
-  "hostRange": "^0.2.0-rc.2",
+  "allowedVersions": "0.38.3",
+  "hostRange": "0.2.1-rc.2",
   "targets": [
     "macos-arm64",
     "linux-x64",
@@ -56,5 +56,11 @@
     "category": "workspace"
   },
   "enabled": true,
-  "install": false
+  "install": false,
+  "latestOnly": true,
+  "distributionScope": "跟进上游最新发布版；无发布版时跟进默认分支。每次构建固定源码与依赖，并在当前 DSH 上重新验证。",
+  "upstreamChannel": "release",
+  "releasePins": {
+    "v0.38.3": "6107bc5046578de3501e212da2ab3dbba790bf09"
+  }
 }

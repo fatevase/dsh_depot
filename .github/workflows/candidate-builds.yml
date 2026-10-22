@@ -10,7 +10,9 @@
         "distribution/candidate-ci.mjs",
         "distribution/lib/**",
         "distribution/test/**",
-        ".github/workflows/candidate-builds.yml"
+        ".github/workflows/candidate-builds.yml",
+        "distribution/config.json",
+        "distribution/host/**"
       ]
     },
     "pull_request": {
@@ -19,13 +21,15 @@
         "distribution/candidate-ci.mjs",
         "distribution/lib/**",
         "distribution/test/**",
-        ".github/workflows/candidate-builds.yml"
+        ".github/workflows/candidate-builds.yml",
+        "distribution/config.json",
+        "distribution/host/**"
       ]
     },
     "workflow_dispatch": {
       "inputs": {
         "batch": {
-          "description": "Batch 1–20; empty runs all 99 repositories",
+          "description": "Batch 1\u201320; empty runs all 99 repositories",
           "type": "string"
         },
         "target": {
@@ -39,7 +43,12 @@
           ]
         }
       }
-    }
+    },
+    "schedule": [
+      {
+        "cron": "37 * * * *"
+      }
+    ]
   },
   "permissions": {},
   "concurrency": {
@@ -178,7 +187,8 @@
           }
         }
       ],
-      "name": "Batch ${{ matrix.batch }} / ${{ matrix.target }}"
+      "name": "Batch ${{ matrix.batch }} / ${{ matrix.target }}",
+      "if": "needs.prepare.outputs.matrix != '' && fromJSON(needs.prepare.outputs.matrix).include[0] != null"
     },
     "report": {
       "if": "always() && github.ref == 'refs/heads/main' && needs.prepare.result == 'success'",
@@ -188,7 +198,7 @@
       ],
       "runs-on": "ubuntu-24.04",
       "permissions": {
-        "contents": "read",
+        "contents": "write",
         "issues": "write"
       },
       "timeout-minutes": 10,

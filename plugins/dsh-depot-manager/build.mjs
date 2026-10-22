@@ -8,10 +8,11 @@ import os from 'node:os'
 import {fileHash,digest,auditTree,atomicJson} from './core/files.mjs'
 import {writePackageMetadata} from './core/package-metadata.mjs'
 import {fail,MANAGER_NAME,MANAGER_VERSION} from './contracts/constants.mjs'
+import config from '../../distribution/config.json' with {type:'json'}
 const here=fileURLToPath(new URL('.',import.meta.url))
 export async function buildManager({target,output}={}) {
  if(!['macos-arm64','linux-x64','win32-x64'].includes(target))fail('INVALID_TARGET','不支持的平台')
- const temp=await mkdtemp(path.join(os.tmpdir(),'depot-manager-build-')),root=path.join(temp,'package'),lib=path.join(root,'lib'),sourceDigest=digest(JSON.stringify({manager:await auditTree(here,{exclude:['node_modules','dist','.runtime']}),format:await auditTree(fileURLToPath(new URL('../../packages/offline-format/',import.meta.url)))}))
+ const temp=await mkdtemp(path.join(os.tmpdir(),'depot-manager-build-')),root=path.join(temp,'package'),lib=path.join(root,'lib'),sourceDigest=digest(JSON.stringify({host:config.host,manager:await auditTree(here,{exclude:['node_modules','dist','.runtime']}),format:await auditTree(fileURLToPath(new URL('../../packages/offline-format/',import.meta.url)))}))
  try {
   await mkdir(lib,{recursive:true});await mkdir(output,{recursive:true})
   const banner={js:'import {createRequire as __createRequire} from "node:module";const require=__createRequire(import.meta.url);'}
@@ -30,7 +31,7 @@ export async function buildManager({target,output}={}) {
   await cp(path.join(here,'plugin/client/styles.css'),path.join(lib,'client.css'))
   await writeFile(path.join(lib,'manager.html'),'<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>离线插件 · DSH</title><link rel="stylesheet" href="/api/depot/client.css"></head><body><div id="manager"></div><script type="module" src="/api/depot/client.js"></script></body></html>')
   for(const file of ['package.json','cordis.patch.yml','README.md','LICENSE'])await cp(path.join(here,'plugin',file),path.join(root,file))
-  await writePackageMetadata(root,{task:{target,host:{version:'0.2.0-rc.2',node:'26.9.0'},source:{digest:sourceDigest},buildKey:digest(sourceDigest+target)},recipe:{id:MANAGER_NAME,hostRange:'0.2.0-rc.2',probes:{}}})
+  await writePackageMetadata(root,{task:{target,host:{version:config.host.version,node:config.host.node},source:{digest:sourceDigest},buildKey:digest(sourceDigest+target)},recipe:{id:MANAGER_NAME,hostRange:JSON.parse(await readFile(path.join(here,'plugin/package.json'),'utf8')).engines.dsh,probes:{}}})
   const fileName=`${MANAGER_NAME}-${MANAGER_VERSION}-${target}.tgz`,file=path.join(output,fileName);await tar.c({file,gzip:true,cwd:temp,portable:true},['package'])
   return{name:MANAGER_NAME,version:MANAGER_VERSION,target,path:file,fileName,sha256:await fileHash(file),compressedBytes:(await stat(file)).size,sourceDigest}
  }finally{await rm(temp,{recursive:true,force:true})}

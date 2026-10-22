@@ -21,7 +21,7 @@ export async function discover({ recipes, previous = {}, github, candidateFeeds 
       if (recipe.channel.type === 'branch') refs = [{ name: recipe.channel.ref }]
       else if (recipe.channel.type === 'fixed') refs = [{ name: recipe.channel.ref ?? recipe.seed?.commit, commit: { sha: recipe.channel.ref ?? recipe.seed?.commit } }]
       else refs = (await github.list(`/repos/${recipe.repository}/${recipe.channel.type === 'releases' ? 'releases' : 'tags'}`)).filter(r => !r.draft).map(r => ({ name: r.tag_name ?? r.name, commit: r.commit })).filter(r => { const v = semver.valid(r.name); return v && semver.satisfies(v, recipe.allowedVersions, { includePrerelease: recipe.channel.allowPrerelease }) }).slice(0, 20)
-      if (recipe.seed && !refs.some(r => r.commit?.sha === recipe.seed.commit || r.name === recipe.seed.ref)) refs.push({ name: recipe.seed.ref, commit: { sha: recipe.seed.commit } })
+      if (!recipe.latestOnly && recipe.seed && !refs.some(r => r.commit?.sha === recipe.seed.commit || r.name === recipe.seed.ref)) refs.push({ name: recipe.seed.ref, commit: { sha: recipe.seed.commit } })
       for (const ref of refs) {
         const { data: resolved } = await github.request(`/repos/${recipe.repository}/commits/${encodeURIComponent(ref.commit?.sha ?? ref.name)}`)
         const commit = resolved.sha
@@ -36,7 +36,7 @@ export async function discover({ recipes, previous = {}, github, candidateFeeds 
         if (tagVersion && tagVersion !== manifest.version) throw new Error('Tag and package version disagree')
         const lockDigests = {}
         for (const lock of Object.values(recipe.locks ?? {})) if (lock.file && lock.origin !== 'adapter') lockDigests[lock.file] = digest(await github.text(recipe.repository, prefix + safeRelative(lock.file), commit))
-        sources.push({ ...(commit === recipe.seed?.commit ? {archiveSha256:recipe.seed.archiveSha256} : {}), recipeId: recipe.id, repository: recipe.repository, ref: ref.name, commit, version: manifest.version, manifestDigest: jsonDigest(manifest), lockDigests, peerDependencies: manifest.peerDependencies ?? {}, peerDependenciesMeta: manifest.peerDependenciesMeta ?? {}, observedAt: new Date().toISOString() })
+        sources.push({ ...(commit === recipe.seed?.commit ? {archiveSha256:recipe.seed.archiveSha256} : {}), recipeId: recipe.id, repository: recipe.repository, ref: ref.name, commit, version: manifest.version, manifestDigest: jsonDigest(manifest), lockDigests, enginesDsh: manifest.engines?.dsh, peerDependencies: manifest.peerDependencies ?? {}, peerDependenciesMeta: manifest.peerDependenciesMeta ?? {}, observedAt: new Date().toISOString() })
       }
     } catch (error) {
       errors.push({ recipeId: recipe.id, message: error.message })

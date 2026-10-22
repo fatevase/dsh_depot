@@ -1,3 +1,5 @@
+import semver from 'semver'
+import managerManifest from '../plugin/package.json' with {type:'json'}
 import {readFile,realpath,readdir,stat} from 'node:fs/promises'
 import {createRequire} from 'node:module'
 import path from 'node:path'
@@ -27,7 +29,7 @@ export async function probeHost(candidate){
  const runtime=await runHostCommand({executable:nodePath,args:['-e','console.log(JSON.stringify({source:"host",kind:process.versions.electron?"electron":"node",platform:process.platform,arch:process.arch,node:process.versions.node,abi:process.versions.modules,napi:+process.versions.napi,libc:process.platform==="linux"?{name:process.report.getReport().header.glibcVersionRuntime?"glibc":"unknown",version:process.report.getReport().header.glibcVersionRuntime??""}:null}))'],cwd:profileDir,envAllowlist:candidate.runtimeEnv},{timeoutMs:10000})
  if(runtime.exitCode)fail('HOST_RUNTIME_REQUIRED','无法检查所选宿主 Node')
  const observed=JSON.parse(runtime.stdout.trim()),req=createRequire(path.join(dshRoot,'package.json'));let operations=false
- try{req.resolve('@deepseek-ai/dsh-plugin-manager/operations');req.resolve('@deepseek-ai/dsh-atomic-write');operations=pkg.version==='0.2.0-rc.2'}catch{}
+ try{req.resolve('@deepseek-ai/dsh-plugin-manager/operations');req.resolve('@deepseek-ai/dsh-atomic-write');operations=semver.satisfies(pkg.version,managerManifest.engines.dsh??managerManifest.peerDependencies['@deepseek-ai/dsh-app-boot'],{includePrerelease:true})}catch{}
  const kind=candidate.kind??'cli-web';operations=operations&&owned
  let desktop
  if(kind==='official-desktop'){

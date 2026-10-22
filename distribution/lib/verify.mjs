@@ -1,3 +1,4 @@
+import config from '../config.json' with {type:'json'}
 import { runtimeTarget } from './platform.mjs'
 import assert from 'node:assert/strict'
 import net from 'node:net'
@@ -80,7 +81,7 @@ export async function checkIsolation({ adapter, control, env, workDir }) {
   if (result.beforeReachableIPv6 && result.offline.externalBlockedIPv6 && result.loopback.externalBlockedIPv6 && result.offline.childBlockedIPv6 && result.loopback.childBlockedIPv6 && result.offline.otherProgramBlocked && result.loopback.otherProgramBlocked && result.offline.externalBlocked && result.offline.childBlocked && result.offline.loopbackBlocked && result.loopback.externalBlocked && result.loopback.childBlocked && result.loopback.loopbackAllowed) result.status = 'passed'
   return result
 }
-export async function prepareHost({ hostVersion = '0.2.0-rc.2', workDir, tools, dshBin, environmentDigest = hostEnvironmentDigest() } = {}) {
+export async function prepareHost({ hostVersion = config.host.version, workDir, tools, dshBin, environmentDigest = hostEnvironmentDigest() } = {}) {
   if(environmentDigest !== hostEnvironmentDigest())throw new Error('Host configuration changed after planning')
   if (dshBin) {
     const bin=await realpath(dshBin),manifest=await readJson(path.resolve(bin,'../../package.json'))

@@ -6,16 +6,17 @@
   "npmName": "@liustack/modlens",
   "channel": {
     "type": "fixed",
-    "ref": "aa108d1796e3c4b5a6790516e2fcde87a35b189f"
+    "ref": "aa108d1796e3c4b5a6790516e2fcde87a35b189f",
+    "allowPrerelease": false
   },
   "seed": {
-    "ref": "aa108d1796e3c4b5a6790516e2fcde87a35b189f",
-    "version": "3.27.1",
+    "ref": "v3.27.1",
     "commit": "aa108d1796e3c4b5a6790516e2fcde87a35b189f",
+    "version": "3.27.1",
     "archiveSha256": "78e936ed3dda503cbe6f07429de40a3d55a5947da40c2242c5fbd00a139d9673"
   },
   "allowedVersions": "3.27.1",
-  "hostRange": "^0.2.0-rc.2",
+  "hostRange": "0.2.1-rc.2",
   "targets": [
     "macos-arm64",
     "linux-x64",
@@ -63,5 +64,10 @@
   },
   "enabled": true,
   "license": "MIT",
-  "distributionScope": "The complete official Modlens CLI and DSH plugin, including its browser client and frozen production dependencies. Vision-provider requests need a configured provider or an authenticated external CLI; packaging and plugin startup do not provide credentials."
+  "distributionScope": "跟进上游最新发布版；无发布版时跟进默认分支。每次构建固定源码与依赖，并在当前 DSH 上重新验证。",
+  "latestOnly": true,
+  "upstreamChannel": "release",
+  "releasePins": {
+    "v3.27.1": "aa108d1796e3c4b5a6790516e2fcde87a35b189f"
+  }
 }

@@ -9,12 +9,12 @@
     "ref": "5247dd6813d6e4430728f39ccc63d43cda046022"
   },
   "seed": {
-    "ref": "5247dd6813d6e4430728f39ccc63d43cda046022",
+    "ref": "v0.4.2",
     "version": "0.4.2",
     "commit": "5247dd6813d6e4430728f39ccc63d43cda046022"
   },
   "allowedVersions": "0.4.2",
-  "hostRange": "^0.2.0-rc.2",
+  "hostRange": "0.2.1-rc.2",
   "targets": [
     "macos-arm64",
     "linux-x64",
@@ -45,5 +45,11 @@
     "category": "tools"
   },
   "enabled": true,
-  "install": false
+  "install": false,
+  "latestOnly": true,
+  "upstreamChannel": "release",
+  "distributionScope": "跟进上游最新发布版；无发布版时跟进默认分支。每次构建固定源码与依赖，并在当前 DSH 上重新验证。",
+  "releasePins": {
+    "v0.4.2": "5247dd6813d6e4430728f39ccc63d43cda046022"
+  }
 }

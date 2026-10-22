@@ -16,7 +16,7 @@
     "archiveSha256": "5936afb42a147f22e924f612d523ff6f15606eaeaf0b6044dcb6442a9141c5cd"
   },
   "allowedVersions": "1.1.71",
-  "hostRange": "0.2.0-rc.2",
+  "hostRange": "0.2.1-rc.2",
   "targets": [
     "macos-arm64",
     "linux-x64",
@@ -47,5 +47,7 @@
     "category": "workspace"
   },
   "enabled": true,
-  "install": false
+  "install": false,
+  "latestRefreshError": "Upstream repository is no longer publicly accessible (HTTP 404)",
+  "latestOnly": true
 }

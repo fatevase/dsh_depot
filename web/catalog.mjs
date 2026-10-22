@@ -7,13 +7,15 @@ export const packagesFor = (catalog,id) => catalog.packages.filter(p=>p.recipeId
 export function platformState(catalog,plugin,target){
  const published=packagesFor(catalog,plugin.id).find(p=>p.target===target)
  if(published)return {label:isUnverifiedPackage(published)?'未验证 · 可下载':'已验证 · 可下载',package:published,unverified:isUnverifiedPackage(published)}
- const trial=plugin.trial?.results?.[target]
+ const trial=!plugin.trial?.outdated&&plugin.trial?.results?.[target]
  if(trial){
   if(trial.status==='compiled')return {label:'已构建 · 未离线验证',message:'已完成源码编译打包或固定成品包检查，尚未完成离线安装验证。可直接下载已发布的构建包；构建步骤和检查结果见站内记录。',unverified:true,trial}
   if(trial.status==='failed')return {label:'构建失败',message:trial.error??'本次编译或打包失败。',trial}
   return {label:'未收到构建结果',message:'本次没有收到该平台的构建结果。',trial}
  }
  const decision=catalog.decisions?.find(d=>d.recipeId===plugin.id&&d.target===target)
+ if(decision?.action==='blocked')return {label:'更新待处理',message:decision.reason??'当前版本尚未完成适配。'}
+ if(decision?.action==='incompatible')return {label:'当前版本不兼容',message:decision.reason??'当前插件版本尚不支持最新 DSH。'}
  if(plugin.status==='needs_recipe'||decision?.action==='needs_recipe')return {label:'待适配',message:plugin.availabilityNote??'这个插件的构建适配尚未完成，当前没有可下载的离线包。'}
  if(decision?.action==='queued')return {label:'排队待构建',message:'已满足构建规则，因本批任务上限留待下一轮处理。'}
  const issue=decision?.buildKey?catalog.issues?.find(r=>r.buildKey===decision.buildKey):undefined
