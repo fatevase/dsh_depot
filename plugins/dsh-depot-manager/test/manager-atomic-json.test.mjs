@@ -20,13 +20,20 @@ test('persistent Windows rename failure preserves the record and removes only it
  try{await assert.rejects(atomicJson(f.file,{state:'after'}),e=>e===error)}finally{fs.rename=original;syncBuiltinESMExports();Object.defineProperty(process,'platform',platform)}
  assert.deepEqual(await readJson(f.file),{state:'before'});assert.deepEqual(await fs.readdir(f.root),['job.json'])
 })
-test('Windows replacement waits for a real sharing lock to be released',{skip:process.platform!=='win32'},async t=>{
+test('Windows replacement waits for a real sharing lock to be released',{skip:process.platform!=='win32',timeout:10000},async t=>{
  const {spawn}=await import('node:child_process'),{once}=await import('node:events'),f=await fixture(t)
- const release=path.join(f.root,'release'),script="$ErrorActionPreference='Stop'; $s=[IO.File]::Open($env:DEPOT_BUSY_JSON,[IO.FileMode]::Open,[IO.FileAccess]::Read,[IO.FileShare]::ReadWrite); try { [Console]::Out.WriteLine('locked'); while (-not [IO.File]::Exists($env:DEPOT_BUSY_RELEASE)) { Start-Sleep -Milliseconds 10 } } finally { $s.Dispose() }"
- const child=spawn('powershell.exe',['-NoProfile','-NonInteractive','-Command',script],{env:{...process.env,DEPOT_BUSY_JSON:f.file,DEPOT_BUSY_RELEASE:release},stdio:['ignore','pipe','pipe']})
+ const script="$ErrorActionPreference='Stop'; $s=[IO.File]::Open($env:DEPOT_BUSY_JSON,[IO.FileMode]::Open,[IO.FileAccess]::Read,[IO.FileShare]::ReadWrite); try { [Console]::Out.WriteLine('locked'); [Console]::Out.Flush(); [Threading.Thread]::Sleep(200) } finally { $s.Dispose() }"
+ const child=spawn('powershell.exe',['-NoProfile','-NonInteractive','-Command',script],{env:{...process.env,DEPOT_BUSY_JSON:f.file},stdio:['ignore','pipe','pipe']})
+ let out='',err='';const exited=once(child,'exit')
  t.after(()=>{if(child.exitCode===null)child.kill()})
- let out='';await new Promise((resolve,reject)=>{child.once('error',reject);child.once('exit',code=>reject(Error('lock helper exited early '+code)));child.stdout.on('data',b=>{out+=b;if(out.includes('locked'))resolve()})})
- const exited=once(child,'exit'),timer=setTimeout(()=>fs.writeFile(release,'release').catch(()=>{}),100);t.after(()=>clearTimeout(timer))
- await atomicJson(f.file,{state:'after'});await exited
- assert.deepEqual(await readJson(f.file),{state:'after'})
+ child.stderr.on('data',b=>{err+=b})
+ await new Promise((resolve,reject)=>{
+  const timer=setTimeout(()=>{child.kill();reject(Error('sharing lock helper timed out: '+err))},5000)
+  const ready=()=>{clearTimeout(timer);resolve()}
+  child.once('error',e=>{clearTimeout(timer);reject(e)})
+  child.once('exit',code=>{clearTimeout(timer);if(!out.includes('locked'))reject(Error('sharing lock helper failed '+code+': '+err))})
+  child.stdout.on('data',b=>{out+=b;if(out.includes('locked'))ready()})
+ })
+ await atomicJson(f.file,{state:'after'});const [code]=await exited
+ assert.equal(code,0,err);assert.deepEqual(await readJson(f.file),{state:'after'})
 })
