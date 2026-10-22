@@ -63,7 +63,7 @@ function showPreview(io,host,preview){
  for(const warning of preview.warnings??[])io.write(`提示：${warning.message??warning.code}\n`)
 }
 function showOutcome(io,value){
- const messages={waiting_for_host_exit:'检测到 DSH 仍在运行，任务已保存。完全退出 DSH 后，重新运行脚本并选择“继续待处理任务”。',awaiting_reload:'安装完成。请重启 DSH 以加载新插件；当前 DSH 无需在安装前退出。',succeeded:value.result?.removed?'插件已卸载，配置与业务数据保留。':'操作完成。',failed_restored:'操作未完成，已恢复原状态。',recovery_required:'操作未完成，需要从“恢复任务”检查恢复点。',failed:'DSH 安装未完成。未自动回滚，请查看下方错误；修正后可重新安装成品包。'}
+ const messages={waiting_for_host_exit:'检测到 DSH 仍在运行，任务已保存。完全退出 DSH 后，重新运行脚本并选择“继续待处理任务”。',awaiting_reload:'安装完成。请重新打开或重启 DSH 以加载新插件。',succeeded:value.result?.removed?'插件已卸载，配置与业务数据保留。':'操作完成。',failed_restored:'操作未完成，已恢复原状态。',recovery_required:'操作未完成，需要从“恢复任务”检查恢复点。',failed:'DSH 安装未完成。未自动回滚，请查看下方错误；修正后可重新安装成品包。'}
  io.write((messages[value.state]??`任务状态：${value.state}`)+'\n');if(value.error)io.write(`${value.error.code}: ${value.error.message}\n`);if(value.operationId)io.write(`任务编号：${value.operationId}\n`)
  return ['failed','recovery_required'].includes(value.state)?2:0
 }
@@ -108,7 +108,7 @@ export async function main(argv,{io,services}={}) {
     const selected=await choose(io,'选择要管理的本机 DSH 环境',choices)
     if(!selected)return 0
     if(selected==='locate'){
-     const input=(await io.ask('完整路径（不要添加 shell 转义；q 返回）：')).trim();if(input==='q')continue
+     const input=(await io.ask('Desktop 安装目录、EXE、dsh.cmd 或配置主目录（完整路径；q 返回）：')).trim();if(input==='q')continue
      if(!input){io.write('路径为空，已返回选择菜单。\n');continue}
      try{await services.locate(input)}catch(e){if(!['INVALID_PATH','ENOENT','ENOTDIR','EACCES'].includes(e.code))throw e;io.write(`${e.code}: ${e.message}；请重新输入或退出。\n`)}continue
     }

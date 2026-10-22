@@ -8,6 +8,11 @@ export async function desktopIsRunning(host,{processes}={}){
  for(const row of processes??await runningProcesses()){
   if(row.pid===process.pid)continue
   const command=(row.command??'').replace(/^"/,'')
+  if(host.desktop.layout==='bundled-cli'){
+   const text=command.replaceAll('\\','/').toLowerCase(),prefix=root.replaceAll('\\','/').toLowerCase()
+   if(text.startsWith(prefix)&&!text.includes('--expose-internals'))return true
+   continue
+  }
   if(command.startsWith(root)||/[/\\](?:DSH Desktop(?: Helper[^/\\]*)?|dsh-desktop)(?:\.exe)?(?:["'\s]|$)/i.test(command))return true
  }
  return false

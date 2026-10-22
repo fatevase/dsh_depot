@@ -1,0 +1,59 @@
+{
+  "schemaVersion": 1,
+  "status": "passed",
+  "desktopVersion": "0.2.1-rc.2",
+  "dshVersion": "0.2.1-rc.2",
+  "target": "macos-arm64",
+  "runtime": {
+    "source": "host",
+    "kind": "electron",
+    "platform": "darwin",
+    "arch": "arm64",
+    "node": "24.21.0",
+    "abi": "149",
+    "napi": 10,
+    "libc": null
+  },
+  "managerSha256": "8d7a51eedd2e1ed84ad612246458e24decd79abe6c5ff234fb4458eb08d71f36",
+  "operations": [
+    {
+      "action": "install",
+      "state": "awaiting_reload",
+      "error": null
+    },
+    {
+      "action": "install",
+      "state": "awaiting_reload",
+      "error": null
+    },
+    {
+      "action": "remove",
+      "state": "succeeded",
+      "error": null
+    }
+  ],
+  "coverage": "isolated-official-cli-install-reinstall-remove",
+  "ownership": "passed",
+  "ui": "unverified",
+  "networkIsolation": "unverified",
+  "createdAt": "2026-10-22T08:44:57.227Z",
+  "windowsInspection": {
+    "source": "https://download.deepseek.com/desktop/dsh-latest-windows-x64.exe",
+    "installerSha256": "72e4a8579f11b5428dd0a1506532777924adba7ecaacc710a7e429085796537f",
+    "bytes": 289385456,
+    "desktopVersion": "0.2.1-rc.2",
+    "dshVersion": "0.2.1-rc.2",
+    "node": "24.21.0",
+    "pnpm": "11.28.5",
+    "status": "static-layout-confirmed-native-CI-pending"
+  },
+  "sourceCommit": "687f282e8625c6b8d11ff58211a90524be2e4317",
+  "tests": {
+    "web": 14,
+    "managerPassed": 131,
+    "managerSkipped": 2,
+    "distribution": 122,
+    "failures": 0,
+    "webBuild": "passed"
+  }
+}

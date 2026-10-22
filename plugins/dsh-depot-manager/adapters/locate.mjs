@@ -1,8 +1,10 @@
 // Bounded local discovery only: no recursive disk scan, shell evaluation or network.
-import {readFile,realpath,readdir,stat,open} from 'node:fs/promises'
+import {readFile,realpath,readdir,stat} from 'node:fs/promises'
 import path from 'node:path'
 import os from 'node:os'
 import {runHostCommand} from './command.mjs'
+import {desktopAt} from './desktop-layout.mjs'
+export {desktopAt} from './desktop-layout.mjs'
 const json=async file=>JSON.parse(await readFile(file,'utf8'))
 const canonical=async file=>{try{return await realpath(file)}catch{return null}}
 async function packageRoot(file){
@@ -22,42 +24,18 @@ async function nodeFor(root,env){
  for(const dir of (env.PATH??env.Path??'').split(path.delimiter).filter(Boolean)){const p=await canonical(path.join(dir,process.platform==='win32'?'node.exe':'node'));if(p)return p}
  return null
 }
-async function desktopManifest(resources){
- try{return await json(path.join(resources,'app/package.json'))}catch{}
- if(process.versions.electron)try{return await json(path.join(resources,'app.asar/package.json'))}catch{}
- const file=await open(path.join(resources,'app.asar'),'r')
- try{
-  const size=(await file.stat()).size,header=Buffer.alloc(16);if((await file.read(header,0,16,0)).bytesRead!==16)return null
-  const block=header.readUInt32LE(4),length=header.readUInt32LE(12)
-  if(length<2||length>16*1024*1024||block<length+8||block>length+32||block+8>size)return null
-  const buffer=Buffer.alloc(length);if((await file.read(buffer,0,length,16)).bytesRead!==length)return null
-  const entry=JSON.parse(buffer).files?.['package.json'],offset=Number(entry?.offset),bytes=entry?.size
-  if(!Number.isSafeInteger(offset)||offset<0||!Number.isSafeInteger(bytes)||bytes<2||bytes>256*1024||block+8+offset+bytes>size||entry.link)return null
-  const content=Buffer.alloc(bytes);if((await file.read(content,0,bytes,block+8+offset)).bytesRead!==bytes)return null
-  return JSON.parse(content)
- }finally{await file.close()}
-}
-export async function desktopAt(input){
- let dir=await canonical(input);if(!dir)return null
- if(!(await stat(dir)).isDirectory())dir=path.dirname(dir)
- for(let i=0;i<5;i++){
-  for(const resources of [path.join(dir,'Contents/Resources'),path.join(dir,'resources'),path.basename(dir).toLowerCase()==='resources'?dir:null].filter(Boolean)){
-   try{const pkg=await desktopManifest(resources);if(pkg?.name==='dsh-desktop'&&typeof pkg.version==='string'){
-    const appPath=await canonical(resources.endsWith(path.join('Contents','Resources'))?path.resolve(resources,'../..'):path.dirname(resources)),executable=path.join(appPath,'Contents/MacOS/DSH Desktop')
-    const supported=process.platform==='darwin'&&pkg.version==='0.12.0'&&pkg.dependencies?.['@deepseek-ai/dsh']==='0.2.0-rc.2'&&!!await canonical(executable)
-    return{kind:'official-desktop',appPath,resources,executable,supported,runtimeRoot:await canonical(path.join(resources,'app'))??path.join(resources,'app.asar'),version:pkg.version,dshVersion:pkg.dependencies?.['@deepseek-ai/dsh'],capabilities:{inspect:true,writeSession:false},blockedReason:'DESKTOP_CAPABILITY_UNVERIFIED'}
-   }}catch{}
-  }
-  const parent=path.dirname(dir);if(parent===dir)break;dir=parent
- }
- return null
-}
 export async function runningProcesses(){
  const windows=process.platform==='win32'
- const command=windows?{executable:'powershell.exe',args:['-NoProfile','-NonInteractive','-Command',"$ErrorActionPreference='Stop'; $env:PSModulePath=[IO.Path]::Combine($PSHOME,'Modules'); Get-CimInstance Win32_Process | Where-Object { $_.Name -match '^(node|dsh|DSH Desktop|dsh-desktop)(\\.exe)?$' } | Select-Object ProcessId,ExecutablePath,CommandLine | ConvertTo-Json -Compress"]}:{executable:'ps',args:['-u',String(process.getuid()),'-o','pid=,args=']}
+ const command=windows?{executable:'powershell.exe',args:['-NoProfile','-NonInteractive','-Command',"$ErrorActionPreference='Stop'; $env:PSModulePath=[IO.Path]::Combine($PSHOME,'Modules'); Get-CimInstance Win32_Process | Where-Object { $_.Name -match '^(node|dsh|DSH Desktop|dsh-desktop|DeepSeek Harness)(\\.exe)?$' } | Select-Object ProcessId,ExecutablePath,CommandLine | ConvertTo-Json -Compress"]}:{executable:'ps',args:['-u',String(process.getuid()),'-o','pid=,args=']}
  const r=await runHostCommand({...command,cwd:os.tmpdir()},{timeoutMs:10000,maxBytes:8*1024*1024})
  if(r.exitCode||r.stdout.length>=8*1024*1024)throw Object.assign(new Error('进程查找不可用；仍可使用路径查找和手动输入'),{code:'PROCESS_DISCOVERY_UNAVAILABLE'})
  return windows?[].concat(JSON.parse(r.stdout||'[]')).filter(Boolean).map(p=>({pid:p.ProcessId,executable:p.ExecutablePath,command:p.CommandLine??''})):r.stdout.split('\n').map(line=>{const m=line.trim().match(/^(\d+)\s+(.*)$/);return m?{pid:+m[1],command:m[2]}:null}).filter(Boolean)
+}
+export async function windowsDesktopPaths(){
+ const script="$ErrorActionPreference='Stop'; $roots=@('HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\*','HKLM:\\Software\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\*','HKLM:\\Software\\WOW6432Node\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\*'); @(Get-ItemProperty -Path $roots -ErrorAction SilentlyContinue | Where-Object { $_.DisplayName -match '^(DeepSeek Harness|DSH Desktop)$' -and $_.InstallLocation } | Select-Object -First 32 -ExpandProperty InstallLocation) | ConvertTo-Json -Compress"
+ const result=await runHostCommand({executable:'powershell.exe',args:['-NoProfile','-NonInteractive','-Command',script],cwd:os.tmpdir()},{timeoutMs:10000,maxBytes:32768})
+ if(result.exitCode||result.stdout.length>=32768)throw Object.assign(Error('无法读取 Desktop 安装位置；仍可手动指定安装目录或 EXE'),{code:'DESKTOP_REGISTRY_UNAVAILABLE'})
+ return [].concat(JSON.parse(result.stdout||'[]')).filter(p=>typeof p==='string'&&path.isAbsolute(p)).slice(0,32)
 }
 async function workingDirectory(pid){
  if(!Number.isSafeInteger(pid)||pid<=0)return null
@@ -87,19 +65,20 @@ export async function locateInstallations({env=process.env,paths=[],processes,us
   await addHome(input);return root
  }
  const standardRoots=[env.DSH_DEPOT_DSH_ROOT,path.join(env.APPDATA??userHome,'npm/node_modules/@deepseek-ai/dsh'),'/opt/homebrew/lib/node_modules/@deepseek-ai/dsh','/usr/local/lib/node_modules/@deepseek-ai/dsh']
- const apps=process.platform==='darwin'?['/Applications/DSH Desktop.app',path.join(userHome,'Applications/DSH Desktop.app')]:process.platform==='win32'?[path.join(env.LOCALAPPDATA??path.join(userHome,'AppData/Local'),'Programs/DSH Desktop'),path.join(env.LOCALAPPDATA??path.join(userHome,'AppData/Local'),'Programs/dsh-desktop'),path.join(env.ProgramFiles??'C:\\Program Files','DSH Desktop')]:['/opt/DSH Desktop','/opt/dsh-desktop','/usr/lib/dsh-desktop']
+ const apps=process.platform==='darwin'?['/Applications/DeepSeek Harness.app',path.join(userHome,'Applications/DeepSeek Harness.app'),'/Applications/DSH Desktop.app',path.join(userHome,'Applications/DSH Desktop.app')]:process.platform==='win32'?[path.join(env.LOCALAPPDATA??path.join(userHome,'AppData/Local'),'Programs/DeepSeek Harness'),path.join(env.ProgramFiles??'C:\\Program Files','DeepSeek Harness'),path.join(env.LOCALAPPDATA??path.join(userHome,'AppData/Local'),'Programs/DSH Desktop'),path.join(env.LOCALAPPDATA??path.join(userHome,'AppData/Local'),'Programs/dsh-desktop'),path.join(env.ProgramFiles??'C:\\Program Files','DSH Desktop')]:['/opt/DSH Desktop','/opt/dsh-desktop','/usr/lib/dsh-desktop']
+ if(process.platform==='win32')try{apps.push(...await windowsDesktopPaths())}catch(e){issue(e)}
  for(const input of [...standardRoots,...apps,env.DSH_DEPOT_DESKTOP_APP,...paths].filter(Boolean))await addPath(input)
  for(const dir of (env.PATH??env.Path??'').split(path.delimiter).filter(Boolean)){
-  for(const name of process.platform==='win32'?['dsh.cmd','dsh.exe','dsh-desktop.exe','DSH Desktop.exe']:['dsh','dsh-desktop'])await addPath(path.join(dir,name))
+  for(const name of process.platform==='win32'?['dsh.cmd','dsh.exe','dsh-desktop.exe','DSH Desktop.exe','DeepSeek Harness.exe']:['dsh','dsh-desktop'])await addPath(path.join(dir,name))
   await addPath(path.join(dir,'node_modules/@deepseek-ai/dsh'));await addPath(path.join(dir,'../lib/node_modules/@deepseek-ai/dsh'))
  }
  if(processes===undefined)try{processes=await runningProcesses()}catch(e){issue(e);processes=[]}
  let inspected=0
  for(const row of processes){
-  const text=row.command??'';if(row.pid===process.pid||!/(?:dsh|lib[/\\]bin\.js)/i.test(text)||inspected++>=32)continue
+  const text=row.command??'';if(row.pid===process.pid||!/(?:dsh|DeepSeek Harness|lib[/\\]bin\.js)/i.test(text+' '+(row.executable??''))||inspected++>=32)continue
   const data=text.match(/--user-data-dir(?:=|\s+)("[^"]+"|'[^']+'|.*?)(?=\s+--[a-zA-Z]|$)/);if(data){const value=data[1].replace(/^["']|["']$/g,'');const home=await canonical(path.join(value,'harness'));if(home)desktopHomes.push(home)}
   const appMatch=text.match(/^"?(.*?\.app)(?:[/\\]|\s)/i);if(appMatch){await addPath(appMatch[1]);continue}
-  const desktopExe=text.match(/^"?(.+?[/\\](?:dsh-desktop|DSH Desktop)(?:\.exe)?)"?(?=\s|$)/i);if(desktopExe)await addPath(desktopExe[1])
+  const desktopExe=text.match(/^"?(.+?[/\\](?:dsh-desktop|DSH Desktop|DeepSeek Harness)(?:\.exe)?)"?(?=\s|$)/i);if(desktopExe)await addPath(desktopExe[1])
   if(row.executable)await addPath(row.executable)
   const m=text.match(/^(?:"([^"]+)"|(.+?[/\\]node(?:\.exe)?|node(?:\.exe)?))(?=\s|$)/i);if(!m)continue
   const node=await canonical(m[1]??m[2]);if(!node)continue
@@ -119,16 +98,19 @@ export async function locateInstallations({env=process.env,paths=[],processes,us
  const desktopOwnedHomes=new Set(await Promise.all(desktopHomes.map(canonical)))
  const locations=[]
  const selected=desktop.get(await canonical(env.DSH_DEPOT_DESKTOP_APP??''))
+ let desktopProfiles=0
  if(selected?.supported&&process.versions.electron&&(await canonical(process.execPath))?.startsWith(selected.appPath+path.sep)){
-  for(const home of new Set(desktopHomes)){
+  for(const home of new Set(selected.layout==='bundled-cli'?[...homes]:desktopHomes)){
    const resolved=await canonical(home);if(!resolved)continue
-   try{await stat(path.join(resolved,'profiles/web/package.json'));await stat(path.join(resolved,'.desktop-install-state.json'))}catch{continue}
-   locations.push({kind:'official-desktop',home:resolved,profileName:'web',dshRoot:path.join(selected.runtimeRoot,'node_modules/@deepseek-ai/dsh'),nodePath:process.execPath,desktop:selected,runtimeEnv:{ELECTRON_RUN_AS_NODE:'1'}})
+   try{await stat(path.join(resolved,'profiles',selected.profileName,'package.json'));if(selected.layout!=='bundled-cli')await stat(path.join(resolved,'.desktop-install-state.json'))}catch{continue}
+   desktopProfiles++
+   locations.push({kind:'official-desktop',home:resolved,profileName:selected.profileName,dshRoot:path.join(selected.runtimeRoot,'node_modules/@deepseek-ai/dsh'),nodePath:process.execPath,desktop:selected,runtimeEnv:{ELECTRON_RUN_AS_NODE:'1'}})
   }
  }
+ if(selected?.layout==='bundled-cli'&&!desktopProfiles)issue({code:'DESKTOP_PROFILE_NOT_INITIALIZED',message:'已找到 Desktop 自带 DSH，但未找到 '+path.join(env.DSH_HOME??path.join(userHome,'.dsh'),'profiles/desktop')+'；请先启动 Desktop 完成初始化，或在 settings.json 的 dshHome 指定实际配置主目录'})
  for(const home of homes){const resolved=await canonical(home);if(!resolved||desktopOwnedHomes.has(resolved))continue
   let profiles;try{profiles=await readdir(path.join(resolved,'profiles'))}catch{continue}
   for(const profileName of profiles.filter(p=>/^[a-zA-Z0-9][a-zA-Z0-9_-]*$/.test(p)&&p!=='desktop'))for(const [dshRoot,nodePath]of roots)locations.push({home:resolved,dshRoot,nodePath,profileName})
  }
- return{locations,desktop:[...desktop.values()].map(d=>({...d,homes:[...new Set(desktopHomes)]})),issues}
+ return{locations,desktop:[...desktop.values()].map(d=>({...d,homes:[...new Set(d.layout==='bundled-cli'?[...homes]:desktopHomes)]})),issues}
 }

@@ -108,11 +108,24 @@
           "run": "node distribution/manager/ci.mjs build ${{ matrix.target }} .runtime/manager-ci/${{ matrix.target }}"
         },
         {
+          "name": "Verify actual official Windows Desktop CLI",
+          "if": "matrix.target == 'win32-x64'",
+          "shell": "pwsh",
+          "run": "$ErrorActionPreference = 'Stop'\n$Root = Join-Path $PWD '.runtime/official-windows-desktop'\nNew-Item -ItemType Directory -Force $Root | Out-Null\nInvoke-WebRequest 'https://download.deepseek.com/desktop/dsh-latest-windows-x64.exe' -OutFile \"$Root/installer.exe\"\n& 7z e \"$Root/installer.exe\" '-o.runtime/official-windows-desktop/payload' '$PLUGINSDIR/app-64.7z' -y\nif ($LASTEXITCODE -ne 0) { throw 'Desktop NSIS extraction failed' }\n& 7z x \"$Root/payload/app-64.7z\" '-o.runtime/official-windows-desktop/app' -y\nif ($LASTEXITCODE -ne 0) { throw 'Desktop application extraction failed' }\nnode distribution/manager/native-desktop-smoke.mjs \"$Root/app\" .runtime/manager-ci/win32-x64\nif ($LASTEXITCODE -ne 0) { throw 'Desktop native CLI regression failed' }",
+          "id": "native-desktop"
+        },
+        {
+          "name": "Exclude failed Desktop target from publication",
+          "if": "failure() && matrix.target == 'win32-x64'",
+          "shell": "pwsh",
+          "run": "Remove-Item -LiteralPath '.runtime/manager-ci/win32-x64/receipt.json' -ErrorAction SilentlyContinue"
+        },
+        {
           "uses": "actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9",
           "if": "always()",
           "with": {
             "name": "manager-${{ matrix.target }}",
-            "path": ".runtime/manager-ci/${{ matrix.target }}/*.tgz\n.runtime/manager-ci/${{ matrix.target }}/*.zip\n.runtime/manager-ci/${{ matrix.target }}/receipt.json\n.runtime/manager-ci/${{ matrix.target }}/SHA256SUMS\n.runtime/manager-ci/${{ matrix.target }}/manager-verification.json\n.runtime/manager-ci/${{ matrix.target }}/verification/**/*.json\n.runtime/manager-ci/${{ matrix.target }}/verification/**/*.log\n.runtime/manager-ci/${{ matrix.target }}/export-roundtrip.json\n.runtime/manager-ci/${{ matrix.target }}/export-roundtrip/target-verification/**/*.json\n.runtime/manager-ci/${{ matrix.target }}/export-roundtrip/*.log\n.runtime/manager-ci/${{ matrix.target }}/export-roundtrip/target-verification/**/*.log",
+            "path": ".runtime/manager-ci/${{ matrix.target }}/*.tgz\n.runtime/manager-ci/${{ matrix.target }}/*.zip\n.runtime/manager-ci/${{ matrix.target }}/receipt.json\n.runtime/manager-ci/${{ matrix.target }}/SHA256SUMS\n.runtime/manager-ci/${{ matrix.target }}/manager-verification.json\n.runtime/manager-ci/${{ matrix.target }}/verification/**/*.json\n.runtime/manager-ci/${{ matrix.target }}/verification/**/*.log\n.runtime/manager-ci/${{ matrix.target }}/export-roundtrip.json\n.runtime/manager-ci/${{ matrix.target }}/export-roundtrip/target-verification/**/*.json\n.runtime/manager-ci/${{ matrix.target }}/export-roundtrip/*.log\n.runtime/manager-ci/${{ matrix.target }}/export-roundtrip/target-verification/**/*.log\n.runtime/manager-ci/${{ matrix.target }}/native-desktop.json\n.runtime/manager-ci/${{ matrix.target }}/native-desktop/*.log",
             "retention-days": 2,
             "if-no-files-found": "warn"
           }
