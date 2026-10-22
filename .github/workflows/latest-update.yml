@@ -13,6 +13,16 @@
         "distribution/lib/latest.mjs",
         ".github/workflows/latest-update.yml"
       ]
+    },
+    "push": {
+      "branches": [
+        "main"
+      ],
+      "paths": [
+        "distribution/update-latest.mjs",
+        "distribution/lib/latest.mjs",
+        ".github/workflows/latest-update.yml"
+      ]
     }
   },
   "permissions": {},
