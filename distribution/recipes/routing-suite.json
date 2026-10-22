@@ -10,9 +10,9 @@
     "allowPrerelease": false
   },
   "seed": {
-    "ref": "195273352f23bff7f9023ebe2ec0cdbdf9c98f10",
-    "version": "0.3.3",
+    "ref": "main",
     "commit": "195273352f23bff7f9023ebe2ec0cdbdf9c98f10",
+    "version": "0.3.3",
     "archiveSha256": "35ac8bff3a0e5c5023fc55df8c838caf0812a203e8d6bf6bb9cedfcf00d57c87"
   },
   "allowedVersions": "0.3.3",
@@ -65,6 +65,7 @@
     "category": "tools"
   },
   "enabled": true,
-  "latestRefreshError": "Latest release changed the package layout; the plugin component needs an updated build recipe",
-  "latestOnly": true
+  "latestOnly": true,
+  "distributionScope": "跟进上游最新发布版；无发布版时跟进默认分支。每次构建固定源码与依赖，并在当前 DSH 上重新验证。",
+  "upstreamChannel": "branch"
 }

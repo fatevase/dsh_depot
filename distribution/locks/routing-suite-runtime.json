@@ -6,7 +6,8 @@
   "packages": {
     "": {
       "name": "@dsh-external/dsh-super-injector",
-      "version": "0.3.3"
+      "version": "0.3.3",
+      "private": true
     }
   }
 }

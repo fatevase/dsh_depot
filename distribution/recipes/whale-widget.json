@@ -6,12 +6,13 @@
   "npmName": "dsh-whale-widget",
   "channel": {
     "type": "fixed",
-    "ref": "5247dd6813d6e4430728f39ccc63d43cda046022"
+    "ref": "5247dd6813d6e4430728f39ccc63d43cda046022",
+    "allowPrerelease": false
   },
   "seed": {
     "ref": "v0.4.2",
-    "version": "0.4.2",
-    "commit": "5247dd6813d6e4430728f39ccc63d43cda046022"
+    "commit": "5247dd6813d6e4430728f39ccc63d43cda046022",
+    "version": "0.4.2"
   },
   "allowedVersions": "0.4.2",
   "hostRange": "0.2.1-rc.2",

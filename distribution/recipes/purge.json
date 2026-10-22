@@ -48,6 +48,6 @@
   },
   "enabled": true,
   "install": false,
-  "latestRefreshError": "Upstream repository is no longer publicly accessible (HTTP 404)",
+  "latestRefreshError": "GitHub GET /repos/YuJunZhiXue/dsh-purge/releases returned 404",
   "latestOnly": true
 }
