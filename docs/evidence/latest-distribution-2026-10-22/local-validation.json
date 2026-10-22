@@ -1,0 +1,153 @@
+{
+  "date": "2026-10-22",
+  "host": "0.2.1-rc.2",
+  "hostGraphDigest": "de4dc34a74a1bf15b67742d99bfca7566a6137eb99c3886447f013ae22b4f14c",
+  "managerVersion": "0.1.9",
+  "managerSha256": "ab2c9085af13404a46cc2b8294206b667f94eb560942bb5b6b01ca6b5e152a95",
+  "managerBaseVerification": {
+    "status": "passed",
+    "checks": {
+      "install": true,
+      "compose": true,
+      "host": true,
+      "clientModule": true,
+      "native": true
+    },
+    "isolationControls": {
+      "status": "passed",
+      "beforeReachable": true,
+      "beforeReachableIPv6": true,
+      "offline": {
+        "externalBlocked": true,
+        "externalBlockedIPv6": true,
+        "childBlockedIPv6": true,
+        "otherProgramBlocked": true,
+        "loopbackAllowed": false,
+        "loopbackBlocked": true,
+        "childBlocked": true,
+        "controlFamilies": [
+          "IPv4",
+          "IPv6-mapped-IPv4"
+        ]
+      },
+      "loopback": {
+        "externalBlocked": true,
+        "externalBlockedIPv6": true,
+        "childBlockedIPv6": true,
+        "otherProgramBlocked": true,
+        "loopbackAllowed": true,
+        "loopbackBlocked": true,
+        "childBlocked": true,
+        "controlFamilies": [
+          "IPv4",
+          "IPv6-mapped-IPv4"
+        ],
+        "observer": "outside-sandbox-inbound-only",
+        "outboundLoopbackBlocked": true
+      }
+    }
+  },
+  "localExport": {
+    "status": "passed",
+    "sourceInstall": true,
+    "sourceConfigurationPreserved": true,
+    "verification": {
+      "status": "passed",
+      "checks": {
+        "install": true,
+        "compose": true,
+        "registration": true,
+        "host": true,
+        "clientModule": null,
+        "native": true
+      }
+    }
+  },
+  "scope": "Independent stock DSH profile only; no writes to daily Desktop profile. Full installer acceptance remains separate from these base checks.",
+  "plugins": [
+    {
+      "id": "answer-html",
+      "version": "0.5.7",
+      "commit": "76c3c6d39270138f3dfa6d577a3afb02178b3a1d",
+      "channel": "release",
+      "blockedReason": null
+    },
+    {
+      "id": "free-model",
+      "version": "2.5.9",
+      "commit": "25ab765d6bb860779dbd8c53062953524f3cac09",
+      "channel": "release",
+      "blockedReason": null
+    },
+    {
+      "id": "market",
+      "version": "1.66.47",
+      "commit": "f2667a0992578a50cf19c34b24acd199ac7cefe2",
+      "channel": "release",
+      "blockedReason": null
+    },
+    {
+      "id": "mobile",
+      "version": "0.1.9",
+      "commit": "489a1a2c0f12246e478a93eb25683f87c1f33832",
+      "channel": "release",
+      "blockedReason": null
+    },
+    {
+      "id": "modlens",
+      "version": "3.27.1",
+      "commit": "aa108d1796e3c4b5a6790516e2fcde87a35b189f",
+      "channel": "release",
+      "blockedReason": null
+    },
+    {
+      "id": "multi-root",
+      "version": "0.1.9",
+      "commit": "583267e19fe3cfca01a28d4faa26a036c1d44a1b",
+      "channel": "release",
+      "blockedReason": null
+    },
+    {
+      "id": "purge",
+      "version": "1.1.71",
+      "commit": "6c1d638d1bdcc45ede50fc30249c753d58122a51",
+      "channel": null,
+      "blockedReason": "Upstream repository is no longer publicly accessible (HTTP 404)"
+    },
+    {
+      "id": "routing-suite",
+      "version": "0.3.3",
+      "commit": "195273352f23bff7f9023ebe2ec0cdbdf9c98f10",
+      "channel": null,
+      "blockedReason": "Latest release changed the package layout; the plugin component needs an updated build recipe"
+    },
+    {
+      "id": "sidebar",
+      "version": "0.28.0",
+      "commit": "83faf70940160e5cd4c5332f5400aa8f4dbbb6d6",
+      "channel": "release",
+      "blockedReason": null
+    },
+    {
+      "id": "taskfold",
+      "version": "0.38.3",
+      "commit": "6107bc5046578de3501e212da2ab3dbba790bf09",
+      "channel": "release",
+      "blockedReason": null
+    },
+    {
+      "id": "treg",
+      "version": "0.27.0",
+      "commit": "2ecec028561f5331d6cd88691126675184310340",
+      "channel": "branch",
+      "blockedReason": null
+    },
+    {
+      "id": "whale-widget",
+      "version": "0.4.2",
+      "commit": "5247dd6813d6e4430728f39ccc63d43cda046022",
+      "channel": "release",
+      "blockedReason": null
+    }
+  ]
+}

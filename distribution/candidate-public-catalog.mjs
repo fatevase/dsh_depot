@@ -1,6 +1,6 @@
 // Public download metadata is separate from trial status and offline validation.
 const repository='fatevase/dsh_depot'
-export async function candidatePublicDownloads({github,snapshot,fetchImpl=fetch}){
+async function singleRunDownloads({github,snapshot,fetchImpl=fetch}){
  if(!snapshot)return snapshot
  const tag=`candidate-${snapshot.runId}-${snapshot.runAttempt??1}`
  let release
@@ -13,7 +13,8 @@ export async function candidatePublicDownloads({github,snapshot,fetchImpl=fetch}
  const chunks=[];let bytes=0
  for await(const chunk of response.body){bytes+=chunk.length;if(bytes>4*1024*1024)throw Error('Candidate download catalog too large');chunks.push(Buffer.from(chunk))}
  const data=JSON.parse(Buffer.concat(chunks).toString('utf8'))
- return applyCandidateDownloads(snapshot,data,prefix)
+ const ids=new Set(snapshot.plugins.flatMap(p=>Object.keys(p.results).map(t=>`${p.repositoryId}:${t}`)))
+ return applyCandidateDownloads(snapshot,{...data,packages:Array.isArray(data.packages)?data.packages.filter(p=>ids.has(`${p.repositoryId}:${p.target}`)):data.packages},prefix)
 }
 export function applyCandidateDownloads(snapshot,data,prefix){
  if(data.schemaVersion!==1||data.verification!=='not-run'||data.runId!==snapshot.runId||data.runAttempt!==(snapshot.runAttempt??1)||!Array.isArray(data.packages))throw Error('Candidate download catalog identity mismatch')
@@ -29,4 +30,24 @@ export function applyCandidateDownloads(snapshot,data,prefix){
   const item=entries.get(`${p.repositoryId}:${target}:${f.filename}`)
   return {...f,...(item?{url:item.url,downloadFilename:item.assetName}:{})}
  })}]))}))}
+}
+
+export async function candidatePublicDownloads({snapshot,...options}){
+ if(!snapshot)return snapshot
+ const groups=new Map()
+ for(const p of snapshot.plugins)for(const [target,result]of Object.entries(p.results)){
+  const runId=result.runId??p.runId??snapshot.runId,runAttempt=result.runAttempt??p.runAttempt??snapshot.runAttempt??1
+  if(!runId)continue
+  const key=`${runId}:${runAttempt}`
+  if(!groups.has(key))groups.set(key,{...snapshot,runId,runAttempt,plugins:[]})
+  const group=groups.get(key);let plugin=group.plugins.find(item=>item.repositoryId===p.repositoryId)
+  if(!plugin){plugin={...p,results:{}};group.plugins.push(plugin)}
+  plugin.results[target]=result
+ }
+ const found=new Map()
+ for(const group of groups.values()){
+  const result=await singleRunDownloads({...options,snapshot:group})
+  for(const p of result.plugins){const old=found.get(p.repositoryId);found.set(p.repositoryId,{...p,results:{...old?.results,...p.results}})}
+ }
+ return {...snapshot,plugins:snapshot.plugins.map(p=>({...p,results:{...p.results,...found.get(p.repositoryId)?.results}}))}
 }

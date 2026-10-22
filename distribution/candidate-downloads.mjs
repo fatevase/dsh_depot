@@ -26,18 +26,18 @@ export async function publishCandidateDownloads({github,runId,workDir}){
   :(await github.request(`/repos/${repository}/actions/workflows/candidate-builds.yml/runs?status=completed&branch=${meta.default_branch}&per_page=30`)).data.workflow_runs
  let chosen
  for(const run of candidates){
-  if(run.path!==workflow||run.head_repository?.id!==meta.id||run.head_branch!==meta.default_branch||run.status!=='completed'||!['push','workflow_dispatch'].includes(run.event))continue
+  if(run.path!==workflow||run.head_repository?.id!==meta.id||run.head_branch!==meta.default_branch||run.status!=='completed'||!['push','workflow_dispatch','schedule'].includes(run.event))continue
   const artifacts=(await github.request(`/repos/${repository}/actions/runs/${run.id}/artifacts?per_page=100`)).data.artifacts
   if(!artifacts.some(a=>a.name==='candidate-build-report'&&!a.expired)||!artifacts.some(a=>a.name==='candidate-build-plan'&&!a.expired))continue
   const jobs=(await github.request(`/repos/${repository}/actions/runs/${run.id}/jobs?per_page=100&filter=latest`)).data.jobs
   if(!jobs.some(j=>j.name==='report'&&j.conclusion==='success'))continue
   const dir=path.join(workDir,String(run.id)),planDir=await unpack(github,artifacts.find(a=>a.name==='candidate-build-plan'),path.join(dir,'plan'))
   const plan=await readJson(path.join(planDir,'plan.json')),config=await readJson(new URL('./candidate-builds.json',import.meta.url))
-  if(plan.entries.length!==config.entries.length||targets.some(t=>!plan.targets.includes(t))){await rm(dir,{recursive:true,force:true});continue}
-  if(plan.sourceCommit!==run.head_sha||plan.id!==config.id||new Set(plan.entries.map(e=>e.repositoryId)).size!==config.entries.length||config.entries.some(e=>!plan.entries.some(p=>p.repositoryId===e.repositoryId&&p.repository.toLowerCase()===e.repository.toLowerCase())))throw Error('Candidate plan identity mismatch')
+  if(!plan.entries.length||!plan.targets?.length||plan.targets.some(t=>!targets.includes(t))){await rm(dir,{recursive:true,force:true});continue}
+  if(plan.sourceCommit!==run.head_sha||plan.id!==config.id||new Set(plan.entries.map(e=>e.repositoryId)).size!==plan.entries.length||plan.entries.some(p=>!config.entries.some(e=>p.repositoryId===e.repositoryId&&p.repository.toLowerCase()===e.repository.toLowerCase())))throw Error('Candidate plan identity mismatch')
   chosen={run,artifacts,plan,dir};break
  }
- if(!chosen)throw Error('No completed full main-branch candidate report is available')
+ if(!chosen){if(runId)return{runId,packages:0,reason:'No publishable candidate report in this run'};throw Error('No completed main-branch candidate report is available')}
  const {run,artifacts,plan,dir}=chosen,receipts=[],locations=new Map()
  for(const artifact of artifacts.filter(a=>/^candidate-batch-\d+-(macos-arm64|linux-x64|win32-x64)$/.test(a.name))){
   if(artifact.expired)throw Error('Candidate package artifact expired; rebuild required')
@@ -54,7 +54,7 @@ export async function publishCandidateDownloads({github,runId,workDir}){
   await collect(root)
  }
  const report=summarizeCampaign(plan,receipts),packages=[],names=new Set()
- for(const entry of report.plugins)for(const target of targets){
+ for(const entry of report.plugins)for(const target of plan.targets){
   const receipt=entry.results[target]
   if(receipt.status!=='compiled')continue
   const frozen=plan.entries.find(e=>e.repositoryId===entry.repositoryId)
@@ -70,7 +70,7 @@ export async function publishCandidateDownloads({github,runId,workDir}){
    packages.push({repositoryId:entry.repositoryId,repository:entry.repository,sourceCommit:entry.commit,target,name:a.name,version:a.version,filename:a.filename,assetName,sha256:a.sha256,bytes:a.bytes,kind:a.kind,file})
   }
  }
- if(!packages.length)throw Error('No completed packages to publish')
+ if(!packages.length)return {runId:run.id,packages:0,reason:'No completed packages in this batch'}
  packages.sort((a,b)=>a.assetName.localeCompare(b.assetName))
  const tag=`candidate-${run.id}-${run.run_attempt}`,base=`/repos/${repository}`,remote=githubReleaseRemote({repository,github})
  let release

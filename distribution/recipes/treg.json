@@ -1,13 +1,16 @@
 {
   "schemaVersion": 1,
   "packagePath": ".",
-  "sourceArchiveExcludes": [".agents"],
+  "sourceArchiveExcludes": [
+    ".agents"
+  ],
   "channel": {
     "type": "fixed",
-    "ref": "6c27d5bfafaf821290f580e713b9fcb159bf2e93"
+    "ref": "2ecec028561f5331d6cd88691126675184310340",
+    "allowPrerelease": false
   },
-  "allowedVersions": "0.26.0",
-  "hostRange": "^0.2.0-rc.2",
+  "allowedVersions": "0.27.0",
+  "hostRange": "0.2.1-rc.2",
   "targets": [
     "macos-arm64",
     "linux-x64",
@@ -28,9 +31,9 @@
   "repository": "superdesigndev/treg",
   "npmName": "treg-dsh",
   "seed": {
-    "ref": "6c27d5bfafaf821290f580e713b9fcb159bf2e93",
-    "version": "0.26.0",
-    "commit": "6c27d5bfafaf821290f580e713b9fcb159bf2e93"
+    "ref": "main",
+    "commit": "2ecec028561f5331d6cd88691126675184310340",
+    "version": "0.27.0"
   },
   "locks": {
     "runtime": {
@@ -55,7 +58,9 @@
     "category": "tools"
   },
   "enabled": true,
-  "distributionScope": "The official treg-dsh DSH skill bundle. The Python CLI and server are not installed by this package. The separately declared hosted MCP connector requires TREG_TOKEN and network access; it is disabled without that token.",
+  "distributionScope": "跟进上游最新发布版；无发布版时跟进默认分支。每次构建固定源码与依赖，并在当前 DSH 上重新验证。",
   "license": "LicenseRef-tools-registry",
-  "licenseSource": "https://github.com/superdesigndev/treg/blob/6c27d5bfafaf821290f580e713b9fcb159bf2e93/LICENSE"
+  "licenseSource": "https://github.com/superdesigndev/treg/blob/6c27d5bfafaf821290f580e713b9fcb159bf2e93/LICENSE",
+  "latestOnly": true,
+  "upstreamChannel": "branch"
 }

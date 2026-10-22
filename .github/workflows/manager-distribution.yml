@@ -12,7 +12,8 @@
         "distribution/test/manager-*.test.mjs",
         "package.json",
         "package-lock.json",
-        ".github/workflows/manager-distribution.yml"
+        ".github/workflows/manager-distribution.yml",
+        "distribution/config.json"
       ]
     },
     "workflow_dispatch": {
@@ -21,6 +22,15 @@
           "description": "Publish only fully accepted manager assets (default branch only)",
           "type": "boolean",
           "default": false
+        },
+        "channel": {
+          "description": "Preview publishes built assets with incomplete acceptance clearly labelled; stable requires full acceptance",
+          "type": "choice",
+          "options": [
+            "stable",
+            "preview"
+          ],
+          "default": "stable"
         }
       }
     },
@@ -35,7 +45,8 @@
         "distribution/test/manager-*.test.mjs",
         "package.json",
         "package-lock.json",
-        ".github/workflows/manager-distribution.yml"
+        ".github/workflows/manager-distribution.yml",
+        "distribution/config.json"
       ],
       "branches": [
         "main"
@@ -145,7 +156,7 @@
           }
         },
         {
-          "run": "node distribution/manager/ci.mjs publication .runtime/manager-publication ${{ github.event_name == 'push' && 'preview' || 'stable' }}"
+          "run": "node distribution/manager/ci.mjs publication .runtime/manager-publication ${{ github.event_name == 'push' && 'preview' || inputs.channel || 'stable' }}"
         },
         {
           "name": "Publish exact files with explicit acceptance status",

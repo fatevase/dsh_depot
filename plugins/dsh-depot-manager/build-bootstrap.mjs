@@ -7,6 +7,7 @@ import * as tar from 'tar'
 import {fileHash,atomicJson} from './core/files.mjs'
 import {runHostCommand} from './adapters/command.mjs'
 import {fail,MANAGER_VERSION} from './contracts/constants.mjs'
+import managerManifest from './plugin/package.json' with {type:'json'}
 const here=fileURLToPath(new URL('.',import.meta.url))
 export async function buildBootstrap({target,flavor,managerArchive,output,runtimeLock,runtimeArchive}={}) {
  if(!['macos-arm64','linux-x64','win32-x64'].includes(target)||!['full','lite'].includes(flavor))fail('INVALID_BUNDLE','平台或安装包类型无效')
@@ -37,7 +38,7 @@ export async function buildBootstrap({target,flavor,managerArchive,output,runtim
   await writeFile(path.join(root,'README.txt'),[
    `DSH 离线插件管理器 ${MANAGER_VERSION}`,'',
    '更新安装器：重新下载并完整解压新版；旧的解压目录和维护入口不会自动更新。',
-   '使用前：已安装并初始化 DSH 0.2.0-rc.2 Web，或 macOS DSH Desktop 0.12.0。运行中的 DSH 也可安装，完成后请重启 DSH。',
+   `使用前：已安装并初始化 DSH ${managerManifest.engines.dsh} Web，或 macOS DSH Desktop 0.12.0。运行中的 DSH 也可安装，完成后请重启 DSH。`,
    '1. 将整个压缩包解压到本机可写目录；不要在压缩包预览窗口中运行。',
    `2. ${entry}。`,
    '3. 找到唯一的受支持 Desktop 后会自动使用应用自带 DSH，并进入五项菜单；选择“1. 安装 / 替换离线成品包”即可安装随包管理器，不再输入 yes。只有多个目标无法确定时才要求选择。',

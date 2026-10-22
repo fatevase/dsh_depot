@@ -6,15 +6,18 @@ export function createPlan({ recipes, sources, state = {}, host, retryKeys = [] 
   for (const source of sources) if (!recipes.some(r => r.id === source.recipeId && r.enabled)) decisions.push({ recipeId: source.recipeId, action: 'needs_recipe', reason: 'Source has no enabled recipe' })
   for (const recipe of recipes.filter(r => r.enabled)) {
     let selected
-    const available = sources.filter(s => s.recipeId === recipe.id).sort((a, b) => semver.valid(a.version) && semver.valid(b.version) ? semver.rcompare(a.version, b.version) : 0)
+    const reject=(note,action,reason)=>{for(const target of recipe.latestOnly?recipe.targets:[undefined])decisions.push({...note,...(target?{target}:{}),action,reason})}
+    if(recipe.latestRefreshError){reject({recipeId:recipe.id,version:recipe.seed?.version},'blocked',recipe.latestRefreshError);continue}
+    let available = sources.filter(s => s.recipeId === recipe.id).sort((a, b) => semver.valid(a.version) && semver.valid(b.version) ? semver.rcompare(a.version, b.version) : 0)
+    if(recipe.latestOnly)available=available.slice(0,1)
     if(!available.length)for(const target of recipe.targets)decisions.push({recipeId:recipe.id,target,action:'blocked',reason:'No usable source observation; inspect discovery errors'})
     for (const source of available) {
       const note = { recipeId: recipe.id, version: source.version }
-      if (source.error || source.stale) { decisions.push({ ...note, action: 'blocked', reason: source.error?.code ?? 'source_fetch_failed' }); continue }
-      const compatible = semver.valid(source.version) && semver.satisfies(source.version, recipe.allowedVersions, { includePrerelease: !!recipe.channel.allowPrerelease }) && semver.satisfies(host.version, recipe.hostRange, { includePrerelease: true }) && (!source.peerDependencies?.['@deepseek-ai/dsh'] || semver.satisfies(host.version, source.peerDependencies['@deepseek-ai/dsh'], { includePrerelease: true }))
-      if (!compatible) { decisions.push({ ...note, action: 'incompatible', reason: 'Version or host constraints do not match' }); continue }
-      const missingLock = recipe._lockError || Object.values(recipe.locks ?? {}).some(l => l.origin === 'adapter' ? !l.digest : l.file && !source.lockDigests?.[l.file])
-      if (missingLock) { decisions.push({ ...note, action: 'blocked', reason: recipe._lockError ?? 'Missing frozen dependency lock' }); continue }
+      if (source.error || source.stale) { reject(note,'blocked',source.error?.code??'source_fetch_failed'); continue }
+      const compatible = semver.valid(source.version) && semver.satisfies(source.version, recipe.allowedVersions, { includePrerelease: !!recipe.channel.allowPrerelease }) && semver.satisfies(host.version, recipe.hostRange, { includePrerelease: true }) && (source.enginesDsh ? semver.satisfies(host.version,source.enginesDsh,{includePrerelease:true}) : Object.entries(source.peerDependencies??{}).filter(([name])=>name==='@deepseek-ai/dsh'||name.startsWith('@deepseek-ai/dsh-')).every(([,range])=>semver.satisfies(host.version,range,{includePrerelease:true})))
+      if (!compatible) { reject(note,'incompatible','当前插件版本的 DSH 兼容要求与最新宿主不匹配'); continue }
+      const missingLock = recipe.latestRefreshError || recipe._lockError || Object.values(recipe.locks ?? {}).some(l => l.origin === 'adapter' ? !l.digest : l.file && !source.lockDigests?.[l.file])
+      if (missingLock) { reject(note,'blocked',recipe._lockError??'当前版本缺少对应的冻结依赖锁'); continue }
       selected = source; break
     }
     if (!selected) continue

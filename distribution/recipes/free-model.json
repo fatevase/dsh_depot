@@ -6,16 +6,16 @@
   "npmName": "dsh-our-free-model",
   "channel": {
     "type": "fixed",
-    "ref": "f0b979fdf48d3915504f5f20e0a105596712f3c8",
+    "ref": "25ab765d6bb860779dbd8c53062953524f3cac09",
     "allowPrerelease": false
   },
   "seed": {
-    "ref": "f0b979fdf48d3915504f5f20e0a105596712f3c8",
-    "version": "2.5.3",
-    "commit": "f0b979fdf48d3915504f5f20e0a105596712f3c8"
+    "ref": "v2.5.9",
+    "commit": "25ab765d6bb860779dbd8c53062953524f3cac09",
+    "version": "2.5.9"
   },
-  "allowedVersions": "2.5.3",
-  "hostRange": "0.2.0-rc.2",
+  "allowedVersions": "2.5.9",
+  "hostRange": "0.2.1-rc.2",
   "targets": [
     "macos-arm64",
     "linux-x64",
@@ -46,5 +46,11 @@
     "category": "tools"
   },
   "enabled": true,
-  "install": false
+  "install": false,
+  "latestOnly": true,
+  "distributionScope": "跟进上游最新发布版；无发布版时跟进默认分支。每次构建固定源码与依赖，并在当前 DSH 上重新验证。",
+  "upstreamChannel": "release",
+  "releasePins": {
+    "v2.5.9": "25ab765d6bb860779dbd8c53062953524f3cac09"
+  }
 }

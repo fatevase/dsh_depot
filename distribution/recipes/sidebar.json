@@ -6,16 +6,16 @@
   "npmName": "dsh-better-sidebar",
   "channel": {
     "type": "fixed",
-    "ref": "9323f48d0946432ffd94655df1c115a1cd89f34c"
+    "ref": "83faf70940160e5cd4c5332f5400aa8f4dbbb6d6",
+    "allowPrerelease": false
   },
   "seed": {
-    "ref": "v0.26.0",
-    "version": "0.26.0",
-    "commit": "9323f48d0946432ffd94655df1c115a1cd89f34c",
-    "archiveSha256": "edb85c646cb877680e27d599aaec4bb12d9779ec808a2eb5f163b8ed77f63c92"
+    "ref": "v0.28.0",
+    "commit": "83faf70940160e5cd4c5332f5400aa8f4dbbb6d6",
+    "version": "0.28.0"
   },
-  "allowedVersions": "0.26.0",
-  "hostRange": "^0.2.0-rc.2",
+  "allowedVersions": "0.28.0",
+  "hostRange": "0.2.1-rc.2",
   "targets": [
     "macos-arm64",
     "linux-x64",
@@ -56,5 +56,10 @@
     "category": "interface"
   },
   "enabled": true,
-  "distributionScope": "First cohort uses the compatible source version already exercised against frozen stock DSH0.2.0-rc.2; it does not claim to be the latest upstream release."
+  "distributionScope": "跟进上游最新发布版；无发布版时跟进默认分支。每次构建固定源码与依赖，并在当前 DSH 上重新验证。",
+  "latestOnly": true,
+  "upstreamChannel": "release",
+  "releasePins": {
+    "v0.28.0": "83faf70940160e5cd4c5332f5400aa8f4dbbb6d6"
+  }
 }

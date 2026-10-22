@@ -5,18 +5,18 @@
   "packagePath": ".",
   "npmName": "@april-jk/dsh-mobile",
   "channel": {
-    "type": "branch",
-    "ref": "main",
+    "type": "fixed",
+    "ref": "489a1a2c0f12246e478a93eb25683f87c1f33832",
     "allowPrerelease": false
   },
   "seed": {
     "ref": "v0.1.9",
-    "version": "0.1.9",
     "commit": "489a1a2c0f12246e478a93eb25683f87c1f33832",
+    "version": "0.1.9",
     "archiveSha256": "ee857afaa0365b5ac287ccde235ff05691f6e980dd212a3b2e7e88295137ec2a"
   },
-  "allowedVersions": ">=0.1.9 <1.0.0",
-  "hostRange": "^0.2.0-rc.2",
+  "allowedVersions": "0.1.9",
+  "hostRange": "0.2.1-rc.2",
   "targets": [
     "macos-arm64",
     "linux-x64",
@@ -56,5 +56,11 @@
     "name": "DSH Mobile",
     "category": "interface"
   },
-  "enabled": true
+  "enabled": true,
+  "latestOnly": true,
+  "distributionScope": "跟进上游最新发布版；无发布版时跟进默认分支。每次构建固定源码与依赖，并在当前 DSH 上重新验证。",
+  "upstreamChannel": "release",
+  "releasePins": {
+    "v0.1.9": "489a1a2c0f12246e478a93eb25683f87c1f33832"
+  }
 }

@@ -6,16 +6,16 @@
   "npmName": "dshmarket",
   "channel": {
     "type": "fixed",
-    "ref": "07e0def00366016c0a4d5b637fb5a80673134657"
+    "ref": "f2667a0992578a50cf19c34b24acd199ac7cefe2",
+    "allowPrerelease": false
   },
   "seed": {
-    "ref": "v1.66.38",
-    "version": "1.66.38",
-    "commit": "07e0def00366016c0a4d5b637fb5a80673134657",
-    "archiveSha256": "230654e6d6351fec95ab05e530b186ac0c628ef6b08c8aea52064a1290ea2685"
+    "ref": "v1.66.47",
+    "commit": "f2667a0992578a50cf19c34b24acd199ac7cefe2",
+    "version": "1.66.47"
   },
-  "allowedVersions": "1.66.38",
-  "hostRange": "^0.2.0-rc.2",
+  "allowedVersions": "1.66.47",
+  "hostRange": "0.2.1-rc.2",
   "targets": [
     "macos-arm64",
     "linux-x64",
@@ -56,5 +56,10 @@
     "category": "tools"
   },
   "enabled": true,
-  "distributionScope": "First cohort uses the compatible source version already exercised against frozen stock DSH0.2.0-rc.2; it does not claim to be the latest upstream release."
+  "distributionScope": "跟进上游最新发布版；无发布版时跟进默认分支。每次构建固定源码与依赖，并在当前 DSH 上重新验证。",
+  "latestOnly": true,
+  "upstreamChannel": "release",
+  "releasePins": {
+    "v1.66.47": "f2667a0992578a50cf19c34b24acd199ac7cefe2"
+  }
 }

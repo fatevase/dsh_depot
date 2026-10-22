@@ -16,7 +16,7 @@
     "archiveSha256": "35ac8bff3a0e5c5023fc55df8c838caf0812a203e8d6bf6bb9cedfcf00d57c87"
   },
   "allowedVersions": "0.3.3",
-  "hostRange": "0.2.0-rc.2",
+  "hostRange": "0.2.1-rc.2",
   "targets": [
     "macos-arm64",
     "linux-x64",
@@ -64,5 +64,7 @@
     "name": "DSH Routing Suite · Injector",
     "category": "tools"
   },
-  "enabled": true
+  "enabled": true,
+  "latestRefreshError": "Latest release changed the package layout; the plugin component needs an updated build recipe",
+  "latestOnly": true
 }

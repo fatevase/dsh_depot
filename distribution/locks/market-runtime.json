@@ -1,40 +1,22 @@
 {
   "name": "dshmarket",
-  "version": "1.66.38",
+  "version": "1.66.47",
   "lockfileVersion": 3,
   "requires": true,
   "packages": {
     "": {
       "name": "dshmarket",
-      "version": "1.66.38",
-      "bundleDependencies": [
-        "js-yaml",
-        "undici"
-      ],
-      "license": "MIT",
+      "version": "1.66.47",
       "dependencies": {
         "js-yaml": "4.3.2",
-        "undici": "7.30.0"
+        "undici": "7.30.1"
       },
-      "peerDependencies": {
-        "@deepseek-ai/cordis": "^4.0.1",
-        "@deepseek-ai/dsh-settings": "^0.1.0-rc.7 || ^0.1.1-rc.2 || ^0.1.2-alpha.2 || ^0.2.0-rc.1 || ^0.2.1-alpha.3 || ^0.2.1-rc.1",
-        "@deepseek-ai/schemastery": "^3.18.1"
-      },
-      "peerDependenciesMeta": {
-        "@deepseek-ai/dsh-settings": {
-          "optional": true
-        },
-        "@deepseek-ai/schemastery": {
-          "optional": true
-        }
-      }
+      "private": true
     },
     "node_modules/argparse": {
       "version": "2.0.1",
       "resolved": "https://registry.npmjs.org/argparse/-/argparse-2.0.1.tgz",
       "integrity": "sha512-8+9WqebbFzpX9OR+Wa6O29asIogeRMzcGtAINdpMHHyAg10f05aSFVBbcEqGf/PXw1EjAZ+q2/bEBg3DvurK3Q==",
-      "inBundle": true,
       "license": "Python-2.0"
     },
     "node_modules/js-yaml": {
@@ -51,7 +33,6 @@
           "url": "https://github.com/sponsors/nodeca"
         }
       ],
-      "inBundle": true,
       "license": "MIT",
       "dependencies": {
         "argparse": "^2.0.1"
@@ -61,10 +42,9 @@
       }
     },
     "node_modules/undici": {
-      "version": "7.30.0",
-      "resolved": "https://registry.npmjs.org/undici/-/undici-7.30.0.tgz",
-      "integrity": "sha512-dkrQXeHSaoamnItlYbmzG0wFYrM0ZwDxCIg0A7aKjTyyhh9svRzCNFEzV+Vm05/yehjCzjDZ31KXfGEjYSztDQ==",
-      "inBundle": true,
+      "version": "7.30.1",
+      "resolved": "https://registry.npmjs.org/undici/-/undici-7.30.1.tgz",
+      "integrity": "sha512-03KrMbjIFDWQR5RNPrSw3bd1r12JpyFQl9/yxjUbJtqkjmllqC5lFjZh6ujeuJCKr8EOQvRW872Oy/az+nLYxg==",
       "license": "MIT",
       "engines": {
         "node": ">=20.18.1"

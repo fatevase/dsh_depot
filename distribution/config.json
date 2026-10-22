@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "distributionRepository": "fatevase/dsh_depot",
   "host": {
-    "version": "0.2.0-rc.2",
+    "version": "0.2.1-rc.2",
     "node": "26.9.0"
   },
   "candidateFeeds": [
@@ -26,5 +26,11 @@
   "batchPolicy": {
     "maxPlugins": 5,
     "maxTasks": 15
+  },
+  "versionPolicy": {
+    "host": "npm-latest",
+    "plugins": "latest-release-or-tag-otherwise-default-branch",
+    "history": "current-only",
+    "includeHostPrerelease": true
   }
 }

@@ -6,16 +6,16 @@
   "npmName": "answer-me-with-html",
   "channel": {
     "type": "fixed",
-    "ref": "7acea24024923eaae8647f5988e826062456dc86"
+    "ref": "76c3c6d39270138f3dfa6d577a3afb02178b3a1d",
+    "allowPrerelease": false
   },
   "seed": {
-    "ref": "7acea24024923eaae8647f5988e826062456dc86",
-    "version": "0.5.5",
-    "commit": "7acea24024923eaae8647f5988e826062456dc86",
-    "archiveSha256": "8ceb435db1f8c55910017591578715b8c580ff16aa17cf38ade3e08e8b20fea1"
+    "ref": "v0.5.7",
+    "commit": "76c3c6d39270138f3dfa6d577a3afb02178b3a1d",
+    "version": "0.5.7"
   },
-  "allowedVersions": "0.5.5",
-  "hostRange": "^0.2.0-rc.2",
+  "allowedVersions": "0.5.7",
+  "hostRange": "0.2.1-rc.2",
   "targets": [
     "macos-arm64",
     "linux-x64",
@@ -54,5 +54,11 @@
     "category": "tools"
   },
   "enabled": true,
-  "install": false
+  "install": false,
+  "latestOnly": true,
+  "distributionScope": "跟进上游最新发布版；无发布版时跟进默认分支。每次构建固定源码与依赖，并在当前 DSH 上重新验证。",
+  "upstreamChannel": "release",
+  "releasePins": {
+    "v0.5.7": "76c3c6d39270138f3dfa6d577a3afb02178b3a1d"
+  }
 }
