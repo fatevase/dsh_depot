@@ -10,6 +10,7 @@ import {probeHost} from '../../adapters/discover.mjs'
 import {adapterFor} from '../../adapters/select.mjs'
 import {desktopAt} from '../../adapters/locate.mjs'
 import {createManagerApi} from './api.mjs'
+import {liveInstallAdapter} from './live-install.mjs'
 import {exportDownloadResponse} from './export-download.mjs'
 import {uploadChunk} from './upload.mjs'
 import {operationsIn,readOperation,saveOperation} from '../../core/receipts.mjs'
@@ -29,7 +30,7 @@ export async function apply(ctx) {
  const host=await currentEnvironment(ctx),ownerId=host.ownerId,storeDir=path.join(depotDataHome(),'manager','hosts',host.hostId)
  await atomicJson(path.join(storeDir,'host-live.json'),{hostId:host.hostId,pid:process.pid,startedAt:Date.now()})
  await pruneRetention({storeDir,profileDir:host.profileDir,hostId:host.hostId}).catch(()=>{})
- const api=createManagerApi({host,ownerId,storeDir,adapter:adapterFor(host),listBundles:()=>ctx.pluginManager.listBundles()})
+ const api=createManagerApi({host,ownerId,storeDir,adapter:liveInstallAdapter({profile:ctx.profileContext,pluginManager:ctx.pluginManager,fallback:adapterFor(host)}),listBundles:()=>ctx.pluginManager.listBundles()})
  const disposers=[],root=fileURLToPath(new URL('.',import.meta.url))
  // The public Connection registry supplies Host/Origin admission and browser authentication.
  disposers.push(ctx.connection.fetch.register({path:'/api/depot/rpc',methods:['POST'],requestBody:'buffered',async fetch(request){

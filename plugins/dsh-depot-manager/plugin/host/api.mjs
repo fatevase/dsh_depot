@@ -15,7 +15,7 @@ export const publicInspection=i=>({importId:i.importId,packageName:i.packageName
 export const publicPlan=p=>({planId:p.planId,hostId:p.hostId,action:p.action,packageName:p.packageName,version:p.version,previousVersion:p.previousVersion,packageSha256:p.packageSha256,requiresExit:p.requiresExit,recoveryBytes:p.recoveryBytes,expiresAt:p.expiresAt})
 export function createManagerApi({host,ownerId,storeDir,adapter,listBundles,trustIndex={},exportService}) {
  const imports=path.join(storeDir,'imports'),controllers=new Map(),exports=exportService??createExportService({host,ownerId,storeDir,listBundles})
- async function inventory(){return(await listBundles()).map(b=>({name:b.name,version:b.version??null,enabled:b.enabled,installed:b.installed,protected:!b.removable||b.name===MANAGER_NAME||b.name.startsWith('@deepseek-ai/'),exportable:!!b.installed&&!b.error&&!isHostPackage(b.name),exportReason:!b.installed?'未安装的项目不可导出':b.error?'无法读取源插件，请修复安装后重试':isHostPackage(b.name)?'内置 DSH 核心由目标宿主提供':null,fingerprint:digest(JSON.stringify({name:b.name,version:b.version,enabled:b.enabled,installed:b.installed})),problem:b.error?.code??null}))}
+ async function inventory(){return(await listBundles()).filter(b=>b.installed&&!b.official&&b.availability!=='installation'&&!isHostPackage(b.name)).map(b=>({name:b.name,version:b.version??null,meta:b.meta,description:b.description,rows:b.rows??[],enabled:b.enabled,installed:b.installed,protected:!b.removable||b.name===MANAGER_NAME||b.name.startsWith('@deepseek-ai/'),exportable:!b.error,exportReason:b.error?'无法读取源插件，请修复安装后重试':null,fingerprint:digest(JSON.stringify({name:b.name,version:b.version,enabled:b.enabled,installed:b.installed})),problem:b.error?.code??null}))}
  async function ownedOperation(id){const op=await readOperation(checkedId(id),{storeDir});if(op.hostId!==host.hostId||(op.plan?.ownerId&&op.plan.ownerId!==ownerId))fail('FORBIDDEN','任务属于另一用户或环境');return op}
  return {async invoke(method,input={},actor){
   if(actor!==ownerId)fail('FORBIDDEN','请求未通过当前用户鉴权')
@@ -43,11 +43,11 @@ export function createManagerApi({host,ownerId,storeDir,adapter,listBundles,trus
     if(input.action==='remove'){const row=(await inventory()).find(x=>x.name===input.packageName);if(!row||row.protected)fail('PROTECTED_PACKAGE','此项不可卸载');if(input.installedFingerprint!==row.fingerprint)fail('HOST_CHANGED','插件已变化，请刷新');installedFingerprint=row.fingerprint}
     else {const root=path.join(imports,checkedId(input.importId)),s=await readJson(path.join(root,'session.json'));if(s.hostId!==host.hostId||s.ownerId!==ownerId)fail('FORBIDDEN','导入项属于其他环境');inspection=await readJson(path.join(root,'inspection.json'))}
     if(host.dshRoot)host.fingerprint=await hostFingerprint(host)
-    const p=await createOperationPlan({host,inspection,packageName:input.action==='remove'?input.packageName:undefined,installedFingerprint,action:input.action,acceptUnverified:input.acceptUnverified===true});p.ownerId=ownerId;await atomicJson(path.join(storeDir,'plans',p.planId+'.json'),p);return publicPlan(p)
+    const p=await createOperationPlan({host,inspection,packageName:input.action==='remove'?input.packageName:undefined,installedFingerprint,action:input.action,acceptUnverified:input.acceptUnverified===true});if(adapter?.liveInstall&&p.action!=='remove')p.requiresExit=false;p.ownerId=ownerId;await atomicJson(path.join(storeDir,'plans',p.planId+'.json'),p);return publicPlan(p)
    }
    case 'operations.start':{
-    if(host.capabilities.requiresExit&&!host.capabilities.externalToolkit)fail('TOOLKIT_REQUIRED','请先运行外部脚本，注册保存在插件目录之外的维护工具')
     const p=await readJson(path.join(storeDir,'plans',checkedId(input.planId)+'.json'));if(p.hostId!==host.hostId||p.ownerId!==ownerId)fail('FORBIDDEN','计划属于其他环境')
+    if(p.requiresExit&&!host.capabilities.externalToolkit)fail('TOOLKIT_REQUIRED','请先运行外部脚本，注册保存在插件目录之外的维护工具')
     const controller=new AbortController();controllers.set(p.planId,controller)
     try{return publicOperation(await executePlan(p,{host,adapter,storeDir,signal:controller.signal,quiesced:false}))}finally{controllers.delete(p.planId)}
    }

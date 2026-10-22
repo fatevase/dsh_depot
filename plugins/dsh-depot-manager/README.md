@@ -1,6 +1,6 @@
 # DSH 离线插件管理器
 
-在 DSH 内查看、安装和移除离线插件，支持拖入已构建的 .tgz 或成品目录，卸载默认保留配置和业务数据。
+在 DSH 内查看后来安装的第三方插件，并载入和导出离线包。页面沿用官方插件页样式；点击“载入插件”后拖入已构建的 `.tgz` 或成品目录，准备好后点击一次“确定”。点击插件进入详情，可导出程序与运行依赖，配置和业务数据留在原机。卸载默认保留数据。
 
 `plugin/` 是装入 DSH 的插件，`core/`、`adapters/`、`worker/` 管理检查与操作，`bootstrap/` 提供终端安装入口。build.mjs 生成已编译的标准插件，build-bootstrap.mjs 将插件与入口放进完整包或轻量包。构建验证与发布编排位于 `distribution/manager/`。
 
@@ -25,3 +25,5 @@ Windows 用 `install.cmd diagnose`，macOS/Linux 用 `sh install.sh diagnose` �
 官方 Windows Desktop 的入口为 `resources/runtime/cli/bin/dsh.cmd`，内部调用 `DeepSeek Harness.exe` 和 `app.asar/dsh/node_modules/@deepseek-ai/dsh-desktop-host/lib/cli.js`。安装助手等价调用这个专用入口，不要求 PATH 已注册 dsh。默认配置主目录为 `~/.dsh`，插件配置在 `profiles/desktop`；自定义时填写 `dshHome`，不要填写 Electron 的 AppData 设置目录。先启动 Desktop 完成初始化。自动发现还会读取 Windows 卸载注册表的 InstallLocation，失败时可手动指定路径。
 
 Windows 0.1.11 修复了找到 Desktop 后出现“无交互终端”的问题。输入继续留在启动脚本所在的终端，切换到应用自带 DSH 后会正常显示五项菜单。请重新下载并完整解压新版，不要继续运行 0.1.10 的旧目录。
+
+0.1.12 调整应用内管理页面：第三方插件列表、离线载入弹窗、插件详情和导出下载。应用内安装使用当前 DSH 的包管理服务与共享写锁；外部脚本继续复用目标 DSH 的 CLI。
