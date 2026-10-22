@@ -31,11 +31,14 @@ export async function runningProcesses(){
  if(r.exitCode||r.stdout.length>=8*1024*1024)throw Object.assign(new Error('进程查找不可用；仍可使用路径查找和手动输入'),{code:'PROCESS_DISCOVERY_UNAVAILABLE'})
  return windows?[].concat(JSON.parse(r.stdout||'[]')).filter(Boolean).map(p=>({pid:p.ProcessId,executable:p.ExecutablePath,command:p.CommandLine??''})):r.stdout.split('\n').map(line=>{const m=line.trim().match(/^(\d+)\s+(.*)$/);return m?{pid:+m[1],command:m[2]}:null}).filter(Boolean)
 }
+export function desktopRegistryPaths(rows){
+ return [...new Set([].concat(rows??[]).filter(row=>/^(?:DeepSeek Harness|DSH Desktop)(?:\s+\d[^\r\n]*)?$/.test(row?.DisplayName??'')&&typeof row.InstallLocation==='string'&&path.win32.isAbsolute(row.InstallLocation)).map(row=>row.InstallLocation))].slice(0,32)
+}
 export async function windowsDesktopPaths(){
- const script="$ErrorActionPreference='Stop'; $roots=@('HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\*','HKLM:\\Software\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\*','HKLM:\\Software\\WOW6432Node\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\*'); @(Get-ItemProperty -Path $roots -ErrorAction SilentlyContinue | Where-Object { $_.DisplayName -match '^(DeepSeek Harness|DSH Desktop)$' -and $_.InstallLocation } | Select-Object -First 32 -ExpandProperty InstallLocation) | ConvertTo-Json -Compress"
+ const script="$ErrorActionPreference='Stop'; $roots=@('HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\*','HKLM:\\Software\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\*','HKLM:\\Software\\WOW6432Node\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\*'); @(Get-ItemProperty -Path $roots -ErrorAction SilentlyContinue | Where-Object { $_.DisplayName -match '^(DeepSeek Harness|DSH Desktop)'  -and $_.InstallLocation } | Select-Object -First 128 DisplayName,InstallLocation) | ConvertTo-Json -Compress"
  const result=await runHostCommand({executable:'powershell.exe',args:['-NoProfile','-NonInteractive','-Command',script],cwd:os.tmpdir()},{timeoutMs:10000,maxBytes:32768})
  if(result.exitCode||result.stdout.length>=32768)throw Object.assign(Error('无法读取 Desktop 安装位置；仍可手动指定安装目录或 EXE'),{code:'DESKTOP_REGISTRY_UNAVAILABLE'})
- return [].concat(JSON.parse(result.stdout||'[]')).filter(p=>typeof p==='string'&&path.isAbsolute(p)).slice(0,32)
+ return desktopRegistryPaths(JSON.parse(result.stdout||'[]'))
 }
 async function workingDirectory(pid){
  if(!Number.isSafeInteger(pid)||pid<=0)return null

@@ -83,3 +83,15 @@ test('native Desktop batch preview reports its exit requirement',async t=>{
  const batch=await createBatch({host:f.host,inspections:[f.inspection],ownerId:'fixture',storeDir:path.join(f.dir,'state')})
  assert.equal(batch.requiresExit,true)
 })
+test('Windows registry discovery accepts product names with a release version suffix',async()=>{
+ const {desktopRegistryPaths}=await import('../adapters/locate.mjs')
+ assert.equal(typeof desktopRegistryPaths,'function')
+ assert.deepEqual(desktopRegistryPaths([
+  {DisplayName:'DeepSeek Harness 0.2.1-rc.2',InstallLocation:'D:\\Custom Apps\\Harness'},
+  {DisplayName:'DeepSeek Harness',InstallLocation:'C:\\Apps\\Harness'},
+  {DisplayName:'DSH Desktop 0.12.0',InstallLocation:'E:\\Tools\\DSH'},
+  {DisplayName:'DeepSeek Harness Tools',InstallLocation:'D:\\Other'},
+  {DisplayName:'Other',InstallLocation:'D:\\Other'},
+  {DisplayName:'DeepSeek Harness',InstallLocation:'relative/path'}
+ ]),['D:\\Custom Apps\\Harness','C:\\Apps\\Harness','E:\\Tools\\DSH'])
+})
