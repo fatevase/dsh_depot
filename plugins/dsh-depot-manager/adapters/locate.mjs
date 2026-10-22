@@ -102,7 +102,8 @@ export async function locateInstallations({env=process.env,paths=[],processes,us
  const locations=[]
  const selected=desktop.get(await canonical(env.DSH_DEPOT_DESKTOP_APP??''))
  let desktopProfiles=0
- if(selected?.supported&&process.versions.electron&&(await canonical(process.execPath))?.startsWith(selected.appPath+path.sep)){
+ const inDesktopRuntime=selected?.supported&&process.versions.electron&&(await canonical(process.execPath))?.startsWith(selected.appPath+path.sep)
+ if(inDesktopRuntime){
   for(const home of new Set(selected.layout==='bundled-cli'?[...homes]:desktopHomes)){
    const resolved=await canonical(home);if(!resolved)continue
    try{await stat(path.join(resolved,'profiles',selected.profileName,'package.json'));if(selected.layout!=='bundled-cli')await stat(path.join(resolved,'.desktop-install-state.json'))}catch{continue}
@@ -110,7 +111,7 @@ export async function locateInstallations({env=process.env,paths=[],processes,us
    locations.push({kind:'official-desktop',home:resolved,profileName:selected.profileName,dshRoot:path.join(selected.runtimeRoot,'node_modules/@deepseek-ai/dsh'),nodePath:process.execPath,desktop:selected,runtimeEnv:{ELECTRON_RUN_AS_NODE:'1'}})
   }
  }
- if(selected?.layout==='bundled-cli'&&!desktopProfiles)issue({code:'DESKTOP_PROFILE_NOT_INITIALIZED',message:'已找到 Desktop 自带 DSH，但未找到 '+path.join(env.DSH_HOME??path.join(userHome,'.dsh'),'profiles/desktop')+'；请先启动 Desktop 完成初始化，或在 settings.json 的 dshHome 指定实际配置主目录'})
+ if(inDesktopRuntime&&selected.layout==='bundled-cli'&&!desktopProfiles)issue({code:'DESKTOP_PROFILE_NOT_INITIALIZED',message:'已找到 Desktop 自带 DSH，但未找到 '+path.join(env.DSH_HOME??path.join(userHome,'.dsh'),'profiles/desktop')+'；请先启动 Desktop 完成初始化，或在 settings.json 的 dshHome 指定实际配置主目录'})
  for(const home of homes){const resolved=await canonical(home);if(!resolved||desktopOwnedHomes.has(resolved))continue
   let profiles;try{profiles=await readdir(path.join(resolved,'profiles'))}catch{continue}
   for(const profileName of profiles.filter(p=>/^[a-zA-Z0-9][a-zA-Z0-9_-]*$/.test(p)&&p!=='desktop'))for(const [dshRoot,nodePath]of roots)locations.push({home:resolved,dshRoot,nodePath,profileName})

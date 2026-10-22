@@ -1,0 +1,63 @@
+{
+  "schemaVersion": 1,
+  "status": "passed",
+  "desktopVersion": "0.2.1-rc.2",
+  "dshVersion": "0.2.1-rc.2",
+  "target": "macos-arm64",
+  "runtime": {
+    "source": "host",
+    "kind": "electron",
+    "platform": "darwin",
+    "arch": "arm64",
+    "node": "24.21.0",
+    "abi": "149",
+    "napi": 10,
+    "libc": null
+  },
+  "managerSha256": "dc2e2e47c09eeed6e075eca6997dadbe3385c3cad4c4a26cda3ea03fec843de4",
+  "operations": [
+    {
+      "action": "install",
+      "state": "awaiting_reload",
+      "error": null
+    },
+    {
+      "action": "install",
+      "state": "awaiting_reload",
+      "error": null
+    },
+    {
+      "action": "remove",
+      "state": "succeeded",
+      "error": null
+    }
+  ],
+  "coverage": "isolated-official-cli-install-reinstall-remove-and-packaged-terminal-handoff",
+  "terminalHandoff": {
+    "status": "passed",
+    "prompts": 2,
+    "consoleOwner": "parent",
+    "childStdio": "ipc-without-tty"
+  },
+  "ownership": "passed",
+  "ui": "unverified",
+  "networkIsolation": "unverified",
+  "createdAt": "2026-10-22T09:23:35.731Z",
+  "managerVersion": "0.1.11",
+  "regression": {
+    "reportedVersion": "0.1.10",
+    "failure": "Desktop discovery succeeded, then Electron menu failed INPUT_REQUIRED because stdin was not a TTY",
+    "fix": "The original Node terminal owns input/output and forwards typed menu requests over a live IPC channel; an environment marker alone cannot enable interaction",
+    "eof": "Real parent readline EOF aborts nested child IPC instead of hanging"
+  },
+  "tests": {
+    "webPassed": 14,
+    "managerPassed": 139,
+    "managerExistingSkips": 2,
+    "distributionPassed": 122,
+    "failures": 0,
+    "productionWebBuild": "passed",
+    "independentReview": "passed-after-EOF-regression-fix"
+  },
+  "windows": "Actual official Windows Desktop CLI and packaged terminal handoff run on the native Actions runner; report is attached to published artifacts. UI and normal-user ownership remain separate acceptance items."
+}

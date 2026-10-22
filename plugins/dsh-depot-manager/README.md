@@ -23,3 +23,5 @@ Windows 用 `install.cmd diagnose`，macOS/Linux 用 `sh install.sh diagnose` �
 安装助手复用目标 DSH 的包管理入口。Desktop 使用应用自带的 pnpm、启动包装和锁恢复入口；CLI 使用其原有解析方式。安装包不再附带另一套 pnpm，也不按 profile 记录另选版本或强制指定 store。缺少 Desktop 安装入口时会说明具体问题，请先修复或更新 DSH。完整包内的 Node 仅用于启动安装助手，安装操作使用目标 DSH 的运行时。
 
 官方 Windows Desktop 的入口为 `resources/runtime/cli/bin/dsh.cmd`，内部调用 `DeepSeek Harness.exe` 和 `app.asar/dsh/node_modules/@deepseek-ai/dsh-desktop-host/lib/cli.js`。安装助手等价调用这个专用入口，不要求 PATH 已注册 dsh。默认配置主目录为 `~/.dsh`，插件配置在 `profiles/desktop`；自定义时填写 `dshHome`，不要填写 Electron 的 AppData 设置目录。先启动 Desktop 完成初始化。自动发现还会读取 Windows 卸载注册表的 InstallLocation，失败时可手动指定路径。
+
+Windows 0.1.11 修复了找到 Desktop 后出现“无交互终端”的问题。输入继续留在启动脚本所在的终端，切换到应用自带 DSH 后会正常显示五项菜单。请重新下载并完整解压新版，不要继续运行 0.1.10 的旧目录。

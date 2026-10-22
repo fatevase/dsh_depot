@@ -95,3 +95,9 @@ test('Windows registry discovery accepts product names with a release version su
   {DisplayName:'DeepSeek Harness',InstallLocation:'relative/path'}
  ]),['D:\\Custom Apps\\Harness','C:\\Apps\\Harness','E:\\Tools\\DSH'])
 })
+test('console discovery does not misreport an initialized Desktop as uninitialized before runtime handoff',async t=>{
+ const f=await fixture(t,process.platform==='darwin'?'darwin':'win32'),home=path.join(f.root,'data')
+ await mkdir(path.join(home,'profiles/desktop'),{recursive:true});await writeFile(path.join(home,'profiles/desktop/package.json'),'{}')
+ const found=await locateInstallations({env:{PATH:'',DSH_HOME:home,DSH_DEPOT_DESKTOP_APP:f.app},paths:[f.app],processes:[],userHome:f.root})
+ assert.ok(!found.issues.some(i=>i.code==='DESKTOP_PROFILE_NOT_INITIALIZED'))
+})
