@@ -66,7 +66,7 @@
   "license": "MIT",
   "distributionScope": "跟进上游最新发布版；无发布版时跟进默认分支。每次构建固定源码与依赖，并在当前 DSH 上重新验证。",
   "latestOnly": true,
-  "upstreamChannel": "release",
+  "upstreamChannel": "tag",
   "releasePins": {
     "v3.27.1": "aa108d1796e3c4b5a6790516e2fcde87a35b189f"
   }

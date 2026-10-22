@@ -57,7 +57,7 @@
   "install": false,
   "latestOnly": true,
   "distributionScope": "跟进上游最新发布版；无发布版时跟进默认分支。每次构建固定源码与依赖，并在当前 DSH 上重新验证。",
-  "upstreamChannel": "release",
+  "upstreamChannel": "tag",
   "releasePins": {
     "v0.5.7": "76c3c6d39270138f3dfa6d577a3afb02178b3a1d"
   }
