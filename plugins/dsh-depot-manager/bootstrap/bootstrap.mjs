@@ -10,6 +10,7 @@ import {readFile,mkdir,realpath} from 'node:fs/promises'
 import {createInterface} from 'node:readline/promises'
 import {discoverEnvironments,probeHost} from '../adapters/discover.mjs'
 import {adapterFor} from '../adapters/select.mjs'
+import {desktopTerminalIo} from './terminal-bridge.mjs'
 import {openDesktopInstaller} from './desktop.mjs'
 import {inspectArtifact} from '../core/inspect.mjs'
 import {createOperationPlan} from '../core/plans.mjs'
@@ -43,7 +44,7 @@ export async function createServices({storeDir=baseDir(),discoveryOptions={}}={}
  return {
   hosts,discover,
   async isRunning(id){const host=await selected(id);return adapterFor(host).isRunning(host)},
-  openDesktop:process.versions.electron&&(discoveryOptions.env??process.env).DSH_DEPOT_DESKTOP_APP?undefined:(desktop,args)=>openDesktopInstaller(desktop,{entry:fileURLToPath(import.meta.url),args,env:{...(discoveryOptions.env??process.env),DSH_DEPOT_SEARCH_PATHS:JSON.stringify(paths)}}),
+  openDesktop:process.versions.electron&&(discoveryOptions.env??process.env).DSH_DEPOT_DESKTOP_APP?undefined:(desktop,args,terminal={})=>openDesktopInstaller(desktop,{...terminal,entry:fileURLToPath(import.meta.url),args,env:{...(discoveryOptions.env??process.env),DSH_DEPOT_SEARCH_PATHS:JSON.stringify(paths)}}),
   async locate(input){let value=input.trim().replace(/^([\"\'])(.*)\1$/,'$2');if(value.startsWith('~/'))value=path.join(os.homedir(),value.slice(2));if(!path.isAbsolute(value))fail('INVALID_PATH','请输入应用、DSH 安装或配置目录的完整路径');paths.push(value);return discover()},
   async inspect(args){const host=await selected(args.host);const inspection=await inspectArtifact({path:args.file,host,workDir:path.join(local(host.hostId),'imports')});const plan=await createOperationPlan({host,inspection,action:'install',acceptUnverified:args['accept-unverified']});plan.ownerId=host.ownerId;await atomicJson(path.join(storeDir,'plans',plan.planId+'.json'),plan);return {planId:plan.planId,hostId:host.hostId,packageName:plan.packageName,version:plan.version,previousVersion:plan.previousVersion,action:plan.action,warnings:inspection.warnings,requiresExit:plan.requiresExit,expiresAt:plan.expiresAt}},
   async execute(args){const plan=await readJson(path.join(storeDir,'plans',safeId(args.plan)+'.json'));const host=await selected(plan.hostId);if(args.host&&args.host!==host.hostId)fail('HOST_CHANGED','环境与预览不符');const refreshed=await probeHost(host);return executePlan(plan,{host:refreshed,adapter:adapterFor(host),storeDir:local(host.hostId),quiesced:args['host-exited']===true,signal:args.signal,onEvent:args.onEvent,onOutput:args.onOutput})},
@@ -69,7 +70,10 @@ function showOutcome(io,value){
 }
 export async function main(argv,{io,services}={}) {
  const controller=new AbortController(),stop=()=>controller.abort();process.once('SIGINT',stop);process.once('SIGTERM',stop)
+ const bridged=!io?desktopTerminalIo({onAbort:stop}):null
+ io??=bridged
  const rl=!io&&process.stdin.isTTY?createInterface({input:process.stdin,output:process.stdout}):null
+ rl?.once('close',stop)
  io??={isTTY:!!process.stdin.isTTY,write:s=>process.stdout.write(String(s)),ask:q=>rl.question(q,{signal:controller.signal})}
  let phase='',phaseStarted=0
  const showPhase=label=>{phase=label;phaseStarted=Date.now();io.write(label+'\n')}
@@ -95,7 +99,7 @@ export async function main(argv,{io,services}={}) {
     const apps=(found.desktop??[]).filter(d=>d.supported)
     if(preferred){host=preferred;break}
     if(desktops.length===1){host=desktops[0];break}
-    if(!desktops.length&&apps.length===1&&services.openDesktop){io.write(`使用应用自带 DSH：${apps[0].appPath}\n`);rl?.close();return await services.openDesktop(apps[0],args.file?['menu','--file',args.file]:['menu'])}
+    if(!desktops.length&&apps.length===1&&services.openDesktop){io.write(`使用应用自带 DSH：${apps[0].appPath}\n`);return await services.openDesktop(apps[0],args.file?['menu','--file',args.file]:['menu'],{io,signal:controller.signal})}
     if(!desktops.length&&!apps.length&&found.hosts.length===1){host=found.hosts[0];break}
     banner()
     for(const d of found.desktop??[])io.write(`已找到 DSH Desktop ${d.version}：${d.appPath}\n${d.supported?'可选择下面的桌面入口，使用应用自带的 DSH 与运行时。':'已找到桌面应用，但当前安装器不能向它安装插件；继续搜索或手填同一路径不会解除此限制。'}\n`)
@@ -112,7 +116,7 @@ export async function main(argv,{io,services}={}) {
      if(!input){io.write('路径为空，已返回选择菜单。\n');continue}
      try{await services.locate(input)}catch(e){if(!['INVALID_PATH','ENOENT','ENOTDIR','EACCES'].includes(e.code))throw e;io.write(`${e.code}: ${e.message}；请重新输入或退出。\n`)}continue
     }
-    if(selected.desktop&&!selected.hostId){rl?.close();return await services.openDesktop(selected.desktop,args.file?['menu','--file',args.file]:['menu'])}
+    if(selected.desktop&&!selected.hostId){return await services.openDesktop(selected.desktop,args.file?['menu','--file',args.file]:['menu'],{io,signal:controller.signal})}
     host=selected
    }
    banner()
@@ -132,6 +136,6 @@ export async function main(argv,{io,services}={}) {
   }
   const result=await (args.command==='inspect'?services.inspect(args):args.command==='status'?services.status(args):args.command==='recover'?(args.plan?services.recover(args):services.previewRecovery(args)):services.execute(args))
   io.write(JSON.stringify(publicResult(result),null,2)+'\n');return 0
- }catch(e){io.write(`${e.code??'MANAGER_FAILED'}: ${e.message}\n`);return 2}finally{clearInterval(heartbeat);rl?.close();process.removeListener('SIGINT',stop);process.removeListener('SIGTERM',stop)}
+ }catch(e){io.write(`${e.code??'MANAGER_FAILED'}: ${e.message}\n`);return 2}finally{clearInterval(heartbeat);rl?.removeListener('close',stop);rl?.close();bridged?.close();process.removeListener('SIGINT',stop);process.removeListener('SIGTERM',stop)}
 }
 if(process.argv[1]&&import.meta.url===pathToFileURL(process.argv[1]).href)process.exitCode=await main(process.argv.slice(2))

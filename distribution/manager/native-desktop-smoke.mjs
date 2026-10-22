@@ -2,6 +2,9 @@
 import path from 'node:path'
 import {fileURLToPath,pathToFileURL} from 'node:url'
 import {mkdir,readFile,writeFile} from 'node:fs/promises'
+import {runTerminalChild} from '../../plugins/dsh-depot-manager/bootstrap/terminal-bridge.mjs'
+import {runHostCommand} from '../../plugins/dsh-depot-manager/adapters/command.mjs'
+import * as tar from 'tar'
 import {spawn} from 'node:child_process'
 import {desktopAt} from '../../plugins/dsh-depot-manager/adapters/locate.mjs'
 import {probeHost,discoverEnvironments} from '../../plugins/dsh-depot-manager/adapters/discover.mjs'
@@ -46,7 +49,23 @@ export async function nativeDesktopSmoke(app,output){
   operations.push({action,state:op.state,error:op.error})
   if(!['awaiting_reload','succeeded'].includes(op.state))throw Error(JSON.stringify(op.error))
  }
- const report={schemaVersion:1,status:'passed',desktopVersion:desktop.version,dshVersion:host.version,target:host.target,runtime:host.runtime,managerSha256:await fileHash(archive),operations,coverage:'isolated-official-cli-install-reinstall-remove',ownership:elevatedCi?'unverified-elevated-ci-carrier-test':'passed',ui:'unverified',networkIsolation:'unverified',createdAt:new Date().toISOString()}
+ const lite=receipt.assets?.find(a=>a.flavor==='lite')
+ if(!lite)throw Error('Packaged lite installer required for terminal handoff regression')
+ const extraction=path.join(work,'bootstrap with spaces'),bundleArchive=path.join(output,lite.fileName)
+ await mkdir(extraction,{recursive:true})
+ if(process.platform==='win32'){
+  const r=await runHostCommand({executable:'python',args:['-c','import sys,zipfile;zipfile.ZipFile(sys.argv[1]).extractall(sys.argv[2])',bundleArchive,extraction],cwd:work})
+  if(r.exitCode)throw Error('Cannot extract installer: '+r.stderr)
+ }else await tar.x({file:bundleArchive,cwd:extraction})
+ const bundleRoot=path.join(extraction,lite.fileName.replace(/\.(?:tgz|zip)$/,'')),consoleNode=path.join(desktop.resources,'runtime/primary-runtime/dependencies/node/bin',process.platform==='win32'?'node.exe':'node')
+ const terminalOutput=[];let promptCount=0
+ const terminalCode=await runTerminalChild(consoleNode,[path.join(bundleRoot,'core.mjs'),'menu'],{
+  env:{...process.env,DSH_DEPOT_HOME:path.join(work,'toolkit-store')},
+  io:{isTTY:true,write:s=>terminalOutput.push(s),ask:async()=>{if(++promptCount>2)throw Error('Unexpected extra prompt');const text=terminalOutput.join('');if(text.includes('5. 恢复任务'))return 'q';const row=text.split('\n').find(l=>l.includes('DSH Desktop '+desktop.version+' / 使用应用自带 DSH'));const choice=row?.match(/^([0-9]+)\./)?.[1];if(!choice)throw Error('Expected Desktop or action menu');return choice}}
+ })
+ const terminalLog=terminalOutput.join('');await writeFile(path.join(work,'terminal-handoff.log'),terminalLog)
+ if(terminalCode!==0||!promptCount||!terminalLog.includes('使用应用自带 DSH')||!terminalLog.includes('5. 恢复任务')||terminalLog.includes('INPUT_REQUIRED'))throw Error('Packaged Node → Desktop terminal handoff failed: '+terminalLog)
+ const report={schemaVersion:1,status:'passed',desktopVersion:desktop.version,dshVersion:host.version,target:host.target,runtime:host.runtime,managerSha256:await fileHash(archive),operations,coverage:'isolated-official-cli-install-reinstall-remove-and-packaged-terminal-handoff',terminalHandoff:{status:'passed',prompts:promptCount,consoleOwner:'parent',childStdio:'ipc-without-tty'},ownership:elevatedCi?'unverified-elevated-ci-carrier-test':'passed',ui:'unverified',networkIsolation:'unverified',createdAt:new Date().toISOString()}
  await atomicJson(path.join(output,'native-desktop.json'),report)
  receipt.verification.nativeDesktop=report
  await atomicJson(path.join(output,'receipt.json'),receipt)
