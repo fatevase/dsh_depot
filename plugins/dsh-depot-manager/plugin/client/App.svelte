@@ -2,30 +2,45 @@
  import {onMount} from 'svelte'
  import ImportPanel from './ImportPanel.svelte'
  import InstalledPanel from './InstalledPanel.svelte'
- import ExportsPanel from './ExportsPanel.svelte'
- import {MANAGER_VERSION} from '../../contracts/constants.mjs'
+ import PluginDetail from './PluginDetail.svelte'
+ import Modal from './Modal.svelte'
  import OperationsPanel from './OperationsPanel.svelte'
- import {emptyState,reduceManagerState} from './state.mjs'
- let {client,initialState=emptyState()}=$props(),state=$state(initialState),busy=$state(false),error=$state(''),plan=$state(null),accepted=$state(false)
+ import {MANAGER_VERSION} from '../../contracts/constants.mjs'
+ import {emptyState,reduceManagerState,stateLabel} from './state.mjs'
+ import {pluginTitle} from './view.mjs'
+ import {prepareImports,installPrepared} from './import-flow.mjs'
+ let {client,initialState=emptyState()}=$props()
+ let state=$state(initialState),busy=$state(false),error=$state(''),notice=$state(''),dialog=$state(null),prepared=$state([]),preparing=$state(false),loadError=$state(''),loadPhase=$state('prepare'),loadResults=$state([])
+ let preparation=0,alive=true,refreshing=$state(false)
+ const selected=$derived(state.installed.find(x=>x.name===state.selection))
  const dispatch=event=>state=reduceManagerState(state,event)
- async function refresh(){const [host,installed,operations,exports]=await Promise.all([client.current(),client.installed(),client.operations(),client.exports?.()??[]]);dispatch({type:'host',value:host});dispatch({type:'installed',value:installed});dispatch({type:'operations',value:operations});dispatch({type:'exports',value:exports})}
+ async function refresh(){if(refreshing)return;refreshing=true;try{const [host,installed,operations,exports]=await Promise.all([client.current(),client.installed(),client.operations(),client.exports?.()??[]]);if(!alive)return;dispatch({type:'host',value:host});dispatch({type:'installed',value:installed});dispatch({type:'operations',value:operations});dispatch({type:'exports',value:exports})}finally{refreshing=false}}
  async function act(fn){if(busy)return;busy=true;error='';try{await fn()}catch(e){error=`${e.code??'操作失败'}：${e.message}`}finally{busy=false}}
- async function importGroups(groups,e){if(e){error=e.message;return}await act(async()=>{if(groups.length>20)throw new Error('每批最多 20 项');for(const files of groups){try{dispatch({type:'import',value:await client.importFiles(files)})}catch(e){dispatch({type:'import',value:{importId:crypto.randomUUID(),packageName:files[0]?.file.name??'导入项',blockers:[{code:e.code,message:e.message}],warnings:[],checks:{}}})}}})}
- async function preview(item){await act(async()=>{plan=await client.plan({action:'install',importId:item.importId,acceptUnverified:accepted})})}
- async function remove(item){await act(async()=>{plan=await client.plan({action:'remove',packageName:item.name,installedFingerprint:item.fingerprint})})}
+ function close(){dialog=null;preparation++;preparing=false}
+ function openLoad(){if(busy){dialog='load';return}preparation++;prepared=[];loadResults=[];loadError='';loadPhase='prepare';dialog='load'}
+ async function importGroups(groups,e){if(e){loadError=e.message;return}const generation=++preparation;preparing=true;loadError='';prepared=[];try{const items=await prepareImports(client,groups,items=>{if(generation===preparation)prepared=items});if(generation===preparation)prepared=items}catch(e){if(generation===preparation)loadError=e.message}finally{if(generation===preparation)preparing=false}}
+ async function confirmLoad(){if(busy||preparing)return;busy=true;loadError='';loadPhase='installing';try{loadResults=await installPrepared(client,prepared,op=>dispatch({type:'operation',value:op}));loadPhase='done';await refresh()}catch(e){loadError=`${e.code??'载入未完成'}：${e.message}`;loadPhase='prepare'}finally{busy=false}}
  async function exportPlugin(item){await act(async()=>{await client.createExport({packageName:item.name,installedFingerprint:item.fingerprint});await refresh()})}
- async function execute(){await act(async()=>{dispatch({type:'operation',value:await (plan.batchId?client.startBatch(plan.batchId):client.start(plan.planId))});plan=null;await refresh()})}
- onMount(()=>{if(!client)return;refresh().catch(e=>error=e.message);const timer=setInterval(()=>refresh().catch(()=>dispatch({type:'connection',value:'disconnected'})),2500);return()=>clearInterval(timer)})
+ function navigate(name){state.selection=name;if(typeof window!=='undefined')location.hash=name?'plugin='+encodeURIComponent(name):''}
+ onMount(()=>{if(!client)return;const route=()=>{const value=location.hash.slice(1);state.selection=value.startsWith('plugin=')?new URLSearchParams(value).get('plugin'):null};route();window.addEventListener('hashchange',route);refresh().catch(e=>error=e.message);const timer=setInterval(()=>refresh().catch(()=>dispatch({type:'connection',value:'disconnected'})),2500);return()=>{alive=false;clearInterval(timer);window.removeEventListener('hashchange',route)}})
 </script>
-<svelte:head><title>离线插件 · DSH</title></svelte:head>
-<div class="manager-shell"><header><a class="back" href="/">← 返回 DSH</a><div class="brand">DSH <span>/</span> 离线插件</div><span class="connection">{state.connection==='connected'?'已连接当前宿主':'正在读取宿主状态'}</span></header>
- <main><div class="intro"><div><span class="eyebrow">LOCAL PLUGIN MANAGER</span><h1>本机插件，有序管理。</h1><p>检查离线包，确认环境，再安装。每一步都留下可查看的记录。</p></div><span class="version">v{MANAGER_VERSION}</span></div>
- <section class="environment" aria-label="当前环境"><div><span class="eyebrow">当前环境</span><strong>{state.host?.profileName??'正在读取'}</strong></div><div><span>宿主</span><strong>{state.host?.kind??'—'} {state.host?.version??''}</strong></div><div><span>平台 / 运行时</span><strong>{state.host?.runtimeTarget??'—'} · Node {state.host?.runtime?.node??'—'}</strong></div><span class="badge neutral">仅管理此环境</span></section>
- {#if error}<p role="alert" class="error notice">{error}</p>{/if}
- <div class="workspace"><div class="primary"><ImportPanel onimport={importGroups} {busy}/>
- <section class="panel"><div class="section-title"><span class="number">02</span><h2>安装预览</h2></div>{#if state.imports.filter(i=>!i.blockers?.length).length>1}<button class="secondary" disabled={busy} onclick={()=>act(async()=>{plan=await client.batchPlan({importIds:state.imports.filter(i=>!i.blockers?.length).map(i=>i.importId),acceptUnverified:accepted})})}>批量预览 {state.imports.filter(i=>!i.blockers?.length).length} 项</button>{/if}{#if !state.imports.length}<p class="empty">导入后查看插件版本、完整性与验证状态。</p>{/if}
- {#each state.imports as item (item.importId)}<article class="import-row"><div class="list-row"><strong>{item.packageName} <small>{item.version??''}</small></strong><span class="badge" class:warning={!item.checks?.publication}>{item.blockers?.length?'已阻止':item.checks?.publication?'有对应验证证据':item.origin==='local-export'?'本机导出':'未验证包'}</span></div><p class="subtle">{item.target??'未声明平台'} · 文件完整性：{item.checks?.integrity?'已核对':'未提供包内清单'}</p>{#each item.warnings??[] as warning}<p class="warning-text">{warning.code} {warning.message??''}</p>{/each}{#each item.blockers??[] as blocker}<p class="error">{blocker.code} {blocker.message??''}</p>{/each}<button class="secondary" disabled={busy||!!item.blockers?.length} onclick={()=>preview(item)}>查看变更</button></article>{/each}
- {#if state.imports.some(x=>x.warnings?.length)}<label class="accept"><input type="checkbox" bind:checked={accepted}/>我已了解未验证条件，允许尝试可检查的包</label>{/if}
- {#if plan}<div class="plan"><h3>确认{plan.batchId?'批量安装':plan.action==='remove'?'卸载':plan.action==='replace'?'替换':'安装'} {plan.packageName??''}</h3>{#each plan.items??[] as item}<p>{item.packageName} · {item.version}</p>{/each}<p>目标：{state.host?.profileName} · {plan.previousVersion??'未安装'} → {plan.version??'移除'}</p><p>检查成品后直接调用目标 DSH 安装，不扫描或备份整个依赖目录。{plan.action==='remove'?'保留用户数据。':''}</p>{#if plan.requiresExit}<p class="warning-text">此宿主需退出后执行。确认后保存任务，再运行外部脚本继续。</p>{/if}<div class="actions"><button disabled={busy} onclick={execute}>{plan.requiresExit?'确认并保存任务':'确认安装'}</button><button class="secondary" onclick={()=>plan=null}>取消预览</button></div></div>{/if}
- </section><InstalledPanel items={state.installed} onremove={remove} onexport={exportPlugin} {busy}/></div><aside><ExportsPanel items={state.exports??[]} oncancel={id=>act(async()=>{await client.cancelExport(id);await refresh()})} {busy}/><OperationsPanel items={state.operations} oncancel={id=>act(()=>client.cancel(id))}/><div class="help"><strong>遇到中断时</strong>{#if state.host?.capabilities?.toolkitEntry}<p>外部维护入口：<code style="overflow-wrap:anywhere">{state.host.capabilities.toolkitEntry}</code></p>{:else}<p>尚未注册维护工具，请先运行安装脚本。</p>{/if}<p>重跑安装脚本可查看任务记录。常规安装完成后重启 DSH；恢复旧版完整恢复点前需退出。新安装不创建完整恢复点；旧版恢复点仍可恢复。等待加载不代表失败；不要反复安装同一份包。</p></div></aside></div>
- </main><footer>运行依赖来自离线包；插件的在线业务功能仍可能需要网络。</footer></div>
+<svelte:head><title>{selected?pluginTitle(selected)+' · ':''}插件 · DSH</title></svelte:head>
+<main class="manager-page">
+ {#if selected}<PluginDetail item={selected} host={state.host} exports={state.exports.filter(x=>x.packageName===selected.name)} {busy} onback={()=>navigate(null)} onexport={exportPlugin} oncancel={id=>act(async()=>{await client.cancelExport(id);await refresh()})}/>
+ {:else}<header class="page-head"><div><h1>插件</h1><p class="page-intro">载入和导出离线插件 <span title="在当前 DSH 环境中载入和导出离线插件">ⓘ</span></p></div><div class="toolbar"><button class="icon-button refresh-button" aria-label="刷新插件" disabled={refreshing||busy} onclick={()=>refresh().catch(e=>error=e.message)}><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M20 11a8 8 0 1 0-2 6M20 4v7h-7"/></svg></button><button class="load-button" disabled={busy&&loadPhase!=='installing'} onclick={openLoad}><span aria-hidden="true">＋</span> 载入插件</button></div></header>{/if}
+ {#if error}<p class="notice error" role="alert">{error}<button class="icon-button" aria-label="关闭错误" onclick={()=>error=''}>×</button></p>{/if}
+ {#if notice}<p class="notice" role="status">{notice}<button class="icon-button" aria-label="关闭提示" onclick={()=>notice=''}>×</button></p>{/if}
+ {#if state.connection==='disconnected'}<p class="notice warning-text" role="status">连接已断开，正在重新连接 DSH。显示的是上次读取的状态。</p>{/if}
+ {#if !selected}<InstalledPanel items={state.installed} onopen={item=>navigate(item.name)}/>{/if}
+ <footer class="page-footer"><a href="/">返回 DSH</a><span>离线插件管理器 {MANAGER_VERSION}</span><button class="text-button" onclick={()=>dialog='tasks'}>操作记录{#if state.operations.some(o=>['applying','queued','awaiting_reload','waiting_for_host_exit'].includes(o.state))}<span class="status-dot"></span>{/if}</button></footer>
+</main>
+{#if dialog==='load'}<Modal title="载入插件" onclose={close}>
+ {#if loadPhase==='prepare'}<ImportPanel onimport={importGroups} busy={preparing||busy}/>{#if preparing}<p class="subtle" role="status">正在准备插件…</p>{/if}
+ {#each prepared as item}<article class="prepared-item"><div class="list-row"><strong>{item.packageName}</strong><span class="subtle">{item.version??''}</span></div><p class="subtle">{item.target??'未声明平台'} · {item.blockers?.length?'无法载入':'已准备好'}</p>{#each item.warnings??[] as warning}<p class="warning-text">{warning.message??warning.code}</p>{/each}{#each item.blockers??[] as blocker}<p class="error">{blocker.message??blocker.code}</p>{/each}</article>{/each}
+ {#if prepared.length&&!prepared.some(i=>i.blockers?.length)}<p class="subtle">点击“确定”将安装以上插件；同名插件会被替换。请确认离线包来源可信。</p>{/if}
+ {:else if loadPhase==='installing'}<div class="loading-state" role="status"><span class="spinner"></span><h3>正在载入插件</h3><p class="subtle">关闭窗口后任务仍会继续，可在操作记录中查看。</p></div>
+ {:else}<div class="load-result">{#each loadResults as op}<p class:error={op.state==='failed'}><strong>{op.result?.packageName??'插件'}</strong> · {stateLabel(op.state)}</p>{#if op.error}<p class="error">{op.error.message}</p>{/if}{/each}<p class="subtle">等待加载的插件将在 DSH 重新加载或重启后生效。</p></div>{/if}
+ {#if loadError}<p role="alert" class="error notice">{loadError}</p>{/if}
+ {#snippet footer()}{#if loadPhase==='prepare'}<button class="secondary" onclick={close}>取消</button><button disabled={busy||preparing||!prepared.length||prepared.some(i=>i.blockers?.length)} onclick={confirmLoad}>确定</button>{:else}<button onclick={close}>关闭</button>{/if}{/snippet}
+ </Modal>
+{:else if dialog==='tasks'}<Modal title="操作记录" onclose={close}><OperationsPanel items={state.operations} oncancel={id=>act(async()=>{await client.cancel(id);await refresh()})}/>{#if state.host?.capabilities?.toolkitEntry}<details class="maintenance-entry"><summary>外部维护入口</summary><p class="subtle">{state.host.capabilities.toolkitEntry}</p></details>{/if}</Modal>{/if}

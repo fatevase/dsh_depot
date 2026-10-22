@@ -1,0 +1,15 @@
+{
+  "manager": "0.1.12",
+  "host": "0.2.1-rc.2",
+  "scope": "isolated-stock-web-host",
+  "checks": {
+    "inventory": true,
+    "prepareWithoutInstall": true,
+    "liveInstall": true,
+    "installedThirdPartyVisible": true,
+    "exportDownload": true
+  },
+  "inventoryCount": 1,
+  "exportedBytes": 2092,
+  "status": "passed"
+}

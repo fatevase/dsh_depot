@@ -47,3 +47,14 @@ test('host core dependencies also validate the installed source instance',async 
 test('disposing another service instance does not terminate this instance export',async t=>{
  const f=await exportFixture(t),a=createExportService(f),b=createExportService(f);t.after(()=>a.dispose());const job=await a.create({packageName:'fixture',installedFingerprint:bundleFingerprint(f.bundle)});await b.dispose();await waitFor(async()=>(await a.status(job.exportId)).state==='ready')
 })
+test('dispose waits for a retention cleanup that already started',async t=>{
+ const f=await exportFixture(t),service=createExportService({...f,cleanupIntervalMs:20});await service.list()
+ const original=fs.mkdir;let release,entered,held=false,ended=false
+ const blocked=new Promise(r=>entered=r),gate=new Promise(r=>release=r)
+ fs.mkdir=async function(file,...args){if(!held&&String(file)===path.join(f.dir,'exports/.retention/locks')){held=true;entered();await gate}return original.call(this,file,...args)};syncBuiltinESMExports()
+ let closing
+ try{
+  await Promise.race([blocked,new Promise((_,reject)=>setTimeout(()=>reject(Error('cleanup did not start')),2000))]);closing=service.dispose().then(()=>ended=true)
+  await Promise.race([closing,new Promise(r=>setTimeout(r,80))]);assert.equal(ended,false,'dispose must wait until the already-started cleanup finishes')
+ }finally{release();fs.mkdir=original;syncBuiltinESMExports();await closing;await service.dispose()}
+})

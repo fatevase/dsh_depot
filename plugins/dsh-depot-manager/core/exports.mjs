@@ -79,7 +79,7 @@ export function createExportService({host,ownerId,storeDir,listBundles,resolveBu
    }
   }finally{pumping=false}
  }
- const cleanupTimer=setInterval(()=>initialized.then(()=>prune()).catch(()=>{}),cleanupIntervalMs);cleanupTimer.unref()
+ const cleanupTimer=setInterval(()=>enqueue(async()=>{await initialized;if(!disposed)await prune()}).catch(()=>{}),cleanupIntervalMs);cleanupTimer.unref()
  const service={
   async create({packageName,installedFingerprint,...extra}){
    await initialized;return enqueue(async()=>{

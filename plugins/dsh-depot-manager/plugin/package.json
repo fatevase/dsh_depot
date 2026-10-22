@@ -1,6 +1,6 @@
 {
   "name": "dsh-depot-manager",
-  "version": "0.1.11",
+  "version": "0.1.12",
   "type": "module",
   "description": "在 DSH 中导入、安装和移除离线插件，保留用户数据。",
   "license": "MIT",
