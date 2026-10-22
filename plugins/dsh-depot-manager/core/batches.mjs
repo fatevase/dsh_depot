@@ -15,7 +15,7 @@ export async function createBatch({host,inspections,acceptUnverified=false,owner
  const items=[];for(const inspection of inspections){const p=await createOperationPlan({host,inspection,action:'install',acceptUnverified,execution});items.push({inspection,sha256:p.packageSha256})}
  const batch={schemaVersion:1,execution,batchId:randomUUID(),hostId:host.hostId,ownerId,hostIdentity:identity(host),beforeFingerprint:await fingerprint({execution},host.profileDir),items,expiresAt:Date.now()+LIMITS.planTtlMs,acceptedAt:null,next:0,results:[],activePlan:null}
  await atomicJson(batchFile(storeDir,batch.batchId),batch)
- return{batchId:batch.batchId,hostId:batch.hostId,expiresAt:batch.expiresAt,items:items.map(({inspection:i})=>({packageName:i.packageName,version:i.version,sha256:i.sha256,warnings:i.warnings})),requiresExit:execution==='snapshot'}
+ return{batchId:batch.batchId,hostId:batch.hostId,expiresAt:batch.expiresAt,items:items.map(({inspection:i})=>({packageName:i.packageName,version:i.version,sha256:i.sha256,warnings:i.warnings})),requiresExit:execution==='snapshot'||host.desktop?.layout==='bundled-cli'}
 }
 export async function startBatch(id,{host,storeDir}){
  return withManagerLock(storeDir,host.hostId,async()=>{

@@ -6,6 +6,11 @@ import {fail} from '../contracts/constants.mjs'
 const exists=async file=>{try{await access(file);return true}catch{return false}}
 // The installation owns both the pnpm version and its launch/recovery wrapper.
 export async function desktopPackageManager(desktop,{nodePath}={}){
+ if(desktop.layout==='bundled-cli'){
+  const entry=path.join(desktop.resources,'runtime/primary-runtime/dependencies/pnpm/bin/pnpm.mjs')
+  if(!await exists(entry))fail('HOST_PACKAGE_MANAGER_UNAVAILABLE','Desktop 自带的 pnpm 不完整，请修复 Desktop')
+  return{command:nodePath,args:['--expose-internals',entry],env:{ELECTRON_RUN_AS_NODE:'1',DSH_DESKTOP_NODE_EXECUTABLE:nodePath,PATH:path.join(desktop.resources,'runtime/bin')+path.delimiter+(process.env.PATH??process.env.Path??'')}}
+ }
  const bin=path.join(desktop.runtimeRoot,'node_modules/pnpm/bin')
  let entry
  for(const name of ['pnpm.cjs','pnpm.mjs'])if(await exists(path.join(bin,name))){entry=path.join(bin,name);break}
@@ -19,5 +24,6 @@ export async function desktopPackageManager(desktop,{nodePath}={}){
  return invocation
 }
 export function desktopPnpmEnvironment(packageManager){
+ if(packageManager.env?.DSH_DESKTOP_NODE_EXECUTABLE)return {...packageManager.env}
  return {...packageManager.env,DSH_DESKTOP_PNPM_ENTRY:packageManager.args.at(-1),DSH_DESKTOP_PNPM_RUNNER:packageManager.args.at(-2)}
 }

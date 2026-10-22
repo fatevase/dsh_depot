@@ -8,7 +8,16 @@
       "target": "macos-arm64",
       "evidence": "docs/evidence/offline-manager-desktop-2026-10-19/report.json",
       "validation": "isolated-profile-and-authenticated-page"
+    },
+    {
+      "kind": "official-desktop",
+      "desktopVersion": "0.2.1-rc.2",
+      "dshVersion": "0.2.1-rc.2",
+      "target": "macos-arm64",
+      "evidence": "docs/evidence/desktop-native-entry-2026-10-22/report.json",
+      "validation": "isolated-official-cli-install-reinstall-remove",
+      "ui": "unverified"
     }
   ],
-  "note": "Other Desktop versions/platforms remain unavailable; installer releases remain preview until complete matrix acceptance."
+  "note": "Official Desktop bundled CLI and legacy web layouts are separate. Windows runs actual bundled CLI regression in Actions; UI, normal-user Windows ownership and complete native acceptance remain unverified. Installer releases remain preview."
 }
