@@ -56,7 +56,7 @@
           }
         },
         {
-          "run": "npm ci --ignore-scripts --registry=https://registry.npmjs.org"
+          "run": "npm ci --ignore-scripts --registry=https://registry.npmjs.org --no-audit --no-fund"
         },
         {
           "run": "node distribution/candidate-downloads.mjs",
