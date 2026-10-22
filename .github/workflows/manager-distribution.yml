@@ -94,7 +94,7 @@
           }
         },
         {
-          "run": "npm ci --ignore-scripts --registry=https://registry.npmjs.org"
+          "run": "npm ci --ignore-scripts --registry=https://registry.npmjs.org --no-audit --no-fund"
         },
         {
           "run": "npm run manager:test && node --test distribution/test/manager-*.test.mjs"
@@ -146,7 +146,7 @@
           }
         },
         {
-          "run": "npm ci --ignore-scripts --registry=https://registry.npmjs.org"
+          "run": "npm ci --ignore-scripts --registry=https://registry.npmjs.org --no-audit --no-fund"
         },
         {
           "uses": "actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333",

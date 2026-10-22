@@ -56,3 +56,17 @@ test('PR updates run once instead of duplicating native matrices on a branch pus
   assert.ok(w.on.pull_request)
  }
 })
+
+test('CI dependency lock uses the official registry for tarball downloads',async()=>{
+ const lock=JSON.parse(await readFile(new URL('../../package-lock.json',import.meta.url)))
+ for(const [name,pkg]of Object.entries(lock.packages))if(pkg.resolved?.startsWith('https://'))assert.equal(new URL(pkg.resolved).hostname,'registry.npmjs.org',name)
+})
+
+test('native matrices avoid repeated advisory calls while pipeline test installation retains its audit',async()=>{
+ for(const name of ['plugin-distribution','manager-distribution','candidate-builds']){
+  const w=JSON.parse(await readFile(new URL(`../../.github/workflows/${name}.yml`,import.meta.url)))
+  const install=w.jobs.build.steps.find(s=>s.run?.startsWith('npm ci '))
+  assert.ok(install.run.includes('--no-audit'),name)
+  if(w.jobs.test){const check=w.jobs.test.steps.find(s=>s.run?.startsWith('npm ci '));assert.ok(!check.run.includes('--no-audit'),name)}
+ }
+})
