@@ -180064,7 +180064,7 @@
   ],
   "candidateReport": {
     "schemaVersion": 1,
-    "projectionVersion": 2,
+    "projectionVersion": 3,
     "runId": 39387441493,
     "runAttempt": 1,
     "runUrl": "https://github.com/fatevase/dsh_depot/actions/runs/39387441493",
@@ -180080,9 +180080,13 @@
         "repository": "Ebony-Vinyl/dsh-our-free-model",
         "npmName": "dsh-our-free-model",
         "commit": "5923ebef0f55578ca21bb5555b7ba5adb51aef21",
+        "runId": 39387441493,
+        "runAttempt": 1,
         "runUrl": "https://github.com/fatevase/dsh_depot/actions/runs/39387441493",
         "results": {
           "macos-arm64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T07:36:27.723Z",
@@ -180132,6 +180136,8 @@
             ]
           },
           "linux-x64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T07:36:13.468Z",
@@ -180181,6 +180187,8 @@
             ]
           },
           "win32-x64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T07:36:37.297Z",
@@ -180236,9 +180244,13 @@
         "repository": "zhu1090093659/dsh-web",
         "npmName": "dsh-web",
         "commit": "5deb54d4a9af44e2500d94cfd453bb1fe95e51cd",
+        "runId": 39387441493,
+        "runAttempt": 1,
         "runUrl": "https://github.com/fatevase/dsh_depot/actions/runs/39387441493",
         "results": {
           "macos-arm64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T07:36:36.571Z",
@@ -180943,6 +180955,8 @@
             ]
           },
           "linux-x64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T07:36:21.075Z",
@@ -181647,6 +181661,8 @@
             ]
           },
           "win32-x64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T07:36:50.021Z",
@@ -182357,9 +182373,13 @@
         "repository": "YuJunZhiXue/dsh-purge",
         "npmName": "dsh-purge",
         "commit": "8df4406a7c5bddc01091ed20608417390cb457ee",
+        "runId": 39387441493,
+        "runAttempt": 1,
         "runUrl": "https://github.com/fatevase/dsh_depot/actions/runs/39387441493",
         "results": {
           "macos-arm64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T07:38:17.288Z",
@@ -182442,6 +182462,8 @@
             ]
           },
           "linux-x64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T07:37:48.105Z",
@@ -182524,6 +182546,8 @@
             ]
           },
           "win32-x64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T07:38:09.632Z",
@@ -182612,9 +182636,13 @@
         "repository": "yjh051108/dsh-routing-suite",
         "npmName": "@dsh-external/dsh-super-injector",
         "commit": "195273352f23bff7f9023ebe2ec0cdbdf9c98f10",
+        "runId": 39387441493,
+        "runAttempt": 1,
         "runUrl": "https://github.com/fatevase/dsh_depot/actions/runs/39387441493",
         "results": {
           "macos-arm64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T07:38:20.171Z",
@@ -182702,6 +182730,8 @@
             ]
           },
           "linux-x64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T07:37:49.698Z",
@@ -182789,6 +182819,8 @@
             ]
           },
           "win32-x64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T07:38:11.995Z",
@@ -182882,9 +182914,13 @@
         "repository": "superdesigndev/treg",
         "npmName": "treg-dsh",
         "commit": "6299e73b0064b0995f4b7f4f73e420c7cca80f4b",
+        "runId": 39387441493,
+        "runAttempt": 1,
         "runUrl": "https://github.com/fatevase/dsh_depot/actions/runs/39387441493",
         "results": {
           "macos-arm64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T07:38:30.045Z",
@@ -183017,6 +183053,8 @@
             ]
           },
           "linux-x64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T07:37:57.568Z",
@@ -183149,6 +183187,8 @@
             ]
           },
           "win32-x64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T07:38:20.961Z",
@@ -183287,9 +183327,13 @@
         "repository": "MeteorNOX/DeepSeek-Balance-Whale-Widget",
         "npmName": "dsh-whale-widget",
         "commit": "5247dd6813d6e4430728f39ccc63d43cda046022",
+        "runId": 39387441493,
+        "runAttempt": 1,
         "runUrl": "https://github.com/fatevase/dsh_depot/actions/runs/39387441493",
         "results": {
           "macos-arm64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T07:38:49.597Z",
@@ -183333,6 +183377,8 @@
             ]
           },
           "linux-x64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T07:38:54.602Z",
@@ -183376,6 +183422,8 @@
             ]
           },
           "win32-x64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T07:39:26.938Z",
@@ -183425,9 +183473,13 @@
         "repository": "ccch1mneyyy/dsh-TUI",
         "npmName": "@deepseek-harness-tui/dsh-tui",
         "commit": "75954c04c3bdd43010f24d7f1d58ac5f3d94472f",
+        "runId": 39387441493,
+        "runAttempt": 1,
         "runUrl": "https://github.com/fatevase/dsh_depot/actions/runs/39387441493",
         "results": {
           "macos-arm64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T07:38:57.808Z",
@@ -183594,6 +183646,8 @@
             ]
           },
           "linux-x64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T07:39:01.505Z",
@@ -183760,6 +183814,8 @@
             ]
           },
           "win32-x64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T07:39:39.413Z",
@@ -183932,9 +183988,13 @@
         "repository": "liustack/modlens",
         "npmName": "@liustack/modlens",
         "commit": "aa108d1796e3c4b5a6790516e2fcde87a35b189f",
+        "runId": 39387441493,
+        "runAttempt": 1,
         "runUrl": "https://github.com/fatevase/dsh_depot/actions/runs/39387441493",
         "results": {
           "macos-arm64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T07:40:51.707Z",
@@ -184027,6 +184087,8 @@
             ]
           },
           "linux-x64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T07:39:59.728Z",
@@ -184119,6 +184181,8 @@
             ]
           },
           "win32-x64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T07:41:19.175Z",
@@ -184217,9 +184281,13 @@
         "repository": "omdsh-dev/DSH-better-sidebar",
         "npmName": "dsh-better-sidebar",
         "commit": "83faf70940160e5cd4c5332f5400aa8f4dbbb6d6",
+        "runId": 39387441493,
+        "runAttempt": 1,
         "runUrl": "https://github.com/fatevase/dsh_depot/actions/runs/39387441493",
         "results": {
           "macos-arm64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T07:41:05.300Z",
@@ -184358,6 +184426,8 @@
             ]
           },
           "linux-x64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T07:40:08.900Z",
@@ -184496,6 +184566,8 @@
             ]
           },
           "win32-x64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T07:41:34.458Z",
@@ -184640,9 +184712,13 @@
         "repository": "QingYunA/answer-me-with-html",
         "npmName": "answer-me-with-html",
         "commit": "659aefe9072c0d6493a840a5f4d9df7027094160",
+        "runId": 39387441493,
+        "runAttempt": 1,
         "runUrl": "https://github.com/fatevase/dsh_depot/actions/runs/39387441493",
         "results": {
           "macos-arm64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T07:41:39.606Z",
@@ -184729,6 +184805,8 @@
             ]
           },
           "linux-x64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T07:40:26.330Z",
@@ -184815,6 +184893,8 @@
             ]
           },
           "win32-x64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T07:42:05.580Z",
@@ -184907,9 +184987,13 @@
         "repository": "T-Auto/dsh-ops",
         "npmName": "dsh-ops",
         "commit": "34ba06f542af5a7feaca49fe5d9b6cd97b86293e",
+        "runId": 39387441493,
+        "runAttempt": 1,
         "runUrl": "https://github.com/fatevase/dsh_depot/actions/runs/39387441493",
         "results": {
           "macos-arm64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T07:41:15.918Z",
@@ -185040,6 +185124,8 @@
             ]
           },
           "linux-x64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T07:42:12.609Z",
@@ -185170,6 +185256,8 @@
             ]
           },
           "win32-x64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T07:42:58.867Z",
@@ -185306,9 +185394,13 @@
         "repository": "Minglink/dsh-infinite-gen-5",
         "npmName": "dsh-infinite-gen-5",
         "commit": "2baed0fadba511a16bc695114e2f6ce1adaff067",
+        "runId": 39387441493,
+        "runAttempt": 1,
         "runUrl": "https://github.com/fatevase/dsh_depot/actions/runs/39387441493",
         "results": {
           "macos-arm64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T07:41:28.084Z",
@@ -185354,6 +185446,8 @@
             ]
           },
           "linux-x64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T07:42:20.130Z",
@@ -185399,6 +185493,8 @@
             ]
           },
           "win32-x64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T07:43:12.561Z",
@@ -185450,9 +185546,13 @@
         "repository": "bowenliang123/dsh-context",
         "npmName": "dsh-context",
         "commit": "1bc481c8f1d73b65d2710ede2b0dd3f6af7c5c6d",
+        "runId": 39387441493,
+        "runAttempt": 1,
         "runUrl": "https://github.com/fatevase/dsh_depot/actions/runs/39387441493",
         "results": {
           "macos-arm64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T07:41:38.803Z",
@@ -185554,6 +185654,8 @@
             ]
           },
           "linux-x64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T07:42:30.030Z",
@@ -185655,6 +185757,8 @@
             ]
           },
           "win32-x64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T07:43:24.922Z",
@@ -185762,9 +185866,13 @@
         "repository": "NanmiCoder/dsh-agent-teams",
         "npmName": "@nanmicoder/dsh-agent-teams",
         "commit": "673549cbe254afbb56a0e26a34008e3d000690be",
+        "runId": 39387441493,
+        "runAttempt": 1,
         "runUrl": "https://github.com/fatevase/dsh_depot/actions/runs/39387441493",
         "results": {
           "macos-arm64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T07:41:54.888Z",
@@ -185876,6 +185984,8 @@
             ]
           },
           "linux-x64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T07:42:37.551Z",
@@ -185987,6 +186097,8 @@
             ]
           },
           "win32-x64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T07:43:40.747Z",
@@ -186104,9 +186216,13 @@
         "repository": "xmanrui/dsh-im",
         "npmName": "@xmanrui/dsh-im",
         "commit": "0b9cbc24b60a9218820a10ed1f9c8fe913aa23c5",
+        "runId": 39387441493,
+        "runAttempt": 1,
         "runUrl": "https://github.com/fatevase/dsh_depot/actions/runs/39387441493",
         "results": {
           "macos-arm64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T07:42:22.993Z",
@@ -186208,6 +186324,8 @@
             ]
           },
           "linux-x64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T07:42:50.617Z",
@@ -186309,6 +186427,8 @@
             ]
           },
           "win32-x64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T07:44:06.933Z",
@@ -186416,9 +186536,13 @@
         "repository": "shaobeichen/dsh-pocket",
         "npmName": "dsh-pocket",
         "commit": "aee3ae7e97516206049394c7a37dc38778ffb6da",
+        "runId": 39387441493,
+        "runAttempt": 1,
         "runUrl": "https://github.com/fatevase/dsh_depot/actions/runs/39387441493",
         "results": {
           "macos-arm64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T07:43:12.415Z",
@@ -186505,6 +186629,8 @@
             ]
           },
           "linux-x64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T07:43:25.299Z",
@@ -186591,6 +186717,8 @@
             ]
           },
           "win32-x64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T07:44:46.106Z",
@@ -186683,9 +186811,13 @@
         "repository": "ranxianglei/billion-context",
         "npmName": "billion-context",
         "commit": "5121f45f81f1c7b41891875950f18b3f15dfb33c",
+        "runId": 39387441493,
+        "runAttempt": 1,
         "runUrl": "https://github.com/fatevase/dsh_depot/actions/runs/39387441493",
         "results": {
           "macos-arm64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T07:43:17.179Z",
@@ -186769,6 +186901,8 @@
             ]
           },
           "linux-x64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T07:43:30.593Z",
@@ -186852,6 +186986,8 @@
             ]
           },
           "win32-x64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T07:44:54.888Z",
@@ -186941,9 +187077,13 @@
         "repository": "kenryu42/cc-safety-net",
         "npmName": "cc-safety-net",
         "commit": "c696ca1aaa82728840f3d1958e3a0fb2208b26b1",
+        "runId": 39387441493,
+        "runAttempt": 1,
         "runUrl": "https://github.com/fatevase/dsh_depot/actions/runs/39387441493",
         "results": {
           "macos-arm64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T07:43:44.764Z",
@@ -186990,6 +187130,8 @@
             ]
           },
           "linux-x64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T07:43:59.190Z",
@@ -187036,6 +187178,8 @@
             ]
           },
           "win32-x64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T07:45:27.840Z",
@@ -187088,9 +187232,13 @@
         "repository": "elysia395/dsh-wallpaper-engine",
         "npmName": "dsh-plugin-wallpaper-engine",
         "commit": "01fbb8b8e66fd7e405e9c878d18dbd456187f111",
+        "runId": 39387441493,
+        "runAttempt": 1,
         "runUrl": "https://github.com/fatevase/dsh_depot/actions/runs/39387441493",
         "results": {
           "macos-arm64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T07:43:46.673Z",
@@ -187181,6 +187329,8 @@
             ]
           },
           "linux-x64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T07:44:00.528Z",
@@ -187271,6 +187421,8 @@
             ]
           },
           "win32-x64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T07:45:29.312Z",
@@ -187367,9 +187519,13 @@
         "repository": "GanyuanRan/Aegis",
         "npmName": "aegis",
         "commit": "28dfb41e4d08239c6b47c6425396c81cdd10601e",
+        "runId": 39387441493,
+        "runAttempt": 1,
         "runUrl": "https://github.com/fatevase/dsh_depot/actions/runs/39387441493",
         "results": {
           "macos-arm64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T07:43:54.064Z",
@@ -187417,6 +187573,8 @@
             ]
           },
           "linux-x64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T07:44:05.670Z",
@@ -187464,6 +187622,8 @@
             ]
           },
           "win32-x64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T07:45:33.963Z",
@@ -187517,9 +187677,13 @@
         "repository": "corrinehu/dsh-workbuddy-connect",
         "npmName": "dsh-workbuddy-connect",
         "commit": "f1e22c4854f1aa8007e3ec58759bfe3616504a2a",
+        "runId": 39387441493,
+        "runAttempt": 1,
         "runUrl": "https://github.com/fatevase/dsh_depot/actions/runs/39387441493",
         "results": {
           "macos-arm64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T07:44:43.773Z",
@@ -187618,6 +187782,8 @@
             ]
           },
           "linux-x64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T07:44:43.022Z",
@@ -187716,6 +187882,8 @@
             ]
           },
           "win32-x64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T07:46:04.877Z",
@@ -187820,9 +187988,13 @@
         "repository": "vshulcz/deja-vu",
         "npmName": "dsh-deja",
         "commit": "4512c01dee0b59fecfb5568552ec894d78cb71a2",
+        "runId": 39387441493,
+        "runAttempt": 1,
         "runUrl": "https://github.com/fatevase/dsh_depot/actions/runs/39387441493",
         "results": {
           "macos-arm64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T07:44:57.033Z",
@@ -187868,6 +188040,8 @@
             ]
           },
           "linux-x64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T07:44:52.313Z",
@@ -187913,6 +188087,8 @@
             ]
           },
           "win32-x64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T07:46:15.906Z",
@@ -187964,9 +188140,13 @@
         "repository": "ysr666/dsh-vision-router",
         "npmName": "dsh-vision-router",
         "commit": "14760a6c5052234724c732330eb7341be0c42318",
+        "runId": 39387441493,
+        "runAttempt": 1,
         "runUrl": "https://github.com/fatevase/dsh_depot/actions/runs/39387441493",
         "results": {
           "macos-arm64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T07:45:03.794Z",
@@ -188064,6 +188244,8 @@
             ]
           },
           "linux-x64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T07:44:59.452Z",
@@ -188161,6 +188343,8 @@
             ]
           },
           "win32-x64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T07:46:26.609Z",
@@ -188264,9 +188448,13 @@
         "repository": "Miaotofu01/Study-Mate",
         "npmName": "@yunmiao/studymate",
         "commit": "a3d6a700dc660954bb2bd8ffeec46ea500ad09dd",
+        "runId": 39387441493,
+        "runAttempt": 1,
         "runUrl": "https://github.com/fatevase/dsh_depot/actions/runs/39387441493",
         "results": {
           "macos-arm64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T07:45:15.261Z",
@@ -188310,6 +188498,8 @@
             ]
           },
           "linux-x64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T07:45:09.901Z",
@@ -188353,6 +188543,8 @@
             ]
           },
           "win32-x64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T07:46:35.828Z",
@@ -188402,9 +188594,13 @@
         "repository": "Anionex/dsh-vision-toolkit",
         "npmName": "@anionex/dsh-vision-toolkit",
         "commit": "18a05b12dca54ce74538bd7d8b921491bb0d7f6a",
+        "runId": 39387441493,
+        "runAttempt": 1,
         "runUrl": "https://github.com/fatevase/dsh_depot/actions/runs/39387441493",
         "results": {
           "macos-arm64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T07:45:22.893Z",
@@ -188541,6 +188737,8 @@
             ]
           },
           "linux-x64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T07:45:16.073Z",
@@ -188677,6 +188875,8 @@
             ]
           },
           "win32-x64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T07:46:44.436Z",
@@ -188819,9 +189019,13 @@
         "repository": "toby-bridges/api-relay-audit",
         "npmName": "dsh-api-relay-audit",
         "commit": "390de58b83f8e3a7b6c54944c78eae286238dbf5",
+        "runId": 39387441493,
+        "runAttempt": 1,
         "runUrl": "https://github.com/fatevase/dsh_depot/actions/runs/39387441493",
         "results": {
           "macos-arm64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T07:46:14.280Z",
@@ -188872,6 +189076,8 @@
             ]
           },
           "linux-x64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T07:46:03.921Z",
@@ -188922,6 +189128,8 @@
             ]
           },
           "win32-x64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T07:47:34.852Z",
@@ -188978,9 +189186,13 @@
         "repository": "LiPu-jpg/Openwrite",
         "npmName": "dsh-openwrite",
         "commit": "c662440f351436e666b6f996d3bdb3274f351b31",
+        "runId": 39387441493,
+        "runAttempt": 1,
         "runUrl": "https://github.com/fatevase/dsh_depot/actions/runs/39387441493",
         "results": {
           "macos-arm64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T07:46:15.728Z",
@@ -189158,6 +189370,8 @@
             ]
           },
           "linux-x64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T07:46:04.773Z",
@@ -189335,6 +189549,8 @@
             ]
           },
           "win32-x64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T07:47:36.857Z",
@@ -189518,9 +189734,13 @@
         "repository": "liustack/modsearch",
         "npmName": "@liustack/modsearch",
         "commit": "df0cf76aea06d31ca07c06322b0c7ad47b6d3a6a",
+        "runId": 39387441493,
+        "runAttempt": 1,
         "runUrl": "https://github.com/fatevase/dsh_depot/actions/runs/39387441493",
         "results": {
           "macos-arm64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T07:47:40.864Z",
@@ -189613,6 +189833,8 @@
             ]
           },
           "linux-x64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T07:47:15.793Z",
@@ -189705,6 +189927,8 @@
             ]
           },
           "win32-x64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T07:49:05.740Z",
@@ -189803,9 +190027,13 @@
         "repository": "SeaOf0/dsh-redteam-model",
         "npmName": "@dsh-external/dsh-redteam-model",
         "commit": "85516202beaad3b1abdb277f606a1ea385c32833",
+        "runId": 39387441493,
+        "runAttempt": 1,
         "runUrl": "https://github.com/fatevase/dsh_depot/actions/runs/39387441493",
         "results": {
           "macos-arm64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T07:47:47.415Z",
@@ -189894,6 +190122,8 @@
             ]
           },
           "linux-x64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T07:47:20.964Z",
@@ -189982,6 +190212,8 @@
             ]
           },
           "win32-x64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T07:49:11.545Z",
@@ -190076,9 +190308,13 @@
         "repository": "zhoushoujianwork/easyeda-agent",
         "npmName": "easyeda-agent-dsh",
         "commit": "7cde1ae1769d3e8c50fd9ada43f9bcc166d69d70",
+        "runId": 39387441493,
+        "runAttempt": 1,
         "runUrl": "https://github.com/fatevase/dsh_depot/actions/runs/39387441493",
         "results": {
           "macos-arm64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T07:47:59.688Z",
@@ -190124,6 +190360,8 @@
             ]
           },
           "linux-x64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T07:47:30.108Z",
@@ -190169,6 +190407,8 @@
             ]
           },
           "win32-x64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T07:49:23.296Z",
@@ -190220,9 +190460,13 @@
         "repository": "Nagi-ovo/dsh-ads",
         "npmName": "@nagi-ovo/dsh-ads",
         "commit": "a5854a37bbe24078878740ae4567e59cc75c29ec",
+        "runId": 39387441493,
+        "runAttempt": 1,
         "runUrl": "https://github.com/fatevase/dsh_depot/actions/runs/39387441493",
         "results": {
           "macos-arm64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T07:48:05.320Z",
@@ -190314,6 +190558,8 @@
             ]
           },
           "linux-x64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T07:48:36.890Z",
@@ -190405,6 +190651,8 @@
             ]
           },
           "win32-x64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T07:50:11.342Z",
@@ -190502,9 +190750,13 @@
         "repository": "adoresever/graph-memory",
         "npmName": "graph-memory",
         "commit": "5841b1987c3967998818764c9d4238add5f3aa7c",
+        "runId": 39387441493,
+        "runAttempt": 1,
         "runUrl": "https://github.com/fatevase/dsh_depot/actions/runs/39387441493",
         "results": {
           "macos-arm64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T07:48:15.818Z",
@@ -190591,6 +190843,8 @@
             ]
           },
           "linux-x64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T07:48:48.292Z",
@@ -190677,6 +190931,8 @@
             ]
           },
           "win32-x64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T07:50:26.077Z",
@@ -190769,9 +191025,13 @@
         "repository": "sandbaseai/sandbase-harness",
         "npmName": "managed-agents",
         "commit": "427b52a96a5309ca23268407f85c237468ab6a4e",
+        "runId": 39387441493,
+        "runAttempt": 1,
         "runUrl": "https://github.com/fatevase/dsh_depot/actions/runs/39387441493",
         "results": {
           "macos-arm64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T07:48:24.998Z",
@@ -190868,6 +191128,8 @@
             ]
           },
           "linux-x64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T07:48:57.425Z",
@@ -190964,6 +191226,8 @@
             ]
           },
           "win32-x64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T07:50:37.372Z",
@@ -191066,9 +191330,13 @@
         "repository": "mnemon-dev/mnemon",
         "npmName": "@mnemon-dev/dsh-mnemon",
         "commit": "fa74871bb2811b24acb6dfd637abdbd36a12149c",
+        "runId": 39387441493,
+        "runAttempt": 1,
         "runUrl": "https://github.com/fatevase/dsh_depot/actions/runs/39387441493",
         "results": {
           "macos-arm64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T07:49:19.448Z",
@@ -191114,6 +191382,8 @@
             ]
           },
           "linux-x64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T07:49:38.183Z",
@@ -191159,6 +191429,8 @@
             ]
           },
           "win32-x64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T07:51:15.822Z",
@@ -191210,9 +191482,13 @@
         "repository": "omdsh-dev/dsh-genui",
         "npmName": "@changfenhuang/dsh-genui",
         "commit": "e64819af5968cf98e8bd28fd72a1cda977309214",
+        "runId": 39387441493,
+        "runAttempt": 1,
         "runUrl": "https://github.com/fatevase/dsh_depot/actions/runs/39387441493",
         "results": {
           "macos-arm64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T07:49:26.173Z",
@@ -191324,6 +191600,8 @@
             ]
           },
           "linux-x64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T07:49:43.810Z",
@@ -191435,6 +191713,8 @@
             ]
           },
           "win32-x64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T07:51:24.838Z",
@@ -191552,9 +191832,13 @@
         "repository": "shanliuling/dsh-image-gen",
         "npmName": "dsh-image-gen",
         "commit": "a961b7f476af651736afa6ab42b795c8e0aa9dc7",
+        "runId": 39387441493,
+        "runAttempt": 1,
         "runUrl": "https://github.com/fatevase/dsh_depot/actions/runs/39387441493",
         "results": {
           "macos-arm64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T07:50:27.680Z",
@@ -191648,6 +191932,8 @@
             ]
           },
           "linux-x64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T07:50:28.490Z",
@@ -191741,6 +192027,8 @@
             ]
           },
           "win32-x64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T07:52:29.106Z",
@@ -191840,9 +192128,13 @@
         "repository": "howmp/dsh-pentest",
         "npmName": "@howmp/dsh-pentest",
         "commit": "f518e8f48405a9f99a4fa15d9b77bdac7bc52838",
+        "runId": 39387441493,
+        "runAttempt": 1,
         "runUrl": "https://github.com/fatevase/dsh_depot/actions/runs/39387441493",
         "results": {
           "macos-arm64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T07:51:06.025Z",
@@ -191896,6 +192188,8 @@
             ]
           },
           "linux-x64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T07:50:54.634Z",
@@ -191949,6 +192243,8 @@
             ]
           },
           "win32-x64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T07:53:07.071Z",
@@ -192008,9 +192304,13 @@
         "repository": "omdsh-dev/dsh-mnemon",
         "npmName": "dsh-mnemon",
         "commit": "434f58c20a894cdd26bca9d3e91c26fc95cfb897",
+        "runId": 39387441493,
+        "runAttempt": 1,
         "runUrl": "https://github.com/fatevase/dsh_depot/actions/runs/39387441493",
         "results": {
           "macos-arm64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T07:51:08.408Z",
@@ -192126,6 +192426,8 @@
             ]
           },
           "linux-x64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T07:50:55.600Z",
@@ -192241,6 +192543,8 @@
             ]
           },
           "win32-x64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T07:53:08.244Z",
@@ -192362,9 +192666,13 @@
         "repository": "dream-num/dsh-univer-office",
         "npmName": "dsh-univer-office",
         "commit": "8f85ce4074fdbe51416b6c337468bb916a302c2a",
+        "runId": 39387441493,
+        "runAttempt": 1,
         "runUrl": "https://github.com/fatevase/dsh_depot/actions/runs/39387441493",
         "results": {
           "macos-arm64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T07:52:16.352Z",
@@ -192466,6 +192774,8 @@
             ]
           },
           "linux-x64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T07:51:41.372Z",
@@ -192567,6 +192877,8 @@
             ]
           },
           "win32-x64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T07:54:01.566Z",
@@ -192674,9 +192986,13 @@
         "repository": "sixtysevenlf/dsh-blender-plugin",
         "npmName": "@dsh-external/dsh-blender-plugin",
         "commit": "f044a019bbb97513443b24cc5ebcad111a002628",
+        "runId": 39387441493,
+        "runAttempt": 1,
         "runUrl": "https://github.com/fatevase/dsh_depot/actions/runs/39387441493",
         "results": {
           "macos-arm64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T07:53:23.344Z",
@@ -192717,6 +193033,8 @@
             ]
           },
           "linux-x64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T07:52:36.026Z",
@@ -192757,6 +193075,8 @@
             ]
           },
           "win32-x64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T07:55:29.829Z",
@@ -192803,9 +193123,13 @@
         "repository": "liangmianya/dsh-synapse",
         "npmName": "dsh-synapse",
         "commit": "847b712b14579ca5e5c5fcf414f4559589c44d93",
+        "runId": 39387441493,
+        "runAttempt": 1,
         "runUrl": "https://github.com/fatevase/dsh_depot/actions/runs/39387441493",
         "results": {
           "macos-arm64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T07:53:15.609Z",
@@ -192895,6 +193219,8 @@
             ]
           },
           "linux-x64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T07:53:51.429Z",
@@ -192984,6 +193310,8 @@
             ]
           },
           "win32-x64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T07:54:43.470Z",
@@ -193079,9 +193407,13 @@
         "repository": "anysearch-team/anysearch-dsh",
         "npmName": "@anysearch/anysearch-dsh",
         "commit": "d20ab97727b36b4341977e53d7c9b7d2e93d3d03",
+        "runId": 39387441493,
+        "runAttempt": 1,
         "runUrl": "https://github.com/fatevase/dsh_depot/actions/runs/39387441493",
         "results": {
           "macos-arm64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T07:53:23.522Z",
@@ -193177,6 +193509,8 @@
             ]
           },
           "linux-x64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T07:53:59.083Z",
@@ -193272,6 +193606,8 @@
             ]
           },
           "win32-x64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T07:54:53.475Z",
@@ -193373,9 +193709,13 @@
         "repository": "Ikalus1988/MisakaNet",
         "npmName": "misakanet",
         "commit": "22c2a97d49da8890d7100e6648ec352f3f975f1b",
+        "runId": 39387441493,
+        "runAttempt": 1,
         "runUrl": "https://github.com/fatevase/dsh_depot/actions/runs/39387441493",
         "results": {
           "macos-arm64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T07:53:30.221Z",
@@ -193428,6 +193768,8 @@
             ]
           },
           "linux-x64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T07:54:05.433Z",
@@ -193480,6 +193822,8 @@
             ]
           },
           "win32-x64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T07:54:57.948Z",
@@ -193538,9 +193882,13 @@
         "repository": "saya-ch/dsh-mobile",
         "npmName": "dsh-mobile",
         "commit": "6d606ad09af51def5068961009fd07cebf732306",
+        "runId": 39387441493,
+        "runAttempt": 1,
         "runUrl": "https://github.com/fatevase/dsh_depot/actions/runs/39387441493",
         "results": {
           "macos-arm64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T07:53:35.640Z",
@@ -193636,6 +193984,8 @@
             ]
           },
           "linux-x64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T07:54:08.796Z",
@@ -193731,6 +194081,8 @@
             ]
           },
           "win32-x64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T07:55:02.153Z",
@@ -193832,9 +194184,13 @@
         "repository": "DDDMUC/dsh-free-search",
         "npmName": "dsh-free-search",
         "commit": "b09e67110e90e2a710793d0ad073ab4ff10e291e",
+        "runId": 39387441493,
+        "runAttempt": 1,
         "runUrl": "https://github.com/fatevase/dsh_depot/actions/runs/39387441493",
         "results": {
           "macos-arm64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T07:54:02.096Z",
@@ -193895,6 +194251,8 @@
             ]
           },
           "linux-x64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T07:54:26.811Z",
@@ -193955,6 +194313,8 @@
             ]
           },
           "win32-x64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T07:55:19.616Z",
@@ -194021,9 +194381,13 @@
         "repository": "V1ki/dsh-plugin-subscriptions",
         "npmName": "dsh-plugin-subscriptions",
         "commit": "a5b01068b7f0c0cdb6f38bafe700c345fdfee4ba",
+        "runId": 39387441493,
+        "runAttempt": 1,
         "runUrl": "https://github.com/fatevase/dsh_depot/actions/runs/39387441493",
         "results": {
           "macos-arm64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T07:55:01.501Z",
@@ -194120,6 +194484,8 @@
             ]
           },
           "linux-x64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T07:55:47.248Z",
@@ -194216,6 +194582,8 @@
             ]
           },
           "win32-x64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T07:56:21.400Z",
@@ -194318,9 +194686,13 @@
         "repository": "Han-1413141/dsh-cost-meter",
         "npmName": "dsh-cost-meter",
         "commit": "b867bfae77ce2de8efceaa25485c70c0f3e5dfba",
+        "runId": 39387441493,
+        "runAttempt": 1,
         "runUrl": "https://github.com/fatevase/dsh_depot/actions/runs/39387441493",
         "results": {
           "macos-arm64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T07:55:17.107Z",
@@ -194422,6 +194794,8 @@
             ]
           },
           "linux-x64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T07:55:59.885Z",
@@ -194523,6 +194897,8 @@
             ]
           },
           "win32-x64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T07:56:40.462Z",
@@ -194630,9 +195006,13 @@
         "repository": "QCYTSN/dsh-dafeiyu",
         "npmName": "dsh-dafeiyu",
         "commit": "43542f8fc9567f45ce98534d407abca2ff4ff74e",
+        "runId": 39387441493,
+        "runAttempt": 1,
         "runUrl": "https://github.com/fatevase/dsh_depot/actions/runs/39387441493",
         "results": {
           "macos-arm64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T07:55:24.238Z",
@@ -194670,6 +195050,8 @@
             ]
           },
           "linux-x64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T07:56:05.239Z",
@@ -194707,6 +195089,8 @@
             ]
           },
           "win32-x64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T07:56:47.576Z",
@@ -194750,9 +195134,13 @@
         "repository": "FuRongJun-1999/dsh-memory",
         "npmName": "@furongjun1999/dsh-memory",
         "commit": "00c0cb028e8cc543d21356c97506d9a2d98a135e",
+        "runId": 39387441493,
+        "runAttempt": 1,
         "runUrl": "https://github.com/fatevase/dsh_depot/actions/runs/39387441493",
         "results": {
           "macos-arm64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T07:55:44.580Z",
@@ -194842,6 +195230,8 @@
             ]
           },
           "linux-x64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T07:56:10.326Z",
@@ -194931,6 +195321,8 @@
             ]
           },
           "win32-x64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T07:57:02.730Z",
@@ -195026,9 +195418,13 @@
         "repository": "Mars-Sea/dsh-commandcode-provider",
         "npmName": "@mars-sea/dsh-commandcode-provider",
         "commit": "cacd3f079cd226ae3c92654e5f5f3648833a5146",
+        "runId": 39387441493,
+        "runAttempt": 1,
         "runUrl": "https://github.com/fatevase/dsh_depot/actions/runs/39387441493",
         "results": {
           "macos-arm64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T07:55:57.173Z",
@@ -195135,6 +195531,8 @@
             ]
           },
           "linux-x64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T07:56:22.880Z",
@@ -195241,6 +195639,8 @@
             ]
           },
           "win32-x64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T07:57:27.724Z",
@@ -195353,9 +195753,13 @@
         "repository": "csyangwen/dsh-memory-evolve",
         "npmName": "dsh-memory-evolve",
         "commit": "e6f6b84c56f0fc18ba4a6a1a5959fbf86ea9ec8b",
+        "runId": 39387441493,
+        "runAttempt": 1,
         "runUrl": "https://github.com/fatevase/dsh_depot/actions/runs/39387441493",
         "results": {
           "macos-arm64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T07:56:46.122Z",
@@ -195466,6 +195870,8 @@
             ]
           },
           "linux-x64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T07:56:57.049Z",
@@ -195576,6 +195982,8 @@
             ]
           },
           "win32-x64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T07:58:19.344Z",
@@ -195692,9 +196100,13 @@
         "repository": "d-dev0101/open-sea-skin",
         "npmName": "open-sea-skin",
         "commit": "634583facf41ab4a8bff705a71ea6605404ab35f",
+        "runId": 39387441493,
+        "runAttempt": 1,
         "runUrl": "https://github.com/fatevase/dsh_depot/actions/runs/39387441493",
         "results": {
           "macos-arm64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T07:56:50.382Z",
@@ -195776,6 +196188,8 @@
             ]
           },
           "linux-x64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T07:57:01.410Z",
@@ -195857,6 +196271,8 @@
             ]
           },
           "win32-x64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T07:58:24.605Z",
@@ -195944,9 +196360,13 @@
         "repository": "theBigGavin/marketingdashboard",
         "npmName": "my-app",
         "commit": "f793de6f9f9874c120585cd6f6b293333067fa46",
+        "runId": 39387441493,
+        "runAttempt": 1,
         "runUrl": "https://github.com/fatevase/dsh_depot/actions/runs/39387441493",
         "results": {
           "macos-arm64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T07:56:55.620Z",
@@ -196042,6 +196462,8 @@
             ]
           },
           "linux-x64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T07:57:05.061Z",
@@ -196137,6 +196559,8 @@
             ]
           },
           "win32-x64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T07:58:29.078Z",
@@ -196238,9 +196662,13 @@
         "repository": "liguobao/ds-harness-remote",
         "npmName": "ds-harness-remote",
         "commit": "6ad3b271cb9de59a2f49c3aa92493eb958b4be23",
+        "runId": 39387441493,
+        "runAttempt": 1,
         "runUrl": "https://github.com/fatevase/dsh_depot/actions/runs/39387441493",
         "results": {
           "macos-arm64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T07:57:25.080Z",
@@ -196305,6 +196733,8 @@
             ]
           },
           "linux-x64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T07:57:30.631Z",
@@ -196369,6 +196799,8 @@
             ]
           },
           "win32-x64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T07:59:02.063Z",
@@ -196439,9 +196871,13 @@
         "repository": "vlln/whale-girl",
         "npmName": "whale-girl",
         "commit": "38e2721ff9f1e8aedff8fc73b8d4455118116924",
+        "runId": 39387441493,
+        "runAttempt": 1,
         "runUrl": "https://github.com/fatevase/dsh_depot/actions/runs/39387441493",
         "results": {
           "macos-arm64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T07:57:27.741Z",
@@ -196533,6 +196969,8 @@
             ]
           },
           "linux-x64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T07:57:32.599Z",
@@ -196624,6 +197062,8 @@
             ]
           },
           "win32-x64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T07:59:04.320Z",
@@ -196721,9 +197161,13 @@
         "repository": "linhay/harmony-next.skills",
         "npmName": "dsh-harmony-next",
         "commit": "0243a77451a2ffa97a43114c6b39232544704101",
+        "runId": 39387441493,
+        "runAttempt": 1,
         "runUrl": "https://github.com/fatevase/dsh_depot/actions/runs/39387441493",
         "results": {
           "macos-arm64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T07:58:13.248Z",
@@ -196767,6 +197211,8 @@
             ]
           },
           "linux-x64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T07:58:06.744Z",
@@ -196810,6 +197256,8 @@
             ]
           },
           "win32-x64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T07:59:31.821Z",
@@ -196859,9 +197307,13 @@
         "repository": "shengsheng90/DSH-taskboard",
         "npmName": "@shengsheng/dsh-taskboard",
         "commit": "0fa3f97ed7f2266e173d6643819921b9f3963aa8",
+        "runId": 39387441493,
+        "runAttempt": 1,
         "runUrl": "https://github.com/fatevase/dsh_depot/actions/runs/39387441493",
         "results": {
           "macos-arm64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T07:58:35.975Z",
@@ -196973,6 +197425,8 @@
             ]
           },
           "linux-x64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T07:58:23.789Z",
@@ -197084,6 +197538,8 @@
             ]
           },
           "win32-x64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T08:00:01.950Z",
@@ -197201,9 +197657,13 @@
         "repository": "ZSeven-W/dsh-ios",
         "npmName": "@zseven-w/dsh-ios",
         "commit": "ed785afb2872e0cf5c5c325be94f81a7b8451284",
+        "runId": 39387441493,
+        "runAttempt": 1,
         "runUrl": "https://github.com/fatevase/dsh_depot/actions/runs/39387441493",
         "results": {
           "macos-arm64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T07:58:44.721Z",
@@ -197239,6 +197699,8 @@
             ]
           },
           "linux-x64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T07:58:33.096Z",
@@ -197274,6 +197736,8 @@
             ]
           },
           "win32-x64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T08:00:12.465Z",
@@ -197315,9 +197779,13 @@
         "repository": "Nagi-ovo/dsh-visualize",
         "npmName": "@nagi-ovo/dsh-visualize",
         "commit": "1ab0d903b4d689524e9f72e5a4624e93d0b47cd2",
+        "runId": 39387441493,
+        "runAttempt": 1,
         "runUrl": "https://github.com/fatevase/dsh_depot/actions/runs/39387441493",
         "results": {
           "macos-arm64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T07:58:45.107Z",
@@ -197414,6 +197882,8 @@
             ]
           },
           "linux-x64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T07:58:33.566Z",
@@ -197510,6 +197980,8 @@
             ]
           },
           "win32-x64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T08:00:13.014Z",
@@ -197612,9 +198084,13 @@
         "repository": "toolclub/dsh-agent-team-gui",
         "npmName": "dsh-agent-team-gui",
         "commit": "9e952e0681d528975444568b70f3c554ac2984be",
+        "runId": 39387441493,
+        "runAttempt": 1,
         "runUrl": "https://github.com/fatevase/dsh_depot/actions/runs/39387441493",
         "results": {
           "macos-arm64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T07:59:01.683Z",
@@ -197726,6 +198202,8 @@
             ]
           },
           "linux-x64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T07:58:45.454Z",
@@ -197837,6 +198315,8 @@
             ]
           },
           "win32-x64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T08:00:34.533Z",
@@ -197954,9 +198434,13 @@
         "repository": "huiliyi37/dsh-tianshu-tui",
         "npmName": "@huiliyi37/dsh-tianshu-tui",
         "commit": "229c2b336fd7b44e125a9eeb19b72f82ed9f6e17",
+        "runId": 39387441493,
+        "runAttempt": 1,
         "runUrl": "https://github.com/fatevase/dsh_depot/actions/runs/39387441493",
         "results": {
           "macos-arm64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T07:59:40.750Z",
@@ -198086,6 +198570,8 @@
             ]
           },
           "linux-x64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T07:59:31.177Z",
@@ -198215,6 +198701,8 @@
             ]
           },
           "win32-x64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T08:01:03.970Z",
@@ -198350,9 +198838,13 @@
         "repository": "wssfk12138/dsh-damage-pulse",
         "npmName": "dsh-damage-pulse",
         "commit": "14af778e159de7009937ba1063781eb7f4f5b355",
+        "runId": 39387441493,
+        "runAttempt": 1,
         "runUrl": "https://github.com/fatevase/dsh_depot/actions/runs/39387441493",
         "results": {
           "macos-arm64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T07:59:50.973Z",
@@ -198463,6 +198955,8 @@
             ]
           },
           "linux-x64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T07:59:41.716Z",
@@ -198573,6 +199067,8 @@
             ]
           },
           "win32-x64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T08:01:22.804Z",
@@ -198689,9 +199185,13 @@
         "repository": "FishBottle7/opencode2dsh",
         "npmName": "@opencode2dsh/dsh-plugin",
         "commit": "62298f64b70108a3dc97a6a1bf2c2bf77388cb60",
+        "runId": 39387441493,
+        "runAttempt": 1,
         "runUrl": "https://github.com/fatevase/dsh_depot/actions/runs/39387441493",
         "results": {
           "macos-arm64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T08:00:14.332Z",
@@ -198811,6 +199311,8 @@
             ]
           },
           "linux-x64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T07:59:55.609Z",
@@ -198930,6 +199432,8 @@
             ]
           },
           "win32-x64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T08:01:43.642Z",
@@ -199055,9 +199559,13 @@
         "repository": "dhicoc/dsh-reverse-skill",
         "npmName": "@dhicoc/dsh-reverse-skill",
         "commit": "f1b61cf3deec370198ae81a23b8512338002d073",
+        "runId": 39387441493,
+        "runAttempt": 1,
         "runUrl": "https://github.com/fatevase/dsh_depot/actions/runs/39387441493",
         "results": {
           "macos-arm64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T08:00:29.788Z",
@@ -199148,6 +199656,8 @@
             ]
           },
           "linux-x64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T08:00:06.685Z",
@@ -199238,6 +199748,8 @@
             ]
           },
           "win32-x64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T08:02:00.967Z",
@@ -199334,9 +199846,13 @@
         "repository": "Devin-AXIS/jev-dsh-decision",
         "npmName": "dsh-jev-decision-model",
         "commit": "adc88caa9bf174d367e79a5f254c7936bcef088e",
+        "runId": 39387441493,
+        "runAttempt": 1,
         "runUrl": "https://github.com/fatevase/dsh_depot/actions/runs/39387441493",
         "results": {
           "macos-arm64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T08:00:43.771Z",
@@ -199383,6 +199899,8 @@
             ]
           },
           "linux-x64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T08:00:16.569Z",
@@ -199429,6 +199947,8 @@
             ]
           },
           "win32-x64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T08:02:17.816Z",
@@ -199481,9 +200001,13 @@
         "repository": "Fisfzy/dsh-ego-browser",
         "npmName": "dsh-ego-browser",
         "commit": "c02428e25446bb26e1f8e09532d688090246cfe4",
+        "runId": 39387441493,
+        "runAttempt": 1,
         "runUrl": "https://github.com/fatevase/dsh_depot/actions/runs/39387441493",
         "results": {
           "macos-arm64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "failed",
             "verification": "not-run",
             "startedAt": "2026-10-20T08:01:10.955Z",
@@ -199542,6 +200066,8 @@
             "files": []
           },
           "linux-x64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "failed",
             "verification": "not-run",
             "startedAt": "2026-10-20T08:01:08.212Z",
@@ -199600,6 +200126,8 @@
             "files": []
           },
           "win32-x64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "failed",
             "verification": "not-run",
             "startedAt": "2026-10-20T08:02:28.234Z",
@@ -199664,9 +200192,13 @@
         "repository": "RevolutionLA/dsh-dream-skin",
         "npmName": "dsh-dream-skin",
         "commit": "7ce4b64a44e9795fc35a0658197d45f1e87b756d",
+        "runId": 39387441493,
+        "runAttempt": 1,
         "runUrl": "https://github.com/fatevase/dsh_depot/actions/runs/39387441493",
         "results": {
           "macos-arm64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T08:01:17.008Z",
@@ -199719,6 +200251,8 @@
             ]
           },
           "linux-x64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T08:01:13.824Z",
@@ -199771,6 +200305,8 @@
             ]
           },
           "win32-x64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T08:02:36.566Z",
@@ -199829,9 +200365,13 @@
         "repository": "kingOfSoySauce/dsh-liang-skin",
         "npmName": "@leon___/dsh-client-liang-intensity-skin",
         "commit": "a598702bdcdd51cd201b96bdd60efc89a255c787",
+        "runId": 39387441493,
+        "runAttempt": 1,
         "runUrl": "https://github.com/fatevase/dsh_depot/actions/runs/39387441493",
         "results": {
           "macos-arm64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T08:01:21.050Z",
@@ -199913,6 +200453,8 @@
             ]
           },
           "linux-x64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T08:01:14.886Z",
@@ -199994,6 +200536,8 @@
             ]
           },
           "win32-x64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T08:02:38.578Z",
@@ -200081,9 +200625,13 @@
         "repository": "Nwflower/dsh-chat-import",
         "npmName": "dsh-chat-import",
         "commit": "1e3e63e533abd709e646f49eca08e8a5c6de9176",
+        "runId": 39387441493,
+        "runAttempt": 1,
         "runUrl": "https://github.com/fatevase/dsh_depot/actions/runs/39387441493",
         "results": {
           "macos-arm64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T08:01:26.262Z",
@@ -200174,6 +200722,8 @@
             ]
           },
           "linux-x64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T08:01:19.528Z",
@@ -200264,6 +200814,8 @@
             ]
           },
           "win32-x64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T08:02:47.513Z",
@@ -200359,9 +200911,13 @@
         "repositoryId": 1408587744,
         "repository": "xcisxc29/dsh-wechat",
         "commit": "d9a113d6b31175c54cb7abe71da4573754333519",
+        "runId": 39387441493,
+        "runAttempt": 1,
         "runUrl": "https://github.com/fatevase/dsh_depot/actions/runs/39387441493",
         "results": {
           "macos-arm64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T08:01:37.638Z",
@@ -200453,6 +201009,8 @@
             ]
           },
           "linux-x64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T08:01:30.517Z",
@@ -200544,6 +201102,8 @@
             ]
           },
           "win32-x64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T08:03:07.043Z",
@@ -200641,9 +201201,13 @@
         "repository": "PerryLink/dsh-auto-review",
         "npmName": "dsh-auto-review",
         "commit": "af42ac66e705b4d08eca5bcf938b970e5d87cf83",
+        "runId": 39387441493,
+        "runAttempt": 1,
         "runUrl": "https://github.com/fatevase/dsh_depot/actions/runs/39387441493",
         "results": {
           "macos-arm64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T08:02:21.361Z",
@@ -200763,6 +201327,8 @@
             ]
           },
           "linux-x64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T08:02:41.220Z",
@@ -200882,6 +201448,8 @@
             ]
           },
           "win32-x64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T08:04:08.477Z",
@@ -201007,9 +201575,13 @@
         "repository": "HanaAyane/dsh-reasoning-effort",
         "npmName": "dsh-reasoning-effort",
         "commit": "dda6997f0dde60f615abb129449eaab4a0e9bce7",
+        "runId": 39387441493,
+        "runAttempt": 1,
         "runUrl": "https://github.com/fatevase/dsh_depot/actions/runs/39387441493",
         "results": {
           "macos-arm64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T08:02:33.827Z",
@@ -201112,6 +201684,8 @@
             ]
           },
           "linux-x64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T08:02:47.147Z",
@@ -201214,6 +201788,8 @@
             ]
           },
           "win32-x64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T08:04:19.806Z",
@@ -201322,9 +201898,13 @@
         "repository": "MichengAI/dsh-skills-manager",
         "npmName": "@michengai/dsh-skills-manager",
         "commit": "434e166fc1af6a8bcee4f6b22a3851e037fa90b7",
+        "runId": 39387441493,
+        "runAttempt": 1,
         "runUrl": "https://github.com/fatevase/dsh_depot/actions/runs/39387441493",
         "results": {
           "macos-arm64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T08:02:48.694Z",
@@ -201425,6 +202005,8 @@
             ]
           },
           "linux-x64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T08:03:01.219Z",
@@ -201525,6 +202107,8 @@
             ]
           },
           "win32-x64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T08:04:40.444Z",
@@ -201631,9 +202215,13 @@
         "repository": "yyh-001/dsh-meme",
         "npmName": "dsh-meme",
         "commit": "d53f92951e41994c8b978ca7f1c861dca6a8bd4d",
+        "runId": 39387441493,
+        "runAttempt": 1,
         "runUrl": "https://github.com/fatevase/dsh_depot/actions/runs/39387441493",
         "results": {
           "macos-arm64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T08:03:05.921Z",
@@ -201679,6 +202267,8 @@
             ]
           },
           "linux-x64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T08:03:12.904Z",
@@ -201724,6 +202314,8 @@
             ]
           },
           "win32-x64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T08:05:01.325Z",
@@ -201775,9 +202367,13 @@
         "repository": "weijiafu14/pi2dsh",
         "npmName": "pi2dsh",
         "commit": "a7f1ea8bd0d21735e85c0d76a21488dc347fa8b0",
+        "runId": 39387441493,
+        "runAttempt": 1,
         "runUrl": "https://github.com/fatevase/dsh_depot/actions/runs/39387441493",
         "results": {
           "macos-arm64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T08:03:08.369Z",
@@ -201893,6 +202489,8 @@
             ]
           },
           "linux-x64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T08:03:14.505Z",
@@ -202008,6 +202606,8 @@
             ]
           },
           "win32-x64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T08:05:03.512Z",
@@ -202129,9 +202729,13 @@
         "repository": "zuorn/Tydora",
         "npmName": "tydora",
         "commit": "4af1de4d458c7d03adc2615893e4793766c1bb87",
+        "runId": 39387441493,
+        "runAttempt": 1,
         "runUrl": "https://github.com/fatevase/dsh_depot/actions/runs/39387441493",
         "results": {
           "macos-arm64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "failed",
             "verification": "not-run",
             "startedAt": "2026-10-20T08:04:06.447Z",
@@ -202145,6 +202749,8 @@
             "files": []
           },
           "linux-x64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "failed",
             "verification": "not-run",
             "startedAt": "2026-10-20T08:04:11.458Z",
@@ -202158,6 +202764,8 @@
             "files": []
           },
           "win32-x64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "failed",
             "verification": "not-run",
             "startedAt": "2026-10-20T08:05:20.098Z",
@@ -202177,9 +202785,13 @@
         "repository": "PerryLink/dsh-industry-research",
         "npmName": "dsh-industry-research",
         "commit": "1523dfa222ad0cf2489d346be7c36cef570f9ad4",
+        "runId": 39387441493,
+        "runAttempt": 1,
         "runUrl": "https://github.com/fatevase/dsh_depot/actions/runs/39387441493",
         "results": {
           "macos-arm64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T08:04:09.996Z",
@@ -202272,6 +202884,8 @@
             ]
           },
           "linux-x64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T08:04:15.513Z",
@@ -202364,6 +202978,8 @@
             ]
           },
           "win32-x64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T08:05:32.507Z",
@@ -202462,9 +203078,13 @@
         "repository": "PerryLink/dsh-research-report",
         "npmName": "dsh-research-report",
         "commit": "3d816dd0b14f0f3cc8d83232f1ba6d27268b28ed",
+        "runId": 39387441493,
+        "runAttempt": 1,
         "runUrl": "https://github.com/fatevase/dsh_depot/actions/runs/39387441493",
         "results": {
           "macos-arm64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T08:04:15.009Z",
@@ -202560,6 +203180,8 @@
             ]
           },
           "linux-x64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T08:04:22.045Z",
@@ -202655,6 +203277,8 @@
             ]
           },
           "win32-x64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T08:05:47.128Z",
@@ -202756,9 +203380,13 @@
         "repository": "Phant0Meow/dsh-meow-memory",
         "npmName": "meow-memory",
         "commit": "033df8589467bbe17a2c40dc864283b960795ec5",
+        "runId": 39387441493,
+        "runAttempt": 1,
         "runUrl": "https://github.com/fatevase/dsh_depot/actions/runs/39387441493",
         "results": {
           "macos-arm64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T08:04:23.956Z",
@@ -202864,6 +203492,8 @@
             ]
           },
           "linux-x64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T08:04:31.992Z",
@@ -202969,6 +203599,8 @@
             ]
           },
           "win32-x64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T08:06:02.924Z",
@@ -203080,9 +203712,13 @@
         "repository": "Fishquito7/dsh-skill-mcp-panel",
         "npmName": "dsh-skill-mcp-panel",
         "commit": "83adb6cd68827b84ceb44b6ed698013c73041af1",
+        "runId": 39387441493,
+        "runAttempt": 1,
         "runUrl": "https://github.com/fatevase/dsh_depot/actions/runs/39387441493",
         "results": {
           "macos-arm64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T08:04:32.125Z",
@@ -203173,6 +203809,8 @@
             ]
           },
           "linux-x64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T08:04:35.283Z",
@@ -203263,6 +203901,8 @@
             ]
           },
           "win32-x64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T08:06:12.134Z",
@@ -203359,9 +203999,13 @@
         "repository": "omdsh-dev/dsh-data-agent",
         "npmName": "@yejiming/dsh-data-agent",
         "commit": "6a649fe930aeab4247d3e8b936b6bf393aa71e8c",
+        "runId": 39387441493,
+        "runAttempt": 1,
         "runUrl": "https://github.com/fatevase/dsh_depot/actions/runs/39387441493",
         "results": {
           "macos-arm64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T08:05:14.918Z",
@@ -203485,6 +204129,8 @@
             ]
           },
           "linux-x64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T08:06:05.044Z",
@@ -203608,6 +204254,8 @@
             ]
           },
           "win32-x64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T08:07:10.277Z",
@@ -203737,9 +204385,13 @@
         "repository": "e2mcc/dsh-popout-sidebar",
         "npmName": "dsh-popout-sidebar",
         "commit": "f2c72d6b39df536072c075b1f0c55eff84b12e77",
+        "runId": 39387441493,
+        "runAttempt": 1,
         "runUrl": "https://github.com/fatevase/dsh_depot/actions/runs/39387441493",
         "results": {
           "macos-arm64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T08:05:36.959Z",
@@ -203829,6 +204481,8 @@
             ]
           },
           "linux-x64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T08:06:20.909Z",
@@ -203918,6 +204572,8 @@
             ]
           },
           "win32-x64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T08:07:33.762Z",
@@ -204013,9 +204669,13 @@
         "repository": "luobosibing2/dsh-jev-plugin",
         "npmName": "@dsh-jev/plugin",
         "commit": "c983390d307f2228ff4d2a88d9709adcb3b2a806",
+        "runId": 39387441493,
+        "runAttempt": 1,
         "runUrl": "https://github.com/fatevase/dsh_depot/actions/runs/39387441493",
         "results": {
           "macos-arm64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T08:05:43.642Z",
@@ -204146,6 +204806,8 @@
             ]
           },
           "linux-x64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T08:06:27.704Z",
@@ -204276,6 +204938,8 @@
             ]
           },
           "win32-x64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T08:07:44.976Z",
@@ -204412,9 +205076,13 @@
         "repository": "FylarOpen/dsh-fylar-office-editor",
         "npmName": "@fylar/dsh-fylar-office-editor",
         "commit": "263bedfb3103831ab561f437c36b50bd9062f6f2",
+        "runId": 39387441493,
+        "runAttempt": 1,
         "runUrl": "https://github.com/fatevase/dsh_depot/actions/runs/39387441493",
         "results": {
           "macos-arm64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T08:06:05.950Z",
@@ -204515,6 +205183,8 @@
             ]
           },
           "linux-x64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T08:06:46.807Z",
@@ -204615,6 +205285,8 @@
             ]
           },
           "win32-x64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T08:08:12.389Z",
@@ -204721,9 +205393,13 @@
         "repository": "xiajiajun516/dsh-config-manager",
         "npmName": "dsh-config-manager",
         "commit": "865c4efdd5c77b8a64f55d2af6cadf50d73e00d8",
+        "runId": 39387441493,
+        "runAttempt": 1,
         "runUrl": "https://github.com/fatevase/dsh_depot/actions/runs/39387441493",
         "results": {
           "macos-arm64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T08:06:20.687Z",
@@ -204778,6 +205454,8 @@
             ]
           },
           "linux-x64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T08:07:05.250Z",
@@ -204832,6 +205510,8 @@
             ]
           },
           "win32-x64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T08:08:28.816Z",
@@ -204892,9 +205572,13 @@
         "repository": "wenbin-wb/dsh-bridge",
         "npmName": "@wenbin_wb/dsh-bridge",
         "commit": "f7a6ae0490d9baa96824819627314208c78cefe4",
+        "runId": 39387441493,
+        "runAttempt": 1,
         "runUrl": "https://github.com/fatevase/dsh_depot/actions/runs/39387441493",
         "results": {
           "macos-arm64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T08:07:02.810Z",
@@ -204982,6 +205666,8 @@
             ]
           },
           "linux-x64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T08:07:37.941Z",
@@ -205069,6 +205755,8 @@
             ]
           },
           "win32-x64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T08:08:42.661Z",
@@ -205162,9 +205850,13 @@
         "repository": "oil-oil/dsh-oil-creator",
         "npmName": "dsh-oil-creator",
         "commit": "58bd30d0d05b04e149552e8bdb4ff0becae614f0",
+        "runId": 39387441493,
+        "runAttempt": 1,
         "runUrl": "https://github.com/fatevase/dsh_depot/actions/runs/39387441493",
         "results": {
           "macos-arm64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T08:07:19.566Z",
@@ -205270,6 +205962,8 @@
             ]
           },
           "linux-x64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T08:07:56.012Z",
@@ -205375,6 +206069,8 @@
             ]
           },
           "win32-x64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T08:09:05.114Z",
@@ -205486,9 +206182,13 @@
         "repository": "taxueseek/argo",
         "npmName": "argo-search",
         "commit": "11a6cda2421a58f5c90e5c4ef7942195ccb72916",
+        "runId": 39387441493,
+        "runAttempt": 1,
         "runUrl": "https://github.com/fatevase/dsh_depot/actions/runs/39387441493",
         "results": {
           "macos-arm64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T08:07:26.640Z",
@@ -205532,6 +206232,8 @@
             ]
           },
           "linux-x64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T08:07:58.960Z",
@@ -205575,6 +206277,8 @@
             ]
           },
           "win32-x64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T08:09:08.287Z",
@@ -205624,9 +206328,13 @@
         "repository": "Hilbert-beinghappy/seektty",
         "npmName": "seektty",
         "commit": "42a2a7fa2a01b5a10a2e2ce368c151c8e0fdafc5",
+        "runId": 39387441493,
+        "runAttempt": 1,
         "runUrl": "https://github.com/fatevase/dsh_depot/actions/runs/39387441493",
         "results": {
           "macos-arm64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T08:07:37.259Z",
@@ -205795,6 +206503,8 @@
             ]
           },
           "linux-x64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T08:08:05.344Z",
@@ -205963,6 +206673,8 @@
             ]
           },
           "win32-x64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T08:09:17.523Z",
@@ -206137,9 +206849,13 @@
         "repository": "awesome-dsh-plugin/dsh-find-plugin",
         "npmName": "dsh-find-plugin",
         "commit": "afce1cd43f98b8a8b02e4a35cd6a65d6444de412",
+        "runId": 39387441493,
+        "runAttempt": 1,
         "runUrl": "https://github.com/fatevase/dsh_depot/actions/runs/39387441493",
         "results": {
           "macos-arm64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T08:07:58.178Z",
@@ -206224,6 +206940,8 @@
             ]
           },
           "linux-x64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T08:08:14.510Z",
@@ -206308,6 +207026,8 @@
             ]
           },
           "win32-x64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T08:09:27.666Z",
@@ -206398,9 +207118,13 @@
         "repository": "tinqiao-oss/engramory",
         "npmName": "dsh-engramory",
         "commit": "500cf5d49a19108196a420bd50e71ef0a3a80e7c",
+        "runId": 39387441493,
+        "runAttempt": 1,
         "runUrl": "https://github.com/fatevase/dsh_depot/actions/runs/39387441493",
         "results": {
           "macos-arm64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T08:08:59.145Z",
@@ -206444,6 +207168,8 @@
             ]
           },
           "linux-x64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T08:09:06.371Z",
@@ -206487,6 +207213,8 @@
             ]
           },
           "win32-x64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T08:10:17.247Z",
@@ -206536,9 +207264,13 @@
         "repository": "ZSeven-W/dsh-openpencil",
         "npmName": "@zseven-w/dsh-openpencil",
         "commit": "34cf7b45ed10fc7de43c3ccb30406e6c40b449ae",
+        "runId": 39387441493,
+        "runAttempt": 1,
         "runUrl": "https://github.com/fatevase/dsh_depot/actions/runs/39387441493",
         "results": {
           "macos-arm64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T08:09:05.583Z",
@@ -206597,6 +207329,8 @@
             ]
           },
           "linux-x64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T08:09:11.979Z",
@@ -206655,6 +207389,8 @@
             ]
           },
           "win32-x64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T08:10:28.307Z",
@@ -206719,9 +207455,13 @@
         "repository": "ZSeven-W/dsh-android",
         "npmName": "@zseven-w/dsh-android",
         "commit": "3363a85b1bbeefe994d42d52bd8e792c1527e9ec",
+        "runId": 39387441493,
+        "runAttempt": 1,
         "runUrl": "https://github.com/fatevase/dsh_depot/actions/runs/39387441493",
         "results": {
           "macos-arm64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T08:09:16.261Z",
@@ -206808,6 +207548,8 @@
             ]
           },
           "linux-x64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T08:09:23.839Z",
@@ -206894,6 +207636,8 @@
             ]
           },
           "win32-x64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T08:10:45.051Z",
@@ -206986,9 +207730,13 @@
         "repository": "cocofhu/anime-find",
         "npmName": "@cocofhu/anime-find",
         "commit": "a772e4d74608469507a48bf5bfe8445cd567064f",
+        "runId": 39387441493,
+        "runAttempt": 1,
         "runUrl": "https://github.com/fatevase/dsh_depot/actions/runs/39387441493",
         "results": {
           "macos-arm64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T08:09:25.584Z",
@@ -207031,6 +207779,8 @@
             ]
           },
           "linux-x64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T08:09:33.380Z",
@@ -207073,6 +207823,8 @@
             ]
           },
           "win32-x64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T08:10:55.308Z",
@@ -207121,9 +207873,13 @@
         "repository": "Ychris12138/dsh-usage-stats",
         "npmName": "@ychris12138/dsh-usage-stats",
         "commit": "3826b5792ab455b2e523732d411065c45826eabb",
+        "runId": 39387441493,
+        "runAttempt": 1,
         "runUrl": "https://github.com/fatevase/dsh_depot/actions/runs/39387441493",
         "results": {
           "macos-arm64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T08:09:25.911Z",
@@ -207167,6 +207923,8 @@
             ]
           },
           "linux-x64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T08:09:33.493Z",
@@ -207210,6 +207968,8 @@
             ]
           },
           "win32-x64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T08:10:55.668Z",
@@ -207259,9 +208019,13 @@
         "repository": "omdsh-dev/dsh_workflow",
         "npmName": "@dsh-external/workflow",
         "commit": "804e4c38e4e1649f5777f92fed28fa29d17aa62d",
+        "runId": 39387441493,
+        "runAttempt": 1,
         "runUrl": "https://github.com/fatevase/dsh_depot/actions/runs/39387441493",
         "results": {
           "macos-arm64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T08:10:12.505Z",
@@ -207321,6 +208085,8 @@
             ]
           },
           "linux-x64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T08:10:07.804Z",
@@ -207380,6 +208146,8 @@
             ]
           },
           "win32-x64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T08:11:24.773Z",
@@ -207445,9 +208213,13 @@
         "repository": "amlyczz/dsh-agy-link",
         "npmName": "dsh-agy-link",
         "commit": "9e38f216de3c43ebbdaac33c3100fdb058a6021e",
+        "runId": 39387441493,
+        "runAttempt": 1,
         "runUrl": "https://github.com/fatevase/dsh_depot/actions/runs/39387441493",
         "results": {
           "macos-arm64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T08:10:18.611Z",
@@ -207546,6 +208318,8 @@
             ]
           },
           "linux-x64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T08:10:12.306Z",
@@ -207644,6 +208418,8 @@
             ]
           },
           "win32-x64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T08:11:35.268Z",
@@ -207748,9 +208524,13 @@
         "repository": "HakureiMonika/dsh-sandbox-escalation-fix",
         "npmName": "dsh-sandbox-escalation-fix",
         "commit": "8760b89076b45ea3f60e3c6a598f91e59a1f7387",
+        "runId": 39387441493,
+        "runAttempt": 1,
         "runUrl": "https://github.com/fatevase/dsh_depot/actions/runs/39387441493",
         "results": {
           "macos-arm64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T08:10:29.002Z",
@@ -207843,6 +208623,8 @@
             ]
           },
           "linux-x64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T08:10:19.505Z",
@@ -207935,6 +208717,8 @@
             ]
           },
           "win32-x64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T08:11:44.805Z",
@@ -208033,9 +208817,13 @@
         "repository": "hanshanyike/dsh-yolo",
         "npmName": "dsh-plugin-yolo",
         "commit": "c87d70105f975d86c5c0f98f34fbce66657a6934",
+        "runId": 39387441493,
+        "runAttempt": 1,
         "runUrl": "https://github.com/fatevase/dsh_depot/actions/runs/39387441493",
         "results": {
           "macos-arm64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T08:10:41.455Z",
@@ -208124,6 +208912,8 @@
             ]
           },
           "linux-x64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T08:10:28.787Z",
@@ -208212,6 +209002,8 @@
             ]
           },
           "win32-x64": {
+            "runId": 39387441493,
+            "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
             "startedAt": "2026-10-20T08:12:01.351Z",
