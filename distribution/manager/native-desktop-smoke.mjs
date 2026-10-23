@@ -4,6 +4,7 @@ import {fileURLToPath,pathToFileURL} from 'node:url'
 import {mkdir,readFile,writeFile,rm,cp,readdir,rename} from 'node:fs/promises'
 import {runTerminalChild} from '../../plugins/dsh-depot-manager/bootstrap/terminal-bridge.mjs'
 import {runHostCommand} from '../../plugins/dsh-depot-manager/adapters/command.mjs'
+import {desktopPackageManager,desktopPnpmEnvironment} from '../../plugins/dsh-depot-manager/adapters/host-pnpm.mjs'
 import * as tar from 'tar'
 import {spawn} from 'node:child_process'
 import {desktopAt} from '../../plugins/dsh-depot-manager/adapters/locate.mjs'
@@ -39,7 +40,13 @@ export async function nativeDesktopSmoke(app,output){
  if(!found.hosts.some(h=>h.kind==='official-desktop'&&h.profileName==='desktop'))throw Error('Native Desktop profile discovery failed: '+JSON.stringify(found.issues))
  const host=await probeHost({kind:'official-desktop',desktop,home,profileName:'desktop',dshRoot,nodePath:process.execPath,runtimeEnv:{ELECTRON_RUN_AS_NODE:'1'}})
  const elevatedCi=process.platform==='win32'&&process.env.GITHUB_ACTIONS==='true'&&process.env.RUNNER_ENVIRONMENT==='github-hosted'&&host.capabilities.blockedReason==='PROFILE_OWNER_MISMATCH'
- if(elevatedCi){host.capabilities={...host.capabilities,writeSession:true,offlineInstall:true,remove:true}}
+ if(elevatedCi){
+  host.capabilities={...host.capabilities,writeSession:true,offlineInstall:true,remove:true}
+  // probeHost deliberately withholds the carrier for an elevated process.
+  // This existing CI-only admission applies to the disposable test profile.
+  host.packageManager=await desktopPackageManager(desktop,{nodePath:host.nodePath})
+  host.runtimeEnv=desktopPnpmEnvironment(host.packageManager)
+ }
  // An empty profile cannot expose registry-metadata revalidation. Seed an
  // ordinary dependency online, then clear only this disposable metadata cache.
  const cache=path.join(work,'pnpm-cache'),cacheEnv={npm_config_cache_dir:cache,pnpm_config_cache_dir:cache,PNPM_CONFIG_CACHE_DIR:cache}
