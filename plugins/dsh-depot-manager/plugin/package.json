@@ -1,6 +1,6 @@
 {
   "name": "dsh-depot-manager",
-  "version": "0.1.12",
+  "version": "0.1.13",
   "type": "module",
   "description": "在 DSH 中导入、安装和移除离线插件，保留用户数据。",
   "license": "MIT",
@@ -24,6 +24,18 @@
   "dsh": {
     "bundle": {
       "patch": "cordis.patch.yml"
+    },
+    "client": {
+      "platform": "web",
+      "inject": [
+        "@deepseek-ai/dsh-client-ui-layout",
+        "@deepseek-ai/dsh-client-ui-sidebar"
+      ]
     }
+  },
+  "exports": {
+    ".": "./lib/index.js",
+    "./client": "./lib/client.js",
+    "./package.json": "./package.json"
   }
 }

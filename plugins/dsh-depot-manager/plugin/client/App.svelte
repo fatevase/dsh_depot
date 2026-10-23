@@ -9,7 +9,7 @@
  import {emptyState,reduceManagerState,stateLabel} from './state.mjs'
  import {pluginTitle} from './view.mjs'
  import {prepareImports,installPrepared} from './import-flow.mjs'
- let {client,initialState=emptyState()}=$props()
+ let {client,initialState=emptyState(),embedded=false}=$props()
  let state=$state(initialState),busy=$state(false),error=$state(''),notice=$state(''),dialog=$state(null),prepared=$state([]),preparing=$state(false),loadError=$state(''),loadPhase=$state('prepare'),loadResults=$state([])
  let preparation=0,alive=true,refreshing=$state(false)
  const selected=$derived(state.installed.find(x=>x.name===state.selection))
@@ -21,10 +21,10 @@
  async function importGroups(groups,e){if(e){loadError=e.message;return}const generation=++preparation;preparing=true;loadError='';prepared=[];try{const items=await prepareImports(client,groups,items=>{if(generation===preparation)prepared=items});if(generation===preparation)prepared=items}catch(e){if(generation===preparation)loadError=e.message}finally{if(generation===preparation)preparing=false}}
  async function confirmLoad(){if(busy||preparing)return;busy=true;loadError='';loadPhase='installing';try{loadResults=await installPrepared(client,prepared,op=>dispatch({type:'operation',value:op}));loadPhase='done';await refresh()}catch(e){loadError=`${e.code??'载入未完成'}：${e.message}`;loadPhase='prepare'}finally{busy=false}}
  async function exportPlugin(item){await act(async()=>{await client.createExport({packageName:item.name,installedFingerprint:item.fingerprint});await refresh()})}
- function navigate(name){state.selection=name;if(typeof window!=='undefined')location.hash=name?'plugin='+encodeURIComponent(name):''}
- onMount(()=>{if(!client)return;const route=()=>{const value=location.hash.slice(1);state.selection=value.startsWith('plugin=')?new URLSearchParams(value).get('plugin'):null};route();window.addEventListener('hashchange',route);refresh().catch(e=>error=e.message);const timer=setInterval(()=>refresh().catch(()=>dispatch({type:'connection',value:'disconnected'})),2500);return()=>{alive=false;clearInterval(timer);window.removeEventListener('hashchange',route)}})
+ function navigate(name){state.selection=name;if(!embedded&&typeof window!=='undefined')location.hash=name?'plugin='+encodeURIComponent(name):''}
+ onMount(()=>{if(!client)return;const route=()=>{const value=location.hash.slice(1);state.selection=value.startsWith('plugin=')?new URLSearchParams(value).get('plugin'):null};if(!embedded){route();window.addEventListener('hashchange',route)}refresh().catch(e=>error=e.message);const timer=setInterval(()=>refresh().catch(()=>dispatch({type:'connection',value:'disconnected'})),2500);return()=>{alive=false;clearInterval(timer);window.removeEventListener('hashchange',route)}})
 </script>
-<svelte:head><title>{selected?pluginTitle(selected)+' · ':''}插件 · DSH</title></svelte:head>
+<svelte:head>{#if !embedded}<title>{selected?pluginTitle(selected)+' · ':''}插件 · DSH</title>{/if}</svelte:head>
 <main class="manager-page">
  {#if selected}<PluginDetail item={selected} host={state.host} exports={state.exports.filter(x=>x.packageName===selected.name)} {busy} onback={()=>navigate(null)} onexport={exportPlugin} oncancel={id=>act(async()=>{await client.cancelExport(id);await refresh()})}/>
  {:else}<header class="page-head"><div><h1>插件</h1><p class="page-intro">载入和导出离线插件 <span title="在当前 DSH 环境中载入和导出离线插件">ⓘ</span></p></div><div class="toolbar"><button class="icon-button refresh-button" aria-label="刷新插件" disabled={refreshing||busy} onclick={()=>refresh().catch(e=>error=e.message)}><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M20 11a8 8 0 1 0-2 6M20 4v7h-7"/></svg></button><button class="load-button" disabled={busy&&loadPhase!=='installing'} onclick={openLoad}><span aria-hidden="true">＋</span> 载入插件</button></div></header>{/if}
@@ -32,7 +32,7 @@
  {#if notice}<p class="notice" role="status">{notice}<button class="icon-button" aria-label="关闭提示" onclick={()=>notice=''}>×</button></p>{/if}
  {#if state.connection==='disconnected'}<p class="notice warning-text" role="status">连接已断开，正在重新连接 DSH。显示的是上次读取的状态。</p>{/if}
  {#if !selected}<InstalledPanel items={state.installed} onopen={item=>navigate(item.name)}/>{/if}
- <footer class="page-footer"><a href="/">返回 DSH</a><span>离线插件管理器 {MANAGER_VERSION}</span><button class="text-button" onclick={()=>dialog='tasks'}>操作记录{#if state.operations.some(o=>['applying','queued','awaiting_reload','waiting_for_host_exit'].includes(o.state))}<span class="status-dot"></span>{/if}</button></footer>
+ <footer class="page-footer">{#if !embedded}<a href="/">返回 DSH</a>{/if}<span>离线插件管理器 {MANAGER_VERSION}</span><button class="text-button" onclick={()=>dialog='tasks'}>操作记录{#if state.operations.some(o=>['applying','queued','awaiting_reload','waiting_for_host_exit'].includes(o.state))}<span class="status-dot"></span>{/if}</button></footer>
 </main>
 {#if dialog==='load'}<Modal title="载入插件" onclose={close}>
  {#if loadPhase==='prepare'}<ImportPanel onimport={importGroups} busy={preparing||busy}/>{#if preparing}<p class="subtle" role="status">正在准备插件…</p>{/if}

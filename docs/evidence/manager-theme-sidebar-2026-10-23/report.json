@@ -1,0 +1,32 @@
+{
+  "version": "0.1.13",
+  "host": "0.2.1-rc.2",
+  "scope": "isolated stock DSH Web, macos-arm64",
+  "checks": {
+    "officialModuleLoader": true,
+    "leftSidebarCollapsed": true,
+    "leftSidebarExpanded": true,
+    "lightFromHostSettings": true,
+    "darkFromHostSettings": true,
+    "systemFromHostSettings": true,
+    "noFloatingLink": true,
+    "legacyLinkRedirectAndSelection": true,
+    "embeddedDetailPreservesHostHash": true,
+    "loadDialogOpenClose": true
+  },
+  "themeColors": {
+    "light": "rgb(15, 17, 21)",
+    "dark": "rgb(249, 250, 251)"
+  },
+  "tests": {
+    "webPassed": 14,
+    "managerPassed": 153,
+    "managerSkipped": 3,
+    "distributionPassed": 122
+  },
+  "limits": [
+    "Windows/Linux native UI not exercised on this Mac",
+    "Native macOS chrome uses official inherited clearance; not tested in daily Desktop profile",
+    "This run does not replace native OS network-isolation qualification"
+  ]
+}
