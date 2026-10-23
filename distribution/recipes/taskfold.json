@@ -6,15 +6,15 @@
   "npmName": "dsh-taskfold",
   "channel": {
     "type": "fixed",
-    "ref": "6107bc5046578de3501e212da2ab3dbba790bf09",
+    "ref": "9e98e0477178ace1583ec391699a98de5ebeccc5",
     "allowPrerelease": false
   },
   "seed": {
-    "ref": "v0.38.3",
-    "commit": "6107bc5046578de3501e212da2ab3dbba790bf09",
-    "version": "0.38.3"
+    "ref": "v0.39.0",
+    "commit": "9e98e0477178ace1583ec391699a98de5ebeccc5",
+    "version": "0.39.0"
   },
-  "allowedVersions": "0.38.3",
+  "allowedVersions": "0.39.0",
   "hostRange": "0.2.1-rc.2",
   "targets": [
     "macos-arm64",
@@ -61,6 +61,7 @@
   "distributionScope": "跟进上游最新发布版；无发布版时跟进默认分支。每次构建固定源码与依赖，并在当前 DSH 上重新验证。",
   "upstreamChannel": "release",
   "releasePins": {
-    "v0.38.3": "6107bc5046578de3501e212da2ab3dbba790bf09"
+    "v0.38.3": "6107bc5046578de3501e212da2ab3dbba790bf09",
+    "v0.39.0": "9e98e0477178ace1583ec391699a98de5ebeccc5"
   }
 }

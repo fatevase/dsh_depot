@@ -6,16 +6,15 @@
   "npmName": "dsh-purge",
   "channel": {
     "type": "fixed",
-    "ref": "6c1d638d1bdcc45ede50fc30249c753d58122a51",
+    "ref": "1ea067189cb37c5cfe290c0f95d9be0c5713b91b",
     "allowPrerelease": false
   },
   "seed": {
-    "ref": "6c1d638d1bdcc45ede50fc30249c753d58122a51",
-    "version": "1.1.71",
-    "commit": "6c1d638d1bdcc45ede50fc30249c753d58122a51",
-    "archiveSha256": "5936afb42a147f22e924f612d523ff6f15606eaeaf0b6044dcb6442a9141c5cd"
+    "ref": "v1.1.73",
+    "commit": "1ea067189cb37c5cfe290c0f95d9be0c5713b91b",
+    "version": "1.1.73"
   },
-  "allowedVersions": "1.1.71",
+  "allowedVersions": "1.1.73",
   "hostRange": "0.2.1-rc.2",
   "targets": [
     "macos-arm64",
@@ -48,6 +47,10 @@
   },
   "enabled": true,
   "install": false,
-  "latestRefreshError": "GitHub GET /repos/YuJunZhiXue/dsh-purge/releases returned 404",
-  "latestOnly": true
+  "latestOnly": true,
+  "releasePins": {
+    "v1.1.73": "1ea067189cb37c5cfe290c0f95d9be0c5713b91b"
+  },
+  "distributionScope": "跟进上游最新发布版；无发布版时跟进默认分支。每次构建固定源码与依赖，并在当前 DSH 上重新验证。",
+  "upstreamChannel": "release"
 }
