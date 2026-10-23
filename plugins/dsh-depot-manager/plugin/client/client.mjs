@@ -21,4 +21,4 @@ export const browserTransport={
  async call(method,input){const r=await fetch('/api/depot/rpc',{method:'POST',credentials:'same-origin',headers:{'content-type':'application/json'},body:JSON.stringify({method,input})});const body=await r.json();if(!body.ok)throw Object.assign(new Error(body.error.message),{code:body.error.code});return body.value},
  async upload({importId,relative,offset,final,blob}){const query=new URLSearchParams({id:importId,path:relative,offset:String(offset),final:final?'1':'0'});const r=await fetch('/api/depot/upload?'+query,{method:'POST',credentials:'same-origin',body:blob});const result=await r.json();if(!result.ok)throw Object.assign(new Error(result.error.message),{code:result.error.code});return result.value}
 }
-export function mountManager(container,client=createManagerClient(browserTransport)) {const app=mount(App,{target:container,props:{client}});return()=>unmount(app)}
+export function mountManager(container,client=createManagerClient(browserTransport),options={}) {const app=mount(App,{target:container,props:{client,...options}});return()=>unmount(app)}
