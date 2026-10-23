@@ -1,3 +1,4 @@
+import {offlineLockfileArgs} from './offline-policy.mjs'
 import {applyDshCli} from './dsh-cli.mjs'
 import {depotDataHome} from '../core/paths.mjs'
 import {createRequire} from 'node:module'
@@ -79,7 +80,7 @@ export function cliWebAdapter({runningProbe=hostIsRunning,loadPublicServices,own
     const flags=['--offline','--ignore-scripts','--config.auto-install-peers=false','--config.manage-package-manager-versions=false']
     const options={...host.packageManager,execution:'service',outputBytes:262144,lockWaitMs:10000,lookupTimeoutMs:10000,idleTimeoutMs:30000,signal,env:{...host.packageManager?.env,npm_config_offline:'true',npm_config_ignore_scripts:'true',npm_config_auto_install_peers:'false',npm_config_manage_package_manager_versions:'false',COREPACK_ENABLE_NETWORK:'0'}}
     const perform=async(dir,args,store)=>{
-     const r=await operations.runProfilePnpm({profile:host.profileName,dir,home:host.home,installAnchor:path.join(host.dshRoot,'package.json'),cwd:dir},args,{...options,args:[...(options.args??[]),'--config.offline=true','--config.ignore-scripts=true','--config.auto-install-peers=false','--config.manage-package-manager-versions=false',...(args.some(a=>a.startsWith('--config.store-dir='))?[]:['--config.store-dir='+(store??args[args.indexOf('--store-dir')+1])])],env:policyEnv(host.packageManager?.env,store??args[args.indexOf('--store-dir')+1])})
+     const r=await operations.runProfilePnpm({profile:host.profileName,dir,home:host.home,installAnchor:path.join(host.dshRoot,'package.json'),cwd:dir},[...args,...await offlineLockfileArgs(dir)],{...options,args:[...(options.args??[]),'--config.offline=true','--config.ignore-scripts=true','--config.auto-install-peers=false','--config.manage-package-manager-versions=false',...(args.some(a=>a.startsWith('--config.store-dir='))?[]:['--config.store-dir='+(store??args[args.indexOf('--store-dir')+1])])],env:policyEnv(host.packageManager?.env,store??args[args.indexOf('--store-dir')+1])})
      if(r.exitCode!==0)fail('PACKAGE_OPERATION_FAILED','离线包操作失败',{exitCode:r.exitCode,output:r.output,logPath:r.logPath});return r
     }
     let installedStore

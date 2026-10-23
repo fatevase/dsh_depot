@@ -3,6 +3,7 @@ import {createRequire} from 'node:module'
 import {pathToFileURL} from 'node:url'
 import {mkdir,writeFile,readFile} from 'node:fs/promises'
 import {parse as parseYaml} from 'yaml'
+import {offlineLockfileArgs} from '../../adapters/offline-policy.mjs'
 import {fail} from '../../contracts/constants.mjs'
 // Inside DSH, use its package operation service and live layer controls. The
 // external bootstrap keeps its CLI adapter for environments without a running host.
@@ -18,7 +19,9 @@ export function liveInstallAdapter({profile,pluginManager,fallback,loadOperation
   let storeDir
   try{storeDir=parseYaml(await readFile(path.join(profile.dir,'node_modules/.modules.yaml'),'utf8'))?.storeDir}catch(e){if(e.code!=='ENOENT')throw e}
   if(storeDir!==undefined&&(typeof storeDir!=='string'||!path.isAbsolute(storeDir)))fail('INVALID_STORE','目标 DSH 的现有 store 路径无效')
-  const result=await operations.runProfilePnpm({...profile,profile:profile.name},['add',action.path,'--offline','--ignore-scripts',...(storeDir?['--store-dir',storeDir]:[])],{
+  const lockfileArgs=await offlineLockfileArgs(profile.dir)
+  if(lockfileArgs.length)onOutput?.('本次离线操作信任与已安装记录一致的旧锁文件，不复审其仓库元数据；保留包完整性校验。\n')
+  const result=await operations.runProfilePnpm({...profile,profile:profile.name},['add',action.path,'--offline','--ignore-scripts',...(storeDir?['--store-dir',storeDir]:[]),...lockfileArgs],{
    ...profile.packageManager,execution:'service',signal,outputBytes:262144,lockWaitMs:10000,lookupTimeoutMs:10000,idleTimeoutMs:30000,activateNewBundles:false,
    env:{...profile.packageManager?.env,npm_config_offline:'true',npm_config_ignore_scripts:'true',COREPACK_ENABLE_NETWORK:'0'},onOutput
   })

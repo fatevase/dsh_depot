@@ -1,3 +1,4 @@
+export {runOfflinePackageCommand} from '../adapters/dsh-cli.mjs'
 import {depotDataHome} from '../core/paths.mjs'
 import path from 'node:path'
 import {randomUUID} from 'node:crypto'
