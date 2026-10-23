@@ -1,0 +1,32 @@
+{
+  "version": "0.1.14",
+  "host": "0.2.1-rc.2",
+  "existingDependency": "@deepseek-ai/cosmokit@1.8.6",
+  "registryCacheEntries": 0,
+  "fullInstaller": "passed",
+  "policy": "offline, ignore-scripts, trust matching installed lock snapshot only",
+  "osNetworkIsolation": "not asserted",
+  "regression": {
+    "web": 14,
+    "manager": 157,
+    "managerSkipped": 3,
+    "distribution": 122
+  },
+  "pnpm12": {
+    "version": "12.14.0",
+    "registryMetadata": "empty",
+    "install": true,
+    "reinstall": true,
+    "remove": true
+  },
+  "pnpm11": {
+    "version": "11.28.5",
+    "policyReviewMetadata": "empty",
+    "ordinaryResolverMetadata": "required and prepared from genuine online setup",
+    "install": true,
+    "reinstall": true,
+    "remove": true
+  },
+  "cancellation": "worker acknowledges IPC and lets original DSH service clean up children",
+  "lockRace": "snapshot comparison repeated under official profile lock"
+}
