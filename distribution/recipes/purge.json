@@ -6,15 +6,15 @@
   "npmName": "dsh-purge",
   "channel": {
     "type": "fixed",
-    "ref": "1ea067189cb37c5cfe290c0f95d9be0c5713b91b",
+    "ref": "5a9b8e14856138814a2139a0105481e1dcdaece4",
     "allowPrerelease": false
   },
   "seed": {
-    "ref": "v1.1.73",
-    "commit": "1ea067189cb37c5cfe290c0f95d9be0c5713b91b",
-    "version": "1.1.73"
+    "ref": "v1.1.74",
+    "commit": "5a9b8e14856138814a2139a0105481e1dcdaece4",
+    "version": "1.1.74"
   },
-  "allowedVersions": "1.1.73",
+  "allowedVersions": "1.1.74",
   "hostRange": "0.2.1-rc.2",
   "targets": [
     "macos-arm64",
@@ -49,7 +49,8 @@
   "install": false,
   "latestOnly": true,
   "releasePins": {
-    "v1.1.73": "1ea067189cb37c5cfe290c0f95d9be0c5713b91b"
+    "v1.1.73": "1ea067189cb37c5cfe290c0f95d9be0c5713b91b",
+    "v1.1.74": "5a9b8e14856138814a2139a0105481e1dcdaece4"
   },
   "distributionScope": "跟进上游最新发布版；无发布版时跟进默认分支。每次构建固定源码与依赖，并在当前 DSH 上重新验证。",
   "upstreamChannel": "release"
