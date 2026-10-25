@@ -6,15 +6,15 @@
   "npmName": "dsh-our-free-model",
   "channel": {
     "type": "fixed",
-    "ref": "25ab765d6bb860779dbd8c53062953524f3cac09",
+    "ref": "f449bbfc46c461e6791cbf175d834ec2c5d38f12",
     "allowPrerelease": false
   },
   "seed": {
-    "ref": "v2.5.9",
-    "commit": "25ab765d6bb860779dbd8c53062953524f3cac09",
-    "version": "2.5.9"
+    "ref": "v2.7.1",
+    "commit": "f449bbfc46c461e6791cbf175d834ec2c5d38f12",
+    "version": "2.7.1"
   },
-  "allowedVersions": "2.5.9",
+  "allowedVersions": "2.7.1",
   "hostRange": "0.2.1-rc.2",
   "targets": [
     "macos-arm64",
@@ -51,6 +51,7 @@
   "distributionScope": "跟进上游最新发布版；无发布版时跟进默认分支。每次构建固定源码与依赖，并在当前 DSH 上重新验证。",
   "upstreamChannel": "release",
   "releasePins": {
-    "v2.5.9": "25ab765d6bb860779dbd8c53062953524f3cac09"
+    "v2.5.9": "25ab765d6bb860779dbd8c53062953524f3cac09",
+    "v2.7.1": "f449bbfc46c461e6791cbf175d834ec2c5d38f12"
   }
 }

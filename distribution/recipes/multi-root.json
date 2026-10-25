@@ -6,15 +6,15 @@
   "npmName": "@dsh-electron/dsh-plugin-multi-root-workspace",
   "channel": {
     "type": "fixed",
-    "ref": "583267e19fe3cfca01a28d4faa26a036c1d44a1b",
+    "ref": "199fdcb9165d4c47d9a2ed72b3d9390104772ff7",
     "allowPrerelease": false
   },
   "seed": {
-    "ref": "v0.1.9",
-    "commit": "583267e19fe3cfca01a28d4faa26a036c1d44a1b",
-    "version": "0.1.9"
+    "ref": "v0.1.10",
+    "commit": "199fdcb9165d4c47d9a2ed72b3d9390104772ff7",
+    "version": "0.1.10"
   },
-  "allowedVersions": "0.1.9",
+  "allowedVersions": "0.1.10",
   "hostRange": "0.2.1-rc.2",
   "targets": [
     "macos-arm64",
@@ -63,6 +63,7 @@
   "distributionScope": "跟进上游最新发布版；无发布版时跟进默认分支。每次构建固定源码与依赖，并在当前 DSH 上重新验证。",
   "upstreamChannel": "release",
   "releasePins": {
-    "v0.1.9": "583267e19fe3cfca01a28d4faa26a036c1d44a1b"
+    "v0.1.9": "583267e19fe3cfca01a28d4faa26a036c1d44a1b",
+    "v0.1.10": "199fdcb9165d4c47d9a2ed72b3d9390104772ff7"
   }
 }
