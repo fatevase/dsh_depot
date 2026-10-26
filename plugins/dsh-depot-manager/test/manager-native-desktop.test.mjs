@@ -8,13 +8,13 @@ import {desktopPackageManager,desktopPnpmEnvironment} from '../adapters/host-pnp
 import {applyDshCli} from '../adapters/dsh-cli.mjs'
 
 // Mirrors the downloaded official Windows ASAR and physical runtime layout.
-async function fixture(t,platform='win32'){
+async function fixture(t,platform='win32',version='0.2.1-rc.2'){
  const root=await realpath(await mkdtemp(path.join(os.tmpdir(),'native-desktop-')));t.after(()=>rm(root,{recursive:true,force:true}))
  const app=path.join(root,platform==='darwin'?'Renamed Harness.app':'custom install with spaces'),resources=path.join(app,platform==='darwin'?'Contents/Resources':'resources')
  const executable=path.join(app,platform==='darwin'?'Contents/MacOS/DeepSeek Harness':'DeepSeek Harness.exe')
  const cli=path.join(resources,'runtime/cli/bin',platform==='win32'?'dsh.cmd':'dsh'),pnpm=path.join(resources,'runtime/primary-runtime/dependencies/pnpm/bin/pnpm.mjs')
  for(const p of [cli,pnpm,executable]){await mkdir(path.dirname(p),{recursive:true});await writeFile(p,'fixture, never execute')}
- const entries={'package.json':JSON.stringify({name:'@deepseek-ai/dsh-desktop',version:'0.2.1-rc.2'}),'dsh/node_modules/@deepseek-ai/dsh/package.json':JSON.stringify({name:'@deepseek-ai/dsh',version:'0.2.1-rc.2'}),'dsh/node_modules/@deepseek-ai/dsh-desktop-host/lib/cli.js':'// official entry fixture'}
+ const entries={'package.json':JSON.stringify({name:'@deepseek-ai/dsh-desktop',version}),'dsh/node_modules/@deepseek-ai/dsh/package.json':JSON.stringify({name:'@deepseek-ai/dsh',version}),'dsh/node_modules/@deepseek-ai/dsh-desktop-host/lib/cli.js':'// official entry fixture'}
  const tree={files:{}};let offset=0;const bodies=[]
  for(const [name,content]of Object.entries(entries)){let dir=tree;const parts=name.split('/');for(const p of parts.slice(0,-1))dir=dir.files[p]??=( {files:{}} );const body=Buffer.from(content);dir.files[parts.at(-1)]={offset:String(offset),size:body.length};bodies.push(body);offset+=body.length}
  const header=Buffer.from(JSON.stringify(tree)),block=Math.ceil((header.length+8)/4)*4,bytes=Buffer.alloc(block+8+offset)
@@ -22,12 +22,12 @@ async function fixture(t,platform='win32'){
  await writeFile(path.join(resources,'app.asar'),bytes)
  return{root,app,resources,executable,cli,pnpm}
 }
-for(const platform of ['win32','darwin'])test(`official ${platform} Desktop is recognized from directory, executable and CLI shim`,async t=>{
- const f=await fixture(t,platform)
+for(const platform of ['win32','darwin'])for(const version of ['0.2.1-rc.2','0.2.1-rc.3'])test(`official ${platform} Desktop ${version} is recognized from directory, executable and CLI shim`,async t=>{
+ const f=await fixture(t,platform,version)
  for(const input of [f.app,f.executable,f.cli]){
   const d=await desktopAt(input,{platform})
   assert.ok(d,'must recognize official package identity');assert.equal(d.layout,'bundled-cli');assert.equal(d.supported,true)
-  assert.equal(d.executable,f.executable);assert.equal(d.profileName,'desktop');assert.equal(d.dshVersion,'0.2.1-rc.2')
+  assert.equal(d.executable,f.executable);assert.equal(d.profileName,'desktop');assert.equal(d.dshVersion,version)
   assert.equal(d.cliEntry,path.join(f.resources,'app.asar/dsh/node_modules/@deepseek-ai/dsh-desktop-host/lib/cli.js'))
  }
 })
