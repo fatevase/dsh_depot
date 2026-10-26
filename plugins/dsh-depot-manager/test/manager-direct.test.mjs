@@ -40,9 +40,17 @@ test('DSH CLI uses literal offline add/remove arguments and the target home',asy
   await applyDshCli(host,{action,path:path.join(f.dir,'space ; literal.tgz'),packageName:'new-plugin',storeDir:path.join(f.dir,'logs')},{ownershipCheck:async()=>{}})
   const observed=JSON.parse(await readFile(record));assert.equal(observed.home,f.dir);assert.deepEqual(observed.argv.slice(0,3),['plugin','--profile','web'])
   assert.deepEqual(observed.options,{})
+  assert.ok(observed.argv.includes('--config.trust-lockfile=true'),'the actual DSH CLI must always receive the pure-offline policy even without an installed snapshot')
   assert.ok(!observed.argv.some(a=>/store-dir|auto-install-peers|manage-package-manager/.test(a)))
   if(action==='remove'){assert.ok(observed.argv.includes('--config.offline=true'));assert.ok(!observed.argv.includes('--offline'));assert.ok(!observed.argv.includes('--ignore-scripts'))}
   else assert.equal(observed.argv[4],path.join(f.dir,'space ; literal.tgz'))
+ }
+ await writeFile(path.join(f.profile,'pnpm-lock.yaml'),"lockfileVersion: '9.0'\nimporters: {}\n")
+ await mkdir(path.join(f.profile,'node_modules/.pnpm'),{recursive:true})
+ for(const snapshot of ['lockfileVersion: 9.0\nimporters: {}\nsettings: {autoInstallPeers: false}\n','[invalid']){
+  await writeFile(path.join(f.profile,'node_modules/.pnpm/lock.yaml'),snapshot)
+  await applyDshCli(host,{action:'install',path:f.inspection.archivePath,storeDir:path.join(f.dir,'logs')},{ownershipCheck:async()=>{}})
+  assert.ok(JSON.parse(await readFile(record)).argv.includes('--config.trust-lockfile=true'),'snapshot drift must not silently remove the pure-offline CLI policy')
  }
 })
 test('direct installation preserves the host package-manager wrapper and ignores profile pnpm version',async t=>{

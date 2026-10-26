@@ -1,0 +1,22 @@
+{
+  "managerVersion": "0.1.15",
+  "hostVersion": "0.2.1-rc.2",
+  "pnpmVersion": "12.14.0",
+  "reproduction": {
+    "existingDependency": "@deepseek-ai/cosmokit@1.8.6",
+    "registryMetadata": "empty",
+    "installedSnapshot": "missing",
+    "oldResult": "DSH_INSTALL_FAILED / ERR_PNPM_NO_OFFLINE_META",
+    "newResult": "passed through original DSH CLI"
+  },
+  "finalFullInstaller": {
+    "platform": "macos-arm64",
+    "versionInstalled": "0.1.15",
+    "existingDependencyPreserved": true,
+    "registryMetadataEntriesAfterInstall": 0,
+    "status": "passed"
+  },
+  "regression": {"webPassed": 14, "managerPassed": 153, "managerSkipped": 3, "distributionPassed": 122},
+  "newCoverage": ["CLI policy with missing snapshot", "CLI policy with different snapshot", "CLI policy with invalid snapshot", "live-service policy without second snapshot"],
+  "limits": ["Actual user Windows snapshot was not supplied; missing and differing snapshots reproduce the same silent fallback branch", "Local run used pnpm offline mode; OS-level network denial is covered separately by native distribution CI", "pnpm 11 still requires ordinary resolver metadata; no metadata or dependencies are fabricated"]
+}

@@ -54,7 +54,7 @@ test('native Desktop installs with its CLI and verifies with plugin list instead
  const archive=path.join(f.root,'space ; literal.tgz')
  await applyDshCli(host,{action:'install',packageName:'test-plugin',path:archive,storeDir:path.join(f.root,'logs')},{ownershipCheck:async()=>{}})
  const rows=(await readFile(record,'utf8')).trim().split('\n').map(JSON.parse)
- assert.deepEqual(rows.map(r=>r.args),[['plugin','--profile','desktop','add',archive,'--offline','--ignore-scripts'],['plugin','--profile','desktop','list']]);assert.ok(rows.every(r=>r.home===f.root))
+ assert.deepEqual(rows.map(r=>r.args),[['plugin','--profile','desktop','add',archive,'--offline','--ignore-scripts','--config.trust-lockfile=true'],['plugin','--profile','desktop','list']]);assert.ok(rows.every(r=>r.home===f.root))
 })
 test('native Desktop queues a running-app install and resumes after exit without writing early',async t=>{
  const {fixture:transaction}=await import('./manager-helpers.mjs'),{createOperationPlan}=await import('../core/plans.mjs'),{executePlan}=await import('../core/operations.mjs'),{officialDesktopAdapter}=await import('../adapters/official-desktop.mjs')

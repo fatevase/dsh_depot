@@ -1,0 +1,8 @@
+<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width"><title>管理器 0.1.15 离线策略回归</title><style>body{font:16px/1.7 system-ui;max-width:880px;margin:48px auto;padding:0 24px;color:#202124}h1{font-size:28px}li{margin:8px 0}</style>
+<h1>管理器 0.1.15：取消会漏传参数的条件分支</h1>
+<p>2026-10-26。用户 Windows 日志中的最终 pnpm 命令只有 offline 和 ignore-scripts，没有 trust-lockfile，随后复审 72 个旧依赖并报 NO_OFFLINE_META。0.1.14 只有 wanted lock 与安装快照完全一致时才启用策略；其他情况静默回到未携带策略的 CLI。</p>
+<p>复现使用隔离的官方 DSH 0.2.1-rc.2、pnpm 12.14.0 和已安装 cosmokit@1.8.6。保留代码、store 和主锁文件，清空仓库元数据并临时移开安装快照，旧代码稳定报相同的元数据错误；新代码使用原 DSH CLI 完成安装。</p>
+<p>修复后，外部脚本在每次操作向目标 DSH CLI 传递 trust-lockfile=true；应用内沿用公开包服务并传递相同策略。不再用第二份安装快照决定是否进入离线模式，也不再为此启动额外服务 worker。信任的是本机现有锁定结果，旧依赖的年龄和信任级别不再复审；保留包完整性校验、禁用安装脚本和断网要求，不修改全局配置，不伪造缓存或依赖。</p>
+<ul><li>新增实际 CLI 参数回归：无快照、有差异快照和不可解析快照均不漏传策略。该回归先在旧代码上失败。</li><li>最终 macOS arm64 full 压缩包实际菜单安装 0.1.15 成功，原有 cosmokit 保留，仓库元数据缓存仍为空。</li><li>完整回归：网站 14 通过；管理器 153 通过、3 跳过；分发 122 通过。</li><li>Windows 原生 Desktop 回归增加首次无快照、重装快照有差异、卸载正常快照三种场景，并保留明确验证范围报告。</li></ul>
+<p>限制：未取得用户机器的实际快照文件，无法判定其具体差异；本地复现证明了同一错误分支。pnpm 11 仍需保留普通解析缓存，缺少真实依赖时明确失败，不自动联网。操作系统级网络隔离结果以各平台 CI 报告为准。</p>
+<p><a href="result.json">结构化结果</a> · <a href="https://github.com/pnpm/pnpm/blob/main/pnpm/docs/settings/dependency-resolution.md#trustlockfile">pnpm 官方策略说明</a></p></html>

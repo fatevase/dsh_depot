@@ -66,14 +66,18 @@ export async function nativeDesktopSmoke(app,output){
  await rm(savedCache,{recursive:true,force:true})
  const archive=path.join(output,receipt.manager.fileName),adapter=officialDesktopAdapter({runningProbe:async()=>false,...(elevatedCi?{ownershipCheck:async()=>{}}:{})}),operations=[]
  for(const action of ['install','install','remove']){
+  const snapshot=path.join(profileDir,'node_modules/.pnpm/lock.yaml')
+  const snapshotCase=operations.length===0?'missing':operations.length===1?'different':'normal'
+  if(snapshotCase==='missing')await rm(snapshot,{force:true})
+  else if(snapshotCase==='different')await writeFile(snapshot,(await readFile(snapshot,'utf8'))+'\ndepotSmokeSnapshot: true\n')
   const fresh=await probeHost(host);fresh.runtimeEnv={...fresh.runtimeEnv,...cacheEnv};if(elevatedCi)fresh.capabilities={...fresh.capabilities,writeSession:true,offlineInstall:true,remove:true}
   const inspection=action==='remove'?undefined:await inspectArtifact({path:archive,host:fresh,workDir:path.join(work,'imports')})
   const plan=await createOperationPlan({host:fresh,inspection,action,packageName:action==='remove'?'dsh-depot-manager':undefined,installedFingerprint:action==='remove'?'native-smoke':undefined,acceptUnverified:true})
   let commandOutput=''
   const op=await executePlan(plan,{host:fresh,adapter,storeDir:path.join(work,'tasks'),quiesced:true,onOutput:s=>{commandOutput+=s;process.stdout.write(s)}})
-  operations.push({action,state:op.state,error:op.error})
+  operations.push({action,snapshotCase,state:op.state,error:op.error})
   if(!['awaiting_reload','succeeded'].includes(op.state))throw Error(JSON.stringify(op.error))
-  if(!commandOutput.includes('与已安装记录一致'))throw Error('Existing-profile offline strategy was not exercised')
+  if(!commandOutput.includes('纯离线策略'))throw Error('Existing-profile offline strategy was not exercised')
   if(await readFile(existingFile,'utf8')!==existingBytes)throw Error('Offline operation changed the existing registry dependency')
  }
  const lite=receipt.assets?.find(a=>a.flavor==='lite')
