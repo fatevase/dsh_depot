@@ -1,6 +1,6 @@
 {
   "name": "dsh-depot-manager",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "type": "module",
   "description": "在 DSH 中导入、安装和移除离线插件，保留用户数据。",
   "license": "MIT",
@@ -13,13 +13,13 @@
   ],
   "engines": {
     "node": "^22.19.0 || >=24.0.0",
-    "dsh": "0.2.0-rc.2 || 0.2.1-rc.2"
+    "dsh": "0.2.0-rc.2 || 0.2.1-rc.2 || 0.2.1-rc.3"
   },
   "peerDependencies": {
-    "@deepseek-ai/dsh-app-boot": "0.2.0-rc.2 || 0.2.1-rc.2",
-    "@deepseek-ai/dsh-client-connection": "0.2.0-rc.2 || 0.2.1-rc.2",
-    "@deepseek-ai/dsh-host-webserver": "0.2.0-rc.2 || 0.2.1-rc.2",
-    "@deepseek-ai/dsh-plugin-manager": "0.2.0-rc.2 || 0.2.1-rc.2"
+    "@deepseek-ai/dsh-app-boot": "0.2.0-rc.2 || 0.2.1-rc.2 || 0.2.1-rc.3",
+    "@deepseek-ai/dsh-client-connection": "0.2.0-rc.2 || 0.2.1-rc.2 || 0.2.1-rc.3",
+    "@deepseek-ai/dsh-host-webserver": "0.2.0-rc.2 || 0.2.1-rc.2 || 0.2.1-rc.3",
+    "@deepseek-ai/dsh-plugin-manager": "0.2.0-rc.2 || 0.2.1-rc.2 || 0.2.1-rc.3"
   },
   "dsh": {
     "bundle": {
