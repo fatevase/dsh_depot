@@ -6,15 +6,15 @@
   "npmName": "answer-me-with-html",
   "channel": {
     "type": "fixed",
-    "ref": "76c3c6d39270138f3dfa6d577a3afb02178b3a1d",
+    "ref": "4b5106da7dd24d2c460f4314e797320b7f521ede",
     "allowPrerelease": false
   },
   "seed": {
-    "ref": "v0.5.7",
-    "commit": "76c3c6d39270138f3dfa6d577a3afb02178b3a1d",
-    "version": "0.5.7"
+    "ref": "v0.5.8",
+    "commit": "4b5106da7dd24d2c460f4314e797320b7f521ede",
+    "version": "0.5.8"
   },
-  "allowedVersions": "0.5.7",
+  "allowedVersions": "0.5.8",
   "hostRange": "0.2.1-rc.2",
   "targets": [
     "macos-arm64",
@@ -59,6 +59,7 @@
   "distributionScope": "跟进上游最新发布版；无发布版时跟进默认分支。每次构建固定源码与依赖，并在当前 DSH 上重新验证。",
   "upstreamChannel": "release",
   "releasePins": {
-    "v0.5.7": "76c3c6d39270138f3dfa6d577a3afb02178b3a1d"
+    "v0.5.7": "76c3c6d39270138f3dfa6d577a3afb02178b3a1d",
+    "v0.5.8": "4b5106da7dd24d2c460f4314e797320b7f521ede"
   }
 }
