@@ -1,12 +1,12 @@
 {
   "name": "dsh-our-free-model",
-  "version": "2.7.1",
+  "version": "2.7.2",
   "lockfileVersion": 3,
   "requires": true,
   "packages": {
     "": {
       "name": "dsh-our-free-model",
-      "version": "2.7.1",
+      "version": "2.7.2",
       "private": true
     }
   }

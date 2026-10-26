@@ -6,15 +6,15 @@
   "npmName": "answer-me-with-html",
   "channel": {
     "type": "fixed",
-    "ref": "4b5106da7dd24d2c460f4314e797320b7f521ede",
+    "ref": "f82dd6dce3ca95b0e565f8cffaf5eba23f4c995f",
     "allowPrerelease": false
   },
   "seed": {
-    "ref": "v0.5.8",
-    "commit": "4b5106da7dd24d2c460f4314e797320b7f521ede",
-    "version": "0.5.8"
+    "ref": "v0.5.10",
+    "commit": "f82dd6dce3ca95b0e565f8cffaf5eba23f4c995f",
+    "version": "0.5.10"
   },
-  "allowedVersions": "0.5.8",
+  "allowedVersions": "0.5.10",
   "hostRange": "0.2.1-rc.2",
   "targets": [
     "macos-arm64",
@@ -60,6 +60,7 @@
   "upstreamChannel": "release",
   "releasePins": {
     "v0.5.7": "76c3c6d39270138f3dfa6d577a3afb02178b3a1d",
-    "v0.5.8": "4b5106da7dd24d2c460f4314e797320b7f521ede"
+    "v0.5.8": "4b5106da7dd24d2c460f4314e797320b7f521ede",
+    "v0.5.10": "f82dd6dce3ca95b0e565f8cffaf5eba23f4c995f"
   }
 }

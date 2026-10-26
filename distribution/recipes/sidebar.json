@@ -6,15 +6,15 @@
   "npmName": "dsh-better-sidebar",
   "channel": {
     "type": "fixed",
-    "ref": "83faf70940160e5cd4c5332f5400aa8f4dbbb6d6",
+    "ref": "59131330bb837cf48dc4117b17c091998b595df0",
     "allowPrerelease": false
   },
   "seed": {
-    "ref": "v0.28.0",
-    "commit": "83faf70940160e5cd4c5332f5400aa8f4dbbb6d6",
-    "version": "0.28.0"
+    "ref": "v0.28.1",
+    "commit": "59131330bb837cf48dc4117b17c091998b595df0",
+    "version": "0.28.1"
   },
-  "allowedVersions": "0.28.0",
+  "allowedVersions": "0.28.1",
   "hostRange": "0.2.1-rc.2",
   "targets": [
     "macos-arm64",
@@ -60,6 +60,7 @@
   "latestOnly": true,
   "upstreamChannel": "release",
   "releasePins": {
-    "v0.28.0": "83faf70940160e5cd4c5332f5400aa8f4dbbb6d6"
+    "v0.28.0": "83faf70940160e5cd4c5332f5400aa8f4dbbb6d6",
+    "v0.28.1": "59131330bb837cf48dc4117b17c091998b595df0"
   }
 }
