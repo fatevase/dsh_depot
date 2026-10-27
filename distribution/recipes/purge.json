@@ -6,15 +6,15 @@
   "npmName": "dsh-purge",
   "channel": {
     "type": "fixed",
-    "ref": "24f4a7f5df43a766f52e7fa159188c20eaa2b0f1",
+    "ref": "160b9114cbad7beca3d4d3f9f027ec843bf46f5e",
     "allowPrerelease": false
   },
   "seed": {
-    "ref": "v1.1.79",
-    "commit": "24f4a7f5df43a766f52e7fa159188c20eaa2b0f1",
-    "version": "1.1.79"
+    "ref": "v1.1.81",
+    "commit": "160b9114cbad7beca3d4d3f9f027ec843bf46f5e",
+    "version": "1.1.81"
   },
-  "allowedVersions": "1.1.79",
+  "allowedVersions": "1.1.81",
   "hostRange": "0.2.1-rc.2",
   "targets": [
     "macos-arm64",
@@ -53,7 +53,8 @@
     "v1.1.74": "5a9b8e14856138814a2139a0105481e1dcdaece4",
     "v1.1.77": "ac58b3e35509da23bd75b6250f01007590524102",
     "v1.1.78": "fd109e106ce5818b3c00524123a3431e4afc0e81",
-    "v1.1.79": "24f4a7f5df43a766f52e7fa159188c20eaa2b0f1"
+    "v1.1.79": "24f4a7f5df43a766f52e7fa159188c20eaa2b0f1",
+    "v1.1.81": "160b9114cbad7beca3d4d3f9f027ec843bf46f5e"
   },
   "distributionScope": "跟进上游最新发布版；无发布版时跟进默认分支。每次构建固定源码与依赖，并在当前 DSH 上重新验证。",
   "upstreamChannel": "release"
