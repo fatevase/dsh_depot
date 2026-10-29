@@ -16,7 +16,7 @@
     "archiveSha256": "ee857afaa0365b5ac287ccde235ff05691f6e980dd212a3b2e7e88295137ec2a"
   },
   "allowedVersions": "0.1.9",
-  "hostRange": "0.2.1-rc.2",
+  "hostRange": "0.2.1-rc.5",
   "targets": [
     "macos-arm64",
     "linux-x64",

@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "distributionRepository": "fatevase/dsh_depot",
   "host": {
-    "version": "0.2.1-rc.2",
+    "version": "0.2.1-rc.5",
     "node": "26.9.0"
   },
   "candidateFeeds": [
