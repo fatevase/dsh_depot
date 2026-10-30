@@ -6,15 +6,15 @@
   "npmName": "dsh-taskfold",
   "channel": {
     "type": "fixed",
-    "ref": "7a82d652b0f772b0ff48af6ed3f44f9aa67f33b0",
+    "ref": "bcf67181b3df19a5c844565fa47005e9ec674425",
     "allowPrerelease": false
   },
   "seed": {
-    "ref": "v0.39.1",
-    "commit": "7a82d652b0f772b0ff48af6ed3f44f9aa67f33b0",
-    "version": "0.39.1"
+    "ref": "v0.40.0",
+    "commit": "bcf67181b3df19a5c844565fa47005e9ec674425",
+    "version": "0.40.0"
   },
-  "allowedVersions": "0.39.1",
+  "allowedVersions": "0.40.0",
   "hostRange": "0.2.1-rc.5",
   "targets": [
     "macos-arm64",
@@ -63,6 +63,7 @@
   "releasePins": {
     "v0.38.3": "6107bc5046578de3501e212da2ab3dbba790bf09",
     "v0.39.0": "9e98e0477178ace1583ec391699a98de5ebeccc5",
-    "v0.39.1": "7a82d652b0f772b0ff48af6ed3f44f9aa67f33b0"
+    "v0.39.1": "7a82d652b0f772b0ff48af6ed3f44f9aa67f33b0",
+    "v0.40.0": "bcf67181b3df19a5c844565fa47005e9ec674425"
   }
 }
