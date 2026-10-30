@@ -6,10 +6,10 @@
   ],
   "channel": {
     "type": "fixed",
-    "ref": "f4143c4b4b03caaaa513c9eb7d92cabff6515bf7",
+    "ref": "4e3bbd66baa7cccceab837457eb3aeb429a8cc70",
     "allowPrerelease": false
   },
-  "allowedVersions": "0.27.0",
+  "allowedVersions": "0.28.0",
   "hostRange": "0.2.1-rc.5",
   "targets": [
     "macos-arm64",
@@ -32,8 +32,8 @@
   "npmName": "treg-dsh",
   "seed": {
     "ref": "main",
-    "commit": "f4143c4b4b03caaaa513c9eb7d92cabff6515bf7",
-    "version": "0.27.0"
+    "commit": "4e3bbd66baa7cccceab837457eb3aeb429a8cc70",
+    "version": "0.28.0"
   },
   "locks": {
     "runtime": {
