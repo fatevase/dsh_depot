@@ -1,12 +1,12 @@
 {
   "name": "@dsh-electron/dsh-plugin-multi-root-workspace",
-  "version": "0.1.12",
+  "version": "0.1.13",
   "lockfileVersion": 3,
   "requires": true,
   "packages": {
     "": {
       "name": "@dsh-electron/dsh-plugin-multi-root-workspace",
-      "version": "0.1.12",
+      "version": "0.1.13",
       "dependencies": {
         "@deepseek-ai/node-addon-system": "0.1.2",
         "koffi": "3.3.6",

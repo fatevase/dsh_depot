@@ -6,7 +6,7 @@
   ],
   "channel": {
     "type": "fixed",
-    "ref": "11c38f159e215148f59dcaa2a9cad9ab33eb762b",
+    "ref": "d58c83181266868138a067c526b882582e6b5110",
     "allowPrerelease": false
   },
   "allowedVersions": "0.28.0",
@@ -32,7 +32,7 @@
   "npmName": "treg-dsh",
   "seed": {
     "ref": "main",
-    "commit": "11c38f159e215148f59dcaa2a9cad9ab33eb762b",
+    "commit": "d58c83181266868138a067c526b882582e6b5110",
     "version": "0.28.0"
   },
   "locks": {

@@ -6,15 +6,15 @@
   "npmName": "@dsh-electron/dsh-plugin-multi-root-workspace",
   "channel": {
     "type": "fixed",
-    "ref": "9053cf254c5f5b6f2997058bfffc8aca16f5b5f0",
+    "ref": "4e45e25aa34aa39c926b6f3908a22f8b265b1f1c",
     "allowPrerelease": false
   },
   "seed": {
-    "ref": "v0.1.12",
-    "commit": "9053cf254c5f5b6f2997058bfffc8aca16f5b5f0",
-    "version": "0.1.12"
+    "ref": "v0.1.13",
+    "commit": "4e45e25aa34aa39c926b6f3908a22f8b265b1f1c",
+    "version": "0.1.13"
   },
-  "allowedVersions": "0.1.12",
+  "allowedVersions": "0.1.13",
   "hostRange": "0.2.1-rc.5",
   "targets": [
     "macos-arm64",
@@ -66,6 +66,7 @@
     "v0.1.9": "583267e19fe3cfca01a28d4faa26a036c1d44a1b",
     "v0.1.10": "199fdcb9165d4c47d9a2ed72b3d9390104772ff7",
     "v0.1.11": "c7148a6133b9c8d14994f12011fc090a495736c6",
-    "v0.1.12": "9053cf254c5f5b6f2997058bfffc8aca16f5b5f0"
+    "v0.1.12": "9053cf254c5f5b6f2997058bfffc8aca16f5b5f0",
+    "v0.1.13": "4e45e25aa34aa39c926b6f3908a22f8b265b1f1c"
   }
 }
