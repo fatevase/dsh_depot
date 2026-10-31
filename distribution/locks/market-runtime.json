@@ -1,12 +1,12 @@
 {
   "name": "dshmarket",
-  "version": "1.73.5",
+  "version": "1.73.6",
   "lockfileVersion": 3,
   "requires": true,
   "packages": {
     "": {
       "name": "dshmarket",
-      "version": "1.73.5",
+      "version": "1.73.6",
       "dependencies": {
         "js-yaml": "4.3.2",
         "undici": "7.30.1"
