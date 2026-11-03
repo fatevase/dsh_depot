@@ -6,15 +6,15 @@
   "npmName": "dshmarket",
   "channel": {
     "type": "fixed",
-    "ref": "c01a967a2603f670795eea7e4e1bd9717e05d3ff",
+    "ref": "c57e77ac22fe33dc91134346c2ca8882da488152",
     "allowPrerelease": false
   },
   "seed": {
-    "ref": "v1.73.8",
-    "commit": "c01a967a2603f670795eea7e4e1bd9717e05d3ff",
-    "version": "1.73.8"
+    "ref": "v1.73.9",
+    "commit": "c57e77ac22fe33dc91134346c2ca8882da488152",
+    "version": "1.73.9"
   },
-  "allowedVersions": "1.73.8",
+  "allowedVersions": "1.73.9",
   "hostRange": "0.2.1-rc.5",
   "targets": [
     "macos-arm64",
@@ -72,6 +72,7 @@
     "v1.73.5": "d797f38834c53a97a5827651f60ab35a461b44d3",
     "v1.73.6": "81d03b611d1a61cae5865c442e3e7d9cf7f6ae05",
     "v1.73.7": "43530b15f0712ec5b506f584a335698cc9ac54b1",
-    "v1.73.8": "c01a967a2603f670795eea7e4e1bd9717e05d3ff"
+    "v1.73.8": "c01a967a2603f670795eea7e4e1bd9717e05d3ff",
+    "v1.73.9": "c57e77ac22fe33dc91134346c2ca8882da488152"
   }
 }
