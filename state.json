@@ -260933,13 +260933,13 @@
   "candidateReport": {
     "schemaVersion": 1,
     "projectionVersion": 3,
-    "runId": 41795784714,
+    "runId": 41922349585,
     "runAttempt": 1,
-    "runUrl": "https://github.com/fatevase/dsh_depot/actions/runs/41795784714",
-    "completedAt": "2026-11-04T08:01:20Z",
+    "runUrl": "https://github.com/fatevase/dsh_depot/actions/runs/41922349585",
+    "completedAt": "2026-11-04T22:11:46Z",
     "counts": {
-      "compiled": 270,
-      "failed": 27,
+      "compiled": 267,
+      "failed": 30,
       "missing": 0
     },
     "plugins": [
@@ -260948,17 +260948,17 @@
         "repository": "Ebony-Vinyl/dsh-our-free-model",
         "npmName": "dsh-our-free-model",
         "commit": "999e9f784ea3ea7a11cae383b142697b1ff2c42f",
-        "runId": 41795784714,
+        "runId": 41922349585,
         "runAttempt": 1,
-        "runUrl": "https://github.com/fatevase/dsh_depot/actions/runs/41795784714",
+        "runUrl": "https://github.com/fatevase/dsh_depot/actions/runs/41922349585",
         "results": {
           "macos-arm64": {
-            "runId": 41795784714,
+            "runId": 41922349585,
             "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
-            "startedAt": "2026-11-04T07:58:21.907Z",
-            "seconds": 14.061,
+            "startedAt": "2026-11-04T22:08:51.893Z",
+            "seconds": 13.25,
             "stage": "pack-0",
             "dependencyMode": "not-installed-prebuilt-trial",
             "adapterDigest": "b96635693f938836330a9d2180c337974b065f7905f5e9ea5955f4200571d755",
@@ -260977,14 +260977,14 @@
                 ],
                 "cwd": "source",
                 "exitCode": 0,
-                "seconds": 1.183
+                "seconds": 1.458
               }
             ],
             "runtimeDependencies": [],
             "version": "2.8.0",
             "warnings": [],
-            "artifactsUrl": "https://github.com/fatevase/dsh_depot/actions/runs/41795784714/artifacts/13305243319",
-            "artifactsExpiresAt": "2026-11-11T08:00:03Z",
+            "artifactsUrl": "https://github.com/fatevase/dsh_depot/actions/runs/41922349585/artifacts/13368500155",
+            "artifactsExpiresAt": "2026-11-11T22:11:14Z",
             "files": [
               {
                 "name": "dsh-our-free-model",
@@ -261004,12 +261004,12 @@
             ]
           },
           "linux-x64": {
-            "runId": 41795784714,
+            "runId": 41922349585,
             "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
-            "startedAt": "2026-11-04T07:58:18.918Z",
-            "seconds": 15.331,
+            "startedAt": "2026-11-04T22:08:45.328Z",
+            "seconds": 9.546,
             "stage": "pack-0",
             "dependencyMode": "not-installed-prebuilt-trial",
             "adapterDigest": "b96635693f938836330a9d2180c337974b065f7905f5e9ea5955f4200571d755",
@@ -261028,14 +261028,14 @@
                 ],
                 "cwd": "source",
                 "exitCode": 0,
-                "seconds": 1.014
+                "seconds": 1.25
               }
             ],
             "runtimeDependencies": [],
             "version": "2.8.0",
             "warnings": [],
-            "artifactsUrl": "https://github.com/fatevase/dsh_depot/actions/runs/41795784714/artifacts/13305506697",
-            "artifactsExpiresAt": "2026-11-11T07:59:57Z",
+            "artifactsUrl": "https://github.com/fatevase/dsh_depot/actions/runs/41922349585/artifacts/13367892313",
+            "artifactsExpiresAt": "2026-11-11T22:10:24Z",
             "files": [
               {
                 "name": "dsh-our-free-model",
@@ -261055,12 +261055,12 @@
             ]
           },
           "win32-x64": {
-            "runId": 41795784714,
+            "runId": 41922349585,
             "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
-            "startedAt": "2026-11-04T07:58:39.387Z",
-            "seconds": 20.303,
+            "startedAt": "2026-11-04T22:09:07.627Z",
+            "seconds": 10.259,
             "stage": "pack-0",
             "dependencyMode": "not-installed-prebuilt-trial",
             "adapterDigest": "b96635693f938836330a9d2180c337974b065f7905f5e9ea5955f4200571d755",
@@ -261079,14 +261079,14 @@
                 ],
                 "cwd": "source",
                 "exitCode": 0,
-                "seconds": 2.104
+                "seconds": 1.75
               }
             ],
             "runtimeDependencies": [],
             "version": "2.8.0",
             "warnings": [],
-            "artifactsUrl": "https://github.com/fatevase/dsh_depot/actions/runs/41795784714/artifacts/13305776352",
-            "artifactsExpiresAt": "2026-11-11T08:00:52Z",
+            "artifactsUrl": "https://github.com/fatevase/dsh_depot/actions/runs/41922349585/artifacts/13367234009",
+            "artifactsExpiresAt": "2026-11-11T22:11:16Z",
             "files": [
               {
                 "name": "dsh-our-free-model",
@@ -261111,23 +261111,23 @@
         "repositoryId": 1331636953,
         "repository": "zhu1090093659/dsh-web",
         "npmName": "dsh-web",
-        "commit": "81a09ab991ae3f1be5aa35115901815194fe0d64",
-        "runId": 41795784714,
+        "commit": "e8cc1955bab16cd6acecdefd5259d8b2531a98a2",
+        "runId": 41922349585,
         "runAttempt": 1,
-        "runUrl": "https://github.com/fatevase/dsh_depot/actions/runs/41795784714",
+        "runUrl": "https://github.com/fatevase/dsh_depot/actions/runs/41922349585",
         "results": {
           "macos-arm64": {
-            "runId": 41795784714,
+            "runId": 41922349585,
             "runAttempt": 1,
-            "status": "compiled",
+            "status": "failed",
             "verification": "not-run",
-            "startedAt": "2026-11-04T07:58:39.666Z",
-            "seconds": 69.679,
-            "stage": "pack-18",
+            "startedAt": "2026-11-04T22:09:09.341Z",
+            "seconds": 92.989,
+            "stage": "pack-0",
             "dependencyMode": "source-lock",
-            "adapterDigest": "ef331db4ed94eefe849cd346ad383ca531563f54172b7ce522a97516d83cfbf7",
-            "sourceSha256": "d0dbab693e8b7c7399cde6b0190395a1ab6838cd9341962ab78faac06d6ef191",
-            "lockSha256": "3c3ef9cc778dd8b7937dc4126d6e72775918ecf51707588d6de067215ecade06",
+            "adapterDigest": "571b8b09421d4f956868fff26350e08b065b55519cdb5f854fc35e7fde40ba89",
+            "sourceSha256": "27e07bdca282f1f013c7795b2f5a2389b4c72f5536cdef27f28fbc1757a6861a",
+            "lockSha256": "1890a538e70e3121ffad87d4bfb8a65b9f0573cd891fc9d0dacf3fa01bd59d7c",
             "steps": [
               {
                 "stage": "source-init",
@@ -261141,7 +261141,7 @@
                 ],
                 "cwd": "source-input/git",
                 "exitCode": 0,
-                "seconds": 0.059
+                "seconds": 0.035
               },
               {
                 "stage": "source-remote",
@@ -261158,7 +261158,7 @@
                 ],
                 "cwd": "source-input/git",
                 "exitCode": 0,
-                "seconds": 0.007
+                "seconds": 0.009
               },
               {
                 "stage": "source-fetch",
@@ -261175,11 +261175,11 @@
                   "--depth=1",
                   "--filter=blob:none",
                   "origin",
-                  "81a09ab991ae3f1be5aa35115901815194fe0d64"
+                  "e8cc1955bab16cd6acecdefd5259d8b2531a98a2"
                 ],
                 "cwd": "source-input/git",
                 "exitCode": 0,
-                "seconds": 0.423
+                "seconds": 0.458
               },
               {
                 "stage": "source-identity",
@@ -261194,7 +261194,7 @@
                 ],
                 "cwd": "source-input/git",
                 "exitCode": 0,
-                "seconds": 0.007
+                "seconds": 0.008
               },
               {
                 "stage": "source-components",
@@ -261219,7 +261219,7 @@
                 ],
                 "cwd": "source-input/git",
                 "exitCode": 0,
-                "seconds": 30.655
+                "seconds": 45.492
               },
               {
                 "stage": "dependencies-0",
@@ -261236,7 +261236,7 @@
                 ],
                 "cwd": "source",
                 "exitCode": 0,
-                "seconds": 6.941
+                "seconds": 14.947
               },
               {
                 "stage": "build",
@@ -261250,7 +261250,7 @@
                 ],
                 "cwd": "source",
                 "exitCode": 0,
-                "seconds": 22.094
+                "seconds": 30.315
               },
               {
                 "stage": "pack-0",
@@ -261267,573 +261267,37 @@
                 ],
                 "cwd": "source/packages/dsh-web-all",
                 "exitCode": 0,
-                "seconds": 0.37
-              },
-              {
-                "stage": "pack-1",
-                "argv": [
-                  "/Users/runner/hostedtoolcache/node/26.9.0/arm64/bin/node",
-                  "/Users/runner/work/dsh_depot/dsh_depot/.runtime/candidate-builds/tools/11.24.0/pnpm-11.24.0/node_modules/pnpm/bin/pnpm.cjs",
-                  "--config.manage-package-manager-versions=false",
-                  "--pm-on-fail=ignore",
-                  "pack",
-                  "--config.ignore-scripts=true",
-                  "--json",
-                  "--pack-destination",
-                  "/Users/runner/work/dsh_depot/dsh_depot/.runtime/candidate-builds/results/1331636953/packages"
-                ],
-                "cwd": "source/packages/dsh-git-graph",
-                "exitCode": 0,
-                "seconds": 0.395
-              },
-              {
-                "stage": "pack-2",
-                "argv": [
-                  "/Users/runner/hostedtoolcache/node/26.9.0/arm64/bin/node",
-                  "/Users/runner/work/dsh_depot/dsh_depot/.runtime/candidate-builds/tools/11.24.0/pnpm-11.24.0/node_modules/pnpm/bin/pnpm.cjs",
-                  "--config.manage-package-manager-versions=false",
-                  "--pm-on-fail=ignore",
-                  "pack",
-                  "--config.ignore-scripts=true",
-                  "--json",
-                  "--pack-destination",
-                  "/Users/runner/work/dsh_depot/dsh_depot/.runtime/candidate-builds/results/1331636953/packages"
-                ],
-                "cwd": "source/packages/dsh-i18n",
-                "exitCode": 0,
-                "seconds": 0.296
-              },
-              {
-                "stage": "pack-3",
-                "argv": [
-                  "/Users/runner/hostedtoolcache/node/26.9.0/arm64/bin/node",
-                  "/Users/runner/work/dsh_depot/dsh_depot/.runtime/candidate-builds/tools/11.24.0/pnpm-11.24.0/node_modules/pnpm/bin/pnpm.cjs",
-                  "--config.manage-package-manager-versions=false",
-                  "--pm-on-fail=ignore",
-                  "pack",
-                  "--config.ignore-scripts=true",
-                  "--json",
-                  "--pack-destination",
-                  "/Users/runner/work/dsh_depot/dsh_depot/.runtime/candidate-builds/results/1331636953/packages"
-                ],
-                "cwd": "source/packages/dsh-liangshen",
-                "exitCode": 0,
-                "seconds": 0.339
-              },
-              {
-                "stage": "pack-4",
-                "argv": [
-                  "/Users/runner/hostedtoolcache/node/26.9.0/arm64/bin/node",
-                  "/Users/runner/work/dsh_depot/dsh_depot/.runtime/candidate-builds/tools/11.24.0/pnpm-11.24.0/node_modules/pnpm/bin/pnpm.cjs",
-                  "--config.manage-package-manager-versions=false",
-                  "--pm-on-fail=ignore",
-                  "pack",
-                  "--config.ignore-scripts=true",
-                  "--json",
-                  "--pack-destination",
-                  "/Users/runner/work/dsh_depot/dsh_depot/.runtime/candidate-builds/results/1331636953/packages"
-                ],
-                "cwd": "source/packages/dsh-market",
-                "exitCode": 0,
-                "seconds": 0.292
-              },
-              {
-                "stage": "pack-5",
-                "argv": [
-                  "/Users/runner/hostedtoolcache/node/26.9.0/arm64/bin/node",
-                  "/Users/runner/work/dsh_depot/dsh_depot/.runtime/candidate-builds/tools/11.24.0/pnpm-11.24.0/node_modules/pnpm/bin/pnpm.cjs",
-                  "--config.manage-package-manager-versions=false",
-                  "--pm-on-fail=ignore",
-                  "pack",
-                  "--config.ignore-scripts=true",
-                  "--json",
-                  "--pack-destination",
-                  "/Users/runner/work/dsh_depot/dsh_depot/.runtime/candidate-builds/results/1331636953/packages"
-                ],
-                "cwd": "source/packages/dsh-plugin-manager",
-                "exitCode": 0,
-                "seconds": 0.325
-              },
-              {
-                "stage": "pack-6",
-                "argv": [
-                  "/Users/runner/hostedtoolcache/node/26.9.0/arm64/bin/node",
-                  "/Users/runner/work/dsh_depot/dsh_depot/.runtime/candidate-builds/tools/11.24.0/pnpm-11.24.0/node_modules/pnpm/bin/pnpm.cjs",
-                  "--config.manage-package-manager-versions=false",
-                  "--pm-on-fail=ignore",
-                  "pack",
-                  "--config.ignore-scripts=true",
-                  "--json",
-                  "--pack-destination",
-                  "/Users/runner/work/dsh_depot/dsh_depot/.runtime/candidate-builds/results/1331636953/packages"
-                ],
-                "cwd": "source/packages/dsh-remote-bridge",
-                "exitCode": 0,
-                "seconds": 0.515
-              },
-              {
-                "stage": "pack-7",
-                "argv": [
-                  "/Users/runner/hostedtoolcache/node/26.9.0/arm64/bin/node",
-                  "/Users/runner/work/dsh_depot/dsh_depot/.runtime/candidate-builds/tools/11.24.0/pnpm-11.24.0/node_modules/pnpm/bin/pnpm.cjs",
-                  "--config.manage-package-manager-versions=false",
-                  "--pm-on-fail=ignore",
-                  "pack",
-                  "--config.ignore-scripts=true",
-                  "--json",
-                  "--pack-destination",
-                  "/Users/runner/work/dsh_depot/dsh_depot/.runtime/candidate-builds/results/1331636953/packages"
-                ],
-                "cwd": "source/packages/dsh-remote-web-ui",
-                "exitCode": 0,
-                "seconds": 0.449
-              },
-              {
-                "stage": "pack-8",
-                "argv": [
-                  "/Users/runner/hostedtoolcache/node/26.9.0/arm64/bin/node",
-                  "/Users/runner/work/dsh_depot/dsh_depot/.runtime/candidate-builds/tools/11.24.0/pnpm-11.24.0/node_modules/pnpm/bin/pnpm.cjs",
-                  "--config.manage-package-manager-versions=false",
-                  "--pm-on-fail=ignore",
-                  "pack",
-                  "--config.ignore-scripts=true",
-                  "--json",
-                  "--pack-destination",
-                  "/Users/runner/work/dsh_depot/dsh_depot/.runtime/candidate-builds/results/1331636953/packages"
-                ],
-                "cwd": "source/packages/dsh-session-archive",
-                "exitCode": 0,
-                "seconds": 0.339
-              },
-              {
-                "stage": "pack-9",
-                "argv": [
-                  "/Users/runner/hostedtoolcache/node/26.9.0/arm64/bin/node",
-                  "/Users/runner/work/dsh_depot/dsh_depot/.runtime/candidate-builds/tools/11.24.0/pnpm-11.24.0/node_modules/pnpm/bin/pnpm.cjs",
-                  "--config.manage-package-manager-versions=false",
-                  "--pm-on-fail=ignore",
-                  "pack",
-                  "--config.ignore-scripts=true",
-                  "--json",
-                  "--pack-destination",
-                  "/Users/runner/work/dsh_depot/dsh_depot/.runtime/candidate-builds/results/1331636953/packages"
-                ],
-                "cwd": "source/packages/dsh-session-id",
-                "exitCode": 0,
-                "seconds": 0.283
-              },
-              {
-                "stage": "pack-10",
-                "argv": [
-                  "/Users/runner/hostedtoolcache/node/26.9.0/arm64/bin/node",
-                  "/Users/runner/work/dsh_depot/dsh_depot/.runtime/candidate-builds/tools/11.24.0/pnpm-11.24.0/node_modules/pnpm/bin/pnpm.cjs",
-                  "--config.manage-package-manager-versions=false",
-                  "--pm-on-fail=ignore",
-                  "pack",
-                  "--config.ignore-scripts=true",
-                  "--json",
-                  "--pack-destination",
-                  "/Users/runner/work/dsh_depot/dsh_depot/.runtime/candidate-builds/results/1331636953/packages"
-                ],
-                "cwd": "source/packages/dsh-skill-explorer",
-                "exitCode": 0,
-                "seconds": 0.289
-              },
-              {
-                "stage": "pack-11",
-                "argv": [
-                  "/Users/runner/hostedtoolcache/node/26.9.0/arm64/bin/node",
-                  "/Users/runner/work/dsh_depot/dsh_depot/.runtime/candidate-builds/tools/11.24.0/pnpm-11.24.0/node_modules/pnpm/bin/pnpm.cjs",
-                  "--config.manage-package-manager-versions=false",
-                  "--pm-on-fail=ignore",
-                  "pack",
-                  "--config.ignore-scripts=true",
-                  "--json",
-                  "--pack-destination",
-                  "/Users/runner/work/dsh_depot/dsh_depot/.runtime/candidate-builds/results/1331636953/packages"
-                ],
-                "cwd": "source/packages/dsh-ssh",
-                "exitCode": 0,
-                "seconds": 0.367
-              },
-              {
-                "stage": "pack-12",
-                "argv": [
-                  "/Users/runner/hostedtoolcache/node/26.9.0/arm64/bin/node",
-                  "/Users/runner/work/dsh_depot/dsh_depot/.runtime/candidate-builds/tools/11.24.0/pnpm-11.24.0/node_modules/pnpm/bin/pnpm.cjs",
-                  "--config.manage-package-manager-versions=false",
-                  "--pm-on-fail=ignore",
-                  "pack",
-                  "--config.ignore-scripts=true",
-                  "--json",
-                  "--pack-destination",
-                  "/Users/runner/work/dsh_depot/dsh_depot/.runtime/candidate-builds/results/1331636953/packages"
-                ],
-                "cwd": "source/packages/dsh-task-board",
-                "exitCode": 0,
-                "seconds": 0.506
-              },
-              {
-                "stage": "pack-13",
-                "argv": [
-                  "/Users/runner/hostedtoolcache/node/26.9.0/arm64/bin/node",
-                  "/Users/runner/work/dsh_depot/dsh_depot/.runtime/candidate-builds/tools/11.24.0/pnpm-11.24.0/node_modules/pnpm/bin/pnpm.cjs",
-                  "--config.manage-package-manager-versions=false",
-                  "--pm-on-fail=ignore",
-                  "pack",
-                  "--config.ignore-scripts=true",
-                  "--json",
-                  "--pack-destination",
-                  "/Users/runner/work/dsh_depot/dsh_depot/.runtime/candidate-builds/results/1331636953/packages"
-                ],
-                "cwd": "source/packages/dsh-task-board-github",
-                "exitCode": 0,
-                "seconds": 0.382
-              },
-              {
-                "stage": "pack-14",
-                "argv": [
-                  "/Users/runner/hostedtoolcache/node/26.9.0/arm64/bin/node",
-                  "/Users/runner/work/dsh_depot/dsh_depot/.runtime/candidate-builds/tools/11.24.0/pnpm-11.24.0/node_modules/pnpm/bin/pnpm.cjs",
-                  "--config.manage-package-manager-versions=false",
-                  "--pm-on-fail=ignore",
-                  "pack",
-                  "--config.ignore-scripts=true",
-                  "--json",
-                  "--pack-destination",
-                  "/Users/runner/work/dsh_depot/dsh_depot/.runtime/candidate-builds/results/1331636953/packages"
-                ],
-                "cwd": "source/packages/dsh-task-board-remote",
-                "exitCode": 0,
-                "seconds": 0.315
-              },
-              {
-                "stage": "pack-15",
-                "argv": [
-                  "/Users/runner/hostedtoolcache/node/26.9.0/arm64/bin/node",
-                  "/Users/runner/work/dsh_depot/dsh_depot/.runtime/candidate-builds/tools/11.24.0/pnpm-11.24.0/node_modules/pnpm/bin/pnpm.cjs",
-                  "--config.manage-package-manager-versions=false",
-                  "--pm-on-fail=ignore",
-                  "pack",
-                  "--config.ignore-scripts=true",
-                  "--json",
-                  "--pack-destination",
-                  "/Users/runner/work/dsh_depot/dsh_depot/.runtime/candidate-builds/results/1331636953/packages"
-                ],
-                "cwd": "source/packages/dsh-update",
-                "exitCode": 0,
-                "seconds": 0.305
-              },
-              {
-                "stage": "pack-16",
-                "argv": [
-                  "/Users/runner/hostedtoolcache/node/26.9.0/arm64/bin/node",
-                  "/Users/runner/work/dsh_depot/dsh_depot/.runtime/candidate-builds/tools/11.24.0/pnpm-11.24.0/node_modules/pnpm/bin/pnpm.cjs",
-                  "--config.manage-package-manager-versions=false",
-                  "--pm-on-fail=ignore",
-                  "pack",
-                  "--config.ignore-scripts=true",
-                  "--json",
-                  "--pack-destination",
-                  "/Users/runner/work/dsh_depot/dsh_depot/.runtime/candidate-builds/results/1331636953/packages"
-                ],
-                "cwd": "source/packages/dsh-usage",
-                "exitCode": 0,
-                "seconds": 0.34
-              },
-              {
-                "stage": "pack-17",
-                "argv": [
-                  "/Users/runner/hostedtoolcache/node/26.9.0/arm64/bin/node",
-                  "/Users/runner/work/dsh_depot/dsh_depot/.runtime/candidate-builds/tools/11.24.0/pnpm-11.24.0/node_modules/pnpm/bin/pnpm.cjs",
-                  "--config.manage-package-manager-versions=false",
-                  "--pm-on-fail=ignore",
-                  "pack",
-                  "--config.ignore-scripts=true",
-                  "--json",
-                  "--pack-destination",
-                  "/Users/runner/work/dsh_depot/dsh_depot/.runtime/candidate-builds/results/1331636953/packages"
-                ],
-                "cwd": "source/packages/dsh-web-settings",
-                "exitCode": 0,
-                "seconds": 0.282
-              },
-              {
-                "stage": "pack-18",
-                "argv": [
-                  "/Users/runner/hostedtoolcache/node/26.9.0/arm64/bin/node",
-                  "/Users/runner/work/dsh_depot/dsh_depot/.runtime/candidate-builds/tools/11.24.0/pnpm-11.24.0/node_modules/pnpm/bin/pnpm.cjs",
-                  "--config.manage-package-manager-versions=false",
-                  "--pm-on-fail=ignore",
-                  "pack",
-                  "--config.ignore-scripts=true",
-                  "--json",
-                  "--pack-destination",
-                  "/Users/runner/work/dsh_depot/dsh_depot/.runtime/candidate-builds/results/1331636953/packages"
-                ],
-                "cwd": "source/packages/dsh-win-bash",
-                "exitCode": 0,
-                "seconds": 0.923
+                "seconds": 0.462
               }
             ],
             "dependencies": [
               {
                 "path": ".",
                 "manager": "pnpm",
-                "sourceLockSha256": "3c3ef9cc778dd8b7937dc4126d6e72775918ecf51707588d6de067215ecade06",
+                "sourceLockSha256": "1890a538e70e3121ffad87d4bfb8a65b9f0573cd891fc9d0dacf3fa01bd59d7c",
                 "mode": "source-lock",
-                "sha256": "3c3ef9cc778dd8b7937dc4126d6e72775918ecf51707588d6de067215ecade06"
+                "sha256": "1890a538e70e3121ffad87d4bfb8a65b9f0573cd891fc9d0dacf3fa01bd59d7c"
               }
             ],
-            "runtimeDependencies": [
-              "@linxin666/dsh-web-all"
-            ],
-            "version": "0.4.14",
+            "version": "0.4.15",
+            "error": "ENOENT: no such file or directory, open '/Users/runner/work/dsh_depot/dsh_depot/.runtime/candidate-builds/results/1331636953/source/packages/dsh-git-graph/package.json'",
+            "errorCategory": "package_contents",
             "warnings": [],
-            "artifactsUrl": "https://github.com/fatevase/dsh_depot/actions/runs/41795784714/artifacts/13305243319",
-            "artifactsExpiresAt": "2026-11-11T08:00:03Z",
-            "files": [
-              {
-                "name": "@linxin666/dsh-web-all",
-                "version": "0.4.14",
-                "filename": "linxin666-dsh-web-all-0.4.14.tgz",
-                "bytes": 137885,
-                "sha256": "69e392f0493c31c172de842b1e4c12f1b00733e4c9d5f69962f2461aabdb4315",
-                "hostPeers": {
-                  "@deepseek-ai/dsh": ">=0.2.1-rc.3"
-                },
-                "hostCompatibility": null
-              },
-              {
-                "name": "@linxin666/dsh-client-ui-git-graph",
-                "version": "0.4.14",
-                "filename": "linxin666-dsh-client-ui-git-graph-0.4.14.tgz",
-                "bytes": 249169,
-                "sha256": "4cd9ef5222fc77d8b9def377ca6d78deb5353ece92b11a4d894d42f384029b5d",
-                "hostPeers": {
-                  "@deepseek-ai/dsh": ">=0.2.1-rc.3",
-                  "react": "^18.2.0"
-                },
-                "hostCompatibility": null
-              },
-              {
-                "name": "@linxin666/dsh-i18n",
-                "version": "0.4.14",
-                "filename": "linxin666-dsh-i18n-0.4.14.tgz",
-                "bytes": 107555,
-                "sha256": "bae492a4c466d00a373e2dc31db484286774784539c1863726a0e341a0d8e9de",
-                "hostPeers": {
-                  "@deepseek-ai/dsh": ">=0.2.1-rc.3"
-                },
-                "hostCompatibility": null
-              },
-              {
-                "name": "@linxin666/dsh-liangshen",
-                "version": "0.4.14",
-                "filename": "linxin666-dsh-liangshen-0.4.14.tgz",
-                "bytes": 316629,
-                "sha256": "98ceec3c0709bdee79e0ebe155a25a8ce7fa86526a10bdd713686a8c262205ea",
-                "hostPeers": {
-                  "@deepseek-ai/dsh": ">=0.2.1-rc.3"
-                },
-                "hostCompatibility": null
-              },
-              {
-                "name": "@linxin666/dsh-client-ui-market",
-                "version": "0.4.14",
-                "filename": "linxin666-dsh-client-ui-market-0.4.14.tgz",
-                "bytes": 129042,
-                "sha256": "d8520a1dfc4db3b323f67c6ca5d6bb0197171d957d5fbc8d3ae5c97ce495f16f",
-                "hostPeers": {
-                  "@deepseek-ai/dsh": ">=0.2.1-rc.3",
-                  "react": "^18.2.0"
-                },
-                "hostCompatibility": null
-              },
-              {
-                "name": "@linxin666/dsh-client-ui-plugin-manager",
-                "version": "0.4.14",
-                "filename": "linxin666-dsh-client-ui-plugin-manager-0.4.14.tgz",
-                "bytes": 209672,
-                "sha256": "0c5a04e5b7ee0e40422ca92aa4a6d0724365501969d06789a38dcb4cde87c680",
-                "hostPeers": {
-                  "@deepseek-ai/dsh": ">=0.2.1-rc.3",
-                  "react": "^18.2.0"
-                },
-                "hostCompatibility": null
-              },
-              {
-                "name": "@linxin666/dsh-remote-bridge",
-                "version": "0.4.14",
-                "filename": "linxin666-dsh-remote-bridge-0.4.14.tgz",
-                "bytes": 904505,
-                "sha256": "5cdb2d077c124aaef651467df95ef96b8c0c7494410e85690e57dc6d2bcded7a",
-                "hostPeers": {
-                  "@deepseek-ai/dsh": ">=0.2.1-rc.3",
-                  "react": "^18.2.0",
-                  "react-dom": "^18.2.0"
-                },
-                "hostCompatibility": null
-              },
-              {
-                "name": "@linxin666/dsh-remote-web-ui",
-                "version": "0.4.14",
-                "filename": "linxin666-dsh-remote-web-ui-0.4.14.tgz",
-                "bytes": 857354,
-                "sha256": "9155749c6542c3ae169c3db389df0d1cf5ad3c05704f06716ab3d0f35e97d826",
-                "hostPeers": {
-                  "@deepseek-ai/dsh": ">=0.2.1-rc.3",
-                  "react": "^18.2.0",
-                  "react-dom": "^18.2.0"
-                },
-                "hostCompatibility": null
-              },
-              {
-                "name": "@linxin666/dsh-session-archive",
-                "version": "0.4.14",
-                "filename": "linxin666-dsh-session-archive-0.4.14.tgz",
-                "bytes": 183934,
-                "sha256": "569ef97533e8f800fb1794124727427606cb299bc4878bacabd9de12116872fc",
-                "hostPeers": {
-                  "@deepseek-ai/dsh": ">=0.2.1-rc.3",
-                  "react": "^18.2.0"
-                },
-                "hostCompatibility": null
-              },
-              {
-                "name": "@linxin666/dsh-client-ui-session-id",
-                "version": "0.4.14",
-                "filename": "linxin666-dsh-client-ui-session-id-0.4.14.tgz",
-                "bytes": 29050,
-                "sha256": "7c5dec99673ced7b41ff9422410753f5bb5d7f24e8e0ea7ed296518fbe7234d8",
-                "hostPeers": {
-                  "@deepseek-ai/dsh": ">=0.2.1-rc.3",
-                  "react": "^18.2.0"
-                },
-                "hostCompatibility": null
-              },
-              {
-                "name": "@linxin666/dsh-client-ui-skill-explorer",
-                "version": "0.4.14",
-                "filename": "linxin666-dsh-client-ui-skill-explorer-0.4.14.tgz",
-                "bytes": 127029,
-                "sha256": "dc24c24221fae76cc623a6d9b78c6ca67d75fbcdfa54eefa372d227486733d3a",
-                "hostPeers": {
-                  "@deepseek-ai/dsh": ">=0.2.1-rc.3",
-                  "react": "^18.2.0"
-                },
-                "hostCompatibility": null
-              },
-              {
-                "name": "@linxin666/dsh-ssh",
-                "version": "0.4.14",
-                "filename": "linxin666-dsh-ssh-0.4.14.tgz",
-                "bytes": 611315,
-                "sha256": "1d7612c813c90ea129e47bc635309a29bd624d1f14c39275acff423eab568a25",
-                "hostPeers": {
-                  "@deepseek-ai/dsh": ">=0.2.1-rc.3",
-                  "react": "^18.2.0",
-                  "react-dom": "^18.2.0"
-                },
-                "hostCompatibility": null
-              },
-              {
-                "name": "@linxin666/dsh-client-ui-task-board",
-                "version": "0.4.14",
-                "filename": "linxin666-dsh-client-ui-task-board-0.4.14.tgz",
-                "bytes": 1239826,
-                "sha256": "2997f667a29112e2eb3bdcf071708d9249b8bd5913fb373474644b60918ae1d3",
-                "hostPeers": {
-                  "@deepseek-ai/dsh": ">=0.2.1-rc.3",
-                  "react": "^18.2.0"
-                },
-                "hostCompatibility": null
-              },
-              {
-                "name": "@linxin666/dsh-client-ui-task-board-github",
-                "version": "0.4.14",
-                "filename": "linxin666-dsh-client-ui-task-board-github-0.4.14.tgz",
-                "bytes": 279331,
-                "sha256": "069b76edde13c7d2ac5d912e003106820b86566993d25667e2746156af68b999",
-                "hostPeers": {
-                  "@deepseek-ai/dsh": ">=0.2.1-rc.3",
-                  "react": "^18.2.0"
-                },
-                "hostCompatibility": null
-              },
-              {
-                "name": "@linxin666/dsh-task-board-remote",
-                "version": "0.4.14",
-                "filename": "linxin666-dsh-task-board-remote-0.4.14.tgz",
-                "bytes": 26566,
-                "sha256": "a2274974f844e78381b563465225f498afe39e438e3c176419546cf2528309b1",
-                "hostPeers": {
-                  "@deepseek-ai/dsh": ">=0.2.1-rc.3"
-                },
-                "hostCompatibility": null
-              },
-              {
-                "name": "@linxin666/dsh-update",
-                "version": "0.4.14",
-                "filename": "linxin666-dsh-update-0.4.14.tgz",
-                "bytes": 127437,
-                "sha256": "6c9f6cd032dcc0fa78fb98da9193f4e1916b4b0a225cce03f3596080670f51e7",
-                "hostPeers": {
-                  "@deepseek-ai/dsh": ">=0.2.1-rc.3",
-                  "react": "^18.2.0",
-                  "react-dom": "^18.2.0"
-                },
-                "hostCompatibility": null
-              },
-              {
-                "name": "@linxin666/dsh-usage",
-                "version": "0.4.14",
-                "filename": "linxin666-dsh-usage-0.4.14.tgz",
-                "bytes": 1190505,
-                "sha256": "27821a509a3b4fd0de5001d3e3a7a543bf9d3a3d8ccad141d9043098a5aff9f3",
-                "hostPeers": {
-                  "@deepseek-ai/dsh": ">=0.2.1-rc.3",
-                  "react": "^18.2.0"
-                },
-                "hostCompatibility": null
-              },
-              {
-                "name": "@linxin666/dsh-client-ui-web-ui-settings",
-                "version": "0.4.14",
-                "filename": "linxin666-dsh-client-ui-web-ui-settings-0.4.14.tgz",
-                "bytes": 79298,
-                "sha256": "173e7a6ba8a5a367651b3b4b32f42d912bb2bc380339522cabf23730b57e88c0",
-                "hostPeers": {
-                  "@deepseek-ai/dsh": ">=0.2.1-rc.3",
-                  "react": "^18.2.0"
-                },
-                "hostCompatibility": null
-              },
-              {
-                "name": "@linxin666/dsh-win-bash",
-                "version": "0.4.14",
-                "filename": "linxin666-dsh-win-bash-0.4.14.tgz",
-                "bytes": 8346513,
-                "sha256": "888b682af933f37457327b1deb5dbc31857a2860cdb9a1155fa4ec575f6a788c",
-                "hostPeers": {
-                  "@deepseek-ai/dsh": ">=0.2.1-rc.3"
-                },
-                "hostCompatibility": null
-              }
-            ]
+            "artifactsExpiresAt": "2026-11-11T22:11:14Z",
+            "files": []
           },
           "linux-x64": {
-            "runId": 41795784714,
+            "runId": 41922349585,
             "runAttempt": 1,
-            "status": "compiled",
+            "status": "failed",
             "verification": "not-run",
-            "startedAt": "2026-11-04T07:58:37.776Z",
-            "seconds": 65.294,
-            "stage": "pack-18",
+            "startedAt": "2026-11-04T22:08:58.800Z",
+            "seconds": 71.01,
+            "stage": "pack-0",
             "dependencyMode": "source-lock",
-            "adapterDigest": "ef331db4ed94eefe849cd346ad383ca531563f54172b7ce522a97516d83cfbf7",
-            "sourceSha256": "d0dbab693e8b7c7399cde6b0190395a1ab6838cd9341962ab78faac06d6ef191",
-            "lockSha256": "3c3ef9cc778dd8b7937dc4126d6e72775918ecf51707588d6de067215ecade06",
+            "adapterDigest": "571b8b09421d4f956868fff26350e08b065b55519cdb5f854fc35e7fde40ba89",
+            "sourceSha256": "27e07bdca282f1f013c7795b2f5a2389b4c72f5536cdef27f28fbc1757a6861a",
+            "lockSha256": "1890a538e70e3121ffad87d4bfb8a65b9f0573cd891fc9d0dacf3fa01bd59d7c",
             "steps": [
               {
                 "stage": "source-init",
@@ -261864,7 +261328,7 @@
                 ],
                 "cwd": "source-input/git",
                 "exitCode": 0,
-                "seconds": 0.004
+                "seconds": 0.003
               },
               {
                 "stage": "source-fetch",
@@ -261881,11 +261345,11 @@
                   "--depth=1",
                   "--filter=blob:none",
                   "origin",
-                  "81a09ab991ae3f1be5aa35115901815194fe0d64"
+                  "e8cc1955bab16cd6acecdefd5259d8b2531a98a2"
                 ],
                 "cwd": "source-input/git",
                 "exitCode": 0,
-                "seconds": 0.98
+                "seconds": 0.288
               },
               {
                 "stage": "source-identity",
@@ -261925,7 +261389,7 @@
                 ],
                 "cwd": "source-input/git",
                 "exitCode": 0,
-                "seconds": 25.694
+                "seconds": 36.037
               },
               {
                 "stage": "dependencies-0",
@@ -261942,7 +261406,7 @@
                 ],
                 "cwd": "source",
                 "exitCode": 0,
-                "seconds": 4.056
+                "seconds": 6.266
               },
               {
                 "stage": "build",
@@ -261956,7 +261420,7 @@
                 ],
                 "cwd": "source",
                 "exitCode": 0,
-                "seconds": 25.555
+                "seconds": 27.111
               },
               {
                 "stage": "pack-0",
@@ -261973,573 +261437,37 @@
                 ],
                 "cwd": "source/packages/dsh-web-all",
                 "exitCode": 0,
-                "seconds": 0.353
-              },
-              {
-                "stage": "pack-1",
-                "argv": [
-                  "/opt/hostedtoolcache/node/26.9.0/x64/bin/node",
-                  "/home/runner/work/dsh_depot/dsh_depot/.runtime/candidate-builds/tools/11.24.0/pnpm-11.24.0/node_modules/pnpm/bin/pnpm.cjs",
-                  "--config.manage-package-manager-versions=false",
-                  "--pm-on-fail=ignore",
-                  "pack",
-                  "--config.ignore-scripts=true",
-                  "--json",
-                  "--pack-destination",
-                  "/home/runner/work/dsh_depot/dsh_depot/.runtime/candidate-builds/results/1331636953/packages"
-                ],
-                "cwd": "source/packages/dsh-git-graph",
-                "exitCode": 0,
-                "seconds": 0.384
-              },
-              {
-                "stage": "pack-2",
-                "argv": [
-                  "/opt/hostedtoolcache/node/26.9.0/x64/bin/node",
-                  "/home/runner/work/dsh_depot/dsh_depot/.runtime/candidate-builds/tools/11.24.0/pnpm-11.24.0/node_modules/pnpm/bin/pnpm.cjs",
-                  "--config.manage-package-manager-versions=false",
-                  "--pm-on-fail=ignore",
-                  "pack",
-                  "--config.ignore-scripts=true",
-                  "--json",
-                  "--pack-destination",
-                  "/home/runner/work/dsh_depot/dsh_depot/.runtime/candidate-builds/results/1331636953/packages"
-                ],
-                "cwd": "source/packages/dsh-i18n",
-                "exitCode": 0,
-                "seconds": 0.322
-              },
-              {
-                "stage": "pack-3",
-                "argv": [
-                  "/opt/hostedtoolcache/node/26.9.0/x64/bin/node",
-                  "/home/runner/work/dsh_depot/dsh_depot/.runtime/candidate-builds/tools/11.24.0/pnpm-11.24.0/node_modules/pnpm/bin/pnpm.cjs",
-                  "--config.manage-package-manager-versions=false",
-                  "--pm-on-fail=ignore",
-                  "pack",
-                  "--config.ignore-scripts=true",
-                  "--json",
-                  "--pack-destination",
-                  "/home/runner/work/dsh_depot/dsh_depot/.runtime/candidate-builds/results/1331636953/packages"
-                ],
-                "cwd": "source/packages/dsh-liangshen",
-                "exitCode": 0,
-                "seconds": 0.36
-              },
-              {
-                "stage": "pack-4",
-                "argv": [
-                  "/opt/hostedtoolcache/node/26.9.0/x64/bin/node",
-                  "/home/runner/work/dsh_depot/dsh_depot/.runtime/candidate-builds/tools/11.24.0/pnpm-11.24.0/node_modules/pnpm/bin/pnpm.cjs",
-                  "--config.manage-package-manager-versions=false",
-                  "--pm-on-fail=ignore",
-                  "pack",
-                  "--config.ignore-scripts=true",
-                  "--json",
-                  "--pack-destination",
-                  "/home/runner/work/dsh_depot/dsh_depot/.runtime/candidate-builds/results/1331636953/packages"
-                ],
-                "cwd": "source/packages/dsh-market",
-                "exitCode": 0,
-                "seconds": 0.291
-              },
-              {
-                "stage": "pack-5",
-                "argv": [
-                  "/opt/hostedtoolcache/node/26.9.0/x64/bin/node",
-                  "/home/runner/work/dsh_depot/dsh_depot/.runtime/candidate-builds/tools/11.24.0/pnpm-11.24.0/node_modules/pnpm/bin/pnpm.cjs",
-                  "--config.manage-package-manager-versions=false",
-                  "--pm-on-fail=ignore",
-                  "pack",
-                  "--config.ignore-scripts=true",
-                  "--json",
-                  "--pack-destination",
-                  "/home/runner/work/dsh_depot/dsh_depot/.runtime/candidate-builds/results/1331636953/packages"
-                ],
-                "cwd": "source/packages/dsh-plugin-manager",
-                "exitCode": 0,
-                "seconds": 0.328
-              },
-              {
-                "stage": "pack-6",
-                "argv": [
-                  "/opt/hostedtoolcache/node/26.9.0/x64/bin/node",
-                  "/home/runner/work/dsh_depot/dsh_depot/.runtime/candidate-builds/tools/11.24.0/pnpm-11.24.0/node_modules/pnpm/bin/pnpm.cjs",
-                  "--config.manage-package-manager-versions=false",
-                  "--pm-on-fail=ignore",
-                  "pack",
-                  "--config.ignore-scripts=true",
-                  "--json",
-                  "--pack-destination",
-                  "/home/runner/work/dsh_depot/dsh_depot/.runtime/candidate-builds/results/1331636953/packages"
-                ],
-                "cwd": "source/packages/dsh-remote-bridge",
-                "exitCode": 0,
-                "seconds": 0.424
-              },
-              {
-                "stage": "pack-7",
-                "argv": [
-                  "/opt/hostedtoolcache/node/26.9.0/x64/bin/node",
-                  "/home/runner/work/dsh_depot/dsh_depot/.runtime/candidate-builds/tools/11.24.0/pnpm-11.24.0/node_modules/pnpm/bin/pnpm.cjs",
-                  "--config.manage-package-manager-versions=false",
-                  "--pm-on-fail=ignore",
-                  "pack",
-                  "--config.ignore-scripts=true",
-                  "--json",
-                  "--pack-destination",
-                  "/home/runner/work/dsh_depot/dsh_depot/.runtime/candidate-builds/results/1331636953/packages"
-                ],
-                "cwd": "source/packages/dsh-remote-web-ui",
-                "exitCode": 0,
-                "seconds": 0.445
-              },
-              {
-                "stage": "pack-8",
-                "argv": [
-                  "/opt/hostedtoolcache/node/26.9.0/x64/bin/node",
-                  "/home/runner/work/dsh_depot/dsh_depot/.runtime/candidate-builds/tools/11.24.0/pnpm-11.24.0/node_modules/pnpm/bin/pnpm.cjs",
-                  "--config.manage-package-manager-versions=false",
-                  "--pm-on-fail=ignore",
-                  "pack",
-                  "--config.ignore-scripts=true",
-                  "--json",
-                  "--pack-destination",
-                  "/home/runner/work/dsh_depot/dsh_depot/.runtime/candidate-builds/results/1331636953/packages"
-                ],
-                "cwd": "source/packages/dsh-session-archive",
-                "exitCode": 0,
-                "seconds": 0.351
-              },
-              {
-                "stage": "pack-9",
-                "argv": [
-                  "/opt/hostedtoolcache/node/26.9.0/x64/bin/node",
-                  "/home/runner/work/dsh_depot/dsh_depot/.runtime/candidate-builds/tools/11.24.0/pnpm-11.24.0/node_modules/pnpm/bin/pnpm.cjs",
-                  "--config.manage-package-manager-versions=false",
-                  "--pm-on-fail=ignore",
-                  "pack",
-                  "--config.ignore-scripts=true",
-                  "--json",
-                  "--pack-destination",
-                  "/home/runner/work/dsh_depot/dsh_depot/.runtime/candidate-builds/results/1331636953/packages"
-                ],
-                "cwd": "source/packages/dsh-session-id",
-                "exitCode": 0,
-                "seconds": 0.303
-              },
-              {
-                "stage": "pack-10",
-                "argv": [
-                  "/opt/hostedtoolcache/node/26.9.0/x64/bin/node",
-                  "/home/runner/work/dsh_depot/dsh_depot/.runtime/candidate-builds/tools/11.24.0/pnpm-11.24.0/node_modules/pnpm/bin/pnpm.cjs",
-                  "--config.manage-package-manager-versions=false",
-                  "--pm-on-fail=ignore",
-                  "pack",
-                  "--config.ignore-scripts=true",
-                  "--json",
-                  "--pack-destination",
-                  "/home/runner/work/dsh_depot/dsh_depot/.runtime/candidate-builds/results/1331636953/packages"
-                ],
-                "cwd": "source/packages/dsh-skill-explorer",
-                "exitCode": 0,
-                "seconds": 0.327
-              },
-              {
-                "stage": "pack-11",
-                "argv": [
-                  "/opt/hostedtoolcache/node/26.9.0/x64/bin/node",
-                  "/home/runner/work/dsh_depot/dsh_depot/.runtime/candidate-builds/tools/11.24.0/pnpm-11.24.0/node_modules/pnpm/bin/pnpm.cjs",
-                  "--config.manage-package-manager-versions=false",
-                  "--pm-on-fail=ignore",
-                  "pack",
-                  "--config.ignore-scripts=true",
-                  "--json",
-                  "--pack-destination",
-                  "/home/runner/work/dsh_depot/dsh_depot/.runtime/candidate-builds/results/1331636953/packages"
-                ],
-                "cwd": "source/packages/dsh-ssh",
-                "exitCode": 0,
-                "seconds": 0.393
-              },
-              {
-                "stage": "pack-12",
-                "argv": [
-                  "/opt/hostedtoolcache/node/26.9.0/x64/bin/node",
-                  "/home/runner/work/dsh_depot/dsh_depot/.runtime/candidate-builds/tools/11.24.0/pnpm-11.24.0/node_modules/pnpm/bin/pnpm.cjs",
-                  "--config.manage-package-manager-versions=false",
-                  "--pm-on-fail=ignore",
-                  "pack",
-                  "--config.ignore-scripts=true",
-                  "--json",
-                  "--pack-destination",
-                  "/home/runner/work/dsh_depot/dsh_depot/.runtime/candidate-builds/results/1331636953/packages"
-                ],
-                "cwd": "source/packages/dsh-task-board",
-                "exitCode": 0,
-                "seconds": 0.459
-              },
-              {
-                "stage": "pack-13",
-                "argv": [
-                  "/opt/hostedtoolcache/node/26.9.0/x64/bin/node",
-                  "/home/runner/work/dsh_depot/dsh_depot/.runtime/candidate-builds/tools/11.24.0/pnpm-11.24.0/node_modules/pnpm/bin/pnpm.cjs",
-                  "--config.manage-package-manager-versions=false",
-                  "--pm-on-fail=ignore",
-                  "pack",
-                  "--config.ignore-scripts=true",
-                  "--json",
-                  "--pack-destination",
-                  "/home/runner/work/dsh_depot/dsh_depot/.runtime/candidate-builds/results/1331636953/packages"
-                ],
-                "cwd": "source/packages/dsh-task-board-github",
-                "exitCode": 0,
-                "seconds": 0.363
-              },
-              {
-                "stage": "pack-14",
-                "argv": [
-                  "/opt/hostedtoolcache/node/26.9.0/x64/bin/node",
-                  "/home/runner/work/dsh_depot/dsh_depot/.runtime/candidate-builds/tools/11.24.0/pnpm-11.24.0/node_modules/pnpm/bin/pnpm.cjs",
-                  "--config.manage-package-manager-versions=false",
-                  "--pm-on-fail=ignore",
-                  "pack",
-                  "--config.ignore-scripts=true",
-                  "--json",
-                  "--pack-destination",
-                  "/home/runner/work/dsh_depot/dsh_depot/.runtime/candidate-builds/results/1331636953/packages"
-                ],
-                "cwd": "source/packages/dsh-task-board-remote",
-                "exitCode": 0,
-                "seconds": 0.309
-              },
-              {
-                "stage": "pack-15",
-                "argv": [
-                  "/opt/hostedtoolcache/node/26.9.0/x64/bin/node",
-                  "/home/runner/work/dsh_depot/dsh_depot/.runtime/candidate-builds/tools/11.24.0/pnpm-11.24.0/node_modules/pnpm/bin/pnpm.cjs",
-                  "--config.manage-package-manager-versions=false",
-                  "--pm-on-fail=ignore",
-                  "pack",
-                  "--config.ignore-scripts=true",
-                  "--json",
-                  "--pack-destination",
-                  "/home/runner/work/dsh_depot/dsh_depot/.runtime/candidate-builds/results/1331636953/packages"
-                ],
-                "cwd": "source/packages/dsh-update",
-                "exitCode": 0,
-                "seconds": 0.334
-              },
-              {
-                "stage": "pack-16",
-                "argv": [
-                  "/opt/hostedtoolcache/node/26.9.0/x64/bin/node",
-                  "/home/runner/work/dsh_depot/dsh_depot/.runtime/candidate-builds/tools/11.24.0/pnpm-11.24.0/node_modules/pnpm/bin/pnpm.cjs",
-                  "--config.manage-package-manager-versions=false",
-                  "--pm-on-fail=ignore",
-                  "pack",
-                  "--config.ignore-scripts=true",
-                  "--json",
-                  "--pack-destination",
-                  "/home/runner/work/dsh_depot/dsh_depot/.runtime/candidate-builds/results/1331636953/packages"
-                ],
-                "cwd": "source/packages/dsh-usage",
-                "exitCode": 0,
-                "seconds": 0.384
-              },
-              {
-                "stage": "pack-17",
-                "argv": [
-                  "/opt/hostedtoolcache/node/26.9.0/x64/bin/node",
-                  "/home/runner/work/dsh_depot/dsh_depot/.runtime/candidate-builds/tools/11.24.0/pnpm-11.24.0/node_modules/pnpm/bin/pnpm.cjs",
-                  "--config.manage-package-manager-versions=false",
-                  "--pm-on-fail=ignore",
-                  "pack",
-                  "--config.ignore-scripts=true",
-                  "--json",
-                  "--pack-destination",
-                  "/home/runner/work/dsh_depot/dsh_depot/.runtime/candidate-builds/results/1331636953/packages"
-                ],
-                "cwd": "source/packages/dsh-web-settings",
-                "exitCode": 0,
-                "seconds": 0.293
-              },
-              {
-                "stage": "pack-18",
-                "argv": [
-                  "/opt/hostedtoolcache/node/26.9.0/x64/bin/node",
-                  "/home/runner/work/dsh_depot/dsh_depot/.runtime/candidate-builds/tools/11.24.0/pnpm-11.24.0/node_modules/pnpm/bin/pnpm.cjs",
-                  "--config.manage-package-manager-versions=false",
-                  "--pm-on-fail=ignore",
-                  "pack",
-                  "--config.ignore-scripts=true",
-                  "--json",
-                  "--pack-destination",
-                  "/home/runner/work/dsh_depot/dsh_depot/.runtime/candidate-builds/results/1331636953/packages"
-                ],
-                "cwd": "source/packages/dsh-win-bash",
-                "exitCode": 0,
-                "seconds": 0.753
+                "seconds": 0.452
               }
             ],
             "dependencies": [
               {
                 "path": ".",
                 "manager": "pnpm",
-                "sourceLockSha256": "3c3ef9cc778dd8b7937dc4126d6e72775918ecf51707588d6de067215ecade06",
+                "sourceLockSha256": "1890a538e70e3121ffad87d4bfb8a65b9f0573cd891fc9d0dacf3fa01bd59d7c",
                 "mode": "source-lock",
-                "sha256": "3c3ef9cc778dd8b7937dc4126d6e72775918ecf51707588d6de067215ecade06"
+                "sha256": "1890a538e70e3121ffad87d4bfb8a65b9f0573cd891fc9d0dacf3fa01bd59d7c"
               }
             ],
-            "runtimeDependencies": [
-              "@linxin666/dsh-web-all"
-            ],
-            "version": "0.4.14",
+            "version": "0.4.15",
+            "error": "ENOENT: no such file or directory, open '/home/runner/work/dsh_depot/dsh_depot/.runtime/candidate-builds/results/1331636953/source/packages/dsh-git-graph/package.json'",
+            "errorCategory": "package_contents",
             "warnings": [],
-            "artifactsUrl": "https://github.com/fatevase/dsh_depot/actions/runs/41795784714/artifacts/13305506697",
-            "artifactsExpiresAt": "2026-11-11T07:59:57Z",
-            "files": [
-              {
-                "name": "@linxin666/dsh-web-all",
-                "version": "0.4.14",
-                "filename": "linxin666-dsh-web-all-0.4.14.tgz",
-                "bytes": 137885,
-                "sha256": "1032c608a88faf15060903957355ba5fcf1e445ce35b0b65f8e05bea55b11a7e",
-                "hostPeers": {
-                  "@deepseek-ai/dsh": ">=0.2.1-rc.3"
-                },
-                "hostCompatibility": null
-              },
-              {
-                "name": "@linxin666/dsh-client-ui-git-graph",
-                "version": "0.4.14",
-                "filename": "linxin666-dsh-client-ui-git-graph-0.4.14.tgz",
-                "bytes": 249169,
-                "sha256": "5fd0c917316651f303a0bf49784c15aa02e25491f9f05f0289de016288ebab0f",
-                "hostPeers": {
-                  "@deepseek-ai/dsh": ">=0.2.1-rc.3",
-                  "react": "^18.2.0"
-                },
-                "hostCompatibility": null
-              },
-              {
-                "name": "@linxin666/dsh-i18n",
-                "version": "0.4.14",
-                "filename": "linxin666-dsh-i18n-0.4.14.tgz",
-                "bytes": 107555,
-                "sha256": "1c17e7a86b9a0a33cdb4384ebc51d6e2d545d72d7281133fc6b9a22f57febe58",
-                "hostPeers": {
-                  "@deepseek-ai/dsh": ">=0.2.1-rc.3"
-                },
-                "hostCompatibility": null
-              },
-              {
-                "name": "@linxin666/dsh-liangshen",
-                "version": "0.4.14",
-                "filename": "linxin666-dsh-liangshen-0.4.14.tgz",
-                "bytes": 316629,
-                "sha256": "3e8b7cf89cea4e76aafa4f6ec99a04d62832c6e5713410f62c4e151ffeea5354",
-                "hostPeers": {
-                  "@deepseek-ai/dsh": ">=0.2.1-rc.3"
-                },
-                "hostCompatibility": null
-              },
-              {
-                "name": "@linxin666/dsh-client-ui-market",
-                "version": "0.4.14",
-                "filename": "linxin666-dsh-client-ui-market-0.4.14.tgz",
-                "bytes": 129042,
-                "sha256": "c8f4ad4148e35bb60c0ee97528386128d974eef9a8a41e54ec4668421f1163d1",
-                "hostPeers": {
-                  "@deepseek-ai/dsh": ">=0.2.1-rc.3",
-                  "react": "^18.2.0"
-                },
-                "hostCompatibility": null
-              },
-              {
-                "name": "@linxin666/dsh-client-ui-plugin-manager",
-                "version": "0.4.14",
-                "filename": "linxin666-dsh-client-ui-plugin-manager-0.4.14.tgz",
-                "bytes": 209672,
-                "sha256": "efa9892dbd9d84cd6665280c196e164f8a96bf35f2c6c32c556390953269ac08",
-                "hostPeers": {
-                  "@deepseek-ai/dsh": ">=0.2.1-rc.3",
-                  "react": "^18.2.0"
-                },
-                "hostCompatibility": null
-              },
-              {
-                "name": "@linxin666/dsh-remote-bridge",
-                "version": "0.4.14",
-                "filename": "linxin666-dsh-remote-bridge-0.4.14.tgz",
-                "bytes": 904505,
-                "sha256": "8ca5ebadc251a06895de81f9d3fdfe451ea2d4917846d1b9330af1032f3d8f56",
-                "hostPeers": {
-                  "@deepseek-ai/dsh": ">=0.2.1-rc.3",
-                  "react": "^18.2.0",
-                  "react-dom": "^18.2.0"
-                },
-                "hostCompatibility": null
-              },
-              {
-                "name": "@linxin666/dsh-remote-web-ui",
-                "version": "0.4.14",
-                "filename": "linxin666-dsh-remote-web-ui-0.4.14.tgz",
-                "bytes": 857354,
-                "sha256": "e019c7f4237ea89674fce1a4f3643a0b503d5975c9fdc8d84a9dd2284bcdfbb4",
-                "hostPeers": {
-                  "@deepseek-ai/dsh": ">=0.2.1-rc.3",
-                  "react": "^18.2.0",
-                  "react-dom": "^18.2.0"
-                },
-                "hostCompatibility": null
-              },
-              {
-                "name": "@linxin666/dsh-session-archive",
-                "version": "0.4.14",
-                "filename": "linxin666-dsh-session-archive-0.4.14.tgz",
-                "bytes": 183934,
-                "sha256": "9a4c9522e310fde15b5c59d200a236f300dc7b7b895de04790e3d07b62e8d0fa",
-                "hostPeers": {
-                  "@deepseek-ai/dsh": ">=0.2.1-rc.3",
-                  "react": "^18.2.0"
-                },
-                "hostCompatibility": null
-              },
-              {
-                "name": "@linxin666/dsh-client-ui-session-id",
-                "version": "0.4.14",
-                "filename": "linxin666-dsh-client-ui-session-id-0.4.14.tgz",
-                "bytes": 29050,
-                "sha256": "f529ed683411cb4ae34f88cba4204ba0c957fe50e94e60af855d01f1f34c8932",
-                "hostPeers": {
-                  "@deepseek-ai/dsh": ">=0.2.1-rc.3",
-                  "react": "^18.2.0"
-                },
-                "hostCompatibility": null
-              },
-              {
-                "name": "@linxin666/dsh-client-ui-skill-explorer",
-                "version": "0.4.14",
-                "filename": "linxin666-dsh-client-ui-skill-explorer-0.4.14.tgz",
-                "bytes": 127029,
-                "sha256": "41dec470d686b8e52386c08525aa1297b771b4196b3f84ce74eff292079e3307",
-                "hostPeers": {
-                  "@deepseek-ai/dsh": ">=0.2.1-rc.3",
-                  "react": "^18.2.0"
-                },
-                "hostCompatibility": null
-              },
-              {
-                "name": "@linxin666/dsh-ssh",
-                "version": "0.4.14",
-                "filename": "linxin666-dsh-ssh-0.4.14.tgz",
-                "bytes": 611315,
-                "sha256": "42818a617d53021ff3c17043afc48a7a4a820f0d0caf7b23c8ae0ec60dae504d",
-                "hostPeers": {
-                  "@deepseek-ai/dsh": ">=0.2.1-rc.3",
-                  "react": "^18.2.0",
-                  "react-dom": "^18.2.0"
-                },
-                "hostCompatibility": null
-              },
-              {
-                "name": "@linxin666/dsh-client-ui-task-board",
-                "version": "0.4.14",
-                "filename": "linxin666-dsh-client-ui-task-board-0.4.14.tgz",
-                "bytes": 1239826,
-                "sha256": "f1ad177cabac7c09cfb68fbbf6e8c4374a03e3c5ee045aacea5f8cc40e9facfe",
-                "hostPeers": {
-                  "@deepseek-ai/dsh": ">=0.2.1-rc.3",
-                  "react": "^18.2.0"
-                },
-                "hostCompatibility": null
-              },
-              {
-                "name": "@linxin666/dsh-client-ui-task-board-github",
-                "version": "0.4.14",
-                "filename": "linxin666-dsh-client-ui-task-board-github-0.4.14.tgz",
-                "bytes": 279331,
-                "sha256": "3b49fe8788f4f68add49a92a741f47d365086606ac2357b675edb4fdb3d0ae48",
-                "hostPeers": {
-                  "@deepseek-ai/dsh": ">=0.2.1-rc.3",
-                  "react": "^18.2.0"
-                },
-                "hostCompatibility": null
-              },
-              {
-                "name": "@linxin666/dsh-task-board-remote",
-                "version": "0.4.14",
-                "filename": "linxin666-dsh-task-board-remote-0.4.14.tgz",
-                "bytes": 26566,
-                "sha256": "3c4d693c8eced227f82f497e8d87b41b91ca359ef45382527597507b1b9c7571",
-                "hostPeers": {
-                  "@deepseek-ai/dsh": ">=0.2.1-rc.3"
-                },
-                "hostCompatibility": null
-              },
-              {
-                "name": "@linxin666/dsh-update",
-                "version": "0.4.14",
-                "filename": "linxin666-dsh-update-0.4.14.tgz",
-                "bytes": 127437,
-                "sha256": "7674ea82e418cd8d3a874995f98884135aa7e61ec913b8baf67a34163ae5152a",
-                "hostPeers": {
-                  "@deepseek-ai/dsh": ">=0.2.1-rc.3",
-                  "react": "^18.2.0",
-                  "react-dom": "^18.2.0"
-                },
-                "hostCompatibility": null
-              },
-              {
-                "name": "@linxin666/dsh-usage",
-                "version": "0.4.14",
-                "filename": "linxin666-dsh-usage-0.4.14.tgz",
-                "bytes": 1190505,
-                "sha256": "aab42fa604d473904cbc19cbbc8b98aa89982702f21191bb6c444ca778d925c2",
-                "hostPeers": {
-                  "@deepseek-ai/dsh": ">=0.2.1-rc.3",
-                  "react": "^18.2.0"
-                },
-                "hostCompatibility": null
-              },
-              {
-                "name": "@linxin666/dsh-client-ui-web-ui-settings",
-                "version": "0.4.14",
-                "filename": "linxin666-dsh-client-ui-web-ui-settings-0.4.14.tgz",
-                "bytes": 79298,
-                "sha256": "a8ec604a1819ab11686835e5a03ed8ef7af4e16cb4e34ca651f1a94fada28d6e",
-                "hostPeers": {
-                  "@deepseek-ai/dsh": ">=0.2.1-rc.3",
-                  "react": "^18.2.0"
-                },
-                "hostCompatibility": null
-              },
-              {
-                "name": "@linxin666/dsh-win-bash",
-                "version": "0.4.14",
-                "filename": "linxin666-dsh-win-bash-0.4.14.tgz",
-                "bytes": 8346513,
-                "sha256": "e9884b97410975c1eb4647d70947746e46c5b6a6970eaa42b60b57b70cc235ec",
-                "hostPeers": {
-                  "@deepseek-ai/dsh": ">=0.2.1-rc.3"
-                },
-                "hostCompatibility": null
-              }
-            ]
+            "artifactsExpiresAt": "2026-11-11T22:10:24Z",
+            "files": []
           },
           "win32-x64": {
-            "runId": 41795784714,
+            "runId": 41922349585,
             "runAttempt": 1,
-            "status": "compiled",
+            "status": "failed",
             "verification": "not-run",
-            "startedAt": "2026-11-04T07:59:17.638Z",
-            "seconds": 76.505,
-            "stage": "pack-18",
+            "startedAt": "2026-11-04T22:09:26.686Z",
+            "seconds": 92.692,
+            "stage": "pack-0",
             "dependencyMode": "source-lock",
-            "adapterDigest": "ef331db4ed94eefe849cd346ad383ca531563f54172b7ce522a97516d83cfbf7",
-            "sourceSha256": "d0dbab693e8b7c7399cde6b0190395a1ab6838cd9341962ab78faac06d6ef191",
-            "lockSha256": "3c3ef9cc778dd8b7937dc4126d6e72775918ecf51707588d6de067215ecade06",
+            "adapterDigest": "571b8b09421d4f956868fff26350e08b065b55519cdb5f854fc35e7fde40ba89",
+            "sourceSha256": "27e07bdca282f1f013c7795b2f5a2389b4c72f5536cdef27f28fbc1757a6861a",
+            "lockSha256": "1890a538e70e3121ffad87d4bfb8a65b9f0573cd891fc9d0dacf3fa01bd59d7c",
             "steps": [
               {
                 "stage": "source-init",
@@ -262553,7 +261481,7 @@
                 ],
                 "cwd": "source-input\\git",
                 "exitCode": 0,
-                "seconds": 0.051
+                "seconds": 0.057
               },
               {
                 "stage": "source-remote",
@@ -262570,7 +261498,7 @@
                 ],
                 "cwd": "source-input\\git",
                 "exitCode": 0,
-                "seconds": 0.046
+                "seconds": 0.049
               },
               {
                 "stage": "source-fetch",
@@ -262587,11 +261515,11 @@
                   "--depth=1",
                   "--filter=blob:none",
                   "origin",
-                  "81a09ab991ae3f1be5aa35115901815194fe0d64"
+                  "e8cc1955bab16cd6acecdefd5259d8b2531a98a2"
                 ],
                 "cwd": "source-input\\git",
                 "exitCode": 0,
-                "seconds": 0.548
+                "seconds": 0.543
               },
               {
                 "stage": "source-identity",
@@ -262606,7 +261534,7 @@
                 ],
                 "cwd": "source-input\\git",
                 "exitCode": 0,
-                "seconds": 0.046
+                "seconds": 0.047
               },
               {
                 "stage": "source-components",
@@ -262631,7 +261559,7 @@
                 ],
                 "cwd": "source-input\\git",
                 "exitCode": 0,
-                "seconds": 12.245
+                "seconds": 36.95
               },
               {
                 "stage": "dependencies-0",
@@ -262648,7 +261576,7 @@
                 ],
                 "cwd": "source",
                 "exitCode": 0,
-                "seconds": 8.544
+                "seconds": 12.156
               },
               {
                 "stage": "build",
@@ -262662,7 +261590,7 @@
                 ],
                 "cwd": "source",
                 "exitCode": 0,
-                "seconds": 38.449
+                "seconds": 39.814
               },
               {
                 "stage": "pack-0",
@@ -262679,560 +261607,24 @@
                 ],
                 "cwd": "source\\packages\\dsh-web-all",
                 "exitCode": 0,
-                "seconds": 0.585
-              },
-              {
-                "stage": "pack-1",
-                "argv": [
-                  "C:\\hostedtoolcache\\windows\\node\\26.9.0\\x64\\node.exe",
-                  "D:\\a\\dsh_depot\\dsh_depot\\.runtime\\candidate-builds\\tools\\11.24.0\\pnpm-11.24.0\\node_modules\\pnpm\\bin\\pnpm.cjs",
-                  "--config.manage-package-manager-versions=false",
-                  "--pm-on-fail=ignore",
-                  "pack",
-                  "--config.ignore-scripts=true",
-                  "--json",
-                  "--pack-destination",
-                  "D:\\a\\dsh_depot\\dsh_depot\\.runtime\\candidate-builds\\results\\1331636953\\packages"
-                ],
-                "cwd": "source\\packages\\dsh-git-graph",
-                "exitCode": 0,
-                "seconds": 0.629
-              },
-              {
-                "stage": "pack-2",
-                "argv": [
-                  "C:\\hostedtoolcache\\windows\\node\\26.9.0\\x64\\node.exe",
-                  "D:\\a\\dsh_depot\\dsh_depot\\.runtime\\candidate-builds\\tools\\11.24.0\\pnpm-11.24.0\\node_modules\\pnpm\\bin\\pnpm.cjs",
-                  "--config.manage-package-manager-versions=false",
-                  "--pm-on-fail=ignore",
-                  "pack",
-                  "--config.ignore-scripts=true",
-                  "--json",
-                  "--pack-destination",
-                  "D:\\a\\dsh_depot\\dsh_depot\\.runtime\\candidate-builds\\results\\1331636953\\packages"
-                ],
-                "cwd": "source\\packages\\dsh-i18n",
-                "exitCode": 0,
-                "seconds": 0.526
-              },
-              {
-                "stage": "pack-3",
-                "argv": [
-                  "C:\\hostedtoolcache\\windows\\node\\26.9.0\\x64\\node.exe",
-                  "D:\\a\\dsh_depot\\dsh_depot\\.runtime\\candidate-builds\\tools\\11.24.0\\pnpm-11.24.0\\node_modules\\pnpm\\bin\\pnpm.cjs",
-                  "--config.manage-package-manager-versions=false",
-                  "--pm-on-fail=ignore",
-                  "pack",
-                  "--config.ignore-scripts=true",
-                  "--json",
-                  "--pack-destination",
-                  "D:\\a\\dsh_depot\\dsh_depot\\.runtime\\candidate-builds\\results\\1331636953\\packages"
-                ],
-                "cwd": "source\\packages\\dsh-liangshen",
-                "exitCode": 0,
-                "seconds": 0.585
-              },
-              {
-                "stage": "pack-4",
-                "argv": [
-                  "C:\\hostedtoolcache\\windows\\node\\26.9.0\\x64\\node.exe",
-                  "D:\\a\\dsh_depot\\dsh_depot\\.runtime\\candidate-builds\\tools\\11.24.0\\pnpm-11.24.0\\node_modules\\pnpm\\bin\\pnpm.cjs",
-                  "--config.manage-package-manager-versions=false",
-                  "--pm-on-fail=ignore",
-                  "pack",
-                  "--config.ignore-scripts=true",
-                  "--json",
-                  "--pack-destination",
-                  "D:\\a\\dsh_depot\\dsh_depot\\.runtime\\candidate-builds\\results\\1331636953\\packages"
-                ],
-                "cwd": "source\\packages\\dsh-market",
-                "exitCode": 0,
-                "seconds": 0.485
-              },
-              {
-                "stage": "pack-5",
-                "argv": [
-                  "C:\\hostedtoolcache\\windows\\node\\26.9.0\\x64\\node.exe",
-                  "D:\\a\\dsh_depot\\dsh_depot\\.runtime\\candidate-builds\\tools\\11.24.0\\pnpm-11.24.0\\node_modules\\pnpm\\bin\\pnpm.cjs",
-                  "--config.manage-package-manager-versions=false",
-                  "--pm-on-fail=ignore",
-                  "pack",
-                  "--config.ignore-scripts=true",
-                  "--json",
-                  "--pack-destination",
-                  "D:\\a\\dsh_depot\\dsh_depot\\.runtime\\candidate-builds\\results\\1331636953\\packages"
-                ],
-                "cwd": "source\\packages\\dsh-plugin-manager",
-                "exitCode": 0,
-                "seconds": 0.534
-              },
-              {
-                "stage": "pack-6",
-                "argv": [
-                  "C:\\hostedtoolcache\\windows\\node\\26.9.0\\x64\\node.exe",
-                  "D:\\a\\dsh_depot\\dsh_depot\\.runtime\\candidate-builds\\tools\\11.24.0\\pnpm-11.24.0\\node_modules\\pnpm\\bin\\pnpm.cjs",
-                  "--config.manage-package-manager-versions=false",
-                  "--pm-on-fail=ignore",
-                  "pack",
-                  "--config.ignore-scripts=true",
-                  "--json",
-                  "--pack-destination",
-                  "D:\\a\\dsh_depot\\dsh_depot\\.runtime\\candidate-builds\\results\\1331636953\\packages"
-                ],
-                "cwd": "source\\packages\\dsh-remote-bridge",
-                "exitCode": 0,
-                "seconds": 0.689
-              },
-              {
-                "stage": "pack-7",
-                "argv": [
-                  "C:\\hostedtoolcache\\windows\\node\\26.9.0\\x64\\node.exe",
-                  "D:\\a\\dsh_depot\\dsh_depot\\.runtime\\candidate-builds\\tools\\11.24.0\\pnpm-11.24.0\\node_modules\\pnpm\\bin\\pnpm.cjs",
-                  "--config.manage-package-manager-versions=false",
-                  "--pm-on-fail=ignore",
-                  "pack",
-                  "--config.ignore-scripts=true",
-                  "--json",
-                  "--pack-destination",
-                  "D:\\a\\dsh_depot\\dsh_depot\\.runtime\\candidate-builds\\results\\1331636953\\packages"
-                ],
-                "cwd": "source\\packages\\dsh-remote-web-ui",
-                "exitCode": 0,
-                "seconds": 0.741
-              },
-              {
-                "stage": "pack-8",
-                "argv": [
-                  "C:\\hostedtoolcache\\windows\\node\\26.9.0\\x64\\node.exe",
-                  "D:\\a\\dsh_depot\\dsh_depot\\.runtime\\candidate-builds\\tools\\11.24.0\\pnpm-11.24.0\\node_modules\\pnpm\\bin\\pnpm.cjs",
-                  "--config.manage-package-manager-versions=false",
-                  "--pm-on-fail=ignore",
-                  "pack",
-                  "--config.ignore-scripts=true",
-                  "--json",
-                  "--pack-destination",
-                  "D:\\a\\dsh_depot\\dsh_depot\\.runtime\\candidate-builds\\results\\1331636953\\packages"
-                ],
-                "cwd": "source\\packages\\dsh-session-archive",
-                "exitCode": 0,
-                "seconds": 0.559
-              },
-              {
-                "stage": "pack-9",
-                "argv": [
-                  "C:\\hostedtoolcache\\windows\\node\\26.9.0\\x64\\node.exe",
-                  "D:\\a\\dsh_depot\\dsh_depot\\.runtime\\candidate-builds\\tools\\11.24.0\\pnpm-11.24.0\\node_modules\\pnpm\\bin\\pnpm.cjs",
-                  "--config.manage-package-manager-versions=false",
-                  "--pm-on-fail=ignore",
-                  "pack",
-                  "--config.ignore-scripts=true",
-                  "--json",
-                  "--pack-destination",
-                  "D:\\a\\dsh_depot\\dsh_depot\\.runtime\\candidate-builds\\results\\1331636953\\packages"
-                ],
-                "cwd": "source\\packages\\dsh-session-id",
-                "exitCode": 0,
-                "seconds": 0.479
-              },
-              {
-                "stage": "pack-10",
-                "argv": [
-                  "C:\\hostedtoolcache\\windows\\node\\26.9.0\\x64\\node.exe",
-                  "D:\\a\\dsh_depot\\dsh_depot\\.runtime\\candidate-builds\\tools\\11.24.0\\pnpm-11.24.0\\node_modules\\pnpm\\bin\\pnpm.cjs",
-                  "--config.manage-package-manager-versions=false",
-                  "--pm-on-fail=ignore",
-                  "pack",
-                  "--config.ignore-scripts=true",
-                  "--json",
-                  "--pack-destination",
-                  "D:\\a\\dsh_depot\\dsh_depot\\.runtime\\candidate-builds\\results\\1331636953\\packages"
-                ],
-                "cwd": "source\\packages\\dsh-skill-explorer",
-                "exitCode": 0,
-                "seconds": 0.507
-              },
-              {
-                "stage": "pack-11",
-                "argv": [
-                  "C:\\hostedtoolcache\\windows\\node\\26.9.0\\x64\\node.exe",
-                  "D:\\a\\dsh_depot\\dsh_depot\\.runtime\\candidate-builds\\tools\\11.24.0\\pnpm-11.24.0\\node_modules\\pnpm\\bin\\pnpm.cjs",
-                  "--config.manage-package-manager-versions=false",
-                  "--pm-on-fail=ignore",
-                  "pack",
-                  "--config.ignore-scripts=true",
-                  "--json",
-                  "--pack-destination",
-                  "D:\\a\\dsh_depot\\dsh_depot\\.runtime\\candidate-builds\\results\\1331636953\\packages"
-                ],
-                "cwd": "source\\packages\\dsh-ssh",
-                "exitCode": 0,
-                "seconds": 0.622
-              },
-              {
-                "stage": "pack-12",
-                "argv": [
-                  "C:\\hostedtoolcache\\windows\\node\\26.9.0\\x64\\node.exe",
-                  "D:\\a\\dsh_depot\\dsh_depot\\.runtime\\candidate-builds\\tools\\11.24.0\\pnpm-11.24.0\\node_modules\\pnpm\\bin\\pnpm.cjs",
-                  "--config.manage-package-manager-versions=false",
-                  "--pm-on-fail=ignore",
-                  "pack",
-                  "--config.ignore-scripts=true",
-                  "--json",
-                  "--pack-destination",
-                  "D:\\a\\dsh_depot\\dsh_depot\\.runtime\\candidate-builds\\results\\1331636953\\packages"
-                ],
-                "cwd": "source\\packages\\dsh-task-board",
-                "exitCode": 0,
-                "seconds": 0.783
-              },
-              {
-                "stage": "pack-13",
-                "argv": [
-                  "C:\\hostedtoolcache\\windows\\node\\26.9.0\\x64\\node.exe",
-                  "D:\\a\\dsh_depot\\dsh_depot\\.runtime\\candidate-builds\\tools\\11.24.0\\pnpm-11.24.0\\node_modules\\pnpm\\bin\\pnpm.cjs",
-                  "--config.manage-package-manager-versions=false",
-                  "--pm-on-fail=ignore",
-                  "pack",
-                  "--config.ignore-scripts=true",
-                  "--json",
-                  "--pack-destination",
-                  "D:\\a\\dsh_depot\\dsh_depot\\.runtime\\candidate-builds\\results\\1331636953\\packages"
-                ],
-                "cwd": "source\\packages\\dsh-task-board-github",
-                "exitCode": 0,
-                "seconds": 0.582
-              },
-              {
-                "stage": "pack-14",
-                "argv": [
-                  "C:\\hostedtoolcache\\windows\\node\\26.9.0\\x64\\node.exe",
-                  "D:\\a\\dsh_depot\\dsh_depot\\.runtime\\candidate-builds\\tools\\11.24.0\\pnpm-11.24.0\\node_modules\\pnpm\\bin\\pnpm.cjs",
-                  "--config.manage-package-manager-versions=false",
-                  "--pm-on-fail=ignore",
-                  "pack",
-                  "--config.ignore-scripts=true",
-                  "--json",
-                  "--pack-destination",
-                  "D:\\a\\dsh_depot\\dsh_depot\\.runtime\\candidate-builds\\results\\1331636953\\packages"
-                ],
-                "cwd": "source\\packages\\dsh-task-board-remote",
-                "exitCode": 0,
-                "seconds": 0.498
-              },
-              {
-                "stage": "pack-15",
-                "argv": [
-                  "C:\\hostedtoolcache\\windows\\node\\26.9.0\\x64\\node.exe",
-                  "D:\\a\\dsh_depot\\dsh_depot\\.runtime\\candidate-builds\\tools\\11.24.0\\pnpm-11.24.0\\node_modules\\pnpm\\bin\\pnpm.cjs",
-                  "--config.manage-package-manager-versions=false",
-                  "--pm-on-fail=ignore",
-                  "pack",
-                  "--config.ignore-scripts=true",
-                  "--json",
-                  "--pack-destination",
-                  "D:\\a\\dsh_depot\\dsh_depot\\.runtime\\candidate-builds\\results\\1331636953\\packages"
-                ],
-                "cwd": "source\\packages\\dsh-update",
-                "exitCode": 0,
-                "seconds": 0.545
-              },
-              {
-                "stage": "pack-16",
-                "argv": [
-                  "C:\\hostedtoolcache\\windows\\node\\26.9.0\\x64\\node.exe",
-                  "D:\\a\\dsh_depot\\dsh_depot\\.runtime\\candidate-builds\\tools\\11.24.0\\pnpm-11.24.0\\node_modules\\pnpm\\bin\\pnpm.cjs",
-                  "--config.manage-package-manager-versions=false",
-                  "--pm-on-fail=ignore",
-                  "pack",
-                  "--config.ignore-scripts=true",
-                  "--json",
-                  "--pack-destination",
-                  "D:\\a\\dsh_depot\\dsh_depot\\.runtime\\candidate-builds\\results\\1331636953\\packages"
-                ],
-                "cwd": "source\\packages\\dsh-usage",
-                "exitCode": 0,
-                "seconds": 0.611
-              },
-              {
-                "stage": "pack-17",
-                "argv": [
-                  "C:\\hostedtoolcache\\windows\\node\\26.9.0\\x64\\node.exe",
-                  "D:\\a\\dsh_depot\\dsh_depot\\.runtime\\candidate-builds\\tools\\11.24.0\\pnpm-11.24.0\\node_modules\\pnpm\\bin\\pnpm.cjs",
-                  "--config.manage-package-manager-versions=false",
-                  "--pm-on-fail=ignore",
-                  "pack",
-                  "--config.ignore-scripts=true",
-                  "--json",
-                  "--pack-destination",
-                  "D:\\a\\dsh_depot\\dsh_depot\\.runtime\\candidate-builds\\results\\1331636953\\packages"
-                ],
-                "cwd": "source\\packages\\dsh-web-settings",
-                "exitCode": 0,
-                "seconds": 0.48
-              },
-              {
-                "stage": "pack-18",
-                "argv": [
-                  "C:\\hostedtoolcache\\windows\\node\\26.9.0\\x64\\node.exe",
-                  "D:\\a\\dsh_depot\\dsh_depot\\.runtime\\candidate-builds\\tools\\11.24.0\\pnpm-11.24.0\\node_modules\\pnpm\\bin\\pnpm.cjs",
-                  "--config.manage-package-manager-versions=false",
-                  "--pm-on-fail=ignore",
-                  "pack",
-                  "--config.ignore-scripts=true",
-                  "--json",
-                  "--pack-destination",
-                  "D:\\a\\dsh_depot\\dsh_depot\\.runtime\\candidate-builds\\results\\1331636953\\packages"
-                ],
-                "cwd": "source\\packages\\dsh-win-bash",
-                "exitCode": 0,
-                "seconds": 1.176
+                "seconds": 0.576
               }
             ],
             "dependencies": [
               {
                 "path": ".",
                 "manager": "pnpm",
-                "sourceLockSha256": "3c3ef9cc778dd8b7937dc4126d6e72775918ecf51707588d6de067215ecade06",
+                "sourceLockSha256": "1890a538e70e3121ffad87d4bfb8a65b9f0573cd891fc9d0dacf3fa01bd59d7c",
                 "mode": "source-lock",
-                "sha256": "3c3ef9cc778dd8b7937dc4126d6e72775918ecf51707588d6de067215ecade06"
+                "sha256": "1890a538e70e3121ffad87d4bfb8a65b9f0573cd891fc9d0dacf3fa01bd59d7c"
               }
             ],
-            "runtimeDependencies": [
-              "@linxin666/dsh-web-all"
-            ],
-            "version": "0.4.14",
+            "version": "0.4.15",
+            "error": "ENOENT: no such file or directory, open 'D:\\a\\dsh_depot\\dsh_depot\\.runtime\\candidate-builds\\results\\1331636953\\source\\packages\\dsh-git-graph\\package.json'",
+            "errorCategory": "package_contents",
             "warnings": [],
-            "artifactsUrl": "https://github.com/fatevase/dsh_depot/actions/runs/41795784714/artifacts/13305776352",
-            "artifactsExpiresAt": "2026-11-11T08:00:52Z",
-            "files": [
-              {
-                "name": "@linxin666/dsh-web-all",
-                "version": "0.4.14",
-                "filename": "linxin666-dsh-web-all-0.4.14.tgz",
-                "bytes": 137885,
-                "sha256": "850a00c3dbab5793a8faaf560b8f5fd1e36583fdb2a12c9f505278ef66e7e1ad",
-                "hostPeers": {
-                  "@deepseek-ai/dsh": ">=0.2.1-rc.3"
-                },
-                "hostCompatibility": null
-              },
-              {
-                "name": "@linxin666/dsh-client-ui-git-graph",
-                "version": "0.4.14",
-                "filename": "linxin666-dsh-client-ui-git-graph-0.4.14.tgz",
-                "bytes": 249169,
-                "sha256": "09b2707da3b23006fbad795b7aa11e58cc74305facac81bb13ca6094e6a97dcb",
-                "hostPeers": {
-                  "@deepseek-ai/dsh": ">=0.2.1-rc.3",
-                  "react": "^18.2.0"
-                },
-                "hostCompatibility": null
-              },
-              {
-                "name": "@linxin666/dsh-i18n",
-                "version": "0.4.14",
-                "filename": "linxin666-dsh-i18n-0.4.14.tgz",
-                "bytes": 107555,
-                "sha256": "7cce015c9f8e492073d6e6e81465ada201d1ce01f5b9276fd4b3208b0366ec87",
-                "hostPeers": {
-                  "@deepseek-ai/dsh": ">=0.2.1-rc.3"
-                },
-                "hostCompatibility": null
-              },
-              {
-                "name": "@linxin666/dsh-liangshen",
-                "version": "0.4.14",
-                "filename": "linxin666-dsh-liangshen-0.4.14.tgz",
-                "bytes": 316629,
-                "sha256": "4156c730c2220c587f8f265a1793566a60e5c945442b65dcf65c6dcb75c14391",
-                "hostPeers": {
-                  "@deepseek-ai/dsh": ">=0.2.1-rc.3"
-                },
-                "hostCompatibility": null
-              },
-              {
-                "name": "@linxin666/dsh-client-ui-market",
-                "version": "0.4.14",
-                "filename": "linxin666-dsh-client-ui-market-0.4.14.tgz",
-                "bytes": 129042,
-                "sha256": "1e18c85f9df3c99763a6b3d29534b77f2e2060cd2f714cefc0fc46301559b247",
-                "hostPeers": {
-                  "@deepseek-ai/dsh": ">=0.2.1-rc.3",
-                  "react": "^18.2.0"
-                },
-                "hostCompatibility": null
-              },
-              {
-                "name": "@linxin666/dsh-client-ui-plugin-manager",
-                "version": "0.4.14",
-                "filename": "linxin666-dsh-client-ui-plugin-manager-0.4.14.tgz",
-                "bytes": 209672,
-                "sha256": "7b91ead5f6aa74cf5cf5c79375004be0141dbee8c1446249ed770cb035e49aa0",
-                "hostPeers": {
-                  "@deepseek-ai/dsh": ">=0.2.1-rc.3",
-                  "react": "^18.2.0"
-                },
-                "hostCompatibility": null
-              },
-              {
-                "name": "@linxin666/dsh-remote-bridge",
-                "version": "0.4.14",
-                "filename": "linxin666-dsh-remote-bridge-0.4.14.tgz",
-                "bytes": 904722,
-                "sha256": "cafe0716e4245b5ee9e96abb980163f7d148e51d2d62be46f20e93fa37cc3af5",
-                "hostPeers": {
-                  "@deepseek-ai/dsh": ">=0.2.1-rc.3",
-                  "react": "^18.2.0",
-                  "react-dom": "^18.2.0"
-                },
-                "hostCompatibility": null
-              },
-              {
-                "name": "@linxin666/dsh-remote-web-ui",
-                "version": "0.4.14",
-                "filename": "linxin666-dsh-remote-web-ui-0.4.14.tgz",
-                "bytes": 857354,
-                "sha256": "8cc660c40512978a313b905e9f8fe2955f0f29cba737ea96afa8a7d6669c2884",
-                "hostPeers": {
-                  "@deepseek-ai/dsh": ">=0.2.1-rc.3",
-                  "react": "^18.2.0",
-                  "react-dom": "^18.2.0"
-                },
-                "hostCompatibility": null
-              },
-              {
-                "name": "@linxin666/dsh-session-archive",
-                "version": "0.4.14",
-                "filename": "linxin666-dsh-session-archive-0.4.14.tgz",
-                "bytes": 183934,
-                "sha256": "a1d0ec872972e3d3594b77378ac22b2a2c0610f4b18cdd2f0682f5cb210b0505",
-                "hostPeers": {
-                  "@deepseek-ai/dsh": ">=0.2.1-rc.3",
-                  "react": "^18.2.0"
-                },
-                "hostCompatibility": null
-              },
-              {
-                "name": "@linxin666/dsh-client-ui-session-id",
-                "version": "0.4.14",
-                "filename": "linxin666-dsh-client-ui-session-id-0.4.14.tgz",
-                "bytes": 29050,
-                "sha256": "671e22d09519a737b03c9d77d9f0fb06b678a7955961508d019166986135c0b4",
-                "hostPeers": {
-                  "@deepseek-ai/dsh": ">=0.2.1-rc.3",
-                  "react": "^18.2.0"
-                },
-                "hostCompatibility": null
-              },
-              {
-                "name": "@linxin666/dsh-client-ui-skill-explorer",
-                "version": "0.4.14",
-                "filename": "linxin666-dsh-client-ui-skill-explorer-0.4.14.tgz",
-                "bytes": 127029,
-                "sha256": "f124649bfe05e59da4aad2762ccc9dfd7ce07aab9404167359c4073c18c845ee",
-                "hostPeers": {
-                  "@deepseek-ai/dsh": ">=0.2.1-rc.3",
-                  "react": "^18.2.0"
-                },
-                "hostCompatibility": null
-              },
-              {
-                "name": "@linxin666/dsh-ssh",
-                "version": "0.4.14",
-                "filename": "linxin666-dsh-ssh-0.4.14.tgz",
-                "bytes": 611315,
-                "sha256": "70c13d4575cf07cff49e9d0ee67f633809f82bc3a12346bb690e1d76cdaca0c1",
-                "hostPeers": {
-                  "@deepseek-ai/dsh": ">=0.2.1-rc.3",
-                  "react": "^18.2.0",
-                  "react-dom": "^18.2.0"
-                },
-                "hostCompatibility": null
-              },
-              {
-                "name": "@linxin666/dsh-client-ui-task-board",
-                "version": "0.4.14",
-                "filename": "linxin666-dsh-client-ui-task-board-0.4.14.tgz",
-                "bytes": 1239826,
-                "sha256": "4d9c706acbd8d57bf82f7a4685f8c20ca1836a11a75a7e4a89f2d0983ddf50e3",
-                "hostPeers": {
-                  "@deepseek-ai/dsh": ">=0.2.1-rc.3",
-                  "react": "^18.2.0"
-                },
-                "hostCompatibility": null
-              },
-              {
-                "name": "@linxin666/dsh-client-ui-task-board-github",
-                "version": "0.4.14",
-                "filename": "linxin666-dsh-client-ui-task-board-github-0.4.14.tgz",
-                "bytes": 279366,
-                "sha256": "954e23952b1f3df19b58460ce9c89e32d77488048833b1275a0eb07a0574748f",
-                "hostPeers": {
-                  "@deepseek-ai/dsh": ">=0.2.1-rc.3",
-                  "react": "^18.2.0"
-                },
-                "hostCompatibility": null
-              },
-              {
-                "name": "@linxin666/dsh-task-board-remote",
-                "version": "0.4.14",
-                "filename": "linxin666-dsh-task-board-remote-0.4.14.tgz",
-                "bytes": 26566,
-                "sha256": "b03e542e856a22ca0a0e0df10c64fccfe61bbea55a471ebf93fec0d19e7b0d4e",
-                "hostPeers": {
-                  "@deepseek-ai/dsh": ">=0.2.1-rc.3"
-                },
-                "hostCompatibility": null
-              },
-              {
-                "name": "@linxin666/dsh-update",
-                "version": "0.4.14",
-                "filename": "linxin666-dsh-update-0.4.14.tgz",
-                "bytes": 127437,
-                "sha256": "50fc2d65bb0f2a301f0d065b8f5c19837c52bef0b238c3d1383dfd9cf3245578",
-                "hostPeers": {
-                  "@deepseek-ai/dsh": ">=0.2.1-rc.3",
-                  "react": "^18.2.0",
-                  "react-dom": "^18.2.0"
-                },
-                "hostCompatibility": null
-              },
-              {
-                "name": "@linxin666/dsh-usage",
-                "version": "0.4.14",
-                "filename": "linxin666-dsh-usage-0.4.14.tgz",
-                "bytes": 1190533,
-                "sha256": "643a9361b6d1bcb55c7514fde0bb50b7427c13406b8588bc70d136ca3233476d",
-                "hostPeers": {
-                  "@deepseek-ai/dsh": ">=0.2.1-rc.3",
-                  "react": "^18.2.0"
-                },
-                "hostCompatibility": null
-              },
-              {
-                "name": "@linxin666/dsh-client-ui-web-ui-settings",
-                "version": "0.4.14",
-                "filename": "linxin666-dsh-client-ui-web-ui-settings-0.4.14.tgz",
-                "bytes": 79298,
-                "sha256": "e143349c161cd308ffa73e92ed80367b58d174e42571c144f8657199b07f25e0",
-                "hostPeers": {
-                  "@deepseek-ai/dsh": ">=0.2.1-rc.3",
-                  "react": "^18.2.0"
-                },
-                "hostCompatibility": null
-              },
-              {
-                "name": "@linxin666/dsh-win-bash",
-                "version": "0.4.14",
-                "filename": "linxin666-dsh-win-bash-0.4.14.tgz",
-                "bytes": 8346513,
-                "sha256": "f31d1b7e7ff94252bcc4b469e1b0fcad0f3ec2a09c9cd35f07df60a7a27d41ca",
-                "hostPeers": {
-                  "@deepseek-ai/dsh": ">=0.2.1-rc.3"
-                },
-                "hostCompatibility": null
-              }
-            ]
+            "artifactsExpiresAt": "2026-11-11T22:11:16Z",
+            "files": []
           }
         }
       },
@@ -263241,17 +261633,17 @@
         "repository": "YuJunZhiXue/dsh-purge",
         "npmName": "dsh-purge",
         "commit": "217d60d3d61881079ea95bbe2c174f338a02182b",
-        "runId": 41795784714,
+        "runId": 41922349585,
         "runAttempt": 1,
-        "runUrl": "https://github.com/fatevase/dsh_depot/actions/runs/41795784714",
+        "runUrl": "https://github.com/fatevase/dsh_depot/actions/runs/41922349585",
         "results": {
           "macos-arm64": {
-            "runId": 41795784714,
+            "runId": 41922349585,
             "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
-            "startedAt": "2026-11-04T07:59:49.384Z",
-            "seconds": 1.581,
+            "startedAt": "2026-11-04T22:10:42.331Z",
+            "seconds": 2.549,
             "stage": "pack-0",
             "dependencyMode": "trial-resolution",
             "adapterDigest": "bbf1c522a47b8789091a7099ed49466343e96242d9dea318135b892e366231ff",
@@ -263272,7 +261664,7 @@
                 ],
                 "cwd": "source",
                 "exitCode": 0,
-                "seconds": 0.377
+                "seconds": 0.625
               },
               {
                 "stage": "build",
@@ -263284,7 +261676,7 @@
                 ],
                 "cwd": "source",
                 "exitCode": 0,
-                "seconds": 0.167
+                "seconds": 0.22
               },
               {
                 "stage": "pack-0",
@@ -263299,7 +261691,7 @@
                 ],
                 "cwd": "source",
                 "exitCode": 0,
-                "seconds": 0.378
+                "seconds": 0.546
               }
             ],
             "dependencies": [
@@ -263313,8 +261705,8 @@
             "runtimeDependencies": [],
             "version": "1.1.90",
             "warnings": [],
-            "artifactsUrl": "https://github.com/fatevase/dsh_depot/actions/runs/41795784714/artifacts/13305243319",
-            "artifactsExpiresAt": "2026-11-11T08:00:03Z",
+            "artifactsUrl": "https://github.com/fatevase/dsh_depot/actions/runs/41922349585/artifacts/13368500155",
+            "artifactsExpiresAt": "2026-11-11T22:11:14Z",
             "files": [
               {
                 "name": "dsh-purge",
@@ -263330,12 +261722,12 @@
             ]
           },
           "linux-x64": {
-            "runId": 41795784714,
+            "runId": 41922349585,
             "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
-            "startedAt": "2026-11-04T07:59:43.071Z",
-            "seconds": 1.561,
+            "startedAt": "2026-11-04T22:10:09.810Z",
+            "seconds": 1.269,
             "stage": "pack-0",
             "dependencyMode": "trial-resolution",
             "adapterDigest": "bbf1c522a47b8789091a7099ed49466343e96242d9dea318135b892e366231ff",
@@ -263356,7 +261748,7 @@
                 ],
                 "cwd": "source",
                 "exitCode": 0,
-                "seconds": 0.169
+                "seconds": 0.213
               },
               {
                 "stage": "build",
@@ -263368,7 +261760,7 @@
                 ],
                 "cwd": "source",
                 "exitCode": 0,
-                "seconds": 0.118
+                "seconds": 0.153
               },
               {
                 "stage": "pack-0",
@@ -263383,7 +261775,7 @@
                 ],
                 "cwd": "source",
                 "exitCode": 0,
-                "seconds": 0.348
+                "seconds": 0.444
               }
             ],
             "dependencies": [
@@ -263397,8 +261789,8 @@
             "runtimeDependencies": [],
             "version": "1.1.90",
             "warnings": [],
-            "artifactsUrl": "https://github.com/fatevase/dsh_depot/actions/runs/41795784714/artifacts/13305506697",
-            "artifactsExpiresAt": "2026-11-11T07:59:57Z",
+            "artifactsUrl": "https://github.com/fatevase/dsh_depot/actions/runs/41922349585/artifacts/13367892313",
+            "artifactsExpiresAt": "2026-11-11T22:10:24Z",
             "files": [
               {
                 "name": "dsh-purge",
@@ -263414,12 +261806,12 @@
             ]
           },
           "win32-x64": {
-            "runId": 41795784714,
+            "runId": 41922349585,
             "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
-            "startedAt": "2026-11-04T08:00:34.143Z",
-            "seconds": 2.183,
+            "startedAt": "2026-11-04T22:10:59.379Z",
+            "seconds": 2.027,
             "stage": "pack-0",
             "dependencyMode": "trial-resolution",
             "adapterDigest": "bbf1c522a47b8789091a7099ed49466343e96242d9dea318135b892e366231ff",
@@ -263440,7 +261832,7 @@
                 ],
                 "cwd": "source",
                 "exitCode": 0,
-                "seconds": 0.385
+                "seconds": 0.436
               },
               {
                 "stage": "build",
@@ -263452,7 +261844,7 @@
                 ],
                 "cwd": "source",
                 "exitCode": 0,
-                "seconds": 0.265
+                "seconds": 0.258
               },
               {
                 "stage": "pack-0",
@@ -263467,7 +261859,7 @@
                 ],
                 "cwd": "source",
                 "exitCode": 0,
-                "seconds": 0.674
+                "seconds": 0.722
               }
             ],
             "dependencies": [
@@ -263481,8 +261873,8 @@
             "runtimeDependencies": [],
             "version": "1.1.90",
             "warnings": [],
-            "artifactsUrl": "https://github.com/fatevase/dsh_depot/actions/runs/41795784714/artifacts/13305776352",
-            "artifactsExpiresAt": "2026-11-11T08:00:52Z",
+            "artifactsUrl": "https://github.com/fatevase/dsh_depot/actions/runs/41922349585/artifacts/13367234009",
+            "artifactsExpiresAt": "2026-11-11T22:11:16Z",
             "files": [
               {
                 "name": "dsh-purge",
@@ -263504,17 +261896,17 @@
         "repository": "yjh051108/dsh-routing-suite",
         "npmName": "@dsh-external/dsh-super-injector",
         "commit": "195273352f23bff7f9023ebe2ec0cdbdf9c98f10",
-        "runId": 41795784714,
+        "runId": 41922349585,
         "runAttempt": 1,
-        "runUrl": "https://github.com/fatevase/dsh_depot/actions/runs/41795784714",
+        "runUrl": "https://github.com/fatevase/dsh_depot/actions/runs/41922349585",
         "results": {
           "macos-arm64": {
-            "runId": 41795784714,
+            "runId": 41922349585,
             "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
-            "startedAt": "2026-11-04T07:59:50.967Z",
-            "seconds": 6.861,
+            "startedAt": "2026-11-04T22:10:44.882Z",
+            "seconds": 9.448,
             "stage": "pack-0",
             "dependencyMode": "trial-resolution",
             "adapterDigest": "67a3e89ef85f04417848cd3c1dbc0c63dccb7b6fb6422dabc1e48f83ac33b767",
@@ -263535,7 +261927,7 @@
                 ],
                 "cwd": "source",
                 "exitCode": 0,
-                "seconds": 0.199
+                "seconds": 0.292
               },
               {
                 "stage": "build",
@@ -263547,7 +261939,7 @@
                 ],
                 "cwd": "source",
                 "exitCode": 0,
-                "seconds": 6.128
+                "seconds": 8.519
               },
               {
                 "stage": "pack-0",
@@ -263562,7 +261954,7 @@
                 ],
                 "cwd": "source",
                 "exitCode": 0,
-                "seconds": 0.238
+                "seconds": 0.286
               }
             ],
             "dependencies": [
@@ -263579,8 +261971,8 @@
               "类型声明文件缺失：./injector/lib/types/index.d.ts",
               "类型声明文件缺失：./injector/lib/types/client/index.d.ts"
             ],
-            "artifactsUrl": "https://github.com/fatevase/dsh_depot/actions/runs/41795784714/artifacts/13305243319",
-            "artifactsExpiresAt": "2026-11-11T08:00:03Z",
+            "artifactsUrl": "https://github.com/fatevase/dsh_depot/actions/runs/41922349585/artifacts/13368500155",
+            "artifactsExpiresAt": "2026-11-11T22:11:14Z",
             "files": [
               {
                 "name": "@dsh-external/dsh-super-injector",
@@ -263598,12 +261990,12 @@
             ]
           },
           "linux-x64": {
-            "runId": 41795784714,
+            "runId": 41922349585,
             "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
-            "startedAt": "2026-11-04T07:59:44.632Z",
-            "seconds": 7.23,
+            "startedAt": "2026-11-04T22:10:11.079Z",
+            "seconds": 7.84,
             "stage": "pack-0",
             "dependencyMode": "trial-resolution",
             "adapterDigest": "67a3e89ef85f04417848cd3c1dbc0c63dccb7b6fb6422dabc1e48f83ac33b767",
@@ -263624,7 +262016,7 @@
                 ],
                 "cwd": "source",
                 "exitCode": 0,
-                "seconds": 0.172
+                "seconds": 0.216
               },
               {
                 "stage": "build",
@@ -263636,7 +262028,7 @@
                 ],
                 "cwd": "source",
                 "exitCode": 0,
-                "seconds": 6.521
+                "seconds": 7.058
               },
               {
                 "stage": "pack-0",
@@ -263651,7 +262043,7 @@
                 ],
                 "cwd": "source",
                 "exitCode": 0,
-                "seconds": 0.212
+                "seconds": 0.256
               }
             ],
             "dependencies": [
@@ -263668,8 +262060,8 @@
               "类型声明文件缺失：./injector/lib/types/index.d.ts",
               "类型声明文件缺失：./injector/lib/types/client/index.d.ts"
             ],
-            "artifactsUrl": "https://github.com/fatevase/dsh_depot/actions/runs/41795784714/artifacts/13305506697",
-            "artifactsExpiresAt": "2026-11-11T07:59:57Z",
+            "artifactsUrl": "https://github.com/fatevase/dsh_depot/actions/runs/41922349585/artifacts/13367892313",
+            "artifactsExpiresAt": "2026-11-11T22:10:24Z",
             "files": [
               {
                 "name": "@dsh-external/dsh-super-injector",
@@ -263687,12 +262079,12 @@
             ]
           },
           "win32-x64": {
-            "runId": 41795784714,
+            "runId": 41922349585,
             "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
-            "startedAt": "2026-11-04T08:00:36.328Z",
-            "seconds": 9.473,
+            "startedAt": "2026-11-04T22:11:01.407Z",
+            "seconds": 9.324,
             "stage": "pack-0",
             "dependencyMode": "trial-resolution",
             "adapterDigest": "67a3e89ef85f04417848cd3c1dbc0c63dccb7b6fb6422dabc1e48f83ac33b767",
@@ -263713,7 +262105,7 @@
                 ],
                 "cwd": "source",
                 "exitCode": 0,
-                "seconds": 0.387
+                "seconds": 0.462
               },
               {
                 "stage": "build",
@@ -263725,7 +262117,7 @@
                 ],
                 "cwd": "source",
                 "exitCode": 0,
-                "seconds": 8.174
+                "seconds": 7.983
               },
               {
                 "stage": "pack-0",
@@ -263740,7 +262132,7 @@
                 ],
                 "cwd": "source",
                 "exitCode": 0,
-                "seconds": 0.48
+                "seconds": 0.49
               }
             ],
             "dependencies": [
@@ -263757,8 +262149,8 @@
               "类型声明文件缺失：./injector/lib/types/index.d.ts",
               "类型声明文件缺失：./injector/lib/types/client/index.d.ts"
             ],
-            "artifactsUrl": "https://github.com/fatevase/dsh_depot/actions/runs/41795784714/artifacts/13305776352",
-            "artifactsExpiresAt": "2026-11-11T08:00:52Z",
+            "artifactsUrl": "https://github.com/fatevase/dsh_depot/actions/runs/41922349585/artifacts/13367234009",
+            "artifactsExpiresAt": "2026-11-11T22:11:16Z",
             "files": [
               {
                 "name": "@dsh-external/dsh-super-injector",
@@ -263781,22 +262173,22 @@
         "repositoryId": 1301657572,
         "repository": "superdesigndev/treg",
         "npmName": "treg-dsh",
-        "commit": "d7051e52d6631b62ce0de5df7321cb9e41273bdf",
-        "runId": 41795784714,
+        "commit": "a2fe33f8ff83ba66f1b83e59dd45153ade8a246d",
+        "runId": 41922349585,
         "runAttempt": 1,
-        "runUrl": "https://github.com/fatevase/dsh_depot/actions/runs/41795784714",
+        "runUrl": "https://github.com/fatevase/dsh_depot/actions/runs/41922349585",
         "results": {
           "macos-arm64": {
-            "runId": 41795784714,
+            "runId": 41922349585,
             "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
-            "startedAt": "2026-11-04T07:59:57.831Z",
-            "seconds": 5.363,
+            "startedAt": "2026-11-04T22:10:54.331Z",
+            "seconds": 19.287,
             "stage": "pack-0",
             "dependencyMode": "not-installed-prebuilt-trial",
-            "adapterDigest": "8b4ca2ea18c9177ceee89d73301aec7a7f348a5520123f074b23c2ca5fac3936",
-            "sourceSha256": "dae3b176793f78f24244adee20a6389a012b158ba6af534e4f41e1d3c2ce5656",
+            "adapterDigest": "24b91353901345d2e6c8922e0a8b8bb43a14318e01cd1eab9182d3d43e016107",
+            "sourceSha256": "78cc0250536c6760ca233aca727c0659b2fa4ea91143dfaebc89279d3fca18b7",
             "steps": [
               {
                 "stage": "source-init",
@@ -263810,7 +262202,7 @@
                 ],
                 "cwd": "source-input/git",
                 "exitCode": 0,
-                "seconds": 0.024
+                "seconds": 0.027
               },
               {
                 "stage": "source-remote",
@@ -263827,7 +262219,7 @@
                 ],
                 "cwd": "source-input/git",
                 "exitCode": 0,
-                "seconds": 0.007
+                "seconds": 0.008
               },
               {
                 "stage": "source-fetch",
@@ -263844,11 +262236,11 @@
                   "--depth=1",
                   "--filter=blob:none",
                   "origin",
-                  "d7051e52d6631b62ce0de5df7321cb9e41273bdf"
+                  "a2fe33f8ff83ba66f1b83e59dd45153ade8a246d"
                 ],
                 "cwd": "source-input/git",
                 "exitCode": 0,
-                "seconds": 0.737
+                "seconds": 0.464
               },
               {
                 "stage": "source-identity",
@@ -263863,7 +262255,7 @@
                 ],
                 "cwd": "source-input/git",
                 "exitCode": 0,
-                "seconds": 0.01
+                "seconds": 0.011
               },
               {
                 "stage": "source-components",
@@ -263885,7 +262277,7 @@
                 ],
                 "cwd": "source-input/git",
                 "exitCode": 0,
-                "seconds": 4.285
+                "seconds": 17.89
               },
               {
                 "stage": "pack-0",
@@ -263900,37 +262292,37 @@
                 ],
                 "cwd": "source",
                 "exitCode": 0,
-                "seconds": 0.216
+                "seconds": 0.634
               }
             ],
             "runtimeDependencies": [],
             "version": "0.29.0",
             "warnings": [],
-            "artifactsUrl": "https://github.com/fatevase/dsh_depot/actions/runs/41795784714/artifacts/13305243319",
-            "artifactsExpiresAt": "2026-11-11T08:00:03Z",
+            "artifactsUrl": "https://github.com/fatevase/dsh_depot/actions/runs/41922349585/artifacts/13368500155",
+            "artifactsExpiresAt": "2026-11-11T22:11:14Z",
             "files": [
               {
                 "name": "treg-dsh",
                 "version": "0.29.0",
                 "filename": "treg-dsh-0.29.0.tgz",
                 "bytes": 31301,
-                "sha256": "f699beaceaa89f42b050b23a97cc3b3943040793a3ae5a8b177740e537dfbe20",
+                "sha256": "d6137ce82b064d2900b1c917ba8e8e6ab6aaf267bc696624d1e9c3873b223a6d",
                 "hostPeers": {},
                 "hostCompatibility": null
               }
             ]
           },
           "linux-x64": {
-            "runId": 41795784714,
+            "runId": 41922349585,
             "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
-            "startedAt": "2026-11-04T07:59:51.862Z",
-            "seconds": 5.947,
+            "startedAt": "2026-11-04T22:10:18.919Z",
+            "seconds": 5.739,
             "stage": "pack-0",
             "dependencyMode": "not-installed-prebuilt-trial",
-            "adapterDigest": "8b4ca2ea18c9177ceee89d73301aec7a7f348a5520123f074b23c2ca5fac3936",
-            "sourceSha256": "dae3b176793f78f24244adee20a6389a012b158ba6af534e4f41e1d3c2ce5656",
+            "adapterDigest": "24b91353901345d2e6c8922e0a8b8bb43a14318e01cd1eab9182d3d43e016107",
+            "sourceSha256": "78cc0250536c6760ca233aca727c0659b2fa4ea91143dfaebc89279d3fca18b7",
             "steps": [
               {
                 "stage": "source-init",
@@ -263978,11 +262370,11 @@
                   "--depth=1",
                   "--filter=blob:none",
                   "origin",
-                  "d7051e52d6631b62ce0de5df7321cb9e41273bdf"
+                  "a2fe33f8ff83ba66f1b83e59dd45153ade8a246d"
                 ],
                 "cwd": "source-input/git",
                 "exitCode": 0,
-                "seconds": 0.491
+                "seconds": 0.342
               },
               {
                 "stage": "source-identity",
@@ -264019,7 +262411,7 @@
                 ],
                 "cwd": "source-input/git",
                 "exitCode": 0,
-                "seconds": 5.187
+                "seconds": 5.079
               },
               {
                 "stage": "pack-0",
@@ -264034,37 +262426,37 @@
                 ],
                 "cwd": "source",
                 "exitCode": 0,
-                "seconds": 0.193
+                "seconds": 0.231
               }
             ],
             "runtimeDependencies": [],
             "version": "0.29.0",
             "warnings": [],
-            "artifactsUrl": "https://github.com/fatevase/dsh_depot/actions/runs/41795784714/artifacts/13305506697",
-            "artifactsExpiresAt": "2026-11-11T07:59:57Z",
+            "artifactsUrl": "https://github.com/fatevase/dsh_depot/actions/runs/41922349585/artifacts/13367892313",
+            "artifactsExpiresAt": "2026-11-11T22:10:24Z",
             "files": [
               {
                 "name": "treg-dsh",
                 "version": "0.29.0",
                 "filename": "treg-dsh-0.29.0.tgz",
                 "bytes": 31301,
-                "sha256": "f699beaceaa89f42b050b23a97cc3b3943040793a3ae5a8b177740e537dfbe20",
+                "sha256": "d6137ce82b064d2900b1c917ba8e8e6ab6aaf267bc696624d1e9c3873b223a6d",
                 "hostPeers": {},
                 "hostCompatibility": null
               }
             ]
           },
           "win32-x64": {
-            "runId": 41795784714,
+            "runId": 41922349585,
             "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
-            "startedAt": "2026-11-04T08:00:45.802Z",
-            "seconds": 6.368,
+            "startedAt": "2026-11-04T22:11:10.733Z",
+            "seconds": 5.426,
             "stage": "pack-0",
             "dependencyMode": "not-installed-prebuilt-trial",
-            "adapterDigest": "8b4ca2ea18c9177ceee89d73301aec7a7f348a5520123f074b23c2ca5fac3936",
-            "sourceSha256": "dae3b176793f78f24244adee20a6389a012b158ba6af534e4f41e1d3c2ce5656",
+            "adapterDigest": "24b91353901345d2e6c8922e0a8b8bb43a14318e01cd1eab9182d3d43e016107",
+            "sourceSha256": "78cc0250536c6760ca233aca727c0659b2fa4ea91143dfaebc89279d3fca18b7",
             "steps": [
               {
                 "stage": "source-init",
@@ -264078,7 +262470,7 @@
                 ],
                 "cwd": "source-input\\git",
                 "exitCode": 0,
-                "seconds": 0.053
+                "seconds": 0.059
               },
               {
                 "stage": "source-remote",
@@ -264095,7 +262487,7 @@
                 ],
                 "cwd": "source-input\\git",
                 "exitCode": 0,
-                "seconds": 0.048
+                "seconds": 0.05
               },
               {
                 "stage": "source-fetch",
@@ -264112,11 +262504,11 @@
                   "--depth=1",
                   "--filter=blob:none",
                   "origin",
-                  "d7051e52d6631b62ce0de5df7321cb9e41273bdf"
+                  "a2fe33f8ff83ba66f1b83e59dd45153ade8a246d"
                 ],
                 "cwd": "source-input\\git",
                 "exitCode": 0,
-                "seconds": 0.421
+                "seconds": 0.217
               },
               {
                 "stage": "source-identity",
@@ -264131,7 +262523,7 @@
                 ],
                 "cwd": "source-input\\git",
                 "exitCode": 0,
-                "seconds": 0.046
+                "seconds": 0.045
               },
               {
                 "stage": "source-components",
@@ -264153,7 +262545,7 @@
                 ],
                 "cwd": "source-input\\git",
                 "exitCode": 0,
-                "seconds": 5.234
+                "seconds": 4.448
               },
               {
                 "stage": "pack-0",
@@ -264168,21 +262560,21 @@
                 ],
                 "cwd": "source",
                 "exitCode": 0,
-                "seconds": 0.42
+                "seconds": 0.46
               }
             ],
             "runtimeDependencies": [],
             "version": "0.29.0",
             "warnings": [],
-            "artifactsUrl": "https://github.com/fatevase/dsh_depot/actions/runs/41795784714/artifacts/13305776352",
-            "artifactsExpiresAt": "2026-11-11T08:00:52Z",
+            "artifactsUrl": "https://github.com/fatevase/dsh_depot/actions/runs/41922349585/artifacts/13367234009",
+            "artifactsExpiresAt": "2026-11-11T22:11:16Z",
             "files": [
               {
                 "name": "treg-dsh",
                 "version": "0.29.0",
                 "filename": "treg-dsh-0.29.0.tgz",
                 "bytes": 31301,
-                "sha256": "f699beaceaa89f42b050b23a97cc3b3943040793a3ae5a8b177740e537dfbe20",
+                "sha256": "d6137ce82b064d2900b1c917ba8e8e6ab6aaf267bc696624d1e9c3873b223a6d",
                 "hostPeers": {},
                 "hostCompatibility": null
               }
