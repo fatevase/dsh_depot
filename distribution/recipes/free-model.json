@@ -15,7 +15,7 @@
     "version": "2.8.0"
   },
   "allowedVersions": "2.8.0",
-  "hostRange": "0.2.1-rc.5",
+  "hostRange": "0.2.2-rc.1",
   "targets": [
     "macos-arm64",
     "linux-x64",

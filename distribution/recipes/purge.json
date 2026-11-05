@@ -15,7 +15,7 @@
     "version": "1.1.90"
   },
   "allowedVersions": "1.1.90",
-  "hostRange": "0.2.1-rc.5",
+  "hostRange": "0.2.2-rc.1",
   "targets": [
     "macos-arm64",
     "linux-x64",
@@ -64,5 +64,6 @@
     "v1.1.90": "217d60d3d61881079ea95bbe2c174f338a02182b"
   },
   "distributionScope": "跟进上游最新发布版；无发布版时跟进默认分支。每次构建固定源码与依赖，并在当前 DSH 上重新验证。",
-  "upstreamChannel": "release"
+  "upstreamChannel": "release",
+  "latestRefreshError": "source_conflict: previously observed release/tag moved"
 }
