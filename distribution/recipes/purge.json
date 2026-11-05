@@ -65,5 +65,5 @@
   },
   "distributionScope": "跟进上游最新发布版；无发布版时跟进默认分支。每次构建固定源码与依赖，并在当前 DSH 上重新验证。",
   "upstreamChannel": "release",
-  "latestRefreshError": "source_conflict: previously observed release/tag moved"
+  "latestRefreshError": "Latest package repository identity changed"
 }

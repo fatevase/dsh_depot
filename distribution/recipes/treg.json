@@ -6,10 +6,10 @@
   ],
   "channel": {
     "type": "fixed",
-    "ref": "e2ef16c03bede1f4e9ca3f82a5fe61e2a0d34a97",
+    "ref": "5264ab42bb130d6d39998fb5763623e775bdb42b",
     "allowPrerelease": false
   },
-  "allowedVersions": "0.29.0",
+  "allowedVersions": "0.30.0",
   "hostRange": "0.2.2-rc.1",
   "targets": [
     "macos-arm64",
@@ -31,9 +31,9 @@
   "repository": "superdesigndev/treg",
   "npmName": "treg-dsh",
   "seed": {
-    "ref": "main",
-    "commit": "e2ef16c03bede1f4e9ca3f82a5fe61e2a0d34a97",
-    "version": "0.29.0"
+    "ref": "v0.30.0",
+    "commit": "5264ab42bb130d6d39998fb5763623e775bdb42b",
+    "version": "0.30.0"
   },
   "locks": {
     "runtime": {
@@ -62,5 +62,8 @@
   "license": "LicenseRef-tools-registry",
   "licenseSource": "https://github.com/superdesigndev/treg/blob/6c27d5bfafaf821290f580e713b9fcb159bf2e93/LICENSE",
   "latestOnly": true,
-  "upstreamChannel": "branch"
+  "upstreamChannel": "tag",
+  "releasePins": {
+    "v0.30.0": "5264ab42bb130d6d39998fb5763623e775bdb42b"
+  }
 }
