@@ -6,15 +6,15 @@
   "npmName": "@liustack/modlens",
   "channel": {
     "type": "fixed",
-    "ref": "ac278f885386f785dc1a35ddfbd8994bb5e744d7",
+    "ref": "804f2193ef39e9cbe68c0e23d0701141f440a344",
     "allowPrerelease": false
   },
   "seed": {
-    "ref": "v3.27.2",
-    "commit": "ac278f885386f785dc1a35ddfbd8994bb5e744d7",
-    "version": "3.27.2"
+    "ref": "v3.27.3",
+    "commit": "804f2193ef39e9cbe68c0e23d0701141f440a344",
+    "version": "3.27.3"
   },
-  "allowedVersions": "3.27.2",
+  "allowedVersions": "3.27.3",
   "hostRange": "0.2.2-rc.1",
   "targets": [
     "macos-arm64",
@@ -68,6 +68,7 @@
   "upstreamChannel": "release",
   "releasePins": {
     "v3.27.1": "aa108d1796e3c4b5a6790516e2fcde87a35b189f",
-    "v3.27.2": "ac278f885386f785dc1a35ddfbd8994bb5e744d7"
+    "v3.27.2": "ac278f885386f785dc1a35ddfbd8994bb5e744d7",
+    "v3.27.3": "804f2193ef39e9cbe68c0e23d0701141f440a344"
   }
 }
