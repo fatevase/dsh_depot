@@ -1,12 +1,12 @@
 {
   "name": "dsh-better-sidebar",
-  "version": "0.30.1",
+  "version": "0.31.0",
   "lockfileVersion": 3,
   "requires": true,
   "packages": {
     "": {
       "name": "dsh-better-sidebar",
-      "version": "0.30.1",
+      "version": "0.31.0",
       "dependencies": {
         "@codemirror/commands": "6.11.1",
         "@codemirror/lang-cpp": "6.0.3",
@@ -29,8 +29,7 @@
         "@codemirror/search": "6.7.2",
         "@codemirror/state": "6.7.6",
         "@codemirror/view": "6.43.15",
-        "@deepseek-ai/schemastery": "3.18.5",
-        "@formkit/auto-animate": "0.10.0",
+        "@formkit/auto-animate": "0.10.2",
         "@lezer/highlight": "1.2.5",
         "@xterm/addon-fit": "0.11.0",
         "@xterm/xterm": "6.0.0",
@@ -39,7 +38,7 @@
         "mermaid": "11.17.2",
         "react-icons": "5.7.0",
         "rxjs": "7.8.2",
-        "ws": "8.22.1",
+        "ws": "8.22.2",
         "yaml": "2.9.1"
       },
       "private": true
@@ -362,26 +361,10 @@
         "w3c-keyname": "^2.2.4"
       }
     },
-    "node_modules/@deepseek-ai/cosmokit": {
-      "version": "1.8.6",
-      "resolved": "https://registry.npmjs.org/@deepseek-ai/cosmokit/-/cosmokit-1.8.6.tgz",
-      "integrity": "sha512-ZSD/fN52L498LBIOYwjIOlaLv5veY6ZEwI2yzvZUKQtctn0QAPqu8tKdJ+OF5+Tv6NBq1U+wJWH+QI6OGy5EvQ==",
-      "license": "MIT"
-    },
-    "node_modules/@deepseek-ai/schemastery": {
-      "version": "3.18.5",
-      "resolved": "https://registry.npmjs.org/@deepseek-ai/schemastery/-/schemastery-3.18.5.tgz",
-      "integrity": "sha512-Mnobvqf9rHsZYv4g5edj5ddxS1oF1kIdSlz0DunUgnY3LWG5F26MqvH3YOOsSaodCgyzJ16OMN9O99/s5Crtdw==",
-      "license": "MIT",
-      "dependencies": {
-        "@deepseek-ai/cosmokit": "~1.8.6",
-        "@standard-schema/spec": "^1.1.0"
-      }
-    },
     "node_modules/@formkit/auto-animate": {
-      "version": "0.10.0",
-      "resolved": "https://registry.npmjs.org/@formkit/auto-animate/-/auto-animate-0.10.0.tgz",
-      "integrity": "sha512-KGomRttjUfORuPUaR/ZGQw+6xfMrTM+sxnILv7JAd9AmabU9rg9i6gF/iC0Ih+QpKCubJpCA/1DX9UHKE8cX+A==",
+      "version": "0.10.2",
+      "resolved": "https://registry.npmjs.org/@formkit/auto-animate/-/auto-animate-0.10.2.tgz",
+      "integrity": "sha512-t2Z3y8b/zB3wPWwgpc6JDVm4q0ezb5vfe2mqfUrQJ7XziZY8iYuhocQ7eJdTzowRePihrNbZ/DNJoFa6Yi5blg==",
       "license": "MIT"
     },
     "node_modules/@iconify/types": {
@@ -581,12 +564,6 @@
       "dependencies": {
         "@chevrotain/types": "~11.1.2"
       }
-    },
-    "node_modules/@standard-schema/spec": {
-      "version": "1.1.0",
-      "resolved": "https://registry.npmjs.org/@standard-schema/spec/-/spec-1.1.0.tgz",
-      "integrity": "sha512-l2aFy5jALhniG5HgqrD6jXLi/rUWrKvqN/qJx6yoJsgKhblVd+iqqU4RCXavm/jPityDo5TCvKMnpjKnOriy0w==",
-      "license": "MIT"
     },
     "node_modules/@types/d3": {
       "version": "7.4.3",
@@ -913,9 +890,9 @@
       "license": "MIT"
     },
     "node_modules/cytoscape": {
-      "version": "3.34.4",
-      "resolved": "https://registry.npmjs.org/cytoscape/-/cytoscape-3.34.4.tgz",
-      "integrity": "sha512-msY99tMY8iWTg+sIPGfSqDcPNOt4xcj+v/K/7qUFaCUxxlqnMkUYLBjRUzn9W5CU/R2hrmtJa5+UtovrEM2ctg==",
+      "version": "3.35.0",
+      "resolved": "https://registry.npmjs.org/cytoscape/-/cytoscape-3.35.0.tgz",
+      "integrity": "sha512-sMvBIXiGMnhkCaWz2R06FwF/27MNlS+Tqvi17foO9UhnUg3XGZccKjxsvEqQFAQYMSSZmN5SxYzUYlQ0DOJJ3g==",
       "license": "MIT",
       "engines": {
         "node": ">=0.10"
@@ -1437,9 +1414,9 @@
       }
     },
     "node_modules/es-toolkit": {
-      "version": "1.53.1",
-      "resolved": "https://registry.npmjs.org/es-toolkit/-/es-toolkit-1.53.1.tgz",
-      "integrity": "sha512-VhMc6IXmexu8iYFfL2aaAww6IvJTdHlqBLruLoEUs33YD4IcP5DdZcLOybMsMmmLsiy1c8PsiLsrM0DdIuuRUA==",
+      "version": "1.53.2",
+      "resolved": "https://registry.npmjs.org/es-toolkit/-/es-toolkit-1.53.2.tgz",
+      "integrity": "sha512-iUqZ+NlwH4jUgRmXZUxFBsV/9762TQEa1O4IXLFBmDEjVHScBytKuseX23I0+v9ShZ5MYxEx6WKNzm6IPnex8g==",
       "license": "MIT",
       "workspaces": [
         "docs",
@@ -1716,9 +1693,9 @@
       "license": "MIT"
     },
     "node_modules/ws": {
-      "version": "8.22.1",
-      "resolved": "https://registry.npmjs.org/ws/-/ws-8.22.1.tgz",
-      "integrity": "sha512-oyL6OPYme/CmiFvNuGzeoxCJ4nOrZE2O1FwM9MWM1AsGri6nLXB2pg+lNA8aLeXMSav0J6eIVS1j6vUPzUtK9g==",
+      "version": "8.22.2",
+      "resolved": "https://registry.npmjs.org/ws/-/ws-8.22.2.tgz",
+      "integrity": "sha512-/rEZ2ejown2N5gxVTHUu9bVVC7ttu0/Tgzf5hbTOixR3Fs7mbbXgn2DbdbcKgJOmpQMtrIUWivtYuVMnp/W/yA==",
       "license": "MIT",
       "engines": {
         "node": ">=10.0.0"
