@@ -6,15 +6,15 @@
   "npmName": "dsh-better-sidebar",
   "channel": {
     "type": "fixed",
-    "ref": "4b578d83e1aa473bf4d694204b6a1276667fd3a9",
+    "ref": "0b6293f05145d6852428a05035d5ea0f370992be",
     "allowPrerelease": false
   },
   "seed": {
-    "ref": "v0.31.0",
-    "commit": "4b578d83e1aa473bf4d694204b6a1276667fd3a9",
-    "version": "0.31.0"
+    "ref": "v0.30.1",
+    "commit": "0b6293f05145d6852428a05035d5ea0f370992be",
+    "version": "0.30.1"
   },
-  "allowedVersions": "0.31.0",
+  "allowedVersions": "0.30.1",
   "hostRange": "0.2.2-rc.1",
   "targets": [
     "macos-arm64",
