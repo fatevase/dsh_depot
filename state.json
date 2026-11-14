@@ -293162,10 +293162,10 @@
   "candidateReport": {
     "schemaVersion": 1,
     "projectionVersion": 3,
-    "runId": 43568739510,
+    "runId": 43604833697,
     "runAttempt": 1,
-    "runUrl": "https://github.com/fatevase/dsh_depot/actions/runs/43568739510",
-    "completedAt": "2026-11-14T07:01:40Z",
+    "runUrl": "https://github.com/fatevase/dsh_depot/actions/runs/43604833697",
+    "completedAt": "2026-11-14T14:30:31Z",
     "counts": {
       "compiled": 264,
       "failed": 33,
@@ -293177,17 +293177,17 @@
         "repository": "Ebony-Vinyl/dsh-our-free-model",
         "npmName": "dsh-our-free-model",
         "commit": "435253b1b268f741bd900afefaa9bf630ab89565",
-        "runId": 43568739510,
+        "runId": 43604833697,
         "runAttempt": 1,
-        "runUrl": "https://github.com/fatevase/dsh_depot/actions/runs/43568739510",
+        "runUrl": "https://github.com/fatevase/dsh_depot/actions/runs/43604833697",
         "results": {
           "macos-arm64": {
-            "runId": 43568739510,
+            "runId": 43604833697,
             "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
-            "startedAt": "2026-11-14T06:58:12.992Z",
-            "seconds": 15.176,
+            "startedAt": "2026-11-14T14:27:39.300Z",
+            "seconds": 32.442,
             "stage": "pack-0",
             "dependencyMode": "not-installed-prebuilt-trial",
             "adapterDigest": "d6cda85881b035422ff9cc90f778b43f6ae86b8a65e7ca3dfd7312f617b33791",
@@ -293206,14 +293206,14 @@
                 ],
                 "cwd": "source",
                 "exitCode": 0,
-                "seconds": 2.798
+                "seconds": 1.814
               }
             ],
             "runtimeDependencies": [],
             "version": "2.8.3",
             "warnings": [],
-            "artifactsUrl": "https://github.com/fatevase/dsh_depot/actions/runs/43568739510/artifacts/14103615634",
-            "artifactsExpiresAt": "2026-11-21T07:00:56Z",
+            "artifactsUrl": "https://github.com/fatevase/dsh_depot/actions/runs/43604833697/artifacts/14118356417",
+            "artifactsExpiresAt": "2026-11-21T14:30:04Z",
             "files": [
               {
                 "name": "dsh-our-free-model",
@@ -293233,12 +293233,12 @@
             ]
           },
           "linux-x64": {
-            "runId": 43568739510,
+            "runId": 43604833697,
             "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
-            "startedAt": "2026-11-14T06:58:06.220Z",
-            "seconds": 9.22,
+            "startedAt": "2026-11-14T14:27:36.469Z",
+            "seconds": 11.565,
             "stage": "pack-0",
             "dependencyMode": "not-installed-prebuilt-trial",
             "adapterDigest": "d6cda85881b035422ff9cc90f778b43f6ae86b8a65e7ca3dfd7312f617b33791",
@@ -293257,14 +293257,14 @@
                 ],
                 "cwd": "source",
                 "exitCode": 0,
-                "seconds": 1.576
+                "seconds": 1.041
               }
             ],
             "runtimeDependencies": [],
             "version": "2.8.3",
             "warnings": [],
-            "artifactsUrl": "https://github.com/fatevase/dsh_depot/actions/runs/43568739510/artifacts/14102639392",
-            "artifactsExpiresAt": "2026-11-21T06:59:51Z",
+            "artifactsUrl": "https://github.com/fatevase/dsh_depot/actions/runs/43604833697/artifacts/14117413015",
+            "artifactsExpiresAt": "2026-11-21T14:29:06Z",
             "files": [
               {
                 "name": "dsh-our-free-model",
@@ -293284,12 +293284,12 @@
             ]
           },
           "win32-x64": {
-            "runId": 43568739510,
+            "runId": 43604833697,
             "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
-            "startedAt": "2026-11-14T06:58:29.099Z",
-            "seconds": 11.095,
+            "startedAt": "2026-11-14T14:27:48.401Z",
+            "seconds": 11.254,
             "stage": "pack-0",
             "dependencyMode": "not-installed-prebuilt-trial",
             "adapterDigest": "d6cda85881b035422ff9cc90f778b43f6ae86b8a65e7ca3dfd7312f617b33791",
@@ -293308,14 +293308,14 @@
                 ],
                 "cwd": "source",
                 "exitCode": 0,
-                "seconds": 1.893
+                "seconds": 2.202
               }
             ],
             "runtimeDependencies": [],
             "version": "2.8.3",
             "warnings": [],
-            "artifactsUrl": "https://github.com/fatevase/dsh_depot/actions/runs/43568739510/artifacts/14103551432",
-            "artifactsExpiresAt": "2026-11-21T07:00:33Z",
+            "artifactsUrl": "https://github.com/fatevase/dsh_depot/actions/runs/43604833697/artifacts/14118146910",
+            "artifactsExpiresAt": "2026-11-21T14:29:50Z",
             "files": [
               {
                 "name": "dsh-our-free-model",
@@ -293341,17 +293341,17 @@
         "repository": "zhu1090093659/dsh-web",
         "npmName": "dsh-web",
         "commit": "33b795dec1618fdb699adcd83de5702646311d0d",
-        "runId": 43568739510,
+        "runId": 43604833697,
         "runAttempt": 1,
-        "runUrl": "https://github.com/fatevase/dsh_depot/actions/runs/43568739510",
+        "runUrl": "https://github.com/fatevase/dsh_depot/actions/runs/43604833697",
         "results": {
           "macos-arm64": {
-            "runId": 43568739510,
+            "runId": 43604833697,
             "runAttempt": 1,
             "status": "failed",
             "verification": "not-run",
-            "startedAt": "2026-11-14T06:58:33.379Z",
-            "seconds": 124.013,
+            "startedAt": "2026-11-14T14:28:17.047Z",
+            "seconds": 90.237,
             "stage": "pack-0",
             "dependencyMode": "source-lock",
             "adapterDigest": "7d3473a530a1bbc12413c8a725f98097d447a830170aac7e29376b15e4a4bf41",
@@ -293370,7 +293370,7 @@
                 ],
                 "cwd": "source-input/git",
                 "exitCode": 0,
-                "seconds": 0.038
+                "seconds": 0.036
               },
               {
                 "stage": "source-remote",
@@ -293387,7 +293387,7 @@
                 ],
                 "cwd": "source-input/git",
                 "exitCode": 0,
-                "seconds": 0.009
+                "seconds": 0.011
               },
               {
                 "stage": "source-fetch",
@@ -293408,7 +293408,7 @@
                 ],
                 "cwd": "source-input/git",
                 "exitCode": 0,
-                "seconds": 0.433
+                "seconds": 0.72
               },
               {
                 "stage": "source-identity",
@@ -293423,7 +293423,7 @@
                 ],
                 "cwd": "source-input/git",
                 "exitCode": 0,
-                "seconds": 0.009
+                "seconds": 0.013
               },
               {
                 "stage": "source-components",
@@ -293448,7 +293448,7 @@
                 ],
                 "cwd": "source-input/git",
                 "exitCode": 0,
-                "seconds": 66.279
+                "seconds": 41.517
               },
               {
                 "stage": "dependencies-0",
@@ -293465,7 +293465,7 @@
                 ],
                 "cwd": "source",
                 "exitCode": 0,
-                "seconds": 16.582
+                "seconds": 17.268
               },
               {
                 "stage": "build",
@@ -293479,7 +293479,7 @@
                 ],
                 "cwd": "source",
                 "exitCode": 0,
-                "seconds": 38.616
+                "seconds": 28.665
               },
               {
                 "stage": "pack-0",
@@ -293496,7 +293496,7 @@
                 ],
                 "cwd": "source/packages/dsh-web-all",
                 "exitCode": 0,
-                "seconds": 0.616
+                "seconds": 0.551
               }
             ],
             "dependencies": [
@@ -293512,16 +293512,16 @@
             "error": "ENOENT: no such file or directory, open '/Users/runner/work/dsh_depot/dsh_depot/.runtime/candidate-builds/results/1331636953/source/packages/dsh-git-graph/package.json'",
             "errorCategory": "package_contents",
             "warnings": [],
-            "artifactsExpiresAt": "2026-11-21T07:00:56Z",
+            "artifactsExpiresAt": "2026-11-21T14:30:04Z",
             "files": []
           },
           "linux-x64": {
-            "runId": 43568739510,
+            "runId": 43604833697,
             "runAttempt": 1,
             "status": "failed",
             "verification": "not-run",
-            "startedAt": "2026-11-14T06:58:19.413Z",
-            "seconds": 79.215,
+            "startedAt": "2026-11-14T14:27:51.555Z",
+            "seconds": 62.192,
             "stage": "pack-0",
             "dependencyMode": "source-lock",
             "adapterDigest": "7d3473a530a1bbc12413c8a725f98097d447a830170aac7e29376b15e4a4bf41",
@@ -293540,7 +293540,7 @@
                 ],
                 "cwd": "source-input/git",
                 "exitCode": 0,
-                "seconds": 0.005
+                "seconds": 0.004
               },
               {
                 "stage": "source-remote",
@@ -293557,7 +293557,7 @@
                 ],
                 "cwd": "source-input/git",
                 "exitCode": 0,
-                "seconds": 0.004
+                "seconds": 0.003
               },
               {
                 "stage": "source-fetch",
@@ -293578,7 +293578,7 @@
                 ],
                 "cwd": "source-input/git",
                 "exitCode": 0,
-                "seconds": 0.21
+                "seconds": 0.387
               },
               {
                 "stage": "source-identity",
@@ -293618,7 +293618,7 @@
                 ],
                 "cwd": "source-input/git",
                 "exitCode": 0,
-                "seconds": 38.21
+                "seconds": 34.443
               },
               {
                 "stage": "dependencies-0",
@@ -293635,7 +293635,7 @@
                 ],
                 "cwd": "source",
                 "exitCode": 0,
-                "seconds": 6.048
+                "seconds": 4.406
               },
               {
                 "stage": "build",
@@ -293649,7 +293649,7 @@
                 ],
                 "cwd": "source",
                 "exitCode": 0,
-                "seconds": 33.216
+                "seconds": 21.935
               },
               {
                 "stage": "pack-0",
@@ -293666,7 +293666,7 @@
                 ],
                 "cwd": "source/packages/dsh-web-all",
                 "exitCode": 0,
-                "seconds": 0.517
+                "seconds": 0.336
               }
             ],
             "dependencies": [
@@ -293682,16 +293682,16 @@
             "error": "ENOENT: no such file or directory, open '/home/runner/work/dsh_depot/dsh_depot/.runtime/candidate-builds/results/1331636953/source/packages/dsh-git-graph/package.json'",
             "errorCategory": "package_contents",
             "warnings": [],
-            "artifactsExpiresAt": "2026-11-21T06:59:51Z",
+            "artifactsExpiresAt": "2026-11-21T14:29:06Z",
             "files": []
           },
           "win32-x64": {
-            "runId": 43568739510,
+            "runId": 43604833697,
             "runAttempt": 1,
             "status": "failed",
             "verification": "not-run",
-            "startedAt": "2026-11-14T06:58:49.813Z",
-            "seconds": 89.712,
+            "startedAt": "2026-11-14T14:28:06.978Z",
+            "seconds": 88.606,
             "stage": "pack-0",
             "dependencyMode": "source-lock",
             "adapterDigest": "7d3473a530a1bbc12413c8a725f98097d447a830170aac7e29376b15e4a4bf41",
@@ -293710,7 +293710,7 @@
                 ],
                 "cwd": "source-input\\git",
                 "exitCode": 0,
-                "seconds": 0.053
+                "seconds": 0.064
               },
               {
                 "stage": "source-remote",
@@ -293727,7 +293727,7 @@
                 ],
                 "cwd": "source-input\\git",
                 "exitCode": 0,
-                "seconds": 0.046
+                "seconds": 0.047
               },
               {
                 "stage": "source-fetch",
@@ -293748,7 +293748,7 @@
                 ],
                 "cwd": "source-input\\git",
                 "exitCode": 0,
-                "seconds": 0.306
+                "seconds": 0.291
               },
               {
                 "stage": "source-identity",
@@ -293763,7 +293763,7 @@
                 ],
                 "cwd": "source-input\\git",
                 "exitCode": 0,
-                "seconds": 0.044
+                "seconds": 0.053
               },
               {
                 "stage": "source-components",
@@ -293788,7 +293788,7 @@
                 ],
                 "cwd": "source-input\\git",
                 "exitCode": 0,
-                "seconds": 37.142
+                "seconds": 36.723
               },
               {
                 "stage": "dependencies-0",
@@ -293805,7 +293805,7 @@
                 ],
                 "cwd": "source",
                 "exitCode": 0,
-                "seconds": 12.358
+                "seconds": 12.704
               },
               {
                 "stage": "build",
@@ -293819,7 +293819,7 @@
                 ],
                 "cwd": "source",
                 "exitCode": 0,
-                "seconds": 36.829
+                "seconds": 35.864
               },
               {
                 "stage": "pack-0",
@@ -293836,7 +293836,7 @@
                 ],
                 "cwd": "source\\packages\\dsh-web-all",
                 "exitCode": 0,
-                "seconds": 0.555
+                "seconds": 0.584
               }
             ],
             "dependencies": [
@@ -293852,7 +293852,7 @@
             "error": "ENOENT: no such file or directory, open 'D:\\a\\dsh_depot\\dsh_depot\\.runtime\\candidate-builds\\results\\1331636953\\source\\packages\\dsh-git-graph\\package.json'",
             "errorCategory": "package_contents",
             "warnings": [],
-            "artifactsExpiresAt": "2026-11-21T07:00:33Z",
+            "artifactsExpiresAt": "2026-11-21T14:29:50Z",
             "files": []
           }
         }
@@ -293861,53 +293861,53 @@
         "repositoryId": 1339256252,
         "repository": "YuJunZhiXue/dsh-purge",
         "npmName": "dsh-purge",
-        "runId": 43568739510,
+        "runId": 43604833697,
         "runAttempt": 1,
-        "runUrl": "https://github.com/fatevase/dsh_depot/actions/runs/43568739510",
+        "runUrl": "https://github.com/fatevase/dsh_depot/actions/runs/43604833697",
         "results": {
           "macos-arm64": {
-            "runId": 43568739510,
+            "runId": 43604833697,
             "runAttempt": 1,
             "status": "failed",
             "verification": "not-run",
-            "startedAt": "2026-11-14T07:00:37.393Z",
+            "startedAt": "2026-11-14T14:29:47.286Z",
             "seconds": 0,
             "adapterDigest": "358a57809f075eafc1db179942beb5e5bc4d9d22d8dbde431bec835d80f91753",
             "steps": [],
             "error": "Source discovery: GitHub GET /repos/YuJunZhiXue/dsh-purge returned 404",
             "errorCategory": "compile",
             "warnings": [],
-            "artifactsExpiresAt": "2026-11-21T07:00:56Z",
+            "artifactsExpiresAt": "2026-11-21T14:30:04Z",
             "files": []
           },
           "linux-x64": {
-            "runId": 43568739510,
+            "runId": 43604833697,
             "runAttempt": 1,
             "status": "failed",
             "verification": "not-run",
-            "startedAt": "2026-11-14T06:59:38.628Z",
+            "startedAt": "2026-11-14T14:28:53.747Z",
             "seconds": 0,
             "adapterDigest": "358a57809f075eafc1db179942beb5e5bc4d9d22d8dbde431bec835d80f91753",
             "steps": [],
             "error": "Source discovery: GitHub GET /repos/YuJunZhiXue/dsh-purge returned 404",
             "errorCategory": "compile",
             "warnings": [],
-            "artifactsExpiresAt": "2026-11-21T06:59:51Z",
+            "artifactsExpiresAt": "2026-11-21T14:29:06Z",
             "files": []
           },
           "win32-x64": {
-            "runId": 43568739510,
+            "runId": 43604833697,
             "runAttempt": 1,
             "status": "failed",
             "verification": "not-run",
-            "startedAt": "2026-11-14T07:00:19.526Z",
-            "seconds": 0,
+            "startedAt": "2026-11-14T14:29:35.581Z",
+            "seconds": 0.001,
             "adapterDigest": "358a57809f075eafc1db179942beb5e5bc4d9d22d8dbde431bec835d80f91753",
             "steps": [],
             "error": "Source discovery: GitHub GET /repos/YuJunZhiXue/dsh-purge returned 404",
             "errorCategory": "compile",
             "warnings": [],
-            "artifactsExpiresAt": "2026-11-21T07:00:33Z",
+            "artifactsExpiresAt": "2026-11-21T14:29:50Z",
             "files": []
           }
         }
@@ -293917,17 +293917,17 @@
         "repository": "yjh051108/dsh-routing-suite",
         "npmName": "@dsh-external/dsh-super-injector",
         "commit": "195273352f23bff7f9023ebe2ec0cdbdf9c98f10",
-        "runId": 43568739510,
+        "runId": 43604833697,
         "runAttempt": 1,
-        "runUrl": "https://github.com/fatevase/dsh_depot/actions/runs/43568739510",
+        "runUrl": "https://github.com/fatevase/dsh_depot/actions/runs/43604833697",
         "results": {
           "macos-arm64": {
-            "runId": 43568739510,
+            "runId": 43604833697,
             "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
-            "startedAt": "2026-11-14T07:00:37.395Z",
-            "seconds": 11.057,
+            "startedAt": "2026-11-14T14:29:47.287Z",
+            "seconds": 9.829,
             "stage": "pack-0",
             "dependencyMode": "trial-resolution",
             "adapterDigest": "67a3e89ef85f04417848cd3c1dbc0c63dccb7b6fb6422dabc1e48f83ac33b767",
@@ -293948,7 +293948,7 @@
                 ],
                 "cwd": "source",
                 "exitCode": 0,
-                "seconds": 0.83
+                "seconds": 0.872
               },
               {
                 "stage": "build",
@@ -293960,7 +293960,7 @@
                 ],
                 "cwd": "source",
                 "exitCode": 0,
-                "seconds": 8.663
+                "seconds": 7.449
               },
               {
                 "stage": "pack-0",
@@ -293975,7 +293975,7 @@
                 ],
                 "cwd": "source",
                 "exitCode": 0,
-                "seconds": 0.891
+                "seconds": 0.318
               }
             ],
             "dependencies": [
@@ -293992,8 +293992,8 @@
               "类型声明文件缺失：./injector/lib/types/index.d.ts",
               "类型声明文件缺失：./injector/lib/types/client/index.d.ts"
             ],
-            "artifactsUrl": "https://github.com/fatevase/dsh_depot/actions/runs/43568739510/artifacts/14103615634",
-            "artifactsExpiresAt": "2026-11-21T07:00:56Z",
+            "artifactsUrl": "https://github.com/fatevase/dsh_depot/actions/runs/43604833697/artifacts/14118356417",
+            "artifactsExpiresAt": "2026-11-21T14:30:04Z",
             "files": [
               {
                 "name": "@dsh-external/dsh-super-injector",
@@ -294011,12 +294011,12 @@
             ]
           },
           "linux-x64": {
-            "runId": 43568739510,
+            "runId": 43604833697,
             "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
-            "startedAt": "2026-11-14T06:59:38.629Z",
-            "seconds": 8.039,
+            "startedAt": "2026-11-14T14:28:53.748Z",
+            "seconds": 7.415,
             "stage": "pack-0",
             "dependencyMode": "trial-resolution",
             "adapterDigest": "67a3e89ef85f04417848cd3c1dbc0c63dccb7b6fb6422dabc1e48f83ac33b767",
@@ -294037,7 +294037,7 @@
                 ],
                 "cwd": "source",
                 "exitCode": 0,
-                "seconds": 0.232
+                "seconds": 0.161
               },
               {
                 "stage": "build",
@@ -294049,7 +294049,7 @@
                 ],
                 "cwd": "source",
                 "exitCode": 0,
-                "seconds": 7.236
+                "seconds": 6.653
               },
               {
                 "stage": "pack-0",
@@ -294064,7 +294064,7 @@
                 ],
                 "cwd": "source",
                 "exitCode": 0,
-                "seconds": 0.29
+                "seconds": 0.199
               }
             ],
             "dependencies": [
@@ -294081,8 +294081,8 @@
               "类型声明文件缺失：./injector/lib/types/index.d.ts",
               "类型声明文件缺失：./injector/lib/types/client/index.d.ts"
             ],
-            "artifactsUrl": "https://github.com/fatevase/dsh_depot/actions/runs/43568739510/artifacts/14102639392",
-            "artifactsExpiresAt": "2026-11-21T06:59:51Z",
+            "artifactsUrl": "https://github.com/fatevase/dsh_depot/actions/runs/43604833697/artifacts/14117413015",
+            "artifactsExpiresAt": "2026-11-21T14:29:06Z",
             "files": [
               {
                 "name": "@dsh-external/dsh-super-injector",
@@ -294100,12 +294100,12 @@
             ]
           },
           "win32-x64": {
-            "runId": 43568739510,
+            "runId": 43604833697,
             "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
-            "startedAt": "2026-11-14T07:00:19.528Z",
-            "seconds": 8.756,
+            "startedAt": "2026-11-14T14:29:35.583Z",
+            "seconds": 9.241,
             "stage": "pack-0",
             "dependencyMode": "trial-resolution",
             "adapterDigest": "67a3e89ef85f04417848cd3c1dbc0c63dccb7b6fb6422dabc1e48f83ac33b767",
@@ -294126,7 +294126,7 @@
                 ],
                 "cwd": "source",
                 "exitCode": 0,
-                "seconds": 0.414
+                "seconds": 0.384
               },
               {
                 "stage": "build",
@@ -294138,7 +294138,7 @@
                 ],
                 "cwd": "source",
                 "exitCode": 0,
-                "seconds": 7.473
+                "seconds": 8.041
               },
               {
                 "stage": "pack-0",
@@ -294153,7 +294153,7 @@
                 ],
                 "cwd": "source",
                 "exitCode": 0,
-                "seconds": 0.472
+                "seconds": 0.443
               }
             ],
             "dependencies": [
@@ -294170,8 +294170,8 @@
               "类型声明文件缺失：./injector/lib/types/index.d.ts",
               "类型声明文件缺失：./injector/lib/types/client/index.d.ts"
             ],
-            "artifactsUrl": "https://github.com/fatevase/dsh_depot/actions/runs/43568739510/artifacts/14103551432",
-            "artifactsExpiresAt": "2026-11-21T07:00:33Z",
+            "artifactsUrl": "https://github.com/fatevase/dsh_depot/actions/runs/43604833697/artifacts/14118146910",
+            "artifactsExpiresAt": "2026-11-21T14:29:50Z",
             "files": [
               {
                 "name": "@dsh-external/dsh-super-injector",
@@ -294195,17 +294195,17 @@
         "repository": "superdesigndev/treg",
         "npmName": "treg-dsh",
         "commit": "5264ab42bb130d6d39998fb5763623e775bdb42b",
-        "runId": 43568739510,
+        "runId": 43604833697,
         "runAttempt": 1,
-        "runUrl": "https://github.com/fatevase/dsh_depot/actions/runs/43568739510",
+        "runUrl": "https://github.com/fatevase/dsh_depot/actions/runs/43604833697",
         "results": {
           "macos-arm64": {
-            "runId": 43568739510,
+            "runId": 43604833697,
             "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
-            "startedAt": "2026-11-14T07:00:48.455Z",
-            "seconds": 6.917,
+            "startedAt": "2026-11-14T14:29:57.117Z",
+            "seconds": 6.954,
             "stage": "pack-0",
             "dependencyMode": "not-installed-prebuilt-trial",
             "adapterDigest": "827e52ce02e8eb3e00dbfe00304ce1d4339ef1e0b0a89e76e1bd0aee10d47f18",
@@ -294223,7 +294223,7 @@
                 ],
                 "cwd": "source-input/git",
                 "exitCode": 0,
-                "seconds": 0.044
+                "seconds": 0.023
               },
               {
                 "stage": "source-remote",
@@ -294240,7 +294240,7 @@
                 ],
                 "cwd": "source-input/git",
                 "exitCode": 0,
-                "seconds": 0.017
+                "seconds": 0.007
               },
               {
                 "stage": "source-fetch",
@@ -294261,7 +294261,7 @@
                 ],
                 "cwd": "source-input/git",
                 "exitCode": 0,
-                "seconds": 0.494
+                "seconds": 0.642
               },
               {
                 "stage": "source-identity",
@@ -294276,7 +294276,7 @@
                 ],
                 "cwd": "source-input/git",
                 "exitCode": 0,
-                "seconds": 0.015
+                "seconds": 0.007
               },
               {
                 "stage": "source-components",
@@ -294298,7 +294298,7 @@
                 ],
                 "cwd": "source-input/git",
                 "exitCode": 0,
-                "seconds": 5.654
+                "seconds": 5.874
               },
               {
                 "stage": "pack-0",
@@ -294313,14 +294313,14 @@
                 ],
                 "cwd": "source",
                 "exitCode": 0,
-                "seconds": 0.525
+                "seconds": 0.313
               }
             ],
             "runtimeDependencies": [],
             "version": "0.30.0",
             "warnings": [],
-            "artifactsUrl": "https://github.com/fatevase/dsh_depot/actions/runs/43568739510/artifacts/14103615634",
-            "artifactsExpiresAt": "2026-11-21T07:00:56Z",
+            "artifactsUrl": "https://github.com/fatevase/dsh_depot/actions/runs/43604833697/artifacts/14118356417",
+            "artifactsExpiresAt": "2026-11-21T14:30:04Z",
             "files": [
               {
                 "name": "treg-dsh",
@@ -294334,12 +294334,12 @@
             ]
           },
           "linux-x64": {
-            "runId": 43568739510,
+            "runId": 43604833697,
             "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
-            "startedAt": "2026-11-14T06:59:46.669Z",
-            "seconds": 4.835,
+            "startedAt": "2026-11-14T14:29:01.163Z",
+            "seconds": 4.701,
             "stage": "pack-0",
             "dependencyMode": "not-installed-prebuilt-trial",
             "adapterDigest": "827e52ce02e8eb3e00dbfe00304ce1d4339ef1e0b0a89e76e1bd0aee10d47f18",
@@ -294357,7 +294357,7 @@
                 ],
                 "cwd": "source-input/git",
                 "exitCode": 0,
-                "seconds": 0.004
+                "seconds": 0.005
               },
               {
                 "stage": "source-remote",
@@ -294395,7 +294395,7 @@
                 ],
                 "cwd": "source-input/git",
                 "exitCode": 0,
-                "seconds": 0.204
+                "seconds": 0.322
               },
               {
                 "stage": "source-identity",
@@ -294432,7 +294432,7 @@
                 ],
                 "cwd": "source-input/git",
                 "exitCode": 0,
-                "seconds": 4.265
+                "seconds": 4.117
               },
               {
                 "stage": "pack-0",
@@ -294447,14 +294447,14 @@
                 ],
                 "cwd": "source",
                 "exitCode": 0,
-                "seconds": 0.266
+                "seconds": 0.187
               }
             ],
             "runtimeDependencies": [],
             "version": "0.30.0",
             "warnings": [],
-            "artifactsUrl": "https://github.com/fatevase/dsh_depot/actions/runs/43568739510/artifacts/14102639392",
-            "artifactsExpiresAt": "2026-11-21T06:59:51Z",
+            "artifactsUrl": "https://github.com/fatevase/dsh_depot/actions/runs/43604833697/artifacts/14117413015",
+            "artifactsExpiresAt": "2026-11-21T14:29:06Z",
             "files": [
               {
                 "name": "treg-dsh",
@@ -294468,12 +294468,12 @@
             ]
           },
           "win32-x64": {
-            "runId": 43568739510,
+            "runId": 43604833697,
             "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
-            "startedAt": "2026-11-14T07:00:28.285Z",
-            "seconds": 4.73,
+            "startedAt": "2026-11-14T14:29:44.825Z",
+            "seconds": 5.131,
             "stage": "pack-0",
             "dependencyMode": "not-installed-prebuilt-trial",
             "adapterDigest": "827e52ce02e8eb3e00dbfe00304ce1d4339ef1e0b0a89e76e1bd0aee10d47f18",
@@ -294491,7 +294491,7 @@
                 ],
                 "cwd": "source-input\\git",
                 "exitCode": 0,
-                "seconds": 0.052
+                "seconds": 0.05
               },
               {
                 "stage": "source-remote",
@@ -294508,7 +294508,7 @@
                 ],
                 "cwd": "source-input\\git",
                 "exitCode": 0,
-                "seconds": 0.044
+                "seconds": 0.045
               },
               {
                 "stage": "source-fetch",
@@ -294529,7 +294529,7 @@
                 ],
                 "cwd": "source-input\\git",
                 "exitCode": 0,
-                "seconds": 0.23
+                "seconds": 0.265
               },
               {
                 "stage": "source-identity",
@@ -294544,7 +294544,7 @@
                 ],
                 "cwd": "source-input\\git",
                 "exitCode": 0,
-                "seconds": 0.043
+                "seconds": 0.05
               },
               {
                 "stage": "source-components",
@@ -294566,7 +294566,7 @@
                 ],
                 "cwd": "source-input\\git",
                 "exitCode": 0,
-                "seconds": 3.785
+                "seconds": 4.171
               },
               {
                 "stage": "pack-0",
@@ -294581,14 +294581,14 @@
                 ],
                 "cwd": "source",
                 "exitCode": 0,
-                "seconds": 0.432
+                "seconds": 0.408
               }
             ],
             "runtimeDependencies": [],
             "version": "0.30.0",
             "warnings": [],
-            "artifactsUrl": "https://github.com/fatevase/dsh_depot/actions/runs/43568739510/artifacts/14103551432",
-            "artifactsExpiresAt": "2026-11-21T07:00:33Z",
+            "artifactsUrl": "https://github.com/fatevase/dsh_depot/actions/runs/43604833697/artifacts/14118146910",
+            "artifactsExpiresAt": "2026-11-21T14:29:50Z",
             "files": [
               {
                 "name": "treg-dsh",
