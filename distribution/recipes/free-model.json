@@ -6,15 +6,15 @@
   "npmName": "dsh-our-free-model",
   "channel": {
     "type": "fixed",
-    "ref": "8cb6ac429257e6af9aba6e7746a18f8e6aee9c67",
+    "ref": "061f9a2df1e721dcabb99c44ffb467a3a67a27bf",
     "allowPrerelease": false
   },
   "seed": {
-    "ref": "v2.8.5",
-    "commit": "8cb6ac429257e6af9aba6e7746a18f8e6aee9c67",
-    "version": "2.8.5"
+    "ref": "v2.8.6",
+    "commit": "061f9a2df1e721dcabb99c44ffb467a3a67a27bf",
+    "version": "2.8.6"
   },
-  "allowedVersions": "2.8.5",
+  "allowedVersions": "2.8.6",
   "hostRange": "0.2.2-rc.1",
   "targets": [
     "macos-arm64",
@@ -60,6 +60,7 @@
     "v2.8.2": "214c5111e852170137fe84dd1ea2c8f352300350",
     "v2.8.3": "435253b1b268f741bd900afefaa9bf630ab89565",
     "v2.8.4": "a912a51959ebb36c865fba1a40570aee7e094d9e",
-    "v2.8.5": "8cb6ac429257e6af9aba6e7746a18f8e6aee9c67"
+    "v2.8.5": "8cb6ac429257e6af9aba6e7746a18f8e6aee9c67",
+    "v2.8.6": "061f9a2df1e721dcabb99c44ffb467a3a67a27bf"
   }
 }
