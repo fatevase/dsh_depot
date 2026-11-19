@@ -15,7 +15,7 @@
     "version": "3.27.5"
   },
   "allowedVersions": "3.27.5",
-  "hostRange": "0.2.2-rc.1",
+  "hostRange": "0.2.2-rc.5",
   "targets": [
     "macos-arm64",
     "linux-x64",

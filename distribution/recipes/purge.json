@@ -15,7 +15,7 @@
     "version": "1.1.90"
   },
   "allowedVersions": "1.1.90",
-  "hostRange": "0.2.2-rc.1",
+  "hostRange": "0.2.2-rc.5",
   "targets": [
     "macos-arm64",
     "linux-x64",
