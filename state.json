@@ -313587,10 +313587,10 @@
   "candidateReport": {
     "schemaVersion": 1,
     "projectionVersion": 3,
-    "runId": 44820695258,
+    "runId": 44857589334,
     "runAttempt": 1,
-    "runUrl": "https://github.com/fatevase/dsh_depot/actions/runs/44820695258",
-    "completedAt": "2026-11-20T21:34:03Z",
+    "runUrl": "https://github.com/fatevase/dsh_depot/actions/runs/44857589334",
+    "completedAt": "2026-11-21T02:49:46Z",
     "counts": {
       "compiled": 264,
       "failed": 33,
@@ -313602,17 +313602,17 @@
         "repository": "Ebony-Vinyl/dsh-our-free-model",
         "npmName": "dsh-our-free-model",
         "commit": "38b29cd066bcb7a8e015ced418f0f6dcd0fbd8e5",
-        "runId": 44820695258,
+        "runId": 44857589334,
         "runAttempt": 1,
-        "runUrl": "https://github.com/fatevase/dsh_depot/actions/runs/44820695258",
+        "runUrl": "https://github.com/fatevase/dsh_depot/actions/runs/44857589334",
         "results": {
           "macos-arm64": {
-            "runId": 44820695258,
+            "runId": 44857589334,
             "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
-            "startedAt": "2026-11-20T21:30:58.795Z",
-            "seconds": 13.721,
+            "startedAt": "2026-11-21T02:47:07.798Z",
+            "seconds": 15.571,
             "stage": "pack-0",
             "dependencyMode": "not-installed-prebuilt-trial",
             "adapterDigest": "9238efab1c97cf9e36e5c1a0307bfc42ea10e5e7fb7bcf7b9b0dcec17b713d44",
@@ -313631,14 +313631,14 @@
                 ],
                 "cwd": "source",
                 "exitCode": 0,
-                "seconds": 1.65
+                "seconds": 2.431
               }
             ],
             "runtimeDependencies": [],
             "version": "2.8.9",
             "warnings": [],
-            "artifactsUrl": "https://github.com/fatevase/dsh_depot/actions/runs/44820695258/artifacts/14671529321",
-            "artifactsExpiresAt": "2026-11-27T21:33:32Z",
+            "artifactsUrl": "https://github.com/fatevase/dsh_depot/actions/runs/44857589334/artifacts/14687663910",
+            "artifactsExpiresAt": "2026-11-28T02:49:22Z",
             "files": [
               {
                 "name": "dsh-our-free-model",
@@ -313658,12 +313658,12 @@
             ]
           },
           "linux-x64": {
-            "runId": 44820695258,
+            "runId": 44857589334,
             "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
-            "startedAt": "2026-11-20T21:30:54.969Z",
-            "seconds": 9.848,
+            "startedAt": "2026-11-21T02:47:02.451Z",
+            "seconds": 10.444,
             "stage": "pack-0",
             "dependencyMode": "not-installed-prebuilt-trial",
             "adapterDigest": "9238efab1c97cf9e36e5c1a0307bfc42ea10e5e7fb7bcf7b9b0dcec17b713d44",
@@ -313682,14 +313682,14 @@
                 ],
                 "cwd": "source",
                 "exitCode": 0,
-                "seconds": 1.191
+                "seconds": 1.179
               }
             ],
             "runtimeDependencies": [],
             "version": "2.8.9",
             "warnings": [],
-            "artifactsUrl": "https://github.com/fatevase/dsh_depot/actions/runs/44820695258/artifacts/14671293925",
-            "artifactsExpiresAt": "2026-11-27T21:32:45Z",
+            "artifactsUrl": "https://github.com/fatevase/dsh_depot/actions/runs/44857589334/artifacts/14688855006",
+            "artifactsExpiresAt": "2026-11-28T02:48:35Z",
             "files": [
               {
                 "name": "dsh-our-free-model",
@@ -313709,12 +313709,12 @@
             ]
           },
           "win32-x64": {
-            "runId": 44820695258,
+            "runId": 44857589334,
             "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
-            "startedAt": "2026-11-20T21:31:05.506Z",
-            "seconds": 18.496,
+            "startedAt": "2026-11-21T02:47:18.501Z",
+            "seconds": 6.315,
             "stage": "pack-0",
             "dependencyMode": "not-installed-prebuilt-trial",
             "adapterDigest": "9238efab1c97cf9e36e5c1a0307bfc42ea10e5e7fb7bcf7b9b0dcec17b713d44",
@@ -313733,14 +313733,14 @@
                 ],
                 "cwd": "source",
                 "exitCode": 0,
-                "seconds": 1.431
+                "seconds": 1.734
               }
             ],
             "runtimeDependencies": [],
             "version": "2.8.9",
             "warnings": [],
-            "artifactsUrl": "https://github.com/fatevase/dsh_depot/actions/runs/44820695258/artifacts/14671743799",
-            "artifactsExpiresAt": "2026-11-27T21:33:03Z",
+            "artifactsUrl": "https://github.com/fatevase/dsh_depot/actions/runs/44857589334/artifacts/14688760226",
+            "artifactsExpiresAt": "2026-11-28T02:49:14Z",
             "files": [
               {
                 "name": "dsh-our-free-model",
@@ -313766,17 +313766,17 @@
         "repository": "zhu1090093659/dsh-web",
         "npmName": "dsh-web",
         "commit": "627af187047f4ee59031d51bae9518ba67174ad2",
-        "runId": 44820695258,
+        "runId": 44857589334,
         "runAttempt": 1,
-        "runUrl": "https://github.com/fatevase/dsh_depot/actions/runs/44820695258",
+        "runUrl": "https://github.com/fatevase/dsh_depot/actions/runs/44857589334",
         "results": {
           "macos-arm64": {
-            "runId": 44820695258,
+            "runId": 44857589334,
             "runAttempt": 1,
             "status": "failed",
             "verification": "not-run",
-            "startedAt": "2026-11-20T21:31:16.969Z",
-            "seconds": 118.015,
+            "startedAt": "2026-11-21T02:47:28.733Z",
+            "seconds": 99.482,
             "stage": "pack-0",
             "dependencyMode": "source-lock",
             "adapterDigest": "e0df269e3d15c2a28cb0249a4dfe5a048d647a95783936b990f9c25496683bb4",
@@ -313795,7 +313795,7 @@
                 ],
                 "cwd": "source-input/git",
                 "exitCode": 0,
-                "seconds": 0.037
+                "seconds": 0.126
               },
               {
                 "stage": "source-remote",
@@ -313812,7 +313812,7 @@
                 ],
                 "cwd": "source-input/git",
                 "exitCode": 0,
-                "seconds": 0.009
+                "seconds": 0.016
               },
               {
                 "stage": "source-fetch",
@@ -313833,7 +313833,7 @@
                 ],
                 "cwd": "source-input/git",
                 "exitCode": 0,
-                "seconds": 0.393
+                "seconds": 0.861
               },
               {
                 "stage": "source-identity",
@@ -313848,7 +313848,7 @@
                 ],
                 "cwd": "source-input/git",
                 "exitCode": 0,
-                "seconds": 0.009
+                "seconds": 0.01
               },
               {
                 "stage": "source-components",
@@ -313873,7 +313873,7 @@
                 ],
                 "cwd": "source-input/git",
                 "exitCode": 0,
-                "seconds": 62.482
+                "seconds": 41.721
               },
               {
                 "stage": "dependencies-0",
@@ -313890,7 +313890,7 @@
                 ],
                 "cwd": "source",
                 "exitCode": 0,
-                "seconds": 18.861
+                "seconds": 15.133
               },
               {
                 "stage": "build",
@@ -313904,7 +313904,7 @@
                 ],
                 "cwd": "source",
                 "exitCode": 0,
-                "seconds": 34.32
+                "seconds": 39.8
               },
               {
                 "stage": "pack-0",
@@ -313921,7 +313921,7 @@
                 ],
                 "cwd": "source/packages/dsh-web-all",
                 "exitCode": 0,
-                "seconds": 0.739
+                "seconds": 0.583
               }
             ],
             "dependencies": [
@@ -313937,21 +313937,838 @@
             "error": "ENOENT: no such file or directory, open '/Users/runner/work/dsh_depot/dsh_depot/.runtime/candidate-builds/results/1331636953/source/packages/dsh-git-graph/package.json'",
             "errorCategory": "package_contents",
             "warnings": [],
-            "artifactsExpiresAt": "2026-11-27T21:33:32Z",
+            "artifactsExpiresAt": "2026-11-28T02:49:22Z",
             "files": []
           },
           "linux-x64": {
-            "runId": 44820695258,
+            "runId": 44857589334,
             "runAttempt": 1,
             "status": "failed",
             "verification": "not-run",
-            "startedAt": "2026-11-20T21:31:08.156Z",
-            "seconds": 86.28,
+            "startedAt": "2026-11-21T02:47:16.297Z",
+            "seconds": 68.808,
             "stage": "pack-0",
             "dependencyMode": "source-lock",
             "adapterDigest": "e0df269e3d15c2a28cb0249a4dfe5a048d647a95783936b990f9c25496683bb4",
             "sourceSha256": "a7f66b642420ba870e99ca4ac8c7406f7af049ffcee62ebe335cdde4a264df10",
             "lockSha256": "8a7751c554273d33078feaf3abd1b12fd9fa15bce8d527039417c5a709f9a7ce",
+            "steps": [
+              {
+                "stage": "source-init",
+                "argv": [
+                  "git",
+                  "-c",
+                  "protocol.file.allow=never",
+                  "-c",
+                  "core.hooksPath=/dev/null",
+                  "init"
+                ],
+                "cwd": "source-input/git",
+                "exitCode": 0,
+                "seconds": 0.004
+              },
+              {
+                "stage": "source-remote",
+                "argv": [
+                  "git",
+                  "-c",
+                  "protocol.file.allow=never",
+                  "-c",
+                  "core.hooksPath=/dev/null",
+                  "remote",
+                  "add",
+                  "origin",
+                  "https://github.com/zhu1090093659/dsh-web.git"
+                ],
+                "cwd": "source-input/git",
+                "exitCode": 0,
+                "seconds": 0.003
+              },
+              {
+                "stage": "source-fetch",
+                "argv": [
+                  "git",
+                  "-c",
+                  "protocol.file.allow=never",
+                  "-c",
+                  "core.hooksPath=/dev/null",
+                  "-c",
+                  "http.version=HTTP/1.1",
+                  "fetch",
+                  "--no-tags",
+                  "--depth=1",
+                  "--filter=blob:none",
+                  "origin",
+                  "627af187047f4ee59031d51bae9518ba67174ad2"
+                ],
+                "cwd": "source-input/git",
+                "exitCode": 0,
+                "seconds": 0.352
+              },
+              {
+                "stage": "source-identity",
+                "argv": [
+                  "git",
+                  "-c",
+                  "protocol.file.allow=never",
+                  "-c",
+                  "core.hooksPath=/dev/null",
+                  "rev-parse",
+                  "FETCH_HEAD"
+                ],
+                "cwd": "source-input/git",
+                "exitCode": 0,
+                "seconds": 0.003
+              },
+              {
+                "stage": "source-components",
+                "argv": [
+                  "git",
+                  "-c",
+                  "protocol.file.allow=never",
+                  "-c",
+                  "core.hooksPath=/dev/null",
+                  "archive",
+                  "--format=tar.gz",
+                  "--output=/home/runner/work/dsh_depot/dsh_depot/.runtime/candidate-builds/results/1331636953/source-input/source.tgz",
+                  "FETCH_HEAD",
+                  "--",
+                  "package.json",
+                  "pnpm-lock.yaml",
+                  "pnpm-workspace.yaml",
+                  "LICENSE",
+                  "shared",
+                  "packages",
+                  "scripts"
+                ],
+                "cwd": "source-input/git",
+                "exitCode": 0,
+                "seconds": 38.538
+              },
+              {
+                "stage": "dependencies-0",
+                "argv": [
+                  "/opt/hostedtoolcache/node/26.9.0/x64/bin/node",
+                  "/home/runner/work/dsh_depot/dsh_depot/.runtime/candidate-builds/tools/11.24.0/pnpm-11.24.0/node_modules/pnpm/bin/pnpm.cjs",
+                  "--config.manage-package-manager-versions=false",
+                  "--pm-on-fail=ignore",
+                  "install",
+                  "--frozen-lockfile",
+                  "--ignore-scripts",
+                  "--config.manage-package-manager-versions=false",
+                  "--config.minimumReleaseAge=0"
+                ],
+                "cwd": "source",
+                "exitCode": 0,
+                "seconds": 4.045
+              },
+              {
+                "stage": "build",
+                "argv": [
+                  "/opt/hostedtoolcache/node/26.9.0/x64/bin/node",
+                  "/home/runner/work/dsh_depot/dsh_depot/.runtime/candidate-builds/tools/11.24.0/pnpm-11.24.0/node_modules/pnpm/bin/pnpm.cjs",
+                  "--config.manage-package-manager-versions=false",
+                  "--pm-on-fail=ignore",
+                  "run",
+                  "build"
+                ],
+                "cwd": "source",
+                "exitCode": 0,
+                "seconds": 24.665
+              },
+              {
+                "stage": "pack-0",
+                "argv": [
+                  "/opt/hostedtoolcache/node/26.9.0/x64/bin/node",
+                  "/home/runner/work/dsh_depot/dsh_depot/.runtime/candidate-builds/tools/11.24.0/pnpm-11.24.0/node_modules/pnpm/bin/pnpm.cjs",
+                  "--config.manage-package-manager-versions=false",
+                  "--pm-on-fail=ignore",
+                  "pack",
+                  "--config.ignore-scripts=true",
+                  "--json",
+                  "--pack-destination",
+                  "/home/runner/work/dsh_depot/dsh_depot/.runtime/candidate-builds/results/1331636953/packages"
+                ],
+                "cwd": "source/packages/dsh-web-all",
+                "exitCode": 0,
+                "seconds": 0.406
+              }
+            ],
+            "dependencies": [
+              {
+                "path": ".",
+                "manager": "pnpm",
+                "sourceLockSha256": "8a7751c554273d33078feaf3abd1b12fd9fa15bce8d527039417c5a709f9a7ce",
+                "mode": "source-lock",
+                "sha256": "8a7751c554273d33078feaf3abd1b12fd9fa15bce8d527039417c5a709f9a7ce"
+              }
+            ],
+            "version": "0.4.20",
+            "error": "ENOENT: no such file or directory, open '/home/runner/work/dsh_depot/dsh_depot/.runtime/candidate-builds/results/1331636953/source/packages/dsh-git-graph/package.json'",
+            "errorCategory": "package_contents",
+            "warnings": [],
+            "artifactsExpiresAt": "2026-11-28T02:48:35Z",
+            "files": []
+          },
+          "win32-x64": {
+            "runId": 44857589334,
+            "runAttempt": 1,
+            "status": "failed",
+            "verification": "not-run",
+            "startedAt": "2026-11-21T02:47:33.231Z",
+            "seconds": 87.253,
+            "stage": "pack-0",
+            "dependencyMode": "source-lock",
+            "adapterDigest": "e0df269e3d15c2a28cb0249a4dfe5a048d647a95783936b990f9c25496683bb4",
+            "sourceSha256": "a7f66b642420ba870e99ca4ac8c7406f7af049ffcee62ebe335cdde4a264df10",
+            "lockSha256": "8a7751c554273d33078feaf3abd1b12fd9fa15bce8d527039417c5a709f9a7ce",
+            "steps": [
+              {
+                "stage": "source-init",
+                "argv": [
+                  "git",
+                  "-c",
+                  "protocol.file.allow=never",
+                  "-c",
+                  "core.hooksPath=/dev/null",
+                  "init"
+                ],
+                "cwd": "source-input\\git",
+                "exitCode": 0,
+                "seconds": 0.053
+              },
+              {
+                "stage": "source-remote",
+                "argv": [
+                  "git",
+                  "-c",
+                  "protocol.file.allow=never",
+                  "-c",
+                  "core.hooksPath=/dev/null",
+                  "remote",
+                  "add",
+                  "origin",
+                  "https://github.com/zhu1090093659/dsh-web.git"
+                ],
+                "cwd": "source-input\\git",
+                "exitCode": 0,
+                "seconds": 0.048
+              },
+              {
+                "stage": "source-fetch",
+                "argv": [
+                  "git",
+                  "-c",
+                  "protocol.file.allow=never",
+                  "-c",
+                  "core.hooksPath=/dev/null",
+                  "-c",
+                  "http.version=HTTP/1.1",
+                  "fetch",
+                  "--no-tags",
+                  "--depth=1",
+                  "--filter=blob:none",
+                  "origin",
+                  "627af187047f4ee59031d51bae9518ba67174ad2"
+                ],
+                "cwd": "source-input\\git",
+                "exitCode": 0,
+                "seconds": 0.351
+              },
+              {
+                "stage": "source-identity",
+                "argv": [
+                  "git",
+                  "-c",
+                  "protocol.file.allow=never",
+                  "-c",
+                  "core.hooksPath=/dev/null",
+                  "rev-parse",
+                  "FETCH_HEAD"
+                ],
+                "cwd": "source-input\\git",
+                "exitCode": 0,
+                "seconds": 0.046
+              },
+              {
+                "stage": "source-components",
+                "argv": [
+                  "git",
+                  "-c",
+                  "protocol.file.allow=never",
+                  "-c",
+                  "core.hooksPath=/dev/null",
+                  "archive",
+                  "--format=tar.gz",
+                  "--output=D:\\a\\dsh_depot\\dsh_depot\\.runtime\\candidate-builds\\results\\1331636953\\source-input\\source.tgz",
+                  "FETCH_HEAD",
+                  "--",
+                  "package.json",
+                  "pnpm-lock.yaml",
+                  "pnpm-workspace.yaml",
+                  "LICENSE",
+                  "shared",
+                  "packages",
+                  "scripts"
+                ],
+                "cwd": "source-input\\git",
+                "exitCode": 0,
+                "seconds": 34.614
+              },
+              {
+                "stage": "dependencies-0",
+                "argv": [
+                  "C:\\hostedtoolcache\\windows\\node\\26.9.0\\x64\\node.exe",
+                  "D:\\a\\dsh_depot\\dsh_depot\\.runtime\\candidate-builds\\tools\\11.24.0\\pnpm-11.24.0\\node_modules\\pnpm\\bin\\pnpm.cjs",
+                  "--config.manage-package-manager-versions=false",
+                  "--pm-on-fail=ignore",
+                  "install",
+                  "--frozen-lockfile",
+                  "--ignore-scripts",
+                  "--config.manage-package-manager-versions=false",
+                  "--config.minimumReleaseAge=0"
+                ],
+                "cwd": "source",
+                "exitCode": 0,
+                "seconds": 11.805
+              },
+              {
+                "stage": "build",
+                "argv": [
+                  "C:\\hostedtoolcache\\windows\\node\\26.9.0\\x64\\node.exe",
+                  "D:\\a\\dsh_depot\\dsh_depot\\.runtime\\candidate-builds\\tools\\11.24.0\\pnpm-11.24.0\\node_modules\\pnpm\\bin\\pnpm.cjs",
+                  "--config.manage-package-manager-versions=false",
+                  "--pm-on-fail=ignore",
+                  "run",
+                  "build"
+                ],
+                "cwd": "source",
+                "exitCode": 0,
+                "seconds": 37.244
+              },
+              {
+                "stage": "pack-0",
+                "argv": [
+                  "C:\\hostedtoolcache\\windows\\node\\26.9.0\\x64\\node.exe",
+                  "D:\\a\\dsh_depot\\dsh_depot\\.runtime\\candidate-builds\\tools\\11.24.0\\pnpm-11.24.0\\node_modules\\pnpm\\bin\\pnpm.cjs",
+                  "--config.manage-package-manager-versions=false",
+                  "--pm-on-fail=ignore",
+                  "pack",
+                  "--config.ignore-scripts=true",
+                  "--json",
+                  "--pack-destination",
+                  "D:\\a\\dsh_depot\\dsh_depot\\.runtime\\candidate-builds\\results\\1331636953\\packages"
+                ],
+                "cwd": "source\\packages\\dsh-web-all",
+                "exitCode": 0,
+                "seconds": 0.572
+              }
+            ],
+            "dependencies": [
+              {
+                "path": ".",
+                "manager": "pnpm",
+                "sourceLockSha256": "8a7751c554273d33078feaf3abd1b12fd9fa15bce8d527039417c5a709f9a7ce",
+                "mode": "source-lock",
+                "sha256": "8a7751c554273d33078feaf3abd1b12fd9fa15bce8d527039417c5a709f9a7ce"
+              }
+            ],
+            "version": "0.4.20",
+            "error": "ENOENT: no such file or directory, open 'D:\\a\\dsh_depot\\dsh_depot\\.runtime\\candidate-builds\\results\\1331636953\\source\\packages\\dsh-git-graph\\package.json'",
+            "errorCategory": "package_contents",
+            "warnings": [],
+            "artifactsExpiresAt": "2026-11-28T02:49:14Z",
+            "files": []
+          }
+        }
+      },
+      {
+        "repositoryId": 1339256252,
+        "repository": "YuJunZhiXue/dsh-purge",
+        "npmName": "dsh-purge",
+        "runId": 44857589334,
+        "runAttempt": 1,
+        "runUrl": "https://github.com/fatevase/dsh_depot/actions/runs/44857589334",
+        "results": {
+          "macos-arm64": {
+            "runId": 44857589334,
+            "runAttempt": 1,
+            "status": "failed",
+            "verification": "not-run",
+            "startedAt": "2026-11-21T02:49:08.216Z",
+            "seconds": 0.001,
+            "adapterDigest": "358a57809f075eafc1db179942beb5e5bc4d9d22d8dbde431bec835d80f91753",
+            "steps": [],
+            "error": "Source discovery: GitHub GET /repos/YuJunZhiXue/dsh-purge returned 404",
+            "errorCategory": "compile",
+            "warnings": [],
+            "artifactsExpiresAt": "2026-11-28T02:49:22Z",
+            "files": []
+          },
+          "linux-x64": {
+            "runId": 44857589334,
+            "runAttempt": 1,
+            "status": "failed",
+            "verification": "not-run",
+            "startedAt": "2026-11-21T02:48:25.106Z",
+            "seconds": 0,
+            "adapterDigest": "358a57809f075eafc1db179942beb5e5bc4d9d22d8dbde431bec835d80f91753",
+            "steps": [],
+            "error": "Source discovery: GitHub GET /repos/YuJunZhiXue/dsh-purge returned 404",
+            "errorCategory": "compile",
+            "warnings": [],
+            "artifactsExpiresAt": "2026-11-28T02:48:35Z",
+            "files": []
+          },
+          "win32-x64": {
+            "runId": 44857589334,
+            "runAttempt": 1,
+            "status": "failed",
+            "verification": "not-run",
+            "startedAt": "2026-11-21T02:49:00.487Z",
+            "seconds": 0.001,
+            "adapterDigest": "358a57809f075eafc1db179942beb5e5bc4d9d22d8dbde431bec835d80f91753",
+            "steps": [],
+            "error": "Source discovery: GitHub GET /repos/YuJunZhiXue/dsh-purge returned 404",
+            "errorCategory": "compile",
+            "warnings": [],
+            "artifactsExpiresAt": "2026-11-28T02:49:14Z",
+            "files": []
+          }
+        }
+      },
+      {
+        "repositoryId": 1334586481,
+        "repository": "yjh051108/dsh-routing-suite",
+        "npmName": "@dsh-external/dsh-super-injector",
+        "commit": "195273352f23bff7f9023ebe2ec0cdbdf9c98f10",
+        "runId": 44857589334,
+        "runAttempt": 1,
+        "runUrl": "https://github.com/fatevase/dsh_depot/actions/runs/44857589334",
+        "results": {
+          "macos-arm64": {
+            "runId": 44857589334,
+            "runAttempt": 1,
+            "status": "compiled",
+            "verification": "not-run",
+            "startedAt": "2026-11-21T02:49:08.218Z",
+            "seconds": 9.877,
+            "stage": "pack-0",
+            "dependencyMode": "trial-resolution",
+            "adapterDigest": "67a3e89ef85f04417848cd3c1dbc0c63dccb7b6fb6422dabc1e48f83ac33b767",
+            "sourceSha256": "35ac8bff3a0e5c5023fc55df8c838caf0812a203e8d6bf6bb9cedfcf00d57c87",
+            "lockSha256": "e427f745151ccd857fbbfa611b4b04622074db29254a24faf2d21fc23937ea92",
+            "steps": [
+              {
+                "stage": "dependencies-0",
+                "argv": [
+                  "/Users/runner/hostedtoolcache/node/26.9.0/arm64/bin/node",
+                  "/Users/runner/work/dsh_depot/dsh_depot/.runtime/candidate-builds/tools/11.25.0/npm-11.19.1/node_modules/npm/bin/npm-cli.js",
+                  "install",
+                  "--include=dev",
+                  "--ignore-scripts",
+                  "--legacy-peer-deps",
+                  "--no-audit",
+                  "--no-fund"
+                ],
+                "cwd": "source",
+                "exitCode": 0,
+                "seconds": 0.756
+              },
+              {
+                "stage": "build",
+                "argv": [
+                  "/Users/runner/hostedtoolcache/node/26.9.0/arm64/bin/node",
+                  "/Users/runner/work/dsh_depot/dsh_depot/.runtime/candidate-builds/tools/11.25.0/npm-11.19.1/node_modules/npm/bin/npm-cli.js",
+                  "run",
+                  "prepare"
+                ],
+                "cwd": "source",
+                "exitCode": 0,
+                "seconds": 8.407
+              },
+              {
+                "stage": "pack-0",
+                "argv": [
+                  "/Users/runner/hostedtoolcache/node/26.9.0/arm64/bin/node",
+                  "/Users/runner/work/dsh_depot/dsh_depot/.runtime/candidate-builds/tools/11.25.0/npm-11.19.1/node_modules/npm/bin/npm-cli.js",
+                  "pack",
+                  "--ignore-scripts",
+                  "--json",
+                  "--pack-destination",
+                  "/Users/runner/work/dsh_depot/dsh_depot/.runtime/candidate-builds/results/1334586481/packages"
+                ],
+                "cwd": "source",
+                "exitCode": 0,
+                "seconds": 0.275
+              }
+            ],
+            "dependencies": [
+              {
+                "path": ".",
+                "manager": "npm",
+                "mode": "trial-resolution",
+                "sha256": "e427f745151ccd857fbbfa611b4b04622074db29254a24faf2d21fc23937ea92"
+              }
+            ],
+            "runtimeDependencies": [],
+            "version": "0.3.3",
+            "warnings": [
+              "类型声明文件缺失：./injector/lib/types/index.d.ts",
+              "类型声明文件缺失：./injector/lib/types/client/index.d.ts"
+            ],
+            "artifactsUrl": "https://github.com/fatevase/dsh_depot/actions/runs/44857589334/artifacts/14687663910",
+            "artifactsExpiresAt": "2026-11-28T02:49:22Z",
+            "files": [
+              {
+                "name": "@dsh-external/dsh-super-injector",
+                "version": "0.3.3",
+                "filename": "dsh-external-dsh-super-injector-0.3.3.tgz",
+                "bytes": 135463,
+                "sha256": "6a3ccf29194f26a52c08a96b9cab59463d9d686bdfbc99265414d1d623b61f71",
+                "hostPeers": {
+                  "@deepseek-ai/dsh-tools": ">=0.0.1-rc <2",
+                  "cordis": ">=4.0.0-rc <5",
+                  "schemastery": "^3.18.0"
+                },
+                "hostCompatibility": null
+              }
+            ]
+          },
+          "linux-x64": {
+            "runId": 44857589334,
+            "runAttempt": 1,
+            "status": "compiled",
+            "verification": "not-run",
+            "startedAt": "2026-11-21T02:48:25.107Z",
+            "seconds": 6.905,
+            "stage": "pack-0",
+            "dependencyMode": "trial-resolution",
+            "adapterDigest": "67a3e89ef85f04417848cd3c1dbc0c63dccb7b6fb6422dabc1e48f83ac33b767",
+            "sourceSha256": "35ac8bff3a0e5c5023fc55df8c838caf0812a203e8d6bf6bb9cedfcf00d57c87",
+            "lockSha256": "e427f745151ccd857fbbfa611b4b04622074db29254a24faf2d21fc23937ea92",
+            "steps": [
+              {
+                "stage": "dependencies-0",
+                "argv": [
+                  "/opt/hostedtoolcache/node/26.9.0/x64/bin/node",
+                  "/home/runner/work/dsh_depot/dsh_depot/.runtime/candidate-builds/tools/11.25.0/npm-11.19.1/node_modules/npm/bin/npm-cli.js",
+                  "install",
+                  "--include=dev",
+                  "--ignore-scripts",
+                  "--legacy-peer-deps",
+                  "--no-audit",
+                  "--no-fund"
+                ],
+                "cwd": "source",
+                "exitCode": 0,
+                "seconds": 0.172
+              },
+              {
+                "stage": "build",
+                "argv": [
+                  "/opt/hostedtoolcache/node/26.9.0/x64/bin/node",
+                  "/home/runner/work/dsh_depot/dsh_depot/.runtime/candidate-builds/tools/11.25.0/npm-11.19.1/node_modules/npm/bin/npm-cli.js",
+                  "run",
+                  "prepare"
+                ],
+                "cwd": "source",
+                "exitCode": 0,
+                "seconds": 6.206
+              },
+              {
+                "stage": "pack-0",
+                "argv": [
+                  "/opt/hostedtoolcache/node/26.9.0/x64/bin/node",
+                  "/home/runner/work/dsh_depot/dsh_depot/.runtime/candidate-builds/tools/11.25.0/npm-11.19.1/node_modules/npm/bin/npm-cli.js",
+                  "pack",
+                  "--ignore-scripts",
+                  "--json",
+                  "--pack-destination",
+                  "/home/runner/work/dsh_depot/dsh_depot/.runtime/candidate-builds/results/1334586481/packages"
+                ],
+                "cwd": "source",
+                "exitCode": 0,
+                "seconds": 0.222
+              }
+            ],
+            "dependencies": [
+              {
+                "path": ".",
+                "manager": "npm",
+                "mode": "trial-resolution",
+                "sha256": "e427f745151ccd857fbbfa611b4b04622074db29254a24faf2d21fc23937ea92"
+              }
+            ],
+            "runtimeDependencies": [],
+            "version": "0.3.3",
+            "warnings": [
+              "类型声明文件缺失：./injector/lib/types/index.d.ts",
+              "类型声明文件缺失：./injector/lib/types/client/index.d.ts"
+            ],
+            "artifactsUrl": "https://github.com/fatevase/dsh_depot/actions/runs/44857589334/artifacts/14688855006",
+            "artifactsExpiresAt": "2026-11-28T02:48:35Z",
+            "files": [
+              {
+                "name": "@dsh-external/dsh-super-injector",
+                "version": "0.3.3",
+                "filename": "dsh-external-dsh-super-injector-0.3.3.tgz",
+                "bytes": 135463,
+                "sha256": "6a3ccf29194f26a52c08a96b9cab59463d9d686bdfbc99265414d1d623b61f71",
+                "hostPeers": {
+                  "@deepseek-ai/dsh-tools": ">=0.0.1-rc <2",
+                  "cordis": ">=4.0.0-rc <5",
+                  "schemastery": "^3.18.0"
+                },
+                "hostCompatibility": null
+              }
+            ]
+          },
+          "win32-x64": {
+            "runId": 44857589334,
+            "runAttempt": 1,
+            "status": "compiled",
+            "verification": "not-run",
+            "startedAt": "2026-11-21T02:49:00.488Z",
+            "seconds": 9.49,
+            "stage": "pack-0",
+            "dependencyMode": "trial-resolution",
+            "adapterDigest": "67a3e89ef85f04417848cd3c1dbc0c63dccb7b6fb6422dabc1e48f83ac33b767",
+            "sourceSha256": "35ac8bff3a0e5c5023fc55df8c838caf0812a203e8d6bf6bb9cedfcf00d57c87",
+            "lockSha256": "e427f745151ccd857fbbfa611b4b04622074db29254a24faf2d21fc23937ea92",
+            "steps": [
+              {
+                "stage": "dependencies-0",
+                "argv": [
+                  "C:\\hostedtoolcache\\windows\\node\\26.9.0\\x64\\node.exe",
+                  "D:\\a\\dsh_depot\\dsh_depot\\.runtime\\candidate-builds\\tools\\11.25.0\\npm-11.19.1\\node_modules\\npm\\bin\\npm-cli.js",
+                  "install",
+                  "--include=dev",
+                  "--ignore-scripts",
+                  "--legacy-peer-deps",
+                  "--no-audit",
+                  "--no-fund"
+                ],
+                "cwd": "source",
+                "exitCode": 0,
+                "seconds": 0.416
+              },
+              {
+                "stage": "build",
+                "argv": [
+                  "C:\\hostedtoolcache\\windows\\node\\26.9.0\\x64\\node.exe",
+                  "D:\\a\\dsh_depot\\dsh_depot\\.runtime\\candidate-builds\\tools\\11.25.0\\npm-11.19.1\\node_modules\\npm\\bin\\npm-cli.js",
+                  "run",
+                  "prepare"
+                ],
+                "cwd": "source",
+                "exitCode": 0,
+                "seconds": 8.197
+              },
+              {
+                "stage": "pack-0",
+                "argv": [
+                  "C:\\hostedtoolcache\\windows\\node\\26.9.0\\x64\\node.exe",
+                  "D:\\a\\dsh_depot\\dsh_depot\\.runtime\\candidate-builds\\tools\\11.25.0\\npm-11.19.1\\node_modules\\npm\\bin\\npm-cli.js",
+                  "pack",
+                  "--ignore-scripts",
+                  "--json",
+                  "--pack-destination",
+                  "D:\\a\\dsh_depot\\dsh_depot\\.runtime\\candidate-builds\\results\\1334586481\\packages"
+                ],
+                "cwd": "source",
+                "exitCode": 0,
+                "seconds": 0.468
+              }
+            ],
+            "dependencies": [
+              {
+                "path": ".",
+                "manager": "npm",
+                "mode": "trial-resolution",
+                "sha256": "e427f745151ccd857fbbfa611b4b04622074db29254a24faf2d21fc23937ea92"
+              }
+            ],
+            "runtimeDependencies": [],
+            "version": "0.3.3",
+            "warnings": [
+              "类型声明文件缺失：./injector/lib/types/index.d.ts",
+              "类型声明文件缺失：./injector/lib/types/client/index.d.ts"
+            ],
+            "artifactsUrl": "https://github.com/fatevase/dsh_depot/actions/runs/44857589334/artifacts/14688760226",
+            "artifactsExpiresAt": "2026-11-28T02:49:14Z",
+            "files": [
+              {
+                "name": "@dsh-external/dsh-super-injector",
+                "version": "0.3.3",
+                "filename": "dsh-external-dsh-super-injector-0.3.3.tgz",
+                "bytes": 135463,
+                "sha256": "6a3ccf29194f26a52c08a96b9cab59463d9d686bdfbc99265414d1d623b61f71",
+                "hostPeers": {
+                  "@deepseek-ai/dsh-tools": ">=0.0.1-rc <2",
+                  "cordis": ">=4.0.0-rc <5",
+                  "schemastery": "^3.18.0"
+                },
+                "hostCompatibility": null
+              }
+            ]
+          }
+        }
+      },
+      {
+        "repositoryId": 1301657572,
+        "repository": "superdesigndev/treg",
+        "npmName": "treg-dsh",
+        "commit": "6ffe8df7126479631a4c649467aa307505e28a1b",
+        "runId": 44857589334,
+        "runAttempt": 1,
+        "runUrl": "https://github.com/fatevase/dsh_depot/actions/runs/44857589334",
+        "results": {
+          "macos-arm64": {
+            "runId": 44857589334,
+            "runAttempt": 1,
+            "status": "compiled",
+            "verification": "not-run",
+            "startedAt": "2026-11-21T02:49:18.095Z",
+            "seconds": 3.876,
+            "stage": "pack-0",
+            "dependencyMode": "not-installed-prebuilt-trial",
+            "adapterDigest": "6b994b518a6b4ffc3ae46b8b45a4aa08316a78b77ec393d053cebe330f3d0921",
+            "sourceSha256": "aeff470718cbc32a0eb6b828fc178fb214eb577a9a29ecd196efa24a852d5dad",
+            "steps": [
+              {
+                "stage": "source-init",
+                "argv": [
+                  "git",
+                  "-c",
+                  "protocol.file.allow=never",
+                  "-c",
+                  "core.hooksPath=/dev/null",
+                  "init"
+                ],
+                "cwd": "source-input/git",
+                "exitCode": 0,
+                "seconds": 0.027
+              },
+              {
+                "stage": "source-remote",
+                "argv": [
+                  "git",
+                  "-c",
+                  "protocol.file.allow=never",
+                  "-c",
+                  "core.hooksPath=/dev/null",
+                  "remote",
+                  "add",
+                  "origin",
+                  "https://github.com/superdesigndev/treg.git"
+                ],
+                "cwd": "source-input/git",
+                "exitCode": 0,
+                "seconds": 0.007
+              },
+              {
+                "stage": "source-fetch",
+                "argv": [
+                  "git",
+                  "-c",
+                  "protocol.file.allow=never",
+                  "-c",
+                  "core.hooksPath=/dev/null",
+                  "-c",
+                  "http.version=HTTP/1.1",
+                  "fetch",
+                  "--no-tags",
+                  "--depth=1",
+                  "--filter=blob:none",
+                  "origin",
+                  "6ffe8df7126479631a4c649467aa307505e28a1b"
+                ],
+                "cwd": "source-input/git",
+                "exitCode": 0,
+                "seconds": 0.388
+              },
+              {
+                "stage": "source-identity",
+                "argv": [
+                  "git",
+                  "-c",
+                  "protocol.file.allow=never",
+                  "-c",
+                  "core.hooksPath=/dev/null",
+                  "rev-parse",
+                  "FETCH_HEAD"
+                ],
+                "cwd": "source-input/git",
+                "exitCode": 0,
+                "seconds": 0.007
+              },
+              {
+                "stage": "source-components",
+                "argv": [
+                  "git",
+                  "-c",
+                  "protocol.file.allow=never",
+                  "-c",
+                  "core.hooksPath=/dev/null",
+                  "archive",
+                  "--format=tar.gz",
+                  "--output=/Users/runner/work/dsh_depot/dsh_depot/.runtime/candidate-builds/results/1301657572/source-input/source.tgz",
+                  "FETCH_HEAD",
+                  "--",
+                  "package.json",
+                  "dsh",
+                  "LICENSE",
+                  "README.md"
+                ],
+                "cwd": "source-input/git",
+                "exitCode": 0,
+                "seconds": 3.015
+              },
+              {
+                "stage": "pack-0",
+                "argv": [
+                  "/Users/runner/hostedtoolcache/node/26.9.0/arm64/bin/node",
+                  "/Users/runner/work/dsh_depot/dsh_depot/.runtime/candidate-builds/tools/11.25.0/npm-11.19.1/node_modules/npm/bin/npm-cli.js",
+                  "pack",
+                  "--ignore-scripts",
+                  "--json",
+                  "--pack-destination",
+                  "/Users/runner/work/dsh_depot/dsh_depot/.runtime/candidate-builds/results/1301657572/packages"
+                ],
+                "cwd": "source",
+                "exitCode": 0,
+                "seconds": 0.314
+              }
+            ],
+            "runtimeDependencies": [],
+            "version": "0.31.0",
+            "warnings": [],
+            "artifactsUrl": "https://github.com/fatevase/dsh_depot/actions/runs/44857589334/artifacts/14687663910",
+            "artifactsExpiresAt": "2026-11-28T02:49:22Z",
+            "files": [
+              {
+                "name": "treg-dsh",
+                "version": "0.31.0",
+                "filename": "treg-dsh-0.31.0.tgz",
+                "bytes": 31586,
+                "sha256": "ebd9302f3533ae2edf04ce587f6b46115ba64536afcad8af7c1a1de97c2904c3",
+                "hostPeers": {},
+                "hostCompatibility": null
+              }
+            ]
+          },
+          "linux-x64": {
+            "runId": 44857589334,
+            "runAttempt": 1,
+            "status": "compiled",
+            "verification": "not-run",
+            "startedAt": "2026-11-21T02:48:32.013Z",
+            "seconds": 3.538,
+            "stage": "pack-0",
+            "dependencyMode": "not-installed-prebuilt-trial",
+            "adapterDigest": "6b994b518a6b4ffc3ae46b8b45a4aa08316a78b77ec393d053cebe330f3d0921",
+            "sourceSha256": "aeff470718cbc32a0eb6b828fc178fb214eb577a9a29ecd196efa24a852d5dad",
             "steps": [
               {
                 "stage": "source-init",
@@ -313978,7 +314795,7 @@
                   "remote",
                   "add",
                   "origin",
-                  "https://github.com/zhu1090093659/dsh-web.git"
+                  "https://github.com/superdesigndev/treg.git"
                 ],
                 "cwd": "source-input/git",
                 "exitCode": 0,
@@ -313999,828 +314816,11 @@
                   "--depth=1",
                   "--filter=blob:none",
                   "origin",
-                  "627af187047f4ee59031d51bae9518ba67174ad2"
-                ],
-                "cwd": "source-input/git",
-                "exitCode": 0,
-                "seconds": 0.883
-              },
-              {
-                "stage": "source-identity",
-                "argv": [
-                  "git",
-                  "-c",
-                  "protocol.file.allow=never",
-                  "-c",
-                  "core.hooksPath=/dev/null",
-                  "rev-parse",
-                  "FETCH_HEAD"
-                ],
-                "cwd": "source-input/git",
-                "exitCode": 0,
-                "seconds": 0.002
-              },
-              {
-                "stage": "source-components",
-                "argv": [
-                  "git",
-                  "-c",
-                  "protocol.file.allow=never",
-                  "-c",
-                  "core.hooksPath=/dev/null",
-                  "archive",
-                  "--format=tar.gz",
-                  "--output=/home/runner/work/dsh_depot/dsh_depot/.runtime/candidate-builds/results/1331636953/source-input/source.tgz",
-                  "FETCH_HEAD",
-                  "--",
-                  "package.json",
-                  "pnpm-lock.yaml",
-                  "pnpm-workspace.yaml",
-                  "LICENSE",
-                  "shared",
-                  "packages",
-                  "scripts"
-                ],
-                "cwd": "source-input/git",
-                "exitCode": 0,
-                "seconds": 56.443
-              },
-              {
-                "stage": "dependencies-0",
-                "argv": [
-                  "/opt/hostedtoolcache/node/26.9.0/x64/bin/node",
-                  "/home/runner/work/dsh_depot/dsh_depot/.runtime/candidate-builds/tools/11.24.0/pnpm-11.24.0/node_modules/pnpm/bin/pnpm.cjs",
-                  "--config.manage-package-manager-versions=false",
-                  "--pm-on-fail=ignore",
-                  "install",
-                  "--frozen-lockfile",
-                  "--ignore-scripts",
-                  "--config.manage-package-manager-versions=false",
-                  "--config.minimumReleaseAge=0"
-                ],
-                "cwd": "source",
-                "exitCode": 0,
-                "seconds": 3.864
-              },
-              {
-                "stage": "build",
-                "argv": [
-                  "/opt/hostedtoolcache/node/26.9.0/x64/bin/node",
-                  "/home/runner/work/dsh_depot/dsh_depot/.runtime/candidate-builds/tools/11.24.0/pnpm-11.24.0/node_modules/pnpm/bin/pnpm.cjs",
-                  "--config.manage-package-manager-versions=false",
-                  "--pm-on-fail=ignore",
-                  "run",
-                  "build"
-                ],
-                "cwd": "source",
-                "exitCode": 0,
-                "seconds": 23.893
-              },
-              {
-                "stage": "pack-0",
-                "argv": [
-                  "/opt/hostedtoolcache/node/26.9.0/x64/bin/node",
-                  "/home/runner/work/dsh_depot/dsh_depot/.runtime/candidate-builds/tools/11.24.0/pnpm-11.24.0/node_modules/pnpm/bin/pnpm.cjs",
-                  "--config.manage-package-manager-versions=false",
-                  "--pm-on-fail=ignore",
-                  "pack",
-                  "--config.ignore-scripts=true",
-                  "--json",
-                  "--pack-destination",
-                  "/home/runner/work/dsh_depot/dsh_depot/.runtime/candidate-builds/results/1331636953/packages"
-                ],
-                "cwd": "source/packages/dsh-web-all",
-                "exitCode": 0,
-                "seconds": 0.4
-              }
-            ],
-            "dependencies": [
-              {
-                "path": ".",
-                "manager": "pnpm",
-                "sourceLockSha256": "8a7751c554273d33078feaf3abd1b12fd9fa15bce8d527039417c5a709f9a7ce",
-                "mode": "source-lock",
-                "sha256": "8a7751c554273d33078feaf3abd1b12fd9fa15bce8d527039417c5a709f9a7ce"
-              }
-            ],
-            "version": "0.4.20",
-            "error": "ENOENT: no such file or directory, open '/home/runner/work/dsh_depot/dsh_depot/.runtime/candidate-builds/results/1331636953/source/packages/dsh-git-graph/package.json'",
-            "errorCategory": "package_contents",
-            "warnings": [],
-            "artifactsExpiresAt": "2026-11-27T21:32:45Z",
-            "files": []
-          },
-          "win32-x64": {
-            "runId": 44820695258,
-            "runAttempt": 1,
-            "status": "failed",
-            "verification": "not-run",
-            "startedAt": "2026-11-20T21:31:30.731Z",
-            "seconds": 77.627,
-            "stage": "pack-0",
-            "dependencyMode": "source-lock",
-            "adapterDigest": "e0df269e3d15c2a28cb0249a4dfe5a048d647a95783936b990f9c25496683bb4",
-            "sourceSha256": "a7f66b642420ba870e99ca4ac8c7406f7af049ffcee62ebe335cdde4a264df10",
-            "lockSha256": "8a7751c554273d33078feaf3abd1b12fd9fa15bce8d527039417c5a709f9a7ce",
-            "steps": [
-              {
-                "stage": "source-init",
-                "argv": [
-                  "git",
-                  "-c",
-                  "protocol.file.allow=never",
-                  "-c",
-                  "core.hooksPath=/dev/null",
-                  "init"
-                ],
-                "cwd": "source-input\\git",
-                "exitCode": 0,
-                "seconds": 0.042
-              },
-              {
-                "stage": "source-remote",
-                "argv": [
-                  "git",
-                  "-c",
-                  "protocol.file.allow=never",
-                  "-c",
-                  "core.hooksPath=/dev/null",
-                  "remote",
-                  "add",
-                  "origin",
-                  "https://github.com/zhu1090093659/dsh-web.git"
-                ],
-                "cwd": "source-input\\git",
-                "exitCode": 0,
-                "seconds": 0.038
-              },
-              {
-                "stage": "source-fetch",
-                "argv": [
-                  "git",
-                  "-c",
-                  "protocol.file.allow=never",
-                  "-c",
-                  "core.hooksPath=/dev/null",
-                  "-c",
-                  "http.version=HTTP/1.1",
-                  "fetch",
-                  "--no-tags",
-                  "--depth=1",
-                  "--filter=blob:none",
-                  "origin",
-                  "627af187047f4ee59031d51bae9518ba67174ad2"
-                ],
-                "cwd": "source-input\\git",
-                "exitCode": 0,
-                "seconds": 0.413
-              },
-              {
-                "stage": "source-identity",
-                "argv": [
-                  "git",
-                  "-c",
-                  "protocol.file.allow=never",
-                  "-c",
-                  "core.hooksPath=/dev/null",
-                  "rev-parse",
-                  "FETCH_HEAD"
-                ],
-                "cwd": "source-input\\git",
-                "exitCode": 0,
-                "seconds": 0.036
-              },
-              {
-                "stage": "source-components",
-                "argv": [
-                  "git",
-                  "-c",
-                  "protocol.file.allow=never",
-                  "-c",
-                  "core.hooksPath=/dev/null",
-                  "archive",
-                  "--format=tar.gz",
-                  "--output=D:\\a\\dsh_depot\\dsh_depot\\.runtime\\candidate-builds\\results\\1331636953\\source-input\\source.tgz",
-                  "FETCH_HEAD",
-                  "--",
-                  "package.json",
-                  "pnpm-lock.yaml",
-                  "pnpm-workspace.yaml",
-                  "LICENSE",
-                  "shared",
-                  "packages",
-                  "scripts"
-                ],
-                "cwd": "source-input\\git",
-                "exitCode": 0,
-                "seconds": 36.094
-              },
-              {
-                "stage": "dependencies-0",
-                "argv": [
-                  "C:\\hostedtoolcache\\windows\\node\\26.9.0\\x64\\node.exe",
-                  "D:\\a\\dsh_depot\\dsh_depot\\.runtime\\candidate-builds\\tools\\11.24.0\\pnpm-11.24.0\\node_modules\\pnpm\\bin\\pnpm.cjs",
-                  "--config.manage-package-manager-versions=false",
-                  "--pm-on-fail=ignore",
-                  "install",
-                  "--frozen-lockfile",
-                  "--ignore-scripts",
-                  "--config.manage-package-manager-versions=false",
-                  "--config.minimumReleaseAge=0"
-                ],
-                "cwd": "source",
-                "exitCode": 0,
-                "seconds": 10.105
-              },
-              {
-                "stage": "build",
-                "argv": [
-                  "C:\\hostedtoolcache\\windows\\node\\26.9.0\\x64\\node.exe",
-                  "D:\\a\\dsh_depot\\dsh_depot\\.runtime\\candidate-builds\\tools\\11.24.0\\pnpm-11.24.0\\node_modules\\pnpm\\bin\\pnpm.cjs",
-                  "--config.manage-package-manager-versions=false",
-                  "--pm-on-fail=ignore",
-                  "run",
-                  "build"
-                ],
-                "cwd": "source",
-                "exitCode": 0,
-                "seconds": 28.483
-              },
-              {
-                "stage": "pack-0",
-                "argv": [
-                  "C:\\hostedtoolcache\\windows\\node\\26.9.0\\x64\\node.exe",
-                  "D:\\a\\dsh_depot\\dsh_depot\\.runtime\\candidate-builds\\tools\\11.24.0\\pnpm-11.24.0\\node_modules\\pnpm\\bin\\pnpm.cjs",
-                  "--config.manage-package-manager-versions=false",
-                  "--pm-on-fail=ignore",
-                  "pack",
-                  "--config.ignore-scripts=true",
-                  "--json",
-                  "--pack-destination",
-                  "D:\\a\\dsh_depot\\dsh_depot\\.runtime\\candidate-builds\\results\\1331636953\\packages"
-                ],
-                "cwd": "source\\packages\\dsh-web-all",
-                "exitCode": 0,
-                "seconds": 0.506
-              }
-            ],
-            "dependencies": [
-              {
-                "path": ".",
-                "manager": "pnpm",
-                "sourceLockSha256": "8a7751c554273d33078feaf3abd1b12fd9fa15bce8d527039417c5a709f9a7ce",
-                "mode": "source-lock",
-                "sha256": "8a7751c554273d33078feaf3abd1b12fd9fa15bce8d527039417c5a709f9a7ce"
-              }
-            ],
-            "version": "0.4.20",
-            "error": "ENOENT: no such file or directory, open 'D:\\a\\dsh_depot\\dsh_depot\\.runtime\\candidate-builds\\results\\1331636953\\source\\packages\\dsh-git-graph\\package.json'",
-            "errorCategory": "package_contents",
-            "warnings": [],
-            "artifactsExpiresAt": "2026-11-27T21:33:03Z",
-            "files": []
-          }
-        }
-      },
-      {
-        "repositoryId": 1339256252,
-        "repository": "YuJunZhiXue/dsh-purge",
-        "npmName": "dsh-purge",
-        "runId": 44820695258,
-        "runAttempt": 1,
-        "runUrl": "https://github.com/fatevase/dsh_depot/actions/runs/44820695258",
-        "results": {
-          "macos-arm64": {
-            "runId": 44820695258,
-            "runAttempt": 1,
-            "status": "failed",
-            "verification": "not-run",
-            "startedAt": "2026-11-20T21:33:14.987Z",
-            "seconds": 0.001,
-            "adapterDigest": "358a57809f075eafc1db179942beb5e5bc4d9d22d8dbde431bec835d80f91753",
-            "steps": [],
-            "error": "Source discovery: GitHub GET /repos/YuJunZhiXue/dsh-purge returned 404",
-            "errorCategory": "compile",
-            "warnings": [],
-            "artifactsExpiresAt": "2026-11-27T21:33:32Z",
-            "files": []
-          },
-          "linux-x64": {
-            "runId": 44820695258,
-            "runAttempt": 1,
-            "status": "failed",
-            "verification": "not-run",
-            "startedAt": "2026-11-20T21:32:34.436Z",
-            "seconds": 0,
-            "adapterDigest": "358a57809f075eafc1db179942beb5e5bc4d9d22d8dbde431bec835d80f91753",
-            "steps": [],
-            "error": "Source discovery: GitHub GET /repos/YuJunZhiXue/dsh-purge returned 404",
-            "errorCategory": "compile",
-            "warnings": [],
-            "artifactsExpiresAt": "2026-11-27T21:32:45Z",
-            "files": []
-          },
-          "win32-x64": {
-            "runId": 44820695258,
-            "runAttempt": 1,
-            "status": "failed",
-            "verification": "not-run",
-            "startedAt": "2026-11-20T21:32:48.361Z",
-            "seconds": 0.001,
-            "adapterDigest": "358a57809f075eafc1db179942beb5e5bc4d9d22d8dbde431bec835d80f91753",
-            "steps": [],
-            "error": "Source discovery: GitHub GET /repos/YuJunZhiXue/dsh-purge returned 404",
-            "errorCategory": "compile",
-            "warnings": [],
-            "artifactsExpiresAt": "2026-11-27T21:33:03Z",
-            "files": []
-          }
-        }
-      },
-      {
-        "repositoryId": 1334586481,
-        "repository": "yjh051108/dsh-routing-suite",
-        "npmName": "@dsh-external/dsh-super-injector",
-        "commit": "195273352f23bff7f9023ebe2ec0cdbdf9c98f10",
-        "runId": 44820695258,
-        "runAttempt": 1,
-        "runUrl": "https://github.com/fatevase/dsh_depot/actions/runs/44820695258",
-        "results": {
-          "macos-arm64": {
-            "runId": 44820695258,
-            "runAttempt": 1,
-            "status": "compiled",
-            "verification": "not-run",
-            "startedAt": "2026-11-20T21:33:14.990Z",
-            "seconds": 11.126,
-            "stage": "pack-0",
-            "dependencyMode": "trial-resolution",
-            "adapterDigest": "67a3e89ef85f04417848cd3c1dbc0c63dccb7b6fb6422dabc1e48f83ac33b767",
-            "sourceSha256": "35ac8bff3a0e5c5023fc55df8c838caf0812a203e8d6bf6bb9cedfcf00d57c87",
-            "lockSha256": "e427f745151ccd857fbbfa611b4b04622074db29254a24faf2d21fc23937ea92",
-            "steps": [
-              {
-                "stage": "dependencies-0",
-                "argv": [
-                  "/Users/runner/hostedtoolcache/node/26.9.0/arm64/bin/node",
-                  "/Users/runner/work/dsh_depot/dsh_depot/.runtime/candidate-builds/tools/11.25.0/npm-11.19.1/node_modules/npm/bin/npm-cli.js",
-                  "install",
-                  "--include=dev",
-                  "--ignore-scripts",
-                  "--legacy-peer-deps",
-                  "--no-audit",
-                  "--no-fund"
-                ],
-                "cwd": "source",
-                "exitCode": 0,
-                "seconds": 0.792
-              },
-              {
-                "stage": "build",
-                "argv": [
-                  "/Users/runner/hostedtoolcache/node/26.9.0/arm64/bin/node",
-                  "/Users/runner/work/dsh_depot/dsh_depot/.runtime/candidate-builds/tools/11.25.0/npm-11.19.1/node_modules/npm/bin/npm-cli.js",
-                  "run",
-                  "prepare"
-                ],
-                "cwd": "source",
-                "exitCode": 0,
-                "seconds": 9.121
-              },
-              {
-                "stage": "pack-0",
-                "argv": [
-                  "/Users/runner/hostedtoolcache/node/26.9.0/arm64/bin/node",
-                  "/Users/runner/work/dsh_depot/dsh_depot/.runtime/candidate-builds/tools/11.25.0/npm-11.19.1/node_modules/npm/bin/npm-cli.js",
-                  "pack",
-                  "--ignore-scripts",
-                  "--json",
-                  "--pack-destination",
-                  "/Users/runner/work/dsh_depot/dsh_depot/.runtime/candidate-builds/results/1334586481/packages"
-                ],
-                "cwd": "source",
-                "exitCode": 0,
-                "seconds": 0.671
-              }
-            ],
-            "dependencies": [
-              {
-                "path": ".",
-                "manager": "npm",
-                "mode": "trial-resolution",
-                "sha256": "e427f745151ccd857fbbfa611b4b04622074db29254a24faf2d21fc23937ea92"
-              }
-            ],
-            "runtimeDependencies": [],
-            "version": "0.3.3",
-            "warnings": [
-              "类型声明文件缺失：./injector/lib/types/index.d.ts",
-              "类型声明文件缺失：./injector/lib/types/client/index.d.ts"
-            ],
-            "artifactsUrl": "https://github.com/fatevase/dsh_depot/actions/runs/44820695258/artifacts/14671529321",
-            "artifactsExpiresAt": "2026-11-27T21:33:32Z",
-            "files": [
-              {
-                "name": "@dsh-external/dsh-super-injector",
-                "version": "0.3.3",
-                "filename": "dsh-external-dsh-super-injector-0.3.3.tgz",
-                "bytes": 135463,
-                "sha256": "6a3ccf29194f26a52c08a96b9cab59463d9d686bdfbc99265414d1d623b61f71",
-                "hostPeers": {
-                  "@deepseek-ai/dsh-tools": ">=0.0.1-rc <2",
-                  "cordis": ">=4.0.0-rc <5",
-                  "schemastery": "^3.18.0"
-                },
-                "hostCompatibility": null
-              }
-            ]
-          },
-          "linux-x64": {
-            "runId": 44820695258,
-            "runAttempt": 1,
-            "status": "compiled",
-            "verification": "not-run",
-            "startedAt": "2026-11-20T21:32:34.437Z",
-            "seconds": 7.009,
-            "stage": "pack-0",
-            "dependencyMode": "trial-resolution",
-            "adapterDigest": "67a3e89ef85f04417848cd3c1dbc0c63dccb7b6fb6422dabc1e48f83ac33b767",
-            "sourceSha256": "35ac8bff3a0e5c5023fc55df8c838caf0812a203e8d6bf6bb9cedfcf00d57c87",
-            "lockSha256": "e427f745151ccd857fbbfa611b4b04622074db29254a24faf2d21fc23937ea92",
-            "steps": [
-              {
-                "stage": "dependencies-0",
-                "argv": [
-                  "/opt/hostedtoolcache/node/26.9.0/x64/bin/node",
-                  "/home/runner/work/dsh_depot/dsh_depot/.runtime/candidate-builds/tools/11.25.0/npm-11.19.1/node_modules/npm/bin/npm-cli.js",
-                  "install",
-                  "--include=dev",
-                  "--ignore-scripts",
-                  "--legacy-peer-deps",
-                  "--no-audit",
-                  "--no-fund"
-                ],
-                "cwd": "source",
-                "exitCode": 0,
-                "seconds": 0.176
-              },
-              {
-                "stage": "build",
-                "argv": [
-                  "/opt/hostedtoolcache/node/26.9.0/x64/bin/node",
-                  "/home/runner/work/dsh_depot/dsh_depot/.runtime/candidate-builds/tools/11.25.0/npm-11.19.1/node_modules/npm/bin/npm-cli.js",
-                  "run",
-                  "prepare"
-                ],
-                "cwd": "source",
-                "exitCode": 0,
-                "seconds": 6.242
-              },
-              {
-                "stage": "pack-0",
-                "argv": [
-                  "/opt/hostedtoolcache/node/26.9.0/x64/bin/node",
-                  "/home/runner/work/dsh_depot/dsh_depot/.runtime/candidate-builds/tools/11.25.0/npm-11.19.1/node_modules/npm/bin/npm-cli.js",
-                  "pack",
-                  "--ignore-scripts",
-                  "--json",
-                  "--pack-destination",
-                  "/home/runner/work/dsh_depot/dsh_depot/.runtime/candidate-builds/results/1334586481/packages"
-                ],
-                "cwd": "source",
-                "exitCode": 0,
-                "seconds": 0.223
-              }
-            ],
-            "dependencies": [
-              {
-                "path": ".",
-                "manager": "npm",
-                "mode": "trial-resolution",
-                "sha256": "e427f745151ccd857fbbfa611b4b04622074db29254a24faf2d21fc23937ea92"
-              }
-            ],
-            "runtimeDependencies": [],
-            "version": "0.3.3",
-            "warnings": [
-              "类型声明文件缺失：./injector/lib/types/index.d.ts",
-              "类型声明文件缺失：./injector/lib/types/client/index.d.ts"
-            ],
-            "artifactsUrl": "https://github.com/fatevase/dsh_depot/actions/runs/44820695258/artifacts/14671293925",
-            "artifactsExpiresAt": "2026-11-27T21:32:45Z",
-            "files": [
-              {
-                "name": "@dsh-external/dsh-super-injector",
-                "version": "0.3.3",
-                "filename": "dsh-external-dsh-super-injector-0.3.3.tgz",
-                "bytes": 135463,
-                "sha256": "6a3ccf29194f26a52c08a96b9cab59463d9d686bdfbc99265414d1d623b61f71",
-                "hostPeers": {
-                  "@deepseek-ai/dsh-tools": ">=0.0.1-rc <2",
-                  "cordis": ">=4.0.0-rc <5",
-                  "schemastery": "^3.18.0"
-                },
-                "hostCompatibility": null
-              }
-            ]
-          },
-          "win32-x64": {
-            "runId": 44820695258,
-            "runAttempt": 1,
-            "status": "compiled",
-            "verification": "not-run",
-            "startedAt": "2026-11-20T21:32:48.363Z",
-            "seconds": 10.345,
-            "stage": "pack-0",
-            "dependencyMode": "trial-resolution",
-            "adapterDigest": "67a3e89ef85f04417848cd3c1dbc0c63dccb7b6fb6422dabc1e48f83ac33b767",
-            "sourceSha256": "35ac8bff3a0e5c5023fc55df8c838caf0812a203e8d6bf6bb9cedfcf00d57c87",
-            "lockSha256": "e427f745151ccd857fbbfa611b4b04622074db29254a24faf2d21fc23937ea92",
-            "steps": [
-              {
-                "stage": "dependencies-0",
-                "argv": [
-                  "C:\\hostedtoolcache\\windows\\node\\26.9.0\\x64\\node.exe",
-                  "D:\\a\\dsh_depot\\dsh_depot\\.runtime\\candidate-builds\\tools\\11.25.0\\npm-11.19.1\\node_modules\\npm\\bin\\npm-cli.js",
-                  "install",
-                  "--include=dev",
-                  "--ignore-scripts",
-                  "--legacy-peer-deps",
-                  "--no-audit",
-                  "--no-fund"
-                ],
-                "cwd": "source",
-                "exitCode": 0,
-                "seconds": 0.352
-              },
-              {
-                "stage": "build",
-                "argv": [
-                  "C:\\hostedtoolcache\\windows\\node\\26.9.0\\x64\\node.exe",
-                  "D:\\a\\dsh_depot\\dsh_depot\\.runtime\\candidate-builds\\tools\\11.25.0\\npm-11.19.1\\node_modules\\npm\\bin\\npm-cli.js",
-                  "run",
-                  "prepare"
-                ],
-                "cwd": "source",
-                "exitCode": 0,
-                "seconds": 9.052
-              },
-              {
-                "stage": "pack-0",
-                "argv": [
-                  "C:\\hostedtoolcache\\windows\\node\\26.9.0\\x64\\node.exe",
-                  "D:\\a\\dsh_depot\\dsh_depot\\.runtime\\candidate-builds\\tools\\11.25.0\\npm-11.19.1\\node_modules\\npm\\bin\\npm-cli.js",
-                  "pack",
-                  "--ignore-scripts",
-                  "--json",
-                  "--pack-destination",
-                  "D:\\a\\dsh_depot\\dsh_depot\\.runtime\\candidate-builds\\results\\1334586481\\packages"
-                ],
-                "cwd": "source",
-                "exitCode": 0,
-                "seconds": 0.361
-              }
-            ],
-            "dependencies": [
-              {
-                "path": ".",
-                "manager": "npm",
-                "mode": "trial-resolution",
-                "sha256": "e427f745151ccd857fbbfa611b4b04622074db29254a24faf2d21fc23937ea92"
-              }
-            ],
-            "runtimeDependencies": [],
-            "version": "0.3.3",
-            "warnings": [
-              "类型声明文件缺失：./injector/lib/types/index.d.ts",
-              "类型声明文件缺失：./injector/lib/types/client/index.d.ts"
-            ],
-            "artifactsUrl": "https://github.com/fatevase/dsh_depot/actions/runs/44820695258/artifacts/14671743799",
-            "artifactsExpiresAt": "2026-11-27T21:33:03Z",
-            "files": [
-              {
-                "name": "@dsh-external/dsh-super-injector",
-                "version": "0.3.3",
-                "filename": "dsh-external-dsh-super-injector-0.3.3.tgz",
-                "bytes": 135463,
-                "sha256": "6a3ccf29194f26a52c08a96b9cab59463d9d686bdfbc99265414d1d623b61f71",
-                "hostPeers": {
-                  "@deepseek-ai/dsh-tools": ">=0.0.1-rc <2",
-                  "cordis": ">=4.0.0-rc <5",
-                  "schemastery": "^3.18.0"
-                },
-                "hostCompatibility": null
-              }
-            ]
-          }
-        }
-      },
-      {
-        "repositoryId": 1301657572,
-        "repository": "superdesigndev/treg",
-        "npmName": "treg-dsh",
-        "commit": "6ffe8df7126479631a4c649467aa307505e28a1b",
-        "runId": 44820695258,
-        "runAttempt": 1,
-        "runUrl": "https://github.com/fatevase/dsh_depot/actions/runs/44820695258",
-        "results": {
-          "macos-arm64": {
-            "runId": 44820695258,
-            "runAttempt": 1,
-            "status": "compiled",
-            "verification": "not-run",
-            "startedAt": "2026-11-20T21:33:26.119Z",
-            "seconds": 5.105,
-            "stage": "pack-0",
-            "dependencyMode": "not-installed-prebuilt-trial",
-            "adapterDigest": "6b994b518a6b4ffc3ae46b8b45a4aa08316a78b77ec393d053cebe330f3d0921",
-            "sourceSha256": "aeff470718cbc32a0eb6b828fc178fb214eb577a9a29ecd196efa24a852d5dad",
-            "steps": [
-              {
-                "stage": "source-init",
-                "argv": [
-                  "git",
-                  "-c",
-                  "protocol.file.allow=never",
-                  "-c",
-                  "core.hooksPath=/dev/null",
-                  "init"
-                ],
-                "cwd": "source-input/git",
-                "exitCode": 0,
-                "seconds": 0.057
-              },
-              {
-                "stage": "source-remote",
-                "argv": [
-                  "git",
-                  "-c",
-                  "protocol.file.allow=never",
-                  "-c",
-                  "core.hooksPath=/dev/null",
-                  "remote",
-                  "add",
-                  "origin",
-                  "https://github.com/superdesigndev/treg.git"
-                ],
-                "cwd": "source-input/git",
-                "exitCode": 0,
-                "seconds": 0.015
-              },
-              {
-                "stage": "source-fetch",
-                "argv": [
-                  "git",
-                  "-c",
-                  "protocol.file.allow=never",
-                  "-c",
-                  "core.hooksPath=/dev/null",
-                  "-c",
-                  "http.version=HTTP/1.1",
-                  "fetch",
-                  "--no-tags",
-                  "--depth=1",
-                  "--filter=blob:none",
-                  "origin",
                   "6ffe8df7126479631a4c649467aa307505e28a1b"
                 ],
                 "cwd": "source-input/git",
                 "exitCode": 0,
-                "seconds": 0.638
-              },
-              {
-                "stage": "source-identity",
-                "argv": [
-                  "git",
-                  "-c",
-                  "protocol.file.allow=never",
-                  "-c",
-                  "core.hooksPath=/dev/null",
-                  "rev-parse",
-                  "FETCH_HEAD"
-                ],
-                "cwd": "source-input/git",
-                "exitCode": 0,
-                "seconds": 0.024
-              },
-              {
-                "stage": "source-components",
-                "argv": [
-                  "git",
-                  "-c",
-                  "protocol.file.allow=never",
-                  "-c",
-                  "core.hooksPath=/dev/null",
-                  "archive",
-                  "--format=tar.gz",
-                  "--output=/Users/runner/work/dsh_depot/dsh_depot/.runtime/candidate-builds/results/1301657572/source-input/source.tgz",
-                  "FETCH_HEAD",
-                  "--",
-                  "package.json",
-                  "dsh",
-                  "LICENSE",
-                  "README.md"
-                ],
-                "cwd": "source-input/git",
-                "exitCode": 0,
-                "seconds": 3.764
-              },
-              {
-                "stage": "pack-0",
-                "argv": [
-                  "/Users/runner/hostedtoolcache/node/26.9.0/arm64/bin/node",
-                  "/Users/runner/work/dsh_depot/dsh_depot/.runtime/candidate-builds/tools/11.25.0/npm-11.19.1/node_modules/npm/bin/npm-cli.js",
-                  "pack",
-                  "--ignore-scripts",
-                  "--json",
-                  "--pack-destination",
-                  "/Users/runner/work/dsh_depot/dsh_depot/.runtime/candidate-builds/results/1301657572/packages"
-                ],
-                "cwd": "source",
-                "exitCode": 0,
-                "seconds": 0.46
-              }
-            ],
-            "runtimeDependencies": [],
-            "version": "0.31.0",
-            "warnings": [],
-            "artifactsUrl": "https://github.com/fatevase/dsh_depot/actions/runs/44820695258/artifacts/14671529321",
-            "artifactsExpiresAt": "2026-11-27T21:33:32Z",
-            "files": [
-              {
-                "name": "treg-dsh",
-                "version": "0.31.0",
-                "filename": "treg-dsh-0.31.0.tgz",
-                "bytes": 31586,
-                "sha256": "ebd9302f3533ae2edf04ce587f6b46115ba64536afcad8af7c1a1de97c2904c3",
-                "hostPeers": {},
-                "hostCompatibility": null
-              }
-            ]
-          },
-          "linux-x64": {
-            "runId": 44820695258,
-            "runAttempt": 1,
-            "status": "compiled",
-            "verification": "not-run",
-            "startedAt": "2026-11-20T21:32:41.447Z",
-            "seconds": 4.248,
-            "stage": "pack-0",
-            "dependencyMode": "not-installed-prebuilt-trial",
-            "adapterDigest": "6b994b518a6b4ffc3ae46b8b45a4aa08316a78b77ec393d053cebe330f3d0921",
-            "sourceSha256": "aeff470718cbc32a0eb6b828fc178fb214eb577a9a29ecd196efa24a852d5dad",
-            "steps": [
-              {
-                "stage": "source-init",
-                "argv": [
-                  "git",
-                  "-c",
-                  "protocol.file.allow=never",
-                  "-c",
-                  "core.hooksPath=/dev/null",
-                  "init"
-                ],
-                "cwd": "source-input/git",
-                "exitCode": 0,
-                "seconds": 0.045
-              },
-              {
-                "stage": "source-remote",
-                "argv": [
-                  "git",
-                  "-c",
-                  "protocol.file.allow=never",
-                  "-c",
-                  "core.hooksPath=/dev/null",
-                  "remote",
-                  "add",
-                  "origin",
-                  "https://github.com/superdesigndev/treg.git"
-                ],
-                "cwd": "source-input/git",
-                "exitCode": 0,
-                "seconds": 0.053
-              },
-              {
-                "stage": "source-fetch",
-                "argv": [
-                  "git",
-                  "-c",
-                  "protocol.file.allow=never",
-                  "-c",
-                  "core.hooksPath=/dev/null",
-                  "-c",
-                  "http.version=HTTP/1.1",
-                  "fetch",
-                  "--no-tags",
-                  "--depth=1",
-                  "--filter=blob:none",
-                  "origin",
-                  "6ffe8df7126479631a4c649467aa307505e28a1b"
-                ],
-                "cwd": "source-input/git",
-                "exitCode": 0,
-                "seconds": 0.553
+                "seconds": 0.284
               },
               {
                 "stage": "source-identity",
@@ -314857,7 +314857,7 @@
                 ],
                 "cwd": "source-input/git",
                 "exitCode": 0,
-                "seconds": 3.333
+                "seconds": 2.989
               },
               {
                 "stage": "pack-0",
@@ -314872,14 +314872,14 @@
                 ],
                 "cwd": "source",
                 "exitCode": 0,
-                "seconds": 0.192
+                "seconds": 0.189
               }
             ],
             "runtimeDependencies": [],
             "version": "0.31.0",
             "warnings": [],
-            "artifactsUrl": "https://github.com/fatevase/dsh_depot/actions/runs/44820695258/artifacts/14671293925",
-            "artifactsExpiresAt": "2026-11-27T21:32:45Z",
+            "artifactsUrl": "https://github.com/fatevase/dsh_depot/actions/runs/44857589334/artifacts/14688855006",
+            "artifactsExpiresAt": "2026-11-28T02:48:35Z",
             "files": [
               {
                 "name": "treg-dsh",
@@ -314893,12 +314893,12 @@
             ]
           },
           "win32-x64": {
-            "runId": 44820695258,
+            "runId": 44857589334,
             "runAttempt": 1,
             "status": "compiled",
             "verification": "not-run",
-            "startedAt": "2026-11-20T21:32:58.709Z",
-            "seconds": 4.051,
+            "startedAt": "2026-11-21T02:49:09.980Z",
+            "seconds": 4.162,
             "stage": "pack-0",
             "dependencyMode": "not-installed-prebuilt-trial",
             "adapterDigest": "6b994b518a6b4ffc3ae46b8b45a4aa08316a78b77ec393d053cebe330f3d0921",
@@ -314916,7 +314916,7 @@
                 ],
                 "cwd": "source-input\\git",
                 "exitCode": 0,
-                "seconds": 0.042
+                "seconds": 0.053
               },
               {
                 "stage": "source-remote",
@@ -314933,7 +314933,7 @@
                 ],
                 "cwd": "source-input\\git",
                 "exitCode": 0,
-                "seconds": 0.038
+                "seconds": 0.046
               },
               {
                 "stage": "source-fetch",
@@ -314954,7 +314954,7 @@
                 ],
                 "cwd": "source-input\\git",
                 "exitCode": 0,
-                "seconds": 0.421
+                "seconds": 0.293
               },
               {
                 "stage": "source-identity",
@@ -314969,7 +314969,7 @@
                 ],
                 "cwd": "source-input\\git",
                 "exitCode": 0,
-                "seconds": 0.039
+                "seconds": 0.045
               },
               {
                 "stage": "source-components",
@@ -314991,7 +314991,7 @@
                 ],
                 "cwd": "source-input\\git",
                 "exitCode": 0,
-                "seconds": 3.063
+                "seconds": 3.144
               },
               {
                 "stage": "pack-0",
@@ -315006,14 +315006,14 @@
                 ],
                 "cwd": "source",
                 "exitCode": 0,
-                "seconds": 0.337
+                "seconds": 0.437
               }
             ],
             "runtimeDependencies": [],
             "version": "0.31.0",
             "warnings": [],
-            "artifactsUrl": "https://github.com/fatevase/dsh_depot/actions/runs/44820695258/artifacts/14671743799",
-            "artifactsExpiresAt": "2026-11-27T21:33:03Z",
+            "artifactsUrl": "https://github.com/fatevase/dsh_depot/actions/runs/44857589334/artifacts/14688760226",
+            "artifactsExpiresAt": "2026-11-28T02:49:14Z",
             "files": [
               {
                 "name": "treg-dsh",
