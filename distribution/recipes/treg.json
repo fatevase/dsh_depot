@@ -6,10 +6,10 @@
   ],
   "channel": {
     "type": "fixed",
-    "ref": "6ffe8df7126479631a4c649467aa307505e28a1b",
+    "ref": "dc8d0d480ad76f07b19041b7a191636ed827fb61",
     "allowPrerelease": false
   },
-  "allowedVersions": "0.31.0",
+  "allowedVersions": "0.33.0",
   "hostRange": "0.2.2-rc.5",
   "targets": [
     "macos-arm64",
@@ -31,9 +31,9 @@
   "repository": "superdesigndev/treg",
   "npmName": "treg-dsh",
   "seed": {
-    "ref": "v0.31.0",
-    "commit": "6ffe8df7126479631a4c649467aa307505e28a1b",
-    "version": "0.31.0"
+    "ref": "v0.33.0",
+    "commit": "dc8d0d480ad76f07b19041b7a191636ed827fb61",
+    "version": "0.33.0"
   },
   "locks": {
     "runtime": {
@@ -65,6 +65,7 @@
   "upstreamChannel": "tag",
   "releasePins": {
     "v0.30.0": "5264ab42bb130d6d39998fb5763623e775bdb42b",
-    "v0.31.0": "6ffe8df7126479631a4c649467aa307505e28a1b"
+    "v0.31.0": "6ffe8df7126479631a4c649467aa307505e28a1b",
+    "v0.33.0": "dc8d0d480ad76f07b19041b7a191636ed827fb61"
   }
 }
